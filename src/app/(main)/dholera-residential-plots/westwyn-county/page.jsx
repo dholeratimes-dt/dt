@@ -1,0 +1,27 @@
+import React from "react";
+import Hero from "./Hero";
+import WestWynAboutSection from "./About";
+import WestWynEstate from "./WhyInvest";
+import ProjectAmenities from "./Amenities";
+import FAQS from "./FAQs";
+import CommonForm from "../../components/CommonForm";
+
+export default function page() {
+  return (
+    <>
+      <div>
+        <Hero />
+        <div className="md:hidden">
+          <CommonForm title="WestWyn County is Sold Out - Invest in Westwyn Estate, 0 km from Dholera SIR" />
+        </div>
+        <WestWynAboutSection />
+        <div className="max-sm:hidden">
+          <CommonForm title="WestWyn County is Sold Out - Invest in Westwyn Estate, 0 km from Dholera SIR" />
+        </div>
+        <WestWynEstate />
+        <ProjectAmenities />
+        <FAQS />
+      </div>
+    </>
+  );
+}
