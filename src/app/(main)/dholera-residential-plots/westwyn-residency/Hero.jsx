@@ -37,7 +37,7 @@ export default function Hero() {
   const projectFeatures = [
     { icon: "📐", title: "Plot Size", value: "124,152, & 187 Sq.Yards" },
     { icon: "🏗️", title: "Project Type", value: "Residential Dholera Plots" },
-    { icon: "💰", title: "Price", value: "₹6,000/Sq.Yd" },
+    { icon: "💰", title: "Price", value: "₹6,500/Sq.Yd" },
     { icon: "📍", title: "Location", value: "Pipariya, Dholera" },
   ];
 
