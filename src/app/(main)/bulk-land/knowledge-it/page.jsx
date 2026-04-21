@@ -157,9 +157,9 @@ export default function page() {
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 text-center">
               <div className="flex flex-col items-center">
-                <h3 className="text-gray-800 font-semibold text-xs md:text-sm mb-1">
+                <h2 className="text-gray-800 font-semibold text-xs md:text-sm mb-1">
                   Zone Area
-                </h3>
+                </h2>
                 <p className="text-gray-700 text-sm md:text-lg font-medium">
                   3,039.32 Sq. Yards
                 </p>

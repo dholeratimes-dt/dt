@@ -126,9 +126,9 @@ export default function page() {
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-30 transition-all duration-300"></div>
                 <div className="absolute bottom-4 left-4 right-4">
-                  <h3 className="text-white text-xl font-bold mb-2 group-hover:text-[#d3b36b] transition-colors">
+                  <h2 className="text-white text-xl font-bold mb-2 group-hover:text-[#d3b36b] transition-colors">
                     {category.title}
-                  </h3>
+                  </h2>
                   <p className="text-xs text-white">
                     Where Potential Meets Progress
                   </p>
