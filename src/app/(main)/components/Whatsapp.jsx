@@ -39,7 +39,6 @@ export default function Whatsapp() {
             </defs>
             <text fill="black" fontSize="12" fontWeight="bold">
               <textPath
-                href="#circlePath2"
                 startOffset="50%"
                 textAnchor="middle"
               >
