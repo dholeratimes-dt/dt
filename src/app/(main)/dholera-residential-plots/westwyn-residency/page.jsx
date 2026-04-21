@@ -38,12 +38,9 @@ export default function page() {
       />
       <div>
         <Hero />
-        <div className="md:hidden">
-          <CommonForm title="Get Plots Under ₹10 Lakh at 5 Min from Dholera SIR " />
-        </div>
         <WestWynAboutSection />
-        <div className="max-sm:hidden">
-          <CommonForm title="Get Plots Under ₹10 Lakh at 5 Min from Dholera SIR" />
+        <div>
+          <CommonForm title="Get Plots Starting From ₹8 Lakh in Dholera" />
         </div>
         <WestWynEstate />
         <ProjectAmenities />
