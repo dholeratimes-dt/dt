@@ -229,9 +229,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   {/* Home with hover card */}
 
                   <div className="relative group" ref={projectsDropdownRef}>
-                    <span className="text-white hover:bg-white/10 px-4 py-2 rounded-lg transition-all duration-300 flex items-center gap-1">
-                      <Link href="/dholera-residential-plots">Residential</Link>
-                    </span>
+                    <Link
+                      href="/dholera-residential-plots"
+                      className="text-white hover:bg-white/10 px-4 py-2 rounded-lg transition-all duration-300 flex items-center gap-1"
+                    >
+                      Residential
+                    </Link>
                   </div>
 
                   <div className="relative group">
