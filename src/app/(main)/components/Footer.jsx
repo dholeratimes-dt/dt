@@ -109,8 +109,8 @@ export default function Footer() {
                 <p className="font-semibold text-blue-400">Head Office</p>
 
                 <p className="text-gray-300">
-                  620, JMD Megapolis, Sector-48, Sohna Road, Gurugram - 122018,
-                  India
+                   CGJ - 194, Dlf Capital Greens, Shivaji Marg, Karampura
+                  Industrial Area, Karam Pura, Delhi - 110015, India
                 </p>
                 <br />
                 <p className="font-semibold text-blue-400">Branch Office</p>

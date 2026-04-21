@@ -33,13 +33,13 @@ export default function Whatsapp() {
           >
             <defs>
               <path
-                id="circlePath"
+                id="circlePath2"
                 d="M 50,50 m -30,0 a 30,30 0 1,1 60,0 a 30,30 0 1,1 -60,0"
               />
             </defs>
             <text fill="black" fontSize="12" fontWeight="bold">
               <textPath
-                href="#circlePath"
+                href="#circlePath2"
                 startOffset="50%"
                 textAnchor="middle"
               >

@@ -26,7 +26,6 @@ export default function Dholera() {
 
             {/* Right side - Content */}
             <div className="md:w-1/2 w-full">
-
               {/* Description */}
               <p className="text-gray-600 leading-relaxed text-justify mb-8">
                 Dholera Smart City is India’s first planned smart city, being
@@ -46,10 +45,11 @@ export default function Dholera() {
                 and industrial powerhouse of India.
               </p>
 
-              <Link href="/dholera-sir">
-                <button className="bg-[#b69b5e] hover:bg-[#d3b36b] text-white font-semibold px-6 py-3 rounded-lg transition-colors duration-200 shadow-md">
-                  Dholera SIR →
-                </button>
+              <Link
+                href="/dholera-sir"
+                className="bg-[#b69b5e] hover:bg-[#d3b36b] text-white font-semibold px-6 py-3 rounded-lg transition-colors duration-200 shadow-md"
+              >
+                Dholera SIR →
               </Link>
             </div>
           </div>
