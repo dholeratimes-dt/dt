@@ -44,9 +44,7 @@ export default function page() {
         </div>
         <WestWynEstate />
         <ProjectAmenities />
-        <div className="">
-          <CommonForm title="Looking For Premium Residential Plots in Dholera?" />
-        </div>
+        
         <FAQS />
 
       </div>
