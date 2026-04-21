@@ -33,7 +33,6 @@ export default function Whatsapp() {
           >
             <defs>
               <path
-                id="circlePath2"
                 d="M 50,50 m -30,0 a 30,30 0 1,1 60,0 a 30,30 0 1,1 -60,0"
               />
             </defs>
