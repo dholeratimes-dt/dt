@@ -1,11 +1,14 @@
 "use client";
 
-import React from "react";
+import React, { useId } from "react";
 import Image from "next/image";
 import whatsapp from "@/assets/whatsapp.svg";
 import "./whatsapp.css";
 
 export default function Whatsapp() {
+  const id = useId();
+  const circlePathId = `circlePath-${id}`;
+
   const handleWhatsAppClick = () => {
     if (typeof window !== "undefined") {
       window.dataLayer = window.dataLayer || [];
@@ -33,13 +36,13 @@ export default function Whatsapp() {
           >
             <defs>
               <path
-                id="circlePath"
+                id={circlePathId}
                 d="M 50,50 m -30,0 a 30,30 0 1,1 60,0 a 30,30 0 1,1 -60,0"
               />
             </defs>
             <text fill="black" fontSize="12" fontWeight="bold">
               <textPath
-                href="#circlePath"
+                href={`#${circlePathId}`}
                 startOffset="50%"
                 textAnchor="middle"
               >
