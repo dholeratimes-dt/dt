@@ -170,8 +170,8 @@ export default function InvestmentBenefits() {
             Why Invest in <span className="text-[#d3b36b]">WestWyn Residency</span>?
           </h2>
           <p className="text-lg max-w-3xl mx-auto text-gray-300">
-            Discover the unique advantages that make WestWyn Estates the premier
-            investment opportunity in Dholera SIR.
+            Discover the unique advantages that make WestWyn Residency the premier
+            investment opportunity in Dholera.
           </p>
         </motion.div>
 
