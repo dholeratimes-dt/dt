@@ -166,7 +166,7 @@ const WestWynAboutSection = () => {
         <h1 className="text-2xl md:text-3xl py-4 pt-4 font-bold text-gray-900">
           WestWyn County -{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d3b36b] to-[#c9992a]">
-            Secure & Government-Approved Plots in Dholera SIR
+            Secure & Government-Approved Plots in Dholera
           </span>
         </h1>
       </div>
@@ -199,9 +199,9 @@ const WestWynAboutSection = () => {
           <div className="bg-white/80 backdrop-blur-sm p-4 md:p-8 rounded-3xl shadow-xl border border-gray-100/50 h-full transform hover:shadow-2xl transition-all duration-300 flex flex-col">
             <div className="mb-6">
               <div className="text-center">
-                <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
+                <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
                   Strategic Location Advantage
-                </h3>
+                </h2>
                 <p className="text-[#d3b36b] font-medium text-sm md:text-base">
                   Fedra-Pipli Highway
                 </p>
