@@ -69,10 +69,10 @@ export default async function BlogsPage() {
               {" "}
               {/* Added this wrapper div */}
               <Link href="https://wa.me/+919958993549">
-              <button className="bg-[#b69b5e] hover:bg-[#d3b36b] text-white font-semibold px-6 py-3 rounded-lg transition-colors duration-200 shadow-md flex items-center space-x-2">
+              <span className="bg-[#b69b5e] hover:bg-[#d3b36b] text-white font-semibold px-6 py-3 rounded-lg transition-colors duration-200 shadow-md flex items-center space-x-2">
                 <FaWhatsapp className="text-lg font-semibold" />
                 <span>Invest Today</span>
-              </button>
+              </span>
               </Link>
             </div>
           </div>

@@ -5,7 +5,6 @@ import {
   getNews,
 } from "@/sanity/lib/api";
 import hero from "@/assets/DholeraSirhero.webp";
-import herom from "@/assets/dholera-sir-m-v.webp";
 import Image from "next/image";
 import BlogCard from "./BlogCard";
 import TrendingBlogItem from "./TrendingBlog";

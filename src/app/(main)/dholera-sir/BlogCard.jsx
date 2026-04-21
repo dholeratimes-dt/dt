@@ -12,10 +12,7 @@ export default function BlogCard({ post }) {
   return (
     <div className="bg-white rounded-lg shadow-2xl overflow-hidden flex flex-col h-full transition-transform duration-300 hover:scale-105">
       {/* Image */}
-      <Link
-        href={`/dholera-sir/${post.slug.current}`}
-        className=""
-      >
+      <Link href={`/dholera-sir/${post.slug.current}`} className="">
         {/* Changed to aspect-[3/2] to match your image ratio */}
         <div className="relative w-full aspect-[3/2]">
           {post.mainImage ? (
@@ -42,7 +39,10 @@ export default function BlogCard({ post }) {
 
             {/* Meta info */}
             <div className="text-sm text-gray-400">
-              <time>
+              <time
+                dateTime={new Date(post.publishedAt).toISOString()}
+                className="text-gray-500"
+              >
                 {new Date(post.publishedAt).toLocaleDateString("en-US", {
                   day: "numeric",
                   month: "long",
@@ -56,7 +56,9 @@ export default function BlogCard({ post }) {
             </div>
 
             {/* CTA */}
-            <div className="underline underline-offset-4 text-lg">Read More</div>
+            <div className="underline underline-offset-4 text-lg">
+              Explore More
+            </div>
           </div>
         </div>
       </Link>
