@@ -248,9 +248,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
                   {/* Dholera SIR with hover card and dropdown */}
                   <div className="relative group" ref={dholeraDropdownRef}>
-                    <button className="text-white hover:bg-white/10 px-4 py-2 rounded-lg transition-all duration-300 flex items-center gap-1">
-                      <Link href="/dholera-sir">Dholera SIR</Link>
-                    </button>
+                    <Link
+                      href="/dholera-sir"
+                      className="text-white hover:bg-white/10 px-4 py-2 rounded-lg transition-all duration-300 flex items-center gap-1"
+                    >
+                      Dholera SIR
+                    </Link>
                   </div>
 
                   {/* Dholera Updates with hover card and dropdown */}
@@ -259,7 +262,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                       onClick={toggleBlogsDropdown}
                       className="text-white hover:bg-white/10 px-4 py-2 rounded-lg transition-all duration-300 flex items-center gap-1"
                     >
-                      <p>Dholera Updates</p>
+                      Dholera Updates
                       <ChevronDown
                         className={`h-4 w-4 text-white transition-transform duration-300 ${
                           isBlogsDropdownOpen ? "rotate-180" : ""

@@ -21,7 +21,6 @@ export default function Home2Main() {
       <div>
         <AboutDT />
       </div>
-      <div></div>
       <div>
         <Dholera />
       </div>

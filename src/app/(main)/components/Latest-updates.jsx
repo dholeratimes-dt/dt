@@ -65,7 +65,7 @@ const RelatedBlogCard = ({ item, type }) => {
 
             {/* CTA */}
             <span className="text-[#d6b873] hover:text-white text-sm font-medium inline-flex items-center group underline underline-offset-4">
-              Read More
+              Explore More
               <svg
                 className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform duration-300"
                 fill="none"
