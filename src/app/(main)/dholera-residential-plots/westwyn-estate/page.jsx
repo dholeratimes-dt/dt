@@ -9,7 +9,7 @@ import CommonForm from "../../components/CommonForm";
 export default function page() {
   return (
     <>
-    <script
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -38,20 +38,17 @@ export default function page() {
       />
       <div>
         <Hero />
-        <div className="md:hidden">
-          <CommonForm title="Get Complete Details of WestWyn Estates " />
-        </div>
         <WestWynAboutSection />
-        <div className="max-sm:hidden">
-          <CommonForm title="Get Complete Details of WestWyn Estates " />
+        <div>
+          <CommonForm title="Get Plots Starting From ₹8 Lakh in Dholera" />
         </div>
         <WestWynEstate />
         <ProjectAmenities />
-         <div className="">
+        <div className="">
           <CommonForm title="Looking For Premium Residential Plots in Dholera?" />
         </div>
         <FAQS />
-       
+
       </div>
     </>
   );
