@@ -801,9 +801,9 @@ export default async function BlogDetail({ params }) {
                     </div>
                     <div className="flex items-center justify-center mt-6">
                       <Link href="/dholera-updates/blogs">
-                        <button className="text-center rounded-xl text-white font-semibold bg-[#d7b56d] hover:bg-[#c6a45d] p-3 transition-colors">
+                        <span className="text-center rounded-xl text-white font-semibold bg-[#d7b56d] hover:bg-[#c6a45d] p-3 transition-colors">
                           Explore More
-                        </button>
+                        </span>
                       </Link>
                     </div>
                   </div>
