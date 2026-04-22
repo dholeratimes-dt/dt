@@ -200,22 +200,13 @@ const SchemaMarkup = ({ post, relatedBlog = [] }) => {
 
   return (
     <>
-      {/* Main structured data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(allSchemas, null, 2),
         }}
       />
-      {/* Additional meta tags for better SEO */}
-      <meta
-        name="description"
-        content={post.metaDescription || extractPlainText(post.body)}
-      />
-      <meta name="keywords" content={post.tags?.join(", ") || ""} />
-      <meta name="author" content="Dholera Times" />
-      <meta name="robots" content="index, follow" />
-      {/* Open Graph meta tags */}
+      {/* Open Graph */}
       <meta property="og:type" content="article" />
       <meta property="og:title" content={post.title} />
       <meta
@@ -223,7 +214,6 @@ const SchemaMarkup = ({ post, relatedBlog = [] }) => {
         content={post.description || extractPlainText(post.body)}
       />
       <meta property="og:url" content={postUrl} />
-      
       <meta property="og:site_name" content="Dholera Times" />
       {post.mainImage && (
         <meta
@@ -235,9 +225,11 @@ const SchemaMarkup = ({ post, relatedBlog = [] }) => {
         property="article:published_time"
         content={post.publishedAt || post._createdAt}
       />
-      <meta property="article:modified_time" content={post._updatedAt || post.publishedAt } />
-      
-      {/* Twitter Card meta tags */}
+      <meta
+        property="article:modified_time"
+        content={post._updatedAt || post.publishedAt}
+      />
+      {/* Twitter */}
       <meta name="x:card" content="summary_large_image" />
       <meta name="x:title" content={post.title} />
       <meta
@@ -250,8 +242,7 @@ const SchemaMarkup = ({ post, relatedBlog = [] }) => {
           content={urlFor(post.mainImage).width(1200).height(630).url()}
         />
       )}
-      <meta name="x:site" content="@dholeratimes" />{" "}
-      {/* Replace with your Twitter handle */}
+      <meta name="x:site" content="@dholeratimes" />
     </>
   );
 };
