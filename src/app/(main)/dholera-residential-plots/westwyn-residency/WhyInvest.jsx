@@ -3,15 +3,27 @@ import { useState, useEffect } from "react";
 import { Plus, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import PopupForm from "../../components/PopupForm";
-import safe from "@/assets/residential/safe-investment.webp"
-import lifestyle from "@/assets/residential/lifestyle-and-trust.webp"
-import support from "@/assets/residential/government-support-dholera.webp"
-import growth from "@/assets/residential/exceptional-growth.webp"
-import connectivity from "@/assets/residential/dholera-strong-connectivity.webp"
-import location from "@/assets/residential/strategic-location-dholera.webp"
+import safe from "@/assets/residential/safe-investment.webp";
+import lifestyle from "@/assets/residential/lifestyle-and-trust.webp";
+import support from "@/assets/residential/government-support-dholera.webp";
+import growth from "@/assets/residential/exceptional-growth.webp";
+import connectivity from "@/assets/residential/dholera-strong-connectivity.webp";
+import location from "@/assets/residential/strategic-location-dholera.webp";
 import Image from "next/image";
 
+import govtApprovedProject from "@/assets/icons/verified-auda-approved.webp";
+import salesDeed from "@/assets/icons/immediate-sale-deed.webp";
+import afterSales from "@/assets/icons/resale-support.webp";
+import buybackguarantee from "@/assets/icons/high-roi-potential.webp";
+import days365 from "@/assets/icons/365-day-site-visit.webp";
+import dueD from "@/assets/icons/due-diligence-team.webp";
 
+import {
+  Users,
+  Building,
+  BadgeCheck,
+  AreaChart,
+} from "lucide-react";
 
 export default function InvestmentBenefits() {
   const [openIndex, setOpenIndex] = useState(null);
@@ -33,7 +45,7 @@ export default function InvestmentBenefits() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setHoveredBenefit((prev) => (prev + 1) % benefits.length);
+      setHoveredBenefit((prev) => (prev + 1) % features.length);
     }, 5000);
     return () => clearInterval(interval);
   }, []);
@@ -52,9 +64,11 @@ export default function InvestmentBenefits() {
     const isLeftSwipe = distance > 50;
     const isRightSwipe = distance < -50;
     if (isLeftSwipe) {
-      setHoveredBenefit((prev) => (prev + 1) % benefits.length);
+      setHoveredBenefit((prev) => (prev + 1) % features.length);
     } else if (isRightSwipe) {
-      setHoveredBenefit((prev) => (prev - 1 + benefits.length) % benefits.length);
+      setHoveredBenefit(
+        (prev) => (prev - 1 + features.length) % features.length,
+      );
     }
     setTouchStart(null);
     setTouchEnd(null);
@@ -77,6 +91,39 @@ export default function InvestmentBenefits() {
     setShowModal(false);
     setSelectedBenefit(null);
   };
+
+  const features = [
+    {
+      icon: salesDeed,
+      title: "Immediate Registry",
+      description: "Quick documentation and registration",
+    },
+    {
+      icon: buybackguarantee,
+      title: "NA/NOC/Title Clearance",
+      description: "*Terms & Conditions Apply*",
+    },
+    {
+      icon: govtApprovedProject,
+      title: "Verified AUDA-approved Dholera plots",
+      description: "Fully government approved and verified",
+    },
+    {
+      icon: dueD,
+      title: "Due Diligence Team",
+      description: "No hidden charges, clear pricing structure",
+    },
+    {
+      icon: days365,
+      title: "365-day Site Visit Assistance",
+      description: "Comprehensive post-purchase assistance",
+    },
+    {
+      icon: afterSales,
+      title: "Resale & Buyback Assistance*",
+      description: "*Terms & Conditions Apply*",
+    },
+  ];
 
   const benefits = [
     {
@@ -126,22 +173,6 @@ export default function InvestmentBenefits() {
     },
   };
 
-  const modalOverlayVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 0.3 } },
-  };
-
-  const modalContentVariants = {
-    hidden: { opacity: 0, scale: 0.8, y: 50 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      transition: { duration: 0.4, ease: "easeOut" },
-    },
-    exit: { opacity: 0, scale: 0.8, transition: { duration: 0.3 } },
-  };
-
   const imageVariants = {
     hidden: { opacity: 0, scale: 0.95 },
     visible: {
@@ -167,11 +198,14 @@ export default function InvestmentBenefits() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-2xl md:text-3xl font-bold mb-4">
-            Why Invest in <span className="text-[#d3b36b]">WestWyn Residency</span>?
+            Why Invest with{" "}
+            <span className="text-[#d3b36b]">Dholera Times</span>?
           </h2>
-          <p className="text-lg max-w-3xl mx-auto text-gray-300">
-            Discover the unique advantages that make WestWyn Residency the premier
-            investment opportunity in Dholera.
+          <p className="text-lg max-w-5xl mx-auto text-gray-300">
+            Dholera Times, a well known developer in Dholera offers
+            government-approved residential plots in Dholera for buyers looking
+            for location advantage, registry readiness, and a more trustworthy
+            buying experience.
           </p>
         </motion.div>
 
@@ -180,36 +214,28 @@ export default function InvestmentBenefits() {
           {/* Image/Visual Section */}
           <div className="lg:w-1/2">
             {!isMobile ? (
-              <>
-                <motion.div
-                  className="relative w-full h-80 md:h-96 rounded-2xl overflow-hidden shadow-2xl"
-                  key={hoveredBenefit}
-                  variants={imageVariants}
-                  initial="hidden"
-                  animate="visible"
-                >
-                  <Image
-                    src={benefits[hoveredBenefit].image}
-                    alt={benefits[hoveredBenefit].title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#151f28]/80 to-transparent">
-                    <div className="absolute bottom-6 left-6 right-6 text-white">
-                      <div className="flex items-center mb-3">
-                        <span className="text-3xl mr-3">
-                          {benefits[hoveredBenefit].icon}
-                        </span>
-                        <h3 className="text-xl md:text-2xl font-bold">
-                          {benefits[hoveredBenefit].title}
-                        </h3>
-                      </div>
+              <motion.div
+                className="relative w-full h-80 md:h-96 rounded-2xl overflow-hidden shadow-2xl"
+                key={hoveredBenefit}
+                variants={imageVariants}
+                initial="hidden"
+                animate="visible"
+              >
+                <Image
+                  src={benefits[hoveredBenefit].image}
+                  alt={benefits[hoveredBenefit].title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#151f28]/80 to-transparent">
+                  <div className="absolute bottom-6 left-6 right-6 text-white">
+                    <div className="flex items-center mb-3">
+                      <h3 className="text-xl md:text-2xl font-bold">
+                        {features[hoveredBenefit].title}
+                      </h3>
                     </div>
                   </div>
-                </motion.div>
-
-                {/* CTA Section */}
-              
-              </>
+                </div>
+              </motion.div>
             ) : (
               <div
                 className="relative w-full h-80 rounded-2xl overflow-hidden shadow-2xl"
@@ -226,19 +252,11 @@ export default function InvestmentBenefits() {
                     exit={{ opacity: 0, x: -100 }}
                     transition={{ duration: 0.4 }}
                   >
-                    <Image
-                      src={benefits[hoveredBenefit].image}
-                      alt={benefits[hoveredBenefit].title}
-                      className="w-full h-full object-cover"
-                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#151f28]/80 via-transparent to-transparent">
                       <div className="absolute bottom-4 left-4 right-4 text-white">
                         <div className="flex items-center mb-2">
-                          <span className="text-2xl mr-3">
-                            {benefits[hoveredBenefit].icon}
-                          </span>
                           <h3 className="text-xl font-bold">
-                            {benefits[hoveredBenefit].title}
+                            {features[hoveredBenefit].title}
                           </h3>
                         </div>
                       </div>
@@ -246,28 +264,14 @@ export default function InvestmentBenefits() {
                   </motion.div>
                 </AnimatePresence>
 
-                {/* Slider Indicators */}
-                <div className="absolute bottom-4 right-4 flex space-x-2">
-                  {benefits.map((_, index) => (
-                    <motion.button
-                      key={index}
-                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                        hoveredBenefit === index
-                          ? "bg-[#d3b36b] scale-125"
-                          : "bg-white/50"
-                      }`}
-                      onClick={() => updateHoveredBenefit(index)}
-                      whileTap={{ scale: 0.8 }}
-                    />
-                  ))}
-                </div>
-
                 {/* Navigation Arrows */}
                 <button
                   className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-[#151f28]/70 hover:bg-[#151f28] text-[#d3b36b] p-2 rounded-full transition-all duration-300"
                   onClick={() =>
                     updateHoveredBenefit(
-                      hoveredBenefit > 0 ? hoveredBenefit - 1 : benefits.length - 1
+                      hoveredBenefit > 0
+                        ? hoveredBenefit - 1
+                        : features.length - 1,
                     )
                   }
                 >
@@ -277,7 +281,9 @@ export default function InvestmentBenefits() {
                   className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-[#151f28]/70 hover:bg-[#151f28] text-[#d3b36b] p-2 rounded-full transition-all duration-300"
                   onClick={() =>
                     updateHoveredBenefit(
-                      hoveredBenefit < benefits.length - 1 ? hoveredBenefit + 1 : 0
+                      hoveredBenefit < features.length - 1
+                        ? hoveredBenefit + 1
+                        : 0,
                     )
                   }
                 >
@@ -287,15 +293,15 @@ export default function InvestmentBenefits() {
             )}
           </div>
 
-          {/* Benefits Cards Section */}
+          {/* Features Cards Section */}
           <div className="lg:w-1/2">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-              {benefits.map((benefit, index) => {
+              {features.map((feature, index) => {
                 const isHighlighted = hoveredBenefit === index;
 
                 return (
                   <motion.div
-                    key={benefit.title}
+                    key={feature.title}
                     className={`group border rounded-xl p-4 md:p-5 cursor-pointer transition-all duration-300 
                       ${
                         isHighlighted
@@ -306,20 +312,22 @@ export default function InvestmentBenefits() {
                     initial="hidden"
                     animate="visible"
                     whileHover="hover"
-                    onClick={() => openModal(benefit, index)}
+                    onClick={() => openModal(feature, index)}
                     onMouseEnter={() => !isMobile && setHoveredBenefit(index)}
                   >
                     <div className="flex items-start mb-3">
-                      <motion.div
-                        className="text-2xl md:text-3xl mr-3"
-                        whileHover={{ scale: 1.2 }}
-                        transition={{ type: "spring", stiffness: 300 }}
-                      >
-                        {benefit.icon}
-                      </motion.div>
-                      <h3 className="text-lg text-[#d3b36b]">
-                        {benefit.title}
-                      </h3>
+                      <div className="w-10 h-10 mr-3 shrink-0">
+                        <Image
+                          src={feature.icon}
+                          alt={feature.title}
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                      <div>
+                        <h3 className="text-base text-[#d3b36b] font-medium">
+                          {feature.title}
+                        </h3>
+                      </div>
                     </div>
                   </motion.div>
                 );
@@ -338,7 +346,8 @@ export default function InvestmentBenefits() {
                   Ready to Invest in Dholera's Future?
                 </h3>
                 <p className="text-sm text-gray-300 mb-3">
-                  Join the early investors securing premium plots in WestWyn Estate.
+                  Join the early investors securing premium plots in WestWyn
+                  Estate.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-2">
                   <motion.a
@@ -362,38 +371,48 @@ export default function InvestmentBenefits() {
             )}
           </div>
         </div>
-          <motion.div
-                  className="mt-6 p-4 rounded-xl bg-gradient-to-r from-[#d3b36b]/10 to-[#d3b36b]/5 border border-[#d3b36b]/20"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6 }}
-                >
-                  <h3 className="text-lg text-center font-bold mb-2">
-                    Ready to Invest in Dholera's Future?
-                  </h3>
-                  <p className="text-sm text-center text-gray-300 mb-3">
-                    Get complete details, pricing, and availability for WestWyn Residency.
-                  </p>
-                  <div className="flex justify-center items-center gap-2">
-                    <motion.a
-                      href="tel:+919958993549"
-                      className="bg-[#d3b36b] hover:bg-[#d4b15f] text-[#151f28] text-sm font-medium py-2 px-4 rounded-lg transition-colors duration-300"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      Book Site Visit
-                    </motion.a>
-                    <motion.button
-                      onClick={openContactForm}
-                      className="border border-[#d3b36b] text-[#d3b36b] hover:bg-[#d3b36b]/10 text-sm font-medium py-2 px-4 rounded-lg transition-colors duration-300"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      Contact Now
-                    </motion.button>
-                  </div>
-                </motion.div>
+
+        {/* Bottom CTA */}
       </div>
+        <div className="max-w-7xl mx-auto px-4 py-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-4">
+            {[
+              {
+                value: "7+",
+                label: "Sold Out Projects",
+                icon: <Building className="h-8 w-8" />,
+              },
+              {
+                value: "957+",
+                label: "Plots Sold",
+                icon: <BadgeCheck className="h-8 w-8" />,
+              },
+              {
+                value: "561+",
+                label: "Happy Customers",
+                icon: <Users className="h-8 w-8" />,
+              },
+              {
+                value: "2 Lakh+ Sq. Yards",
+                label: "Sold",
+                icon: <AreaChart className="h-8 w-8" />,
+              },
+            ].map((stat, index) => (
+              <div
+                key={index}
+                className="bg-white p-2 rounded-lg text-center transform transition-all duration-300 hover:scale-105 hover:shadow-lg flex flex-col items-center"
+              >
+                <div className="text-[#151f28] mb-3">{stat.icon}</div>
+                <div className="text-2xl md:text-3xl font-semibold text-[#151f28] mb-2">
+                  {stat.value}
+                </div>
+                <div className="text-sm md:text-base text-[#151f28]">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
 
       <AnimatePresence>
         {isContactFormOpen && (

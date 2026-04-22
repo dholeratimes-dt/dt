@@ -6,35 +6,34 @@ const faqs = [
   {
     question: "Where is WestWyn Residency located?",
     answer:
-      "It is located in Pipariya village near Dholera Smart City in Gujarat.",
+      "WestWyn Residency is located in Pipariya, Dholera Smart City region in Gujarat.",
   },
   {
-    question: "How far is it from Dholera SIR?",
+    question: "What type of project is WestWyn Residency?",
     answer:
-      "It is approximately 7 km from the SIR boundary.",
+      "It is a residential plotted development offering investment and home-building opportunities.",
   },
   {
-    question: "Is expressway connectivity available?",
+    question: "What plot sizes are available?",
     answer:
-      "Yes, the Ahmedabad–Dholera Expressway is around 12 minutes away.",
+      "The available plot sizes are 124, 152, and 187 square yards.",
   },
   {
-    question: "Is railway connectivity available?",
+    question: "Is the project registry-ready?",
     answer:
-      "Yes, Bhimnath Railway Junction is just 2–3 minutes away.",
+      "Yes, the project is registry-ready, allowing immediate ownership transfer.",
   },
   {
-    question: "How far is the airport from this project?",
+    question: "Is WestWyn Residency government-approved?",
     answer:
-      "Dholera International Airport is approximately 25–30 minutes away.",
+      "Yes, the project is presented as government-approved residential plots.",
   },
   {
-    question: "Who should consider this project?",
+    question: "Who is this project suitable for?",
     answer:
-      "Buyers looking for well-connected residential plots in a developing Dholera Smart City corridor.",
+      "It is ideal for buyers and investors looking for plotted development in the growing Dholera Smart City corridor.",
   },
 ];
-
 
 export default function FAQS() {
   const [openIndex, setOpenIndex] = useState(null);
@@ -44,7 +43,7 @@ export default function FAQS() {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  const displayedFaqs = showAll ? faqs : faqs.slice(0, 5);
+  const displayedFaqs = showAll ? faqs : faqs.slice(0, 6);
 
   const renderAnswer = (answer) => {
     if (Array.isArray(answer)) {
@@ -117,7 +116,7 @@ export default function FAQS() {
             </div>
 
             {/* Show More / Show Less Button */}
-            {faqs.length > 5 && (
+            {/* {faqs.length > 5 && (
               <div className="mt-6 text-center">
                 <button
                   onClick={() => setShowAll(!showAll)}
@@ -136,7 +135,7 @@ export default function FAQS() {
                   )}
                 </button>
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </div>

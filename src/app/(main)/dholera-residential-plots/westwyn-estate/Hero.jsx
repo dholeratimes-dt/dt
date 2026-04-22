@@ -6,15 +6,7 @@ import Link from "next/link";
 import { AnimatePresence } from "framer-motion";
 import BrochureDownload from "../../components/BrochureDownload";
 
-const FeatureCard = ({ icon, title, value }) => (
-  <div className="bg-white rounded-lg p-4 border border-gray-200 text-center">
-    <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
-      <span className="text-xl">{icon}</span>
-    </div>
-    <p className="font-semibold text-gray-900 text-sm mb-1">{title}</p>
-    <p className="text-[#151f28] font-bold text-lg">{value}</p>
-  </div>
-);
+
 
 const PhoneIcon = () => (
   <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24">
@@ -194,15 +186,7 @@ export default function Hero() {
         </div>
 
         {/* Feature Cards */}
-        <div className="bg-white border-b">
-          <div className="max-w-7xl mx-auto px-4 py-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {projectFeatures.map((feature, index) => (
-                <FeatureCard key={index} {...feature} />
-              ))}
-            </div>
-          </div>
-        </div>
+        
       </div>
 
       <AnimatePresence>

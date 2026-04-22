@@ -221,6 +221,14 @@ export default function Footer() {
               <ul className="space-y-2">
                 <li>
                   <a
+                    href="/dholera-residential-plots/westwyn-residency"
+                    className="hover:text-white transition"
+                  >
+                    WestWyn Residency
+                  </a>
+                </li>
+                <li>
+                  <a
                     href="/dholera-residential-plots/westwyn-estate"
                     className="hover:text-white transition"
                   >
@@ -233,54 +241,6 @@ export default function Footer() {
                     className="hover:text-white transition"
                   >
                     WestWyn County
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/dholera-residential-plots/paradise-1"
-                    className="hover:text-white transition"
-                  >
-                    Paradise
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/dholera-residential-plots/paradise-2"
-                    className="hover:text-white transition"
-                  >
-                    Paradise 2
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/dholera-residential-plots/orchid"
-                    className="hover:text-white transition"
-                  >
-                    Orchid
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/dholera-residential-plots/maple"
-                    className="hover:text-white transition"
-                  >
-                    Maple
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/dholera-residential-plots/marina-bay"
-                    className="hover:text-white transition"
-                  >
-                    Marina Bay
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/dholera-residential-plots/pride"
-                    className="hover:text-white transition"
-                  >
-                    Pride
                   </a>
                 </li>
               </ul>
