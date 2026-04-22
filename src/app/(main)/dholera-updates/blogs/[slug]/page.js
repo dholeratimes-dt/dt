@@ -919,7 +919,7 @@ export default async function BlogDetail({ params }) {
                                     </div>
                                   )}
                                   <div className="flex items-center gap-1.5 text-[#b69b5e] font-semibold text-sm group-hover:gap-2.5 transition-all duration-300">
-                                    <span>Read More</span>
+                                    <span>Explore More</span>
                                     <svg
                                       className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"
                                       fill="none"
@@ -1145,7 +1145,7 @@ export default async function BlogDetail({ params }) {
             href="/dholera-updates/blogs"
             className="mt-4 inline-block text-[#C69C21] hover:text-[#FDB913]"
           >
-            ← Back to News
+            ← Back to Blogs
           </Link>
         </div>
       </div>
