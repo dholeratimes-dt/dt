@@ -235,10 +235,8 @@ const SchemaMarkup = ({ post, relatedBlog = [] }) => {
         property="article:published_time"
         content={post.publishedAt || post._createdAt}
       />
-      <meta property="article:modified_time" content={post._updatedAt} />
-      {post.updatedAt && (
-        <meta property="article:modified_time" content={post.updatedAt} />
-      )}
+      <meta property="article:modified_time" content={post._updatedAt || post.publishedAt } />
+      
       {/* Twitter Card meta tags */}
       <meta name="x:card" content="summary_large_image" />
       <meta name="x:title" content={post.title} />
