@@ -566,12 +566,12 @@ export default async function BlogDetail({ params }) {
 
     // Format date for display
     const rawDate = post.publishedAt || post._createdAt;
-    const formattedDate = new Date(rawDate).toLocaleDateString("en-US", {
+    const isoDate = new Date(rawDate).toISOString().split("T")[0];
+    const formattedDate = new Date(isoDate).toLocaleDateString("en-US", {
       day: "numeric",
       month: "long",
       year: "numeric",
     });
-    const isoDate = new Date(rawDate).toISOString().split("T")[0];
 
     return (
       <div className="bg-white min-h-screen">

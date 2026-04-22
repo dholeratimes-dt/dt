@@ -81,6 +81,23 @@ const TrendingBlogItem = ({ post }) => {
   );
 };
 
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const site = "dholera-times";
+  const post = await getPostBySlug(slug, site);
+
+  return {
+    title: post.metaTitle,
+    description: post.metaDescription,
+    keywords: post.keywords,
+    publisher: "Dholera Times",
+    robots: "index, follow",
+    alternates: {
+      canonical: `https://www.dholeratimes.com/dholera-updates/latest-updates/${post.slug.current}`,
+    },
+  };
+}
+
 export default async function BlogDetail({ params }) {
   const { slug } = await params;
   const site = "dholera-times";
@@ -573,9 +590,9 @@ export default async function BlogDetail({ params }) {
     };
 
     // Format date for display
-    const formattedDate = new Date(
-      post.publishedAt || post._createdAt,
-    ).toLocaleDateString("en-US", {
+    const rawDate = post.publishedAt || post._createdAt;
+    const isoDate = new Date(rawDate).toISOString().split("T")[0];
+    const formattedDate = new Date(isoDate).toLocaleDateString("en-US", {
       day: "numeric",
       month: "long",
       year: "numeric",
@@ -584,17 +601,6 @@ export default async function BlogDetail({ params }) {
     return (
       <>
         <div className="bg-white min-h-screen">
-          {/* Sticky Nav Placeholder */}
-          <title>{post.metaTitle}</title>
-          <meta name="description" content={post.metaDescription} />
-          <meta name="keywords" content={post.keywords} />
-          <meta name="publisher" content="Dholera Times" />
-          <link
-            rel="canonical"
-            href={`https://www.dholeratimes.com/dholera-updates/latest-updates/${post.slug.current}`}
-          />
-
-          <meta name="robots" content="index, follow" />
           <SchemaMarkup post={post} relatedBlog={relatedBlogs} />
           <div className="bg-white shadow-sm sticky top-0 z-30" />
 
