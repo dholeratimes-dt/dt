@@ -9,13 +9,18 @@ import LeadFormSlug from "../../dholera-updates/latest-updates/[slug]/LeadForm";
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-
   const site = "dholera-times";
   const post = await getPostBySlug(slug, site);
 
   return {
     title: post.metaTitle,
     description: post.metaDescription,
+    keywords: post.keywords,
+    publisher: "Dholera Times",
+    robots: "index, follow",
+    alternates: {
+      canonical: `https://www.dholeratimes.com/dholera-sir/${post.slug.current}`,
+    },
   };
 }
 
@@ -570,15 +575,7 @@ export default async function BlogDetail({ params }) {
 
     return (
       <div className="bg-white min-h-screen">
-        {/* <title>{post.metaTitle}</title>
-        <meta name="description" content={post.metaDescription} /> */}
-        <meta name="keywords" content={post.keywords} />
-        <meta name="publisher" content="Dholera Times" />
-        <link
-          rel="canonical"
-          href={`https://www.dholeratimes.com/dholera-sir/${post.slug.current}`}
-        />
-        <meta name="robots" content="index, follow" />
+       
         <SchemaMarkup post={post} />
         {/* Sticky Nav Placeholder */}
         <div className="bg-white shadow-sm sticky top-0 z-30" />
@@ -681,7 +678,7 @@ export default async function BlogDetail({ params }) {
                         d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                       ></path>
                     </svg>
-                    <time className="text-gray-500">{formattedDate}</time>
+                    <time className="text-gray-500">{isoDate}</time>
                   </div>
 
                   {post.readingTime && (
