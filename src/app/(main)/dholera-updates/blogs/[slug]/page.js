@@ -762,15 +762,13 @@ export default async function BlogDetail({ params }) {
                 )}
               </div>
             </article>
-            <div className="md:hidden pt-4">
-              <CommonForm title="Still Have Questions? Contact Us Now" />
-            </div>
+            
             {/* Sidebar */}
             <aside className="lg:w-1/3">
               <div className="sticky space-y-4 top-24">
                 <div className=" pt-4 max-w-xl mx-auto">
                   <LeadFormSlug
-                    title="Buy Residential Plot near Dholera SIR under ₹10 Lakh"
+                    title="Buy Residential Plot near Dholera SIR Starting From ₹8 Lakh"
                     buttonName="Know More"
                   />
                 </div>

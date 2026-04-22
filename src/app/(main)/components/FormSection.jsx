@@ -6,7 +6,7 @@ import "./about.css";
 
 export default function CommonForm({ title }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState({ nameFull: "", phoneNo: "" });
+  const [formData, setFormData] = useState({ fullName: "", phone: "" });
   const [showPopup, setShowPopup] = useState(false);
   const [submissionCount, setSubmissionCount] = useState(0);
   const [lastSubmissionTime, setLastSubmissionTime] = useState(0);
@@ -75,14 +75,14 @@ export default function CommonForm({ title }) {
   };
 
   const validateForm = () => {
-    if (!formData.nameFull || !formData.phoneNo) {
+    if (!formData.fullName || !formData.phone) {
       setErrorMessage("Please fill in all fields");
       return false;
     }
 
-    // Simple phoneNo validation
-    if (!/^\d{10,15}$/.test(formData.phoneNo)) {
-      setErrorMessage("Please enter a valid phoneNo number (10-15 digits)");
+    // Simple phone validation
+    if (!/^\d{10,15}$/.test(formData.phone)) {
+      setErrorMessage("Please enter a valid phone number (10-15 digits)");
       return false;
     }
 
@@ -119,8 +119,8 @@ export default function CommonForm({ title }) {
           },
           body: JSON.stringify({
             fields: {
-              name: formData.nameFull,
-              phoneNo: formData.phoneNo,
+              name: formData.fullName,
+              phone: formData.phone,
               message: formData.message,
               source: "Dholera Times Dholera-Sir/Dholera-Update Page",
             },
@@ -134,7 +134,7 @@ export default function CommonForm({ title }) {
 
       if (response.ok) {
         // Success handling
-        setFormData({ nameFull: "", phoneNo: "" });
+        setFormData({ fullName: "", phone: "" });
         setShowPopup(true);
         setSubmissionCount((prev) => {
           const newCount = prev + 1;
@@ -264,16 +264,16 @@ export default function CommonForm({ title }) {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label
-                      htmlFor="nameFull"
+                      htmlFor="fullName"
                       className="block text-gray-900 text-sm md:text-lg font-medium mb-2"
                     >
                       Full Name
                     </label>
                     <input
                       type="text"
-                      id="nameFull"
-                      name="nameFull"
-                      value={formData.nameFull}
+                      id="fullName"
+                      name="fullName"
+                      value={formData.fullName}
                       onChange={handleChange}
                       required
                       className="w-full px-4 py-3 rounded-lg bg-[#151f28] border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-[#d8b66d]"
@@ -283,22 +283,40 @@ export default function CommonForm({ title }) {
 
                   <div>
                     <label
-                      htmlFor="phoneNo"
+                      htmlFor="phone"
                       className="block text-gray-900 text-sm md:text-lg font-medium mb-2"
                     >
-                      phoneNo Number
+                      Phone Number
                     </label>
                     <input
                       type="tel"
-                      id="phoneNo"
-                      name="phoneNo"
-                      value={formData.phoneNo}
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
                       onChange={handleChange}
                       required
                       className="w-full px-4 py-3 rounded-lg bg-[#151f28] border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-[#d8b66d]"
-                      placeholder="Enter your phoneNo number"
+                      placeholder="Enter your phone number"
                     />
                   </div>
+                </div>
+                <div>
+                  <label
+                    htmlFor="phone"
+                    className="block text-gray-900 text-sm md:text-lg font-medium mb-2"
+                  >
+                    Message
+                  </label>
+                  <textarea
+                    type="text"
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-5 rounded-lg bg-[#151f28] border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-[#d8b66d]"
+                    placeholder="Enter your message"
+                  />
                 </div>
 
                 <div className="flex justify-center">
