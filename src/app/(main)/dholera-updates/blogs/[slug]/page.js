@@ -122,10 +122,10 @@ export default async function BlogDetail({ params }) {
           <div className="text-center">
             <h1 className="text-2xl font-bold mb-2">Blog post not found</h1>
             <Link
-              href="/dholera-updates/latest-news"
+              href="/dholera-updates/blogs"
               className="mt-4 inline-block text-[#C69C21] hover:text-[#FDB913]"
             >
-              ← Back to News
+              ← Back to blogs
             </Link>
           </div>
         </div>
@@ -588,9 +588,9 @@ export default async function BlogDetail({ params }) {
     };
 
     // Format date for display
-    const formattedDate = new Date(
-      post.publishedAt || post._createdAt,
-    ).toLocaleDateString("en-US", {
+    const rawDate = post.publishedAt || post._createdAt;
+    const isoDate = new Date(rawDate).toISOString().split("T")[0];
+    const formattedDate = new Date(isoDate).toLocaleDateString("en-US", {
       day: "numeric",
       month: "long",
       year: "numeric",
@@ -696,7 +696,7 @@ export default async function BlogDetail({ params }) {
                         d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                       ></path>
                     </svg>
-                    <time className="text-gray-500">{formattedDate}</time>
+                    <time className="text-gray-500" dateTime={isoDate}>{formattedDate}</time>
                   </div>
 
                   {post.readingTime && (
@@ -797,9 +797,9 @@ export default async function BlogDetail({ params }) {
                   </div>
                   <div className="flex items-center justify-center mt-6">
                     <Link href="/dholera-updates/blogs">
-                      <button className="text-center rounded-xl text-white font-semibold bg-[#d7b56d] hover:bg-[#c6a45d] p-3 transition-colors">
+                      <span className="text-center rounded-xl text-white font-semibold bg-[#d7b56d] hover:bg-[#c6a45d] p-3 transition-colors">
                         Explore More
-                      </button>
+                      </span>
                     </Link>
                   </div>
                 </div>
