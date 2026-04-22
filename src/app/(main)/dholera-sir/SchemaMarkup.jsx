@@ -210,7 +210,7 @@ const SchemaMarkup = ({ post, relatedBlog = [] }) => {
       {/* Additional meta tags for better SEO */}
       <meta
         name="description"
-        content={post.description || extractPlainText(post.body)}
+        content={post.metaDescription || extractPlainText(post.body)}
       />
       <meta name="keywords" content={post.tags?.join(", ") || ""} />
       <meta name="author" content="Dholera Times" />
@@ -223,9 +223,7 @@ const SchemaMarkup = ({ post, relatedBlog = [] }) => {
         content={post.description || extractPlainText(post.body)}
       />
       <meta property="og:url" content={postUrl} />
-      {post.updatedAt && (
-        <meta property="article:modified_time" content={post.updatedAt} />
-      )}
+      
       <meta property="og:site_name" content="Dholera Times" />
       {post.mainImage && (
         <meta
@@ -238,10 +236,9 @@ const SchemaMarkup = ({ post, relatedBlog = [] }) => {
         content={post.publishedAt || post._createdAt}
       />
       <meta property="article:modified_time" content={post._updatedAt} />
-      {post.tags &&
-        post.tags.map((tag) => (
-          <meta key={tag} property="article:tag" content={tag} />
-        ))}
+      {post.updatedAt && (
+        <meta property="article:modified_time" content={post.updatedAt} />
+      )}
       {/* Twitter Card meta tags */}
       <meta name="x:card" content="summary_large_image" />
       <meta name="x:title" content={post.title} />
