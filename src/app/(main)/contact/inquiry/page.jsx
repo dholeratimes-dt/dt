@@ -131,13 +131,6 @@ export default function ContactDetails() {
             fill
             priority
           />
-          {/* <Image
-                  src={bannerMob}
-                  alt="banner"
-                  className="h-full w-full object-cover md:hidden"
-                  fill
-                  priority
-                /> */}
         </div>
       </div>
 
@@ -204,33 +197,33 @@ export default function ContactDetails() {
                     <div className=" mt-4 text-lg space-y-2">
                       <div>
                         <h3>
-                          <p className="flex justify-start items-center gap-4">
+                          <span className="flex justify-start items-center gap-4">
                             <strong>
                               <FaPhoneAlt />
                             </strong>{" "}
                             +91 99589 93549
-                          </p>
+                          </span>
                         </h3>
                       </div>
                       <div>
                         <h3>
-                          <p className="flex justify-start items-center gap-4">
+                          <span className="flex justify-start items-center gap-4">
                             <strong>
                               <CiMail />
                             </strong>{" "}
                             info@dholeratimes.com
-                          </p>
+                          </span>
                         </h3>
                       </div>
                       <div>
                         <h3>
-                          <p className="flex justify-start items-center gap-4">
+                          <span className="flex justify-start items-center gap-4">
                             <strong>
                               <FaMapMarkerAlt />
                             </strong>{" "}
                             620, JMD Megapolis, Sector-48, Sohna Road, Gurugram
                             - 122018, India
-                          </p>
+                          </span>
                         </h3>
                       </div>
 
@@ -259,32 +252,32 @@ export default function ContactDetails() {
                     <div className=" mt-4 text-lg space-y-2">
                       <div>
                         <h3>
-                          <p className="flex justify-start items-center gap-4">
+                          <span className="flex justify-start items-center gap-4">
                             <strong>
                               <FaPhoneAlt />
                             </strong>{" "}
                             +91 99589 93549
-                          </p>
+                          </span>
                         </h3>
                       </div>
                       <div>
                         <h3>
-                          <p className="flex justify-start items-center gap-4">
+                          <span className="flex justify-start items-center gap-4">
                             <strong>
                               <CiMail />
                             </strong>{" "}
                             info@dholeratimes.com
-                          </p>
+                          </span>
                         </h3>
                       </div>
                       <div>
                         <h3>
-                          <p className="flex justify-start items-center gap-4">
+                          <span className="flex justify-start items-center gap-4">
                             <strong>
                               <FaMapMarkerAlt />
                             </strong>{" "}
                             Office no. 303, 3rd Floor H-110, Sector-63, Noida, Uttar Pradesh 201301
-                          </p>
+                          </span>
                         </h3>
                       </div>
                     </div>

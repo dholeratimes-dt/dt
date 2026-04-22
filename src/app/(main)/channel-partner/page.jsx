@@ -236,12 +236,12 @@ export default function ChannelPartnerPage() {
                       style={{ backgroundColor: "#d3b36b" }}
                     ></div>
                     <div>
-                      <h4
+                      <h3
                         className="font-semibold"
                         style={{ color: "#151f28" }}
                       >
                         Prime Location
-                      </h4>
+                      </h3>
                       <p className="text-gray-600 text-sm">
                         Direct entry from State Highway, minutes from Expressway
                         and International Airport.
@@ -255,12 +255,12 @@ export default function ChannelPartnerPage() {
                       style={{ backgroundColor: "#d3b36b" }}
                     ></div>
                     <div>
-                      <h4
+                      <h3
                         className="font-semibold"
                         style={{ color: "#151f28" }}
                       >
                         Secure Gated Community
-                      </h4>
+                      </h3>
                       <p className="text-gray-600 text-sm">
                         Boundary wall, clear plot demarcation, and internal
                         infrastructure.
