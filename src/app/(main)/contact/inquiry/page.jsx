@@ -13,6 +13,7 @@ import {
 } from "react-icons/fa";
 import { CiMail } from "react-icons/ci";
 import ContactForm from "../../components/ContactForm";
+import { FaWhatsapp } from "react-icons/fa";
 
 export default function ContactDetails() {
   const schemaData = {
@@ -149,39 +150,30 @@ export default function ContactDetails() {
             decisions with transparent support and verified information.
           </p>
           <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 px-6 md:px-10">
-            {/* Talk to Sales */}
-            <div className="hover:scale-105 shadow-2xl">
+            {/* Call Us */}
+            <div className="hover:scale-105 shadow-2xl transition-transform duration-300">
               <a
                 href="tel:+919958993549"
-                className="bg-gray-100 p-6 rounded-lg shadow-md flex flex-col items-center text-center"
+                className="bg-gray-100 p-6 rounded-lg shadow-md flex justify-center gap-4 items-center text-center"
               >
-                <FaPhoneAlt className="text-gray-800 text-3xl mb-4" />
-                <h2 className="text-lg font-semibold text-gray-800">
-                  Talk to Sales
-                </h2>
-                <p className="text-gray-600 mt-2">
-                  Interested in our services? Just pick up the phone to chat
-                  with a member of our sales team.
-                </p>
+                <FaPhoneAlt className="text-gray-800 text-3xl" />
+                <h2 className="text-lg font-semibold text-gray-800">Call Us</h2>
               </a>
             </div>
 
-            {/* Contact Support */}
-            <div className="hover:scale-105 shadow-2xl">
+            {/* WhatsApp */}
+            <div className="hover:scale-105 shadow-2xl transition-transform duration-300">
               <a
                 href="https://api.whatsapp.com/send?phone=919958993549"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-gray-100 p-6 rounded-lg shadow-md flex flex-col items-center text-center"
+                className="bg-gray-100 p-6 rounded-lg shadow-md flex justify-center gap-4 items-center text-center"
               >
-                <FaHeadset className="text-gray-800 text-3xl mb-4" />
+                <FaWhatsapp className="text-gray-800 text-3xl" />
                 <h2 className="text-lg font-semibold text-gray-800">
-                  Contact Customer Support
+                  WhatsApp Us
                 </h2>
-                <p className="text-gray-600 mt-2">
-                  Need help? Our support team is here for you. Reach out
-                  anytime!
-                </p>
+                
               </a>
             </div>
           </div>
