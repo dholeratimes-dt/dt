@@ -14,7 +14,6 @@ import {
 import { CiMail } from "react-icons/ci";
 import ContactForm from "../../components/ContactForm";
 
-
 export default function ContactDetails() {
   const schemaData = {
     "@context": "https://schema.org",
@@ -138,10 +137,17 @@ export default function ContactDetails() {
         {/* Header Section */}
 
         {/* Contact Cards Section */}
-        <div className="bg-white py-12">
-          <h1 className="text-center mb-10 font-bold text-4xl max-sm:text-3xl max-sm:ml-4 max-sm:text-left">
+        <div className="bg-white pt-4 pb-2">
+          <h1 className="text-center mb-6 font-bold text-4xl max-sm:text-3xl max-sm:ml-4 max-sm:text-left">
             Get Expert Guidance on Dholera Smart City
           </h1>
+          <p className="max-w-5xl mx-auto pb-6">
+            Looking for trusted guidance on Dholera Smart City investment
+            opportunities? Contact Dholera Times for expert assistance on
+            residential plots, project updates, legal clarity, site visits, and
+            investment consultation. Our team helps investors make informed
+            decisions with transparent support and verified information.
+          </p>
           <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 px-6 md:px-10">
             {/* Talk to Sales */}
             <div className="hover:scale-105 shadow-2xl">
@@ -185,111 +191,57 @@ export default function ContactDetails() {
           {/* Social Media Links */}
           <div className="mt-10 ">
             {/* Contact Info & Contact Form */}
-            <div className="flex flex-col max-sm:flex-col-reverse md:flex-row justify-center items-center  gap-16 p-6">
+            <div className="flex flex-col max-sm:flex-col-reverse md:flex-row justify-center items-center gap-16 p-6">
               {/* Contact Info Section */}
               <div className="max-w-2xl text-left">
                 <div className="space-y-8">
                   <div>
-                    <h2 className="font-bold text-4xl text-[#2863e5]">
-                      Registered Office{" "}
+                    <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                      Speak With Dholera Property Experts
                     </h2>
-                    <h3 className="font-bold text-2xl">Dholera Times </h3>
-                    <div className=" mt-4 text-lg space-y-2">
-                      <div>
-                        <h3>
-                          <span className="flex justify-start items-center gap-4">
-                            <strong>
-                              <FaPhoneAlt />
-                            </strong>{" "}
-                            +91 99589 93549
-                          </span>
-                        </h3>
-                      </div>
-                      <div>
-                        <h3>
-                          <span className="flex justify-start items-center gap-4">
-                            <strong>
-                              <CiMail />
-                            </strong>{" "}
-                            info@dholeratimes.com
-                          </span>
-                        </h3>
-                      </div>
-                      <div>
-                        <h3>
-                          <span className="flex justify-start items-center gap-4">
-                            <strong>
-                              <FaMapMarkerAlt />
-                            </strong>{" "}
-                            620, JMD Megapolis, Sector-48, Sohna Road, Gurugram
-                            - 122018, India
-                          </span>
-                        </h3>
-                      </div>
-
-                      <div className="space-y-4">
-                        <div className=" w-full h-48 rounded overflow-hidden">
-                          <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4203.4823453415875!2d77.03488882442701!3d28.41943917746384!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87ed979cce195a67%3A0xa6ea8ada5da2aaf5!2sDholera%20Times!5e1!3m2!1sen!2sin!4v1744797963851!5m2!1sen!2sin"
-                            className="w-full h-full"
-                            style={{ border: 0 }}
-                            allowFullScreen=""
-                            loading="lazy"
-                            referrerPolicy="no-referrer-when-downgrade"
-                            title="Location map"
-                          ></iframe>
-                        </div>
-                      </div>
-                    </div>
+                    <p className="text-gray-600 text-base leading-relaxed">
+                      Whether you want details about Dholera plots, pricing,
+                      location advantages, or government-backed infrastructure
+                      developments, our experts are here to assist you.
+                    </p>
                   </div>
 
-                  {/* Branch Office Section */}
-                  <div>
-                    <h2 className="font-bold text-4xl text-[#2863e5]">
-                      Branch Office{" "}
-                    </h2>
-                    <h3 className="font-bold text-2xl">Dholera Times </h3>
-                    <div className=" mt-4 text-lg space-y-2">
-                      <div>
-                        <h3>
-                          <span className="flex justify-start items-center gap-4">
-                            <strong>
-                              <FaPhoneAlt />
-                            </strong>{" "}
-                            +91 99589 93549
-                          </span>
-                        </h3>
-                      </div>
-                      <div>
-                        <h3>
-                          <span className="flex justify-start items-center gap-4">
-                            <strong>
-                              <CiMail />
-                            </strong>{" "}
-                            info@dholeratimes.com
-                          </span>
-                        </h3>
-                      </div>
-                      <div>
-                        <h3>
-                          <span className="flex justify-start items-center gap-4">
-                            <strong>
-                              <FaMapMarkerAlt />
-                            </strong>{" "}
-                            Office no. 303, 3rd Floor H-110, Sector-63, Noida, Uttar Pradesh 201301
-                          </span>
-                        </h3>
-                      </div>
-                    </div>
-                  </div>
+                  <ul className="space-y-4">
+                    {[
+                      "Get answers to your Dholera investment questions",
+                      "Request project details and pricing",
+                      "Book a Dholera site visit",
+                      "Get guidance on registry-ready plots",
+                      "Discuss long-term investment opportunities",
+                    ].map((item, index) => (
+                      <li key={index} className="flex items-start gap-3">
+                        <span className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-green-100 flex items-center justify-center">
+                          <svg
+                            className="w-3 h-3 text-green-600"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth={3}
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M5 13l4 4L19 7"
+                            />
+                          </svg>
+                        </span>
+                        <span className="text-gray-700 text-base">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
 
               {/* Contact Form Section */}
-              <div className=" ">
+              <div>
                 <ContactForm
                   title="Enquire Now"
-                  headline="Book  your free consultation with our Dholera expert-no obligations, just guidance. Fields marked with * are mandatory."
+                  headline="Book your free consultation with our Dholera expert — no obligations, just guidance. Fields marked with * are mandatory."
                   buttonName="Get A Call Back"
                 />
               </div>

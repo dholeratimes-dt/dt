@@ -69,25 +69,39 @@ export default function page() {
         content="Dholera Smart City, Dholera Gujarat, Dholera SIR, Dholera Project, Invest in Dholera, Dholera Property Investment"
       />
       <link rel="canonical" href="https://www.dholeratimes.com/bulk-land" />
-      <div className="relative md:h-96 w-full h-[30vh] overflow-hidden">
-        <Image
-          src={hero}
-          alt="Dholera Land"
-          className="object-cover w-full h-auto max-sm:hidden"
-          priority
-        />
-        <Image
-          src={heroM}
-          alt="Dholera Land"
-          className="object-cover w-full h-[60vh] md:hidden"
-          priority
-        />
+      <div className="relative overflow-hidden h-[40vh] w-full">
+        <div className="hidden md:block absolute inset-0 w-full h-full">
+          <Image
+            src={hero}
+            alt="Dholera SIR Project"
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+        <div className="md:hidden absolute inset-0 w-full h-full">
+          <Image
+            src={heroM}
+            alt="Dholera SIR Project"
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="relative z-10 h-full flex items-center justify-center">
+          <div className="max-w-7xl mx-auto px-4 text-center">
+            <h1 className="text-4xl md:text-5xl font-bold mb-8 text-[#debe6b]">
+              Bulk Land Deals
+            </h1>
+          </div>
+        </div>
       </div>
 
       <div>
-        <h1 className="text-2xl  md:text-3xl pt-8 font-bold text-black text-center mb-2">
+        <h2 className="text-2xl  md:text-3xl pt-8 font-bold text-black text-center mb-2">
           Explore Bulk Land Growth Zones in Dholera SIR
-        </h1>
+        </h2>
       </div>
 
       <div>
@@ -98,13 +112,13 @@ export default function page() {
           development, and government-backed progress, Dholera SIR is becoming a
           prime destination for residential, commercial, and industrial
           projects. Whether you are planning a township, business hub, or
-          long-term investment, bulk land in Dholera SIR offers strategic location
-          advantages and strong future potential. Connect with us to get
-          verified details on premium bulk land options and make an informed
+          long-term investment, bulk land in Dholera SIR offers strategic
+          location advantages and strong future potential. Connect with us to
+          get verified details on premium bulk land options and make an informed
           investment decision.
         </p>
       </div>
-      
+
       <div className="text-xl text-center font-semibold pt-4">
         Explore zones in bulk land
       </div>

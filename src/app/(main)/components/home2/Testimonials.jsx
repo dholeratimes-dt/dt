@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { AnimatePresence } from "framer-motion";
 import BrochureDownload from "../BrochureDownload";
+import { FaPhone, FaWhatsapp } from "react-icons/fa";
 
 const testimonials = [
   {
@@ -198,16 +199,16 @@ const TestimonialPagination = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               <a
                 href="tel:+919958993549"
-                className="bg-[#d3b36b] text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
+                className="bg-[#d3b36b] text-white flex justify-center items-center gap-2 px-8 py-3 rounded-xl font-semibold hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
               >
-                Get Free Consultation
+               <FaPhone className="rotate-90"/> Call Now
               </a>
-              <button
-                onClick={openBrochureForm}
-                className="border-2 border-[#151f28] text-[#d3b36b] px-8 py-3 rounded-xl font-semibold hover:bg-[#caac66] hover:text-white transition-all duration-300"
+              <a
+                href="https://wa.me/919958993549?text=Hi"
+                className="border-2 border-[#151f28] text-[#d3b36b] flex justify-center items-center gap-2 px-8 py-3 rounded-xl font-semibold hover:bg-[#caac66] hover:text-white transition-all duration-300"
               >
-                Download Brochure
-              </button>
+               <FaWhatsapp/> WhatsApp Us
+              </a>
             </div>
           </div>
         </div>
