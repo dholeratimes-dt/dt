@@ -1,6 +1,6 @@
 import { PortableText } from "@portabletext/react";
 import { urlFor } from "@/sanity/lib/image";
-import { getPostBySlug, getProjectInfo, getProjects } from "@/sanity/lib/api";
+import { getAboutBySlug, getProjectInfo, getProjects } from "@/sanity/lib/api";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -10,7 +10,7 @@ import LeadFormSlug from "../../dholera-updates/latest-updates/[slug]/LeadForm";
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const site = "dholera-times";
-  const post = await getPostBySlug(slug, site);
+  const post = await getAboutBySlug(slug, site);
 
   return {
     title: post.metaTitle,
@@ -106,7 +106,7 @@ export default async function BlogDetail({ params }) {
 
   try {
     const [post, trendingBlogs] = await Promise.all([
-      getPostBySlug(slug, site),
+      getAboutBySlug(slug, site),
       getProjectInfo(),
     ]);
 

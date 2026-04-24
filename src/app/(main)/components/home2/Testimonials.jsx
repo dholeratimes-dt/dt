@@ -126,7 +126,7 @@ const TestimonialPagination = () => {
               className={`bg-white shadow-md rounded-lg p-6 ${styles.cardBorder} hover:shadow-lg transition-shadow duration-300`}
               whileHover={{ scale: 1.03 }}
             >
-              <p className={`italic ${styles.quote} mb-6 text-black min-h-48`}>
+              <p className={`italic ${styles.quote} mb-6 text-black h-20`}>
                 ❝ {testimonial.quote} ❞
               </p>
               <div className="flex items-center border-t border-[#b98e31] pt-4">

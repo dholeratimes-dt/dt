@@ -3,7 +3,7 @@ import { urlFor } from "@/sanity/lib/image";
 import {
   getblogs,
   getNews,
-  getPostBySlug,
+  getNewsBySlug,
   getProjects,
 } from "@/sanity/lib/api";
 import Link from "next/link";
@@ -84,7 +84,7 @@ const TrendingBlogItem = ({ post }) => {
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const site = "dholera-times";
-  const post = await getPostBySlug(slug, site);
+  const post = await getNewsBySlug(slug, site);
 
   return {
     title: post.metaTitle,
@@ -112,7 +112,7 @@ export default async function BlogDetail({ params }) {
 
   try {
     const [post, trendingBlogs, relatedBlogs, getPro] = await Promise.all([
-      getPostBySlug(slug, site),
+      getNewsBySlug(slug, site),
       getNews(4), // Get top 4 trending news
       getblogs(slug, 3), // Get 3 related blogs based on categories or tags
       getProjects(slug),
