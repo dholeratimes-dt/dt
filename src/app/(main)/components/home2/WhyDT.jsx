@@ -247,16 +247,12 @@ export default function WhyDT() {
             {/* Left Side - Header */}
             <div className="md:col-span-2 text-center">
               <h2 className="text-2xl md:text-[28px] font-bold text-[#151f28] mt-6 mb-6">
-                Your Trusted Partner in Dholera SIR
+                Dholeratimes : Trusted Developers in Dholera
               </h2>
               <p className="text-gray-600">
-                Dholera Times focuses on verified information, structured
-                guidance, and transparent processes for buyers exploring
-                opportunities in Dholera SIR. Our approach emphasizes
-                legal clarity, location awareness, and long-term development
-                potential so investors can make well-informed property
-                decisions.
-                
+                DholeraTimes helps buyers find residential plots in good
+                locations across Dholera with registry-ready documents and full
+                support from enquiry to booking.
               </p>
             </div>
 
@@ -294,23 +290,23 @@ export default function WhyDT() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-4">
             {[
               {
-                value: "9",
-                label: "Residential Projects",
+                value: "7+ Projects",
+                label: "Successfully Sold Out",
                 icon: <Building className="h-8 w-8" />,
               },
               {
-                value: "544+",
+                value: "957+ Plots",
                 label: "Plots Sold",
                 icon: <BadgeCheck className="h-8 w-8" />,
               },
               {
-                value: "411+",
-                label: "Happy Customers",
+                value: "561+",
+                label: "Happy Clients",
                 icon: <Users className="h-8 w-8" />,
               },
               {
-                value: "1.5 Lakh Sq. Yards",
-                label: "Sold",
+                value: "2 Lakh+ Sq. Yd",
+                label: "Dholera Land Sold",
                 icon: <AreaChart className="h-8 w-8" />,
               },
             ].map((stat, index) => (

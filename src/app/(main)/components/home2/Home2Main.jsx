@@ -19,10 +19,10 @@ export default function Home2Main() {
         {/* <Primary/> */}
       </div>
       <div>
-        <AboutDT />
+        <Dholera />
       </div>
       <div>
-        <Dholera />
+        <AboutDT />
       </div>
 
       <div>
@@ -44,9 +44,9 @@ export default function Home2Main() {
         <InvestmentTimeline />
       </div> */}
 
-      <div>
+     {/*  <div>
         <MegaIndustries />
-      </div>
+      </div> */}
 
       <div>
         <FAQS />

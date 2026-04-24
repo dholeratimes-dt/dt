@@ -161,14 +161,14 @@ const WestWynAboutSection = () => {
         <div className="text-center mb-8 md:w-1/2">
           <div className="h-full flex flex-col">
             <p className="text-base text-gray-600 text-justify max-w-4xl mx-auto leading-relaxed mb-4">
-              WestWyn Estates is a premium residential plotting project in
-              Polarpur, Dholera designed for comfortable living and long-term
-              investment. The project offers direct entry from State Highway-117
-              and is located just minutes from Bhimnath Railway Station,
-              ensuring convenient connectivity. With access to major
-              infrastructure and upcoming developments in the region, WestWyn
-              Estates is a suitable option for those exploring Dholera plots
-              with strong future growth potential.
+              WestWyn Estates as a premium residential plotting project in
+              Polarpur, Dholera for buyers who value location advantage, legal
+              clarity, and a more structured buying process. With 152 and 200
+              sq. yard plot options, strong connectivity through State Highway
+              117, and project positioning backed by NA/NOC clearance, clear
+              title, and registry readiness, WestWyn Estates is a practical
+              choice for buyers looking for a better-supported plot investment
+              journey in Dholera.
             </p>
             <div className="flex-grow flex items-center">
               <Image

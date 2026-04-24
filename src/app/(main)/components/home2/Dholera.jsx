@@ -5,13 +5,21 @@ import Link from "next/link";
 import Magnet from "./Magnet";
 
 export default function Dholera() {
+  const locationFeatures = [
+    { text: "India’s First Greenfield Special Investment Region (SIR)" },
+    { text: "Strong backing from both State and Central Governments" },
+    { text: "Rapid industrial and infrastructure development underway" },
+    { text: "Plug and play infrastructure for faster project execution" },
+    { text: "High appreciation potential over the next 5 years" },
+  ];
+
   return (
     <>
       <div className="bg-gray-50 py-8 px-4">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-[28px] text-center font-bold text-[#151f28] mb-6 leading-tight">
-            Dholera Smart City - Where India’s Future Is Being Built
-          </h1>
+          <h2 className="text-[28px] text-center font-bold text-[#151f28] mb-6 leading-tight">
+            Invest in India first planned smart city - Dholera SIR
+          </h2>
           <div className="flex flex-col-reverse md:flex-row-reverse items-center gap-12">
             {/* Left side - Image */}
             <div className="md:w-1/2 w-full">
@@ -27,37 +35,46 @@ export default function Dholera() {
             {/* Right side - Content */}
             <div className="md:w-1/2 w-full">
               {/* Description */}
-              <p className="text-gray-600 leading-relaxed text-justify mb-8">
-                Dholera Smart City is India’s first planned smart city, being
-                developed under the prestigious Delhi–Mumbai Industrial Corridor
-                (DMIC). Spread across 922.5 sq. km, Dholera SIR is planned as a
-                world-class industrial and manufacturing hub with modern
-                infrastructure, smart utilities, sustainable energy solutions,
-                and seamless global connectivity.
-                <br />
-                Strategically located just 109 km from Ahmedabad, the city is
-                well connected through the Ahmedabad–Dholera Expressway and the
-                upcoming Dholera International Airport, which is set to be one
-                of India’s largest airports. Backed by major investments such as
-                Tata Semiconductor Plant (₹91,000 CR), ReNew Power Project
-                (₹1,200 CR), and one of the world’s largest solar power parks,
-                Dholera SIR is rapidly emerging as a next-generation economic
-                and industrial powerhouse of India.
+              <p className="text-gray-600 leading-relaxed text-justify mb-4">
+                Dholera SIR is India's planned greenfield smart city under the
+                Delhi–Mumbai Industrial Corridor. With large-scale
+                infrastructure planning, industrial growth, future-ready
+                connectivity, and expanding development activity, it has become
+                a region that many long-term buyers are closely tracking. Key
+                highlights that define Dholera Smart City:
               </p>
 
-              <Link
-                href="/dholera-sir"
-                className="bg-[#b69b5e] hover:bg-[#d3b36b] text-white font-semibold px-6 py-3 rounded-lg transition-colors duration-200 shadow-md"
-              >
-                Dholera SIR →
-              </Link>
+              <div className="flex flex-col">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-left mb-6">
+                  {locationFeatures.map((feature, index) => {
+                    const isLast = index === locationFeatures.length - 1;
+                    const isOdd = locationFeatures.length % 2 !== 0;
+
+                    return (
+                      <div
+                        key={index}
+                        className={`flex items-start gap-3 p-3 rounded-lg bg-white border border-gray-200 hover:border-amber-300 hover:shadow-md transition-all duration-200 ${isLast && isOdd ? "md:col-span-2" : ""}`}
+                      >
+                        <span className="text-sm text-gray-700 leading-snug">
+                          ➣ {feature.text}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <Link
+                  href="/dholera-sir"
+                  className="bg-[#b69b5e] hover:bg-[#d3b36b] text-white font-semibold px-6 py-3 rounded-lg transition-colors duration-200 shadow-md inline-block w-fit"
+                >
+                  Dholera SIR →
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div>
-        <Magnet />
-      </div>
+      <div></div>
     </>
   );
 }

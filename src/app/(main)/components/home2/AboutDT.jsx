@@ -1,13 +1,44 @@
 import React from "react";
-import dholeraSite from "@/assets/residential/estates.webp";
+import img from "@/assets/residential/we_cover.webp";
+import img2 from "@/assets/residential/residency-1.webp";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  Clock,
-  ArrowRight,
-  Train,
-  Plane,
-} from "lucide-react";
+import { Clock, ArrowRight, Train, Plane } from "lucide-react";
+import Magnet from "./Magnet";
+import { FaArrowRight, FaCheckCircle } from "react-icons/fa";
+
+const PROJECTS = [
+  {
+    image: img2,
+    name: "WestWyn Residency",
+    subtext: "Registry-ready Plots Under ₹8 Lakh*",
+    tag: "Premium Plots",
+    href: "/dholera-residential-plots/westwyn-residency",
+    description:
+      "WestWyn Residency is a gated plotting society in Pipariya, Dholera, offering residential plots with immediate possession and long-term growth potential.It is designed for buyers seeking a well-connected location, and a promising residential opportunity in Dholera’s emerging growth areas.",
+    points: [
+      "Starting from ₹8 lakh",
+      "Prime Location: 5 Minutes from SIR boundary, 30 Minutes from Dholera International Airport",
+      "Documentation: NA/NOC/Title clear plots, Registry-ready",
+      "Premium Amenities: Project Boundary, Gated Community, App-Based Management, EV Charging Station, 24/7 Security & CCTV",
+    ],
+  },
+  {
+    image: img,
+    name: "WestWyn Estates",
+    subtext: "State Highway Plots in Dholera Starting from ₹10 Lakh*",
+    tag: "Plotted Residential",
+    href: "/dholera-residential-plots/westwyn-estate",
+    description:
+      "Located in Polarpur, Dholera, WestWyn Estates is a premium residential plotting project with larger plot options, strong location appeal, and excellent connectivity via State Highway-117, Bhimnath Railway Station, the Dholera SIR boundary, and the expressway corridor.",
+    points: [
+      "Starting from ₹10 lakh",
+      "Prime Location: 5 Minutes from Bhimnath Railway Junction, 30 Minutes from TATA Semiconductor Plant",
+      "Documentation: NA/NOC/Title clear plots, Registry-ready",
+      "Amenities: Project Boundary, Gated Community, 24/7 Security & CCTV, EV Charging Station",
+    ],
+  },
+];
 
 export default function AboutDT() {
   const locationFeatures = [
@@ -20,65 +51,73 @@ export default function AboutDT() {
   ];
 
   return (
-    <div className="bg-gray-50 py-8 px-4">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-[28px] font-bold text-center text-[#151f28] mb-6 leading-tight">
-          WestWyn Estates - Where Smart Location Meets Smart Investment
-        </h2>
-        <div className="flex flex-col-reverse md:flex-row items-center gap-12">
-          {/* Left side - Image */}
-          <div className="md:w-1/2 w-full">
-            <div className="relative">
-              <Image
-                src={dholeraSite}
-                alt="WestWyn Estates in Dholera SIR"
-                className="w-full h-auto md:h-[400px] object-cover rounded-lg shadow-lg"
-              />
-            </div>
-          </div>
-
-          {/* Right side - Content */}
-          <div className="md:w-1/2 w-full">
-            {/* Description */}
-            <p className="text-gray-600 leading-relaxed text-justify mb-4">
-              WestWyn Estates is a premium residential plotting development
-              located in Polarpur, Dholera, designed with a low-density layout
-              to offer exclusivity and world-class amenities. Starting from ₹10 Lakh, 
-              it caters to premium gentry seeking a smart investment
-              opportunity in Dholera’s most active and high-demand region.
+    <>
+      <div className="bg-gray-50 py-8 px-4">
+        <div className="">
+          <div className="max-w-5xl mx-auto">
+            <h2 className="text-[28px] font-bold text-center text-[#151f28] mb-6 leading-tight">
+              Invest in Government-Approved Residential Plots
+            </h2>
+            <p className="text-center text-[#151f28] text-semibold">
+              Dholera Times brings you Premium Residential Plots opportunities
+              Near Dholera SIR WestWyn Residency in Pipariya and WestWyn Estates
+              in Polarpur offering well-located, registry-ready plots with
+              long-term growth potential.
             </p>
-            <div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {locationFeatures.map((feature, index) => {
-                  const Icon = feature.icon;
-                  return (
-                    <div
-                      key={index}
-                      className="flex items-start gap-3 p-3 rounded-lg bg-white border border-gray-200 hover:border-amber-300 hover:shadow-md transition-all duration-200"
-                    >
-                      <Icon className="w-5 h-5 text-[#b69b5e] flex-shrink-0 mt-0.5" />
-                      <span className="text-sm text-gray-700 leading-snug">
-                        {feature.text}
-                      </span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
+          </div>
+          <div className="grid md:grid-cols-2 gap-[clamp(1.25rem,3vw,2rem)] mb-[clamp(2.5rem,5vw,4rem)] max-w-7xl mx-auto pt-4">
+            {PROJECTS.map((project) => (
+              <div
+                key={project.name}
+                className="group border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300"
+              >
+                {/* Image */}
+                <div className="relative aspect-[4/3] w-full overflow-hidden">
+                  <Image
+                    src={project.image}
+                    alt={project.name}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
 
-            {/* CTA Button */}
-            <Link
-              href="/dholera-residential-plots/westwyn-estate"
-              className="block pt-4"
-            >
-              <span className="w-96 bg-[#b69b5e] hover:bg-[#d3b36b] text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-2">
-                <span>Explore WestWyn Estates</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </span>
-            </Link>
+                {/* Content */}
+                <div className="p-[clamp(1rem,2vw,1.5rem)]">
+                  <h3 className="text-[clamp(1.25rem,2.5vw,2rem)] font-bold text-[#151f28] mb-1">
+                    {project.name}
+                  </h3>
+                  <p className="text-[clamp(1rem,2vw,1.125rem)] font-semibold text-[#d3b36b] mb-3">
+                    {project.subtext}
+                  </p>
+                  <p className="text-[clamp(0.5rem,1.5vw,1rem)] text-[#151f28] leading-relaxed mb-4">
+                    {project.description}
+                  </p>
+                  <ul className="space-y-1 mb-3">
+                    {project.points.map((point, i) => (
+                      <li
+                        key={i}
+                        className="flex items-start gap-1.5 text-[clamp(0.5rem,1.5vw,1rem)] text-[#151f28] leading-snug"
+                      >
+                        <FaCheckCircle className="text-[#d3b36b] mt-[2px] flex-shrink-0 text-[clamp(0.5rem,1.5vw,1rem)]" />
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <Link
+                    href={project.href}
+                    className="inline-flex items-center gap-2 text-[clamp(0.75rem,1vw,0.825rem)] font-semibold text-[#d3b36b] border border-[#d3b36b] px-4 py-2 rounded-full hover:bg-[#d3b36b] hover:text-white transition-colors duration-200"
+                  >
+                    View Project Details <FaArrowRight className="text-xs" />
+                  </Link>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
-    </div>
+      <div>
+        <Magnet />
+      </div>
+    </>
   );
 }
