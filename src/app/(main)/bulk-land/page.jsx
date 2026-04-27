@@ -10,6 +10,7 @@ import cityCenter from "@/assets/bulkLand/city-centre-bulk-land-cover.webp";
 import knowledge from "@/assets/bulkLand/knowledge-it-bulk-land-cover.webp";
 import recreation from "@/assets/bulkLand/recreation-sports-bulk-land-cover.webp";
 import BulkLand from "../components/BulkLandForm";
+import { FaHome } from "react-icons/fa";
 
 export default function page() {
   const bulkLandCategories = [
@@ -57,6 +58,43 @@ export default function page() {
     },
   ];
 
+  const cards = [
+    {
+      icon: <FaHome />,
+      title: "Residential Planning",
+      description:
+        "Bulk land options suitable for plotted development and township-style planning",
+    },
+    {
+      icon: <FaHome />,
+      title: "Commercial Use",
+      description:
+        "Land options for buyers exploring business, retail, or service-based development.",
+    },
+    {
+      icon: <FaHome />,
+      title: "Industrial Zone",
+      description:
+        "Location guidance for land near industrial and infrastructure-linked growth areas.",
+    },
+    {
+      icon: <FaHome />,
+      title: "Long-Term Holding",
+      description:
+        "Suitable for investors looking at long-term land banking in Dholera’s growth corridor.",
+    },
+  ];
+
+  const CardItem = ({ icon, title, description }) => (
+    <div className="shadow-xl space-y-2 rounded-xl border-[#d3b36b] border-2 p-4">
+      <div className="flex gap-4 justify-center items-center text-[#d3b36b] text-xl">
+        {icon}
+        <p>{title}</p>
+      </div>
+      <p className="text-center">{description}</p>
+    </div>
+  );
+
   return (
     <>
       <title>Bulk Land in Dholera Smart City | High ROI Investment</title>
@@ -90,21 +128,34 @@ export default function page() {
         </h1>
       </div>
 
-      <div>
-        <p className="text-center max-w-4xl mx-auto px-4 leading-relaxed">
-          Looking to invest in bulk land in Dholera Smart City? This is the
-          right time to explore large, legally approved land parcels designed
-          for high-growth opportunities. With modern infrastructure, planned
-          development, and government-backed progress, Dholera SIR is becoming a
-          prime destination for residential, commercial, and industrial
-          projects. Whether you are planning a township, business hub, or
-          long-term investment, bulk land in Dholera SIR offers strategic location
-          advantages and strong future potential. Connect with us to get
-          verified details on premium bulk land options and make an informed
-          investment decision.
-        </p>
+      <div className="grid grid-cols-1 md:grid-cols-2 max-w-7xl mx-auto">
+        <div className="p-2 flex flex-col justify-center items-center">
+          <p className="text-left max-w-4xl mx-auto px-4 leading-relaxed">
+            Dholera SIR is becoming a key location for investors, developers,
+            and business groups looking for large land parcels in a planned
+            smart city region. With improving connectivity, infrastructure
+            development, and industrial activity around Dholera, bulk land can
+            be considered for residential planning, commercial use, industrial
+            interest, and long-term land holding.
+            <br />
+            Explore location-based bulk land options with guidance on access,
+            nearby development, land purpose, documentation clarity, and site
+            visit support.
+          </p>
+          <div className=" flex justify-center items-center w-full gap-8 p-4 translate-y-4">
+            <button className="bg-[#d3b36b] w-full p-2 rounded-xl shadow-xl  hover:scale-110 duration-300 whitespace-nowrap">Get Bulk Land Deals</button>
+          
+          </div>
+        </div>
+        <div className="p-2">
+          <div className="grid md:grid-cols-2 gap-4">
+            {cards.map((card, index) => (
+              <CardItem key={index} {...card} />
+            ))}
+          </div>
+        </div>
       </div>
-      
+
       <div className="text-xl text-center font-semibold pt-4">
         Explore zones in bulk land
       </div>
