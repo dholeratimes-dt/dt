@@ -18,7 +18,6 @@ import ScrollToTop from "./components/ScrollToTop";
 const FACEBOOK_PIXEL_ID = "672210205737825"; // Replace with your actual Pixel ID
 
 import { Inter } from "next/font/google";
-import Head from "next/head";
 
 const inter = Inter({
   subsets: ["latin"],

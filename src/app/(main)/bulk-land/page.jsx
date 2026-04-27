@@ -12,6 +12,10 @@ import recreation from "@/assets/bulkLand/recreation-sports-bulk-land-cover.webp
 import BulkLand from "../components/BulkLandForm";
 import { FaHome } from "react-icons/fa";
 import FAQS from "./FAQs";
+import residentialIcon from "@/assets/icons/residential-bulk-land-icon.svg"
+import commercialIcon from "@/assets/icons/commercial-bulk-land-icon.svg"
+import grwothIcon from "@/assets/icons/high-growth-potential-icon.svg"
+import industrialIcon from "@/assets/icons/industrial-bulk-land-icon.svg"
 
 export default function page() {
   const bulkLandCategories = [
@@ -61,25 +65,25 @@ export default function page() {
 
   const cards = [
     {
-      icon: <FaHome />,
+      icon: residentialIcon,
       title: "Residential Planning",
       description:
         "Bulk land options suitable for plotted development and township-style planning",
     },
     {
-      icon: <FaHome />,
+      icon: commercialIcon,
       title: "Commercial Use",
       description:
         "Land options for buyers exploring business, retail, or service-based development.",
     },
     {
-      icon: <FaHome />,
+      icon: industrialIcon,
       title: "Industrial Zone",
       description:
         "Location guidance for land near industrial and infrastructure-linked growth areas.",
     },
     {
-      icon: <FaHome />,
+      icon: grwothIcon,
       title: "Long-Term Holding",
       description:
         "Suitable for investors looking at long-term land banking in Dholera’s growth corridor.",
@@ -89,10 +93,14 @@ export default function page() {
   const CardItem = ({ icon, title, description }) => (
     <div className="shadow-xl space-y-2 rounded-xl border-[#d3b36b] border-2 p-4">
       <div className="flex gap-4 justify-center items-center text-[#d3b36b] text-xl">
-        {icon}
+        <Image
+          src={icon}
+          alt={title}
+          className="w-[30px] h-[30px] flex justify-center items-center"
+        />
         <p>{title}</p>
       </div>
-      <p className="text-center">{description}</p>
+      <p className="text-left">{description}</p>
     </div>
   );
 
