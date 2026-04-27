@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import govtApprovedProject from "@/assets/icons/verified-auda-approved.webp";
 import salesDeed from "@/assets/icons/immediate-sale-deed.webp";
 import afterSales from "@/assets/icons/resale-support.webp";
@@ -11,8 +11,6 @@ import Image from "next/image";
 import {
   Users,
   Building,
-  Check,
-  Star,
   BadgeCheck,
   AreaChart,
 } from "lucide-react";
@@ -50,47 +48,7 @@ const features = [
 ];
 
 export default function WhyDT() {
-  const [investmentYear, setInvestmentYear] = useState(5);
-  const [plotSize, setPlotSize] = useState(200);
-  const [customYear, setCustomYear] = useState("");
-
-  const baseRate = 9250; // Current price per sq. yard
-  const targetRate = 17000; // Price after 5 years
-  const annualGrowthRate = 0.05; // 5% annual growth
-
-  const calculateFutureValue = (years) => {
-    // If years is 2 or less, use linear interpolation to match exactly 13000 at 2 years
-    if (years <= 5) {
-      const incrementPerYear = (targetRate - baseRate) / 5;
-      return baseRate + incrementPerYear * years;
-    } else {
-      // For years > 2, use compound growth at 5% from the 2-year mark
-      return targetRate * Math.pow(1 + annualGrowthRate, years - 5);
-    }
-  };
-
-  const calculateInvestment = () => {
-    let years = investmentYear;
-    if (customYear) {
-      years = parseInt(customYear);
-    }
-
-    const futureRate = calculateFutureValue(years);
-    const currentInvestment = baseRate * plotSize;
-    const futureValue = futureRate * plotSize;
-    const profit = futureValue - currentInvestment;
-    const percentageGrowth = (futureValue / currentInvestment - 1) * 100;
-
-    return {
-      currentValue: currentInvestment,
-      futureValue: futureValue,
-      profit: profit,
-      percentageGrowth: percentageGrowth,
-      ratePerSqYard: futureRate,
-    };
-  };
-
-  const investmentDetails = calculateInvestment();
+  
 
   useEffect(() => {
     // Initialize animation observers when component mounts

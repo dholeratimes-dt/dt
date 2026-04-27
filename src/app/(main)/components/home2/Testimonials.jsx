@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
 import { AnimatePresence } from "framer-motion";
 import BrochureDownload from "../BrochureDownload";
 import { FaPhone, FaWhatsapp } from "react-icons/fa";
@@ -112,19 +111,15 @@ const TestimonialPagination = () => {
         <h3 className={`text-center text-[28px] font-semibold mb-10`}>
           What our customers says
         </h3>
-        <motion.div
+        <div
           key={currentPage}
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -50 }}
-          transition={{ duration: 0.5 }}
           className="grid md:grid-cols-3 gap-8 mb-8"
         >
           {currentTestimonials.map((testimonial, index) => (
-            <motion.div
+            <div
               key={index}
               className={`bg-white shadow-md rounded-lg p-6 ${styles.cardBorder} hover:shadow-lg transition-shadow duration-300`}
-              whileHover={{ scale: 1.03 }}
+
             >
               <p className={`italic ${styles.quote} mb-6 text-black h-20`}>
                 ❝ {testimonial.quote} ❞
@@ -140,11 +135,11 @@ const TestimonialPagination = () => {
                   </p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
 
-        <motion.div transition={{ duration: 0.5 }}>
+        <div>
           <div className="flex justify-center items-center space-x-4">
             <Button
               onClick={prevPage}
@@ -182,7 +177,7 @@ const TestimonialPagination = () => {
               <ChevronRight className="h-4 w-4" />
             </Button>
           </div>
-        </motion.div>
+        </div>
       </div>
 
       <div className="max-w-6xl mx-auto">
@@ -214,7 +209,7 @@ const TestimonialPagination = () => {
         </div>
       </div>
 
-      <AnimatePresence>
+      <div>
         {isBrochureFormOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]">
             <BrochureDownload
@@ -224,7 +219,7 @@ const TestimonialPagination = () => {
             />
           </div>
         )}
-      </AnimatePresence>
+      </div>
     </div>
   );
 };

@@ -2,7 +2,6 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
 
 /* image import */
 import hero1 from "@/assets/hero/abcd-building-dholera-homepage.webp";
@@ -11,7 +10,6 @@ import hero3 from "@/assets/hero/dholera-smart-city-indias-planned-smart-city-ho
 import heroM1 from "@/assets/hero/abcd-building-dholera-homepage-mobile.webp";
 import heroM2 from "@/assets/hero/dholera-sir-indias-first-semiconductor-city-homepage-mobile.webp";
 import heroM3 from "@/assets/hero/dholera-smart-city-mobile-banner-dholera-times.webp";
-import BrochureForm from "../BrochureForm";
 import HeroForm from "./HeroForm";
 
 export default function HOME2() {
@@ -80,22 +78,16 @@ export default function HOME2() {
       desktop: hero1,
       mobile: heroM1,
       alt: "Dholera Smart City",
-      desktopClickArea: { left: 159, top: 527, right: 367, bottom: 565 },
-      mobileClickArea: { left: 191, top: 865, right: 400, bottom: 906 },
     },
     {
       desktop: hero2,
       mobile: heroM2,
       alt: "Dholera SIR",
-      desktopClickArea: { left: 160, top: 524, right: 406, bottom: 570 },
-      mobileClickArea: { left: 181, top: 856, right: 412, bottom: 898 },
     },
     {
       desktop: hero3,
       mobile: heroM3,
       alt: "Dholera Smart City Project",
-      desktopClickArea: { left: 159, top: 518, right: 401, bottom: 562 },
-      mobileClickArea: { left: 174, top: 861, right: 417, bottom: 902 },
     },
   ];
 
@@ -108,10 +100,6 @@ export default function HOME2() {
     const interval = setInterval(nextSlide, 5000);
     return () => clearInterval(interval);
   }, []);
-
-  const handlePhoneCall = () => {
-    window.location.href = "tel:+919958993549";
-  };
 
   return (
     <>
@@ -157,18 +145,6 @@ export default function HOME2() {
                 />
                 {/* Gradient — mirrors Hero.jsx */}
                 <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-black/10 to-black/60" />
-                <button
-                  onClick={handlePhoneCall}
-                  className="absolute z-20 bg-transparent hover:bg-black/10 transition-all duration-300"
-                  style={{
-                    left: `${(slide.desktopClickArea.left / 1920) * 100}%`,
-                    top: `${(slide.desktopClickArea.top / 1080) * 175}%`,
-                    width: `${((slide.desktopClickArea.right - slide.desktopClickArea.left) / 1920) * 100}%`,
-                    height: `${((slide.desktopClickArea.bottom - slide.desktopClickArea.top) / 1080) * 100}%`,
-                  }}
-                  aria-label="Call +91 9958993549"
-                  title="Call +91 9958993549"
-                />
               </div>
             </div>
           ))}
@@ -193,18 +169,6 @@ export default function HOME2() {
                   className="object-cover"
                 />
                 <div className="absolute inset-0 bg-black/50" />
-                <button
-                  onClick={handlePhoneCall}
-                  className="absolute z-20 bg-transparent hover:bg-black/10 transition-all duration-300"
-                  style={{
-                    left: `${(slide.desktopClickArea.left / 1920) * 100}%`,
-                    top: `${(slide.desktopClickArea.top / 1080) * 100}%`,
-                    width: `${((slide.desktopClickArea.right - slide.desktopClickArea.left) / 1920) * 100}%`,
-                    height: `${((slide.desktopClickArea.bottom - slide.desktopClickArea.top) / 1080) * 100}%`,
-                  }}
-                  aria-label="Call +91 9958993549"
-                  title="Call +91 9958993549"
-                />
               </div>
             </div>
           ))}
@@ -268,32 +232,6 @@ export default function HOME2() {
         </button>
       </div>
 
-      {/* BrochureForm modal */}
-      <AnimatePresence>
-        {isContactFormOpen && (
-          <motion.div
-            className="fixed inset-0 flex items-center justify-center bg-black/70 z-[1000]"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            >
-              <BrochureForm
-                title={brochureFormData.title}
-                subTitle={brochureFormData.subTitle}
-                buttonName={brochureFormData.buttonText}
-                onClose={() => setIsContactFormOpen(false)}
-                onSuccess={() => setIsFormSubmitted(true)}
-              />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </>
   );
 }
