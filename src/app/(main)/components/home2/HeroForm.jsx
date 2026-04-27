@@ -83,42 +83,61 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
       if (formData.city) notesArray.push(`City: ${formData.city}`);
       if (formData.budget) notesArray.push(`Budget: ${formData.budget}`);
 
-      const response = await fetch("https://api./elead", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
-        },
-        body: JSON.stringify({
-          fields: {
-            name: formData.fullName,
-            phone: formData.phone,
-            email: formData.email || "",
-            notes: notesArray.join(" | "),
-            source: "BookMyAssets Taboola Hero Section",
+      const response = await fetch(
+        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
           },
-          tags: ["Dholera Investment", "Website Lead", "Taboola Hero"],
-          recaptchaToken: token,
-        }),
-      });
+          body: JSON.stringify({
+            fields: {
+              name: formData.fullName,
+              phone: formData.phone,
+              email: formData.email || "",
+              notes: notesArray.join(" | "),
+              source: "Dholera Times",
+            },
+            tags: ["Dholera Investment", "Website Lead", "Taboola Hero"],
+            recaptchaToken: token,
+          }),
+        },
+      );
 
       if (response.ok) {
-        setFormData({ fullName: "", phone: "", email: "", city: "", budget: "" });
+        setFormData({
+          fullName: "",
+          phone: "",
+          email: "",
+          city: "",
+          budget: "",
+        });
         if (onSuccess) onSuccess();
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({ event: "lead_form_submitted" });
       } else {
         const errorText = await response.text();
         console.error("API Error:", response.status, errorText);
-        setErrorMessage(`Submission failed (${response.status}). Please try again.`);
+        setErrorMessage(
+          `Submission failed (${response.status}). Please try again.`,
+        );
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      setErrorMessage("Network error. Please check your connection and try again.");
+      setErrorMessage(
+        "Network error. Please check your connection and try again.",
+      );
     } finally {
       setIsLoading(false);
-      if (typeof window !== "undefined" && window.grecaptcha && recaptchaRef.current) {
-        try { window.grecaptcha.reset(); } catch (err) {}
+      if (
+        typeof window !== "undefined" &&
+        window.grecaptcha &&
+        recaptchaRef.current
+      ) {
+        try {
+          window.grecaptcha.reset();
+        } catch (err) {}
       }
     }
   };
@@ -127,9 +146,14 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
     e.preventDefault();
     setIsLoading(true);
     setErrorMessage("");
-    if (!validateForm()) { setIsLoading(false); return; }
+    if (!validateForm()) {
+      setIsLoading(false);
+      return;
+    }
     if (!recaptchaLoaded || !window.grecaptcha) {
-      setErrorMessage("Security verification not loaded. Please refresh the page.");
+      setErrorMessage(
+        "Security verification not loaded. Please refresh the page.",
+      );
       setIsLoading(false);
       return;
     }
@@ -222,10 +246,18 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
         onChange={handleChange}
         required
       >
-        <option value="" disabled className="text-gray-500">Budget*</option>
-        <option value="5-15" className="text-black">₹5 Lakh – ₹15 Lakh</option>
-        <option value="15-25" className="text-black">₹15 Lakh – ₹25 Lakh</option>
-        <option value="25+" className="text-black">₹25 Lakh +</option>
+        <option value="" disabled className="text-gray-500">
+          Budget*
+        </option>
+        <option value="5-15" className="text-black">
+          ₹5 Lakh – ₹15 Lakh
+        </option>
+        <option value="15-25" className="text-black">
+          ₹15 Lakh – ₹25 Lakh
+        </option>
+        <option value="25+" className="text-black">
+          ₹25 Lakh +
+        </option>
       </select>
 
       <div ref={recaptchaRef} className="recaptcha-container" />
@@ -241,9 +273,25 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
       >
         {isLoading ? (
           <span className="flex items-center justify-center gap-2">
-            <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+            <svg
+              className="animate-spin h-4 w-4"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              />
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              />
             </svg>
             Submitting…
           </span>

@@ -17,9 +17,9 @@ export default function Dholera() {
     <>
       <div className="bg-gray-50 py-8 px-4">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-[28px] text-center font-bold text-[#151f28] mb-6 leading-tight">
-            Invest in India first planned smart city - Dholera SIR
-          </h2>
+          <h1 className="text-[28px] text-center font-bold text-[#151f28] mb-6 leading-tight">
+            Invest in India's First Planned Smart City - Dholera SIR
+          </h1>
           <div className="flex flex-col-reverse md:flex-row-reverse items-center gap-12">
             {/* Left side - Image */}
             <div className="md:w-1/2 w-full">

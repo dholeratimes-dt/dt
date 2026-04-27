@@ -41,14 +41,7 @@ const PROJECTS = [
 ];
 
 export default function AboutDT() {
-  const locationFeatures = [
-    { text: "5 Minutes from Bhimnath Railway Junction", icon: Train },
-    { text: "15 Minutes from Dholera SIR boundary", icon: Clock },
-    { text: "15 Minutes from RMS Multi-Specialty Hospital", icon: Clock },
-    { text: "17 minutes from Ahmedabad Dholera Expressway", icon: Clock },
-    { text: "30 minutes from Tata Semiconductor Plant", icon: Clock },
-    { text: "45 minutes from Dholera International Airport", icon: Plane },
-  ];
+
 
   return (
     <>
@@ -56,7 +49,7 @@ export default function AboutDT() {
         <div className="">
           <div className="max-w-5xl mx-auto">
             <h2 className="text-[28px] font-bold text-center text-[#151f28] mb-6 leading-tight">
-              Invest in Government-Approved Residential Plots
+             Government-Approved Residential Plots in Dholera
             </h2>
             <p className="text-center text-[#151f28] text-semibold">
               Dholera Times brings you Premium Residential Plots opportunities

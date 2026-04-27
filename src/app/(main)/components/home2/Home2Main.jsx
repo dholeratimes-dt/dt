@@ -4,12 +4,10 @@ import Dholera from "./Dholera";
 import LatestUpdates from "../Latest-updates";
 import WhyDT from "./WhyDT";
 import AboutDT from "./AboutDT";
-import MegaIndustries from "./MegaIndusties";
 import TestimonialPagination from "./Testimonials";
 import FAQS from "./FAQs";
 import PopupForm from "./PopUpForm";
 import BulkLand from "../BulkLandForm";
-import Primary from "./Primary";
 
 export default function Home2Main() {
   return (
