@@ -24,6 +24,7 @@ import Table from "./table";
 import BulkLand from "../../components/BulkLandForm";
 import { getHACLinks, getResidentialLinks } from "../InterLink";
 import HighAccessCorridorCards from "./Cards";
+import FAQS from "./FAQs";
 
 // Horizontal Scroll Design
 const HorizontalScrollInterlink = ({ properties }) => {
@@ -236,6 +237,7 @@ export default function page() {
         title="Invest in Govt. Approved Bulk Land in Dholera Starting 2Cr"
         pageName="hac-bulk-land"
       />
+      <FAQS/>
 
       <div>
         <Table />

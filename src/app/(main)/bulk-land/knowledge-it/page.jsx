@@ -21,6 +21,7 @@ import BulkLand from "../../components/BulkLandForm";
 import { TbBuildingSkyscraper } from "react-icons/tb";
 import { getKnowledgeITLinks, getResidentialLinks } from "../InterLink";
 import KnowledgeITZoneCards from "./Cards";
+import FAQS from "./FAQs";
 
 // Horizontal Scroll Design
 const HorizontalScrollInterlink = ({ properties }) => {
@@ -233,6 +234,7 @@ export default function page() {
         title="Invest in Govt. Approved Bulk Land in Dholera Starting 2Cr"
         pageName="knowledge-it-bulk-land"
       />
+      <FAQS/>
       <HorizontalScrollInterlink properties={relatedProperties} />
 
       <div>

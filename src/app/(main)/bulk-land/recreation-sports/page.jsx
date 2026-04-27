@@ -20,6 +20,7 @@ import Table from "./table";
 import BulkLand from "../../components/BulkLandForm";
 import { getResidentialLinks, getSportLinks } from "../InterLink";
 import RecreationZoneCards from "./Cards";
+import FAQS from "./FAQs";
 
 // Horizontal Scroll Design
 const HorizontalScrollInterlink = ({ properties }) => {
@@ -231,6 +232,7 @@ export default function page() {
         title="Invest in Govt. Approved Bulk Land in Dholera Starting 2Cr"
         pageName="recreation-sports-bulk-land"
       />
+      <FAQS/>
       <HorizontalScrollInterlink properties={relatedProperties} />
 
       <div>

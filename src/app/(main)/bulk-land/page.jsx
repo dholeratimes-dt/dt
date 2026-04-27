@@ -11,6 +11,7 @@ import knowledge from "@/assets/bulkLand/knowledge-it-bulk-land-cover.webp";
 import recreation from "@/assets/bulkLand/recreation-sports-bulk-land-cover.webp";
 import BulkLand from "../components/BulkLandForm";
 import { FaHome } from "react-icons/fa";
+import FAQS from "./FAQs";
 
 export default function page() {
   const bulkLandCategories = [
@@ -19,42 +20,42 @@ export default function page() {
       title: "Residential Zone",
       image: residential,
       href: "/bulk-land/residential",
-      description: "Perfect for residential townships and housing projects",
+      description: "Suitable for buyers exploring bulk land for plotted development, housing planning, township-style use, or long-term residential investment in Dholera SIR.",
     },
     {
       id: 2,
       title: "Industrial Zone",
       image: industrial,
       href: "/bulk-land/industrial",
-      description: "Ideal for manufacturing and industrial developments",
+      description: "Bulk land options for buyers tracking industrial growth, manufacturing activity, warehouse planning, and infrastructure-linked development around Dholera.",
     },
     {
       id: 3,
       title: "High Access Corridor",
       image: hac,
       href: "/bulk-land/high-access-corridor",
-      description: "Prime locations with excellent connectivity",
+      description: "Land options positioned around important access routes, suitable for buyers who prefer better road connectivity, movement visibility, and future development access.",
     },
     {
       id: 4,
       title: "City Centre",
       image: cityCenter,
       href: "/bulk-land/city-centre",
-      description: "Central business district opportunities",
+      description: "Bulk land options around central development areas, suitable for buyers exploring commercial, mixed-use, service-based, or future urban planning opportunities.",
     },
     {
       id: 5,
       title: "Knowledge & IT",
       image: knowledge,
       href: "/bulk-land/knowledge-it",
-      description: "Tech parks and knowledge-based industries",
+      description: "Suitable for buyers exploring land around education, IT, office, institutional, or future service-sector development possibilities in Dholera SIR.",
     },
     {
       id: 6,
       title: "Recreation & Sports",
       image: recreation,
       href: "/bulk-land/recreation-sports",
-      description: "Entertainment and sports facility development",
+      description: "Land options near lifestyle, recreation, sports, and community-focused development areas, suitable for long-term planning around future social infrastructure.",
     },
   ];
 
@@ -142,7 +143,7 @@ export default function page() {
             nearby development, land purpose, documentation clarity, and site
             visit support.
           </p>
-          <div className=" flex justify-center items-center gap-8 p-4 translate-y-4">
+          <div className=" flex justify-center items-center gap-8 w-full p-4 translate-y-4">
             <button className="bg-[#d3b36b] w-full p-2 rounded-xl shadow-xl  hover:scale-110 duration-300 whitespace-nowrap">Get Bulk Land Deals</button>
           
           </div>
@@ -181,7 +182,7 @@ export default function page() {
                     {category.title}
                   </h3>
                   <p className="text-xs text-white">
-                    Where Potential Meets Progress
+                    {category.description}
                   </p>
                 </div>
               </div>
@@ -208,6 +209,7 @@ export default function page() {
         </div>
       </div>
       <BulkLand title="Looking to Invest in Bulk Land Parcels in Dholera SIR" />
+      <FAQS/>
     </>
   );
 }

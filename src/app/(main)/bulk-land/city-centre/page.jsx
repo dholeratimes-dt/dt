@@ -20,6 +20,7 @@ import Table from "./table";
 import BulkLand from "../../components/BulkLandForm";
 import { getCityCenterLinks, getResidentialLinks } from "../InterLink";
 import CityCentreZoneCards from "./Cards";
+import FAQS from "./FAQs";
 
 // Horizontal Scroll Design
 const HorizontalScrollInterlink = ({ properties }) => {
@@ -250,6 +251,7 @@ export default function page() {
         title="Invest in Govt. Approved Bulk Land in Dholera Starting 2Cr"
         pageName="city-centre-bulk-land"
       />
+      <FAQS/>
       <HorizontalScrollInterlink properties={relatedProperties} />
 
       <div>
