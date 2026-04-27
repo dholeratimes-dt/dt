@@ -177,7 +177,7 @@ export default function DholeraProgressPage() {
               
               {/* Caption */}
               <div className="p-4 text-center">
-                <h3 className="text-lg font-bold text-gray-800 mb-2">{image.alt}</h3>
+                <h2 className="text-lg font-bold text-gray-800 mb-2">{image.alt}</h2>
               </div>
             </div>
           ))}

@@ -242,7 +242,7 @@ export default function PopupForm() {
                   >
                     ×
                   </button>
-                  <h1 className="text-2xl font-bold text-[#151f28] mb-2">Explore Verified Residential Plots in Dholera Under ₹10 lakh</h1>
+                  <h1 className="text-2xl font-bold text-[#151f28] mb-2">Invest in Registry Ready Dholera Plots Starting from ₹8 Lakh</h1>
                   
                 </div>
 

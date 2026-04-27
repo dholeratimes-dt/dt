@@ -69,10 +69,10 @@ export default async function BlogsPage() {
               {" "}
               {/* Added this wrapper div */}
               <Link href="https://wa.me/+919958993549">
-              <button className="bg-[#b69b5e] hover:bg-[#d3b36b] text-white font-semibold px-6 py-3 rounded-lg transition-colors duration-200 shadow-md flex items-center space-x-2">
+              <span className="bg-[#b69b5e] hover:bg-[#d3b36b] text-white font-semibold px-6 py-3 rounded-lg transition-colors duration-200 shadow-md flex items-center space-x-2">
                 <FaWhatsapp className="text-lg font-semibold" />
                 <span>Invest Today</span>
-              </button>
+              </span>
               </Link>
             </div>
           </div>
@@ -95,7 +95,7 @@ export default async function BlogsPage() {
 
           <div className="lg:w-1/4 sticky top-6">
            <div className="bg-white p-6 rounded-xl shadow-md border-l-4 border-[#d7b56d]  mb-8">
-                      <LeadForm title="Secure your investment in Dholera Smart City in just under ₹10 lakh" buttonName="Know More" />
+                      <LeadForm title="Invest in Registry Ready Dholera Plots Starting from ₹8 Lakh" buttonName="Know More" />
                     </div>
             <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-[#d7b56d] ">
               <h2 className="text-2xl text-red-500 font-bold mb-6">

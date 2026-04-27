@@ -4,49 +4,44 @@ import { Plus, Minus, ChevronDown, ChevronUp } from "lucide-react";
 
 const faqs = [
   {
-    question: "How far is Dholera SIR from Ahmedabad?",
+    question: "What kind of residential plots does DholeraTimes offer in Dholera?",
     answer:
-      "Dholera SIR is approximately 109 km from Ahmedabad. Once the Ahmedabad–Dholera Expressway is fully operational, travel time will reduce significantly, improving connectivity and boosting real estate potential.",
+      "DholeraTimes helps buyers explore residential plot options in good locations across Dholera, including projects with registry-ready documentation and buyer support.",
   },
   {
-    question: "Is Dholera SIR suitable for NRIs to invest?",
+    question: "Are the plots registry-ready?",
     answer:
-      "Yes. Dholera SIR is a government-backed smart city with transparent planning, structured TP zones, and high long-term appreciation potential. With clear documentation and regulated development, it is considered a safe and attractive option for NRI investors.",
+      "Yes, DholeraTimes highlights projects with registry-ready documentation so buyers can move forward with more clarity and confidence.",
   },
   {
-    question: "Is my land investment secure in Dholera SIR?",
+    question: "Can I get immediate possession of the plot?",
     answer:
-      "Your investment is secure when you purchase NA (Non-Agricultural) / NOC-approved plots with clear title verification and proper documentation. Buying within approved TP zones through verified developers ensures legal safety and transparency.",
+      "Some projects offer immediate possession, depending on the location and project type. Our team can help you check the current availability and possession details.",
   },
   {
-    question: "When will Dholera SIR be fully developed?",
+    question: "How can DholeraTimes help me choose the right plot?",
     answer:
-      "Dholera SIR is being developed in phases. The Activation Area infrastructure is already operational, and major projects like the International Airport and Expressway are progressing rapidly. Growth is ongoing and structured as per the master development plan.",
+      "DholeraTimes helps buyers compare plot options based on budget, location, project type, and buying goals, with support from enquiry to booking.",
   },
   {
-    question: "What makes Dholera SIR different from other cities?",
+    question: "Do you provide site visit support?",
     answer:
-      "Dholera SIR is not an extension of an existing city. It is a fully planned Greenfield Smart City built from scratch with organized zoning, underground utilities, smart infrastructure, wide roads, and global-standard connectivity.",
+      "Yes, our team can assist you with site visit planning so you can better understand the project location, surroundings, and plot options.",
   },
   {
-    question: "Is Dholera SIR a government project?",
+    question: "Is Dholera a good place to buy a residential plot?",
     answer:
-      "Yes. Dholera SIR is a government-planned and government-backed project under the Delhi-Mumbai Industrial Corridor (DMIC), making it one of India's most structured and transparent urban development initiatives.",
+      "Dholera is gaining attention because of its planned development, infrastructure growth, and future connectivity. Many buyers explore it for long-term residential and investment potential.",
   },
   {
-    question: "Is Dholera SIR good for long-term investment?",
+    question: "What documents should I check before booking a plot?",
     answer:
-      "Yes. Dholera SIR is considered a long-term growth destination due to massive infrastructure spending, industrial investments, and smart city planning. It is not positioned as a short-term speculative market, but rather a strategic future-focused investment opportunity.",
+      "Buyers should check registry status, title clarity, project details, and other important documents before booking. DholeraTimes helps guide buyers through this process.",
   },
   {
-    question: "What are the major projects driving growth in Dholera?",
-    answer: [
-      "Dholera International Airport",
-      "Ahmedabad–Dholera Expressway",
-      "Semiconductor fabrication plant (₹91,000 Cr investment)",
-      "5,000 MW Solar Park",
-      "Industrial and logistics zones under DMIC",
-    ],
+    question: "Can I talk to your team before making a decision?",
+    answer:
+      "Yes, you can connect with the DholeraTimes team for project details, pricing, location guidance, and support before booking.",
   },
 ];
 

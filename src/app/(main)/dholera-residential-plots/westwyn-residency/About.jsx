@@ -13,9 +13,21 @@ import {
   FaWhatsapp,
   FaHospital,
   FaBus,
+  FaMapMarkedAlt,
+  FaPhone,
 } from "react-icons/fa";
 import { TbBuildingFactory } from "react-icons/tb";
 import { Fence } from "lucide-react";
+
+const FeatureCard = ({ icon, title, value }) => (
+  <div className="bg-white rounded-lg p-4 border border-gray-200 text-center">
+    <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
+      <span className="text-xl">{icon}</span>
+    </div>
+    <p className="font-semibold text-gray-900 text-sm mb-1">{title}</p>
+    <p className="text-[#151f28] font-bold text-lg">{value}</p>
+  </div>
+);
 
 const WestWynAboutSection = () => {
   const [counters, setCounters] = useState({
@@ -85,13 +97,18 @@ const WestWynAboutSection = () => {
   const locationFeatures = [
     {
       icon: FaRoad,
-      text: "Entry From Major District Road (MDR)",
-      highlight: "Excellent highway connectivity",
+      text: "Direct Entry from Major District Road (MDR)",
+      highlight: "Excellent road connectivity",
+    },
+    {
+      icon: FaMapMarkedAlt, // optional if you want a location icon
+      text: "Located in Pipariya, Dholera",
+      highlight: "Prime location in Dholera region",
     },
     {
       icon: FaTrain,
       text: "2 Minutes from Railway Connectivity",
-      highlight: "Easy rail connectivity",
+      highlight: "Easy rail access",
     },
     {
       icon: Fence,
@@ -103,15 +120,14 @@ const WestWynAboutSection = () => {
       text: "12 Minutes from Ahmedabad–Dholera Expressway",
       highlight: "Fast access to major corridor",
     },
-    
     {
       icon: FaHospital,
-      text: "18 Minutes from RMS Multi-Specialty Hospital",
-      highlight: "Global connectivity",
+      text: "17 Minutes from RMS Multi-Specialty Hospital",
+      highlight: "Fast access to major corridor",
     },
     {
       icon: FaIndustry,
-      text: "22 Minutes from Tata Semiconductor Plant",
+      text: "22 Minutes from Tata Semiconductor Plant & Industrial Zones",
       highlight: "Industrial growth corridor",
     },
     {
@@ -119,11 +135,13 @@ const WestWynAboutSection = () => {
       text: "30 Minutes from Dholera International Airport",
       highlight: "Global connectivity",
     },
-    {
-      icon: FaBus,
-      text: "Close to Public Facility and Transport",
-      highlight: "Global connectivity",
-    },
+  ];
+
+  const projectFeatures = [
+    { icon: "📐", title: "Plot Size", value: "124,152, & 187 Sq.Yards" },
+    { icon: "🏗️", title: "Project Type", value: "Residential Dholera Plots" },
+    { icon: "💰", title: "Price", value: "₹6,500/Sq.Yd" },
+    { icon: "📍", title: "Location", value: "Pipariya, Dholera" },
   ];
 
   return (
@@ -144,26 +162,26 @@ const WestWynAboutSection = () => {
       <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#d3b36b]/10 rounded-full blur-3xl"></div>
 
       <div className="text-center">
-        <h2 className="text-2xl md:text-3xl py-4 pt-4 font-bold text-gray-900">
+        <h2 className="text-2xl md:text-3xl pt-8 font-bold text-gray-900">
           WestWyn Residency -{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d3b36b] to-[#c9992a]">
-           Government Approved Plots in Dholera 
+            Government Approved Plots in Dholera
           </span>
         </h2>
       </div>
-      <div className="relative md:flex md:items-stretch md:space-x-8 max-w-7xl mx-auto px-4 py-4">
+      <div className="relative md:flex md:space-x-8 max-w-7xl mx-auto px-4 py-4">
         {/* Left Section - Header */}
         <div className="text-center mb-8 md:w-1/2">
           <div className="h-full flex flex-col">
             <p className="text-base text-gray-600 text-justify max-w-4xl mx-auto leading-relaxed mb-4">
               Looking for a secure and future-ready investment? WestWyn
-              Residency offers government approved plots in Dholera starting ₹7.5
+              Residency offers government approved plots in Dholera starting ₹8
               lakh, designed for buyers who value location, connectivity, and
-              long-term growth. Located in Pipariya, one of the most connected
-              zones near Dholera Smart City, this premium residential plotted
+              long-term growth. Located in Pipariya, one of the most Developed
+              zones in Dholera. Further, this premium residential plotted
               development by Dholera Times provides a perfect opportunity to
               invest in Dholera plots with clarity, transparency, and immediate
-              registry. With rising demand for plots near Dholera SIR, WestWyn
+              registry. With rising demand for plots in Dholera, WestWyn
               Residency stands out as a practical and well-planned investment
               choice.
             </p>
@@ -171,7 +189,7 @@ const WestWynAboutSection = () => {
               <Image
                 src={westwyn}
                 alt="westwyn"
-                className="rounded-xl w-full"
+                className="rounded-xl w-full object-contain"
               />
             </div>
           </div>
@@ -183,11 +201,9 @@ const WestWynAboutSection = () => {
             <div className="mb-6">
               <div className="text-center">
                 <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
-                  Strategic Location Advantage
+                  Prime Location
                 </h3>
-                <p className="text-[#d3b36b] font-medium text-sm md:text-base">
-                  State Highway 117
-                </p>
+                
               </div>
             </div>
 
@@ -212,18 +228,36 @@ const WestWynAboutSection = () => {
         </div>
       </div>
 
-      <div className="max-w-3xl mx-auto px-4 pb-8">
-        <p className="text-sm md:text-lg text-gray-700 mb-6 md:mb-8 leading-relaxed text-center pl-3 md:pl-4 italic">
-          "Secure your future with a plot that grows with Dholera."
+      <div className="max-w-7xl mx-auto px-4 md:pt-4 pb-8 bg-gray-200 p-4 rounded-xl">
+        <p className="text-base md:text-xl font-semibold text-gray-900 mb-6 md:mb-8 leading-relaxed text-center pl-3 md:pl-4">
+          Get Complete Details of WestWyn Residency
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4">
+        <div className="flex sm:flex-row gap-4 max-w-3xl mx-auto">
           <a href="https://wa.me/919958993549" className="flex-1">
-            <span className="w-full bg-white border-2 border-[#d3b36b] text-[#d3b36b] px-6 md:px-8 py-3 md:py-4 rounded-xl font-semibold hover:bg-[#f8f5e6] transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3 shadow-lg text-sm md:text-base">
+            <span className="w-full bg-[#d3b36b] border-2 border-[#d3b36b] px-6 md:px-8 py-3 md:py-4 rounded-xl font-semibold hover:bg-[#f8f5e6] transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3 shadow-lg text-sm md:text-base">
               <FaWhatsapp className="w-5 h-5" />
               Enquire Now
             </span>
           </a>
+          <a href="tel:+919958993549" className="flex-1">
+            <span className="w-full bg-white border-2 border-[#d3b36b] text-[#d3b36b] px-6 md:px-8 py-3 md:py-4 rounded-xl font-semibold hover:bg-[#f8f5e6] transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3 shadow-lg text-sm md:text-base">
+              <FaPhone className="w-5 h-5 rotate-90" />
+              Call Now
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <div className="bg-white border-b">
+          <div className="max-w-7xl mx-auto px-4 py-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {projectFeatures.map((feature, index) => (
+                <FeatureCard key={index} {...feature} />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>

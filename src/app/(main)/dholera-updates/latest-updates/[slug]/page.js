@@ -3,7 +3,7 @@ import { urlFor } from "@/sanity/lib/image";
 import {
   getblogs,
   getNews,
-  getPostBySlug,
+  getNewsBySlug,
   getProjects,
 } from "@/sanity/lib/api";
 import Link from "next/link";
@@ -81,6 +81,23 @@ const TrendingBlogItem = ({ post }) => {
   );
 };
 
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const site = "dholera-times";
+  const post = await getNewsBySlug(slug, site);
+
+  return {
+    title: post.metaTitle,
+    description: post.metaDescription,
+    keywords: post.keywords,
+    publisher: "Dholera Times",
+    robots: "index, follow",
+    alternates: {
+      canonical: `https://www.dholeratimes.com/dholera-updates/latest-updates/${post.slug.current}`,
+    },
+  };
+}
+
 export default async function BlogDetail({ params }) {
   const { slug } = await params;
   const site = "dholera-times";
@@ -95,7 +112,7 @@ export default async function BlogDetail({ params }) {
 
   try {
     const [post, trendingBlogs, relatedBlogs, getPro] = await Promise.all([
-      getPostBySlug(slug, site),
+      getNewsBySlug(slug, site),
       getNews(4), // Get top 4 trending news
       getblogs(slug, 3), // Get 3 related blogs based on categories or tags
       getProjects(slug),
@@ -573,9 +590,9 @@ export default async function BlogDetail({ params }) {
     };
 
     // Format date for display
-    const formattedDate = new Date(
-      post.publishedAt || post._createdAt,
-    ).toLocaleDateString("en-US", {
+    const rawDate = post.publishedAt || post._createdAt;
+    const isoDate = new Date(rawDate).toISOString().split("T")[0];
+    const formattedDate = new Date(isoDate).toLocaleDateString("en-US", {
       day: "numeric",
       month: "long",
       year: "numeric",
@@ -584,17 +601,6 @@ export default async function BlogDetail({ params }) {
     return (
       <>
         <div className="bg-white min-h-screen">
-          {/* Sticky Nav Placeholder */}
-          <title>{post.metaTitle}</title>
-          <meta name="description" content={post.metaDescription} />
-          <meta name="keywords" content={post.keywords} />
-          <meta name="publisher" content="Dholera Times" />
-          <link
-            rel="canonical"
-            href={`https://www.dholeratimes.com/dholera-updates/latest-updates/${post.slug.current}`}
-          />
-
-          <meta name="robots" content="index, follow" />
           <SchemaMarkup post={post} relatedBlog={relatedBlogs} />
           <div className="bg-white shadow-sm sticky top-0 z-30" />
 
@@ -696,7 +702,7 @@ export default async function BlogDetail({ params }) {
                           d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                         ></path>
                       </svg>
-                      <time className="text-gray-500">{formattedDate}</time>
+                      <time className="text-gray-500" dateTime={isoDate}>{formattedDate}</time>
                     </div>
 
                     {post.readingTime && (
@@ -768,7 +774,7 @@ export default async function BlogDetail({ params }) {
                 <div className="sticky space-y-4 top-24">
                   <div className=" pt-4 max-w-xl mx-auto">
                     <LeadFormSlug
-                      title="Secure Plots in Dholera's Prime Location under ₹10 Lakh"
+                      title="Secure Plots in Dholera's Prime Location Starting from ₹8 Lakh"
                       buttonName="Know More"
                     />
                   </div>
@@ -795,9 +801,9 @@ export default async function BlogDetail({ params }) {
                     </div>
                     <div className="flex items-center justify-center mt-6">
                       <Link href="/dholera-updates/blogs">
-                        <button className="text-center rounded-xl text-white font-semibold bg-[#d7b56d] hover:bg-[#c6a45d] p-3 transition-colors">
+                        <span className="text-center rounded-xl text-white font-semibold bg-[#d7b56d] hover:bg-[#c6a45d] p-3 transition-colors">
                           Explore More
-                        </button>
+                        </span>
                       </Link>
                     </div>
                   </div>

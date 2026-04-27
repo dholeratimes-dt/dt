@@ -123,9 +123,9 @@ export default async function New() {
                                   post.publishedAt || post._createdAt,
                                 )}
                               </p>
-                              <button className="font-medium hover:underline text-[#d3b36b]">
+                              <span className="font-medium hover:underline text-[#d3b36b]">
                                 Read More →
-                              </button>
+                              </span>
                             </div>
                           </div>
                         </Link>

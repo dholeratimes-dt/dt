@@ -5,81 +5,138 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
 /* image import */
-import hero1 from "@/assets/hero/dholera-sir-greenfield-smart-city-banner-dholera-times.webp";
-import hero2 from "@/assets/hero/dholera-sir-semiconductor-city-banner-dholera-times.webp";
-import hero3 from "@/assets/hero/dholera-desktop-banner-dholera-times.webp";
-import heroM1 from "@/assets/hero/dholera-smart-city-mobile-banner-dholera-times.webp";
-import heroM2 from "@/assets/hero/dholera-sir-semiconductor-city-mobile-banner-dholera-times.webp";
-import heroM3 from "@/assets/hero/westwyn-estate-mobile-banner-dholera-times.webp";
+import hero1 from "@/assets/hero/abcd-building-dholera-homepage.webp";
+import hero2 from "@/assets/hero/dholera-sir-indias-first-semiconductor-city-homepage.webp";
+import hero3 from "@/assets/hero/dholera-smart-city-indias-planned-smart-city-homepage.webp";
+import heroM1 from "@/assets/hero/abcd-building-dholera-homepage-mobile.webp";
+import heroM2 from "@/assets/hero/dholera-sir-indias-first-semiconductor-city-homepage-mobile.webp";
+import heroM3 from "@/assets/hero/dholera-smart-city-mobile-banner-dholera-times.webp";
 import BrochureForm from "../BrochureForm";
+import HeroForm from "./HeroForm";
 
 export default function HOME2() {
   const [currentSlide, setCurrentSlide] = useState(0);
+
+  const [showPopup, setShowPopup] = useState(false);
+  const [submissionCount, setSubmissionCount] = useState(0);
+  const [isDisabled, setIsDisabled] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedCount = parseInt(
+        localStorage.getItem("heroFormSubmissionCount") || "0",
+        10,
+      );
+      const lastSubmissionTime = parseInt(
+        localStorage.getItem("heroFormLastSubmissionTime") || "0",
+        10,
+      );
+
+      if (lastSubmissionTime) {
+        const hoursPassed =
+          (Date.now() - lastSubmissionTime) / (1000 * 60 * 60);
+        if (hoursPassed >= 24) {
+          setSubmissionCount(0);
+          localStorage.setItem("heroFormSubmissionCount", "0");
+          localStorage.setItem(
+            "heroFormLastSubmissionTime",
+            Date.now().toString(),
+          );
+        } else {
+          setSubmissionCount(storedCount);
+          if (storedCount >= 20) setIsDisabled(true);
+        }
+      } else {
+        setSubmissionCount(storedCount);
+      }
+    }
+  }, []);
+
+  const updateSubmissionCount = () => {
+    const newCount = submissionCount + 1;
+    setSubmissionCount(newCount);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("heroFormSubmissionCount", newCount.toString());
+      localStorage.setItem("heroFormLastSubmissionTime", Date.now().toString());
+    }
+    if (newCount >= 20) setIsDisabled(true);
+  };
+
+  const handleFormSuccess = () => {
+    setShowPopup(true);
+    updateSubmissionCount();
+  };
+
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
-  const [formData, setFormData] = useState({
+  const [brochureFormData] = useState({
     title: "",
     subTitle: "",
     buttonText: "",
   });
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
- 
-
-  // Array of slides with both images and text
   const slides = [
     {
       desktop: hero1,
-      tablet: hero1,
       mobile: heroM1,
-      alt:"Dholera Smart City",
+      alt: "Dholera Smart City",
       desktopClickArea: { left: 159, top: 527, right: 367, bottom: 565 },
       mobileClickArea: { left: 191, top: 865, right: 400, bottom: 906 },
     },
     {
       desktop: hero2,
-      tablet: hero2,
       mobile: heroM2,
-      alt:"Dholera SIR",
+      alt: "Dholera SIR",
       desktopClickArea: { left: 160, top: 524, right: 406, bottom: 570 },
       mobileClickArea: { left: 181, top: 856, right: 412, bottom: 898 },
     },
-    /* {
+    {
       desktop: hero3,
-      tablet: hero3,
       mobile: heroM3,
-      alt:"Dholera Smart City Project",
+      alt: "Dholera Smart City Project",
       desktopClickArea: { left: 159, top: 518, right: 401, bottom: 562 },
       mobileClickArea: { left: 174, top: 861, right: 417, bottom: 902 },
-    }, */
+    },
   ];
 
-  const nextSlide = () => {
+  const nextSlide = () =>
     setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-  };
-
-  const prevSlide = () => {
+  const prevSlide = () =>
     setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
-  };
 
-  // Auto-advance the slides every 5 seconds
   useEffect(() => {
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 5000);
-
+    const interval = setInterval(nextSlide, 5000);
     return () => clearInterval(interval);
   }, []);
 
-  // Function to handle phone call
   const handlePhoneCall = () => {
     window.location.href = "tel:+919958993549";
   };
 
   return (
     <>
-      {/* Carousel */}
+      {/* Success Popup */}
+      {showPopup && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+          <div className="bg-white rounded-xl p-8 max-w-sm w-full text-center shadow-xl">
+            <h2 className="text-xl font-bold text-black mb-2">Thank You!</h2>
+            <p className="text-gray-600 text-sm mb-4">
+              Our team will get back to you shortly.
+            </p>
+            <button
+              onClick={() => setShowPopup(false)}
+              className="bg-[#deae3c] hover:bg-yellow-600 text-white font-semibold px-6 py-2 rounded-md transition-colors"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* ── Carousel wrapper — all form overlays live here ── */}
       <div className="relative w-full overflow-hidden">
-        {/* Desktop Slides container - visible only on large screens */}
+
+        {/* ── Desktop slides (lg+) ── */}
         <div
           className="hidden lg:flex w-full transition-transform duration-700 ease-in-out"
           style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -93,15 +150,16 @@ export default function HOME2() {
                 <Image
                   src={slide.desktop}
                   alt={slide.alt}
+                  fill
                   priority={index === 0}
-                  fetchPriority="high"
-                  className=" w-[100vw] h-[80vh]"
+                  fetchPriority={index === 0 ? "high" : undefined}
+                  className="object-cover"
                 />
-
-                {/* Clickable area for phone number - Desktop */}
+                {/* Gradient — mirrors Hero.jsx */}
+                <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-black/10 to-black/60" />
                 <button
                   onClick={handlePhoneCall}
-                  className="absolute z-20 bg-transparent hover:bg-black hover:bg-opacity-10 transition-all duration-300"
+                  className="absolute z-20 bg-transparent hover:bg-black/10 transition-all duration-300"
                   style={{
                     left: `${(slide.desktopClickArea.left / 1920) * 100}%`,
                     top: `${(slide.desktopClickArea.top / 1080) * 175}%`,
@@ -111,15 +169,12 @@ export default function HOME2() {
                   aria-label="Call +91 9958993549"
                   title="Call +91 9958993549"
                 />
-
-                {/* Text overlay with animation - only visible for the current slide */}
-                
               </div>
             </div>
           ))}
         </div>
 
-        {/* Tablet Slides container */}
+        {/* ── Tablet slides (md → lg) ── */}
         <div
           className="hidden md:flex lg:hidden w-full transition-transform duration-700 ease-in-out"
           style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -129,18 +184,18 @@ export default function HOME2() {
               key={`tablet-${index}`}
               className="w-full flex-shrink-0 relative"
             >
-              <div className="relative w-full ">
+              <div className="relative w-full h-screen">
                 <Image
-                  src={slide.desktop} 
+                  src={slide.desktop}
                   alt={`hero slide ${index + 1}`}
+                  fill
                   priority={index === 0}
-                  className="object-cover w-[100vw] "
+                  className="object-cover"
                 />
-
-                {/* Clickable area for phone number - Tablet (using desktop coordinates but scaled) */}
+                <div className="absolute inset-0 bg-black/50" />
                 <button
                   onClick={handlePhoneCall}
-                  className="absolute z-20 bg-transparent hover:bg-black hover:bg-opacity-10 transition-all duration-300"
+                  className="absolute z-20 bg-transparent hover:bg-black/10 transition-all duration-300"
                   style={{
                     left: `${(slide.desktopClickArea.left / 1920) * 100}%`,
                     top: `${(slide.desktopClickArea.top / 1080) * 100}%`,
@@ -150,13 +205,12 @@ export default function HOME2() {
                   aria-label="Call +91 9958993549"
                   title="Call +91 9958993549"
                 />
-
               </div>
             </div>
           ))}
         </div>
 
-        {/* Mobile Slides container */}
+        {/* ── Mobile slides (< md) ── */}
         <div
           className="flex md:hidden w-full transition-transform duration-700 ease-in-out"
           style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -174,46 +228,51 @@ export default function HOME2() {
                   fetchPriority="high"
                   className="w-full h-auto"
                 />
-
-                {/* Clickable area for phone number - Mobile */}
-                <button
-                  onClick={handlePhoneCall}
-                  className="absolute z-20 bg-transparent hover:bg-black hover:bg-opacity-10 transition-all duration-300"
-                  style={{
-                    left: `${(slide.mobileClickArea.left / 430) * 62}%`,
-                    top: `${(slide.mobileClickArea.top / 932) * 97}%`,
-                    width: `${((slide.mobileClickArea.right - slide.mobileClickArea.left) / 430) * 100}%`,
-                    height: `${((slide.mobileClickArea.bottom - slide.mobileClickArea.top) / 932) * 100}%`,
-                  }}
-                  aria-label="Call +91 9958993549"
-                  title="Call +91 9958993549"
-                />
               </div>
             </div>
           ))}
         </div>
 
-        {/* Navigation arrows */}
+        {/* ── Desktop form overlay — right side, vertically centred ── */}
+        <div
+          className="hidden lg:flex absolute top-1/2 -translate-y-1/2 z-20"
+          style={{ right: "clamp(4.5rem, calc(3rem + 2.5vw), 7rem)" }}
+        >
+          <HeroForm isDisabled={isDisabled} onSuccess={handleFormSuccess} />
+        </div>
+
+        {/* ── Tablet form overlay — centred, vertically centred ── */}
+        <div className="hidden md:flex lg:hidden absolute inset-0 z-20 items-center justify-end pr-8">
+          <HeroForm isDisabled={isDisabled} onSuccess={handleFormSuccess} />
+        </div>
+
+        {/* ── Mobile form overlay — bottom of the slide ── */}
+        <div className="flex md:hidden absolute bottom-20 left-0 right-0 z-20 px-4 pb-6">
+          <HeroForm isDisabled={isDisabled} onSuccess={handleFormSuccess} />
+        </div>
+
+        {/* Nav arrows */}
         <button
           onClick={prevSlide}
-          className="absolute top-1/2 left-4 -translate-y-1/2 p-2 rounded-full bg-white bg-opacity-50 hover:bg-opacity-75 transition-all z-10"
+          className="absolute top-1/2 left-4 -translate-y-1/2 p-2 rounded-full bg-white/50 hover:bg-white/75 transition-all z-10"
           aria-label="Previous slide"
         >
           <ChevronLeft size={24} className="text-[#151f28]" />
         </button>
         <button
           onClick={nextSlide}
-          className="absolute top-1/2 right-4 -translate-y-1/2 p-2 rounded-full bg-white bg-opacity-50 hover:bg-opacity-75 transition-all z-10"
+          className="absolute top-1/2 right-4 -translate-y-1/2 p-2 rounded-full bg-white/50 hover:bg-white/75 transition-all z-10"
           aria-label="Next slide"
         >
           <ChevronRight size={24} className="text-[#151f28]" />
         </button>
       </div>
 
+      {/* BrochureForm modal */}
       <AnimatePresence>
         {isContactFormOpen && (
           <motion.div
-            className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 z-[1000]"
+            className="fixed inset-0 flex items-center justify-center bg-black/70 z-[1000]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -225,10 +284,10 @@ export default function HOME2() {
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
             >
               <BrochureForm
-                title={formData.title}
-                subTitle={formData.subTitle}
-                buttonName={formData.buttonText}
-                onClose={closeContactForm}
+                title={brochureFormData.title}
+                subTitle={brochureFormData.subTitle}
+                buttonName={brochureFormData.buttonText}
+                onClose={() => setIsContactFormOpen(false)}
                 onSuccess={() => setIsFormSubmitted(true)}
               />
             </motion.div>

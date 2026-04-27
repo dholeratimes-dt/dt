@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Link from "next/link";
 
@@ -12,16 +12,21 @@ export default function TrendingBlogItem({ post }) {
           {post.title}
         </h3>
         <p className="text-sm text-[#2863e5] mt-4 ">
-          <span><time className="text-gray-500">
+          <span>
+            <time
+              dateTime={new Date(post.publishedAt).toISOString()}
+              className="text-gray-500"
+            >
               {new Date(post.publishedAt).toLocaleDateString("en-US", {
                 day: "numeric",
                 month: "long",
                 year: "numeric",
               })}
-            </time></span>
+            </time>
+          </span>
           <br />
-          Posted By {typeof post.author === 'object' ? post.author.name : post.author}
-
+          Posted By{" "}
+          {typeof post.author === "object" ? post.author.name : post.author}
         </p>
       </Link>
     </div>

@@ -6,40 +6,28 @@ const faqs = [
   {
     question: "Where is WestWyn Estates located?",
     answer:
-      "WestWyn Estates is strategically located on the State Highway 117. It offers strong connectivity to the Dholera Smart City Activation Area, Ahmedabad–Dholera Expressway, and upcoming infrastructure developments.",
+      "WestWyn Estates is located in Polarpur, Dholera, and the page presents it with direct access from State Highway 117.",
   },
   {
-    question: "What is the price of plots in WestWyn Estates?",
+    question: "What plot sizes are available in WestWyn Estates?",
     answer:
-      "Plot pricing is designed for early-stage investors in Dholera SIR. Final cost depends on plot size, facing, and location within the project. Contact our team for updated pricing and availability.",
+      "The project offers plot sizes of 152 and 200 square yards.",
   },
   {
-    question: "Are the plots legally approved and registry-ready?",
+    question: "What is the price of WestWyn Estates plots?",
     answer:
-      "Yes. All plots are NA (Non-Agricultural) approved, NOC-cleared, clear-title, and registry-ready. Complete legal documentation is provided to ensure safe and transparent investment.",
+      "The listed rate is ₹6,700 per square yard. However, the starting price appears differently in multiple sections, so it should be confirmed before finalizing.",
   },
   {
-    question: "What is the booking process?",
+    question: "Are the plots legally clear and registry-ready?",
     answer:
-      "Simple process: Choose plot → Submit documents → Pay booking amount → Agreement → Registry. Complete support is provided at every step.",
+      "Yes, the plots are NA (Non-Agricultural) approved, NOC-cleared, have clear titles, and are registry-ready.",
   },
   {
-    question: "Why invest in WestWyn Estates now?",
+    question: "Why do buyers consider WestWyn Estates?",
     answer:
-      "Early investment near Dholera Smart City infrastructure, expressway, activation area, and Tata Semiconductor project offers strong future appreciation potential.",
+      "Buyers consider this project due to its legal clarity, registry readiness, premium positioning, and connectivity to key Dholera infrastructure such as the expressway, railway access, and airport corridor.",
   },
-  {
-    question: "Is WestWyn Estates suitable for NRI investors?",
-    answer:
-      "Yes. It offers safe, verified plots in Dholera SIR with transparent documentation and hassle-free support for NRI buyers.",
-  },
-  {
-    question: "IHow can Dholera Times help you invest?",
-    answer:
-      "Dholera Times provides expert guidance, site visits, and complete assistance to invest confidently in WestWyn Estates and Dholera Smart City.",
-  },
-
- 
 ];
 
 
@@ -124,7 +112,7 @@ export default function FAQS() {
             </div>
 
             {/* Show More / Show Less Button */}
-            {faqs.length > 5 && (
+            {/* {faqs.length > 5 && (
               <div className="mt-6 text-center">
                 <button
                   onClick={() => setShowAll(!showAll)}
@@ -143,7 +131,7 @@ export default function FAQS() {
                   )}
                 </button>
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </div>

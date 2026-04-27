@@ -184,13 +184,13 @@ export default function LatestUpdates() {
       <div className="max-w-7xl mx-auto px-4">
 
         <p className="text-2xl md:text-4xl text-center font-bold text-[#151f28] mb-4">
-          Featured Content
+           Stay Updated with Dholera’s Latest Developments
         </p>
 
-        <p className="text-gray-600 text-center mb-12">
+       {/*  <p className="text-gray-600 text-center mb-12">
           Stay updated with the latest insights and developments from
           Dholera Times
-        </p>
+        </p> */}
 
         {/* Slider */}
         <div

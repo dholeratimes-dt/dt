@@ -19,10 +19,10 @@ export default function Home2Main() {
         {/* <Primary/> */}
       </div>
       <div>
-        <AboutDT />
+        <Dholera />
       </div>
       <div>
-        <Dholera />
+        <AboutDT />
       </div>
 
       <div>
@@ -34,7 +34,7 @@ export default function Home2Main() {
       </div>
       <div>
         <BulkLand
-          title="Invest in Registry-Ready Plots in Dholera SIR Under ₹10 Lakh"
+          title="Invest in Registry-Ready Plots in Dholera Starting from ₹8 Lakh"
           buttonName="Get A Call Back"
           pageName="Home"
         />
@@ -44,9 +44,9 @@ export default function Home2Main() {
         <InvestmentTimeline />
       </div> */}
 
-      <div>
+     {/*  <div>
         <MegaIndustries />
-      </div>
+      </div> */}
 
       <div>
         <FAQS />

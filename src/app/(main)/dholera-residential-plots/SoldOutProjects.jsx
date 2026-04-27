@@ -4,11 +4,11 @@ import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-const CARD_WIDTH = 340;
+const CARD_WIDTH = 380;
 const GAP = 32;
-const CARDS_VISIBLE = 4;
+const CARDS_VISIBLE = 3;
 
-export default function ProjectsSlider({ projects }) {
+export default function SoldOutSlider({ projects }) {
   const trackRef = useRef(null);
   const [current, setCurrent] = useState(0);
   const maxIndex = Math.max(0, projects.length - CARDS_VISIBLE);
@@ -66,7 +66,7 @@ export default function ProjectsSlider({ projects }) {
         {projects.map((post) => (
           <div
             key={post._id}
-            className="flex-shrink-0 w-[340px] [scroll-snap-align:start]"
+            className="flex-shrink-0 w-[380px] [scroll-snap-align:start]"
           >
             <Link
               href={
@@ -74,29 +74,40 @@ export default function ProjectsSlider({ projects }) {
                   ? `/dholera-residential-plots/${post.slug.current}`
                   : "#"
               }
-              className="block h-full"
+              className="block h-full group"
             >
-              <div className="rounded-3xl shadow-xl overflow-hidden border-2 border-[#debe6b]/20 bg-[#fbfbfb] hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] flex flex-col h-full">
-                <div className="relative h-52 flex-shrink-0">
+              <div className="rounded-2xl shadow-xl overflow-hidden border-2 border-[#debe6b]/20 bg-[#fbfbfb] hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] relative flex flex-col h-full cursor-pointer">
+                {/* Dark overlay */}
+                <div className="absolute inset-0 bg-black/40 z-10 pointer-events-none" />
+
+                {/* Image */}
+                <div className="relative h-56 flex-shrink-0">
                   {post.mainImage && (
                     <Image
                       src={post.mainImage || "/placeholder.svg"}
                       alt={post.title}
                       fill
-                      className="object-cover"
+                      className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                     />
                   )}
+                  <div className="absolute top-4 left-4 z-20">
+                    <span className="px-3 py-1 text-xs font-semibold rounded-full bg-[#debe6b]/80 text-[#151f28] border border-[#debe6b]/50 backdrop-blur-sm">
+                      Sold Out
+                    </span>
+                  </div>
                 </div>
-                <div className="p-5 flex flex-col flex-grow">
-                  <h3 className="text-lg font-bold mb-2 line-clamp-1 text-[#151f28]">
+
+                {/* Content */}
+                <div className="p-6 relative z-20 flex flex-col flex-grow">
+                  <h3 className="text-xl font-bold mb-3 text-[#151f28]">
                     {post.title}
                   </h3>
                   {post.description && (
-                    <p className="text-sm leading-relaxed mb-4 line-clamp-3 flex-grow text-[#151f28]/75">
+                    <p className="text-sm leading-relaxed mb-6 flex-grow text-[#151f28]/80">
                       {post.description}
                     </p>
                   )}
-                  <div className="inline-flex items-center gap-1.5 px-5 py-2.5 font-semibold rounded-xl text-sm mt-auto bg-[#debe6b] text-[#151f28] w-fit">
+                  <div className="mt-auto inline-flex items-center gap-2 px-6 py-2 font-medium rounded-lg border-2 border-[#debe6b] text-[#debe6b] hover:shadow-md transition-all duration-300 text-sm opacity-75 hover:opacity-100 w-fit">
                     View Project
                     <svg
                       className="w-4 h-4"

@@ -300,24 +300,6 @@ export default function CommonForm({ title }) {
                     />
                   </div>
                 </div>
-                <div>
-                  <label
-                    htmlFor="phone"
-                    className="block text-gray-900 text-sm md:text-lg font-medium mb-2"
-                  >
-                    Message
-                  </label>
-                  <textarea
-                    type="text"
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-5 rounded-lg bg-[#151f28] border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-[#d8b66d]"
-                    placeholder="Enter your message"
-                  />
-                </div>
 
                 <div className="flex justify-center">
                   <div ref={recaptchaRef}></div>

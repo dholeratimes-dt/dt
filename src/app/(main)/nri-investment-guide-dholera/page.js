@@ -880,12 +880,12 @@ export default function NRIInvestmentGuide() {
                     className="w-full flex items-center justify-between px-4 py-4 text-left hover:bg-gray-50 transition-colors"
                     onClick={() => setActiveInfra(activeInfra === i ? null : i)}
                   >
-                    <div className="flex items-center gap-3">
+                    <span className="flex items-center gap-3">
                       <span className="text-2xl">{item.icon}</span>
                       <span className="font-semibold text-gray-800 text-base">
                         {item.label}
                       </span>
-                    </div>
+                    </span>
                     {activeInfra === i ? (
                       <ChevronUp
                         className="text-[#d8b66d] shrink-0"
@@ -1370,9 +1370,9 @@ export default function NRIInvestmentGuide() {
                   className="w-full flex items-center justify-between p-4 text-left bg-white hover:bg-gray-50"
                   onClick={() => toggleAccordion(index)}
                 >
-                  <h3 className="text-base font-semibold text-[#151f28] pr-4">
+                  <span className="text-base font-semibold text-[#151f28] pr-4">
                     {faq.question}
-                  </h3>
+                  </span>
                   {activeAccordion === index ? (
                     <ChevronUp className="text-[#d8b66d] shrink-0" size={30} />
                   ) : (

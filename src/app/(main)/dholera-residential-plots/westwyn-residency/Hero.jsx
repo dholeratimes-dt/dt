@@ -6,27 +6,9 @@ import Link from "next/link";
 import { AnimatePresence } from "framer-motion";
 import BrochureDownload from "../../components/BrochureDownload";
 
-const FeatureCard = ({ icon, title, value }) => (
-  <div className="bg-white rounded-lg p-4 border border-gray-200 text-center">
-    <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
-      <span className="text-xl">{icon}</span>
-    </div>
-    <p className="font-semibold text-gray-900 text-sm mb-1">{title}</p>
-    <p className="text-[#151f28] font-bold text-lg">{value}</p>
-  </div>
-);
 
-const PhoneIcon = () => (
-  <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24">
-    <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.61 21 3 13.39 3 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.58a1 1 0 01-.24 1.01l-2.21 2.2z" />
-  </svg>
-);
 
-const DocIcon = () => (
-  <svg width="15" height="15" fill="none" stroke="#d3b36b" strokeWidth="2" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-  </svg>
-);
+
 
 export default function Hero() {
   const [brochureFormOpen, setIsBrochureFormOpen] = useState(false);
@@ -34,12 +16,7 @@ export default function Hero() {
   const openBrochureForm = () => setIsBrochureFormOpen(true);
   const closeBrochureForm = () => setIsBrochureFormOpen(false);
 
-  const projectFeatures = [
-    { icon: "📐", title: "Plot Size", value: "124,152, & 187 Sq.Yards" },
-    { icon: "🏗️", title: "Project Type", value: "Residential Dholera Plots" },
-    { icon: "💰", title: "Price", value: "₹6,500/Sq.Yd" },
-    { icon: "📍", title: "Location", value: "Pipariya, Dholera" },
-  ];
+  
 
   return (
     <>
@@ -94,7 +71,7 @@ export default function Hero() {
                 </div>
               </div>
 
-              <div>
+              <div className="pt-4">
                 <h1 className="text-xl font-bold text-gray-900 mb-2 leading-tight">
                   WestWyn Residency
                 </h1>
@@ -124,15 +101,7 @@ export default function Hero() {
         </div>
 
         {/* Feature Cards */}
-        <div className="bg-white border-b">
-          <div className="max-w-7xl mx-auto px-4 py-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {projectFeatures.map((feature, index) => (
-                <FeatureCard key={index} {...feature} />
-              ))}
-            </div>
-          </div>
-        </div>
+        
       </div>
 
       <AnimatePresence>

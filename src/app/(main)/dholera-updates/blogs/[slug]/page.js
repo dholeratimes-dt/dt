@@ -3,7 +3,7 @@ import { urlFor, urlForImage } from "@/sanity/lib/image";
 import {
   getblogs,
   getNews,
-  getPostBySlug,
+  getBlogBySlug,
   getProjects,
 } from "@/sanity/lib/api";
 import Link from "next/link";
@@ -83,7 +83,7 @@ const TrendingBlogItem = ({ post }) => {
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const post = await getPostBySlug(slug, "dholera-times");
+  const post = await getBlogBySlug(slug, "dholera-times");
 
   return {
     title: post?.metaTitle,
@@ -110,7 +110,7 @@ export default async function BlogDetail({ params }) {
 
   try {
     const [post, trendingBlogs, relatedBlogs, getPro] = await Promise.all([
-      getPostBySlug(slug, site),
+      getBlogBySlug(slug, site),
       getblogs(4), // Get top 4 trending news
       getNews(slug, 3), // Get 3 related blogs based on categories or tags
       getProjects(slug),
@@ -122,10 +122,10 @@ export default async function BlogDetail({ params }) {
           <div className="text-center">
             <h1 className="text-2xl font-bold mb-2">Blog post not found</h1>
             <Link
-              href="/dholera-updates/latest-news"
+              href="/dholera-updates/blogs"
               className="mt-4 inline-block text-[#C69C21] hover:text-[#FDB913]"
             >
-              ← Back to News
+              ← Back to blogs
             </Link>
           </div>
         </div>
@@ -588,9 +588,9 @@ export default async function BlogDetail({ params }) {
     };
 
     // Format date for display
-    const formattedDate = new Date(
-      post.publishedAt || post._createdAt,
-    ).toLocaleDateString("en-US", {
+    const rawDate = post.publishedAt || post._createdAt;
+    const isoDate = new Date(rawDate).toISOString().split("T")[0];
+    const formattedDate = new Date(isoDate).toLocaleDateString("en-US", {
       day: "numeric",
       month: "long",
       year: "numeric",
@@ -696,7 +696,7 @@ export default async function BlogDetail({ params }) {
                         d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                       ></path>
                     </svg>
-                    <time className="text-gray-500">{formattedDate}</time>
+                    <time className="text-gray-500" dateTime={isoDate}>{formattedDate}</time>
                   </div>
 
                   {post.readingTime && (
@@ -762,15 +762,13 @@ export default async function BlogDetail({ params }) {
                 )}
               </div>
             </article>
-            <div className="md:hidden pt-4">
-              <CommonForm title="Still Have Questions? Contact Us Now" />
-            </div>
+            
             {/* Sidebar */}
             <aside className="lg:w-1/3">
               <div className="sticky space-y-4 top-24">
                 <div className=" pt-4 max-w-xl mx-auto">
                   <LeadFormSlug
-                    title="Buy Residential Plot near Dholera SIR under ₹10 Lakh"
+                    title="Buy Residential Plot near Dholera SIR Starting From ₹8 Lakh"
                     buttonName="Know More"
                   />
                 </div>
@@ -797,9 +795,9 @@ export default async function BlogDetail({ params }) {
                   </div>
                   <div className="flex items-center justify-center mt-6">
                     <Link href="/dholera-updates/blogs">
-                      <button className="text-center rounded-xl text-white font-semibold bg-[#d7b56d] hover:bg-[#c6a45d] p-3 transition-colors">
+                      <span className="text-center rounded-xl text-white font-semibold bg-[#d7b56d] hover:bg-[#c6a45d] p-3 transition-colors">
                         Explore More
-                      </button>
+                      </span>
                     </Link>
                   </div>
                 </div>
@@ -921,7 +919,7 @@ export default async function BlogDetail({ params }) {
                                     </div>
                                   )}
                                   <div className="flex items-center gap-1.5 text-[#b69b5e] font-semibold text-sm group-hover:gap-2.5 transition-all duration-300">
-                                    <span>Read More</span>
+                                    <span>Explore More</span>
                                     <svg
                                       className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"
                                       fill="none"
@@ -1147,7 +1145,7 @@ export default async function BlogDetail({ params }) {
             href="/dholera-updates/blogs"
             className="mt-4 inline-block text-[#C69C21] hover:text-[#FDB913]"
           >
-            ← Back to News
+            ← Back to Blogs
           </Link>
         </div>
       </div>

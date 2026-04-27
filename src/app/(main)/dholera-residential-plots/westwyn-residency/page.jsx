@@ -39,11 +39,11 @@ export default function page() {
       <div>
         <Hero />
         <WestWynAboutSection />
-        <div>
-          <CommonForm title="Get Plots Starting From ₹8 Lakh in Dholera" />
-        </div>
-        <WestWynEstate />
         <ProjectAmenities />
+        <WestWynEstate />
+        <div>
+          <CommonForm title="Invest in Dholera Residential Plots" />
+        </div>
         <FAQS />
        
       </div>

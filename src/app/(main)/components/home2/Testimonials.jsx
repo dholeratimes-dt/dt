@@ -5,63 +5,56 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { AnimatePresence } from "framer-motion";
 import BrochureDownload from "../BrochureDownload";
+import { FaPhone, FaWhatsapp } from "react-icons/fa";
 
 const testimonials = [
   {
     quote:
-      "I had an amazing experience with Harjas ji at Dholeratimes.com. He took the time to explain every detail of the Dholera Smart City project, organized my site visit, and ensured all the legal paperwork was handled smoothly. His support was invaluable, and I highly recommend his services to anyone looking to invest in Dholera!",
+      "The team helped me understand project location, documentation, and next steps clearly before I made a decision.",
     name: "Vijay Pratap",
-    type: "Investor",
     location: "Delhi NCR",
   },
   {
     quote:
-      "A big thanks to Rohit Pathak ji for his exceptional support throughout my property investment journey in Dholera. He organized a detailed site visit, explained the project's potential, and assisted with all the legal and documentation processes. I couldn’t have done it without him. Highly recommend him for anyone considering Dholera Smart City!",
+      "My experience with DholeraTimes was smooth and professional. They explained the project details very clearly and guided me at every step.",
     name: "Neeraj Yadav",
-    type: "Real Estate Investor",
     location: "Haryana",
   },
   {
     quote:
-      "I had a great experience with Simar ji at Dholeratimes.com. He went above and beyond, explaining the project in detail, taking me on a site visit, and ensuring all the legal processes and documentation were smooth. I’m very satisfied with my investment and highly recommend his assistance to anyone interested in Dholera.",
+      "From the first call to the site visit, the team was helpful and transparent. They made the whole process easy to understand.",
     name: "Amit Sharma",
-    type: "Investor",
-    location: "Uttar Pradesh",
+    location: "Noida",
   },
   {
     quote:
-      "I highly recommend Anshkirat ji for his excellent service. He arranged a site visit, explained all the features of Dholera Smart City, and helped with every step of the legal paperwork. His effort made everything easy and transparent. If you’re thinking about investing in Dholera, Anshkirat is the person to contact!",
-    name: "Rajeev Gupta",
-    type: "Investor",
-    location: "Delhi NCR",
+      "I was looking for a residential plot in Dholera and DholeraTimes gave me the right guidance on location, pricing, and documentation.",
+    name: "Rahul Verma",
+    location: "Ghaziabad",
   },
   {
     quote:
-      "I was thoroughly impressed with the assistance provided by Divyansh ji. He coordinated my site visit, provided a thorough project explanation, and handled all the legal documentation. His effort made the entire investment process smooth, and I highly recommend him to anyone looking to invest in Dholera Smart City.",
-    name: "Vikas Agarwal",
-    type: "Real Estate Investor",
+      "What I liked most was their honest support and clear communication. They helped me compare options and choose the right project.",
+    name: "Pankaj Singh",
+    location: "Gurugram",
+  },
+  {
+    quote:
+      "The team was very responsive and supportive throughout the process. Their guidance gave me confidence before booking my plot.",
+    name: "Sandeep Chauhan",
+    location: "Jaipur",
+  },
+  {
+    quote:
+      "DholeraTimes made my plot-buying journey simple with clear information, timely updates, and full support from enquiry to booking.",
+    name: "Manoj Kumar",
+    location: "Faridabad",
+  },
+  {
+    quote:
+      "They explained everything in a practical way, from project location to paperwork. I felt supported throughout the process.",
+    name: "Deepak Rana",
     location: "Chandigarh",
-  },
-  {
-    quote:
-      "A special thanks to Harjas ji for his outstanding support throughout the entire process. From arranging my site visit to explaining the project’s growth potential and helping with the legal documentation, he made everything seamless. I would definitely recommend him to anyone interested in the Dholera Smart City project!",
-    name: "Manpreet Kaur",
-    type: "Investor",
-    location: "Chandigarh",
-  },
-  {
-    quote:
-      "I’m so grateful for the support from Rohit Pathak ji. He was with me every step of the way, from coordinating the site visit to explaining all the details of Dholera Smart City and assisting with the legal and documentation process. His professionalism and attention to detail were outstanding. Highly recommend him for a hassle-free experience!",
-    name: "Harpreet Singh",
-    type: "Real Estate Investor",
-    location: "Haryana",
-  },
-  {
-    quote:
-      "Thanks to Simar ji, my experience investing in Dholera was hassle-free. He took the time to explain the project, arranged a site visit, and handled all the legal processes and paperwork efficiently. I highly recommend his services to anyone looking to invest in this promising project!",
-    name: "Gurpreet Singh",
-    type: "Investor",
-    location: "Uttar Pradesh",
   },
 ];
 
@@ -133,7 +126,7 @@ const TestimonialPagination = () => {
               className={`bg-white shadow-md rounded-lg p-6 ${styles.cardBorder} hover:shadow-lg transition-shadow duration-300`}
               whileHover={{ scale: 1.03 }}
             >
-              <p className={`italic ${styles.quote} mb-6 text-black min-h-48`}>
+              <p className={`italic ${styles.quote} mb-6 text-black h-20`}>
                 ❝ {testimonial.quote} ❞
               </p>
               <div className="flex items-center border-t border-[#b98e31] pt-4">
@@ -206,16 +199,16 @@ const TestimonialPagination = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               <a
                 href="tel:+919958993549"
-                className="bg-[#d3b36b] text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
+                className="bg-[#d3b36b] text-white flex justify-center items-center gap-2 px-8 py-3 rounded-xl font-semibold hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
               >
-                Get Free Consultation
+               <FaPhone className="rotate-90"/> Call Now
               </a>
-              <button
-                onClick={openBrochureForm}
-                className="border-2 border-[#151f28] text-[#d3b36b] px-8 py-3 rounded-xl font-semibold hover:bg-[#caac66] hover:text-white transition-all duration-300"
+              <a
+                href="https://wa.me/919958993549?text=Hi"
+                className="border-2 border-[#151f28] text-[#d3b36b] flex justify-center items-center gap-2 px-8 py-3 rounded-xl font-semibold hover:bg-[#caac66] hover:text-white transition-all duration-300"
               >
-                Download Brochure
-              </button>
+               <FaWhatsapp/> WhatsApp Us
+              </a>
             </div>
           </div>
         </div>

@@ -134,11 +134,11 @@ const ProjectAmenities = () => {
           {visibleAmenities.map((amenity, index) => (
             <div
               key={index}
-              className="group relative bg-[#1e2a36] rounded-xl p-6 border border-[#2a3a4a] hover:border-[#d3b36b] hover:rounded-xl transition-all duration-300 hover:-translate-y-1"
+              className="group relative flex-col items-center justify-center bg-[#1e2a36] rounded-xl p-4 border border-[#2a3a4a] hover:border-[#d3b36b] hover:rounded-xl transition-all duration-300 hover:-translate-y-1"
             >
               {/* Icon with gradient background */}
               <div
-                className={`inline-flex items-center justify-center w-12 h-12 rounded-lg mb-4 bg-gradient-to-r ${amenity.color} group-hover:scale-110 transition-transform duration-300`}
+                className={`flex items-center justify-center w-12 h-12 rounded-lg mb-4 bg-gradient-to-r ${amenity.color} group-hover:scale-110 transition-transform duration-300`}
               >
                 <div className="text-2xl">{amenity.icon}</div>
               </div>
@@ -147,11 +147,6 @@ const ProjectAmenities = () => {
               <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-[#d3b36b] transition-colors duration-300">
                 {amenity.title}
               </h3>
-
-              {/* Description */}
-              <p className="text-gray-400 text-sm leading-relaxed">
-                {amenity.description}
-              </p>
 
               {/* Hover effect accent */}
               <div className="absolute bottom-0 left-0 w-0 h-1 bg-[#d3b36b] group-hover:w-full transition-all duration-300"></div>

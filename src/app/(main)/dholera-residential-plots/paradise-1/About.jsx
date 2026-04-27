@@ -188,9 +188,9 @@ const WestWynAboutSection = () => {
         <div className="md:w-1/2">
           <div className="bg-white/80 backdrop-blur-sm p-4 md:p-8 rounded-3xl shadow-xl border border-gray-100/50 h-full transform hover:shadow-2xl transition-all duration-300 flex flex-col">
             <div className="mb-6 text-center">
-              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
+              <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
                 Strategic Location Advantage
-              </h3>
+              </h2>
               <p className="text-[#debe6b] font-medium text-sm md:text-base">
                 Village Shela, Dholera
               </p>
@@ -230,10 +230,10 @@ const WestWynAboutSection = () => {
 
         <div className="flex flex-col sm:flex-row gap-4">
           <a href="https://wa.me/919958993549" className="flex-1">
-            <button className="w-full bg-white border-2 border-[#debe6b] text-[#debe6b] px-6 md:px-8 py-3 md:py-4 rounded-xl font-semibold hover:bg-[#f8f5e6] transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3 shadow-lg text-sm md:text-base">
+            <span className="w-full bg-white border-2 border-[#debe6b] text-[#debe6b] px-6 md:px-8 py-3 md:py-4 rounded-xl font-semibold hover:bg-[#f8f5e6] transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3 shadow-lg text-sm md:text-base">
               <FaWhatsapp className="w-5 h-5" />
               Book Site Visit
-            </button>
+            </span>
           </a>
         </div>
       </div>
