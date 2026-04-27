@@ -10,6 +10,7 @@ import cityCenter from "@/assets/bulkLand/city-centre-bulk-land-cover.webp";
 import knowledge from "@/assets/bulkLand/knowledge-it-bulk-land-cover.webp";
 import recreation from "@/assets/bulkLand/recreation-sports-bulk-land-cover.webp";
 import BulkLand from "../components/BulkLandForm";
+import { FaHome } from "react-icons/fa";
 
 export default function page() {
   const bulkLandCategories = [
@@ -57,6 +58,43 @@ export default function page() {
     },
   ];
 
+  const cards = [
+    {
+      icon: <FaHome />,
+      title: "Residential Planning",
+      description:
+        "Bulk land options suitable for plotted development and township-style planning",
+    },
+    {
+      icon: <FaHome />,
+      title: "Commercial Use",
+      description:
+        "Land options for buyers exploring business, retail, or service-based development.",
+    },
+    {
+      icon: <FaHome />,
+      title: "Industrial Zone",
+      description:
+        "Location guidance for land near industrial and infrastructure-linked growth areas.",
+    },
+    {
+      icon: <FaHome />,
+      title: "Long-Term Holding",
+      description:
+        "Suitable for investors looking at long-term land banking in Dholera’s growth corridor.",
+    },
+  ];
+
+  const CardItem = ({ icon, title, description }) => (
+    <div className="shadow-xl space-y-2 rounded-xl border-[#d3b36b] border-2 p-4">
+      <div className="flex gap-4 justify-center items-center text-[#d3b36b] text-xl">
+        {icon}
+        <p>{title}</p>
+      </div>
+      <p className="text-center">{description}</p>
+    </div>
+  );
+
   return (
     <>
       <title>Bulk Land in Dholera Smart City | High ROI Investment</title>
@@ -69,54 +107,53 @@ export default function page() {
         content="Dholera Smart City, Dholera Gujarat, Dholera SIR, Dholera Project, Invest in Dholera, Dholera Property Investment"
       />
       <link rel="canonical" href="https://www.dholeratimes.com/bulk-land" />
-      <div className="relative overflow-hidden h-[40vh] w-full">
-        <div className="hidden md:block absolute inset-0 w-full h-full">
-          <Image
-            src={hero}
-            alt="Dholera SIR Project"
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
-        <div className="md:hidden absolute inset-0 w-full h-full">
-          <Image
-            src={heroM}
-            alt="Dholera SIR Project"
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="relative z-10 h-full flex items-center justify-center">
-          <div className="max-w-7xl mx-auto px-4 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-8 text-[#debe6b]">
-              Bulk Land Deals
-            </h1>
+      <div className="relative md:h-96 w-full h-[30vh] overflow-hidden">
+        <Image
+          src={hero}
+          alt="Dholera Land"
+          className="object-cover w-full h-auto max-sm:hidden"
+          priority
+        />
+        <Image
+          src={heroM}
+          alt="Dholera Land"
+          className="object-cover w-full h-[60vh] md:hidden"
+          priority
+        />
+      </div>
+
+      <div>
+        <h1 className="text-2xl  md:text-3xl pt-8 font-bold text-black text-center mb-2">
+          Explore Bulk Land Growth Zones in Dholera SIR
+        </h1>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 max-w-7xl mx-auto">
+        <div className="p-2 flex flex-col justify-center items-center">
+          <p className="text-left max-w-4xl mx-auto px-4 leading-relaxed">
+            Dholera SIR is becoming a key location for investors, developers,
+            and business groups looking for large land parcels in a planned
+            smart city region. With improving connectivity, infrastructure
+            development, and industrial activity around Dholera, bulk land can
+            be considered for residential planning, commercial use, industrial
+            interest, and long-term land holding.
+            <br />
+            Explore location-based bulk land options with guidance on access,
+            nearby development, land purpose, documentation clarity, and site
+            visit support.
+          </p>
+          <div className=" flex justify-center items-center gap-8 p-4 translate-y-4">
+            <button className="bg-[#d3b36b] w-full p-2 rounded-xl shadow-xl  hover:scale-110 duration-300 whitespace-nowrap">Get Bulk Land Deals</button>
+          
           </div>
         </div>
-      </div>
-
-      <div>
-        <h2 className="text-2xl  md:text-3xl pt-8 font-bold text-black text-center mb-2">
-          Explore Bulk Land Growth Zones in Dholera SIR
-        </h2>
-      </div>
-
-      <div>
-        <p className="text-center max-w-4xl mx-auto px-4 leading-relaxed">
-          Looking to invest in bulk land in Dholera Smart City? This is the
-          right time to explore large, legally approved land parcels designed
-          for high-growth opportunities. With modern infrastructure, planned
-          development, and government-backed progress, Dholera SIR is becoming a
-          prime destination for residential, commercial, and industrial
-          projects. Whether you are planning a township, business hub, or
-          long-term investment, bulk land in Dholera SIR offers strategic
-          location advantages and strong future potential. Connect with us to
-          get verified details on premium bulk land options and make an informed
-          investment decision.
-        </p>
+        <div className="p-2">
+          <div className="grid md:grid-cols-2 gap-4">
+            {cards.map((card, index) => (
+              <CardItem key={index} {...card} />
+            ))}
+          </div>
+        </div>
       </div>
 
       <div className="text-xl text-center font-semibold pt-4">
@@ -140,9 +177,9 @@ export default function page() {
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-30 transition-all duration-300"></div>
                 <div className="absolute bottom-4 left-4 right-4">
-                  <h2 className="text-white text-xl font-bold mb-2 group-hover:text-[#d3b36b] transition-colors">
+                  <h3 className="text-white text-xl font-bold mb-2 group-hover:text-[#d3b36b] transition-colors">
                     {category.title}
-                  </h2>
+                  </h3>
                   <p className="text-xs text-white">
                     Where Potential Meets Progress
                   </p>
