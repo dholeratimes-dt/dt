@@ -157,7 +157,7 @@ function FlipCard({ item, isFlipped, onFlip }) {
   );
 }
 
-function SectionHeader({ label, title }) {
+function SectionHeader({ label, title, subTitle }) {
   return (
     <div className="text-center mb-10">
       <p
@@ -171,6 +171,7 @@ function SectionHeader({ label, title }) {
         className="w-14 h-0.5 mx-auto mt-4 rounded-full"
         style={{ backgroundColor: BRAND_GOLD }}
       />
+      <p className="text-sm mt-4">{subTitle}</p>
     </div>
   );
 }
@@ -187,6 +188,7 @@ export default function RecreationZoneCards() {
         <SectionHeader
           label="Dholera Zoning Overview"
           title="What's Allowed in Recreation, Sports & Entertainment Zone?"
+          subTitle="Recreation & Sports zones are planned parks, sports facilities, leisure spaces, wellness areas, and community activities. These zones are suitable for lifestyle, public-use, and future social development planning."
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {projects.map((project) => (
@@ -209,6 +211,7 @@ export default function RecreationZoneCards() {
         <SectionHeader
           label="Investment Benefits"
           title="Why Invest in Dholera Recreation, Sports & Entertainment Zone?"
+          subTitle="This zone is suitable for land planning around sports, wellness, leisure, and community-use spaces. It supports future recreational and social infrastructure growth in Dholera."
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {benefits.map((benefit) => (

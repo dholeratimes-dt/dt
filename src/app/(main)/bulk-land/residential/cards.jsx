@@ -156,7 +156,7 @@ function FlipCard({ item, isFlipped, onFlip }) {
   );
 }
 
-function SectionHeader({ label, title }) {
+function SectionHeader({ label, title, subTitle }) {
   return (
     <div className="text-center mb-10">
       <p
@@ -170,6 +170,7 @@ function SectionHeader({ label, title }) {
         className="w-14 h-0.5 mx-auto mt-4 rounded-full"
         style={{ backgroundColor: BRAND_GOLD }}
       />
+      <p className="text-sm mt-4">{subTitle}</p>
     </div>
   );
 }
@@ -186,6 +187,7 @@ export default function ResidentialZoneCards() {
         <SectionHeader
           label="Dholera Zoning Overview"
           title="What's Allowed in Residential Zones?"
+          subTitle="Residential zones in Dholera support housing, daily services, and community needs. They are suitable for buyers planning residential bulk land, housing projects, or long-term investment"
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {projects.map((project) => (
@@ -208,6 +210,7 @@ export default function ResidentialZoneCards() {
         <SectionHeader
           label="Investment Benefits"
           title="Why Invest in Dholera Residential Zones?"
+          subTitle="Dholera residential zones are gaining interest due to planned infrastructure and future housing demand. For long-term buyers, bulk land offers better planning and location clarity."
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {benefits.map((benefit) => (

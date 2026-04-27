@@ -164,7 +164,7 @@ function FlipCard({ item, isFlipped, onFlip }) {
   );
 }
 
-function SectionHeader({ label, title }) {
+function SectionHeader({ label, title, subTitle }) {
   return (
     <div className="text-center mb-10">
       <p
@@ -178,6 +178,7 @@ function SectionHeader({ label, title }) {
         className="w-14 h-0.5 mx-auto mt-4 rounded-full"
         style={{ backgroundColor: BRAND_GOLD }}
       />
+      <p className="text-sm mt-4">{subTitle}</p>
     </div>
   );
 }
@@ -193,6 +194,7 @@ export default function IndustrialZoneCards() {
         <SectionHeader
           label="Zoning Overview"
           title="What's Allowed in Industrial Zones?"
+          subTitle="Industrial zones in Dholera are planned for factories, warehouses, logistics, and support services. These zones are suitable for industrial bulk land, manufacturing, storage, and long-term expansion."
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {projects.map((project) => (
@@ -215,6 +217,7 @@ export default function IndustrialZoneCards() {
         <SectionHeader
           label="Dholera Investment Benefits"
           title="Why Invest in Dholera Industrial Zones?"
+          subTitle="Dholera industrial zones are gaining interest due to planned infrastructure and industrial growth. For long-term buyers, industrial bulk land offers better planning, larger land options, and location clarity."
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {benefits.map((benefit) => (

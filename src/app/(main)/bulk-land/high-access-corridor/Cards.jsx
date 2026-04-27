@@ -157,7 +157,7 @@ function FlipCard({ item, isFlipped, onFlip }) {
   );
 }
 
-function SectionHeader({ label, title }) {
+function SectionHeader({ label, title, subTitle }) {
   return (
     <div className="text-center mb-10">
       <p
@@ -171,6 +171,7 @@ function SectionHeader({ label, title }) {
         className="w-14 h-0.5 mx-auto mt-4 rounded-full"
         style={{ backgroundColor: BRAND_GOLD }}
       />
+      <p className="text-sm mt-4">{subTitle}</p>
     </div>
   );
 }
@@ -187,6 +188,7 @@ export default function HighAccessCorridorCards() {
         <SectionHeader
           label="Zoning Overview"
           title="What's Allowed in High Access Corridor Zones?"
+          subTitle="High Access Corridor zones support retail, hotels, offices, healthcare, and mixed-use projects with better road access and visibility."
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {projects.map((project) => (
@@ -209,6 +211,7 @@ export default function HighAccessCorridorCards() {
         <SectionHeader
           label="Dholera Investment Benefits"
           title="Why Invest in Dholera High Access Corridor Zone?"
+          subTitle="Dholera High Access Corridor offers better access, visibility, and flexible land use for future commercial or mixed-use planning."
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {benefits.map((benefit) => (

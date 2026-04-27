@@ -157,7 +157,7 @@ function FlipCard({ item, isFlipped, onFlip }) {
   );
 }
 
-function SectionHeader({ label, title }) {
+function SectionHeader({ label, title, subTitle }) {
   return (
     <div className="text-center mb-10">
       <p
@@ -171,6 +171,7 @@ function SectionHeader({ label, title }) {
         className="w-14 h-0.5 mx-auto mt-4 rounded-full"
         style={{ backgroundColor: BRAND_GOLD }}
       />
+      <p className="text-sm mt-4">{subTitle}</p>
     </div>
   );
 }
@@ -187,6 +188,7 @@ export default function CityCentreZoneCards() {
         <SectionHeader
           label="Dholera Zoning Overview"
           title="What's Allowed in City Centre Zones?"
+          subTitle="City Centre zones in Dholera are planned for retail, hotels, offices, civic spaces, and mixed-use development. These zones are suitable for buyers looking for central land with strong visibility and business use. "
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {projects.map((project) => (
@@ -209,6 +211,7 @@ export default function CityCentreZoneCards() {
         <SectionHeader
           label="Investment Benefits"
           title="Why Invest in Dholera City Centre Zone?"
+          subTitle="Dholera City Centre offers better visibility, footfall, and flexible use for commercial and mixed-use development .It supports future planning for shopping, hospitality, offices, civic spaces, and residential use."
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {benefits.map((benefit) => (
