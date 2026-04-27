@@ -6,11 +6,9 @@ export default function robots() {
         userAgent: "*",
         allow: "/",
         disallow: [
-          "/_next/",
           "/api/",
           "/studio/",
           "/costsheet/",
-          "/infopack/",
         ],
       },
     ],
