@@ -150,11 +150,6 @@ export default function RootLayout({ children }) {
         />
 
         <Script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-7TB2TDXYX0"
-        ></Script>
-
-        <Script
           id="google-analytics"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
