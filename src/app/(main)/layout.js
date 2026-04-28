@@ -14,6 +14,7 @@ import { initFacebookPixel, trackPageView } from "@/lib/fbpixel";
 import call from "@/assets/call.svg";
 import Script from "next/script";
 import ScrollToTop from "./components/ScrollToTop";
+import { GoogleTagManager } from "@next/third-parties/google";
 
 const FACEBOOK_PIXEL_ID = "672210205737825"; // Replace with your actual Pixel ID
 
@@ -142,8 +143,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <link rel="icon" href="/favicon.ico" />
-        {/* script tags */}
-        <Script
+       
+        <GoogleTagManager gtmId="GTM-NLL6M3PL" />
+
+        
+        {/* <Script
           async
           src="https://www.googletagmanager.com/gtag/js?id=GT-NLL6M3PL"
         />
@@ -182,7 +186,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "qvr31wn09g");
         `}
-        </Script>
+        </Script> */}
 
         <meta
           name="google-site-verification"
