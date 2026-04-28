@@ -1,102 +1,7 @@
-import { getAllProjects } from "@/sanity/lib/api";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FaEnvelope, FaPhone, FaPhoneAlt, FaUser } from "react-icons/fa";
 
 export default function Footer() {
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isProjects, setIsProjects] = useState([]);
-  const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-  });
-  const [showPopup, setShowPopup] = useState(false);
-  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
-
-  const openContactForm = () => {
-    setIsContactFormOpen(true);
-  };
-
-  const closeContactForm = () => {
-    setIsContactFormOpen(false);
-  };
-
-  const buttons = [
-    { id: 1, title: "Download Brochure" },
-    { id: 2, title: "Book Free Site visit" },
-  ];
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-
-    if (!formData.name || !formData.phone) {
-      alert("Please fill in all fields");
-      setIsLoading(false);
-      return;
-    }
-
-    try {
-      const response = await fetch(
-        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
-          },
-          body: JSON.stringify({
-            fields: {
-              name: formData.name,
-              phone: formData.phone,
-              source: "Dholera Times",
-            },
-            source: "Dholera Times Website",
-            tags: ["Dholera Investment", "Website Lead"],
-          }),
-        },
-      );
-
-      const responseText = await response.text();
-
-      if (response.ok) {
-        if (
-          responseText === "OK" ||
-          responseText.toLowerCase().includes("success")
-        ) {
-          setFormData({ name: "", phone: "" }); // Reset form
-          setShowPopup(true); // Show success popup
-        } else {
-          console.log("Response Text:", responseText);
-        }
-      } else {
-        console.error("Server Error:", responseText);
-        throw new Error(responseText || "Submission failed");
-      }
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      alert(`Error submitting form: ${error.message}`);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    async function fetchData() {
-      const projectData = await getAllProjects();
-      setIsProjects(projectData);
-    }
-    fetchData();
-  }, []);
-
   return (
     <>
       <footer className="bg-[#151f28] text-gray-400 space-y-8 pt-8 ">
@@ -109,14 +14,15 @@ export default function Footer() {
                 <p className="font-semibold text-blue-400">Head Office</p>
 
                 <p className="text-gray-300">
-                   CGJ - 194, Dlf Capital Greens, Shivaji Marg, Karampura
+                  CGJ - 194, Dlf Capital Greens, Shivaji Marg, Karampura
                   Industrial Area, Karam Pura, Delhi - 110015, India
                 </p>
                 <br />
                 <p className="font-semibold text-blue-400">Branch Office</p>
 
                 <p className="text-gray-300">
-                  Office no. 303, 3rd Floor H-110, Sector-63, Noida, Uttar Pradesh 201301
+                  Office no. 303, 3rd Floor H-110, Sector-63, Noida, Uttar
+                  Pradesh 201301
                 </p>
               </div>
 
