@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect, useRef, use } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import "./globals.css";
@@ -10,13 +9,12 @@ import Image from "next/image";
 import Footer from "./components/Footer";
 import FloatingIcons from "./components/Floating";
 import { usePathname } from "next/navigation";
-import { initFacebookPixel, trackPageView } from "@/lib/fbpixel";
+import { trackPageView } from "@/lib/fbpixel";
 import call from "@/assets/call.svg";
-import Script from "next/script";
 import ScrollToTop from "./components/ScrollToTop";
 import { GoogleTagManager } from "@next/third-parties/google";
 
-const FACEBOOK_PIXEL_ID = "672210205737825"; // Replace with your actual Pixel ID
+const FACEBOOK_PIXEL_ID = "672210205737825";
 
 import { Inter } from "next/font/google";
 
@@ -146,48 +144,6 @@ export default function RootLayout({ children }) {
        
         <GoogleTagManager gtmId="GTM-NLL6M3PL" />
 
-        
-        {/* <Script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=GT-NLL6M3PL"
-        />
-
-        <Script
-          id="google-analytics"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || []; 
-              function gtag(){ dataLayer.push(arguments); }
-              gtag('js', new Date());
-              gtag('config', 'G-7TB2TDXYX0'); 
-            `,
-          }}
-        />
-
-        <Script
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-NLL6M3PL');
-            `,
-          }}
-        />
-
-        <Script type="text/javascript" strategy="afterInteractive">
-          {`
-              (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "qvr31wn09g");
-        `}
-        </Script> */}
-
         <meta
           name="google-site-verification"
           content="w4B8pqZZDySMLUmxZYsGxeKSCsTI_aHk-myN3iKS3CU"
@@ -271,13 +227,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     {/* Hover card */}
 
                     {/* Dropdown menu */}
-                    <AnimatePresence>
+                    <div>
                       {isBlogsDropdownOpen && (
-                        <motion.div
-                          initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                          animate={{ opacity: 1, y: 0, scale: 1 }}
-                          exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                          transition={{ duration: 0.2, ease: "easeOut" }}
+                        <div
                           className="absolute left-0 mt-2 w-56 bg-white shadow-xl rounded-xl z-50 border border-gray-100 overflow-hidden"
                         >
                           {[
@@ -296,9 +248,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                               {item.title}
                             </Link>
                           ))}
-                        </motion.div>
+                        </div>
                       )}
-                    </AnimatePresence>
+                    </div>
                   </div>
 
                   {/* Bulk Land with hover card */}
@@ -323,13 +275,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   >
                     <Menu className="h-6 w-6" />
                   </button>
-                  <AnimatePresence>
+                  <div>
                     {isDesktopMenuOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                        transition={{ duration: 0.2, ease: "easeOut" }}
+                      <div
                         className="absolute right-0 mt-2 w-64 bg-white shadow-xl rounded-xl z-50 border border-gray-100 overflow-hidden"
                       >
                         <Link
@@ -363,9 +311,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                         </Link>
 
                         {/* Contact Dropdown in Desktop Menu */}
-                      </motion.div>
+                      </div>
                     )}
-                  </AnimatePresence>
+                  </div>
                 </div>
               </div>
 
@@ -397,14 +345,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           </div>
 
           {/* Mobile menu */}
-          <AnimatePresence>
+          <div>
             {isMenuOpen && (
-              <motion.div
-                initial={{ x: "-100%", opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                exit={{ x: "-100%", opacity: 0 }}
+              <div
                 ref={menuOpenRef}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
                 className="lg:hidden bg-gradient-to-br from-slate-900 to-slate-800 backdrop-blur-md fixed top-0 left-0 w-full h-screen z-50 p-6 overflow-y-auto"
               >
                 {/* Mobile Header */}
@@ -459,13 +403,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                         }`}
                       />
                     </div>
-                    <AnimatePresence>
+                    <div>
                       {isMobileBlogsOpen && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3, ease: "easeInOut" }}
+                        <div
                           className="bg-white/5 overflow-hidden"
                         >
                           {[
@@ -487,9 +427,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                               {item.title}
                             </Link>
                           ))}
-                        </motion.div>
+                        </div>
                       )}
-                    </AnimatePresence>
+                    </div>
                   </div>
 
                   <Link
@@ -534,9 +474,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     </Link>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             )}
-          </AnimatePresence>
+          </div>
           <Link href="/sitemap.xml" className="hidden">
             sitemap
           </Link>
