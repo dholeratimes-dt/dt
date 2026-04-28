@@ -17,13 +17,6 @@ export default function Footer() {
                   CGJ - 194, Dlf Capital Greens, Shivaji Marg, Karampura
                   Industrial Area, Karam Pura, Delhi - 110015, India
                 </p>
-                <br />
-                <p className="font-semibold text-blue-400">Branch Office</p>
-
-                <p className="text-gray-300">
-                  Office no. 303, 3rd Floor H-110, Sector-63, Noida, Uttar
-                  Pradesh 201301
-                </p>
               </div>
 
               {/* Social Media Links */}
@@ -181,30 +174,7 @@ export default function Footer() {
                     Blogs
                   </a>
                 </li>
-                <li>
-                  <a
-                    href="/gallery/dholera-sir-progress"
-                    className="hover:text-white transition"
-                  >
-                    Dholera Photos
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/nri-investment-guide-dholera"
-                    className="hover:text-white transition"
-                  >
-                    NRI Investment
-                  </a>
-                </li>
-                <li>
-                  <a href="/" className="hover:text-white transition">
-                    Why Dholera
-                  </a>
-                </li>
-                <li>
-                  <a href="/infopack/inventory">Live Booking status</a>
-                </li>
+                
               </ul>
             </div>
 
@@ -238,23 +208,6 @@ export default function Footer() {
                     className="hover:text-white transition"
                   >
                     Contact Us
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    href="/infopack/locations"
-                    className="hover:text-white transition"
-                  >
-                    Live Location
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/sitemap.xml"
-                    className="hover:text-white transition"
-                  >
-                    Sitemap
                   </a>
                 </li>
               </ul>

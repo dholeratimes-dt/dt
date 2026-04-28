@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { Plus, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import PopupForm from "../../components/PopupForm";
+import PopupForm from "../components/PopupForm";
 import safe from "@/assets/residential/safe-investment.webp";
 import lifestyle from "@/assets/residential/lifestyle-and-trust.webp";
 import support from "@/assets/residential/government-support-dholera.webp";
@@ -252,6 +252,11 @@ export default function InvestmentBenefits() {
                     exit={{ opacity: 0, x: -100 }}
                     transition={{ duration: 0.4 }}
                   >
+                    <Image
+                  src={benefits[hoveredBenefit].image}
+                  alt={benefits[hoveredBenefit].title}
+                  className="w-full h-full object-cover"
+                />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#151f28]/80 via-transparent to-transparent">
                       <div className="absolute bottom-4 left-4 right-4 text-white">
                         <div className="flex items-center mb-2">

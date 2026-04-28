@@ -173,7 +173,7 @@ const WestWynAboutSection = () => {
         {/* Left Section - Header */}
         <div className="text-center mb-8 md:w-1/2">
           <div className="h-full flex flex-col">
-            <p className="text-base text-gray-600 text-justify max-w-4xl mx-auto leading-relaxed mb-4">
+            <p className="text-base text-gray-600 text-left max-w-4xl mx-auto leading-relaxed mb-4">
               Looking for a secure and future-ready investment? WestWyn
               Residency offers government approved plots in Dholera starting ₹8
               lakh, designed for buyers who value location, connectivity, and

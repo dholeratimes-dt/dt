@@ -16,6 +16,7 @@ import marina from "@/assets/residential/marina-bay.webp";
 import pride from "@/assets/residential/pride.webp";
 import LeadForm from "./LeadForm";
 import SoldOutSlider from "./SoldOutProjects";
+import InvestmentBenefits from "./WhyInvest";
 
 const projectsData = [
   {
@@ -254,7 +255,7 @@ export default function Projects() {
             {/* Section heading */}
             <div className="text-center mb-8">
               <h2 className="text-[28px] font-bold text-[#151f28]">
-                High-Growth Opportunities in{" "}
+                Investment Ready Plots in{" "}
                 <span className="text-[#debe6b]">Dholera</span>
               </h2>
               <p className="max-w-2xl mx-auto text-[#151f28]/70">
@@ -292,6 +293,10 @@ export default function Projects() {
           </div>
         </div>
       )}
+
+      <div>
+        <InvestmentBenefits/>
+      </div>
 
       {/* Sold Out Projects */}
       {soldOutProjects.length > 0 && (

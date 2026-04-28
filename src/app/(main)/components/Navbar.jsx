@@ -9,11 +9,6 @@ import logo from "@/assets/dt.webp";
 import logo2 from "@/assets/dtlogobg.png";
 import call from "@/assets/call.svg";
 
-const DESKTOP_BLOGS = [
-  { title: "Latest News", path: "/dholera-updates/latest-updates" },
-  { title: "Blogs", path: "/dholera-updates/blogs" },
-];
-
 const DESKTOP_OVERFLOW = [
   { title: "Gallery", path: "/gallery/dholera-sir-progress" },
   { title: "About Us", path: "/about" },
@@ -95,46 +90,33 @@ export default function Navbar() {
               </Link>
 
               <Link
-                href="/bulk-land"
-                className="text-white hover:bg-white/10 px-4 py-2 rounded-lg transition-all duration-300"
-              >
-                Bulk Land
-              </Link>
-
-              <Link
                 href="/dholera-sir"
                 className="text-white hover:bg-white/10 px-4 py-2 rounded-lg transition-all duration-300"
               >
                 Dholera SIR
               </Link>
 
-              {/* Dholera Updates dropdown */}
-              <div className="relative" ref={blogsDropdownRef}>
-                <button
-                  onClick={() => setIsBlogsDropdownOpen((p) => !p)}
-                  className="text-white hover:bg-white/10 px-4 py-2 rounded-lg transition-all duration-300 flex items-center gap-1"
-                >
-                  Dholera Updates
-                  <ChevronDown
-                    className={`h-4 w-4 transition-transform duration-300 ${isBlogsDropdownOpen ? "rotate-180" : ""}`}
-                  />
-                </button>
-                {isBlogsDropdownOpen && (
-                  <div className="absolute left-0 mt-2 w-56 bg-white shadow-xl rounded-xl z-50 border border-gray-100 overflow-hidden">
-                    {DESKTOP_BLOGS.map((item) => (
-                      <Link
-                        key={item.path}
-                        href={item.path}
-                        className="block px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors duration-150"
-                        onClick={() => setIsBlogsDropdownOpen(false)}
-                      >
-                        {item.title}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
+              <Link
+                href="/dholera-updates/blogs"
+                className="text-white hover:bg-white/10 px-4 py-2 rounded-lg transition-all duration-300"
+              >
+                Dholera Blogs
+              </Link>
 
+              <Link
+                href="/dholera-updates/latest-updates"
+                className="text-white hover:bg-white/10 px-4 py-2 rounded-lg transition-all duration-300"
+              >
+                Dholera News
+              </Link>
+
+              <Link
+                href="/bulk-land"
+                className="text-white hover:bg-white/10 px-4 py-2 rounded-lg transition-all duration-300"
+              >
+                Bulk Land
+              </Link>
+              
               <Link
                 href="/contact/inquiry"
                 className="text-white hover:bg-white/10 px-4 py-2 rounded-lg transition-all duration-300"
@@ -218,12 +200,16 @@ export default function Navbar() {
           {/* Mobile links */}
           <div className="space-y-2">
             {[
-              { title: "Dholera SIR", path: "/dholera-sir" },
-              { title: "Projects", path: "/dholera-residential-plots" },
-              { title: "Bulk Land", path: "/bulk-land" },
+              { title: "About Dholera SIR", path: "/dholera-sir" },
+              { title: "Our Projects", path: "/dholera-residential-plots" },
+              { title: "Dholera Blogs", path: "/dholera-updates/blogs" },
+              {
+                title: "Dholera News",
+                path: "/dholera-updates/latest-updates",
+              },
+              { title: "Bulk Land Deals", path: "/bulk-land" },
               { title: "Gallery", path: "/gallery/dholera-sir-progress" },
               { title: "About Us", path: "/about" },
-              { title: "NRI Guide", path: "/nri-investment-guide-dholera" },
               { title: "Contact Us", path: "/contact/inquiry" },
             ].map((item) => (
               <Link
@@ -235,41 +221,9 @@ export default function Navbar() {
                 <span className="ml-2">{item.title}</span>
               </Link>
             ))}
-
-            {/* Dholera Updates accordion */}
-            <div className="rounded-xl overflow-hidden">
-              <div
-                className="flex items-center justify-between text-white text-lg py-4 px-4 cursor-pointer hover:bg-white/10 transition-all duration-300"
-                onClick={() => setIsMobileBlogsOpen((p) => !p)}
-              >
-                <span className="ml-2">Dholera Updates</span>
-                <ChevronDown
-                  className={`h-5 w-5 transition-transform duration-300 ${isMobileBlogsOpen ? "rotate-180" : ""}`}
-                />
-              </div>
-              {isMobileBlogsOpen && (
-                <div className="bg-white/5">
-                  {DESKTOP_BLOGS.map((item) => (
-                    <Link
-                      key={item.path}
-                      href={item.path}
-                      className="block text-white/80 py-3 px-8 hover:bg-white/10 hover:text-white transition-all duration-200"
-                      onClick={() => {
-                        setIsMobileBlogsOpen(false);
-                        closeMenu();
-                      }}
-                    >
-                      {item.title}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
           </div>
         </div>
       )}
-
-      
     </nav>
   );
 }

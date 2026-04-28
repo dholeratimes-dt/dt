@@ -3,7 +3,6 @@ import img from "@/assets/residential/we_cover.webp";
 import img2 from "@/assets/residential/residency-1.webp";
 import Image from "next/image";
 import Link from "next/link";
-import { Clock, ArrowRight, Train, Plane } from "lucide-react";
 import Magnet from "./Magnet";
 import { FaArrowRight, FaCheckCircle } from "react-icons/fa";
 
@@ -11,7 +10,7 @@ const PROJECTS = [
   {
     image: img2,
     name: "WestWyn Residency",
-    subtext: "Registry-ready Plots Under ₹8 Lakh*",
+    subtext: "Registry-Ready Plots From ₹8 Lakh*",
     tag: "Premium Plots",
     href: "/dholera-residential-plots/westwyn-residency",
     description:
@@ -82,14 +81,14 @@ export default function AboutDT() {
                   <p className="text-[clamp(1rem,2vw,1.125rem)] font-semibold text-[#d3b36b] mb-3">
                     {project.subtext}
                   </p>
-                  <p className="text-[clamp(0.5rem,1.5vw,1rem)] text-[#151f28] leading-relaxed mb-4">
+                  <p className="text-[clamp(0.7rem,1.5vw,1rem)] text-[#151f28] leading-relaxed mb-4">
                     {project.description}
                   </p>
                   <ul className="space-y-1 mb-3">
                     {project.points.map((point, i) => (
                       <li
                         key={i}
-                        className="flex items-start gap-1.5 text-[clamp(0.5rem,1.5vw,1rem)] text-[#151f28] leading-snug"
+                        className="flex items-start gap-1.5 text-[clamp(0.7rem,1.5vw,1.125rem)] text-[#151f28] leading-snug"
                       >
                         <FaCheckCircle className="text-[#d3b36b] mt-[2px] flex-shrink-0 text-[clamp(0.5rem,1.5vw,1rem)]" />
                         <span>{point}</span>

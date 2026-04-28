@@ -160,7 +160,7 @@ const WestWynAboutSection = () => {
         {/* Left Section - Header */}
         <div className="text-center mb-8 md:w-1/2">
           <div className="h-full flex flex-col">
-            <p className="text-base text-gray-600 text-justify max-w-4xl mx-auto leading-relaxed mb-4">
+            <p className="text-base text-gray-600 text-left max-w-4xl mx-auto leading-relaxed mb-4">
               WestWyn Estates as a premium residential plotting project in
               Polarpur, Dholera for buyers who value location advantage, legal
               clarity, and a more structured buying process. With 152 and 200

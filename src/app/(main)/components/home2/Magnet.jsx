@@ -283,14 +283,14 @@ export default function Magnet() {
               
               <div>
                 <label className='block text-xs md:text-base font-medium uppercase tracking-wide mb-2 text-[#d3b36b]'>
-                  City/Pincode
+                  City
                 </label>
                 <input 
                   type="text" 
                   name="city"
                   value={formData.city}
                   onChange={handleChange}
-                  placeholder="Enter city or pincode"
+                  placeholder="Enter city "
                   className='w-full px-4 py-3 bg-transparent border-b-2 border-[#d3b36b]/30 text-sm md:text-lg outline-none transition-colors text-[#d3b36b] focus:border-[#d3b36b] placeholder:text-[#d3b36b]/40'
                 />
               </div>
@@ -311,11 +311,11 @@ export default function Magnet() {
                 />
               </div>
 
-              <div className='mt-8'>
+              <div className='mt-8 max-sm:flex max-sm:justify-center max-sm:items-center'>
                 <button 
                   type="submit"
                   disabled={isDisabled || isLoading}
-                  className='w-full md:w-auto px-12 py-2 rounded-lg bg-[#d3b36b] text-[#151f28] font-semibold uppercase tracking-wide text-sm md:text-lg transition-all hover:bg-[#c4a45c] hover:shadow-lg hover:shadow-[#d3b36b]/30 disabled:opacity-50 disabled:cursor-not-allowed'
+                  className='w-full md:px-12 py-2 rounded-lg bg-[#d3b36b] text-[#151f28] font-semibold uppercase tracking-wide text-sm md:text-lg transition-all hover:bg-[#c4a45c] hover:shadow-lg hover:shadow-[#d3b36b]/30 disabled:opacity-50 disabled:cursor-not-allowed'
                 >
                   {isLoading ? 'Submitting...' : 'Submit'}
                 </button>

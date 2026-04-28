@@ -4,14 +4,14 @@ import { Plus, Minus, ChevronDown, ChevronUp } from "lucide-react";
 
 const faqs = [
   {
-    question: "What kind of residential plots does DholeraTimes offer in Dholera?",
+    question: "What kind of residential plots does Dholera Times offer in Dholera?",
     answer:
-      "DholeraTimes helps buyers explore residential plot options in good locations across Dholera, including projects with registry-ready documentation and buyer support.",
+      "Dholera Times helps buyers explore residential plot options in prime locations in Dholera, including projects with registry-ready documentation and buyer support.",
   },
   {
     question: "Are the plots registry-ready?",
     answer:
-      "Yes, DholeraTimes highlights projects with registry-ready documentation so buyers can move forward with more clarity and confidence.",
+      "Yes, Dholera Times highlights projects with registry-ready documentation so buyers can move forward with more clarity and confidence.",
   },
   {
     question: "Can I get immediate possession of the plot?",
@@ -19,9 +19,9 @@ const faqs = [
       "Some projects offer immediate possession, depending on the location and project type. Our team can help you check the current availability and possession details.",
   },
   {
-    question: "How can DholeraTimes help me choose the right plot?",
+    question: "How can Dholera Times help me choose the right plot?",
     answer:
-      "DholeraTimes helps buyers compare plot options based on budget, location, project type, and buying goals, with support from enquiry to booking.",
+      "Dholera Times helps buyers compare plot options based on budget, location, project type, and buying goals, with support from enquiry to booking.",
   },
   {
     question: "Do you provide site visit support?",
@@ -36,12 +36,12 @@ const faqs = [
   {
     question: "What documents should I check before booking a plot?",
     answer:
-      "Buyers should check registry status, title clarity, project details, and other important documents before booking. DholeraTimes helps guide buyers through this process.",
+      "Buyers should check registry status, title clarity, project details, and other important documents before booking. Dholera Times helps guide buyers through this process.",
   },
   {
     question: "Can I talk to your team before making a decision?",
     answer:
-      "Yes, you can connect with the DholeraTimes team for project details, pricing, location guidance, and support before booking.",
+      "Yes, you can connect with the Dholera Times team for project details, pricing, location guidance, and support before booking.",
   },
 ];
 

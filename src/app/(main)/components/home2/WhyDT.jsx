@@ -42,7 +42,7 @@ const features = [
   },
   {
     icon: afterSales,
-    title: "Resale Support & Buyback Option*",
+    title: "Resale Support & Buyback Assistance*",
     description: "*Terms & Conditions Apply*",
   },
 ];
@@ -205,10 +205,10 @@ export default function WhyDT() {
             {/* Left Side - Header */}
             <div className="md:col-span-2 text-center">
               <h2 className="text-2xl md:text-[28px] font-bold text-[#151f28] mt-6 mb-6">
-                Dholeratimes : Trusted Developers in Dholera
+                Dholera Times : Trusted Developers in Dholera
               </h2>
               <p className="text-gray-600">
-                DholeraTimes helps buyers find residential plots in good
+                Dholera Times helps buyers find residential plots in good
                 locations across Dholera with registry-ready documents and full
                 support from enquiry to booking.
               </p>
@@ -270,7 +270,7 @@ export default function WhyDT() {
             ].map((stat, index) => (
               <div
                 key={index}
-                className="bg-gray-900 p-2 rounded-lg text-center transform transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#d8b66e]/20 flex flex-col items-center"
+                className="bg-gray-900 p-3 rounded-lg text-center transform transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#d8b66e]/20 flex flex-col items-center"
               >
                 <div className="text-[#d8b66e] mb-3">{stat.icon}</div>
                 <div className="text-2xl md:text-3xl font-semibold text-[#d8b66e] mb-2">

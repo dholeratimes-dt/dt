@@ -268,7 +268,7 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
         className={`w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] font-bold px-6 rounded-lg transition-all duration-300 text-xs md:text-[clamp(0.7rem,0.9vw,0.82rem)] uppercase tracking-widest ${
           isLoading || parentIsDisabled || !recaptchaLoaded
             ? "bg-gray-400 cursor-not-allowed text-gray-200"
-            : "bg-yellow-600 hover:bg-yellow-700 text-white shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+            : "bg-[#b69b5e] hover:bg-[#d3b36b text-white shadow-lg hover:shadow-xl transform hover:-translate-y-1"
         }`}
       >
         {isLoading ? (

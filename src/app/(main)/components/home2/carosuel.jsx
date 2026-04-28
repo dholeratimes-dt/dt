@@ -145,29 +145,27 @@ export default function HOME2() {
         </div>
 
         <div
-          className="
-            absolute z-20 pointer-events-none
-            bottom-0 left-0 right-0 flex items-end justify-center pb-5 px-4
-            md:inset-0 md:flex md:items-center md:justify-end md:pb-0 md:px-0
-          "
-          style={{ marginRight: "clamp(0rem, 3rem + 2.5vw, 7rem)" }}
+          className="hidden lg:flex absolute top-1/2 -translate-y-1/2 z-20 -translate-x-1/3 "
+          style={{ right: "clamp(4.5rem, calc(3rem + 2.5vw), 7rem)" }}
         >
-          <div className="pointer-events-auto w-full md:w-auto">
-            <HeroForm isDisabled={isDisabled} onSuccess={handleFormSuccess} />
-          </div>
+          <HeroForm isDisabled={isDisabled} onSuccess={handleFormSuccess} />
+        </div>
+
+        <div className="flex md:hidden absolute bottom-20 left-0 right-0 z-20 px-4 pb-6">
+          <HeroForm isDisabled={isDisabled} onSuccess={handleFormSuccess} />
         </div>
 
         {/* ── Nav arrows ── */}
         <button
           onClick={prevSlide}
-          className="absolute top-1/2 left-4 -translate-y-1/2 p-2 rounded-full bg-white/50 hover:bg-white/75 transition-all z-10"
+          className="absolute max-sm:hidden top-1/2 left-4 -translate-y-1/2 p-2 rounded-full bg-white/50 hover:bg-white/75 transition-all z-10"
           aria-label="Previous slide"
         >
           <ChevronLeft size={24} className="text-[#151f28]" />
         </button>
         <button
           onClick={nextSlide}
-          className="absolute top-1/2 right-4 -translate-y-1/2 p-2 rounded-full bg-white/50 hover:bg-white/75 transition-all z-10"
+          className="absolute max-sm:hidden top-1/2 right-4 -translate-y-1/2 p-2 rounded-full bg-white/50 hover:bg-white/75 transition-all z-10"
           aria-label="Next slide"
         >
           <ChevronRight size={24} className="text-[#151f28]" />
