@@ -18,7 +18,7 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
  const loadRecaptcha = useCallback(() => {
-  if (recaptchaLoaded) return;           // ✅ guard — only runs once
+  if (recaptchaLoaded) return;         
   if (typeof window === "undefined") return;
 
   const script = document.createElement("script");
