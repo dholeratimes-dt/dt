@@ -116,25 +116,25 @@ export default function HOME2() {
 
             return (
               <div key={index} className="w-full flex-shrink-0 relative">
-                {/* — Desktop image (md and above) — */}
+                {/* Desktop */}
                 <div className="hidden md:block relative w-full h-[80vh]">
                   <Image
                     src={slide.desktop}
                     alt={slide.alt}
                     fill
-                    fetchPriority={isFirst ? "high" : "auto"}
+                    priority={isFirst} // ✅ Next.js 15: handles preload + eager internally
                     sizes="100vw"
                     className="object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-black/10 to-black/60" />
                 </div>
 
-                {/* — Mobile image (below md) — */}
+                {/* Mobile */}
                 <div className="block md:hidden relative w-full">
                   <Image
                     src={slide.mobile}
                     alt={slide.alt}
-                    fetchPriority={isFirst ? "high" : "auto"}
+                    priority={isFirst} // ✅ same
                     sizes="100vw"
                     className="w-full h-auto"
                   />

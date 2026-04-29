@@ -17,37 +17,16 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
   const recaptchaRef = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
-  useEffect(() => {
-    const loadRecaptcha = () => {
-      if (typeof window !== "undefined" && !window.grecaptcha && siteKey) {
-        try {
-          const script = document.createElement("script");
-          script.src = "https://www.google.com/recaptcha/api.js";
-          script.async = true;
-          script.defer = true;
-          script.onload = () => setRecaptchaLoaded(true);
-          script.onerror = () => {
-            console.error("Failed to load reCAPTCHA script");
-            setRecaptchaLoaded(true);
-          };
-          document.head.appendChild(script);
-        } catch (err) {
-          console.error("reCAPTCHA script loading error:", err);
-          setRecaptchaLoaded(true);
-        }
-      } else if (window.grecaptcha || !siteKey) {
-        setRecaptchaLoaded(true);
-      }
-    };
-    loadRecaptcha();
-    return () => {
-      if (window.grecaptcha && recaptchaRef.current) {
-        try {
-          window.grecaptcha.reset();
-        } catch (e) {}
-      }
-    };
-  }, [siteKey]);
+ const loadRecaptcha = useCallback(() => {
+  if (recaptchaLoaded) return;           // ✅ guard — only runs once
+  if (typeof window === "undefined") return;
+
+  const script = document.createElement("script");
+  script.src = "https://www.google.com/recaptcha/api.js";
+  script.async = true;
+  script.onload = () => setRecaptchaLoaded(true);
+  document.head.appendChild(script);
+}, [recaptchaLoaded]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -190,7 +169,11 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
     "outline-none transition-colors";
 
   return (
-    <div className="flex flex-col gap-[clamp(0.5rem,1vw,0.75rem)] bg-[#fafafa] border border-yellow-600/20 rounded-xl backdrop-blur-md p-4 md:p-[clamp(1.25rem,2.5vw,2rem)] w-full md:w-[clamp(340px,22vw,440px)]">
+    <div
+      onFocus={loadRecaptcha}
+      onPointerEnter={loadRecaptcha}
+      className="flex flex-col gap-[clamp(0.5rem,1vw,0.75rem)] bg-[#fafafa] border border-yellow-600/20 rounded-xl backdrop-blur-md p-4 md:p-[clamp(1.25rem,2.5vw,2rem)] w-full md:w-[clamp(340px,22vw,440px)]"
+    >
       <h3 className="text-black font-semibold text-center text-lg md:text-[clamp(1.1rem,1.6vw,1.5rem)] leading-tight">
         Registry Ready Plots in Dholera Starting from ₹8 Lakh
       </h3>
