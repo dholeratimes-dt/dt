@@ -1,6 +1,6 @@
 // HeroForm.jsx  (carousel version — matches Hero.jsx style)
 "use client";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useCallback } from "react";
 
 const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
   const [formData, setFormData] = useState({
