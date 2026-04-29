@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useState, useEffect, useRef } from "react";
 import { FaUser, FaEnvelope, FaPhoneAlt } from "react-icons/fa";
 
@@ -17,38 +17,16 @@ export default function ContactForm({ title, headline, buttonName, onClose }) {
     phone: "",
   });
 
-  useEffect(() => {
-    // Load reCAPTCHA script
-    const loadRecaptcha = () => {
-      if (typeof window !== "undefined" && !window.grecaptcha) {
-        const script = document.createElement("script");
-        script.src = "https://www.google.com/recaptcha/api.js";
-        script.async = true;
-        script.defer = true;
-        script.onload = () => setRecaptchaLoaded(true);
-        script.onerror = () => {
-          console.error("Failed to load reCAPTCHA script");
-          setRecaptchaLoaded(true); // Still allow form submission
-        };
-        document.head.appendChild(script);
-      } else if (window.grecaptcha) {
-        setRecaptchaLoaded(true);
-      }
-    };
+  const loadRecaptcha = useCallback(() => {
+    if (recaptchaLoaded) return;
+    if (typeof window === "undefined") return;
 
-    loadRecaptcha();
-
-    // Cleanup function
-    return () => {
-      if (window.grecaptcha && recaptchaRef.current) {
-        try {
-          window.grecaptcha.reset();
-        } catch (e) {
-          console.log("reCAPTCHA cleanup error:", e);
-        }
-      }
-    };
-  }, []);
+    const script = document.createElement("script");
+    script.src = "https://www.google.com/recaptcha/api.js";
+    script.async = true;
+    script.onload = () => setRecaptchaLoaded(true);
+    document.head.appendChild(script);
+  }, [recaptchaLoaded]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -70,7 +48,7 @@ export default function ContactForm({ title, headline, buttonName, onClose }) {
       return false;
     }
 
-    if (!/^\d{10,15}$/.test(formData.phone.replace(/\D/g, ''))) {
+    if (!/^\d{10,15}$/.test(formData.phone.replace(/\D/g, ""))) {
       setErrorMessage("Please enter a valid phone number (10-15 digits)");
       return false;
     }
@@ -99,7 +77,9 @@ export default function ContactForm({ title, headline, buttonName, onClose }) {
 
       // Restrict submission after 20 attempts
       if (submissionCount >= 3) {
-        setErrorMessage("You have reached the maximum submission limit. Try again after 24 hours.");
+        setErrorMessage(
+          "You have reached the maximum submission limit. Try again after 24 hours.",
+        );
         setIsDisabled(true);
         return;
       }
@@ -124,7 +104,7 @@ export default function ContactForm({ title, headline, buttonName, onClose }) {
             tags: ["Dholera Investment", "Website Lead"],
             recaptchaToken: token,
           }),
-        }
+        },
       );
 
       // Store response text before parsing
@@ -144,7 +124,7 @@ export default function ContactForm({ title, headline, buttonName, onClose }) {
           setSubmissionCount(submissionCount);
           localStorage.setItem("formSubmissionCount", submissionCount);
           localStorage.setItem("lastSubmissionTime", Date.now().toString());
-           /* Google Tag */
+          /* Google Tag */
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({
             event: "lead_form",
@@ -162,7 +142,7 @@ export default function ContactForm({ title, headline, buttonName, onClose }) {
       setErrorMessage(`Error submitting form: ${error.message}`);
     } finally {
       setIsLoading(false);
-      
+
       // Reset reCAPTCHA
       if (window.grecaptcha && recaptchaRef.current) {
         window.grecaptcha.reset();
@@ -181,7 +161,9 @@ export default function ContactForm({ title, headline, buttonName, onClose }) {
     }
 
     if (!recaptchaLoaded || !window.grecaptcha) {
-      setErrorMessage("Security verification not loaded. Please refresh the page.");
+      setErrorMessage(
+        "Security verification not loaded. Please refresh the page.",
+      );
       setIsLoading(false);
       return;
     }
@@ -223,10 +205,16 @@ export default function ContactForm({ title, headline, buttonName, onClose }) {
 
         {isDisabled ? (
           <p className="text-center text-red-500 font-semibold">
-            You have reached the maximum submission limit. Try again after 24 hours.
+            You have reached the maximum submission limit. Try again after 24
+            hours.
           </p>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form
+            onSubmit={handleSubmit}
+            onFocus={loadRecaptcha}
+            onPointerEnter={loadRecaptcha}
+            className="space-y-6"
+          >
             {/* Full Name Input */}
             <div className="relative">
               <FaUser className="absolute left-4 top-4 text-gray-500" />

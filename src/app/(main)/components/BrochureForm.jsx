@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { useState,useCallback } from "react";
 import { FaUser, FaEnvelope, FaPhoneAlt } from "react-icons/fa";
 import { X } from "lucide-react"; // Import the X icon from lucide-react
 
-export default function BrochureForm({ title, subTitle, buttonName, onClose, onSuccess }) {
+export default function BrochureForm({
+  title,
+  subTitle,
+  buttonName,
+  onClose,
+  onSuccess,
+}) {
   const [isLoading, setIsLoading] = useState(false);
   const [submissionCount, setSubmissionCount] = useState(0);
   const [isDisabled, setIsDisabled] = useState(false);
@@ -12,6 +18,20 @@ export default function BrochureForm({ title, subTitle, buttonName, onClose, onS
     email: "",
     phone: "",
   });
+  const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
+  const recaptchaRef = useRef(null);
+  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+  
+  const loadRecaptcha = useCallback(() => {
+    if (recaptchaLoaded) return;
+    if (typeof window === "undefined") return;
+
+    const script = document.createElement("script");
+    script.src = "https://www.google.com/recaptcha/api.js";
+    script.async = true;
+    script.onload = () => setRecaptchaLoaded(true);
+    document.head.appendChild(script);
+  }, [recaptchaLoaded]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,7 +65,7 @@ export default function BrochureForm({ title, subTitle, buttonName, onClose, onS
     // Restrict submission after 3 attempts
     if (submissionCount >= 3) {
       alert(
-        "You have reached the maximum submission limit. Try again after 24 hours."
+        "You have reached the maximum submission limit. Try again after 24 hours.",
       );
       setIsLoading(false);
       setIsDisabled(true);
@@ -79,7 +99,7 @@ export default function BrochureForm({ title, subTitle, buttonName, onClose, onS
             source: "Dholera Times Website",
             tags: ["Dholera Investment", "Website Lead"],
           }),
-        }
+        },
       );
 
       // Store response text before parsing
@@ -94,24 +114,21 @@ export default function BrochureForm({ title, subTitle, buttonName, onClose, onS
           setFormData({ fullName: "", email: "", phone: "" }); // Reset all form fields
           setShowPopup(true);
           onSuccess();
-          
+
           submissionCount++;
           setSubmissionCount(submissionCount);
           localStorage.setItem("formSubmissionCount", submissionCount);
           localStorage.setItem("lastSubmissionTime", Date.now().toString());
-           /* Google Tag */
+          /* Google Tag */
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({
             event: "lead_form",
           });
-        }
-        
-        else {
+        } else {
           // Handle unexpected response
           console.log("Response Text:", responseText);
           alert("Submission received but with unexpected response");
         }
-
       } else {
         console.error("Server Error:", responseText);
         throw new Error(responseText || "Submission failed");
@@ -139,16 +156,19 @@ export default function BrochureForm({ title, subTitle, buttonName, onClose, onS
         <h2 className="text-3xl font-bold text-center text-[#151f28] mb-6">
           {title}
         </h2>
-        <h2 className="text-sm text-center text-[#151f28] mb-6">
-          {subTitle}
-        </h2>
+        <h2 className="text-sm text-center text-[#151f28] mb-6">{subTitle}</h2>
         {isDisabled ? (
           <p className="text-center text-red-500 font-semibold">
             You have reached the maximum submission limit. Try again after 24
             hours.
           </p>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form
+            onSubmit={handleSubmit}
+            onFocus={loadRecaptcha}
+            onPointerEnter={loadRecaptcha}
+            className="space-y-6"
+          >
             {/* Full Name Input */}
             <div className="relative">
               <FaUser className="absolute left-4 top-4 text-gray-500" />

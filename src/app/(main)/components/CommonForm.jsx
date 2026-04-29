@@ -6,10 +6,10 @@ import "./about.css";
 
 export default function CommonForm({ title }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState({ 
-    fullName: "", 
-    email: "", 
-    phone: "" 
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
   });
   const [showPopup, setShowPopup] = useState(false);
   const [submissionCount, setSubmissionCount] = useState(0);
@@ -19,70 +19,16 @@ export default function CommonForm({ title }) {
   const recaptchaRef = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
-  useEffect(() => {
-    // Load reCAPTCHA script
-    const loadRecaptcha = () => {
-      if (typeof window !== "undefined" && !window.grecaptcha && siteKey) {
-        try {
-          const script = document.createElement("script");
-          script.src = "https://www.google.com/recaptcha/api.js";
-          script.async = true;
-          script.defer = true;
-          script.onload = () => setRecaptchaLoaded(true);
-          script.onerror = () => {
-            console.error("Failed to load reCAPTCHA script");
-            setRecaptchaLoaded(true);
-          };
-          document.head.appendChild(script);
-        } catch (err) {
-          console.error("reCAPTCHA script loading error:", err);
-          setRecaptchaLoaded(true);
-        }
-      } else if (window.grecaptcha || !siteKey) {
-        setRecaptchaLoaded(true);
-      }
-    };
+  const loadRecaptcha = useCallback(() => {
+    if (recaptchaLoaded) return;
+    if (typeof window === "undefined") return;
 
-    loadRecaptcha();
-
-    // Get submission count from localStorage
-    if (typeof window !== "undefined") {
-      const storedCount = parseInt(localStorage.getItem("formSubmissionCount") || "0", 10);
-      const lastSubmissionTime = parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10);
-      
-      // Check if 24 hours have passed since the last submission
-      if (lastSubmissionTime) {
-        const timeDifference = Date.now() - lastSubmissionTime;
-        const hoursPassed = timeDifference / (1000 * 60 * 60);
-
-        if (hoursPassed >= 24) {
-          // Reset submission count after 24 hours
-          setSubmissionCount(0);
-          localStorage.setItem("formSubmissionCount", "0");
-          localStorage.setItem("lastSubmissionTime", Date.now().toString());
-        } else {
-          setSubmissionCount(storedCount);
-          // Check if limit reached
-          if (storedCount >= 20) {
-            setIsDisabled(true);
-          }
-        }
-      } else {
-        setSubmissionCount(storedCount);
-      }
-    }
-
-    // Cleanup function
-    return () => {
-      if (window.grecaptcha && recaptchaRef.current) {
-        try {
-          window.grecaptcha.reset();
-        } catch (e) {
-          console.log("reCAPTCHA cleanup error:", e);
-        }
-      }
-    };
-  }, [siteKey]);
+    const script = document.createElement("script");
+    script.src = "https://www.google.com/recaptcha/api.js";
+    script.async = true;
+    script.onload = () => setRecaptchaLoaded(true);
+    document.head.appendChild(script);
+  }, [recaptchaLoaded]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -103,14 +49,16 @@ export default function CommonForm({ title }) {
     }
 
     // Phone validation - accept various formats (10-15 digits)
-    if (!/^\d{10,15}$/.test(formData.phone.replace(/\D/g, ''))) {
+    if (!/^\d{10,15}$/.test(formData.phone.replace(/\D/g, ""))) {
       setErrorMessage("Please enter a valid phone number (10-15 digits)");
       return false;
     }
 
     // Check submission limits
     if (submissionCount >= 20) {
-      setErrorMessage("You have reached the maximum submission limit. Try again after 24 hours.");
+      setErrorMessage(
+        "You have reached the maximum submission limit. Try again after 24 hours.",
+      );
       setIsDisabled(true);
       return false;
     }
@@ -139,7 +87,7 @@ export default function CommonForm({ title }) {
             tags: ["Dholera Investment", "Website Lead", "Common Form"],
             recaptchaToken: token,
           }),
-        }
+        },
       );
 
       // Store response text before parsing
@@ -163,12 +111,11 @@ export default function CommonForm({ title }) {
             localStorage.setItem("formSubmissionCount", newCount.toString());
             localStorage.setItem("lastSubmissionTime", Date.now().toString());
           }
-           /* Google Tag */
+          /* Google Tag */
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({
             event: "lead_form",
           });
-
         } else {
           console.log("Response Text:", responseText);
           setErrorMessage("Submission received but with unexpected response");
@@ -177,13 +124,12 @@ export default function CommonForm({ title }) {
         console.error("Server Error:", responseText);
         throw new Error(responseText || "Submission failed");
       }
-
     } catch (error) {
       console.error("Error submitting form:", error);
       setErrorMessage(`Error submitting form: ${error.message}`);
     } finally {
       setIsLoading(false);
-      
+
       // Reset reCAPTCHA
       if (window.grecaptcha && recaptchaRef.current) {
         try {
@@ -206,7 +152,9 @@ export default function CommonForm({ title }) {
     }
 
     if (!recaptchaLoaded || !window.grecaptcha) {
-      setErrorMessage("Security verification not loaded. Please refresh the page.");
+      setErrorMessage(
+        "Security verification not loaded. Please refresh the page.",
+      );
       setIsLoading(false);
       return;
     }
@@ -238,7 +186,7 @@ export default function CommonForm({ title }) {
             <h2 className="text-[#151f28] text-xl sm:text-2xl font-bold text-center">
               {title}
             </h2>
-            
+
             {showPopup ? (
               <div className="text-center py-8">
                 <motion.div
@@ -274,11 +222,17 @@ export default function CommonForm({ title }) {
             ) : isDisabled ? (
               <div className="text-center py-8">
                 <p className="text-center text-red-400 font-semibold">
-                  You have reached the maximum submission limit. Try again after 24 hours.
+                  You have reached the maximum submission limit. Try again after
+                  24 hours.
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="mt-12 space-y-6">
+              <form
+                onSubmit={handleSubmit}
+                onFocus={loadRecaptcha}
+                onPointerEnter={loadRecaptcha}
+                className="mt-12 space-y-6"
+              >
                 {errorMessage && (
                   <div className="p-3 bg-red-500 bg-opacity-20 border border-red-400 text-red-100 rounded-lg text-sm">
                     {errorMessage}

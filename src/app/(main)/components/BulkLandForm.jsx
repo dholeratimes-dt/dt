@@ -1,15 +1,15 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useCallback, useRef } from "react";
 import React from "react";
 import { motion } from "framer-motion";
 import "./about.css";
 
-export default function BulkLand({ title , buttonName, pageName }) {
+export default function BulkLand({ title, buttonName, pageName }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState({ 
-    fullName: "", 
-    email: "", 
-    phone: "" 
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
   });
   const [showPopup, setShowPopup] = useState(false);
   const [submissionCount, setSubmissionCount] = useState(0);
@@ -19,70 +19,16 @@ export default function BulkLand({ title , buttonName, pageName }) {
   const recaptchaRef = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
-  useEffect(() => {
-    // Load reCAPTCHA script
-    const loadRecaptcha = () => {
-      if (typeof window !== "undefined" && !window.grecaptcha && siteKey) {
-        try {
-          const script = document.createElement("script");
-          script.src = "https://www.google.com/recaptcha/api.js";
-          script.async = true;
-          script.defer = true;
-          script.onload = () => setRecaptchaLoaded(true);
-          script.onerror = () => {
-            console.error("Failed to load reCAPTCHA script");
-            setRecaptchaLoaded(true);
-          };
-          document.head.appendChild(script);
-        } catch (err) {
-          console.error("reCAPTCHA script loading error:", err);
-          setRecaptchaLoaded(true);
-        }
-      } else if (window.grecaptcha || !siteKey) {
-        setRecaptchaLoaded(true);
-      }
-    };
+  const loadRecaptcha = useCallback(() => {
+    if (recaptchaLoaded) return;
+    if (typeof window === "undefined") return;
 
-    loadRecaptcha();
-
-    // Get submission count from localStorage
-    if (typeof window !== "undefined") {
-      const storedCount = parseInt(localStorage.getItem("formSubmissionCount") || "0", 10);
-      const lastSubmissionTime = parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10);
-      
-      // Check if 24 hours have passed since the last submission
-      if (lastSubmissionTime) {
-        const timeDifference = Date.now() - lastSubmissionTime;
-        const hoursPassed = timeDifference / (1000 * 60 * 60);
-
-        if (hoursPassed >= 24) {
-          // Reset submission count after 24 hours
-          setSubmissionCount(0);
-          localStorage.setItem("formSubmissionCount", "0");
-          localStorage.setItem("lastSubmissionTime", Date.now().toString());
-        } else {
-          setSubmissionCount(storedCount);
-          // Check if limit reached
-          if (storedCount >= 20) {
-            setIsDisabled(true);
-          }
-        }
-      } else {
-        setSubmissionCount(storedCount);
-      }
-    }
-
-    // Cleanup function
-    return () => {
-      if (window.grecaptcha && recaptchaRef.current) {
-        try {
-          window.grecaptcha.reset();
-        } catch (e) {
-          console.log("reCAPTCHA cleanup error:", e);
-        }
-      }
-    };
-  }, [siteKey]);
+    const script = document.createElement("script");
+    script.src = "https://www.google.com/recaptcha/api.js";
+    script.async = true;
+    script.onload = () => setRecaptchaLoaded(true);
+    document.head.appendChild(script);
+  }, [recaptchaLoaded]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -103,14 +49,16 @@ export default function BulkLand({ title , buttonName, pageName }) {
     }
 
     // Phone validation - accept various formats (10-15 digits)
-    if (!/^\d{10,15}$/.test(formData.phone.replace(/\D/g, ''))) {
+    if (!/^\d{10,15}$/.test(formData.phone.replace(/\D/g, ""))) {
       setErrorMessage("Please enter a valid phone number (10-15 digits)");
       return false;
     }
 
     // Check submission limits
     if (submissionCount >= 20) {
-      setErrorMessage("You have reached the maximum submission limit. Try again after 24 hours.");
+      setErrorMessage(
+        "You have reached the maximum submission limit. Try again after 24 hours.",
+      );
       setIsDisabled(true);
       return false;
     }
@@ -140,7 +88,7 @@ export default function BulkLand({ title , buttonName, pageName }) {
             tags: ["Dholera Investment", "Website Lead", "Bulk Land"],
             recaptchaToken: token,
           }),
-        }
+        },
       );
 
       // Store response text before parsing
@@ -168,9 +116,8 @@ export default function BulkLand({ title , buttonName, pageName }) {
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({
             event: "lead_form",
-            page_name : pageName,
+            page_name: pageName,
           });
-
         } else {
           console.log("Response Text:", responseText);
           setErrorMessage("Submission received but with unexpected response");
@@ -179,13 +126,12 @@ export default function BulkLand({ title , buttonName, pageName }) {
         console.error("Server Error:", responseText);
         throw new Error(responseText || "Submission failed");
       }
-
     } catch (error) {
       console.error("Error submitting form:", error);
       setErrorMessage(`Error submitting form: ${error.message}`);
     } finally {
       setIsLoading(false);
-      
+
       // Reset reCAPTCHA
       if (window.grecaptcha && recaptchaRef.current) {
         try {
@@ -208,7 +154,9 @@ export default function BulkLand({ title , buttonName, pageName }) {
     }
 
     if (!recaptchaLoaded || !window.grecaptcha) {
-      setErrorMessage("Security verification not loaded. Please refresh the page.");
+      setErrorMessage(
+        "Security verification not loaded. Please refresh the page.",
+      );
       setIsLoading(false);
       return;
     }
@@ -275,18 +223,24 @@ export default function BulkLand({ title , buttonName, pageName }) {
             ) : isDisabled ? (
               <div className="text-center py-8">
                 <p className="text-center text-red-400 font-semibold">
-                  You have reached the maximum submission limit. Try again after 24 hours.
+                  You have reached the maximum submission limit. Try again after
+                  24 hours.
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="mt-12 space-y-6">
+              <form
+                onSubmit={handleSubmit}
+                onFocus={loadRecaptcha}
+                onPointerEnter={loadRecaptcha}
+                className="mt-12 space-y-6"
+              >
                 {errorMessage && (
                   <div className="p-3 bg-red-500 bg-opacity-20 border border-red-400 text-red-100 rounded-lg text-sm">
                     {errorMessage}
                   </div>
                 )}
                 <div className="max-sm:space-y-4 md:flex justify-center items-center gap-6">
-                  <div className="w-full"> 
+                  <div className="w-full">
                     <label
                       htmlFor="fullName"
                       className="block text-[#151f28] text-sm font-medium mb-2"
@@ -339,7 +293,9 @@ export default function BulkLand({ title , buttonName, pageName }) {
                         : "bg-[#b69b5e] hover:bg-[#d3b36b] hover:shadow-lg active:scale-95"
                     }`}
                   >
-                     {isLoading ? "Submitting..." : buttonName || "Get A Call Back"}
+                    {isLoading
+                      ? "Submitting..."
+                      : buttonName || "Get A Call Back"}
                   </button>
                 </div>
               </form>

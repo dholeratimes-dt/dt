@@ -1,9 +1,9 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState,useCallback, useRef } from "react";
 import { FaUser, FaPhoneAlt } from "react-icons/fa";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { useRouter, usePathname } from "next/navigation"
+import { useRouter, usePathname } from "next/navigation";
 
 export default function BrochureDownload({
   onClose,
@@ -14,7 +14,7 @@ export default function BrochureDownload({
   thankYouMessage = "Your request has been submitted successfully.",
   source = "Dholera Times",
   link,
-  ids
+  ids,
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({ fullName: "", phone: "" });
@@ -36,77 +36,39 @@ export default function BrochureDownload({
   const downloadPDF = () => {
     try {
       // Create a temporary anchor element
-      const link = document.createElement('a');
+      const link = document.createElement("a");
       link.href = pdfUrl;
-      link.download = 'brochure.pdf'; // You can customize the filename
-      link.target = '_blank';
-      
+      link.download = "brochure.pdf"; // You can customize the filename
+      link.target = "_blank";
+
       // Append to body, click, and remove
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
     } catch (error) {
-      console.error('Error downloading PDF:', error);
+      console.error("Error downloading PDF:", error);
       // Fallback: open in new tab
-      window.open(pdfUrl, '_blank');
+      window.open(pdfUrl, "_blank");
     }
   };
 
   // Handle close function
   const handleClose = () => {
-    if (onClose && typeof onClose === 'function') {
+    if (onClose && typeof onClose === "function") {
       onClose();
     }
   };
 
-  useEffect(() => {
-    // Load reCAPTCHA script
-    const loadRecaptcha = () => {
-      if (typeof window !== "undefined" && !window.grecaptcha) {
-        try {
-          const script = document.createElement("script");
-          script.src = "https://www.google.com/recaptcha/api.js";
-          script.async = true;
-          script.defer = true;
-          script.onload = () => setRecaptchaLoaded(true);
-          script.onerror = () => {
-            console.error("Failed to load reCAPTCHA script");
-            setRecaptchaLoaded(true); // Fallback
-          };
-          document.head.appendChild(script);
-        } catch (err) {
-          console.error("reCAPTCHA script loading error:", err);
-          setRecaptchaLoaded(true); // Fallback
-        }
-      } else if (window.grecaptcha) {
-        setRecaptchaLoaded(true);
-      }
-    };
+  const loadRecaptcha = useCallback(() => {
+    if (recaptchaLoaded) return;
+    if (typeof window === "undefined") return;
 
-    loadRecaptcha();
-
-    if (typeof window !== "undefined") {
-      setSubmissionCount(
-        parseInt(localStorage.getItem("formSubmissionCount") || "0", 10)
-      );
-      setLastSubmissionTime(
-        parseInt(localStorage.getItem("lastSubmissionTime") || "0", 10)
-      );
-    }
-
-    // Handle Escape key press
-    const handleEscapeKey = (event) => {
-      if (event.key === 'Escape') {
-        handleClose();
-      }
-    };
-
-    document.addEventListener('keydown', handleEscapeKey);
-
-    return () => {
-      document.removeEventListener('keydown', handleEscapeKey);
-    };
-  }, []);
+    const script = document.createElement("script");
+    script.src = "https://www.google.com/recaptcha/api.js";
+    script.async = true;
+    script.onload = () => setRecaptchaLoaded(true);
+    document.head.appendChild(script);
+  }, [recaptchaLoaded]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -134,7 +96,7 @@ export default function BrochureDownload({
       localStorage.setItem("lastSubmissionTime", now.toString());
     } else if (submissionCount >= 3) {
       setErrorMessage(
-        "You have reached the maximum submission limit. Try again after 24 hours."
+        "You have reached the maximum submission limit. Try again after 24 hours.",
       );
       return false;
     }
@@ -142,76 +104,76 @@ export default function BrochureDownload({
     return true;
   };
 
-const onRecaptchaSuccess = async (token) => {
-  try {
-    const now = Date.now();
+  const onRecaptchaSuccess = async (token) => {
+    try {
+      const now = Date.now();
 
-    const response = await fetch(
-      "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
-        },
-        body: JSON.stringify({
-          fields: {
-            name: formData.fullName,
-            phone: formData.phone,
-            source: source,
+      const response = await fetch(
+        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
           },
-          source: "Dholera Times",
-          tags: ["Dholera Investment", "Website Lead", "Dholera Times"],
-          recaptchaToken: token,
-        }),
+          body: JSON.stringify({
+            fields: {
+              name: formData.fullName,
+              phone: formData.phone,
+              source: source,
+            },
+            source: "Dholera Times",
+            tags: ["Dholera Investment", "Website Lead", "Dholera Times"],
+            recaptchaToken: token,
+          }),
+        },
+      );
+
+      if (response.ok) {
+        setFormData({ fullName: "", phone: "" });
+        setShowPopup(true);
+        setSubmissionCount((prev) => {
+          const newCount = prev + 1;
+          localStorage.setItem("formSubmissionCount", newCount.toString());
+          localStorage.setItem("lastSubmissionTime", now.toString());
+          return newCount;
+        });
+        /* Google Tag */
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: "lead_form",
+        });
+
+        // Download PDF immediately after successful submission
+        downloadPDF();
+
+        // Show thank you popup for 2 seconds
+        setShowThankYou(true);
+        setTimeout(() => {
+          setShowThankYou(false);
+          handleClose();
+
+          // Get current pathname for return URL
+          const currentPath = pathname || window.location.pathname;
+
+          // Push to thank-you route with return URL
+          router.push(`/thankyou`);
+        }, 2000);
+      } else {
+        throw new Error("Error submitting form");
       }
-    );
-
-    if (response.ok) {
-      setFormData({ fullName: "", phone: "" });
-      setShowPopup(true);
-      setSubmissionCount((prev) => {
-        const newCount = prev + 1;
-        localStorage.setItem("formSubmissionCount", newCount.toString());
-        localStorage.setItem("lastSubmissionTime", now.toString());
-        return newCount;
-      });
-      /* Google Tag */
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({
-            event: "lead_form",
-          });
-
-      // Download PDF immediately after successful submission
-      downloadPDF();
-
-      // Show thank you popup for 2 seconds
-      setShowThankYou(true);
-      setTimeout(() => {
-        setShowThankYou(false);
-        handleClose();
-
-        // Get current pathname for return URL
-        const currentPath = pathname || window.location.pathname;
-        
-        // Push to thank-you route with return URL
-        router.push(`/thankyou`);
-      }, 2000);
-    } else {
-      throw new Error("Error submitting form");
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setErrorMessage(
+        error.message || "Error submitting form. Please try again.",
+      );
+    } finally {
+      setIsLoading(false);
+      if (window.grecaptcha && recaptchaRef.current) {
+        window.grecaptcha.reset(recaptchaRef.current);
+      }
     }
-  } catch (error) {
-    console.error("Form submission error:", error);
-    setErrorMessage(
-      error.message || "Error submitting form. Please try again."
-    );
-  } finally {
-    setIsLoading(false);
-    if (window.grecaptcha && recaptchaRef.current) {
-      window.grecaptcha.reset(recaptchaRef.current);
-    }
-  }
-};
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -379,8 +341,9 @@ const onRecaptchaSuccess = async (token) => {
               transition={{ delay: 0.3 }}
               className="text-center mb-6 pt-4"
             >
-              <h2 className="text-xl md:text-2xl font-bold text-white mb-2">{title}</h2>
-             
+              <h2 className="text-xl md:text-2xl font-bold text-white mb-2">
+                {title}
+              </h2>
             </motion.div>
 
             {showPopup ? (
@@ -419,7 +382,12 @@ const onRecaptchaSuccess = async (token) => {
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form
+                onSubmit={handleSubmit}
+                onFocus={loadRecaptcha}
+                onPointerEnter={loadRecaptcha}
+                className="space-y-5"
+              >
                 {errorMessage && (
                   <div className="p-3 bg-red-500 bg-opacity-20 border border-red-400 text-red-100 rounded-lg text-sm">
                     {errorMessage}

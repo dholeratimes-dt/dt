@@ -51,35 +51,16 @@ export default function PopupScroll({ title }) {
   }, []);
 
   // Load reCAPTCHA
-  useEffect(() => {
-    const loadRecaptcha = () => {
-      if (typeof window !== "undefined" && !window.grecaptcha && siteKey) {
-        const script = document.createElement("script");
-        script.src = "https://www.google.com/recaptcha/api.js";
-        script.async = true;
-        script.defer = true;
-        script.onload = () => setRecaptchaLoaded(true);
-        script.onerror = () => setRecaptchaLoaded(true);
-        document.head.appendChild(script);
-      } else if (window.grecaptcha || !siteKey) {
-        setRecaptchaLoaded(true);
-      }
-    };
+  const loadRecaptcha = useCallback(() => {
+    if (recaptchaLoaded) return;
+    if (typeof window === "undefined") return;
 
-    loadRecaptcha();
-
-    // Escape key handler
-    const handleEscapeKey = (event) => {
-      if (event.key === "Escape" && showFormPopup) {
-        handlePopupClose();
-      }
-    };
-    document.addEventListener("keydown", handleEscapeKey);
-
-    return () => {
-      document.removeEventListener("keydown", handleEscapeKey);
-    };
-  }, [showFormPopup, siteKey]);
+    const script = document.createElement("script");
+    script.src = "https://www.google.com/recaptcha/api.js";
+    script.async = true;
+    script.onload = () => setRecaptchaLoaded(true);
+    document.head.appendChild(script);
+  }, [recaptchaLoaded]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -126,7 +107,7 @@ export default function PopupScroll({ title }) {
             tags: ["Dholera Investment", "Popup Lead", "Dholera Times"],
             recaptchaToken: token,
           }),
-        }
+        },
       );
 
       if (response.ok) {
@@ -167,7 +148,7 @@ export default function PopupScroll({ title }) {
 
     if (!recaptchaLoaded || !window.grecaptcha) {
       setErrorMessage(
-        "Security verification not loaded. Please refresh the page."
+        "Security verification not loaded. Please refresh the page.",
       );
       setIsLoading(false);
       return;
@@ -262,7 +243,11 @@ export default function PopupScroll({ title }) {
                 </div>
 
                 {/* Section 3: Form Fields */}
-                <form onSubmit={handleSubmit}>
+                <form
+                  onSubmit={handleSubmit}
+                  onFocus={loadRecaptcha}
+                  onPointerEnter={loadRecaptcha}
+                >
                   {errorMessage && (
                     <div className="p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg text-sm mb-4">
                       {errorMessage}

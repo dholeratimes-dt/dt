@@ -17,16 +17,16 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
   const recaptchaRef = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
- const loadRecaptcha = useCallback(() => {
-  if (recaptchaLoaded) return;         
-  if (typeof window === "undefined") return;
+  const loadRecaptcha = useCallback(() => {
+    if (recaptchaLoaded) return;
+    if (typeof window === "undefined") return;
 
-  const script = document.createElement("script");
-  script.src = "https://www.google.com/recaptcha/api.js";
-  script.async = true;
-  script.onload = () => setRecaptchaLoaded(true);
-  document.head.appendChild(script);
-}, [recaptchaLoaded]);
+    const script = document.createElement("script");
+    script.src = "https://www.google.com/recaptcha/api.js";
+    script.async = true;
+    script.onload = () => setRecaptchaLoaded(true);
+    document.head.appendChild(script);
+  }, [recaptchaLoaded]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

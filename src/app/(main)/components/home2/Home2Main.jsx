@@ -12,46 +12,25 @@ import BulkLand from "../BulkLandForm";
 export default function Home2Main() {
   return (
     <>
-      <div>
-        <HOME2 />
-        {/* <Primary/> */}
-      </div>
-      <div>
-        <Dholera />
-      </div>
-      <div>
-        <AboutDT />
-      </div>
+      <HOME2 />
 
-      <div>
-        <LatestUpdates />
-      </div>
+      <Dholera />
 
-      <div>
-        <WhyDT />
-      </div>
-      <div>
-        <BulkLand
-          title="Invest in Registry-Ready Plots in Dholera Starting from ₹8 Lakh"
-          buttonName="Get A Call Back"
-          pageName="Home"
-        />
-      </div>
+      <AboutDT />
 
-      {/* <div>
-        <InvestmentTimeline />
-      </div> */}
+      <LatestUpdates />
 
-     {/*  <div>
-        <MegaIndustries />
-      </div> */}
+      <WhyDT />
 
-      <div>
-        <FAQS />
-      </div>
-      <div>
-        <TestimonialPagination />
-      </div>
+      <BulkLand
+        title="Invest in Registry-Ready Plots in Dholera Starting from ₹8 Lakh"
+        buttonName="Get A Call Back"
+        pageName="Home"
+      />
+
+      <FAQS />
+
+      <TestimonialPagination />
 
       <PopupForm />
     </>

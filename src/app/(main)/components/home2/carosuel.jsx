@@ -122,9 +122,10 @@ export default function HOME2() {
                     src={slide.desktop}
                     alt={slide.alt}
                     fill
-                    priority={isFirst} // ✅ Next.js 15: handles preload + eager internally
+                    loading={isFirst ? "eager" : "lazy"}
+                    fetchPriority={isFirst ? "high" : "auto"}
                     sizes="100vw"
-                    className="object-cover"
+                    className=""
                   />
                   <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-black/10 to-black/60" />
                 </div>
@@ -134,7 +135,8 @@ export default function HOME2() {
                   <Image
                     src={slide.mobile}
                     alt={slide.alt}
-                    priority={isFirst} // ✅ same
+                    loading={isFirst ? "eager" : "lazy"}
+                    fetchPriority={isFirst ? "high" : "auto"}
                     sizes="100vw"
                     className="w-full h-auto"
                   />

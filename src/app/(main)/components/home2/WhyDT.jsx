@@ -82,121 +82,7 @@ export default function WhyDT() {
 
   return (
     <>
-      <style jsx global>
-        {`
-          /* Fade in animation */
-          .fade-in-up {
-            opacity: 0;
-            transform: translateY(30px);
-            transition:
-              opacity 0.6s ease,
-              transform 0.6s ease;
-          }
-
-          .fade-in-up.animate-visible {
-            opacity: 1;
-            transform: translateY(0);
-          }
-
-          /* Staggered animation for feature items */
-          .feature-item,
-          .amenity-item {
-            opacity: 0;
-            transform: translateX(-30px);
-            transition:
-              opacity 0.5s ease,
-              transform 0.5s ease;
-          }
-
-          .feature-item.animate-visible,
-          .amenity-item.animate-visible {
-            opacity: 1;
-            transform: translateX(0);
-          }
-
-          .feature-item:nth-child(1),
-          .amenity-item:nth-child(1) {
-            transition-delay: 0.1s;
-          }
-          .feature-item:nth-child(2),
-          .amenity-item:nth-child(2) {
-            transition-delay: 0.2s;
-          }
-          .feature-item:nth-child(3),
-          .amenity-item:nth-child(3) {
-            transition-delay: 0.3s;
-          }
-          .feature-item:nth-child(4),
-          .amenity-item:nth-child(4) {
-            transition-delay: 0.4s;
-          }
-          .feature-item:nth-child(5) {
-            transition-delay: 0.5s;
-          }
-          .feature-item:nth-child(6) {
-            transition-delay: 0.6s;
-          }
-
-          /* Project image animation */
-          .project-image {
-            opacity: 0;
-            transform: translateX(50px);
-            transition:
-              opacity 0.8s ease,
-              transform 0.8s ease;
-          }
-
-          .project-image.animate-visible {
-            opacity: 1;
-            transform: translateX(0);
-          }
-
-          /* Calculator animation */
-          .investment-calculator {
-            opacity: 0;
-            transform: translateY(30px);
-            transition:
-              opacity 0.8s ease,
-              transform 0.8s ease;
-            transition-delay: 0.3s;
-          }
-
-          .investment-calculator.animate-visible {
-            opacity: 1;
-            transform: translateY(0);
-          }
-
-          /* Modal styles */
-          .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            padding: 1rem;
-          }
-
-          .modal-content {
-            background: white;
-            border-radius: 0.5rem;
-            width: 100%;
-            max-width: 500px;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-          }
-
-          /* Add spacing between sections */
-          .westwyn-container section {
-            margin-bottom: 5rem;
-          }
-        `}
-      </style>
+     
 
       <div id="westwyn-county" className="westwyn-container bg-gray-50 py-8">
         {/* Main Content Section */}
@@ -244,7 +130,7 @@ export default function WhyDT() {
           </div>
         </section>
 
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-4">
             {[
               {
