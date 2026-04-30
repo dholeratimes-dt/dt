@@ -11,6 +11,8 @@ import TrendingBlogItem from "./TrendingBlog";
 import Link from "next/link";
 import LeadFormSlug from "../dholera-updates/latest-updates/[slug]/LeadForm";
 import { FaPhone, FaWhatsapp } from "react-icons/fa";
+import BulkLand from "../components/BulkLandForm";
+import BlogSlider from "./BlogSlider";
 
 export default async function BlogsPage() {
   // Fetch data and handle potential errors
@@ -131,10 +133,16 @@ export default async function BlogsPage() {
         </div>
       </div>
 
+      <BulkLand
+        title="Invest in Registry-Ready Plots in Dholera Starting from ₹8 Lakh"
+        buttonName="Get A Call Back"
+        pageName="aboutSir"
+      />
+
       {/* Mega Projects Section */}
       <div className="bg-gray-50 py-14 px-4 flex flex-col max-sm:flex-col-reverse lg:flex-row gap-8">
         <div className="lg:w-1/4 sticky top-6">
-          <div className="bg-white p-6 pt-6 rounded-xl shadow-md border-l-4 border-[#d7b56d]">
+          <div className="bg-white p-6 translate-y-16 rounded-xl shadow-md border-l-4 border-[#d7b56d]">
             <h2 className="text-2xl font-semibold mb-6 text-gray-800">
               Latest News on Dholera SIR
             </h2>
@@ -391,51 +399,9 @@ export default async function BlogsPage() {
       <div className="bg-gray-50 px-4 py-12">
         <div className="flex flex-col max-sm:flex-col-reverse lg:flex-row gap-8">
           {/* Left Sidebar */}
-          <div className="lg:w-1/4 sticky top-6">
-            <div className="bg-white p-6 rounded-xl shadow-md border-l-4 border-[#d7b56d] mb-8">
-              <LeadFormSlug
-                title="Invest in Registry Ready Dholera Plots Starting from ₹8 Lakh"
-                buttonName="Get A Call Back"
-              />
-            </div>
-            <div className="bg-white p-6 rounded-xl shadow-md border-l-4 border-[#d7b56d]">
-              <h2 className="text-2xl font-semibold mb-6 text-gray-800">
-                Latest News on Dholera SIR
-              </h2>
-              {trendingBlogs.length > 0 ? (
-                <div className="space-y-6">
-                  {trendingBlogs.map((post) => (
-                    <TrendingBlogItem key={post._id} post={post} />
-                  ))}
-                </div>
-              ) : (
-                <p className="text-gray-500">
-                  No news available at the moment.
-                </p>
-              )}
-            </div>
-          </div>
 
           {/* Blog Grid */}
-          <div className="lg:w-3/4">
-            {safePosts.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {safePosts.map((post) => (
-                  <BlogCard key={post._id} post={post} />
-                ))}
-              </div>
-            ) : (
-              <div className="bg-white p-8 rounded-xl shadow-md text-center">
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                  No Blog Posts Available
-                </h3>
-                <p className="text-gray-600">
-                  Check back soon for information about Dholera SIR investment
-                  opportunities.
-                </p>
-              </div>
-            )}
-          </div>
+          <BlogSlider posts={safePosts} />
         </div>
       </div>
 
