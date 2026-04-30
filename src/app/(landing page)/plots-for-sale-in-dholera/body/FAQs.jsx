@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
+import Link from "next/link";
 
 
 const faqs = [
@@ -64,13 +65,13 @@ export default function FAQSection() {
               More Questions about Dholera Smart City?
             </p>
             <div className="pt-4">
-              <a
-                href="#"
+              <Link
+                href="tel:+919958993549"
                 className="px-2 py-3 bg-[#d3b36b] text-white rounded-md"
                 onClick={handleCallClick}
               >
                 Give Us A Missed Call
-              </a>
+              </Link>
             </div>
           </div>
 

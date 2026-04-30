@@ -1,11 +1,12 @@
 "use client";
 import React, { useState, useRef } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import logo from "@/assets/dtlogobg.png";
+import logo from "@/assets/DT-logo-transparent.png";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import GetinTouch from "./GetinTouch";
+import Link from "next/link";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -149,14 +150,14 @@ export default function Navbar() {
                       >
                         Book A Free Site Visit
                       </button>
-                      <a
+                      <Link
                         href="tel:+918130371647"
                         className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
                         id="call-now"
                       >
                         Call Now
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         href="https://wa.me/918130371647"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -164,7 +165,7 @@ export default function Navbar() {
                         className="block px-4 py-2 text-black hover:bg-gray-200 transition-colors"
                       >
                         WhatsApp Us
-                      </a>
+                      </Link>
                     </div>
                   </motion.div>
                 )}

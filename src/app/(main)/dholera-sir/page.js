@@ -84,8 +84,8 @@ export default async function BlogsPage() {
             quality={85}
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-black/60"></div>
-          <div className="absolute inset-0 flex items-center justify-center">
+          <div className="absolute inset-0 md:bg-black/60"></div>
+          <div className="absolute inset-0 md:flex md:items-center md:justify-center">
             <div className="text-center">
               <p className="text-2xl md:text-5xl font-bold text-white">
                 About Dholera SIR
@@ -132,8 +132,25 @@ export default async function BlogsPage() {
       </div>
 
       {/* Mega Projects Section */}
-      <div className="bg-gray-50 py-14 px-4">
-        <div className="max-w-7xl mx-auto">
+      <div className="bg-gray-50 py-14 px-4 flex flex-col max-sm:flex-col-reverse lg:flex-row gap-8">
+        <div className="lg:w-1/4 sticky top-6">
+          <div className="bg-white p-6 pt-6 rounded-xl shadow-md border-l-4 border-[#d7b56d]">
+            <h2 className="text-2xl font-semibold mb-6 text-gray-800">
+              Latest News on Dholera SIR
+            </h2>
+            {trendingBlogs.length > 0 ? (
+              <div className="space-y-6">
+                {trendingBlogs.map((post) => (
+                  <TrendingBlogItem key={post._id} post={post} />
+                ))}
+              </div>
+            ) : (
+              <p className="text-gray-500">No news available at the moment.</p>
+            )}
+          </div>
+        </div>
+
+        <div className="lg:w-3/4">
           <h2 className="text-2xl md:text-3xl text-center font-bold text-gray-900 mb-8">
             Mega Projects in Dholera
           </h2>
@@ -353,18 +370,18 @@ export default async function BlogsPage() {
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
-              <a
+              <Link
                 href="tel:+919958993549"
                 className="bg-[#d3b36b] text-white flex justify-center items-center gap-2 px-8 py-3 rounded-xl font-semibold hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
               >
                 <FaPhone className="rotate-90" /> Call Now
-              </a>
-              <a
+              </Link>
+              <Link
                 href="https://wa.me/919958993549?text=Hi"
                 className="border-2 border-[#151f28] text-[#d3b36b] flex justify-center items-center gap-2 px-8 py-3 rounded-xl font-semibold hover:bg-[#caac66] hover:text-white transition-all duration-300"
               >
                 <FaWhatsapp /> WhatsApp Us
-              </a>
+              </Link>
             </div>
           </div>
         </div>

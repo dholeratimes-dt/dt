@@ -28,7 +28,7 @@ export default function layout({ children }) {
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-58263M3B')`,
+})(window,document,'script','dataLayer','GTM-K58C5C62')`,
           }}
         />
 
@@ -69,7 +69,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <body>
         <noscript>
           <iframe
-            src={`https://www.googletagmanager.com/ns.html?id=GTM-58263M3B`}
+            src={`https://www.googletagmanager.com/ns.html?id=GTM-K58C5C62`}
             height="0"
             width="0"
             style={{ display: "none", visibility: "hidden" }}

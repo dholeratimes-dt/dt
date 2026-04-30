@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FaPhone, FaWhatsapp } from "react-icons/fa";
+import Link from "next/link";
 
 const testimonials = [
   {
@@ -182,18 +183,18 @@ const TestimonialPagination = () => {
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
-              <a
+              <Link
                 href="tel:+919958993549"
                 className="bg-[#d3b36b] text-white flex justify-center items-center gap-2 px-8 py-3 rounded-xl font-semibold hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
               >
                <FaPhone className="rotate-90"/> Call Now
-              </a>
-              <a
+              </Link>
+              <Link
                 href="https://wa.me/919958993549?text=Hi"
                 className="border-2 border-[#151f28] text-[#d3b36b] flex justify-center items-center gap-2 px-8 py-3 rounded-xl font-semibold hover:bg-[#caac66] hover:text-white transition-all duration-300"
               >
                <FaWhatsapp/> WhatsApp Us
-              </a>
+              </Link>
             </div>
           </div>
         </div>
