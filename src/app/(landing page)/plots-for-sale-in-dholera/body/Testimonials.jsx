@@ -2,10 +2,7 @@
 import React, { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { AnimatePresence } from "framer-motion";
-import BrochureDownload from "../BrochureDownload";
 import { FaPhone, FaWhatsapp } from "react-icons/fa";
-import Link from "next/link";
 
 const testimonials = [
   {
@@ -71,14 +68,6 @@ const TestimonialPagination = () => {
   );
 
   const [isBrochureFormOpen, setIsBrochureFormOpen] = useState(false);
-
-  const openBrochureForm = () => {
-    setIsBrochureFormOpen(true);
-  };
-
-  const closeBrochureForm = () => {
-    setIsBrochureFormOpen(false);
-  };
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -193,33 +182,21 @@ const TestimonialPagination = () => {
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link
+              <a
                 href="tel:+919958993549"
                 className="bg-[#d3b36b] text-white flex justify-center items-center gap-2 px-8 py-3 rounded-xl font-semibold hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
               >
                <FaPhone className="rotate-90"/> Call Now
-              </Link>
-              <Link
+              </a>
+              <a
                 href="https://wa.me/919958993549?text=Hi"
                 className="border-2 border-[#151f28] text-[#d3b36b] flex justify-center items-center gap-2 px-8 py-3 rounded-xl font-semibold hover:bg-[#caac66] hover:text-white transition-all duration-300"
               >
                <FaWhatsapp/> WhatsApp Us
-              </Link>
+              </a>
             </div>
           </div>
         </div>
-      </div>
-
-      <div>
-        {isBrochureFormOpen && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]">
-            <BrochureDownload
-              title="Explore Verified Residential Plots in Dholera Under ₹10 lakh"
-              buttonName="Get A Call Back"
-              onClose={() => setIsBrochureFormOpen(false)}
-            />
-          </div>
-        )}
       </div>
     </div>
   );
