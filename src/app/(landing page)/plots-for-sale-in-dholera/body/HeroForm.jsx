@@ -13,20 +13,29 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
+
   const recaptchaRef = useRef(null);
+  const recaptchaRendered = useRef(false); 
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
+ 
   const getLeadSource = () => {
     if (typeof window === "undefined") return "Dholera Times";
     const params = new URLSearchParams(window.location.search);
     if (params.has("twclid")) return "Dholera Times Twitter Ads";
     if (params.has("gad_source")) return "Dholera Times Google Ads";
-    return "Dholera Times ";
+    return "Dholera Times";
   };
 
+ 
   const loadRecaptcha = useCallback(() => {
     if (recaptchaLoaded) return;
     if (typeof window === "undefined") return;
+
+    if (document.querySelector('script[src*="recaptcha/api.js"]')) {
+      setRecaptchaLoaded(true);
+      return;
+    }
 
     const script = document.createElement("script");
     script.src = "https://www.google.com/recaptcha/api.js";
@@ -42,27 +51,23 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
   };
 
   const validateForm = () => {
-    if (!formData.fullName.trim() || !formData.phone.trim()) {
+    if (!formData.fullName.trim() || !formData.phone.trim() || !formData.city.trim()) {
       setErrorMessage("Please fill in all required fields");
       return false;
     }
 
-    // Email validation (optional field)
     if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       setErrorMessage("Please enter a valid email address");
       return false;
     }
 
-    // Phone validation
     if (!/^\d{10,15}$/.test(formData.phone.replace(/\D/g, ""))) {
       setErrorMessage("Please enter a valid phone number (10-15 digits)");
       return false;
     }
 
     if (parentIsDisabled) {
-      setErrorMessage(
-        "You have reached the maximum submission limit. Try again after 24 hours.",
-      );
+      setErrorMessage("You have reached the maximum submission limit. Try again after 24 hours.");
       return false;
     }
 
@@ -71,74 +76,55 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
 
   const onRecaptchaSuccess = async (token) => {
     try {
-      // Prepare notes from additional fields
       const notesArray = [];
       if (formData.city) notesArray.push(`City: ${formData.city}`);
       const notes = notesArray.join(" | ");
 
-      // Resolve source dynamically from URL params at submission time
       const source = getLeadSource();
 
-      const response = await fetch(
-        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
-          },
-          body: JSON.stringify({
-            fields: {
-              name: formData.fullName,
-              phone: formData.phone,
-              email: formData.email || "",
-              notes: notes,
-              source: source,
-            },
-            tags: ["Dholera Investment", "Website Lead", "Taboola Hero"],
-            recaptchaToken: token,
-          }),
+      const response = await fetch("https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead", { 
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
         },
-      );
+        body: JSON.stringify({
+          fields: {
+            name: formData.fullName,
+            phone: formData.phone,
+            email: formData.email || "",
+            notes: notes,
+            source: source,
+          },
+          tags: ["Dholera Investment", "Website Lead", "Taboola Hero"],
+          recaptchaToken: token,
+        }),
+      });
 
       if (response.ok) {
-        setFormData({
-          fullName: "",
-          phone: "",
-          email: "",
-          city: "",
-        });
+        setFormData({ fullName: "", phone: "", email: "", city: "" });
 
-        // Notify parent component of successful submission
         if (onSuccess) {
           onSuccess();
         }
 
         window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-          event: "lead_form",
-        });
+        window.dataLayer.push({ event: "lead_form" });
       } else {
         const errorText = await response.text();
         console.error("API Error:", response.status, errorText);
-        setErrorMessage(
-          `Submission failed (${response.status}). Please try again.`,
-        );
+        setErrorMessage(`Submission failed (${response.status}). Please try again.`);
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      setErrorMessage(
-        "Network error. Please check your connection and try again.",
-      );
+      setErrorMessage("Network error. Please check your connection and try again.");
     } finally {
       setIsLoading(false);
-      if (
-        typeof window !== "undefined" &&
-        window.grecaptcha &&
-        recaptchaRef.current
-      ) {
+
+      if (typeof window !== "undefined" && window.grecaptcha && recaptchaRef.current) {
         try {
           window.grecaptcha.reset();
+          recaptchaRendered.current = false;
         } catch (err) {
           console.error("Error resetting reCAPTCHA:", err);
         }
@@ -157,28 +143,25 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
     }
 
     if (!recaptchaLoaded || !window.grecaptcha) {
-      setErrorMessage(
-        "Security verification not loaded. Please refresh the page.",
-      );
+      setErrorMessage("Security verification not loaded. Please refresh the page.");
       setIsLoading(false);
       return;
     }
 
-    // Render reCAPTCHA if not already rendered
-    if (!recaptchaRef.current.innerHTML) {
+    if (!recaptchaRendered.current) {
       try {
         window.grecaptcha.render(recaptchaRef.current, {
           sitekey: siteKey,
           callback: onRecaptchaSuccess,
-          theme: "light", // Using light theme to match form background
+          theme: "light",
         });
+        recaptchaRendered.current = true;
       } catch (error) {
         console.error("Error rendering reCAPTCHA:", error);
         setErrorMessage("Error with verification. Please try again.");
         setIsLoading(false);
       }
     } else {
-      // Execute existing reCAPTCHA
       try {
         window.grecaptcha.execute();
       } catch (error) {
@@ -190,7 +173,8 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
   };
 
   return (
-    <div
+
+    <form
       onSubmit={handleSubmit}
       onFocus={loadRecaptcha}
       onPointerEnter={loadRecaptcha}
@@ -233,35 +217,20 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
         value={formData.email}
         onChange={handleChange}
       />
-      <div className="gap-[clamp(0.5rem,1vw,0.75rem)]">
-        <input
-          name="city"
-          placeholder="City*"
-          type="text"
-          className="w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] bg-white/5 border border-[#b98e31] focus:border-[#d3b36b] rounded-md px-3 md:px-[clamp(0.6rem,1vw,0.875rem)] text-black placeholder:text-black text-sm md:text-[clamp(0.75rem,1vw,0.875rem)] outline-none transition-colors"
-          value={formData.city}
-          onChange={handleChange}
-          required
-        />
-        {/* <select
-        name="investmentAmt"
-        className="w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] bg-white border border-[#b98e31] focus:border-[#d3b36b] rounded-md px-3 md:px-[clamp(0.6rem,1vw,0.875rem)] text-black text-sm md:text-[clamp(0.75rem,1vw,0.875rem)] outline-none transition-colors"
-        value={formData.investmentAmt}
+      <input
+        name="city"
+        placeholder="City*"
+        type="text"
+        className="w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] bg-white/5 border border-[#b98e31] focus:border-[#d3b36b] rounded-md px-3 md:px-[clamp(0.6rem,1vw,0.875rem)] text-black placeholder:text-black text-sm md:text-[clamp(0.75rem,1vw,0.875rem)] outline-none transition-colors"
+        value={formData.city}
         onChange={handleChange}
         required
-        >
-        <option value="" disabled>
-          Budget*
-        </option>
-        <option value="5-15">₹5 Lakh - ₹15 Lakh</option>
-        <option value="15-25">₹15 Lakh - ₹25 Lakh</option>
-        <option value="25+">₹25 Lakh +</option>
-      </select> */}
-      </div>
+      />
+
       <div ref={recaptchaRef} className="recaptcha-container"></div>
 
       <button
-        onClick={handleSubmit}
+        type="submit"
         disabled={isLoading || parentIsDisabled || !recaptchaLoaded}
         className={`w-full h-10 md:h-[clamp(2rem,3.2vw,2.6rem)] font-bold px-6 rounded-lg transition-all duration-300 text-xs md:text-[clamp(0.7rem,0.9vw,0.82rem)] uppercase tracking-widest ${
           isLoading || parentIsDisabled || !recaptchaLoaded
@@ -284,12 +253,12 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
                 r="10"
                 stroke="currentColor"
                 strokeWidth="4"
-              ></circle>
+              />
               <path
                 className="opacity-75"
                 fill="currentColor"
                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-              ></path>
+              />
             </svg>
             Submitting...
           </div>
@@ -297,12 +266,13 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
           "Get Price"
         )}
       </button>
+
       <div className="text-center mt-4">
         <p className="text-sm font-bold text-black">
           Fill Up the Form To Get Project Price
         </p>
       </div>
-    </div>
+    </form>
   );
 };
 
