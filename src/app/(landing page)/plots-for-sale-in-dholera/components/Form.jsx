@@ -14,7 +14,6 @@ export default function Form({ title }) {
   const [formData, setFormData] = useState({
     fullName: "",
     mobileNumber: "",
-    email: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -84,11 +83,6 @@ export default function Form({ title }) {
       return false;
     }
 
-    if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      setErrorMessage("Please enter a valid email address");
-      return false;
-    }
-
     if (!/^\d{10,15}$/.test(formData.mobileNumber.replace(/\D/g, ""))) {
       setErrorMessage("Please enter a valid mobile number (10-15 digits)");
       return false;
@@ -115,7 +109,7 @@ export default function Form({ title }) {
           body: JSON.stringify({
             fields: {
               name: formData.fullName,
-              phone: formData.phone,
+              mobileNumber: formData.mobileNumber,
               source: source,
             },
             tags: ["Dholera Investment", "Website Lead", "Taboola Hero"],
@@ -330,7 +324,7 @@ export default function Form({ title }) {
                         name="phone"
                         type="tel"
                         placeholder="Phone Number *"
-                        value={formData.phone}
+                        value={formData.mobileNumber}
                         onChange={handleChange}
                         required
                         className="w-full p-4 pl-12 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-gray-700 hover:border-yellow-400 transition-colors"

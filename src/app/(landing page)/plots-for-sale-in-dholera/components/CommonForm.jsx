@@ -7,7 +7,6 @@ export default function CommonForm({ title, button }) {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
-    email: "",
     phone: "",
   });
   const [showPopup, setShowPopup] = useState(false);
@@ -23,6 +22,7 @@ export default function CommonForm({ title, button }) {
     const params = new URLSearchParams(window.location.search);
     if (params.has("twclid")) return "Dholera Times Twitter Ads";
     if (params.has("gad_source")) return "Dholera Times Google Ads";
+    if (params.has("")) return "Dholera Times";
     return "Dholera Times ";
   };
 
@@ -46,12 +46,6 @@ export default function CommonForm({ title, button }) {
   const validateForm = () => {
     if (!formData.fullName.trim() || !formData.phone.trim()) {
       setErrorMessage("Please fill in all required fields");
-      return false;
-    }
-
-    // Email validation (optional field)
-    if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      setErrorMessage("Please enter a valid email address");
       return false;
     }
 
@@ -95,8 +89,6 @@ export default function CommonForm({ title, button }) {
             fields: {
               name: formData.fullName,
               phone: formData.phone,
-              email: formData.email || "",
-              notes: notes,
               source: source,
             },
             tags: ["Dholera Investment", "Website Lead", "Taboola Hero"],
@@ -109,8 +101,6 @@ export default function CommonForm({ title, button }) {
         setFormData({
           fullName: "",
           phone: "",
-          email: "",
-          city: "",
         });
 
         // Notify parent component of successful submission
