@@ -294,7 +294,7 @@ export default function BulkLand({ title, buttonName, pageName }) {
             ) : (
               <>
                 <div className="text-center mb-6">
-                  <h3 className="text-xl font-bold text-gray-800">{title}</h3>
+                  <h3 className="text-xl font-bold text-gray-800">Registry Ready Plots Under ₹10 Lakh in Dholera</h3>
                 </div>
 
                 <form

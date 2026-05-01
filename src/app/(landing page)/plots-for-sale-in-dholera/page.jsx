@@ -30,7 +30,7 @@ export default function page() {
         <Footer />
       </div>
       <PopupScroll />
-      <Form title="Registry Ready Plots Under ₹10 Lakh in Dholera" />
+      <Form title="Registry Ready Plots Starting From ₹10 Lakh in Dholera" />
     </>
   );
 }
