@@ -1,77 +1,100 @@
 "use client";
-import { useState, useEffect,useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaUser } from "react-icons/fa6";
-import logo from "@/assets/dt.webp";
-import Image from "next/image";
 
-export default function PopupScroll({ title }) {
-  // Popup states
+const MAX_SUBMISSIONS = 20;
+const SUBMISSION_RESET_MS = 24 * 60 * 60 * 1000;
+
+export default function BulkLand({ title, buttonName, pageName }) {
   const [showFormPopup, setShowFormPopup] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
     phone: "",
-
   });
+  const [submissionCount, setSubmissionCount] = useState(0);
+  const [isDisabled, setIsDisabled] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
 
   const recaptchaRef = useRef(null);
+  const recaptchaRendered = useRef(false);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
-  // Auto-popup after 5 seconds
+  // Read submission count from localStorage on mount
   useEffect(() => {
-    const sessionPopupShown = sessionStorage.getItem("popupShownThisSession");
+    if (typeof window === "undefined") return;
 
-    if (!sessionPopupShown) {
-      const handleScroll = () => {
-        const scrollTop =
-          window.pageYOffset || document.documentElement.scrollTop;
-        const documentHeight =
-          document.documentElement.scrollHeight -
-          document.documentElement.clientHeight;
-        const scrollPercentage = (scrollTop / documentHeight) * 100;
+    const savedCount = parseInt(
+      localStorage.getItem("formSubmissionCount") || "0",
+      10,
+    );
+    const lastSubmissionTime = parseInt(
+      localStorage.getItem("lastSubmissionTime") || "0",
+      10,
+    );
+    const now = Date.now();
 
-        // Trigger popup when user scrolls between 50-60%
-        if (scrollPercentage >= 50 && scrollPercentage <= 60) {
-          setShowFormPopup(true);
-          sessionStorage.setItem("popupShownThisSession", "true");
-          window.removeEventListener("scroll", handleScroll);
-        }
-      };
-
-      window.addEventListener("scroll", handleScroll);
-
-      return () => {
-        window.removeEventListener("scroll", handleScroll);
-      };
+    if (now - lastSubmissionTime > SUBMISSION_RESET_MS) {
+      localStorage.removeItem("formSubmissionCount");
+      localStorage.removeItem("lastSubmissionTime");
+    } else {
+      setSubmissionCount(savedCount);
+      if (savedCount >= MAX_SUBMISSIONS) setIsDisabled(true);
     }
   }, []);
 
-  // Load reCAPTCHA
+  // Auto-popup on 50-60% scroll
+  useEffect(() => {
+    const sessionPopupShown = sessionStorage.getItem("popupShownThisSession");
+    if (sessionPopupShown) return;
+
+    const handleScroll = () => {
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+      const documentHeight =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      const scrollPercentage = (scrollTop / documentHeight) * 100;
+
+      if (scrollPercentage >= 30 && scrollPercentage <= 40) {
+        setShowFormPopup(true);
+        sessionStorage.setItem("popupShownThisSession", "true");
+        window.removeEventListener("scroll", handleScroll);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const getLeadSource = () => {
     if (typeof window === "undefined") return "Dholera Times";
     const params = new URLSearchParams(window.location.search);
     if (params.has("twclid")) return "Dholera Times Twitter Ads";
     if (params.has("gad_source")) return "Dholera Times Google Ads";
-    if (params.has("")) return "Dholera Times";
-    return "Dholera Times ";
+    return "Dholera Times";
   };
 
   const loadRecaptcha = useCallback(() => {
     if (recaptchaLoaded) return;
     if (typeof window === "undefined") return;
 
+    if (document.querySelector('script[src*="recaptcha/api.js"]')) {
+      setRecaptchaLoaded(true);
+      return;
+    }
+
     const script = document.createElement("script");
     script.src = "https://www.google.com/recaptcha/api.js";
     script.async = true;
     script.onload = () => setRecaptchaLoaded(true);
     document.head.appendChild(script);
-  }, [showFormPopup, recaptchaLoaded]);
+  }, [recaptchaLoaded]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -80,18 +103,21 @@ export default function PopupScroll({ title }) {
   };
 
   const validateForm = () => {
-    if (!formData.fullName.trim() || !formData.mobileNumber.trim()) {
+    if (!formData.fullName.trim() || !formData.phone.trim()) {
       setErrorMessage("Please fill in all required fields");
       return false;
     }
 
-    if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      setErrorMessage("Please enter a valid email address");
+    if (!/^\d{10,15}$/.test(formData.phone.replace(/\D/g, ""))) {
+      setErrorMessage("Please enter a valid phone number (10-15 digits)");
       return false;
     }
 
-    if (!/^\d{10,15}$/.test(formData.mobileNumber.replace(/\D/g, ""))) {
-      setErrorMessage("Please enter a valid mobile number (10-15 digits)");
+    if (submissionCount >= MAX_SUBMISSIONS) {
+      setErrorMessage(
+        "You have reached the maximum submission limit. Try again after 24 hours.",
+      );
+      setIsDisabled(true);
       return false;
     }
 
@@ -100,9 +126,6 @@ export default function PopupScroll({ title }) {
 
   const onRecaptchaSuccess = async (token) => {
     try {
-      // Prepare notes from additional fields
-
-      // Resolve source dynamically from URL params at submission time
       const source = getLeadSource();
 
       const response = await fetch(
@@ -119,27 +142,29 @@ export default function PopupScroll({ title }) {
               phone: formData.phone,
               source: source,
             },
-            tags: ["Dholera Investment", "Website Lead", "Taboola Hero"],
+            source: "Dholera Times Website",
+            tags: ["Dholera Investment", "Website Lead", "Bulk Land"],
             recaptchaToken: token,
           }),
         },
       );
 
       if (response.ok) {
-        setFormData({
-          fullName: "",
-          phone: "",
-        });
+        setFormData({ fullName: "", phone: "" });
+        setShowThankYou(true);
 
-        // Notify parent component of successful submission
-        if (onSuccess) {
-          onSuccess();
+        const newCount = submissionCount + 1;
+        setSubmissionCount(newCount);
+
+        if (typeof window !== "undefined") {
+          localStorage.setItem("formSubmissionCount", newCount.toString());
+          localStorage.setItem("lastSubmissionTime", Date.now().toString());
         }
 
+        if (newCount >= MAX_SUBMISSIONS) setIsDisabled(true);
+
         window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-          event: "lead_form",
-        });
+        window.dataLayer.push({ event: "lead_form", page_name: pageName });
       } else {
         const errorText = await response.text();
         console.error("API Error:", response.status, errorText);
@@ -154,6 +179,7 @@ export default function PopupScroll({ title }) {
       );
     } finally {
       setIsLoading(false);
+
       if (
         typeof window !== "undefined" &&
         window.grecaptcha &&
@@ -161,6 +187,7 @@ export default function PopupScroll({ title }) {
       ) {
         try {
           window.grecaptcha.reset();
+          recaptchaRendered.current = false;
         } catch (err) {
           console.error("Error resetting reCAPTCHA:", err);
         }
@@ -186,13 +213,14 @@ export default function PopupScroll({ title }) {
       return;
     }
 
-    if (!recaptchaRef.current.innerHTML) {
+    if (!recaptchaRendered.current) {
       try {
         window.grecaptcha.render(recaptchaRef.current, {
           sitekey: siteKey,
           callback: onRecaptchaSuccess,
           theme: "light",
         });
+        recaptchaRendered.current = true;
       } catch (error) {
         console.error("Error rendering reCAPTCHA:", error);
         setErrorMessage("Error with verification. Please try again.");
@@ -203,14 +231,10 @@ export default function PopupScroll({ title }) {
     }
   };
 
-  const handlePopupClose = () => {
-    setShowFormPopup(false);
-  };
+  const handlePopupClose = () => setShowFormPopup(false);
 
   const handleBackdropClick = (e) => {
-    if (e.target === e.currentTarget) {
-      handlePopupClose();
-    }
+    if (e.target === e.currentTarget) handlePopupClose();
   };
 
   return (
@@ -230,6 +254,14 @@ export default function PopupScroll({ title }) {
             className="bg-white rounded-xl p-8 pt-12 max-w-md w-full shadow-2xl relative"
             onClick={(e) => e.stopPropagation()}
           >
+            {/* Close Button */}
+            <button
+              onClick={handlePopupClose}
+              className="absolute top-3 right-4 text-gray-400 hover:text-gray-600 text-3xl"
+            >
+              ×
+            </button>
+
             {showThankYou ? (
               <div className="text-center">
                 <motion.div
@@ -261,36 +293,10 @@ export default function PopupScroll({ title }) {
               </div>
             ) : (
               <>
-                {/* Section 1: Heading */}
-                <div className="text-center mb-6 space-y-4">
-                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2">
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ delay: 0.2 }}
-                      className="rounded-lg "
-                    >
-                      <Image
-                        src={logo}
-                        alt="Logo"
-                        width={60}
-                        height={60}
-                        className="rounded-lg"
-                      />
-                    </motion.div>
-                  </div>
-                  <button
-                    onClick={handlePopupClose}
-                    className="absolute -top-4 right-4 text-gray-400 hover:text-gray-600 text-3xl "
-                  >
-                    ×
-                  </button>
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">
-                    Registry Ready Plots in Dholera Starting from ₹8 Lakh
-                  </h3>
+                <div className="text-center mb-6">
+                  <h3 className="text-xl font-bold text-gray-800">{title}</h3>
                 </div>
 
-                {/* Section 3: Form Fields */}
                 <form
                   onSubmit={handleSubmit}
                   onFocus={loadRecaptcha}
@@ -306,11 +312,12 @@ export default function PopupScroll({ title }) {
                     <motion.div
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.4 }}
+                      transition={{ delay: 0.3 }}
                       className="relative"
                     >
                       <FaUser className="absolute left-4 top-1/2 transform -translate-y-1/2 text-yellow-400" />
                       <input
+                        type="text"
                         name="fullName"
                         placeholder="Full Name *"
                         value={formData.fullName}
@@ -323,13 +330,13 @@ export default function PopupScroll({ title }) {
                     <motion.div
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.5 }}
+                      transition={{ delay: 0.4 }}
                       className="relative"
                     >
                       <FaPhoneAlt className="absolute left-4 top-1/2 transform -translate-y-1/2 text-yellow-400" />
                       <input
-                        name="phone"
                         type="tel"
+                        name="phone"
                         placeholder="Phone Number *"
                         value={formData.phone}
                         onChange={handleChange}
@@ -343,12 +350,11 @@ export default function PopupScroll({ title }) {
                     <div ref={recaptchaRef}></div>
                   </div>
 
-                  {/* Section 4: Submit Button with Tagline */}
                   <button
                     type="submit"
-                    disabled={isLoading || !recaptchaLoaded}
+                    disabled={isLoading || isDisabled || !recaptchaLoaded}
                     className={`w-full font-bold py-3 px-6 rounded-lg transition-all duration-300 ${
-                      isLoading || !recaptchaLoaded
+                      isLoading || isDisabled || !recaptchaLoaded
                         ? "bg-gray-400 cursor-not-allowed text-gray-600"
                         : "bg-[#d3b36b] hover:bg-[#eab308] text-white transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
                     }`}
@@ -368,21 +374,20 @@ export default function PopupScroll({ title }) {
                             r="10"
                             stroke="currentColor"
                             strokeWidth="4"
-                          ></circle>
+                          />
                           <path
                             className="opacity-75"
                             fill="currentColor"
                             d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                          ></path>
+                          />
                         </svg>
                         Submitting...
                       </div>
                     ) : (
-                      "Get A Call Back"
+                      buttonName || "Get A Call Back"
                     )}
                   </button>
 
-                  {/* Section 5: Privacy Notice */}
                   <div className="text-center mt-4">
                     <p className="text-xs text-gray-500">
                       We respect your privacy. Your details are safe with us.
