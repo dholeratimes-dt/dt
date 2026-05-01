@@ -231,13 +231,6 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source:
-          "/dholera-updates/latest-updates/india-s-first-semiconductor-fab-construction-begins-in-dholera-gujarat",
-        destination:
-          "/dholera-updates/blogs/india-s-first-semiconductor-fab-construction-begins-in-dholera-gujarat",
-        permanent: true,
-      },
-      {
         source: "/dholera-sir/rohm-tata-semiconductor-partnership-in-dholera",
         destination:
           "/dholera-updates/latest-updates/rohm-tata-semiconductor-partnership-in-dholera",
