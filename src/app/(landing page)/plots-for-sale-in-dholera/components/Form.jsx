@@ -122,7 +122,7 @@ export default function Form({ title }) {
       if (response.ok) {
         setFormData({
           fullName: "",
-          phone: "",
+          mobileNumber: "",
         });
 
         // Notify parent component of successful submission
@@ -322,7 +322,7 @@ export default function Form({ title }) {
                     >
                       <FaPhoneAlt className="absolute left-4 top-1/2 transform -translate-y-1/2 text-yellow-400" />
                       <input
-                        name="phone"
+                        name="mobileNumber"
                         type="tel"
                         placeholder="Phone Number *"
                         value={formData.mobileNumber}
