@@ -13,7 +13,7 @@ export default function PopupScroll({ title }) {
   const [showThankYou, setShowThankYou] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
-    mobileNumber: "",
+    phone: "",
 
   });
   const [errorMessage, setErrorMessage] = useState("");
