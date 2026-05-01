@@ -57,6 +57,7 @@ export default function Form({ title }) {
     const params = new URLSearchParams(window.location.search);
     if (params.has("twclid")) return "Dholera Times Twitter Ads";
     if (params.has("gad_source")) return "Dholera Times Google Ads";
+    if (params.has("")) return "Dholera Times";
     return "Dholera Times ";
   };
 
