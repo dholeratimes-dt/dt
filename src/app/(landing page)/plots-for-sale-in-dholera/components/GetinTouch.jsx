@@ -129,7 +129,7 @@ export default function GetinTouch({
 
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
-          event: "lead_form",
+          event: "lead_form_landing_page_dt",
         });
       } else {
         const errorText = await response.text();

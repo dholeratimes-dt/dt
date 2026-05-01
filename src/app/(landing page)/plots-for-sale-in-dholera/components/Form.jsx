@@ -164,7 +164,7 @@ export default function BulkLand({ title, buttonName, pageName }) {
         if (newCount >= MAX_SUBMISSIONS) setIsDisabled(true);
 
         window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({ event: "lead_form", page_name: pageName });
+        window.dataLayer.push({ event: "lead_form_landing_page_dt"});
       } else {
         const errorText = await response.text();
         console.error("API Error:", response.status, errorText);

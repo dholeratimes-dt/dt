@@ -109,7 +109,7 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
         }
 
         window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({ event: "lead_form" });
+        window.dataLayer.push({ event: "lead_form_landing_page_dt" });
       } else {
         const errorText = await response.text();
         console.error("API Error:", response.status, errorText);
