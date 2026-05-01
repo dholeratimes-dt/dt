@@ -49,7 +49,7 @@ export default function BlogSlider({ posts }) {
   );
 
   return (
-    <div className="w-full">
+    <div className="max-w-7xl mx-auto">
       {/* ── Viewport ── */}
       <div className="overflow-hidden w-full">
         <div
