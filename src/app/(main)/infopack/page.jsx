@@ -9,7 +9,7 @@ import {
   Home,
 } from "lucide-react";
 import bg from "@/assets/pexels.jpg";
-import estate1 from "@/assets/residential/estate-hero.webp";
+import estate1 from "@/assets/residential/westwyn-estates/westwyn-estates-dholera-times-desktop.webp";
 import county1 from "@/assets/residential/westwyn-county-banner.webp";
 import Image from "next/image";
 import Link from "next/link";
