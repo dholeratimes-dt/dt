@@ -1,7 +1,6 @@
 "use client";
-import { AnimatePresence } from "framer-motion";
 import React, { useState, useEffect } from "react";
-import westwyn from "@/assets/residential/westwyn-estate-dholera-plots-under-10-lakh.webp";
+import westwyn from "@/assets/residential/sold-out/westwyn-county-dholera-times-desktop.webp";
 
 
 import {
@@ -188,7 +187,7 @@ const WestWynAboutSection = () => {
               <Image
                 src={westwyn}
                 alt="westwyn"
-                className="rounded-xl w-full"
+                className="h-full w-full rounded-xl object-cover"
               />
             </div>
           </div>
@@ -220,9 +219,6 @@ const WestWynAboutSection = () => {
                   <div>
                     <p className="font-bold text-gray-900 text-xs md:text-sm leading-tight mb-1 md:mb-2">
                       {feature.text}
-                    </p>
-                    <p className="text-[10px] md:text-xs text-gray-600 leading-relaxed">
-                      {feature.highlight}
                     </p>
                   </div>
                 </div>

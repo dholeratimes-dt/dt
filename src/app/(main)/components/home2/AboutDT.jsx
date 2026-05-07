@@ -1,6 +1,6 @@
 import React from "react";
-import img from "@/assets/residential/we_cover.webp";
-import img2 from "@/assets/residential/residency-1.webp";
+import img from "@/assets/hero/westwyn-estates-dholera-homepage.webp";
+import img2 from "@/assets/hero/westwyn-residency-dholera-homepage.webp";
 import Image from "next/image";
 import Link from "next/link";
 import Magnet from "./Magnet";
@@ -64,7 +64,7 @@ export default function AboutDT() {
                 className="group border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300"
               >
                 {/* Image */}
-                <div className="relative aspect-[4/3] w-full overflow-hidden">
+                <div className="relative aspect-[5/4] w-full overflow-hidden">
                   <Image
                     src={project.image}
                     alt={project.name}

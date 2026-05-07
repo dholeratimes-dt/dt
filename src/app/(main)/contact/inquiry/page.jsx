@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
-import get from "@/assets/contact-us-hero.webp";
-import getM from "@/assets/contact-us-m-v.webp";
+import get from "@/assets/contact-dholera-times-desktop.webp";
+import getM from "@/assets/contact-dholera-times-mobile.webp";
 import {
   FaPhoneAlt,
   FaHeadset,

@@ -16,7 +16,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import icon2 from "@/assets/svg/plug-and-plug-connection.svg";
-import residentialMap from "@/assets/bulkLand/industrial-zone-map.webp";
+import residentialMap from "@/assets/bulkLand/industrial-zone-dholera-times.webp";
 import Table from "./table";
 import BulkLand from "../../components/BulkLandForm";
 import { getIndustrialLinks, getResidentialLinks } from "../InterLink";

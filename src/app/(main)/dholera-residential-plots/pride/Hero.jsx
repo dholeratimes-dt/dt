@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import wc from "@/assets/residential/pride.webp";
+import desktopImage from "@/assets/residential/sold-out/pride-plots-dholera-times-desktop.webp";
+import mobileImage from "@/assets/residential/sold-out/pride-plots-dholera-times-mobile.webp";
 import Link from "next/link";
 import { AnimatePresence } from "framer-motion";
 import BrochureDownload from "../../components/BrochureDownload";
@@ -74,20 +75,29 @@ export default function Hero() {
       />
       <div className="bg-gray-100">
         <div className="bg-[#151f28] text-white">
-          <div className="max-w-7xl mx-auto px-4 py-4">
+          <div className="py-4">
             {/* Image Container */}
-            <div className="relative min-h-[250px] md:min-h-[min(600px,80vh)] ">
+            <div className="relative aspect-[5/4] md:aspect-[3/1] w-full overflow-hidden">
               {/* Background Image */}
               <Image
-                src={wc}
-                alt="WestWyn Estates in Dholera Gujarat"
+                src={desktopImage}
+                alt="Pride residential plots in Dholera Gujarat"
                 fill
-                className="absolute object-cover aspect-[3/2]"
+                className="hidden object-cover md:block"
+                sizes="(min-width: 1280px) 1280px, 100vw"
+                priority
+              />
+              <Image
+                src={mobileImage}
+                alt="Pride residential plots in Dholera Gujarat"
+                fill
+                className="object-cover md:hidden"
+                sizes="100vw"
                 priority
               />
 
               {/* Bottom Overlay Box */}
-              <div className="hidden md:flex absolute bottom-0 left-0 right-0 bg-[#0d1620]/90 backdrop-blur-sm border-t border-white/10 px-6 py-4 items-center gap-5">
+              <div className="max-w-7xl mx-auto hidden md:flex absolute bottom-0 left-0 right-0 bg-[#0d1620]/90 backdrop-blur-sm border-t border-white/10 px-6 py-4 items-center gap-5">
                 {/* Status */}
                 <div className="flex items-center gap-2 shrink-0">
                   <span

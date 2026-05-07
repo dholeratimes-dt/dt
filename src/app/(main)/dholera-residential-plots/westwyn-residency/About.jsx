@@ -2,7 +2,7 @@
 import { AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
-import westwyn from "@/assets/residential/westwyn-estate-dholera-plots-under-10-lakh.webp";
+import westwyn from "@/assets/residential/residency/westwyn-residency-dholera-times-map-location.webp";
 
 import {
   FaRoad,

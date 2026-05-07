@@ -1,7 +1,7 @@
 "use client";
 import { AnimatePresence } from "framer-motion";
 import React, { useState, useEffect } from "react";
-import wc from "@/assets/residential/paradise1.webp";
+import wc from "@/assets/residential/sold-out/paradise-plots-dholera-times-desktop.webp";
 import Image from "next/image";
 
 import {
@@ -178,7 +178,7 @@ const WestWynAboutSection = () => {
               <Image
                 src={wc} // <-- replace with your paradise image variable
                 alt="Paradise Project"
-                className="rounded-xl w-full"
+                className="h-full w-full rounded-xl object-cover"
               />
             </div>
           </div>
@@ -210,9 +210,7 @@ const WestWynAboutSection = () => {
                     <p className="font-bold text-gray-900 text-xs md:text-sm leading-tight mb-1 md:mb-2">
                       {feature.text}
                     </p>
-                    <p className="text-[10px] md:text-xs text-gray-600 leading-relaxed">
-                      {feature.highlight}
-                    </p>
+                    
                   </div>
                 </div>
               ))}

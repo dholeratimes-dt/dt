@@ -19,7 +19,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { TbGardenCart } from "react-icons/tb";
-import residentialMap from "@/assets/bulkLand/high-access-corridor-map.webp";
+import residentialMap from "@/assets/bulkLand/high-access-corridor-zone-dholera-times.webp";
 import Table from "./table";
 import BulkLand from "../../components/BulkLandForm";
 import { getHACLinks, getResidentialLinks } from "../InterLink";

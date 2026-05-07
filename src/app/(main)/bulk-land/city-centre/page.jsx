@@ -15,7 +15,7 @@ import {
   Train,
   ArrowRight,
 } from "lucide-react";
-import residentialMap from "@/assets/bulkLand/city-centre-map.webp";
+import residentialMap from "@/assets/bulkLand/city-centre-zone-dholera-times.webp";
 import Table from "./table";
 import BulkLand from "../../components/BulkLandForm";
 import { getCityCenterLinks, getResidentialLinks } from "../InterLink";

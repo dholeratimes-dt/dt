@@ -15,7 +15,7 @@ import {
   Train,
   ArrowRight,
 } from "lucide-react";
-import residentialMap from "@/assets/bulkLand/recreation-sports-map.webp";
+import residentialMap from "@/assets/bulkLand/recreation-and-sports-zone-dholera-times.webp";
 import Table from "./table";
 import BulkLand from "../../components/BulkLandForm";
 import { getResidentialLinks, getSportLinks } from "../InterLink";

@@ -2,7 +2,7 @@
 import { AnimatePresence } from "framer-motion";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import wc from "@/assets/residential/maple-township.webp";
+import wc from "@/assets/residential/sold-out/pride-plots-dholera-times-desktop.webp";
 
 import {
   FaWhatsapp,
@@ -191,7 +191,7 @@ const WestWynAboutSection = () => {
               <Image
                 src={wc} // <-- replace with your paradise image variable
                 alt="Paradise Project"
-                className="rounded-xl w-full"
+                className="h-full w-full rounded-xl object-cover"
               />
             </div>
           </div>
@@ -223,9 +223,7 @@ const WestWynAboutSection = () => {
                     <p className="font-bold text-gray-900 text-xs md:text-sm leading-tight mb-1 md:mb-2">
                       {feature.title}
                     </p>
-                    <p className="text-[10px] md:text-xs text-gray-600 leading-relaxed">
-                      {feature.description}
-                    </p>
+                  
                   </div>
                 </div>
               ))}

@@ -16,7 +16,7 @@ import {
   HomeIcon,
   ArrowRight,
 } from "lucide-react";
-import residentialMap from "@/assets/bulkLand/residential-zone-map.webp";
+import residentialMap from "@/assets/bulkLand/residential-zone-dholera-times.webp";
 import Table from "./table";
 import BulkLand from "../../components/BulkLandForm";
 import { getResidentialLinks } from "../InterLink";

@@ -15,7 +15,7 @@ import {
   BrainCircuit,
   ArrowRight,
 } from "lucide-react";
-import residentialMap from "@/assets/bulkLand/knowledge-it-map.webp";
+import residentialMap from "@/assets/bulkLand/knowledge-and-it-zone-dholera-times.webp";
 import Table from "./table";
 import BulkLand from "../../components/BulkLandForm";
 import { TbBuildingSkyscraper } from "react-icons/tb";
