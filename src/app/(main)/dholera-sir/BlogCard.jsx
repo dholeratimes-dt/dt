@@ -10,35 +10,36 @@ export default function BlogCard({ post }) {
       : post.author;
 
   return (
-    <div className="bg-white rounded-lg shadow-2xl overflow-hidden flex flex-col h-full transition-transform duration-300 hover:scale-105">
+    <div className="flex h-full flex-col overflow-hidden rounded-lg bg-white shadow-2xl transition-transform duration-300 md:hover:scale-[1.02]">
       {/* Image */}
-      <Link href={`/dholera-sir/${post.slug.current}`} className="">
+      <Link href={`/dholera-sir/${post.slug.current}`} className="flex h-full flex-col">
         {/* Changed to aspect-[3/2] to match your image ratio */}
-        <div className="relative w-full aspect-[3/2]">
+        <div className="relative aspect-[3/2] w-full">
           {post.mainImage ? (
             <Image
               src={urlFor(post.mainImage).url()}
               alt={post.title}
               fill
+              sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
               className="object-cover"
             />
           ) : (
-            <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+            <div className="flex h-full w-full items-center justify-center bg-gray-200">
               <span className="text-gray-400">No image available</span>
             </div>
           )}
         </div>
 
         {/* Content */}
-        <div className="flex flex-col flex-grow">
-          <div className="w-full px-4 py-2 transition-all font-semibold border-white hover:bg-[#d6b873] bg-[#151f28] hover:text-[#151f28] text-lg md:text-base text-[#d6b873] mt-auto space-y-3">
+        <div className="flex flex-grow flex-col">
+          <div className="mt-auto flex h-full w-full flex-col space-y-3 bg-[#151f28] px-4 py-3 font-semibold text-[#d6b873] transition-all hover:bg-[#d6b873] hover:text-[#151f28]">
             {/* Title */}
-            <h3 className="text-xl font-semibold line-clamp-2 h-14">
+            <h3 className="min-h-[3.5rem] text-[clamp(1.125rem,2vw,1.25rem)] font-semibold leading-[1.4] line-clamp-2">
               {post.title}
             </h3>
 
             {/* Meta info */}
-            <div className="text-sm text-gray-400">
+            <div className="text-sm leading-[1.6] text-gray-400">
               <time
                 dateTime={new Date(post.publishedAt).toISOString()}
                 className="text-gray-500"
@@ -56,7 +57,7 @@ export default function BlogCard({ post }) {
             </div>
 
             {/* CTA */}
-            <div className="underline underline-offset-4 text-lg">
+            <div className="text-base underline underline-offset-4">
               Explore More
             </div>
           </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import BlogCard from "./BlogCard";
+import BlogCard from "./BlogCard_codex_temp";
 
 export default function BlogSlider({ posts }) {
   const [current, setCurrent] = useState(0);
@@ -31,8 +31,8 @@ export default function BlogSlider({ posts }) {
 
   if (!posts.length) {
     return (
-      <div className="bg-white p-8 rounded-xl shadow-md text-center">
-        <h3 className="text-xl font-semibold text-gray-800 mb-2">
+      <div className="rounded-xl bg-white p-[clamp(1.25rem,2.5vw,2rem)] text-center shadow-md">
+        <h3 className="mb-2 text-xl font-semibold text-gray-800">
           No Blog Posts Available
         </h3>
         <p className="text-gray-600">
@@ -49,9 +49,9 @@ export default function BlogSlider({ posts }) {
   );
 
   return (
-    <div className="max-w-7xl mx-auto">
-      {/* ── Viewport ── */}
-      <div className="overflow-hidden w-full">
+    <div className="mx-auto max-w-7xl">
+      {/* Viewport */}
+      <div className="w-full overflow-hidden">
         <div
           className="flex transition-transform duration-500 ease-in-out"
           style={{ transform: `translateX(-${current * 100}%)` }}
@@ -59,14 +59,14 @@ export default function BlogSlider({ posts }) {
           {pages.map((page, pageIdx) => (
             <div
               key={pageIdx}
-              className="flex gap-6 w-full flex-shrink-0"
-              style={{ minWidth: "100%" }}
+              className="grid w-full min-w-0 flex-shrink-0 gap-[clamp(1rem,2vw,1.5rem)]"
+              style={{
+                gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
+                minWidth: "100%",
+              }}
             >
               {page.map((post) => (
-                <div
-                  key={post._id}
-                  style={{ flex: `0 0 calc((100% - ${(cols - 1) * 24}px) / ${cols})` }}
-                >
+                <div key={post._id} className="min-w-0">
                   <BlogCard post={post} />
                 </div>
               ))}
@@ -74,26 +74,23 @@ export default function BlogSlider({ posts }) {
               {/* Fill empty slots on last page so layout doesn't break */}
               {page.length < cols &&
                 Array.from({ length: cols - page.length }).map((_, i) => (
-                  <div
-                    key={`empty-${i}`}
-                    style={{ flex: `0 0 calc((100% - ${(cols - 1) * 24}px) / ${cols})` }}
-                  />
+                  <div key={`empty-${i}`} className="hidden min-w-0 md:block" />
                 ))}
             </div>
           ))}
         </div>
       </div>
 
-      {/* ── Controls ── */}
-      <div className="flex items-center justify-between mt-6">
+      {/* Controls */}
+      <div className="mt-6 flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
         {/* Dots */}
-        <div className="flex items-center gap-2">
+        <div className="flex max-w-full flex-wrap items-center justify-center gap-2 sm:justify-start">
           {pages.map((_, i) => (
             <button
               key={i}
               onClick={() => setCurrent(i)}
               aria-label={`Go to slide ${i + 1}`}
-              className="rounded-full transition-all duration-300 focus:outline-none"
+              className="rounded-full transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d7b56d] focus-visible:ring-offset-2"
               style={{
                 height: 8,
                 width: i === current ? 28 : 8,
@@ -109,19 +106,19 @@ export default function BlogSlider({ posts }) {
             onClick={prev}
             disabled={current === 0}
             aria-label="Previous"
-            className="w-10 h-10 rounded-full border-2 flex items-center justify-center font-bold text-base transition-all duration-200 hover:scale-105 disabled:opacity-30 disabled:cursor-not-allowed"
+            className="flex h-10 w-10 items-center justify-center rounded-full border-2 text-base font-bold transition-all duration-200 hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-30"
             style={{ borderColor: "#d7b56d", color: "#d7b56d" }}
           >
-            ←
+            <span aria-hidden="true">&larr;</span>
           </button>
           <button
             onClick={next}
             disabled={current === totalSlides - 1}
             aria-label="Next"
-            className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-base text-white transition-all duration-200 hover:scale-105 disabled:opacity-30 disabled:cursor-not-allowed"
+            className="flex h-10 w-10 items-center justify-center rounded-full text-base font-bold text-white transition-all duration-200 hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-30"
             style={{ background: "#d7b56d" }}
           >
-            →
+            <span aria-hidden="true">&rarr;</span>
           </button>
         </div>
       </div>
