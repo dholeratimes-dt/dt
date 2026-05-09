@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import BlogCard from "./BlogCard_codex_temp";
+import BlogCard from "./BlogCard";
 
 export default function BlogSlider({ posts }) {
   const [current, setCurrent] = useState(0);
