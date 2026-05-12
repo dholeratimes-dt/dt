@@ -13,6 +13,5 @@ export default function robots() {
       },
     ],
     sitemap: "https://www.dholeratimes.com/sitemap.xml",
-    host: "https://www.dholeratimes.com",
   };
 }
