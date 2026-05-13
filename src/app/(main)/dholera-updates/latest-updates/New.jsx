@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import SidebarWithForm from "./Sidebar";
+import MobileNews from "./MobileNews";
 
 const formatDate = (dateString) => {
   if (!dateString) return "";
@@ -85,7 +86,11 @@ export default async function New() {
                   {/* Featured Blog Post */}
 
                   {/* Smaller Blog Posts Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="md:hidden">
+                    <MobileNews posts={safePosts} />
+                  </div>
+
+                  <div className="hidden md:grid md:grid-cols-2 gap-6">
                     {safePosts.slice(0).map((post, index) => (
                       <article
                         key={post._id}
