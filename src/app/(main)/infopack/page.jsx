@@ -20,6 +20,7 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 
+
 // Animation variants
 const fadeInUp = {
   hidden: { opacity: 0, y: 60 },
