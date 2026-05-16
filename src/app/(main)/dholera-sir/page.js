@@ -61,6 +61,7 @@ export default async function BlogsPage() {
     }
   }
 
+  
   return (
     <>
       <title>About Dholera SIR | Smart City Dholera Gujarat</title>
