@@ -128,7 +128,6 @@ export default function BrochureDownload({
           }),
         },
       );
-      
 
       if (response.ok) {
         setFormData({ fullName: "", phone: "" });
