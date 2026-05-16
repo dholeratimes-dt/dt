@@ -60,5 +60,5 @@ jobs:
           script: |
             cd /var/www/dt
             tar -xzf app.tar.gz
-            pm2 restart app || pm2 start .next/standalone/server.js --name app
+            pm2 restart dt || pm2 start .next/standalone/server.js --name dt
             pm2 save
