@@ -36,8 +36,14 @@ jobs:
       # THIS is the critical missing step
       - name: Prepare standalone output
         run: |
+          echo "Checking .next contents:"
+          ls .next/
+          echo "Checking standalone contents:"
+          ls .next/standalone/
           cp -r .next/static .next/standalone/.next/static
           cp -r public .next/standalone/public
+          echo "After copy:"
+          ls .next/standalone/.next/
 
       - name: Archive build output
         run: tar -czf app.tar.gz .next/standalone package.json
