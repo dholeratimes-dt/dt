@@ -46,7 +46,7 @@ jobs:
           ls .next/standalone/.next/
 
       - name: Archive build output
-        run: tar -czf app.tar.gz .next/standalone package.json
+        run: tar -czf app.tar.gz .next/standalone .next/server package.json
 
       - name: Upload to server
         uses: appleboy/scp-action@v0.1.7
@@ -66,5 +66,6 @@ jobs:
           script: |
             cd /var/www/dt
             tar -xzf app.tar.gz
+            cp -r .next/server .next/standalone/.next/server
             pm2 restart dt || pm2 start .next/standalone/server.js --name dt
             pm2 save
