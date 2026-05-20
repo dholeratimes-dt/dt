@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-   output: 'standalone',
-   poweredByHeader: false, 
+  output: "standalone",
+  poweredByHeader: false,
+
   images: {
     domains: ["cdn.sanity.io"], // Allow Sanity images
   },
@@ -212,10 +213,8 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source:
-          "/dholera-updates/latest-news",
-        destination:
-          "/dholera-updates/latest-updates",
+        source: "/dholera-updates/latest-news",
+        destination: "/dholera-updates/latest-updates",
         permanent: true,
       },
       {
@@ -258,13 +257,16 @@ const nextConfig = {
       },
       {
         source: "/dholera-residential-plots/dholera-connectivity",
-        destination: "/dholera-sir/connectivity-makes-dholera-the-next-big-investment-hub",
+        destination:
+          "/dholera-sir/connectivity-makes-dholera-the-next-big-investment-hub",
         permanent: true,
       },
 
       {
-        source: "/Dholera-SIR/delhi-mumbai-industrial-corridor-set-to-transform-india-with-usd-100-billion-investment",
-        destination: "/dholera-updates/latest-updates/delhi-mumbai-industrial-corridor-set-to-transform-india-with-usd-100-billion-investment",
+        source:
+          "/Dholera-SIR/delhi-mumbai-industrial-corridor-set-to-transform-india-with-usd-100-billion-investment",
+        destination:
+          "/dholera-updates/latest-updates/delhi-mumbai-industrial-corridor-set-to-transform-india-with-usd-100-billion-investment",
         permanent: true,
       },
     ];
