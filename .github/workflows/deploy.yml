@@ -32,6 +32,7 @@ jobs:
           NEXT_PUBLIC_TELECRM_API_KEY: ${{ secrets.NEXT_PUBLIC_TELECRM_API_KEY }}
           RECAPTCHA_PROJECT_ID: ${{ secrets.RECAPTCHA_PROJECT_ID }}
           RECAPTCHA_SECRET_KEY: ${{ secrets.RECAPTCHA_SECRET_KEY }}
+          NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
 
       # THIS is the critical missing step
       - name: Prepare standalone output
@@ -67,5 +68,6 @@ jobs:
             cd /var/www/dt
             tar -xzf app.tar.gz
             cp -r .next/server .next/standalone/.next/server
-            pm2 restart dt || pm2 start .next/standalone/server.js --name dt
+            pm2 delete dt || true
+            pm2 start /var/www/dt/.next/standalone/server.js --name dt
             pm2 save
