@@ -11,6 +11,7 @@ import Image from "next/image";
 
 import LeadFormSlug from "../../latest-updates/[slug]/LeadForm";
 import CommonForm from "@/app/(main)/components/FormSection";
+import LeadFormBlock from "@/app/(main)/components/blog/LeadFormBlock";
 
 const URLFormatter = (text) => {
   if (!text) return "";
@@ -172,6 +173,10 @@ export default async function BlogDetail({ params }) {
               )}
             </figure>
           );
+        },
+
+        leadFormBlock: ({ value }) => {
+          return <LeadFormBlock {...value} />;
         },
 
         table: ({ value }) => {

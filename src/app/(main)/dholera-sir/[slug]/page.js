@@ -6,6 +6,7 @@ import Image from "next/image";
 
 import SchemaMarkup from "../SchemaMarkup";
 import LeadFormSlug from "../../dholera-updates/latest-updates/[slug]/LeadForm";
+import LeadFormBlock from "../../components/blog/LeadFormBlock";
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
@@ -166,6 +167,10 @@ export default async function BlogDetail({ params }) {
               )}
             </figure>
           );
+        },
+
+        leadFormBlock: ({ value }) => {
+          return <LeadFormBlock {...value} />;
         },
 
         table: ({ value }) => {
