@@ -103,5 +103,5 @@ jobs:
             }
             EOF
 
-            sudo pm2 startOrReload /var/www/dt/ecosystem.config.js --update-env
-            sudo pm2 save
+            sudo -n /usr/local/bin/pm2 startOrReload /var/www/dt/ecosystem.config.js --update-env
+            sudo -n /usr/local/bin/pm2 save
