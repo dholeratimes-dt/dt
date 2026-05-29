@@ -16,6 +16,7 @@ let redirectCache = null
 let cacheTime = 0
 const CACHE_TTL = 60 * 1000
 
+
 async function fetchRedirects() {
   const now = Date.now()
 
