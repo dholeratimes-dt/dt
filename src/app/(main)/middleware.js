@@ -9,6 +9,7 @@ const client = createClient({
   useCdn: false,
 })
 
+
 const SITE_NAME = process.env.SITE_NAME || 'dholera-times'
 const SITE_URL = process.env.SITE_URL || 'https://www.dholeratimes.com'
 
