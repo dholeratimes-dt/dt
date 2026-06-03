@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { urlFor } from "@/sanity/lib/image";
+import { getSanityImageUrl } from "@/sanity/lib/image";
 
 export default function BlogCard({ post }) {
   // Handle author object properly
@@ -12,14 +12,19 @@ export default function BlogCard({ post }) {
   return (
     <div className="flex h-full flex-col overflow-hidden rounded-lg bg-white shadow-2xl transition-transform duration-300 md:hover:scale-[1.02]">
       {/* Image */}
-      <Link href={`/dholera-sir/${post.slug.current}`} className="flex h-full flex-col">
+      <Link
+        href={`/dholera-sir/${post.slug.current}`}
+        className="flex h-full flex-col"
+      >
         {/* Changed to aspect-[3/2] to match your image ratio */}
         <div className="relative aspect-[3/2] w-full">
           {post.mainImage ? (
             <Image
-              src={urlFor(post.mainImage).url()}
-              alt={post.title}
-              fill
+              src={getSanityImageUrl(post.mainImage, 1200, 800)}
+              alt={post.title || "Dholera Times"}
+              width={1200}
+              height={800}
+              unoptimized
               sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
               className="object-cover"
             />

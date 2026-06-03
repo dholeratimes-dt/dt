@@ -1,5 +1,5 @@
 import { PortableText } from "@portabletext/react";
-import { urlFor } from "@/sanity/lib/image";
+import { getSanityImageUrl } from "@/sanity/lib/image";
 import { getAboutBySlug, getProjectInfo, getProjects } from "@/sanity/lib/api";
 import Link from "next/link";
 import Image from "next/image";
@@ -72,10 +72,11 @@ const TrendingBlogItem = ({ post }) => {
         {post.mainImage && (
           <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
             <Image
-              src={urlFor(post.mainImage).width(80).height(80).url()}
-              alt={post.title}
-              width={80}
-              height={80}
+              src={getSanityImageUrl(post.mainImage, 1200, 800)}
+              alt={post.title || "Dholera Times"}
+              width={1200}
+              height={800}
+              unoptimized
               className="w-full h-full object-cover"
             />
           </div>
@@ -133,7 +134,7 @@ export default async function BlogDetail({ params }) {
           if (!value?.asset) return null;
 
           const imageUrl =
-            value.asset.url || urlFor(value).width(1200).height(800).url();
+            value.asset.url || getSanityImageUrl(value, 1200, 800);
 
           const imageNode = (
             <img
@@ -713,10 +714,11 @@ export default async function BlogDetail({ params }) {
               {post.mainImage && (
                 <div className="mb-10 overflow-hidden rounded-xl shadow-lg aspect-[3/2]">
                   <Image
-                    src={urlFor(post.mainImage).width(1200).height(800).url()}
-                    alt={post.title}
+                    src={getSanityImageUrl(post.mainImage, 1200, 800)}
+                    alt={post.title || "Dholera Times"}
                     width={1200}
                     height={800}
+                    unoptimized
                     className="w-full h-auto aspect-[3/2]"
                     priority
                   />

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { urlFor } from "@/sanity/lib/image";
+import { getSanityImageUrl } from "@/sanity/lib/image";
 
 export default function BlogCard({ post }) {
   // Handle author object properly
@@ -15,9 +15,11 @@ export default function BlogCard({ post }) {
       <div className="relative w-full h-64">
         {post.mainImage ? (
           <Image
-            src={urlFor(post.mainImage).url()}
-            alt={post.title}
-            fill
+            src={getSanityImageUrl(post.mainImage, 1200, 800)}
+            alt={post.title || "Dholera Times"}
+            width={1200}
+            height={800}
+            unoptimized
             className="object-cover h-full"
           />
         ) : (

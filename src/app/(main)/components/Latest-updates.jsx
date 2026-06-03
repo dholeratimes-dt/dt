@@ -1,7 +1,7 @@
 import { getblogs, getNews } from '@/sanity/lib/api';
 import Image from 'next/image';
 import Link from 'next/link';
-import { urlFor } from '@/sanity/lib/image';
+import { getSanityImageUrl } from '@/sanity/lib/image';
 
 function RelatedBlogCard({ item, type }) {
   const slug =
@@ -15,12 +15,7 @@ function RelatedBlogCard({ item, type }) {
         <div className='relative w-full h-36 md:h-48 aspect-[3/2]'>
           {item.mainImage ? (
             <Image
-              src={urlFor(item.mainImage)
-                .width(800)
-                .height(533)
-                .format('webp')
-                .quality(60)
-                .url()}
+              src={getSanityImageUrl(item.mainImage, 1200, 800)}
               alt={item.title || 'Dholera update'}
               fill
               sizes='(max-width: 768px) 75vw, 288px'
@@ -39,7 +34,6 @@ function RelatedBlogCard({ item, type }) {
             <h3 className='text-base font-semibold text-[#d6b873] line-clamp-2 mb-2 hover:text-white transition-colors duration-300'>
               {item.title}
             </h3>
-
             <div className='text-xs text-gray-400 mb-3'>
               <time className='block mb-1'>
                 {new Date(item.publishedAt || item._createdAt).toLocaleDateString(
@@ -67,13 +61,16 @@ function RelatedBlogCard({ item, type }) {
 export default async function LatestUpdates() {
   const [blogsData, updatesData] = await Promise.all([getblogs(), getNews()]);
 
-  const content = [...(blogsData || []), ...(updatesData || [])]
-    .sort(
-      (a, b) =>
-        new Date(b.publishedAt || b._createdAt) -
-        new Date(a.publishedAt || a._createdAt),
-    )
-    .slice(0, 4);
+  const content = [
+  ...(blogsData || []).map((item) => ({ ...item, _type: 'blog' })),
+  ...(updatesData || []).map((item) => ({ ...item, _type: 'news' })),
+]
+  .sort(
+    (a, b) =>
+      new Date(b.publishedAt || b._createdAt) -
+      new Date(a.publishedAt || a._createdAt),
+  )
+  .slice(0, 4);
 
   return (
     <section className='py-12 bg-white'>
@@ -87,7 +84,7 @@ export default async function LatestUpdates() {
             <RelatedBlogCard
               key={item._id || item.slug?.current || item.title}
               item={item}
-              type='blog'
+              type={item._type}
             />
           ))}
         </div>

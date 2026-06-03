@@ -1,5 +1,5 @@
 import { PortableText } from "@portabletext/react";
-import { urlFor, urlForImage } from "@/sanity/lib/image";
+import { getSanityImageUrl } from "@/sanity/lib/image";
 import {
   getblogs,
   getNews,
@@ -61,10 +61,11 @@ const TrendingBlogItem = ({ post }) => {
         {post.mainImage && (
           <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
             <Image
-              src={urlFor(post.mainImage).width(80).height(80).url()}
-              alt={post.title}
-              width={80}
-              height={80}
+              src={getSanityImageUrl(post.mainImage, 1200, 800)}
+              alt={post.title || "Dholera Times"}
+              width={1200}
+              height={800}
+              unoptimized
               className="w-full h-full object-cover"
             />
           </div>
@@ -94,6 +95,7 @@ export async function generateMetadata({ params }) {
       canonical: `https://www.dholeratimes.com/dholera-updates/blogs/${slug}`,
     },
     robots: "index, follow",
+    authors: [{ name: "Dholera Times" }],
   };
 }
 
@@ -139,7 +141,7 @@ export default async function BlogDetail({ params }) {
           if (!value?.asset) return null;
 
           const imageUrl =
-            value.asset.url || urlFor(value).width(1200).height(800).url();
+            value.asset.url || getSanityImageUrl(value, 1200, 800);
 
           const imageNode = (
             <img
@@ -701,7 +703,9 @@ export default async function BlogDetail({ params }) {
                         d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                       ></path>
                     </svg>
-                    <time className="text-gray-500" dateTime={isoDate}>{formattedDate}</time>
+                    <time className="text-gray-500" dateTime={isoDate}>
+                      {formattedDate}
+                    </time>
                   </div>
 
                   {post.readingTime && (
@@ -730,10 +734,11 @@ export default async function BlogDetail({ params }) {
               {post.mainImage && (
                 <div className="mb-10 overflow-hidden rounded-xl shadow-lg aspect-[3/2]">
                   <Image
-                    src={urlFor(post.mainImage).width(1200).height(800).url()}
-                    alt={post.title}
+                    src={getSanityImageUrl(post.mainImage, 1200, 800)}
+                    alt={post.title || "Dholera Times"}
                     width={1200}
                     height={800}
+                    unoptimized
                     className="w-full h-auto aspect-[3/2]"
                     priority
                   />
@@ -767,7 +772,7 @@ export default async function BlogDetail({ params }) {
                 )}
               </div>
             </article>
-            
+
             {/* Sidebar */}
             <aside className="lg:w-1/3">
               <div className="sticky space-y-4 top-24">
@@ -852,12 +857,15 @@ export default async function BlogDetail({ params }) {
                                 {blog.mainImage ? (
                                   <>
                                     <Image
-                                      src={urlFor(blog.mainImage)
-                                        .width(1200)
-                                        .height(675)
-                                        .url()}
+                                      src={getSanityImageUrl(
+                                        post.mainImage,
+                                        1200,
+                                        800,
+                                      )}
+                                      width={1200}
+                                      height={800}
+                                      unoptimized
                                       alt={blog.title}
-                                      fill
                                       className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -975,12 +983,15 @@ export default async function BlogDetail({ params }) {
                             {blog.mainImage ? (
                               <>
                                 <Image
-                                  src={urlFor(blog.mainImage)
-                                    .width(1200)
-                                    .height(675)
-                                    .url()}
+                                  src={getSanityImageUrl(
+                                    post.mainImage,
+                                    1200,
+                                    800,
+                                  )}
+                                  width={1200}
+                                  height={800}
+                                  unoptimized
                                   alt={blog.title}
-                                  fill
                                   className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

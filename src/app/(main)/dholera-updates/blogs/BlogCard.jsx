@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { urlFor } from "@/sanity/lib/image";
+import { getSanityImageUrl } from "@/sanity/lib/image";
 
 export default function BlogCard({ post }) {
   // Handle author object properly
@@ -12,17 +12,16 @@ export default function BlogCard({ post }) {
   return (
     <div className="bg-white rounded-lg shadow-2xl overflow-hidden flex flex-col h-full transition-transform duration-300 hover:scale-105">
       {/* Image */}
-      <Link
-        href={`/dholera-updates/blogs/${post.slug.current}`}
-        className=""
-      >
+      <Link href={`/dholera-updates/blogs/${post.slug.current}`} className="">
         {/* Changed to aspect-[3/2] to match your image ratio */}
         <div className="relative w-full aspect-[3/2]">
           {post.mainImage ? (
             <Image
-              src={urlFor(post.mainImage).url()}
-              alt={post.title}
-              fill
+              src={getSanityImageUrl(post.mainImage, 1200, 800)}
+              alt={post.title || "Dholera Times"}
+              width={1200}
+              height={800}
+              unoptimized
               className="object-cover"
             />
           ) : (
@@ -56,7 +55,9 @@ export default function BlogCard({ post }) {
             </div>
 
             {/* CTA */}
-            <div className="underline underline-offset-4 text-lg">Read More</div>
+            <div className="underline underline-offset-4 text-lg">
+              Read More
+            </div>
           </div>
         </div>
       </Link>
