@@ -863,11 +863,11 @@ export default async function BlogDetail({ params }) {
                                     <>
                                       <Image
                                         src={getSanityImageUrl(
-                                          post.mainImage,
+                                          blog.mainImage,
                                           1200,
                                           800,
                                         )}
-                                        alt={post.title || "Dholera Times"}
+                                        alt={blog.title || "Dholera Times"}
                                         width={1200}
                                         height={800}
                                         unoptimized
@@ -989,11 +989,11 @@ export default async function BlogDetail({ params }) {
                                 <>
                                   <Image
                                     src={getSanityImageUrl(
-                                      post.mainImage,
+                                      blog.mainImage,
                                       1200,
                                       800,
                                     )}
-                                    alt={post.title || "Dholera Times"}
+                                    alt={blog.title || "Dholera Times"}
                                     width={1200}
                                     height={800}
                                     unoptimized

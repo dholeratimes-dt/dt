@@ -858,7 +858,7 @@ export default async function BlogDetail({ params }) {
                                   <>
                                     <Image
                                       src={getSanityImageUrl(
-                                        post.mainImage,
+                                        blog.mainImage,
                                         1200,
                                         800,
                                       )}
@@ -984,7 +984,7 @@ export default async function BlogDetail({ params }) {
                               <>
                                 <Image
                                   src={getSanityImageUrl(
-                                    post.mainImage,
+                                    blog.mainImage,
                                     1200,
                                     800,
                                   )}
