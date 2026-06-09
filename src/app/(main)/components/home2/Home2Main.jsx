@@ -8,29 +8,44 @@ import TestimonialPagination from "./Testimonials";
 import FAQS from "./FAQs";
 import PopupForm from "./PopUpForm";
 import BulkLand from "../BulkLandForm";
+import ObservedSection from "./ObservedSection_codex_temp";
 
 export default function Home2Main() {
   return (
     <>
       <HOME2 />
 
-      <Dholera />
+      <ObservedSection animation="fade-up">
+        <Dholera />
+      </ObservedSection>
 
-      <AboutDT />
+      <ObservedSection animation="fade-right">
+        <AboutDT />
+      </ObservedSection>
 
-      <LatestUpdates />
+      <ObservedSection animation="fade-up" delay={80}>
+        <LatestUpdates />
+      </ObservedSection>
 
-      <WhyDT />
+      <ObservedSection animation="fade-left">
+        <WhyDT />
+      </ObservedSection>
 
-      <BulkLand
-        title="Invest in Registry-Ready Plots in Dholera Starting from ₹8 Lakh"
-        buttonName="Get A Call Back"
-        pageName="Home"
-      />
+      <ObservedSection animation="scale-soft">
+        <BulkLand
+          title="Invest in Registry-Ready Plots in Dholera Starting from ₹8 Lakh"
+          buttonName="Get A Call Back"
+          pageName="Home"
+        />
+      </ObservedSection>
 
-      <FAQS />
+      <ObservedSection animation="fade-up">
+        <FAQS />
+      </ObservedSection>
 
-      <TestimonialPagination />
+      <ObservedSection animation="fade-up" delay={80}>
+        <TestimonialPagination />
+      </ObservedSection>
 
       <PopupForm />
     </>
