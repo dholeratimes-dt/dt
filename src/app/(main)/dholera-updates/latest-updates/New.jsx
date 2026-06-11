@@ -65,6 +65,7 @@ export default async function New() {
         rel="canonical"
         href="https://www.dholeratimes.com/dholera-updates/latest-updates"
       />
+      <meta name="robots" content="index, follow" />
       <div className="min-h-screen relative overflow-hidden">
         <div className="relative z-10 max-w-7xl mx-auto px-4 pt-12 pb-16">
           <div className="flex flex-col lg:flex-row gap-8">

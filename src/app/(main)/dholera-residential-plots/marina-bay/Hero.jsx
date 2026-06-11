@@ -65,14 +65,11 @@ export default function Hero() {
         name="description"
         content="Marina Bay Dholera, featured in Dholera Times, offers premium smart city plots in Gujarat, providing exceptional connectivity and high investment value."
       />
-      <meta
-        name="keywords"
-        content="Marina Bay Dholera, Dholera plots, smart city Gujarat, Dholera Smart City, Dholera investment"
-      />
       <link
         rel="canonical"
         href="https://www.dholeratimes.com/dholera-residential-plots/marina-bay"
       />
+      <meta name="robots" content="index, follow" />
 
       <div className="bg-gray-100">
         <div className="bg-[#151f28] text-white">
@@ -187,7 +184,10 @@ export default function Hero() {
 
                   {/* Title & Description */}
                   <div>
-                    <Link href="/dholera-residential-plots/westwyn-estate" className="text-xl font-bold text-gray-900 mb-2 leading-tight">
+                    <Link
+                      href="/dholera-residential-plots/westwyn-estate"
+                      className="text-xl font-bold text-gray-900 mb-2 leading-tight"
+                    >
                       WestWyn Estates
                     </Link>
                   </div>

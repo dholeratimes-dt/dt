@@ -18,16 +18,13 @@ export default function Hero() {
       <title>WestWyn Residency Dholera | Premium Plots in Smart City</title>
       <meta
         name="description"
-        content="Discover WestWyn Residency Dholera plots exclusively on Dholera Times - premium smart city plots with high investment growth potential in Gujarat."
-      />
-      <meta
-        name="keywords"
-        content="WestWyn Residency Dholera, Dholera plots, Dholera Smart City, Dholera investment, investment in Dholera"
+        content="Dholera Times Your trusted source for Dholera Smart City news, updates, project information, and real estate insights. Stay informed about Dholera development."
       />
       <link
         rel="canonical"
         href="https://www.dholeratimes.com/dholera-residential-plots/westwyn-residency"
       />
+      <meta name="robots" content="index, follow" />
 
       <div className="bg-gray-100">
         <div className="bg-[#151f28] text-white">

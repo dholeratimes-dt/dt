@@ -648,7 +648,7 @@ export default function NRIInvestmentGuide() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
-      <meta name="robots" content="index, dofollow" />
+      <meta name="robots" content="index, follow" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

@@ -65,14 +65,12 @@ export default function Hero() {
         name="description"
         content="Dholera Times highlights Pride Dholera - signature residential plots located in Gujarat’s Smart City, perfect for long-term Dholera investment."
       />
-      <meta
-        name="keywords"
-        content="Dholera plots, smart city Gujarat, Dholera investment, Dholera Smart City"
-      />
       <link
         rel="canonical"
         href="https://www.dholeratimes.com/dholera-residential-plots/pride"
       />
+      <meta name="robots" content="index, follow" />
+
       <div className="bg-gray-100">
         <div className="bg-[#151f28] text-white">
           <div className="py-4">

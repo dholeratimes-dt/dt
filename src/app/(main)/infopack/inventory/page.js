@@ -101,7 +101,7 @@ export default async function InventoryPage() {
       backgroundPosition: "center",
       backgroundRepeat: "no-repeat",
     }}>
-      <meta name="robots" content="noindex, dofollow"/>
+      <meta name="robots" content="noindex, nofollow"/>
 <link rel="canonical" href="https://www.dholeratimes.com/infopack/inventory" />
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16 relative">

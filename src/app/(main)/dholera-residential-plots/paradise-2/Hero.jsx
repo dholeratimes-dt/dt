@@ -65,14 +65,11 @@ export default function Hero() {
         name="description"
         content="Dholera Times presents Paradise 2 - affordable plots near Dholera airport and expressway, perfect for long-term real estate investment growth."
       />
-      <meta
-        name="keywords"
-        content="Paradise 2 Dholera, Dholera plots, smart city Gujarat, Dholera investment, investment in Dholera"
-      />
       <link
         rel="canonical"
         href="https://www.dholeratimes.com/dholera-residential-plots/paradise-2"
       />
+      <meta name="robots" content="index, follow" />
 
       <div className="bg-gray-100">
         <div className="bg-[#151f28] text-white">

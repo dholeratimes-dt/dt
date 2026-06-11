@@ -216,7 +216,7 @@ export default function Projects() {
         rel="canonical"
         href="https://www.dholeratimes.com/dholera-residential-plots"
       />
-      <meta name="robots" content="index, dofollow" />
+      <meta name="robots" content="index, follow" />
 
       {/* Hero */}
       <div className="relative overflow-hidden h-[50vh] w-full">

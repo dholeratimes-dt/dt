@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function PrivacyPolicy() {
   return (
     <>
-      <meta name="robots" content="index, dofollow"/>
+      <meta name="robots" content="noindex, nofollow"/>
       <link rel="canonical" href="https://www.dholeratimes.com/policies/termsandconditions" />
 
       <div className="relative w-full h-[40vh]">

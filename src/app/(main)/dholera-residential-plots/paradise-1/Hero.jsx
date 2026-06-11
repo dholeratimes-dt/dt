@@ -65,14 +65,11 @@ export default function Hero() {
         name="description"
         content="Paradise Dholera offers affordable residential plots, featured in Dholera Times, ideal for homebuyers and savvy investors in Gujarat’s smart city."
       />
-      <meta
-        name="keywords"
-        content="Paradise Dholera, Dholera plots, smart city Dholera, smart city Gujarat, Dholera investment"
-      />
       <link
         rel="canonical"
         href="https://www.dholeratimes.com/dholera-residential-plots/paradise-1"
       />
+      <meta name="robots" content="index, follow" />
 
       <div className="bg-gray-100">
         <div className="bg-[#151f28] text-white">

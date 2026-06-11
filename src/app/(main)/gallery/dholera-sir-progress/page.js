@@ -132,7 +132,7 @@ export default function DholeraProgressPage() {
         rel="canonical"
         href="https://www.dholeratimes.com/gallery/dholera-sir-progress"
       />
-      <meta name="robots" content="index, dofollow" />
+      <meta name="robots" content="index, follow" />
 
       {/* Hero Section */}
       <div className="relative h-[50vh] overflow-hidden">

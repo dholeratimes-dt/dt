@@ -69,12 +69,8 @@ export default async function BlogsPage() {
         name="description"
         content="Learn about Dholera SIR, Gujarat's first and largest smart city project, offering investment opportunities, infrastructure, and growth potential."
       />
-      <meta
-        name="keywords"
-        content="Dholera SIR, Dholera Smart City, Smart City Dholera, Dholera Gujarat, Dholera Project, Dholera Investment"
-      />
       <link rel="canonical" href="https://www.dholeratimes.com/dholera-sir" />
-      <meta name="robots" content="index, dofollow" />
+      <meta name="robots" content="index, follow" />
 
       {/* Hero Section */}
       <div className="bg-black text-white">
@@ -90,9 +86,9 @@ export default async function BlogsPage() {
           <div className="absolute inset-0 md:bg-black/60"></div>
           <div className="absolute inset-0 md:flex md:items-center md:justify-center">
             <div className="text-center">
-              <p className="text-2xl md:text-5xl font-bold text-white">
+              <h1 className="text-2xl md:text-5xl font-bold text-white">
                 About Dholera SIR
-              </p>
+              </h1>
             </div>
           </div>
         </div>
@@ -101,9 +97,9 @@ export default async function BlogsPage() {
       {/* What Is Dholera Smart City Section */}
       <div className="bg-white py-14 px-4">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-3xl md:text-4xl text-center font-bold text-gray-900 mb-6">
+          <p className="text-3xl md:text-4xl text-center font-bold text-gray-900 mb-6">
             What Is Dholera Smart City?
-          </h1>
+          </p>
           <div className="space-y-5 text-gray-700 text-base md:text-lg leading-relaxed">
             <p>
               Dholera SIR (Special Investment Region) is one of India&apos;s

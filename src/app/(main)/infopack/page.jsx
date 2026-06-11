@@ -260,6 +260,7 @@ const WhyDholeraGrowth = () => (
 export default function Page() {
   return (
     <div className="relative min-h-screen">
+      <meta name="robots" content="noindex, nofollow" />
       {/* Hero Section */}
       <div className="relative">
         {/* Content */}

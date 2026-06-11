@@ -6,9 +6,9 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
   const [formData, setFormData] = useState({
     fullName: "",
     phone: "",
-    email: "",
+   /*  email: "",
     city: "",
-    budget: "",
+    budget: "", */
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -58,9 +58,9 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
 
   const onRecaptchaSuccess = async (token) => {
     try {
-      const notesArray = [];
+      /* const notesArray = [];
       if (formData.city) notesArray.push(`City: ${formData.city}`);
-      if (formData.budget) notesArray.push(`Budget: ${formData.budget}`);
+      if (formData.budget) notesArray.push(`Budget: ${formData.budget}`); */
 
       const response = await fetch(
         "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
@@ -74,8 +74,8 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
             fields: {
               name: formData.fullName,
               phone: formData.phone,
-              email: formData.email || "",
-              notes: notesArray.join(" | "),
+             /*  email: formData.email || "",
+              notes: notesArray.join(" | "), */
               source: "Dholera Times",
             },
             tags: ["Dholera Investment", "Website Lead", "Taboola Hero"],
@@ -88,9 +88,9 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
         setFormData({
           fullName: "",
           phone: "",
-          email: "",
+         /*  email: "",
           city: "",
-          budget: "",
+          budget: "", */
         });
         if (onSuccess) onSuccess();
         window.dataLayer = window.dataLayer || [];
@@ -203,7 +203,7 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
         required
       />
 
-      <input
+      {/* <input
         name="email"
         placeholder="Email (Optional)"
         type="email"
@@ -242,7 +242,7 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
           ₹25 Lakh +
         </option>
       </select>
-
+ */}
       <div ref={recaptchaRef} className="recaptcha-container" />
 
       <button
@@ -279,7 +279,7 @@ const HeroForm = ({ isDisabled: parentIsDisabled, onSuccess }) => {
             Submitting…
           </span>
         ) : (
-          "Get Price"
+          "Get A Call Back"
         )}
       </button>
     </div>

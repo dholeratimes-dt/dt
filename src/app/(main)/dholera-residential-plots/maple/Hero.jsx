@@ -65,11 +65,8 @@ export default function Hero() {
         name="description"
         content="Find Maple Dholera plots on Dholera Times - affordable and strategic plots in Smart City Gujarat designed for investors seeking steady growth."
       />
-      <meta
-        name="keywords"
-        content="Maple Dholera, Dholera plots, smart city Gujarat, Dholera investment, Dholera Smart City."
-      />
-      <link
+      <meta name="robots" content="index, follow" />
+       <link
         rel="canonical"
         href="https://www.dholeratimes.com/dholera-residential-plots/maple"
       />

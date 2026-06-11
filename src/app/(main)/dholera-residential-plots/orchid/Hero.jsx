@@ -60,14 +60,11 @@ export default function Hero() {
         name="description"
         content="Discover Orchid Dholera plots exclusively on Dholera Times - premium smart city plots with high investment growth potential in Gujarat."
       />
-      <meta
-        name="keywords"
-        content="Orchid Dholera, Dholera plots, Dholera Smart City, Dholera investment, investment in Dholera"
-      />
       <link
         rel="canonical"
         href="https://www.dholeratimes.com/dholera-residential-plots/orchid"
       />
+      <meta name="robots" content="index, follow" />
 
       <div className="bg-gray-100">
         <div className="bg-[#151f28] text-white">

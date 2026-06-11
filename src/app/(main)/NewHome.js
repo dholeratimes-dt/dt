@@ -77,7 +77,7 @@ export default function NewHome({openForm}) {
     <>
       {/* Carosuel */}
        <link rel="canonical" href="https://www.dholeratimes.com/" />
-             <meta name="robots" content="index, dofollow"/>
+             <meta name="robots" content="index, follow"/>
 
       <div>
         <HOME2 />

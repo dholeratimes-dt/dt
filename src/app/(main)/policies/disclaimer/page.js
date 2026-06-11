@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function PrivacyPopcy() {
   return (
     <>
-      <meta name="robots" content="index, dofollow"/>
+      <meta name="robots" content="noindex, nofollow"/>
       <link
           rel="canonical"
           href="https://www.dholeratimes.com/policies/disclaimer"

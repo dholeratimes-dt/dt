@@ -50,14 +50,11 @@ export default function Hero() {
         name="description"
         content="Discover WestWyn Estates Dholera plots exclusively on Dholera Times - premium smart city plots with high investment growth potential in Gujarat."
       />
-      <meta
-        name="keywords"
-        content="WestWyn Estates Dholera, Dholera plots, Dholera Smart City, Dholera investment, investment in Dholera"
-      />
       <link
         rel="canonical"
         href="https://www.dholeratimes.com/dholera-residential-plots/westwyn-estate"
       />
+      <meta name="robots" content="index, follow" />
 
       <div className="bg-gray-100">
         <div className="bg-[#151f28] text-white">
