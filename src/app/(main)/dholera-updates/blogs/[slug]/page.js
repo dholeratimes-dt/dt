@@ -735,7 +735,7 @@ export default async function BlogDetail({ params }) {
                 <div className="mb-10 overflow-hidden rounded-xl shadow-lg aspect-[3/2]">
                   <Image
                     src={getSanityImageUrl(post.mainImage, 1200, 800)}
-                    alt={post.title || "Dholera Times"}
+                    alt={post.mainImage?.alt || post.title || "Dholera update"} 
                     width={1200}
                     height={800}
                     unoptimized

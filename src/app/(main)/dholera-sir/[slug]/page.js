@@ -73,7 +73,7 @@ const TrendingBlogItem = ({ post }) => {
           <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
             <Image
               src={getSanityImageUrl(post.mainImage, 1200, 800)}
-              alt={post.title || "Dholera Times"}
+              alt={post.mainImage?.alt || post.title || "Dholera SIR"}
               width={1200}
               height={800}
               unoptimized

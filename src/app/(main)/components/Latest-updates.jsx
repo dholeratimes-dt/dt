@@ -16,7 +16,7 @@ function RelatedBlogCard({ item, type }) {
           {item.mainImage ? (
             <Image
               src={getSanityImageUrl(item.mainImage, 1200, 800)}
-              alt={item.title || 'Dholera update'}
+              alt={item.mainImage?.alt || item.title || 'Dholera update'}
               fill
               sizes='(max-width: 768px) 75vw, 288px'
               loading='lazy'

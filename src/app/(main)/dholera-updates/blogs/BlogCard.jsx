@@ -18,7 +18,7 @@ export default function BlogCard({ post }) {
           {post.mainImage ? (
             <Image
               src={getSanityImageUrl(post.mainImage, 1200, 800)}
-              alt={post.title || "Dholera Times"}
+              alt={post.mainImage?.alt || post.title || "Dholera update"}
               width={1200}
               height={800}
               unoptimized

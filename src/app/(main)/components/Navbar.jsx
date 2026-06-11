@@ -58,14 +58,14 @@ export default function Navbar() {
   const desktopLinkClass = (path) =>
     `px-4 py-2 rounded-lg transition-all duration-300 ${
       isActivePath(path)
-        ? "bg-[#deae3c] text-black"
+        ? "bg-[#debe6b] text-black"
         : "text-white hover:bg-white/10"
     }`;
 
   const mobileLinkClass = (path) =>
     `flex items-center text-lg py-4 px-4 rounded-xl transition-all duration-300 ${
       isActivePath(path)
-        ? "bg-[#deae3c] text-black"
+        ? "bg-[#debe6b] text-black"
         : "text-white hover:bg-white/10"
     }`;
 

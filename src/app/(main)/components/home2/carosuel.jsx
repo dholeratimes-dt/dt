@@ -13,9 +13,9 @@ import heroM3 from "@/assets/hero/dholera-smart-city-mobile-banner-dholera-times
 import HeroForm from "./HeroForm";
 
 const slides = [
-  { desktop: hero1, mobile: heroM1, alt: "Dholera Smart City" },
-  { desktop: hero2, mobile: heroM2, alt: "Dholera SIR" },
-  { desktop: hero3, mobile: heroM3, alt: "Dholera Smart City Project" },
+  { desktop: hero1, mobile: heroM1, alt: "ABCD Building Dholera" },
+  { desktop: hero2, mobile: heroM2, alt: "TATA Semiconductor Plant Dholera" },
+  { desktop: hero3, mobile: heroM3, alt: "Dholera Activation Area" },
 ];
 
 export default function HOME2() {
