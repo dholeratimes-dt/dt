@@ -21,6 +21,22 @@ const URLFormatter = (text) => {
     .replace(/(^-|-$)/g, "");
 };
 
+const formatPostDate = (dateValue) => {
+  if (!dateValue) return null;
+
+  const date = new Date(dateValue);
+  if (Number.isNaN(date.getTime())) return null;
+
+  return {
+    dateTime: date.toISOString().split("T")[0],
+    label: date.toLocaleDateString("en-US", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }),
+  };
+};
+
 const extractHeadings = (body) => {
   if (!body || !Array.isArray(body)) return [];
 
@@ -594,14 +610,8 @@ export default async function BlogDetail({ params }) {
       );
     };
 
-    // Format date for display
-    const rawDate = post.publishedAt || post._createdAt;
-    const isoDate = new Date(rawDate).toISOString().split("T")[0];
-    const formattedDate = new Date(isoDate).toLocaleDateString("en-US", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
+    const createdDate = formatPostDate(post.createdAt);
+    const publishedDate = formatPostDate(post.publishedAt);
 
     return (
       <div className="bg-white min-h-screen">
@@ -686,48 +696,81 @@ export default async function BlogDetail({ params }) {
                   {post.title}
                 </h1>
 
-                {/* Publication date */}
-                <div className="flex items-center gap-4 text-gray-500 text-sm mb-6">
-                  <div className="flex items-center">
-                    <svg
-                      className="w-4 h-4 mr-1"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                      ></path>
-                    </svg>
-                    <time className="text-gray-500" dateTime={isoDate}>
-                      {formattedDate}
-                    </time>
-                  </div>
+                {(createdDate || publishedDate || post.readingTime) && (
+                  <div className="flex flex-wrap items-center gap-4 text-gray-500 text-sm mb-6">
+                    {createdDate && (
+                      <div className="flex items-center">
+                        <svg
+                          className="w-4 h-4 mr-1"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                          ></path>
+                        </svg>
+                        <span className="mr-1">Created:</span>
+                        <time
+                          className="text-gray-500"
+                          dateTime={createdDate.dateTime}
+                        >
+                          {createdDate.label}
+                        </time>
+                      </div>
+                    )}
 
-                  {post.readingTime && (
-                    <div className="flex items-center">
-                      <svg
-                        className="w-4 h-4 mr-1"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                        ></path>
-                      </svg>
-                      <span>{post.readingTime} min read</span>
-                    </div>
-                  )}
-                </div>
+                    {publishedDate && (
+                      <div className="flex items-center">
+                        <svg
+                          className="w-4 h-4 mr-1"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                          ></path>
+                        </svg>
+                        <span className="mr-1">Published:</span>
+                        <time
+                          className="text-gray-500"
+                          dateTime={publishedDate.dateTime}
+                        >
+                          {publishedDate.label}
+                        </time>
+                      </div>
+                    )}
+
+                    {post.readingTime && (
+                      <div className="flex items-center">
+                        <svg
+                          className="w-4 h-4 mr-1"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                          ></path>
+                        </svg>
+                        <span>{post.readingTime} min read</span>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
 
               {/* Featured Image */}
