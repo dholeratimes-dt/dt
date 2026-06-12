@@ -64,7 +64,7 @@ export default function Hero() {
               {/* Background Image */}
               <Image
                 src={estates}
-                alt="WestWyn County residential plots in Dholera Gujarat"
+                alt="WestWyn Estates Residential Plots in Dholera Gujarat"
                 fill
                 className="hidden object-cover md:block"
                 sizes="(min-width: 1280px) 1280px, 100vw"
@@ -72,7 +72,7 @@ export default function Hero() {
               />
               <Image
                 src={estatesM}
-                alt="WestWyn County residential plots in Dholera Gujarat"
+                alt="WestWyn Estates Residential Plots in Dholera Gujarat"
                 fill
                 className="object-cover md:hidden"
                 sizes="100vw"

@@ -189,8 +189,8 @@ const WestWynAboutSection = () => {
 
             <div className="flex-grow flex items-center">
               <Image
-                src={wc} // <-- replace with your paradise image variable
-                alt="Paradise Project"
+                src={wc}
+                alt="Maple Project"
                 className="h-full w-full rounded-xl object-cover"
               />
             </div>

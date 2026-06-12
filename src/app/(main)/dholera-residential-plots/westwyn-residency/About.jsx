@@ -16,7 +16,6 @@ import {
   FaMapMarkedAlt,
   FaPhone,
 } from "react-icons/fa";
-import { TbBuildingFactory } from "react-icons/tb";
 import { Fence } from "lucide-react";
 
 const FeatureCard = ({ icon, title, value }) => (
@@ -188,7 +187,7 @@ const WestWynAboutSection = () => {
             <div className="flex-grow flex items-center">
               <Image
                 src={westwyn}
-                alt="westwyn"
+                alt="WestWyn Residency Location Map - Dholera Times"
                 className="rounded-xl w-full object-contain"
               />
             </div>

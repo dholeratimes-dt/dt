@@ -173,7 +173,7 @@ const WestWynAboutSection = () => {
             <div className="flex-grow flex items-center">
               <Image
                 src={westwyn}
-                alt="westwyn"
+                alt="WestWyn Estates Location Map - Dholera Times"
                 className="rounded-xl w-full"
               />
             </div>

@@ -186,7 +186,7 @@ const WestWynAboutSection = () => {
             <div className="flex-grow flex items-center">
               <Image
                 src={westwyn}
-                alt="westwyn"
+                alt="WestWyn County Location Map - Dholera Times"
                 className="h-full w-full rounded-xl object-cover"
               />
             </div>

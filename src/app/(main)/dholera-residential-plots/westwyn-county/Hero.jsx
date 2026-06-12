@@ -79,7 +79,7 @@ export default function Hero() {
               {/* Background Image */}
               <Image
                 src={desktopImage}
-                alt="WestWyn County residential plots in Dholera Gujarat"
+                alt="WestWyn County Residential Plots in Dholera Gujarat"
                 fill
                 className="hidden object-cover md:block"
                 sizes="(min-width: 1280px) 1280px, 100vw"
@@ -87,7 +87,7 @@ export default function Hero() {
               />
               <Image
                 src={mobileImage}
-                alt="WestWyn County residential plots in Dholera Gujarat"
+                alt="WestWyn County Residential Plots in Dholera Gujarat"
                 fill
                 className="object-cover md:hidden"
                 sizes="100vw"
@@ -121,7 +121,7 @@ export default function Hero() {
                     href="/dholera-residential-plots/westwyn-estate"
                     className="text-white text-2xl font-bold leading-tight m-0"
                   >
-                    WestWyn Estates
+                    WestWyn County
                   </Link>
                   <div className="text-[#d3b36b] text-xs mt-1">
                     Registry Ready Plot Starting From ₹10 Lakh
