@@ -82,7 +82,7 @@ export default function page() {
             <div className="relative w-full md:h-[50vh] aspect-[3/1]">
               <Image
                 src={hero}
-                alt="WestWyn Estates, Dholera Premium Residential Plots"
+                alt="Bulk Land in Dholera Smart City"
                 fill
                 className="object-cover aspect-[3/1]"
                 fetchPriority="high"
@@ -102,7 +102,7 @@ export default function page() {
           <div>
             <Image
               src={heroM}
-              alt="WestWyn Estates, Dholera Premium Residential Plots"
+              alt="Bulk Land in Dholera Smart City"
               fill
               className="object-cover"
               fetchPriority="high"

@@ -3,16 +3,7 @@ import React from "react";
 import banner from "@/assets/bulkLand/city-centre-bulk-land-desktop.webp";
 import bannerMob from "@/assets/bulkLand/city-centre-bulk-land-mobile.webp";
 import {
-  ShoppingBag,
-  Clapperboard,
-  Building2,
-  Landmark,
-  Building,
-  MapPin,
-  Users,
-  Star,
-  Layers,
-  Train,
+
   ArrowRight,
 } from "lucide-react";
 import residentialMap from "@/assets/bulkLand/city-centre-zone-dholera-times.webp";
