@@ -28,7 +28,7 @@ const FeatureCard = ({ icon, title, value }) => (
 
 const WestWynAboutSection = () => {
   const projectFeatures = [
-    { icon: "📐", title: "Plot Size", value: "152 and 200 Sq.Yards" },
+    { icon: "📐", title: "Plot Size", value: "Approx 147-250 sq. yards" },
     { icon: "🏗️", title: "Project Type", value: "Residential Dholera Plots" },
     { icon: "💰", title: "Price", value: "₹6,700/Sq.Yd" },
     { icon: "📍", title: "Location", value: "Polarpur, Dholera" },
@@ -101,7 +101,7 @@ const WestWynAboutSection = () => {
   const locationFeatures = [
     {
       icon: FaRoad,
-      text: "Direct Entry from State Highway 117",
+      text: "Bang on 150 ft wide 4-lane State Highway-117",
       highlight: "Excellent highway connectivity",
     },
     {
@@ -163,12 +163,12 @@ const WestWynAboutSection = () => {
             <p className="text-base text-gray-600 text-left max-w-4xl mx-auto leading-relaxed mb-4">
               WestWyn Estates as a premium residential plotting project in
               Polarpur, Dholera for buyers who value location advantage, legal
-              clarity, and a more structured buying process. With 152 and 200
-              sq. yard plot options, strong connectivity through State Highway
-              117, and project positioning backed by NA/NOC clearance, clear
-              title, and registry readiness, WestWyn Estates is a practical
-              choice for buyers looking for a better-supported plot investment
-              journey in Dholera.
+              clarity, and a more structured buying process. With Approx 147-250
+              sq. yards plot options, strong connectivity through State Highway
+              117, and project positioning backed by NA/NOC, Title Clear, Plan
+              Pass Approved and registry readiness, WestWyn Estates is a
+              practical choice for buyers looking for a better-supported plot
+              investment journey in Dholera.
             </p>
             <div className="flex-grow flex items-center">
               <Image
