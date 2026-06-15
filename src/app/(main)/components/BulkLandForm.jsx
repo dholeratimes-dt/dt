@@ -36,6 +36,18 @@ export default function BulkLand({ title, buttonName, pageName }) {
     setErrorMessage(""); // Clear error messages on input change
   };
 
+  const getLeadSource = () => {
+    if (typeof window === "undefined") return "Dholera Times";
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("twclid")) return "Dholera Times Twitter Ads";
+    if (params.has("dholera-sir-blogs")) return "Dholera Times Blogs";
+    if (params.has("dholera-sir-updates")) return "Dholera Times Updates";
+    if (params.has("about-dholera-sir")) return "Dholera Times Dholera SIR";
+    if (params.has("gad_source")) return "Dholera Times Google Ads";
+    if (params.has("")) return "Dholera Times";
+    return "Dholera Times ";
+  };
+
   const validateForm = () => {
     if (!formData.fullName.trim() || !formData.phone.trim()) {
       setErrorMessage("Please fill in all required fields");
@@ -82,7 +94,7 @@ export default function BulkLand({ title, buttonName, pageName }) {
               name: formData.fullName,
               phone: formData.phone,
               email: formData.email,
-              source: "Dholera Times",
+              source: getLeadSource(),
             },
             source: "Dholera Times Website",
             tags: ["Dholera Investment", "Website Lead", "Bulk Land"],

@@ -16,6 +16,18 @@ export default function CommonForm({ title }) {
   const recaptchaWidgetId = useRef(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
+  const getLeadSource = () => {
+    if (typeof window === "undefined") return "Dholera Times";
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("twclid")) return "Dholera Times Twitter Ads";
+    if (params.has("dholera-sir-blogs")) return "Dholera Times Blogs";
+    if (params.has("dholera-sir-updates")) return "Dholera Times Updates";
+    if (params.has("about-dholera-sir")) return "Dholera Times Dholera SIR";
+    if (params.has("gad_source")) return "Dholera Times Google Ads";
+    if (params.has("")) return "Dholera Times";
+    return "Dholera Times ";
+  };
+
   useEffect(() => {
     const loadRecaptcha = () => {
       if (typeof window !== "undefined" && !window.grecaptcha) {
@@ -122,7 +134,7 @@ export default function CommonForm({ title }) {
               name: formData.fullName,
               phone: formData.phone,
               message: formData.message,
-              source: "Dholera Times Dholera-Sir/Dholera-Update Page",
+              source: getLeadSource(),
             },
             source: "Dholera Times ",
             tags: ["Dholera Investment", "Website Lead"],

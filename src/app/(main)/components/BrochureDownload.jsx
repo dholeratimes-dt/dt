@@ -29,6 +29,18 @@ export default function BrochureDownload({
   const router = useRouter();
   const pathname = usePathname();
 
+  const getLeadSource = () => {
+    if (typeof window === "undefined") return "Dholera Times";
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("twclid")) return "Dholera Times Twitter Ads";
+    if (params.has("dholera-sir-blogs")) return "Dholera Times Blogs";
+    if (params.has("dholera-sir-updates")) return "Dholera Times Updates";
+    if (params.has("about-dholera-sir")) return "Dholera Times Dholera SIR";
+    if (params.has("gad_source")) return "Dholera Times Google Ads";
+    if (params.has("")) return "Dholera Times";
+    return "Dholera Times ";
+  };
+
   // PDF download URL
   const pdfUrl = link;
 
@@ -120,7 +132,7 @@ export default function BrochureDownload({
             fields: {
               name: formData.fullName,
               phone: formData.phone,
-              source: source,
+              source: getLeadSource(),
             },
             source: "Dholera Times",
             tags: ["Dholera Investment", "Website Lead", "Dholera Times"],
