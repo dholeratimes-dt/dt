@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import FloatingIcons from "./components/Floating";
 import ScrollToTop from "./components/ScrollToTop";
+import Script from "next/script";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -26,8 +27,7 @@ export default function RootLayout({ children }) {
           content="w4B8pqZZDySMLUmxZYsGxeKSCsTI_aHk-myN3iKS3CU"
         />
 
-        <Script
-          async
+        <Script          async
           src="https://www.googletagmanager.com/gtag/js?id=AW-18098009906"
         />
         <Script />
