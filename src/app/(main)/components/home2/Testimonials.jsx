@@ -10,51 +10,39 @@ import Link from "next/link";
 const testimonials = [
   {
     quote:
-      "The team helped me understand project location, documentation, and next steps clearly before I made a decision.",
-    name: "Vijay Pratap",
-    location: "Delhi NCR",
+      "Dholera Times is a helpful platform for staying updated with the latest news and developments in Dholera. The content is simple, clear, and easy to understand.",
+    name: "Reader",
+    location: "India",
   },
   {
     quote:
-      "My experience with DholeraTimes was smooth and professional. They explained the project details very clearly and guided me at every step.",
-    name: "Neeraj Yadav",
-    location: "Haryana",
+      "The website explains Dholera Smart City, infrastructure updates, airport news, expressway progress, and investment-related topics in a very practical way.",
+    name: "Regular Visitor",
+    location: "India",
   },
   {
     quote:
-      "From the first call to the site visit, the team was helpful and transparent. They made the whole process easy to understand.",
-    name: "Amit Sharma",
-    location: "Noida",
+      "I like how Dholera Times shares updates without making the information confusing. It is useful for anyone who wants to understand Dholera from the basics.",
+    name: "Website User",
+    location: "India",
   },
   {
     quote:
-      "I was looking for a residential plot in Dholera and DholeraTimes gave me the right guidance on location, pricing, and documentation.",
-    name: "Rahul Verma",
-    location: "Ghaziabad",
+      "Main Dholera ke latest updates ke liye Dholera Times follow karta hoon. Yahan airport, expressway, industries aur smart city development ki information simple language mein milti hai.",
+    name: "Dholera Follower",
+    location: "Gujarat",
   },
   {
     quote:
-      "What I liked most was their honest support and clear communication. They helped me compare options and choose the right project.",
-    name: "Pankaj Singh",
-    location: "Gurugram",
+      "Dholera Times gives clear and regular information about Dholera’s progress. It helps readers understand what is happening on the ground in a trusted way.",
+    name: "Subscriber",
+    location: "India",
   },
   {
     quote:
-      "The team was very responsive and supportive throughout the process. Their guidance gave me confidence before booking my plot.",
-    name: "Sandeep Chauhan",
-    location: "Jaipur",
-  },
-  {
-    quote:
-      "DholeraTimes made my plot-buying journey simple with clear information, timely updates, and full support from enquiry to booking.",
-    name: "Manoj Kumar",
-    location: "Faridabad",
-  },
-  {
-    quote:
-      "They explained everything in a practical way, from project location to paperwork. I felt supported throughout the process.",
-    name: "Deepak Rana",
-    location: "Chandigarh",
+      "Dholera mein investment explore karne se pehle maine Dholera Times se kaafi updates samjhe. Website par information simple, useful aur easy to read hai.",
+    name: "Investor",
+    location: "India",
   },
 ];
 
