@@ -30,7 +30,7 @@ const WestWynAboutSection = () => {
   const projectFeatures = [
     { icon: "📐", title: "Plot Size", value: "Approx 147-250 sq. yards" },
     { icon: "🏗️", title: "Project Type", value: "Residential Dholera Plots" },
-    { icon: "💰", title: "Price", value: "₹6,700/Sq.Yd" },
+    { icon: "💰", title: "Price", value: "₹7,000/Sq.Yd" },
     { icon: "📍", title: "Location", value: "Polarpur, Dholera" },
   ];
 
