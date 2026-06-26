@@ -1,12 +1,14 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import residency from "@/assets/residential/residency/westwyn-residency-dholera-times-desktop.webp";
 import residencyM from "@/assets/residential/residency/westwyn-residency-dholera-times-mobile.webp";
 import Link from "next/link";
-import { AnimatePresence } from "framer-motion";
-import BrochureDownload from "../../components/BrochureDownload";
-
+const BrochureDownload = dynamic(
+  () => import("../../components/BrochureDownload"),
+  { ssr: false },
+);
 export default function Hero() {
   const [brochureFormOpen, setIsBrochureFormOpen] = useState(false);
 
@@ -38,7 +40,6 @@ export default function Hero() {
                 fill
                 className="hidden object-cover md:block"
                 sizes="(min-width: 1280px) 1280px, 100vw"
-                priority
               />
               <Image
                 src={residencyM}
@@ -56,8 +57,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <AnimatePresence>
-        {brochureFormOpen && (
+      {brochureFormOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]">
             <BrochureDownload
               title="Get the Complete Project Brief"
@@ -66,8 +66,7 @@ export default function Hero() {
               link="https://cdn.sanity.io/files/c3e1h345/projects/ff6834296b06f1a58794fae05302be6507dca8a9.pdf"
             />
           </div>
-        )}
-      </AnimatePresence>
+      )}
     </>
   );
 }

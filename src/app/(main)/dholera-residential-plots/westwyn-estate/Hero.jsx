@@ -1,12 +1,14 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import estates from "@/assets/residential/westwyn-estates/westwyn-estates-dholera-times-desktop.webp";
 import estatesM from "@/assets/residential/westwyn-estates/westwyn-estates-dholera-times-mobile.webp";
 import Link from "next/link";
-import { AnimatePresence } from "framer-motion";
-import BrochureDownload from "../../components/BrochureDownload";
-
+const BrochureDownload = dynamic(
+  () => import("../../components/BrochureDownload"),
+  { ssr: false },
+);
 const PhoneIcon = () => (
   <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24">
     <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.61 21 3 13.39 3 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.58a1 1 0 01-.24 1.01l-2.21 2.2z" />
@@ -68,7 +70,6 @@ export default function Hero() {
                 fill
                 className="hidden object-cover md:block"
                 sizes="(min-width: 1280px) 1280px, 100vw"
-                priority
               />
               <Image
                 src={estatesM}
@@ -158,8 +159,7 @@ export default function Hero() {
         {/* Mobile Section */}
       </div>
 
-      <AnimatePresence>
-        {brochureFormOpen && (
+      {brochureFormOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]">
             <BrochureDownload
               title="Get the Complete Project Brief"
@@ -168,8 +168,7 @@ export default function Hero() {
               link="https://cdn.sanity.io/files/c3e1h345/projects/ff6834296b06f1a58794fae05302be6507dca8a9.pdf"
             />
           </div>
-        )}
-      </AnimatePresence>
+      )}
     </>
   );
 }

@@ -1,12 +1,14 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import desktopImage from "@/assets/residential/sold-out/westwyn-county-dholera-times-desktop.webp";
 import mobileImage from "@/assets/residential/sold-out/westwyn-county-dholera-times-mobile.webp";
 import Link from "next/link";
-import { AnimatePresence } from "framer-motion";
-import BrochureDownload from "../../components/BrochureDownload";
-
+const BrochureDownload = dynamic(
+  () => import("../../components/BrochureDownload"),
+  { ssr: false },
+);
 const FeatureCard = ({ icon, title, value }) => (
   <div className="bg-white rounded-lg p-4 border border-gray-200 text-center">
     <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
@@ -83,7 +85,6 @@ export default function Hero() {
                 fill
                 className="hidden object-cover md:block"
                 sizes="(min-width: 1280px) 1280px, 100vw"
-                priority
               />
               <Image
                 src={mobileImage}
@@ -230,8 +231,7 @@ export default function Hero() {
           </div>
         </div>
       </div>
-      <AnimatePresence>
-        {brochureFormOpen && (
+      {brochureFormOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]">
             <BrochureDownload
               title="Get the Complete Project Brief"
@@ -240,8 +240,7 @@ export default function Hero() {
               link="https://cdn.sanity.io/files/c3e1h345/projects/4fe6c7629f7f8caf78eb2b65074a0a439726b608.pdf"
             />
           </div>
-        )}
-      </AnimatePresence>
+      )}
     </>
   );
 }

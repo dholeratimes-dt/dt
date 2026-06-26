@@ -4,11 +4,13 @@ import Dholera from "./Dholera";
 import LatestUpdates from "../Latest-updates";
 import WhyDT from "./WhyDT";
 import AboutDT from "./AboutDT";
-import TestimonialPagination from "./Testimonials";
 import FAQS from "./FAQs";
-import PopupForm from "./PopUpForm";
-import BulkLand from "../BulkLandForm";
 import ObservedSection from "./ObservedSection_codex_temp";
+import {
+  LazyBulkLandSection,
+  LazyPopupForm,
+  LazyTestimonialsSection,
+} from "./LazyHomeSections";
 
 export default function Home2Main() {
   return (
@@ -31,23 +33,15 @@ export default function Home2Main() {
         <WhyDT />
       </ObservedSection>
 
-      <ObservedSection animation="scale-soft">
-        <BulkLand
-          title="Invest in Registry-Ready Plots in Dholera Starting from ₹8 Lakh"
-          buttonName="Get A Call Back"
-          pageName="Home"
-        />
-      </ObservedSection>
+      <LazyBulkLandSection />
 
       <ObservedSection animation="fade-up">
         <FAQS />
       </ObservedSection>
 
-      <ObservedSection animation="fade-up" delay={80}>
-        <TestimonialPagination />
-      </ObservedSection>
+      <LazyTestimonialsSection />
 
-      <PopupForm />
+      <LazyPopupForm />
     </>
   );
 }

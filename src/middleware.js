@@ -20,7 +20,7 @@ async function fetchRedirects() {
   const now = Date.now();
   if (redirectCache && now - cacheTime < CACHE_TTL) return redirectCache;
 
-  // ✅ Sirf is site ke redirects fetch karo
+  // Sirf is site ke redirects fetch karo
   redirectCache = await client.fetch(
     `*[_type == "redirect" && site == $site]{ source, destination, permanent }`,
     { site: SITE_NAME }
