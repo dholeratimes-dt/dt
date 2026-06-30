@@ -11,37 +11,37 @@ const testimonials = [
   {
     quote:
       "Dholera Times is a helpful platform for staying updated with the latest news and developments in Dholera. The content is simple, clear, and easy to understand.",
-    name: "Reader",
+    name: "Amit Khurana",
     location: "India",
   },
   {
     quote:
       "The website explains Dholera Smart City, infrastructure updates, airport news, expressway progress, and investment-related topics in a very practical way.",
-    name: "Regular Visitor",
+    name: "Sandeep Mishra",
     location: "India",
   },
   {
     quote:
       "I like how Dholera Times shares updates without making the information confusing. It is useful for anyone who wants to understand Dholera from the basics.",
-    name: "Website User",
+    name: "Pulkit Sharma",
     location: "India",
   },
   {
     quote:
       "Main Dholera ke latest updates ke liye Dholera Times follow karta hoon. Yahan airport, expressway, industries aur smart city development ki information simple language mein milti hai.",
-    name: "Dholera Follower",
+    name: "Sumit Kumar",
     location: "Gujarat",
   },
   {
     quote:
       "Dholera Times gives clear and regular information about Dholera’s progress. It helps readers understand what is happening on the ground in a trusted way.",
-    name: "Subscriber",
+    name: "Sohail",
     location: "India",
   },
   {
     quote:
       "Dholera mein investment explore karne se pehle maine Dholera Times se kaafi updates samjhe. Website par information simple, useful aur easy to read hai.",
-    name: "Investor",
+    name: "Nikhil Goel",
     location: "India",
   },
 ];
