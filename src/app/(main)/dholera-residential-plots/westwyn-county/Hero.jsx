@@ -122,7 +122,7 @@ export default function Hero() {
                     href="/dholera-residential-plots/westwyn-estate"
                     className="text-white text-2xl font-bold leading-tight m-0"
                   >
-                    WestWyn County
+                    WestWyn Estates
                   </Link>
                   <div className="text-[#d3b36b] text-xs mt-1">
                     Registry Ready Plot Starting From ₹10 Lakh
