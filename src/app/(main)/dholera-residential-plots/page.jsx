@@ -52,7 +52,7 @@ const projectsData = [
     location: "Fedra-Pipli State Highway, Dholera, Gujarat",
     status: "sold out",
   },
-  {
+ /*  {
     _id: "4",
     title: "Orchid",
     slug: { current: "orchid" },
@@ -117,7 +117,7 @@ const projectsData = [
     categories: [{ title: "Sold Out" }, { title: "Eco-Friendly" }],
     location: "Kasindra, Dholera",
     status: "sold-out",
-  },
+  }, */
 ];
 
 // Returns grid col class based on number of available projects (max 4)

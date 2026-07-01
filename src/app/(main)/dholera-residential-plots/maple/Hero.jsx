@@ -65,8 +65,9 @@ export default function Hero() {
         name="description"
         content="Find Maple Dholera plots on Dholera Times - affordable and strategic plots in Smart City Gujarat designed for investors seeking steady growth."
       />
-      <meta name="robots" content="index, follow" />
-       <link
+      <meta name="robots" content="noindex, nofollow" />
+
+      <link
         rel="canonical"
         href="https://www.dholeratimes.com/dholera-residential-plots/maple"
       />
@@ -184,7 +185,10 @@ export default function Hero() {
 
                   {/* Title & Description */}
                   <div>
-                    <Link href="/dholera-residential-plots/westwyn-estate" className="text-xl font-bold text-gray-900 mb-2 leading-tight">
+                    <Link
+                      href="/dholera-residential-plots/westwyn-estate"
+                      className="text-xl font-bold text-gray-900 mb-2 leading-tight"
+                    >
                       WestWyn Estates
                     </Link>
                   </div>

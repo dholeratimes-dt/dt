@@ -69,7 +69,7 @@ export default function Hero() {
         rel="canonical"
         href="https://www.dholeratimes.com/dholera-residential-plots/paradise-1"
       />
-      <meta name="robots" content="index, follow" />
+      <meta name="robots" content="noindex, nofollow" />
 
       <div className="bg-gray-100">
         <div className="bg-[#151f28] text-white">
@@ -184,7 +184,10 @@ export default function Hero() {
 
                   {/* Title & Description */}
                   <div>
-                    <Link href="/dholera-residential-plots/westwyn-estate" className="text-xl font-bold text-gray-900 mb-2 leading-tight">
+                    <Link
+                      href="/dholera-residential-plots/westwyn-estate"
+                      className="text-xl font-bold text-gray-900 mb-2 leading-tight"
+                    >
                       WestWyn Estates
                     </Link>
                   </div>
