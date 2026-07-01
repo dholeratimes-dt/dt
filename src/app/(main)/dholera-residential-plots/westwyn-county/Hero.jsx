@@ -134,7 +134,7 @@ export default function Hero() {
                 {/* Price */}
                 <div className="shrink-0">
                   <div className="text-[#d3b36b] text-[26px] font-extrabold leading-none">
-                    ₹6,700{" "}
+                    ₹7,000{" "}
                     <span className="text-white/35 text-xs font-normal">
                       /Sq.Yd
                     </span>
@@ -182,7 +182,7 @@ export default function Hero() {
                       </span>
                     </div>
                     <div className="text-xl font-bold text-[#151f28]">
-                      ₹6,700
+                      ₹7,000
                       <span className="text-sm text-gray-600 ml-1">/Sq.Yd</span>
                     </div>
                   </div>
