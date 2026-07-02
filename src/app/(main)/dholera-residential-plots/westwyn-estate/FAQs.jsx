@@ -11,12 +11,12 @@ const faqs = [
   {
     question: "What plot sizes are available in WestWyn Estates?",
     answer:
-      "The project offers plot sizes of 152 and 200 square yards.",
+      "The project offers plot sizes of approx 147 to 250 square yards.",
   },
   {
     question: "What is the price of WestWyn Estates plots?",
     answer:
-      "The listed rate is ₹6,700 per square yard. However, the starting price appears differently in multiple sections, so it should be confirmed before finalizing.",
+      "The listed rate is ₹7,000 per square yard. However, the starting price appears differently in multiple sections, so it should be confirmed before finalizing.",
   },
   {
     question: "Are the plots legally clear and registry-ready?",
