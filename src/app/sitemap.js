@@ -55,7 +55,7 @@ export default async function sitemap() {
 /*  { url: `${BASE_URL}/dholera-residential-plots/maple`,             priority: 0.8, changeFrequency: "monthly" },
     { url: `${BASE_URL}/dholera-residential-plots/marina-bay`,        priority: 0.8, changeFrequency: "monthly" },
     { url: `${BASE_URL}/dholera-residential-plots/orchid`,            priority: 0.8, changeFrequency: "monthly" },
-    { url: `${BASE_URL}/dholera-residential-plots/paradise-1`,          priority: 0.8, changeFrequency: "monthly" },
+    { url: `${BASE_URL}/dholera-residential-plots/paradise-1`,        priority: 0.8, changeFrequency: "monthly" },
     { url: `${BASE_URL}/dholera-residential-plots/paradise-2`,        priority: 0.8, changeFrequency: "monthly" },
     { url: `${BASE_URL}/dholera-residential-plots/pride`,             priority: 0.8, changeFrequency: "monthly" }, */
     { url: `${BASE_URL}/dholera-residential-plots/westwyn-county`,    priority: 0.8, changeFrequency: "monthly" },
