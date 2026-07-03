@@ -63,7 +63,7 @@ export default function FAQS() {
           {/* Left Section (40%) */}
           <div className="w-full md:w-2/5 pl-2 pr-2">
             <h2 className="text-[32px] font-semibold text-[#151f28] mb-4">
-              Frequently Asked Questions
+              FAQs
             </h2>
             <p className="text-gray-600 mb-4">Have more questions?</p>
 

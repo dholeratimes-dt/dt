@@ -238,7 +238,7 @@ export default function page() {
       </div>
 
       <BulkLand
-        title="Invest in Govt. Approved Bulk Land in Dholera Starting 2Cr"
+        title="Invest in Govt. Approved Bulk Land in Dholera Starting ₹2Cr"
         pageName="residential-bulk-land"
       />
       <FAQS/>

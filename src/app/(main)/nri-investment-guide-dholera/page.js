@@ -1241,7 +1241,7 @@ export default function NRIInvestmentGuide() {
         <div id="ArticleFAQs" className="max-w-6xl mx-auto px-4 mb-8">
           <h2 className="text-xl md:text-3xl font-bold text-gray-900 mb-8 text-center relative">
             <span className="relative after:content-[\'\'] after:absolute after:bottom-[-10px] after:left-1/2 after:w-20 after:h-1 after:bg-[#d8b66d] after:-translate-x-1/2">
-              Frequently Asked Questions
+              FAQs
             </span>
           </h2>
           <div className="space-y-4">
