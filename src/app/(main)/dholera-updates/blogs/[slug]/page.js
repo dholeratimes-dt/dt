@@ -12,6 +12,7 @@ import Image from "next/image";
 import LeadFormSlug from "../../latest-updates/[slug]/LeadForm";
 import CommonForm from "@/app/(main)/components/FormSection";
 import LeadFormBlock from "@/app/(main)/components/blog/LeadFormBlock";
+import SchemaMarkup from "../SchemaMarkup";
 
 const URLFormatter = (text) => {
   if (!text) return "";
@@ -610,11 +611,14 @@ export default async function BlogDetail({ params }) {
       );
     };
 
-    const createdDate = formatPostDate(post.createdAt);
-    const publishedDate = formatPostDate(post.publishedAt);
+    const updatedDate = formatPostDate(post._updatedAt || post.publishedAt);
+    const publishedDate = formatPostDate(
+      post.publishedAt || post._createdAt || post.createdAt,
+    );
 
     return (
       <div className="bg-white min-h-screen">
+        <SchemaMarkup post={post} relatedBlog={relatedBlogs} />
         {/* Main content */}
         <main className="max-w-7xl mx-auto px-4 py-8">
           <div className="flex flex-col lg:flex-row gap-10">
@@ -696,9 +700,9 @@ export default async function BlogDetail({ params }) {
                   {post.title}
                 </h1>
 
-                {(createdDate || publishedDate || post.readingTime) && (
+                {(updatedDate || post.readingTime) && (
                   <div className="flex flex-wrap items-center gap-4 text-gray-500 text-sm mb-6">
-                    {createdDate && (
+                    {updatedDate && (
                       <div className="flex items-center">
                         <svg
                           className="w-4 h-4 mr-1"
@@ -714,38 +718,12 @@ export default async function BlogDetail({ params }) {
                             d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                           ></path>
                         </svg>
-                        <span className="mr-1">Created:</span>
+                        <span className="mr-1">Updated On:</span>
                         <time
                           className="text-gray-500"
-                          dateTime={createdDate.dateTime}
+                          dateTime={updatedDate.dateTime}
                         >
-                          {createdDate.label}
-                        </time>
-                      </div>
-                    )}
-
-                    {publishedDate && (
-                      <div className="flex items-center">
-                        <svg
-                          className="w-4 h-4 mr-1"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                          ></path>
-                        </svg>
-                        <span className="mr-1">Published:</span>
-                        <time
-                          className="text-gray-500"
-                          dateTime={publishedDate.dateTime}
-                        >
-                          {publishedDate.label}
+                          {updatedDate.label}
                         </time>
                       </div>
                     )}
@@ -810,6 +788,34 @@ export default async function BlogDetail({ params }) {
                           #{tag}
                         </Link>
                       ))}
+                    </div>
+                  </div>
+                )}
+
+                {publishedDate && (
+                  <div className="mt-12 pt-6 border-t border-gray-200 text-sm text-gray-500">
+                    <div className="flex items-center">
+                      <svg
+                        className="w-4 h-4 mr-1"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                        ></path>
+                      </svg>
+                      <span className="mr-1">Published On:</span>
+                      <time
+                        className="text-gray-500"
+                        dateTime={publishedDate.dateTime}
+                      >
+                        {publishedDate.label}
+                      </time>
                     </div>
                   </div>
                 )}
