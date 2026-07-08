@@ -37,6 +37,13 @@ const formatPostDate = (dateValue) => {
   };
 };
 
+const getArticleDates = (post) => {
+  const publishedAt = post?.createdAt || post?._createdAt || post?.publishedAt;
+  const updatedAt = post?.publishedAt || post?._updatedAt || publishedAt;
+
+  return { publishedAt, updatedAt };
+};
+
 const extractHeadings = (body) => {
   if (!body || !Array.isArray(body)) return [];
 
@@ -611,10 +618,9 @@ export default async function BlogDetail({ params }) {
       );
     };
 
-    const updatedDate = formatPostDate(post._updatedAt || post.publishedAt);
-    const publishedDate = formatPostDate(
-      post.publishedAt || post._createdAt || post.createdAt,
-    );
+    const articleDates = getArticleDates(post);
+    const publishedDate = formatPostDate(articleDates.publishedAt);
+    const updatedDate = formatPostDate(articleDates.updatedAt);
 
     return (
       <>

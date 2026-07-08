@@ -91,12 +91,12 @@ export default {
     },
     {
       name: "createdAt",
-      title: "Created At",
+      title: "Published On",
       type: "datetime",
     },
     {
       name: "publishedAt",
-      title: "Published At",
+      title: "Updated On",
       type: "datetime",
     },
     {

@@ -44,8 +44,8 @@ const SchemaMarkup = ({ post, relatedBlog = [] }) => {
 
   const baseUrl = "https://dholeratimes.com"; // Replace with your actual domain
   const postUrl = `${baseUrl}/dholera-updates/latest-updates/${post.slug.current}`;
-  const publishedDate = post.publishedAt || post._createdAt || post.createdAt;
-  const modifiedDate = post._updatedAt || publishedDate;
+  const publishedDate = post.createdAt || post._createdAt || post.publishedAt;
+  const modifiedDate = post.publishedAt || post._updatedAt || publishedDate;
 
   // Main Latest Update post schema
   const blogSchema = {
@@ -248,7 +248,7 @@ const SchemaMarkup = ({ post, relatedBlog = [] }) => {
           image: post.mainImage
             ? urlFor(post.mainImage).width(400).height(250).url()
             : undefined,
-          datePublished: post.publishedAt || post._createdAt || post.createdAt,
+          datePublished: post.createdAt || post._createdAt || post.publishedAt,
         },
       })),
     };
