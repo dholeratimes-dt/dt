@@ -44,16 +44,18 @@ const SchemaMarkup = ({ post, relatedBlog = [] }) => {
 
   const baseUrl = "https://dholeratimes.com"; // Replace with your actual domain
   const postUrl = `${baseUrl}/dholera-sir/${post.slug.current}`;
+  const publishedDate = post.publishedAt || post._createdAt || post.createdAt;
+  const modifiedDate = post._updatedAt || publishedDate;
 
   // Main Latest Update post schema
   const blogSchema = {
     "@context": "https://schema.org",
-    "@type": "Blog Posting",
+    "@type": "BlogPosting",
     headline: post.title,
     description: post.description || extractPlainText(post.body),
     url: postUrl,
-    datePublished: post.publishedAt || post._createdAt,
-    dateModified: post._updatedAt,
+    datePublished: publishedDate,
+    dateModified: modifiedDate,
     author: {
       "@type": "Organization", // Change to "Person" if you want individual author
       name: "Dholera Times", // Replace with your organization/author name
@@ -223,11 +225,11 @@ const SchemaMarkup = ({ post, relatedBlog = [] }) => {
       )}
       <meta
         property="article:published_time"
-        content={post.publishedAt || post._createdAt}
+        content={publishedDate}
       />
       <meta
         property="article:modified_time"
-        content={post._updatedAt || post.publishedAt}
+        content={modifiedDate}
       />
       {/* Twitter */}
       <meta name="x:card" content="summary_large_image" />

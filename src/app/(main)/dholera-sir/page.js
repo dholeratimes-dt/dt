@@ -163,12 +163,7 @@ export default async function BlogsPage() {
             <div className="bg-white border-2 border-black rounded-lg p-5 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
               <div className="text-3xl mb-3">🛣️</div>
               <h4 className="text-lg font-bold mb-2">
-                <Link
-                  href="/dholera-sir-blogs/dholera-ahmedabad-expressway"
-                  className="hover:text-[#deae3c]"
-                >
-                  Ahmedabad-Dholera Expressway
-                </Link>
+                Ahmedabad-Dholera Expressway
               </h4>
               <p className="text-gray-700 text-sm">
                 High-Speed Connectivity Corridor to Dholera
@@ -178,12 +173,7 @@ export default async function BlogsPage() {
             <div className="bg-white border-2 border-black rounded-lg p-5 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
               <div className="text-3xl mb-3">✈️</div>
               <h4 className="text-lg font-bold mb-2">
-                <Link
-                  href="/dholera-sir-blogs/dholera-international-airport"
-                  className="hover:text-[#deae3c]"
-                >
-                  Dholera International Airport
-                </Link>
+                Dholera International Airport
               </h4>
               <p className="text-gray-700 text-sm">
                 India&apos;s Second Largest Airport
@@ -203,12 +193,7 @@ export default async function BlogsPage() {
             <div className="bg-white border-2 border-black rounded-lg p-5 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
               <div className="text-3xl mb-3">☀️</div>
               <h4 className="text-lg font-bold mb-2">
-                <Link
-                  href="/dholera-sir-blogs/dholera-solar-power-project"
-                  className="hover:text-[#deae3c]"
-                >
-                  Dholera Solar Park
-                </Link>
+                Dholera Solar Park
               </h4>
               <p className="text-gray-700 text-sm">
                 One of Asia&apos;s Largest Solar Plants
@@ -226,26 +211,14 @@ export default async function BlogsPage() {
             <div className="bg-white border-2 border-black rounded-lg p-5 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
               <div className="text-3xl mb-3">🚇</div>
               <h4 className="text-lg font-bold mb-2">
-                <Link
-                  href="/dholera-sir-blogs/ahmedabad-dholera-monorail-project-2025"
-                  className="hover:text-[#deae3c]"
-                >
-                  Dholera Monorail
-                </Link>
+                Dholera Monorail
               </h4>
               <p className="text-gray-700 text-sm">High Speed Metro And Rail</p>
             </div>
 
             <div className="bg-white border-2 border-black rounded-lg p-5 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
               <div className="text-3xl mb-3">🏢</div>
-              <h4 className="text-lg font-bold mb-2">
-                <Link
-                  href="/about-dholera-sir/abcd-building-dholera"
-                  className="hover:text-[#deae3c]"
-                >
-                  ABCD Building
-                </Link>
-              </h4>
+              <h4 className="text-lg font-bold mb-2">ABCD Building</h4>
               <p className="text-gray-700 text-sm">
                 Dholera&apos;s Central Command Hub
               </p>
