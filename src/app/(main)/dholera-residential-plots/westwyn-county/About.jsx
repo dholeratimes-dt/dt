@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import westwyn from "@/assets/residential/sold-out/westwyn-county-dholera-times-desktop.webp";
 
-
 import {
   FaWhatsapp,
   FaMapMarkerAlt,
@@ -11,7 +10,7 @@ import {
   FaCity,
   FaIndustry,
   FaClock,
-  FaPlaceOfWorship
+  FaPlaceOfWorship,
 } from "react-icons/fa";
 import Image from "next/image";
 
@@ -174,14 +173,15 @@ const WestWynAboutSection = () => {
         <div className="text-center mb-8 md:w-1/2">
           <div className="h-full flex flex-col">
             <p className="text-base text-gray-600 text-justify max-w-4xl mx-auto leading-relaxed mb-4">
-              WestWyn County offers clear-title, government-approved plots in
-              the rapidly developing Dholera SIR. With registry-ready
-              documentation, flexible payment plans, and complete legal
-              transparency, it ensures a hassle-free investment experience
-              Located within the government-backed Dholera Smart City, the
-              project is ideal for both domestic and NRI investors seeking safe,
-              future-ready property opportunities Secure. Transparent.
-              Future-Ready – WestWyn County is where smart investments begin.
+              WestWyn County is one of the most trusted and successfully
+              sold-out residential plot projects in Dholera, located on the
+              prime Fedra-Pipli State Highway. Developed as a well-planned
+              residential plotting project, WestWyn County has gained strong
+              interest from buyers looking for clear-title plots, future villa
+              construction options, and long-term investment opportunities in
+              Dholera. With the original inventory completely sold out,
+              BookMyAssets is now offering verified resale plots in WestWyn
+              County for buyers who missed the initial launch.
             </p>
             <div className="flex-grow flex items-center">
               <Image
