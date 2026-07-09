@@ -47,8 +47,8 @@ const SchemaMarkup = ({ post, relatedBlog = [] }) => {
 
   const baseUrl = "https://dholeratimes.com"; // Replace with your actual domain
   const postUrl = `${baseUrl}/dholera-updates/blogs/${post.slug.current}`;
-  const publishedDate = post.createdAt || post._createdAt || post.publishedAt;
-  const modifiedDate = post.publishedAt || post._updatedAt || publishedDate;
+  const publishedDate = post.createdAt;
+  const modifiedDate = post.publishedAt;
   
   // Main Latest Update post schema
   const blogSchema = {
@@ -246,7 +246,7 @@ const SchemaMarkup = ({ post, relatedBlog = [] }) => {
           "url": `${baseUrl}/dholera-updates/blogs/${post.slug.current}`,
           "description": post.description,
           "image": post.mainImage ? urlFor(post.mainImage).width(400).height(250).url() : undefined,
-          "datePublished": post.createdAt || post._createdAt || post.publishedAt
+          "datePublished": post.createdAt
         }
       }))
     };
@@ -277,8 +277,12 @@ const SchemaMarkup = ({ post, relatedBlog = [] }) => {
       {post.mainImage && (
         <meta property="og:image" content={urlFor(post.mainImage).width(1200).height(630).url()} />
       )}
-      <meta property="article:published_time" content={publishedDate} />
-      <meta property="article:modified_time" content={modifiedDate} />
+      {publishedDate && (
+        <meta property="article:published_time" content={publishedDate} />
+      )}
+      {modifiedDate && (
+        <meta property="article:modified_time" content={modifiedDate} />
+      )}
       {post.tags && post.tags.map(tag => (
         <meta key={tag} property="article:tag" content={tag} />
       ))}

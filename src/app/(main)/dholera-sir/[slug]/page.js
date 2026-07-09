@@ -586,10 +586,8 @@ export default async function BlogDetail({ params }) {
       );
     };
 
-    const updatedDate = formatPostDate(post._updatedAt || post.publishedAt);
-    const publishedDate = formatPostDate(
-      post.publishedAt || post._createdAt || post.createdAt,
-    );
+    const updatedDate = formatPostDate(post.publishedAt);
+    const publishedDate = formatPostDate(post.createdAt);
 
     return (
       <div className="bg-white min-h-screen">
