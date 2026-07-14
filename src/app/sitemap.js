@@ -52,12 +52,6 @@ export default async function sitemap() {
 
     // Dholera Residential Plots — Static Pages
     { url: `${BASE_URL}/dholera-residential-plots`,                   priority: 0.8, changeFrequency: "weekly" },
-/*  { url: `${BASE_URL}/dholera-residential-plots/maple`,             priority: 0.8, changeFrequency: "monthly" },
-    { url: `${BASE_URL}/dholera-residential-plots/marina-bay`,        priority: 0.8, changeFrequency: "monthly" },
-    { url: `${BASE_URL}/dholera-residential-plots/orchid`,            priority: 0.8, changeFrequency: "monthly" },
-    { url: `${BASE_URL}/dholera-residential-plots/paradise-1`,        priority: 0.8, changeFrequency: "monthly" },
-    { url: `${BASE_URL}/dholera-residential-plots/paradise-2`,        priority: 0.8, changeFrequency: "monthly" },
-    { url: `${BASE_URL}/dholera-residential-plots/pride`,             priority: 0.8, changeFrequency: "monthly" }, */
     { url: `${BASE_URL}/dholera-residential-plots/westwyn-county`,    priority: 0.8, changeFrequency: "monthly" },
     { url: `${BASE_URL}/dholera-residential-plots/westwyn-estate`,    priority: 0.8, changeFrequency: "monthly" },
     { url: `${BASE_URL}/dholera-residential-plots/westwyn-residency`, priority: 0.8, changeFrequency: "monthly" },
