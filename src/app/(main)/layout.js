@@ -13,6 +13,7 @@ const inter = Inter({
   preload: true,
 });
 
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={inter.className}>
