@@ -1,5 +1,5 @@
 "use client";
-import useSinglePopupState from "@/hooks/useSinglePopupState";
+
 import React, { useState, useRef } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import logo from "@/assets/DT-logo-transparent.png";
@@ -12,9 +12,9 @@ import Link from "next/link";
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isGetInTouchDropdownOpen, setIsGetInTouchDropdownOpen] = useState(false);
-  const [isContactFormOpen, setIsContactFormOpen] = useSinglePopupState(false);
+ 
   
-  
+
   const router = useRouter();
   const pathname = usePathname();
   
