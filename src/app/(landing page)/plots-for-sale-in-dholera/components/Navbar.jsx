@@ -14,6 +14,7 @@ export default function Navbar() {
   const [isGetInTouchDropdownOpen, setIsGetInTouchDropdownOpen] = useState(false);
   const [isContactFormOpen, setIsContactFormOpen] = useSinglePopupState(false);
   
+  
   const router = useRouter();
   const pathname = usePathname();
   
