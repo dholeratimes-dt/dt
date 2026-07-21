@@ -36,7 +36,7 @@ export default function Dholera() {
             <div className="md:w-1/2 w-full">
               {/* Description */}
               <p className="text-gray-600 leading-relaxed text-left mb-4">
-                Spanning over 922.5 sq. km, Dholera SIR is part of Delhi–Mumbai
+                Spanning over 920 sq km, Dholera SIR is part of Delhi–Mumbai
                 Industrial Corridor (DMIC). With large-scale infrastructure
                 planning, industrial growth, and future-ready connectivity, it
                 has become India's top investment zone. <br /> Key highlights of Dholera Smart City:

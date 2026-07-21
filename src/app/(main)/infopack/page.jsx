@@ -291,7 +291,7 @@ export default function Page() {
                     model of India’s smart city vision and the first city 
                     developed under the Gujarat Special Investment Region 
                     (SIR) Act. Spread across{" "}
-                    <span className="font-bold text-[#d3b36b]">922.5 sq. km, </span>
+                    <span className="font-bold text-[#d3b36b]">920 sq km, </span>
                      it is a greenfield smart city and a key node of the 
                      Delhi-Mumbai Industrial Corridor (DMIC), being developed 
                      with strong support from the Government of India and the 
