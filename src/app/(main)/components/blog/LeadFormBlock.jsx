@@ -296,7 +296,7 @@ export default function LeadFormBlock({
                 className={`w-full font-bold py-3 px-6 rounded-lg transition duration-300 ${
                   isLoading || isDisabled || !recaptchaLoaded
                     ? "bg-gray-600 cursor-not-allowed text-gray-400"
-                    : "bg-[#b69b5e]hover:bg-[#d3b36b] text-white shadow-md"
+                    : "bg-[#b69b5e] hover:bg-[#d3b36b] text-white shadow-md"
                 }`}
               >
                 {isLoading ? "Submitting..." : "Get A Call Back"}
