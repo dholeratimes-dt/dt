@@ -1,13 +1,33 @@
+"use client";
+
 import React from "react";
 import { FaEnvelope, FaPhone, FaPhoneAlt, FaUser } from "react-icons/fa";
+import { usePathname } from "next/navigation";
+
+const SANITY_CONTENT_ROUTES = [
+  "/dholera-sir",
+  "/dholera-updates/blogs",
+  "/dholera-updates/latest-updates",
+];
 
 export default function Footer() {
+  const pathname = usePathname();
+  const showProjectLinks = SANITY_CONTENT_ROUTES.some(
+    (route) => pathname === route || pathname?.startsWith(`${route}/`),
+  );
+
   return (
     <>
       <footer className="bg-[#151f28] text-gray-400 space-y-8 pt-8 ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* First 3-column row with company info, links, policy */}
-          <div className="grid md:grid-cols-4 md:gap-32 md:left-8 gap-12 mb-12">
+          <div
+            className={`grid gap-12 mb-12 ${
+              showProjectLinks
+                ? "md:grid-cols-4 md:gap-32"
+                : "md:grid-cols-3 md:gap-24"
+            }`}
+          >
             <div className="text-white">
               <div className="mb-6">
                 <h2 className="text-lg font-semibold mb-3">Contact Us</h2>
@@ -113,37 +133,39 @@ export default function Footer() {
                 </a>
               </div>
             </div>
-            <div className="">
-              <h2 className="text-white text-lg font-semibold mb-4">
-                Projects
-              </h2>
-              <ul className="space-y-2">
-                <li>
-                  <a
-                    href="/dholera-residential-plots/westwyn-residency"
-                    className="hover:text-white transition"
-                  >
-                    WestWyn Residency
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/dholera-residential-plots/westwyn-estate"
-                    className="hover:text-white transition"
-                  >
-                    WestWyn Estates
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/dholera-residential-plots/westwyn-county"
-                    className="hover:text-white transition"
-                  >
-                    WestWyn County
-                  </a>
-                </li>
-              </ul>
-            </div>
+            {showProjectLinks && (
+              <div>
+                <h2 className="text-white text-lg font-semibold mb-4">
+                  Projects
+                </h2>
+                <ul className="space-y-2">
+                  <li>
+                    <a
+                      href="/dholera-residential-plots/westwyn-residency"
+                      className="hover:text-white transition"
+                    >
+                      WestWyn Residency
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/dholera-residential-plots/westwyn-estate"
+                      className="hover:text-white transition"
+                    >
+                      WestWyn Estates
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/dholera-residential-plots/westwyn-county"
+                      className="hover:text-white transition"
+                    >
+                      WestWyn County
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            )}
 
             <div className="">
               <h2 className="text-white text-lg font-semibold mb-4">
