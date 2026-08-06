@@ -56,7 +56,7 @@ export default function Hero() {
         rel="canonical"
         href="https://www.dholeratimes.com/dholera-residential-plots/westwyn-estate"
       />
-      <meta name="robots" content="index, follow" />
+      <meta name="robots" content="noindex, nofollow" />
 
       <div className="bg-gray-100">
         <div className="bg-[#151f28] text-white">
