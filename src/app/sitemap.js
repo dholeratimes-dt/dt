@@ -50,12 +50,6 @@ export default async function sitemap() {
     { url: `${BASE_URL}/dholera-sir`,       priority: 0.7, changeFrequency: "monthly" },
     { url: `${BASE_URL}/nri-investment-guide-dholera`,       priority: 0.7, changeFrequency: "monthly" },
 
-    // Dholera Residential Plots — Static Pages
-    { url: `${BASE_URL}/dholera-residential-plots`,                   priority: 0.8, changeFrequency: "weekly" },
-    { url: `${BASE_URL}/dholera-residential-plots/westwyn-county`,    priority: 0.8, changeFrequency: "monthly" },
-    { url: `${BASE_URL}/dholera-residential-plots/westwyn-estate`,    priority: 0.8, changeFrequency: "monthly" },
-    { url: `${BASE_URL}/dholera-residential-plots/westwyn-residency`, priority: 0.8, changeFrequency: "monthly" },
-
   ].map((page) => ({ ...page }));
 
   // ✅ Dynamic URLs
