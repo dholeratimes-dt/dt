@@ -19,6 +19,8 @@ export default function RootLayout({ children }) {
     <html lang="en" className={inter.className}>
       <head>
         <link rel="icon" href="/favicon.ico" />
+        {/* Bing Search Engine(webmaster by Bing) Code */}
+        <meta name="msvalidate.01" content="4EEB445EE58BDF9E15EFDE4DB906372D" />
 
         {/* ── Google Tag Manager ── */}
         <GoogleTagManager gtmId="GTM-NLL6M3PL" />
