@@ -21,9 +21,9 @@ export default function Home2Main() {
         <Dholera />
       </ObservedSection>
 
-      <ObservedSection animation="fade-right">
+      {/* <ObservedSection animation="fade-right">
         <AboutDT />
-      </ObservedSection>
+      </ObservedSection> */}
 
       <ObservedSection animation="fade-up" delay={80}>
         <LatestUpdates />
