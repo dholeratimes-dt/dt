@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback, useRef } from "react";
+import { useState } from "react";
 import React from "react";
 import { motion } from "framer-motion";
 import "./about.css";
@@ -15,20 +15,6 @@ export default function BulkLand({ title, buttonName, pageName }) {
   const [submissionCount, setSubmissionCount] = useState(0);
   const [isDisabled, setIsDisabled] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
-  const recaptchaRef = useRef(null);
-  const siteKey = process.env.SITE_KEY;
-
-  const loadRecaptcha = useCallback(() => {
-    if (recaptchaLoaded) return;
-    if (typeof window === "undefined") return;
-
-    const script = document.createElement("script");
-    script.src = "https://www.google.com/recaptcha/api.js";
-    script.async = true;
-    script.onload = () => setRecaptchaLoaded(true);
-    document.head.appendChild(script);
-  }, [recaptchaLoaded]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -44,8 +30,7 @@ export default function BulkLand({ title, buttonName, pageName }) {
     if (params.has("dholera-sir-updates")) return "Dholera Times Updates";
     if (params.has("about-dholera-sir")) return "Dholera Times Dholera SIR";
     if (params.has("gad_source")) return "Dholera Times Google Ads";
-    if (params.has("")) return "Dholera Times";
-    return "Dholera Times ";
+    return "Dholera Times";
   };
 
   const validateForm = () => {
@@ -78,9 +63,8 @@ export default function BulkLand({ title, buttonName, pageName }) {
     return true;
   };
 
-  const onRecaptchaSuccess = async (token) => {
+  const submitLead = async () => {
     try {
-      // API Request using the new endpoint and format
       const response = await fetch(
         "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
         {
@@ -98,26 +82,21 @@ export default function BulkLand({ title, buttonName, pageName }) {
             },
             source: "Dholera Times Website",
             tags: ["Dholera Investment", "Website Lead", "Bulk Land"],
-            recaptchaToken: token,
           }),
         },
       );
 
-      // Store response text before parsing
       const responseText = await response.text();
       console.log("TeleCRM Response:", responseText);
 
-      // Check response status and handle accordingly
       if (response.ok) {
         if (
           responseText === "OK" ||
           responseText.toLowerCase().includes("success")
         ) {
-          // Success handling
           setFormData({ fullName: "", email: "", phone: "" });
           setShowPopup(true);
 
-          // Update submission count
           const newCount = submissionCount + 1;
           setSubmissionCount(newCount);
           if (typeof window !== "undefined") {
@@ -143,15 +122,6 @@ export default function BulkLand({ title, buttonName, pageName }) {
       setErrorMessage(`Error submitting form: ${error.message}`);
     } finally {
       setIsLoading(false);
-
-      // Reset reCAPTCHA
-      if (window.grecaptcha && recaptchaRef.current) {
-        try {
-          window.grecaptcha.reset();
-        } catch (err) {
-          console.error("Error resetting reCAPTCHA:", err);
-        }
-      }
     }
   };
 
@@ -165,31 +135,7 @@ export default function BulkLand({ title, buttonName, pageName }) {
       return;
     }
 
-    if (!recaptchaLoaded || !window.grecaptcha) {
-      setErrorMessage(
-        "Security verification not loaded. Please refresh the page.",
-      );
-      setIsLoading(false);
-      return;
-    }
-
-    // Render reCAPTCHA if not already rendered
-    if (!recaptchaRef.current.innerHTML) {
-      try {
-        window.grecaptcha.render(recaptchaRef.current, {
-          sitekey: siteKey,
-          callback: onRecaptchaSuccess,
-          theme: "dark",
-        });
-      } catch (error) {
-        console.error("Error rendering reCAPTCHA:", error);
-        setErrorMessage("Error with verification. Please try again.");
-        setIsLoading(false);
-      }
-    } else {
-      // Execute existing reCAPTCHA
-      window.grecaptcha.execute();
-    }
+    await submitLead();
   };
 
   return (
@@ -240,12 +186,7 @@ export default function BulkLand({ title, buttonName, pageName }) {
                 </p>
               </div>
             ) : (
-              <form
-                onSubmit={handleSubmit}
-                onFocus={loadRecaptcha}
-                onPointerEnter={loadRecaptcha}
-                className="mt-12 space-y-6"
-              >
+              <form onSubmit={handleSubmit} className="mt-12 space-y-6">
                 {errorMessage && (
                   <div className="p-3 bg-red-500 bg-opacity-20 border border-red-400 text-red-100 rounded-lg text-sm">
                     {errorMessage}
@@ -291,16 +232,12 @@ export default function BulkLand({ title, buttonName, pageName }) {
                   </div>
                 </div>
 
-                <div className="flex justify-center">
-                  <div ref={recaptchaRef}></div>
-                </div>
-
                 <div>
                   <button
                     type="submit"
-                    disabled={isLoading || isDisabled || !recaptchaLoaded}
+                    disabled={isLoading || isDisabled}
                     className={`w-full font-bold text-white py-3 px-6 rounded-lg transition duration-300 ${
-                      isLoading || isDisabled || !recaptchaLoaded
+                      isLoading || isDisabled
                         ? "bg-gray-400 cursor-not-allowed"
                         : "bg-[#b69b5e] hover:bg-[#d3b36b] hover:shadow-lg active:scale-95"
                     }`}
