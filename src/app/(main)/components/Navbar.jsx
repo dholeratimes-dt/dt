@@ -11,14 +11,6 @@ import logo from "@/assets/dt.webp";
 import logo2 from "@/assets/dtlogobg.png";
 import call from "@/assets/call.svg";
 
-const PROJECTS_ROUTE = "/dholera-residential-plots";
-
-const SANITY_CONTENT_ROUTES = [
-  "/dholera-sir",
-  "/dholera-updates/blogs",
-  "/dholera-updates/latest-updates",
-];
-
 const DESKTOP_OVERFLOW = [
   { title: "Gallery", path: "/gallery/dholera-sir-progress" },
   { title: "About Us", path: "/about" },
@@ -27,7 +19,6 @@ const DESKTOP_OVERFLOW = [
 ];
 
 const MAIN_LINKS = [
-  { title: "Residential", path: PROJECTS_ROUTE },
   { title: "Dholera SIR", path: "/dholera-sir" },
   { title: "Dholera Blogs", path: "/dholera-updates/blogs" },
   { title: "Dholera News", path: "/dholera-updates/latest-updates" },
@@ -37,7 +28,6 @@ const MAIN_LINKS = [
 
 const MOBILE_LINKS = [
   { title: "About Dholera SIR", path: "/dholera-sir" },
-  { title: "Our Projects", path: PROJECTS_ROUTE },
   { title: "Dholera Blogs", path: "/dholera-updates/blogs" },
   { title: "Dholera News", path: "/dholera-updates/latest-updates" },
   { title: "Bulk Land Deals", path: "/bulk-land" },
@@ -56,15 +46,6 @@ export default function Navbar() {
   const closeTimerRef = useRef(null);
 
   const pathname = usePathname();
-  const showProjectLinks = SANITY_CONTENT_ROUTES.some(
-    (route) => pathname === route || pathname?.startsWith(`${route}/`),
-  );
-  const visibleMainLinks = showProjectLinks
-    ? MAIN_LINKS
-    : MAIN_LINKS.filter((item) => item.path !== PROJECTS_ROUTE);
-  const visibleMobileLinks = showProjectLinks
-    ? MOBILE_LINKS
-    : MOBILE_LINKS.filter((item) => item.path !== PROJECTS_ROUTE);
 
   useEffect(() => {
     trackPageView();
@@ -167,7 +148,7 @@ export default function Navbar() {
 
           <div className="hidden lg:flex items-center space-x-1">
             <div className="flex items-baseline space-x-1">
-              {visibleMainLinks.map((item) => (
+              {MAIN_LINKS.map((item) => (
                 <Link
                   key={item.path}
                   href={item.path}
@@ -275,7 +256,7 @@ export default function Navbar() {
           </div>
 
           <div className="space-y-2">
-            {visibleMobileLinks.map((item, index) => (
+            {MOBILE_LINKS.map((item, index) => (
               <Link
                 key={item.path}
                 href={item.path}
