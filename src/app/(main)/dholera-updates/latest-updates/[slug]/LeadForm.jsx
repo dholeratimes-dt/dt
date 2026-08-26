@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { FaUser, FaEnvelope, FaPhoneAlt } from "react-icons/fa";
 
 export default function LeadFormSlug({ title, headline, buttonName, onClose }) {
@@ -8,47 +8,11 @@ export default function LeadFormSlug({ title, headline, buttonName, onClose }) {
   const [isDisabled, setIsDisabled] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
-  const recaptchaRef = useRef(null);
-  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
     phone: "",
   });
-
-  useEffect(() => {
-    // Load reCAPTCHA script
-    const loadRecaptcha = () => {
-      if (typeof window !== "undefined" && !window.grecaptcha) {
-        const script = document.createElement("script");
-        script.src = "https://www.google.com/recaptcha/api.js";
-        script.async = true;
-        script.defer = true;
-        script.onload = () => setRecaptchaLoaded(true);
-        script.onerror = () => {
-          console.error("Failed to load reCAPTCHA script");
-          setRecaptchaLoaded(true); // Still allow form submission
-        };
-        document.head.appendChild(script);
-      } else if (window.grecaptcha) {
-        setRecaptchaLoaded(true);
-      }
-    };
-
-    loadRecaptcha();
-
-    // Cleanup function
-    return () => {
-      if (window.grecaptcha && recaptchaRef.current) {
-        try {
-          window.grecaptcha.reset();
-        } catch (e) {
-          console.log("reCAPTCHA cleanup error:", e);
-        }
-      }
-    };
-  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -70,7 +34,7 @@ export default function LeadFormSlug({ title, headline, buttonName, onClose }) {
       return false;
     }
 
-    if (!/^\d{10,15}$/.test(formData.phone.replace(/\D/g, ''))) {
+    if (!/^\d{10,15}$/.test(formData.phone.replace(/\D/g, ""))) {
       setErrorMessage("Please enter a valid phone number (10-15 digits)");
       return false;
     }
@@ -78,7 +42,7 @@ export default function LeadFormSlug({ title, headline, buttonName, onClose }) {
     return true;
   };
 
-  const onRecaptchaSuccess = async (token) => {
+  const submitLead = async () => {
     try {
       // Get submission count and last submission timestamp
       let submissionCount = localStorage.getItem("formSubmissionCount") || 0;
@@ -97,71 +61,53 @@ export default function LeadFormSlug({ title, headline, buttonName, onClose }) {
         }
       }
 
-      // Restrict submission after 20 attempts
+      // Restrict submission after 3 attempts
       if (submissionCount >= 3) {
-        setErrorMessage("You have reached the maximum submission limit. Try again after 24 hours.");
+        setErrorMessage(
+          "You have reached the maximum submission limit. Try again after 24 hours.",
+        );
         setIsDisabled(true);
         return;
       }
 
-      // API Request
-      const response = await fetch(
-        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
+      // API Request — internal route proxies to TeleCRM, keeping the API key server-side
+      const response = await fetch("/api/submit-form", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fields: {
+            name: formData.fullName,
+            phone: formData.phone,
+            email: formData.email,
+            source: "Dholera Times",
           },
-          body: JSON.stringify({
-            fields: {
-              name: formData.fullName,
-              phone: formData.phone,
-              email: formData.email,
-              source: "Dholera Times",
-            },
-            source: "Dholera Times Website",
-            tags: ["Dholera Investment", "Website Lead"],
-            recaptchaToken: token,
-          }),
-        }
-      );
+          source: "Dholera Times Website",
+          tags: ["Dholera Investment", "Website Lead"],
+        }),
+      });
 
-      // Store response text before parsing
-      const responseText = await response.text();
+      const data = await response.json();
 
-      // Check response status and handle accordingly
-      if (response.ok) {
-        if (
-          responseText === "OK" ||
-          responseText.toLowerCase().includes("success")
-        ) {
-          setFormData({ fullName: "", email: "", phone: "" });
-          setShowPopup(true);
+      if (response.ok && data.success) {
+        setFormData({ fullName: "", email: "", phone: "" });
+        setShowPopup(true);
 
-          // Increment submission count & store time
-          submissionCount++;
-          setSubmissionCount(submissionCount);
-          localStorage.setItem("formSubmissionCount", submissionCount);
-          localStorage.setItem("lastSubmissionTime", Date.now().toString());
-        } else {
-          console.log("Response Text:", responseText);
-          setErrorMessage("Submission received but with unexpected response");
-        }
+        // Increment submission count & store time
+        submissionCount++;
+        setSubmissionCount(submissionCount);
+        localStorage.setItem("formSubmissionCount", submissionCount);
+        localStorage.setItem("lastSubmissionTime", Date.now().toString());
       } else {
-        console.error("Server Error:", responseText);
-        throw new Error(responseText || "Submission failed");
+        console.error("Submission failed:", data.error);
+        setErrorMessage(data.error || "Submission failed. Please try again.");
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      setErrorMessage(`Error submitting form: ${error.message}`);
+      setErrorMessage("Something went wrong. Please try again.");
     } finally {
       setIsLoading(false);
-      
-      // Reset reCAPTCHA
-      if (window.grecaptcha && recaptchaRef.current) {
-        window.grecaptcha.reset();
-      }
     }
   };
 
@@ -175,37 +121,14 @@ export default function LeadFormSlug({ title, headline, buttonName, onClose }) {
       return;
     }
 
-    if (!recaptchaLoaded || !window.grecaptcha) {
-      setErrorMessage("Security verification not loaded. Please refresh the page.");
-      setIsLoading(false);
-      return;
-    }
-
-    // Render reCAPTCHA if not already rendered
-    if (!recaptchaRef.current.innerHTML) {
-      try {
-        window.grecaptcha.render(recaptchaRef.current, {
-          sitekey: siteKey,
-          callback: onRecaptchaSuccess,
-          theme: "light",
-        });
-      } catch (error) {
-        console.error("Error rendering reCAPTCHA:", error);
-        setErrorMessage("Error with verification. Please try again.");
-        setIsLoading(false);
-      }
-    } else {
-      // Execute existing reCAPTCHA
-      window.grecaptcha.execute();
-    }
+    await submitLead();
   };
 
-   const handleClose = () => {
-    if (onClose && typeof onClose === 'function') {
+  const handleClose = () => {
+    if (onClose && typeof onClose === "function") {
       onClose();
     }
   };
-
 
   return (
     <div className="relative">
@@ -222,7 +145,8 @@ export default function LeadFormSlug({ title, headline, buttonName, onClose }) {
 
         {isDisabled ? (
           <p className="text-center text-red-500 font-semibold">
-            You have reached the maximum submission limit. Try again after 24 hours.
+            You have reached the maximum submission limit. Try again after 24
+            hours.
           </p>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -253,17 +177,12 @@ export default function LeadFormSlug({ title, headline, buttonName, onClose }) {
               />
             </div>
 
-            {/* reCAPTCHA */}
-            <div className="flex justify-center">
-              <div ref={recaptchaRef}></div>
-            </div>
-
             {/* Submit Button */}
             <button
               type="submit"
-              disabled={isLoading || isDisabled || !recaptchaLoaded}
+              disabled={isLoading || isDisabled}
               className={`w-full p-4 text-white text-lg font-semibold rounded-xl shadow-md transition-all duration-300 ${
-                isLoading || isDisabled || !recaptchaLoaded
+                isLoading || isDisabled
                   ? "bg-gray-400 cursor-not-allowed"
                   : "bg-[#d7b56d] hover:bg-[#c6a45d] hover:shadow-lg active:scale-95"
               }`}
