@@ -1,5 +1,3 @@
-import React from "react";
-import { FaWhatsapp,  FaPhoneAlt } from "react-icons/fa";
 import Whatsapp from "./Whatsapp";
 
 export default function FloatingIcons() {
@@ -16,8 +14,7 @@ export default function FloatingIcons() {
         <FaWhatsapp className=" size-5 md:size-7" />
       </a> */}
 
-      <Whatsapp/>
-      <Whatsapp className="left-20"/>
+      <Whatsapp />
     </div>
   );
 }

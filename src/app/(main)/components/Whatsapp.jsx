@@ -26,7 +26,7 @@ export default function Whatsapp() {
     <div className="max-w-7xl mx-auto">
       <div
         onClick={handleWhatsAppClick}
-        className="fixed bottom-5 right-5 z-10 cursor-pointer"
+        className="fixed bottom-5 right-5 z-40 cursor-pointer"
       >
         <div className="relative h-20 w-20 rounded-full bg-white shadow-lg flex items-center justify-center">
           {/* Rotating Circular Text */}

@@ -1,6 +1,5 @@
 "use client";
 
-import { getImageProps } from "next/image";
 import { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -167,7 +166,7 @@ export default function HOME2() {
         </div>
 
         <div
-          className="hidden lg:flex absolute top-1/2 -translate-y-1/2 z-20 -translate-x-1/3"
+          className="hidden md:flex absolute top-1/2 -translate-y-1/2 z-20 -translate-x-1/3"
           style={{ right: "clamp(4.5rem, calc(3rem + 2.5vw), 7rem)" }}
         >
           <HeroForm isDisabled={isDisabled} onSuccess={handleFormSuccess} />
