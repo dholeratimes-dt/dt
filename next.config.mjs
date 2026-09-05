@@ -71,7 +71,7 @@ const nextConfig = {
       },
       {
         source: "/Blogs",
-        destination: "/Dholera-Updates/blogs",
+        destination: "/dholera-updates/blogs",
         permanent: true,
       },
       {
@@ -219,9 +219,9 @@ const nextConfig = {
       },
       {
         source:
-          "/dholera-updates/latest-news/dholera-international-airport-latest-news-2025",
+          "/dholera-updates/latest-news/dholera-international-airport-latest-news-2026",
         destination:
-          "/dholera-updates/latest-updates/dholera-international-airport-latest-news-2025",
+          "/dholera-updates/latest-updates/dholera-international-airport-latest-news-2026",
         permanent: true,
       },
       {
@@ -267,6 +267,20 @@ const nextConfig = {
           "/Dholera-SIR/delhi-mumbai-industrial-corridor-set-to-transform-india-with-usd-100-billion-investment",
         destination:
           "/dholera-updates/latest-updates/delhi-mumbai-industrial-corridor-set-to-transform-india-with-usd-100-billion-investment",
+        permanent: true,
+      },
+      {
+        source:
+          "/dholera-updates/blogs/why-dholera-s-connectivity-makes-it-a-top-real-estate-destination",
+        destination:
+          "/dholera-sir/connectivity-makes-dholera-the-next-big-investment-hub",
+        permanent: true,
+      },
+      {
+        source:
+          "/Dholera-Updates/blogs/why-dholera-s-connectivity-makes-it-a-top-real-estate-destination",
+        destination:
+          "/dholera-sir/connectivity-makes-dholera-the-next-big-investment-hub",
         permanent: true,
       },
     ];
