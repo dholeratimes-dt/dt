@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import FloatingIcons from "./components/Floating";
 import ScrollToTop from "./components/ScrollToTop";
 import Script from "next/script";
+import RageClickPopup from "./components/RageClickPopup";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -63,6 +64,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         <FloatingIcons />
         <Footer />
+        <RageClickPopup />
       </body>
     </html>
   );

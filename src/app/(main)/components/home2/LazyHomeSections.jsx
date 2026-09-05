@@ -13,11 +13,6 @@ const TestimonialPagination = dynamic(() => import("./Testimonials"), {
   loading: () => null,
 });
 
-const PopupForm = dynamic(() => import("./PopUpForm"), {
-  ssr: false,
-  loading: () => null,
-});
-
 export function LazyBulkLandSection() {
   return (
     <ObservedSection animation="scale-soft">
@@ -36,8 +31,4 @@ export function LazyTestimonialsSection() {
       <TestimonialPagination />
     </ObservedSection>
   );
-}
-
-export function LazyPopupForm() {
-  return <PopupForm />;
 }

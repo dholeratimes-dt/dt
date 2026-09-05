@@ -8,7 +8,6 @@ import FAQS from "./FAQs";
 import ObservedSection from "./ObservedSection_codex_temp";
 import {
   LazyBulkLandSection,
-  LazyPopupForm,
   LazyTestimonialsSection,
 } from "./LazyHomeSections";
 
@@ -41,7 +40,6 @@ export default function Home2Main() {
 
       <LazyTestimonialsSection />
 
-      <LazyPopupForm />
     </>
   );
 }
