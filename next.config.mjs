@@ -219,7 +219,7 @@ const nextConfig = {
       },
       {
         source:
-          "/dholera-updates/latest-news/dholera-international-airport-latest-news-2026",
+          "/dholera-updates/latest-news/dholera-international-airport-latest-news-2025",
         destination:
           "/dholera-updates/latest-updates/dholera-international-airport-latest-news-2026",
         permanent: true,
@@ -281,6 +281,13 @@ const nextConfig = {
           "/Dholera-Updates/blogs/why-dholera-s-connectivity-makes-it-a-top-real-estate-destination",
         destination:
           "/dholera-sir/connectivity-makes-dholera-the-next-big-investment-hub",
+        permanent: true,
+      },
+      {
+        source:
+          "/dholera-updates/latest-updates/dholera-connectivity-industrial-growth",
+        destination:
+          "/dholera-updates/blogs/dholera-connectivity-industrial-growth",
         permanent: true,
       },
     ];

@@ -42,7 +42,7 @@ export default function Footer() {
               {/* Social Media Links */}
               <div className="flex space-x-4 mb-6">
                 <a
-                  href="https://www.facebook.com/profile.php?id=61573763438050"
+                  href="https://www.facebook.com/share/19FvyusnzA/"
                   className="text-gray-400 hover:text-white transition-colors duration-300"
                   aria-label="Facebook"
                   target="_blank"
@@ -62,7 +62,7 @@ export default function Footer() {
                 </a>
 
                 <a
-                  href="https://www.instagram.com/dholeratimes/"
+                  href="https://www.instagram.com/dholeratimesofficial/"
                   className="text-gray-400 hover:text-white transition-colors duration-300"
                   aria-label="Instagram"
                   target="_blank"
