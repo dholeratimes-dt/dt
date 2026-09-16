@@ -348,25 +348,34 @@ import {
   ChevronDown,
   ChevronRight,
   Menu,
-  Phone,
   X,
 } from "lucide-react";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { trackPageView } from "@/lib/fbpixel";
-import logo from "@/assets/dt.webp";
 
-// Replace your existing Navbar component with this file. No extra stylesheet
-// or package is needed. The fixed header preserves the old component's layout
-// contract: retain your page's existing top offset (88px desktop / 80px mobile).
-// This component owns the existing page-view hook. Do not also fire that event
-// from another component or GTM unless your analytics setup deduplicates it.
+import logo from "@/assets/dt.webp";
+import { trackPageView } from "@/lib/fbpixel";
+
+/* =========================================================
+   NAVIGATION DATA
+========================================================= */
+
 const PRIMARY = [
-  { title: "Dholera SIR", path: "/dholera-sir" },
-  { title: "Residential Projects", path: "/dholera-residential-plots" },
-  { title: "Bulk Land", path: "/bulk-land" },
+  {
+    title: "Dholera SIR",
+    path: "/dholera-sir",
+  },
+  {
+    title: "Residential Projects",
+    path: "/dholera-residential-plots",
+  },
+  {
+    title: "Bulk Land",
+    path: "/bulk-land",
+  },
 ];
+
 const UPDATES = [
   {
     title: "Dholera News",
@@ -384,6 +393,7 @@ const UPDATES = [
     description: "See development on the ground",
   },
 ];
+
 const MORE = [
   {
     title: "About Us",
@@ -401,41 +411,100 @@ const MORE = [
     description: "Explore opportunities to work with us",
   },
 ];
-const CONTACT = { title: "Contact Us", path: "/contact/inquiry" };
+
+const CONTACT = {
+  title: "Contact Us",
+  path: "/contact/inquiry",
+};
+
+/* =========================================================
+   NAVBAR
+========================================================= */
 
 export default function Navbar() {
   const pathname = usePathname() || "/";
   const uid = useId().replace(/:/g, "");
+
   const [dropdown, setDropdown] = useState(null);
+  const [mobileMounted, setMobileMounted] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+
   const navRef = useRef(null);
-  const dialogRef = useRef(null);
   const menuButtonRef = useRef(null);
   const closeButtonRef = useRef(null);
+  const closeTimerRef = useRef(null);
   const lastTrackedPath = useRef(null);
 
-  const active = (path) => pathname === path || pathname.startsWith(`${path}/`);
+  /* =======================================================
+     ROUTE HELPERS
+  ======================================================= */
+
+  const active = (path) =>
+    pathname === path || pathname.startsWith(`${path}/`);
+
   const current = (path) => (pathname === path ? "page" : undefined);
 
-  const closeMobile = () => {
-    dialogRef.current?.close();
-    setMobileOpen(false);
-  };
+  /* =======================================================
+     MOBILE MENU
+  ======================================================= */
+
   const openMobile = () => {
     setDropdown(null);
-    const dialog = dialogRef.current;
-    if (!dialog || dialog.open) return;
-    dialog.showModal();
-    setMobileOpen(true);
-    closeButtonRef.current?.focus();
+
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current);
+    }
+
+    setMobileMounted(true);
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setMobileOpen(true);
+        closeButtonRef.current?.focus();
+      });
+    });
   };
+
+  const closeMobile = () => {
+    setMobileOpen(false);
+
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current);
+    }
+
+    closeTimerRef.current = setTimeout(() => {
+      setMobileMounted(false);
+
+      if (menuButtonRef.current?.getClientRects().length) {
+        menuButtonRef.current.focus();
+      }
+    }, 320);
+  };
+
+  /* =======================================================
+     CLEANUP
+  ======================================================= */
+
+  useEffect(() => {
+    return () => {
+      if (closeTimerRef.current) {
+        clearTimeout(closeTimerRef.current);
+      }
+    };
+  }, []);
+
+  /* =======================================================
+     PAGE TRACKING + ROUTE CHANGE
+  ======================================================= */
 
   useEffect(() => {
     setDropdown(null);
-    dialogRef.current?.close();
     setMobileOpen(false);
+    setMobileMounted(false);
+
     if (lastTrackedPath.current !== pathname) {
       lastTrackedPath.current = pathname;
+
       try {
         trackPageView();
       } catch (error) {
@@ -444,126 +513,322 @@ export default function Navbar() {
     }
   }, [pathname]);
 
+  /* =======================================================
+     LOCK BODY SCROLL
+  ======================================================= */
+
+  useEffect(() => {
+    if (!mobileMounted) return;
+
+    const body = document.body;
+    const previousOverflow = body.style.overflow;
+
+    body.style.overflow = "hidden";
+
+    return () => {
+      body.style.overflow = previousOverflow;
+    };
+  }, [mobileMounted]);
+
+  /* =======================================================
+     ESCAPE KEY
+  ======================================================= */
+
+  useEffect(() => {
+    if (!mobileMounted) return;
+
+    const handleEscape = (event) => {
+      if (event.key === "Escape") {
+        closeMobile();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [mobileMounted]);
+
+  /* =======================================================
+     DESKTOP OUTSIDE CLICK
+  ======================================================= */
+
   useEffect(() => {
     if (!dropdown) return;
-    const onPointerDown = (event) => {
-      if (!navRef.current?.contains(event.target)) setDropdown(null);
+
+    const handleOutside = (event) => {
+      if (!navRef.current?.contains(event.target)) {
+        setDropdown(null);
+      }
     };
-    document.addEventListener("pointerdown", onPointerDown);
-    return () => document.removeEventListener("pointerdown", onPointerDown);
+
+    document.addEventListener("pointerdown", handleOutside);
+
+    return () => {
+      document.removeEventListener("pointerdown", handleOutside);
+    };
   }, [dropdown]);
+
+  /* =======================================================
+     DESKTOP BREAKPOINT
+  ======================================================= */
 
   useEffect(() => {
     const desktop = window.matchMedia("(min-width: 1200px)");
-    const onResize = () => {
-      setDropdown(null);
+
+    const handleBreakpoint = () => {
       if (desktop.matches) {
-        dialogRef.current?.close();
+        setDropdown(null);
         setMobileOpen(false);
+        setMobileMounted(false);
       }
     };
-    desktop.addEventListener("change", onResize);
-    return () => desktop.removeEventListener("change", onResize);
+
+    desktop.addEventListener("change", handleBreakpoint);
+
+    return () => {
+      desktop.removeEventListener("change", handleBreakpoint);
+    };
   }, []);
 
-  useEffect(() => {
-    if (!mobileOpen) return;
-    const body = document.body;
-    const scrollY = window.scrollY;
-    const saved = {
-      position: body.style.position,
-      top: body.style.top,
-      left: body.style.left,
-      right: body.style.right,
-      overflow: body.style.overflow,
-    };
-    body.style.position = "fixed";
-    body.style.top = `-${scrollY}px`;
-    body.style.left = "0";
-    body.style.right = "0";
-    body.style.overflow = "hidden";
-    return () => {
-      Object.assign(body.style, saved);
-      window.scrollTo({ top: scrollY, behavior: "instant" });
-    };
-  }, [mobileOpen]);
-
-  const trackCall = () => {
-    try {
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: "call_click_organic",
-        lead_type: "call",
-        device: window.innerWidth <= 768 ? "mobile" : "desktop",
-      });
-    } catch (error) {
-      console.warn("Call tracking failed", error);
-    }
-  };
+  /* =======================================================
+     DESKTOP DROPDOWN
+  ======================================================= */
 
   const renderDropdown = (key, title, items) => {
     const expanded = dropdown === key;
+    const dropdownActive = items.some((item) => active(item.path));
+
     return (
       <div
-        className="dt-nav-disclosure"
-        onBlur={(event) => {
-          if (!event.currentTarget.contains(event.relatedTarget))
-            setDropdown((open) => (open === key ? null : open));
-        }}
+        className="relative"
         onKeyDown={(event) => {
           if (event.key === "Escape" && expanded) {
             event.preventDefault();
             setDropdown(null);
-            event.currentTarget.querySelector("button")?.focus();
           }
         }}
       >
         <button
           type="button"
-          className={`dt-nav-link ${items.some((item) => active(item.path)) ? "is-active" : ""}`}
           aria-expanded={expanded}
           aria-controls={`${uid}-${key}`}
           onClick={() => setDropdown(expanded ? null : key)}
+          className={`
+            relative
+            inline-flex
+            h-11
+            items-center
+            justify-center
+            gap-2
+            whitespace-nowrap
+            rounded-lg
+            px-3
+            text-[17px]
+            font-medium
+            leading-[26px]
+            transition-colors
+            duration-200
+            focus-visible:outline
+            focus-visible:outline-2
+            focus-visible:outline-offset-2
+            focus-visible:outline-white
+            ${
+              dropdownActive
+                ? "text-[#D6B873]"
+                : "text-[#D1D5DB] hover:bg-white/[0.06] hover:text-white"
+            }
+          `}
         >
-          {title}
+          <span>{title}</span>
+
           <ChevronDown
-            size={15}
+            size={17}
+            strokeWidth={1.8}
             aria-hidden="true"
-            className={expanded ? "dt-nav-rotated" : ""}
+            className={`
+              shrink-0
+              transition-transform
+              duration-200
+              ${expanded ? "rotate-180" : ""}
+            `}
           />
+
+          {dropdownActive && (
+            <span
+              aria-hidden="true"
+              className="
+                absolute
+                bottom-[2px]
+                left-3
+                right-3
+                h-[2px]
+                rounded-full
+                bg-[#B69B5E]
+              "
+            />
+          )}
         </button>
-        <div className="dt-nav-popover" id={`${uid}-${key}`} hidden={!expanded}>
-          <p className="dt-nav-eyebrow">
-            {key === "updates" ? "Explore the latest" : "Get to know us"}
-          </p>
-          {items.map((item) => (
-            <Link
-              key={item.path}
-              href={item.path}
-              aria-current={current(item.path)}
-              className={`dt-nav-popover-link ${active(item.path) ? "is-active" : ""}`}
-              onClick={() => setDropdown(null)}
+
+        {expanded && (
+          <div
+            id={`${uid}-${key}`}
+            className="
+              absolute
+              right-0
+              top-full
+              z-[70]
+              mt-3
+              w-[340px]
+              overflow-hidden
+              rounded-lg
+              border
+              border-[#E5E7EB]
+              bg-white
+              p-3
+              text-[#151F28]
+              shadow-[0_18px_48px_rgba(21,31,40,0.16)]
+            "
+          >
+            <p
+              className="
+                px-3
+                pb-3
+                pt-2
+                text-xs
+                font-semibold
+                uppercase
+                leading-[18px]
+                tracking-[1px]
+                text-[#63717A]
+              "
             >
-              <span>
-                <strong>{item.title}</strong>
-                <small>{item.description}</small>
-              </span>
-              <ChevronRight size={16} aria-hidden="true" />
-            </Link>
-          ))}
-        </div>
+              {key === "updates"
+                ? "Explore the latest"
+                : "Get to know us"}
+            </p>
+
+            {items.map((item) => (
+              <Link
+                key={item.path}
+                href={item.path}
+                aria-current={current(item.path)}
+                onClick={() => setDropdown(null)}
+                className={`
+                  group
+                  flex
+                  items-center
+                  justify-between
+                  gap-3
+                  rounded-lg
+                  px-3
+                  py-3
+                  transition-colors
+                  duration-200
+                  ${
+                    active(item.path)
+                      ? "bg-[#B69B5E]/15"
+                      : "hover:bg-[#F9FAFB]"
+                  }
+                `}
+              >
+                <span className="min-w-0">
+                  <strong
+                    className="
+                      block
+                      text-base
+                      font-medium
+                      leading-6
+                      text-[#151F28]
+                    "
+                  >
+                    {item.title}
+                  </strong>
+
+                  <small
+                    className="
+                      mt-1
+                      block
+                      text-sm
+                      font-normal
+                      leading-[22px]
+                      text-[#63717A]
+                    "
+                  >
+                    {item.description}
+                  </small>
+                </span>
+
+                <ChevronRight
+                  size={18}
+                  strokeWidth={1.8}
+                  aria-hidden="true"
+                  className="
+                    shrink-0
+                    text-[#63717A]
+                    transition-transform
+                    duration-200
+                    group-hover:translate-x-0.5
+                  "
+                />
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     );
   };
 
   return (
     <>
-      <header className="dt-navbar">
-        <div className="dt-nav-shell">
+      {/* =====================================================
+          MAIN NAVBAR
+      ====================================================== */}
+
+      <header
+        className="
+          sticky
+          top-0
+          z-50
+          m-0
+          w-full
+          border-b
+          border-white/10
+          bg-[#15232C]
+          p-0
+        "
+      >
+        <div
+          className="
+            flex
+            h-[72px]
+            w-full
+            items-center
+            gap-4
+            px-4
+            min-[414px]:px-6
+            min-[1200px]:h-[76px]
+            min-[1200px]:gap-5
+            min-[1200px]:px-8
+            min-[1440px]:px-10
+            min-[1600px]:px-12
+          "
+        >
+          {/* Logo */}
+
           <Link
             href="/"
-            className="dt-nav-brand"
             aria-label="Dholera Times home"
+            className="
+              inline-flex
+              shrink-0
+              items-center
+              focus-visible:outline
+              focus-visible:outline-2
+              focus-visible:outline-offset-2
+              focus-visible:outline-white
+            "
           >
             <Image
               src={logo}
@@ -571,13 +836,29 @@ export default function Navbar() {
               width={150}
               height={150}
               priority
-              className="dt-nav-logo"
+              className="
+                block
+                h-[52px]
+                w-auto
+                object-contain
+                min-[1200px]:h-[54px]
+              "
             />
           </Link>
+
+          {/* Desktop Navigation */}
+
           <nav
-            className="dt-nav-desktop"
-            aria-label="Main navigation"
             ref={navRef}
+            aria-label="Main navigation"
+            className="
+              ml-auto
+              hidden
+              items-center
+              justify-end
+              gap-1
+              min-[1200px]:flex
+            "
           >
             {PRIMARY.map((item) => (
               <Link
@@ -585,591 +866,532 @@ export default function Navbar() {
                 href={item.path}
                 aria-current={current(item.path)}
                 onClick={() => setDropdown(null)}
-                className={`dt-nav-link ${active(item.path) ? "is-active" : ""}`}
+                className={`
+                  relative
+                  inline-flex
+                  h-11
+                  items-center
+                  whitespace-nowrap
+                  rounded-lg
+                  px-3
+                  text-[17px]
+                  font-medium
+                  leading-[26px]
+                  transition-colors
+                  duration-200
+                  focus-visible:outline
+                  focus-visible:outline-2
+                  focus-visible:outline-offset-2
+                  focus-visible:outline-white
+                  ${
+                    active(item.path)
+                      ? "text-[#D6B873]"
+                      : "text-[#D1D5DB] hover:bg-white/[0.06] hover:text-white"
+                  }
+                `}
               >
                 {item.title}
+
+                {active(item.path) && (
+                  <span
+                    aria-hidden="true"
+                    className="
+                      absolute
+                      bottom-[2px]
+                      left-3
+                      right-3
+                      h-[2px]
+                      rounded-full
+                      bg-[#B69B5E]
+                    "
+                  />
+                )}
               </Link>
             ))}
+
             {renderDropdown("updates", "Updates", UPDATES)}
             {renderDropdown("more", "More", MORE)}
+
             <Link
               href={CONTACT.path}
-              className={`dt-nav-link ${active(CONTACT.path) ? "is-active" : ""}`}
               aria-current={current(CONTACT.path)}
               onClick={() => setDropdown(null)}
+              className={`
+                relative
+                inline-flex
+                h-11
+                items-center
+                whitespace-nowrap
+                rounded-lg
+                px-3
+                text-[17px]
+                font-medium
+                leading-[26px]
+                transition-colors
+                duration-200
+                focus-visible:outline
+                focus-visible:outline-2
+                focus-visible:outline-offset-2
+                focus-visible:outline-white
+                ${
+                  active(CONTACT.path)
+                    ? "text-[#D6B873]"
+                    : "text-[#D1D5DB] hover:bg-white/[0.06] hover:text-white"
+                }
+              `}
             >
               Contact Us
+
+              {active(CONTACT.path) && (
+                <span
+                  aria-hidden="true"
+                  className="
+                    absolute
+                    bottom-[2px]
+                    left-3
+                    right-3
+                    h-[2px]
+                    rounded-full
+                    bg-[#B69B5E]
+                  "
+                />
+              )}
             </Link>
           </nav>
-          <a
-            href="tel:+919958993549"
-            onClick={trackCall}
-            className="dt-nav-call dt-nav-desktop-call"
-          >
-            <Phone size={17} aria-hidden="true" />
-            <span>Speak to an expert</span>
-          </a>
-          <div className="dt-nav-mobile-actions">
-            <a
-              href="tel:+919958993549"
-              onClick={trackCall}
-              className="dt-nav-mobile-call"
-              aria-label="Call Dholera Times"
-            >
-              <Phone size={18} aria-hidden="true" />
-              <span>Call us</span>
-            </a>
+
+          {/* Mobile Menu Button */}
+
+          <div className="ml-auto flex items-center min-[1200px]:hidden">
             <button
               ref={menuButtonRef}
               type="button"
-              className="dt-nav-menu-button"
-              onClick={openMobile}
               aria-label="Open navigation menu"
               aria-expanded={mobileOpen}
               aria-controls={`${uid}-mobile`}
+              onClick={openMobile}
+              className="
+                grid
+                h-12
+                w-12
+                shrink-0
+                place-items-center
+                rounded-lg
+                border
+                border-white/[0.18]
+                bg-transparent
+                text-white
+                transition
+                duration-200
+                hover:border-white/30
+                hover:bg-white/[0.06]
+                active:scale-95
+                focus-visible:outline
+                focus-visible:outline-2
+                focus-visible:outline-offset-2
+                focus-visible:outline-white
+              "
             >
-              <Menu size={22} aria-hidden="true" />
-              <span>Menu</span>
+              <Menu size={26} strokeWidth={1.8} aria-hidden="true" />
             </button>
           </div>
         </div>
       </header>
 
-      <dialog
-        ref={dialogRef}
-        id={`${uid}-mobile`}
-        className="dt-nav-dialog"
-        aria-labelledby={`${uid}-title`}
-        onCancel={() => setMobileOpen(false)}
-        onClose={() => {
-          setMobileOpen(false);
-          if (menuButtonRef.current?.getClientRects().length)
-            menuButtonRef.current.focus();
-        }}
-        onClick={(event) => {
-          if (event.target === event.currentTarget) closeMobile();
-        }}
-      >
-        <div className="dt-nav-drawer">
-          <div className="dt-nav-drawer-header">
-            <Link
-              href="/"
-              onClick={closeMobile}
-              aria-label="Dholera Times home"
-              className="dt-nav-brand"
+      {/* =====================================================
+          MOBILE NAVIGATION
+      ====================================================== */}
+
+      {mobileMounted && (
+        <div
+          id={`${uid}-mobile`}
+          className="
+            fixed
+            inset-0
+            z-[100]
+            min-[1200px]:hidden
+          "
+        >
+          {/* Backdrop */}
+
+          <button
+            type="button"
+            aria-label="Close navigation menu"
+            onClick={closeMobile}
+            className={`
+              absolute
+              inset-0
+              h-full
+              w-full
+              cursor-default
+              bg-[#151F28]/60
+              backdrop-blur-[2px]
+              transition-opacity
+              duration-300
+              ${mobileOpen ? "opacity-100" : "opacity-0"}
+            `}
+          />
+
+          {/* Top Sheet */}
+
+          <div
+            className={`
+              absolute
+              inset-x-0
+              top-0
+              flex
+              h-[70vh]
+              h-[70dvh]
+              flex-col
+              overflow-hidden
+              rounded-b-xl
+              bg-[#15232C]
+              text-white
+              shadow-[0_20px_60px_rgba(21,31,40,0.28)]
+              transition-[transform,opacity]
+              duration-[380ms]
+              ease-[cubic-bezier(0.16,1,0.3,1)]
+              ${
+                mobileOpen
+                  ? "translate-y-0 opacity-100"
+                  : "-translate-y-full opacity-0"
+              }
+            `}
+          >
+            {/* Mobile Header */}
+
+            <div
+              className="
+                flex
+                h-[72px]
+                shrink-0
+                items-center
+                justify-between
+                border-b
+                border-white/10
+                px-4
+                min-[414px]:px-6
+              "
             >
-              <Image
-                src={logo}
-                alt="Dholera Times"
-                width={150}
-                height={150}
-                className="dt-nav-logo"
-              />
-            </Link>
-            <button
-              ref={closeButtonRef}
-              type="button"
-              onClick={closeMobile}
-              className="dt-nav-close"
-              aria-label="Close navigation menu"
+              <Link
+                href="/"
+                onClick={closeMobile}
+                aria-label="Dholera Times home"
+                className="inline-flex items-center"
+              >
+                <Image
+                  src={logo}
+                  alt="Dholera Times"
+                  width={150}
+                  height={150}
+                  className="block h-[52px] w-auto object-contain"
+                />
+              </Link>
+
+              <button
+                ref={closeButtonRef}
+                type="button"
+                aria-label="Close navigation menu"
+                onClick={closeMobile}
+                className="
+                  grid
+                  h-12
+                  w-12
+                  place-items-center
+                  rounded-lg
+                  border
+                  border-white/[0.16]
+                  bg-transparent
+                  text-white
+                  transition
+                  duration-200
+                  hover:border-white/30
+                  hover:bg-white/[0.06]
+                  active:scale-95
+                  focus-visible:outline
+                  focus-visible:outline-2
+                  focus-visible:outline-offset-2
+                  focus-visible:outline-white
+                "
+              >
+                <X size={26} strokeWidth={1.8} aria-hidden="true" />
+              </button>
+            </div>
+
+            {/* Scrollable Navigation */}
+
+            <div
+              className="
+                min-h-0
+                flex-1
+                overflow-y-auto
+                overscroll-contain
+                px-4
+                py-6
+                min-[414px]:px-6
+              "
             >
-              <X size={23} aria-hidden="true" />
-            </button>
-          </div>
-          <div className="dt-nav-drawer-scroll">
-            <p className="dt-nav-eyebrow" id={`${uid}-title`}>
-              Explore Dholera
-            </p>
-            <nav aria-label="Mobile navigation">
-              {PRIMARY.map((item) => (
-                <Link
-                  key={item.path}
-                  href={item.path}
-                  onClick={closeMobile}
-                  aria-current={current(item.path)}
-                  className={`dt-nav-mobile-primary ${active(item.path) ? "is-active" : ""}`}
+              <p
+                className="
+                  mb-3
+                  text-xs
+                  font-semibold
+                  uppercase
+                  leading-[18px]
+                  tracking-[1px]
+                  text-[#D6B873]
+                "
+              >
+                Explore Dholera
+              </p>
+
+              <nav aria-label="Mobile navigation">
+                {/* Primary */}
+
+                <div>
+                  {PRIMARY.map((item) => (
+                    <Link
+                      key={item.path}
+                      href={item.path}
+                      aria-current={current(item.path)}
+                      onClick={closeMobile}
+                      className={`
+                        group
+                        flex
+                        min-h-12
+                        items-center
+                        justify-between
+                        gap-3
+                        rounded-lg
+                        px-3
+                        py-3
+                        text-base
+                        font-medium
+                        leading-6
+                        transition
+                        duration-200
+                        ${
+                          active(item.path)
+                            ? "bg-[#B69B5E]/15 text-[#D6B873]"
+                            : "text-white hover:bg-white/[0.06]"
+                        }
+                      `}
+                    >
+                      <span>{item.title}</span>
+
+                      <ChevronRight
+                        size={18}
+                        strokeWidth={1.8}
+                        aria-hidden="true"
+                        className="
+                          shrink-0
+                          text-[#D1D5DB]
+                          transition-transform
+                          duration-200
+                          group-hover:translate-x-0.5
+                        "
+                      />
+                    </Link>
+                  ))}
+                </div>
+
+                {/* News & Resources */}
+
+                <div
+                  className="
+                    mt-4
+                    border-t
+                    border-white/[0.12]
+                    pt-4
+                  "
                 >
-                  {item.title}
-                  <ChevronRight size={18} aria-hidden="true" />
-                </Link>
-              ))}
-              <div className="dt-nav-mobile-group">
-                <p className="dt-nav-eyebrow">News & resources</p>
-                {UPDATES.map((item) => (
-                  <Link
-                    key={item.path}
-                    href={item.path}
-                    onClick={closeMobile}
-                    aria-current={current(item.path)}
-                    className={`dt-nav-mobile-secondary ${active(item.path) ? "is-active" : ""}`}
+                  <p
+                    className="
+                      mb-2
+                      px-3
+                      text-xs
+                      font-semibold
+                      uppercase
+                      leading-[18px]
+                      tracking-[1px]
+                      text-[#D1D5DB]
+                    "
                   >
-                    {item.title}
-                    <ChevronRight size={16} aria-hidden="true" />
-                  </Link>
-                ))}
-              </div>
-              <div className="dt-nav-mobile-group">
-                <p className="dt-nav-eyebrow">Dholera Times</p>
-                {[...MORE, CONTACT].map((item) => (
-                  <Link
-                    key={item.path}
-                    href={item.path}
-                    onClick={closeMobile}
-                    aria-current={current(item.path)}
-                    className={`dt-nav-mobile-secondary ${active(item.path) ? "is-active" : ""}`}
+                    News & resources
+                  </p>
+
+                  {UPDATES.map((item) => (
+                    <Link
+                      key={item.path}
+                      href={item.path}
+                      aria-current={current(item.path)}
+                      onClick={closeMobile}
+                      className={`
+                        group
+                        flex
+                        min-h-12
+                        items-center
+                        justify-between
+                        gap-3
+                        rounded-lg
+                        px-3
+                        py-3
+                        text-base
+                        font-medium
+                        leading-6
+                        transition
+                        duration-200
+                        ${
+                          active(item.path)
+                            ? "bg-[#B69B5E]/15 text-[#D6B873]"
+                            : "text-white hover:bg-white/[0.06]"
+                        }
+                      `}
+                    >
+                      <span>{item.title}</span>
+
+                      <ChevronRight
+                        size={17}
+                        strokeWidth={1.8}
+                        aria-hidden="true"
+                        className="
+                          shrink-0
+                          text-[#D1D5DB]
+                          transition-transform
+                          duration-200
+                          group-hover:translate-x-0.5
+                        "
+                      />
+                    </Link>
+                  ))}
+                </div>
+
+                {/* Company */}
+
+                <div
+                  className="
+                    mt-4
+                    border-t
+                    border-white/[0.12]
+                    pt-4
+                  "
+                >
+                  <p
+                    className="
+                      mb-2
+                      px-3
+                      text-xs
+                      font-semibold
+                      uppercase
+                      leading-[18px]
+                      tracking-[1px]
+                      text-[#D1D5DB]
+                    "
                   >
-                    {item.title}
-                    <ChevronRight size={16} aria-hidden="true" />
-                  </Link>
-                ))}
-              </div>
-            </nav>
-          </div>
-          <div className="dt-nav-drawer-footer">
-            <Link
-              href={CONTACT.path}
-              onClick={closeMobile}
-              className="dt-nav-enquire"
+                    Dholera Times
+                  </p>
+
+                  {[...MORE, CONTACT].map((item) => (
+                    <Link
+                      key={item.path}
+                      href={item.path}
+                      aria-current={current(item.path)}
+                      onClick={closeMobile}
+                      className={`
+                        group
+                        flex
+                        min-h-12
+                        items-center
+                        justify-between
+                        gap-3
+                        rounded-lg
+                        px-3
+                        py-3
+                        text-base
+                        font-medium
+                        leading-6
+                        transition
+                        duration-200
+                        ${
+                          active(item.path)
+                            ? "bg-[#B69B5E]/15 text-[#D6B873]"
+                            : "text-white hover:bg-white/[0.06]"
+                        }
+                      `}
+                    >
+                      <span>{item.title}</span>
+
+                      <ChevronRight
+                        size={17}
+                        strokeWidth={1.8}
+                        aria-hidden="true"
+                        className="
+                          shrink-0
+                          text-[#D1D5DB]
+                          transition-transform
+                          duration-200
+                          group-hover:translate-x-0.5
+                        "
+                      />
+                    </Link>
+                  ))}
+                </div>
+              </nav>
+            </div>
+
+            {/* Mobile CTA */}
+
+            <div
+              className="
+                shrink-0
+                border-t
+                border-white/[0.12]
+                bg-[#15232C]
+                px-4
+                pt-3
+                pb-[max(12px,env(safe-area-inset-bottom))]
+                min-[414px]:px-6
+              "
             >
-              Discuss your requirements
-              <ArrowUpRight size={19} aria-hidden="true" />
-            </Link>
-            <a
-              href="tel:+919958993549"
-              onClick={trackCall}
-              className="dt-nav-footer-call"
-            >
-              <Phone size={16} aria-hidden="true" />
-              +91 99589 93549
-            </a>
+              <Link
+                href={CONTACT.path}
+                onClick={closeMobile}
+                className="
+                  flex
+                  min-h-12
+                  w-full
+                  items-center
+                  justify-between
+                  gap-3
+                  rounded-lg
+                  bg-[#B69B5E]
+                  px-6
+                  py-3
+                  text-base
+                  font-semibold
+                  leading-6
+                  text-[#151F28]
+                  transition
+                  duration-200
+                  hover:bg-[#DDBF78]
+                  active:scale-[0.99]
+                  focus-visible:outline
+                  focus-visible:outline-2
+                  focus-visible:outline-offset-2
+                  focus-visible:outline-white
+                "
+              >
+                <span>Discuss your requirements</span>
+
+                <ArrowUpRight
+                  size={19}
+                  strokeWidth={1.9}
+                  aria-hidden="true"
+                />
+              </Link>
+            </div>
           </div>
         </div>
-      </dialog>
-
-      <style jsx global>{`
-        .dt-navbar,
-        .dt-nav-dialog {
-          --dt-ink: #15232c;
-          --dt-gold: #ddbf78;
-          --dt-line: #e4e8e9;
-          font-family: inherit;
-        }
-        .dt-navbar *,
-        .dt-nav-dialog * {
-          box-sizing: border-box;
-        }
-        .dt-navbar a,
-        .dt-nav-dialog a {
-          text-decoration: none;
-        }
-        .dt-navbar button,
-        .dt-nav-dialog button {
-          font: inherit;
-          cursor: pointer;
-        }
-        .dt-navbar a:focus-visible,
-        .dt-navbar button:focus-visible,
-        .dt-nav-dialog a:focus-visible,
-        .dt-nav-dialog button:focus-visible {
-          outline: 3px solid #aa7d2c;
-          outline-offset: 4px;
-        }
-        .dt-navbar {
-          position: fixed;
-          inset: 0 0 auto;
-          z-index: 40;
-          background: #15232c;
-          color: #fff;
-          border-bottom: 1px solid #ffffff14;
-          box-shadow: 0 5px 24px #101d2512;
-        }
-        .dt-nav-shell {
-          max-width: 1440px;
-          margin: 0 auto;
-          height: 88px;
-          padding: 0 32px;
-          display: flex;
-          align-items: center;
-          gap: 24px;
-        }
-        .dt-nav-brand {
-          display: inline-flex;
-          flex: 0 0 auto;
-          align-items: center;
-          border-radius: 6px;
-        }
-        .dt-nav-logo {
-          display: block;
-          width: auto;
-          height: 62px;
-          object-fit: contain;
-        }
-        .dt-nav-desktop {
-          display: flex;
-          align-items: center;
-          gap: 3px;
-          margin-left: auto;
-        }
-        .dt-nav-link {
-          position: relative;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          gap: 6px;
-          min-height: 44px;
-          padding: 10px 12px;
-          border: 0;
-          border-radius: 7px;
-          color: #e7edef;
-          background: transparent;
-          white-space: nowrap;
-          font-size: 14px;
-          font-weight: 500;
-          transition:
-            background 150ms,
-            color 150ms;
-        }
-        .dt-nav-link:hover,
-        .dt-nav-link[aria-expanded="true"] {
-          color: #fff;
-          background: #ffffff0d;
-        }
-        .dt-nav-link.is-active {
-          color: var(--dt-gold);
-        }
-        .dt-nav-link.is-active::after {
-          content: "";
-          position: absolute;
-          bottom: 3px;
-          left: 12px;
-          right: 12px;
-          height: 2px;
-          border-radius: 2px;
-          background: var(--dt-gold);
-        }
-        .dt-nav-link svg {
-          transition: transform 160ms;
-        }
-        .dt-nav-rotated {
-          transform: rotate(180deg);
-        }
-        .dt-nav-call {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          gap: 9px;
-          min-height: 44px;
-          padding: 12px 17px;
-          border: 1px solid var(--dt-gold);
-          border-radius: 7px;
-          color: #15232c;
-          background: var(--dt-gold);
-          font-size: 13px;
-          font-weight: 700;
-          white-space: nowrap;
-        }
-        .dt-nav-call:hover,
-        .dt-nav-enquire:hover {
-          background: #ebd49f;
-        }
-        .dt-nav-disclosure {
-          position: relative;
-        }
-        .dt-nav-popover {
-          position: absolute;
-          right: 0;
-          top: calc(100% + 15px);
-          width: 330px;
-          padding: 12px;
-          border: 1px solid var(--dt-line);
-          border-radius: 12px;
-          background: #fff;
-          color: var(--dt-ink);
-          box-shadow: 0 18px 50px #0b18252b;
-          animation: dt-nav-drop 150ms ease-out;
-        }
-        .dt-nav-popover[hidden] {
-          display: none;
-        }
-        .dt-nav-eyebrow {
-          margin: 0;
-          font-size: 11px;
-          font-weight: 700;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-          color: #697780;
-        }
-        .dt-nav-popover > .dt-nav-eyebrow {
-          padding: 8px 12px 10px;
-        }
-        .dt-nav-popover-link {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 10px;
-          padding: 13px 12px;
-          border-radius: 8px;
-          color: var(--dt-ink);
-        }
-        .dt-nav-popover-link:hover {
-          background: #f3f5f5;
-        }
-        .dt-nav-popover-link.is-active {
-          background: #f8f1df;
-        }
-        .dt-nav-popover-link strong {
-          display: block;
-          font-size: 14px;
-          font-weight: 600;
-        }
-        .dt-nav-popover-link small {
-          display: block;
-          margin-top: 4px;
-          font-size: 12px;
-          line-height: 1.5;
-          color: #63717a;
-        }
-        .dt-nav-mobile-actions {
-          display: none;
-        }
-        .dt-nav-dialog {
-          position: fixed;
-          inset: 0;
-          margin: 0;
-          padding: 0;
-          width: 100%;
-          max-width: none;
-          height: 100%;
-          height: 100dvh;
-          max-height: none;
-          border: 0;
-          background: transparent;
-          color: var(--dt-ink);
-          overflow: hidden;
-        }
-        .dt-nav-dialog::backdrop {
-          background: #0c192b80;
-          backdrop-filter: blur(3px);
-        }
-        .dt-nav-drawer {
-          width: min(440px, 100%);
-          height: 100%;
-          margin-left: auto;
-          background: #fff;
-          display: flex;
-          flex-direction: column;
-          box-shadow: -12px 0 50px #0c192b20;
-          animation: dt-nav-slide 200ms ease-out;
-        }
-        .dt-nav-drawer-header {
-          flex-shrink: 0;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          min-height: 88px;
-          padding: max(12px, env(safe-area-inset-top)) 24px 12px;
-          background: #15232c;
-        }
-        .dt-nav-close {
-          width: 44px;
-          height: 44px;
-          display: grid;
-          place-items: center;
-          color: #fff;
-          background: #ffffff0d;
-          border: 1px solid #ffffff24;
-          border-radius: 8px;
-        }
-        .dt-nav-close:hover {
-          background: #ffffff20;
-        }
-        .dt-nav-drawer-scroll {
-          min-height: 0;
-          flex: 1;
-          overflow-y: auto;
-          overscroll-behavior: contain;
-          padding: 24px;
-        }
-        .dt-nav-drawer-scroll > .dt-nav-eyebrow {
-          margin: 0 10px 12px;
-        }
-        .dt-nav-mobile-primary,
-        .dt-nav-mobile-secondary {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 12px;
-          color: var(--dt-ink);
-          padding: 12px 10px;
-          border-radius: 7px;
-          line-height: 1.4;
-        }
-        .dt-nav-mobile-primary {
-          font-size: 17px;
-          font-weight: 600;
-          min-height: 52px;
-        }
-        .dt-nav-mobile-secondary {
-          font-size: 15px;
-          min-height: 46px;
-        }
-        .dt-nav-mobile-primary svg,
-        .dt-nav-mobile-secondary svg {
-          flex-shrink: 0;
-          color: #7d8990;
-        }
-        .dt-nav-mobile-primary:hover,
-        .dt-nav-mobile-secondary:hover {
-          background: #f3f5f5;
-        }
-        .dt-nav-mobile-primary.is-active,
-        .dt-nav-mobile-secondary.is-active {
-          background: #f8f1df;
-          color: #6c501c;
-        }
-        .dt-nav-mobile-group {
-          margin-top: 16px;
-          padding-top: 18px;
-          border-top: 1px solid var(--dt-line);
-        }
-        .dt-nav-mobile-group > .dt-nav-eyebrow {
-          margin: 0 10px 8px;
-        }
-        .dt-nav-drawer-footer {
-          flex-shrink: 0;
-          padding: 16px 24px max(16px, env(safe-area-inset-bottom));
-          border-top: 1px solid var(--dt-line);
-          background: #f8faf9;
-        }
-        .dt-nav-enquire {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          gap: 12px;
-          min-height: 48px;
-          padding: 13px 16px;
-          border-radius: 7px;
-          background: var(--dt-gold);
-          color: #15232c;
-          font-size: 14px;
-          font-weight: 700;
-        }
-        .dt-nav-footer-call {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 8px;
-          min-height: 44px;
-          margin-top: 5px;
-          font-size: 14px;
-          color: #42545e;
-        }
-        @keyframes dt-nav-drop {
-          from {
-            opacity: 0;
-            transform: translateY(-5px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        @keyframes dt-nav-slide {
-          from {
-            transform: translateX(35px);
-            opacity: 0.7;
-          }
-          to {
-            transform: translateX(0);
-            opacity: 1;
-          }
-        }
-        @media (max-width: 1199px) {
-          .dt-nav-shell {
-            height: 80px;
-            padding: 0 24px;
-            gap: 16px;
-          }
-          .dt-nav-logo {
-            height: 56px;
-          }
-          .dt-nav-desktop,
-          .dt-nav-desktop-call {
-            display: none;
-          }
-          .dt-nav-mobile-actions {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-left: auto;
-          }
-          .dt-nav-mobile-call {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            min-height: 44px;
-            padding: 8px;
-            color: var(--dt-gold);
-            font-size: 14px;
-            font-weight: 600;
-            border-radius: 7px;
-          }
-          .dt-nav-menu-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            min-height: 44px;
-            padding: 9px 12px;
-            border: 1px solid #ffffff30;
-            border-radius: 7px;
-            background: transparent;
-            color: #fff;
-            font-size: 13px;
-          }
-          .dt-nav-menu-button:hover {
-            background: #ffffff0d;
-          }
-        }
-        @media (max-width: 380px) {
-          .dt-nav-shell {
-            padding: 0 16px;
-          }
-          .dt-nav-mobile-actions {
-            gap: 6px;
-          }
-          .dt-nav-mobile-call span {
-            display: none;
-          }
-          .dt-nav-mobile-call {
-            width: 44px;
-            justify-content: center;
-          }
-          .dt-nav-drawer-scroll,
-          .dt-nav-drawer-footer {
-            padding-left: 16px;
-            padding-right: 16px;
-          }
-        }
-        @media (max-height: 480px) {
-          .dt-nav-drawer-header {
-            min-height: 64px;
-          }
-          .dt-nav-drawer-header .dt-nav-logo {
-            height: 40px;
-          }
-          .dt-nav-drawer-footer {
-            padding-top: 8px;
-            padding-bottom: 8px;
-          }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .dt-navbar *,
-          .dt-nav-dialog * {
-            animation: none !important;
-            transition: none !important;
-          }
-        }
-      `}</style>
+      )}
     </>
   );
 }

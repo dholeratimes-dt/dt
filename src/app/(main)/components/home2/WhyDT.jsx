@@ -99,34 +99,6 @@ export default function WhyDT() {
                 support from enquiry to booking.
               </p>
             </div>
-
-            <div className="md:col-span-2">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {features.map((feature, index) => (
-                  <div
-                    key={index}
-                    className="westwyn-feature-card feature-item flex items-center space-x-4 p-4 bg-white rounded-lg shadow-sm"
-                  >
-                    <div className="flex-shrink-0 w-16 h-16 flex items-center justify-center">
-                      <div className="relative w-full h-full">
-                        <Image
-                          src={feature.icon}
-                          alt={feature.title}
-                          width={112}
-                          height={126}
-                          className="object-contain "
-                        />
-                      </div>
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg text-[#151f28]">
-                        {feature.title}
-                      </h3>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
         </section>
 

@@ -1,62 +1,126 @@
 "use client";
 
-import React, { useId } from "react";
 import Image from "next/image";
 import whatsapp from "@/assets/whatsapp.svg";
-import "./whatsapp.css";
 
 export default function Whatsapp() {
-  const id = useId();
-  const circlePathId = `circlePath-${id}`;
-
   const handleWhatsAppClick = () => {
-    if (typeof window !== "undefined") {
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: "whatsapp_click_organic",
-        lead_type: "whatsapp",
-        device: window.innerWidth <= 768 ? "mobile" : "desktop",
-      });
+    if (typeof window === "undefined") return;
 
-      window.open("https://wa.me/919958993549?text=Hi", "_blank");
-    }
+    window.dataLayer = window.dataLayer || [];
+
+    window.dataLayer.push({
+      event: "whatsapp_click_organic",
+      lead_type: "whatsapp",
+      device:
+        window.innerWidth <= 768
+          ? "mobile"
+          : "desktop",
+    });
+
+    window.open(
+      "https://wa.me/919958993549?text=Hi",
+      "_blank",
+      "noopener,noreferrer",
+    );
   };
 
   return (
-    <div className="max-w-7xl mx-auto">
-      <div
-        onClick={handleWhatsAppClick}
-        className="fixed bottom-5 right-5 z-40 cursor-pointer"
-      >
-        <div className="relative h-20 w-20 rounded-full bg-white shadow-lg flex items-center justify-center">
-          {/* Rotating Circular Text */}
-          <svg
-            className="absolute w-24 h-24 animate-spin-slow"
-            viewBox="0 0 100 100"
-          >
-            <defs>
-              <path
-                id={circlePathId}
-                d="M 50,50 m -30,0 a 30,30 0 1,1 60,0 a 30,30 0 1,1 -60,0"
-              />
-            </defs>
-            <text fill="black" fontSize="12" fontWeight="bold">
-              <textPath
-                href={`#${circlePathId}`}
-                startOffset="50%"
-                textAnchor="middle"
-              >
-                Let's Connect ● We're Online ●
-              </textPath>
-            </text>
-          </svg>
+    <button
+      type="button"
+      onClick={handleWhatsAppClick}
+      aria-label="Chat with us on WhatsApp"
+      className="
+        group
+        fixed
+        bottom-5
+        right-5
+        z-40
 
-          {/* WhatsApp Icon */}
-          <div className="absolute">
-            <Image src={whatsapp} alt="WhatsApp" width={50} height={50} />
-          </div>
-        </div>
-      </div>
-    </div>
+        h-[58px]
+        w-[58px]
+
+        border-0
+        bg-transparent
+        p-0
+
+        transition-transform
+        duration-300
+
+        hover:-translate-y-0.5
+        hover:scale-[1.04]
+
+        active:translate-y-0
+        active:scale-95
+
+        focus-visible:outline-none
+        focus-visible:ring-2
+        focus-visible:ring-[#25D366]
+        focus-visible:ring-offset-2
+
+        sm:bottom-6
+        sm:right-6
+        sm:h-[62px]
+        sm:w-[62px]
+      "
+    >
+      {/* WhatsApp icon only */}
+      <Image
+        src={whatsapp}
+        alt=""
+        width={62}
+        height={62}
+        className="
+          h-full
+          w-full
+          object-contain
+
+          drop-shadow-[0_6px_14px_rgba(0,0,0,0.18)]
+
+          transition-transform
+          duration-300
+
+          group-hover:scale-[1.02]
+        "
+      />
+
+      {/* Notification badge */}
+      <span
+        aria-label="1 unread message"
+        className="
+          absolute
+          -right-[2px]
+          -top-[3px]
+          z-10
+
+          flex
+          h-[23px]
+          min-w-[23px]
+          items-center
+          justify-center
+
+          rounded-full
+          border-2
+          border-white
+          bg-[#EF2B2D]
+
+          px-1
+
+          text-[12px]
+          font-bold
+          leading-none
+          text-white
+
+          shadow-[0_3px_8px_rgba(0,0,0,0.2)]
+
+          transition-transform
+          duration-300
+
+          group-hover:scale-110
+        "
+      >
+        1
+      </span>
+    </button>
   );
 }

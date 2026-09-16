@@ -60,7 +60,7 @@ export default function RootLayout({ children }) {
         <ScrollToTop />
         <Navbar />
 
-        <div className="pt-20">{children}</div>
+        <div>{children}</div>
 
         <FloatingIcons />
         <Footer />
