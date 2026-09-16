@@ -103,43 +103,35 @@ export default function WhyDT() {
         </section>
 
         <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-4">
-            {[
-              {
-                value: "7+ Projects",
-                label: "Successfully Sold Out",
-                icon: <Building className="h-8 w-8" />,
-              },
-              {
-                value: "957+ Plots",
-                label: "Plots Sold",
-                icon: <BadgeCheck className="h-8 w-8" />,
-              },
-              {
-                value: "561+",
-                label: "Happy Clients",
-                icon: <Users className="h-8 w-8" />,
-              },
-              {
-                value: "2 Lakh+ Sq. Yd",
-                label: "Dholera Land Sold",
-                icon: <AreaChart className="h-8 w-8" />,
-              },
-            ].map((stat, index) => (
-              <div
-                key={index}
-                className="bg-gray-900 p-3 rounded-lg text-center transform transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#d8b66e]/20 flex flex-col items-center"
-              >
-                <div className="text-[#d8b66e] mb-3">{stat.icon}</div>
-                <div className="text-2xl md:text-3xl font-semibold text-[#d8b66e] mb-2">
-                  {stat.value}
-                </div>
-                <div className="text-sm md:text-base text-gray-300">
-                  {stat.label}
-                </div>
+
+           <div className="md:col-span-2">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {features.map((feature, index) => (
+                  <div
+                    key={index}
+                    className="westwyn-feature-card feature-item flex items-center space-x-4 p-4 bg-white rounded-lg shadow-sm"
+                  >
+                    <div className="flex-shrink-0 w-16 h-16 flex items-center justify-center">
+                      <div className="relative w-full h-full">
+                        <Image
+                          src={feature.icon}
+                          alt={feature.title}
+                          width={112}
+                          height={126}
+                          className="object-contain "
+                        />
+                      </div>
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-lg text-[#151f28]">
+                        {feature.title}
+                      </h3>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
+      
         </div>
       </div>
     </>
