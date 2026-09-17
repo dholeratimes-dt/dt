@@ -637,7 +637,7 @@ export default function Navbar() {
             ${
               dropdownActive
                 ? "text-[#D6B873]"
-                : "text-[#D1D5DB] hover:bg-white/[0.06] hover:text-white"
+                : "text-white hover:bg-white/[0.06] hover:text-white"
             }
           `}
         >
@@ -665,7 +665,7 @@ export default function Navbar() {
                 right-3
                 h-[2px]
                 rounded-full
-                bg-[#B69B5E]
+                bg-[#426A77]
               "
             />
           )}
@@ -728,7 +728,7 @@ export default function Navbar() {
                   duration-200
                   ${
                     active(item.path)
-                      ? "bg-[#B69B5E]/15"
+                      ? "bg-[#426A77]/15"
                       : "hover:bg-[#F9FAFB]"
                   }
                 `}
@@ -795,7 +795,7 @@ export default function Navbar() {
           w-full
           border-b
           border-white/10
-          bg-[#15232C]
+          bg-[#14381F]
           p-0
         "
       >
@@ -886,7 +886,7 @@ export default function Navbar() {
                   ${
                     active(item.path)
                       ? "text-[#D6B873]"
-                      : "text-[#D1D5DB] hover:bg-white/[0.06] hover:text-white"
+                      : "text-white hover:bg-white/[0.06] hover:text-white"
                   }
                 `}
               >
@@ -902,7 +902,7 @@ export default function Navbar() {
                       right-3
                       h-[2px]
                       rounded-full
-                      bg-[#B69B5E]
+                      bg-[#426A77]
                     "
                   />
                 )}
@@ -936,7 +936,7 @@ export default function Navbar() {
                 ${
                   active(CONTACT.path)
                     ? "text-[#D6B873]"
-                    : "text-[#D1D5DB] hover:bg-white/[0.06] hover:text-white"
+                    : "text-white hover:bg-white/[0.06] hover:text-white"
                 }
               `}
             >
@@ -952,7 +952,7 @@ export default function Navbar() {
                     right-3
                     h-[2px]
                     rounded-full
-                    bg-[#B69B5E]
+                    bg-[#426A77]
                   "
                 />
               )}
@@ -1171,7 +1171,7 @@ export default function Navbar() {
                         duration-200
                         ${
                           active(item.path)
-                            ? "bg-[#B69B5E]/15 text-[#D6B873]"
+                            ? "bg-[#426A77]/15 text-[#D6B873]"
                             : "text-white hover:bg-white/[0.06]"
                         }
                       `}
@@ -1184,7 +1184,7 @@ export default function Navbar() {
                         aria-hidden="true"
                         className="
                           shrink-0
-                          text-[#D1D5DB]
+                          text-white
                           transition-transform
                           duration-200
                           group-hover:translate-x-0.5
@@ -1213,7 +1213,7 @@ export default function Navbar() {
                       uppercase
                       leading-[18px]
                       tracking-[1px]
-                      text-[#D1D5DB]
+                      text-white
                     "
                   >
                     News & resources
@@ -1242,7 +1242,7 @@ export default function Navbar() {
                         duration-200
                         ${
                           active(item.path)
-                            ? "bg-[#B69B5E]/15 text-[#D6B873]"
+                            ? "bg-[#426A77]/15 text-[#D6B873]"
                             : "text-white hover:bg-white/[0.06]"
                         }
                       `}
@@ -1255,7 +1255,7 @@ export default function Navbar() {
                         aria-hidden="true"
                         className="
                           shrink-0
-                          text-[#D1D5DB]
+                          text-white
                           transition-transform
                           duration-200
                           group-hover:translate-x-0.5
@@ -1284,7 +1284,7 @@ export default function Navbar() {
                       uppercase
                       leading-[18px]
                       tracking-[1px]
-                      text-[#D1D5DB]
+                      text-white
                     "
                   >
                     Dholera Times
@@ -1313,7 +1313,7 @@ export default function Navbar() {
                         duration-200
                         ${
                           active(item.path)
-                            ? "bg-[#B69B5E]/15 text-[#D6B873]"
+                            ? "bg-[#426A77]/15 text-[#D6B873]"
                             : "text-white hover:bg-white/[0.06]"
                         }
                       `}
@@ -1326,7 +1326,7 @@ export default function Navbar() {
                         aria-hidden="true"
                         className="
                           shrink-0
-                          text-[#D1D5DB]
+                          text-white
                           transition-transform
                           duration-200
                           group-hover:translate-x-0.5
@@ -1363,7 +1363,7 @@ export default function Navbar() {
                   justify-between
                   gap-3
                   rounded-lg
-                  bg-[#B69B5E]
+                  bg-[#426A77]
                   px-6
                   py-3
                   text-base
