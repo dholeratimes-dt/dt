@@ -138,6 +138,10 @@
 //   );
 // }
 
+
+
+
+
 "use client";
 
 import Image from "next/image";
@@ -187,129 +191,48 @@ export default function WhyDT() {
     <section
       id="westwyn-county"
       aria-labelledby="why-dt-heading"
-      className="
-        bg-[#14381F] bg-gradient-to-br
-        from-[#20472C] via-[#14381F] to-[#0D2918]
-        px-4 py-10
-        min-[414px]:px-6
-        md:px-8 md:py-14
-        lg:py-16
-        selection:bg-[#F4D35E] selection:text-[#14381F]
-      "
+      className="border-y  bg-[#F3E7EC] bg-gradient-to-br from-[#EEDDE4] via-[#F7EFF2] to-white px-4 py-10 text-[#39252E] selection:bg-[#E0A4B5] selection:text-[#39252E] min-[414px]:px-6 md:px-8 md:py-12 lg:py-16"
     >
       <div className="mx-auto w-full max-w-7xl">
-        {/* Section intro */}
-        <div
-          className="
-            grid grid-cols-1 gap-5
-            md:gap-6
-            lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]
-            lg:items-end lg:gap-14
-          "
-        >
-          <div>
-            <h2
-              id="why-dt-heading"
-              className="
-                max-w-[560px]
-                text-[28px] font-bold leading-[36px]
-                tracking-tight text-[#FFF8DC]
-                md:text-[32px] md:leading-[40px]
-                lg:text-[36px] lg:leading-[44px]
-              "
-            >
-              Dholera Times : Trusted Developers in Dholera
-            </h2>
-          </div>
-
-          <p
-            className="
-              max-w-[680px]
-              text-[16px] font-normal leading-[27px] text-[#DCE6D9]
-              md:text-[17px] md:leading-[28px]
-              lg:justify-self-end
-            "
+        <header className="grid min-w-0 grid-cols-1 gap-4 md:gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center lg:gap-12">
+          <h2
+            id="why-dt-heading"
+            className="max-w-[580px] text-[26px] font-semibold leading-[1.3] tracking-tight text-[#39252E] sm:text-[30px] md:text-[34px] lg:text-[38px]"
           >
+            Dholera Times :{" "}
+            <span className="text-[#8F2946]">Trusted Developers in Dholera</span>
+          </h2>
+          <p className="max-w-[640px] text-base font-normal leading-7 text-[#5C4851] lg:justify-self-end">
             Dholera Times helps buyers find residential plots in good
             locations across Dholera with registry-ready documents and full
             support from enquiry to booking.
           </p>
-        </div>
+        </header>
 
-        {/* Divider */}
-        <div
-          aria-hidden="true"
-          className="
-            my-7 h-px w-full
-            bg-gradient-to-r
-            from-[#F4D35E]/50 via-[#F4D35E]/20 to-transparent
-            md:my-9
-          "
-        />
+        <div aria-hidden="true" className="my-7 h-px w-full bg-gradient-to-r from-[#8F2946]/35 via-[#E0A4B5]/50 to-transparent md:my-9" />
 
-        {/* Features */}
-        <div
-          className="
-            grid grid-cols-1 gap-3
-            sm:grid-cols-2 sm:gap-4
-            lg:grid-cols-3 lg:gap-5
-          "
-        >
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-5">
           {features.map((feature) => (
             <article
               key={feature.title}
-              className="
-                flex min-h-[112px] min-w-0 items-center gap-4
-                rounded-2xl border border-[#F4D35E]/20
-                bg-[#1C4228] bg-gradient-to-br
-                from-[#244B30] to-[#183D24]
-                p-4
-                shadow-[0_4px_16px_-10px_rgba(0,0,0,0.25)]
-                transition-[border-color,box-shadow] duration-200
-                hover:border-[#F4D35E]/50
-                hover:shadow-[0_8px_24px_-12px_rgba(0,0,0,0.35)]
-                md:min-h-[122px] md:p-5
-                motion-reduce:transition-none
-              "
+              className="flex min-w-0 items-start gap-4 rounded-xl border border-[#DFC9D1] bg-white p-5 shadow-[0_6px_20px_rgba(116,32,57,0.05)] lg:min-h-[156px] lg:p-6"
             >
-              {/* Icon */}
-              <div
-                className="
-                  flex h-16 w-16 shrink-0 items-center justify-center
-                  rounded-xl border border-[#F4D35E]/40
-                  bg-[#FFF8DC] bg-gradient-to-br
-                  from-[#FFF8DC] to-[#FAE9A0]
-                  p-2.5
-                  md:h-[68px] md:w-[68px]
-                "
-              >
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#E0A4B5]/40 bg-[#F7EFF2] p-2">
                 <Image
                   src={feature.icon}
                   alt=""
                   width={72}
                   height={72}
+                  sizes="30px"
                   className="h-full w-full object-contain"
                 />
               </div>
 
-              {/* Text */}
-              <div className="min-w-0">
-                <h3
-                  className="
-                    text-[17px] font-semibold leading-[25px]
-                    text-[#FFF8DC]
-                    md:text-[18px] md:leading-[26px]
-                  "
-                >
+              <div className="min-w-0 flex-1">
+                <h3 className="text-base font-semibold leading-[25px] text-[#39252E] lg:text-[18px] lg:leading-[27px]">
                   {feature.title}
                 </h3>
-
-                <p
-                  className="
-                    mt-1.5 text-[14px] font-normal
-                    leading-[22px] text-[#DCE6D9]
-                  "
-                >
+                <p className="mt-2 text-base font-normal leading-6 text-[#5C4851]">
                   {feature.description}
                 </p>
               </div>

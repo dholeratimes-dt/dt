@@ -16,27 +16,27 @@ export default function Home2Main() {
     <>
       <HOME2 />
 
-      <ObservedSection animation="fade-up">
+      {/* <ObservedSection animation="fade-up"> */}
         <Dholera />
-      </ObservedSection>
+      {/* </ObservedSection> */}
 
       {/* <ObservedSection animation="fade-right">
         <AboutDT />
       </ObservedSection> */}
 
-      <ObservedSection animation="fade-up" delay={80}>
+      {/* <ObservedSection animation="fade-up" delay={80}> */}
         <LatestUpdates />
-      </ObservedSection>
+      {/* </ObservedSection> */}
 
-      <ObservedSection animation="fade-left">
+      {/* <ObservedSection animation="fade-left"> */}
         <WhyDT />
-      </ObservedSection>
+      {/* </ObservedSection> */}
 
       <LazyBulkLandSection />
 
-      <ObservedSection animation="fade-up">
+      {/* <ObservedSection animation="fade-up"> */}
         <FAQS />
-      </ObservedSection>
+      {/* </ObservedSection> */}
 
       <LazyTestimonialsSection />
 

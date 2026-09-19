@@ -395,100 +395,90 @@
 
 // export default HeroForm;
 
-
 "use client";
 
-import React, { useId, useRef, useState } from "react";
+import { useId, useRef, useState } from "react";
+import {
+  LoaderCircle,
+  Phone,
+  UserRound,
+} from "lucide-react";
 
-const HeroForm = ({ isDisabled: parentIsDisabled = false, onSuccess }) => {
+const LIMIT_MESSAGE =
+  "You have reached the maximum submission limit. Try again after 24 hours.";
+
+export default function HeroForm({
+  isDisabled: parentIsDisabled = false,
+  onSuccess,
+}) {
   const formId = useId();
   const submittingRef = useRef(false);
-
-  const [formData, setFormData] = useState({
-    fullName: "",
-    phone: "",
-  });
+  const nameRef = useRef(null);
+  const phoneRef = useRef(null);
+  const [formData, setFormData] = useState({ fullName: "", phone: "" });
+  const [fieldErrors, setFieldErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-
   const isDisabled = isLoading || parentIsDisabled;
+  const visibleError = errorMessage || (parentIsDisabled ? LIMIT_MESSAGE : "");
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setFormData((previous) => ({ ...previous, [name]: value }));
+    setFieldErrors((previous) => ({ ...previous, [name]: "" }));
     setErrorMessage("");
     setSuccessMessage("");
-  };
+  }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  async function handleSubmit(event) {
+    event.preventDefault();
     if (submittingRef.current) return;
-
     setErrorMessage("");
     setSuccessMessage("");
 
     if (parentIsDisabled) {
-      setErrorMessage(
-        "You have reached the maximum submission limit. Try again after 24 hours.",
-      );
+      setErrorMessage(LIMIT_MESSAGE);
       return;
     }
 
     const fullName = formData.fullName.trim();
     const cleanedPhone = formData.phone.replace(/\D/g, "");
-
-    if (!fullName || !formData.phone.trim()) {
-      setErrorMessage("Please fill in all required fields.");
-      return;
-    }
-
+    const errors = {};
+    if (!fullName) errors.fullName = "Please fill in all required fields.";
     if (!/^\d{10,15}$/.test(cleanedPhone)) {
-      setErrorMessage("Please enter a valid phone number (10–15 digits).");
+      errors.phone = "Please enter a valid phone number (10–15 digits).";
+    }
+    setFieldErrors(errors);
+    if (Object.keys(errors).length) {
+      (errors.fullName ? nameRef : phoneRef).current?.focus();
       return;
     }
 
     submittingRef.current = true;
     setIsLoading(true);
-
     try {
       const response = await fetch("/api/submit-form", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          fields: {
-            name: fullName,
-            phone: cleanedPhone,
-            source: "Dholera Times",
-          },
+          fields: { name: fullName, phone: cleanedPhone, source: "Dholera Times" },
           source: "Dholera Times",
           tags: ["Dholera Investment", "Website Lead", "Taboola Hero"],
         }),
       });
-
       const data = await response.json().catch(() => ({}));
-
       if (!response.ok) {
         throw new Error(
-          data.error ||
-            `Submission failed (${response.status}). Please try again.`,
+          data?.error || `Submission failed (${response.status}). Please try again.`,
         );
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-
       setErrorMessage(
         error instanceof Error
           ? error.message
-          : "Network error. Please check your connection and try again.",
+          : "Please check your connection and try again.",
       );
       return;
     } finally {
@@ -497,207 +487,134 @@ const HeroForm = ({ isDisabled: parentIsDisabled = false, onSuccess }) => {
     }
 
     setFormData({ fullName: "", phone: "" });
+    setFieldErrors({});
     setSuccessMessage("Thank you! Your callback request has been received.");
 
-    // Tracking errors should not affect a successful submission.
+    // Tracking or callback errors must not turn a saved lead into a form error.
     try {
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({ event: "lead_form_submitted" });
     } catch (error) {
       console.error("Unable to track form submission:", error);
     }
+    try {
+      await onSuccess?.();
+    } catch (error) {
+      console.error("Post-submission callback failed:", error);
+    }
+  }
 
-    onSuccess?.();
-  };
-
-  const inputClass = `
-    block min-h-[52px] w-full min-w-0 appearance-none
-    rounded-lg border-2 border-[#14381F]
-    bg-white py-3 pl-12 pr-4
-    text-[16px] font-normal leading-6 text-[#14381F]
-    placeholder:font-normal placeholder:text-[#6B7280]
-    caret-[#14381F] accent-[#14381F]
-    outline-none ring-0
-    transition-colors duration-200
-    enabled:hover:border-[#14381F]
-    focus:border-[#14381F]
-    focus:outline-none
-    focus:ring-2 focus:ring-[#14381F]/20
-    focus:ring-offset-0
-    focus-visible:border-[#14381F]
-    focus-visible:outline-none
-    focus-visible:ring-2 focus-visible:ring-[#14381F]/20
-    disabled:cursor-not-allowed disabled:opacity-70
-    motion-reduce:transition-none
-  `;
-
-  const iconClass =
-    "pointer-events-none absolute left-4 top-1/2 h-5 w-5 " +
-    "-translate-y-1/2 text-[#14381F]";
-
-  const limitMessage =
-    "You have reached the maximum submission limit. Try again after 24 hours.";
-
-  const visibleError =
-    errorMessage || (parentIsDisabled ? limitMessage : "");
+  function inputClass(hasError) {
+    return `block min-h-[52px] w-full min-w-0 appearance-none rounded-lg border bg-white py-3 pl-11 pr-4 text-base font-normal leading-6 text-[#39252E] caret-[#8F2946] placeholder:text-[#78656D] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white disabled:cursor-not-allowed disabled:bg-[#FAF7F8] disabled:text-[#78656D] motion-reduce:transition-none ${
+      hasError
+        ? "border-[#B91C1C] focus:border-[#B91C1C] focus:ring-[#B91C1C]"
+        : "border-[#9C838C] enabled:hover:border-[#8F2946] focus:border-[#8F2946] focus:ring-[#8F2946]"
+    }`;
+  }
 
   return (
     <form
+      noValidate
       onSubmit={handleSubmit}
       aria-labelledby={`${formId}-heading`}
       aria-describedby={visibleError ? `${formId}-error` : undefined}
       aria-busy={isLoading}
-      className="
-        mx-auto box-border w-full min-w-0 max-w-[420px]
-        rounded-2xl border-2 border-[#F4D35E]
-        bg-white p-5 text-[#14381F]
-        shadow-lg sm:p-6
-        selection:bg-[#F4D35E] selection:text-[#14381F]
-      "
+      className="mx-auto w-full min-w-0 max-w-[420px] overflow-hidden rounded-2xl border border-[#E0A4B5]/60 bg-white text-[#39252E] shadow-[0_16px_48px_rgba(116,32,57,0.10)] selection:bg-[#E0A4B5] selection:text-[#39252E]"
     >
-      <h3
-        id={`${formId}-heading`}
-        className="
-          m-0 text-left text-[20px] font-bold
-          leading-[28px] tracking-tight text-[#14381F]
-          sm:text-[22px] sm:leading-[30px]
-          lg:text-[24px] lg:leading-[32px]
-        "
-      >
-        Registry Ready Plots in Dholera Starting from ₹10 Lakh
-      </h3>
-
-      <div className="mt-6 space-y-5">
-        <div>
-          <div className="relative">
-            <svg
-              className={iconClass}
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <circle cx="12" cy="8" r="4" />
-              <path d="M4 21v-2a8 8 0 0 1 16 0v2" />
-            </svg>
-
-            <input
-              id={`${formId}-name`}
-              name="fullName"
-              type="text"
-              aria-label="Full name"
-              autoComplete="name"
-              autoCapitalize="words"
-              enterKeyHint="next"
-              placeholder="Enter your full name"
-              className={inputClass}
-              value={formData.fullName}
-              onChange={handleChange}
-              disabled={isDisabled}
-              required
-            />
-          </div>
-        </div>
-
-        <div>
-          <div className="relative">
-            <svg
-              className={iconClass}
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <rect x="6" y="2" width="12" height="20" rx="2" />
-              <path d="M10 18h4" />
-            </svg>
-
-            <input
-              id={`${formId}-phone`}
-              name="phone"
-              type="tel"
-              aria-label="Phone number"
-              inputMode="tel"
-              autoComplete="tel"
-              enterKeyHint="send"
-              placeholder="Enter your phone number"
-              className={inputClass}
-              value={formData.phone}
-              onChange={handleChange}
-              disabled={isDisabled}
-              required
-            />
-          </div>
-        </div>
-      </div>
-
-      {visibleError && (
-        <p
-          id={`${formId}-error`}
-          role="alert"
-          className="
-            mt-4 rounded-lg border border-[#F4D35E]
-            bg-[#F4D35E]/15 px-3 py-3
-            text-[14px] font-medium leading-[22px] text-[#14381F]
-          "
+      <div className="p-5 sm:p-6">
+        <h3
+          id={`${formId}-heading`}
+          className="text-[20px] font-semibold leading-7 tracking-tight text-[#8F2946] sm:text-[22px] sm:leading-[30px] lg:text-[24px] lg:leading-8"
         >
-          {visibleError}
-        </p>
-      )}
+          Registry Ready Plots in Dholera Starting from ₹10 Lakh
+        </h3>
 
-      <button
-        type="submit"
-        disabled={isDisabled}
-        className="
-          mt-6 inline-flex min-h-[52px] w-full
-          touch-manipulation items-center justify-center gap-2
-          rounded-lg border border-[#14381F]
-          bg-[#14381F] px-5 py-3
-          text-[17px] font-semibold leading-6 text-white
-          sm:text-[18px]
-          transition-colors duration-200
-          enabled:hover:bg-[#F4D35E]
-          enabled:hover:text-[#14381F]
-          focus:outline-none
-          focus-visible:ring-2 focus-visible:ring-[#14381F]
-          focus-visible:ring-offset-2
-          focus-visible:ring-offset-white
-          disabled:cursor-not-allowed disabled:opacity-60
-          sm:min-h-14
-          motion-reduce:transition-none
-        "
-      >
-        {isLoading && (
-          <span
-            aria-hidden="true"
-            className="
-              h-4 w-4 animate-spin rounded-full
-              border-2 border-current border-r-transparent
-              motion-reduce:animate-none
-            "
-          />
-        )}
+        <div className="mt-5 space-y-4">
+          <div>
+            <div className="relative">
+              <UserRound size={19} strokeWidth={1.7} aria-hidden="true"
+                className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-[#68565E]" />
+              <input
+                ref={nameRef}
+                id={`${formId}-name`}
+                name="fullName"
+                aria-label="Full name"
+                type="text"
+                autoComplete="name"
+                autoCapitalize="words"
+                enterKeyHint="next"
+                placeholder="Enter your full name"
+                className={inputClass(Boolean(fieldErrors.fullName))}
+                value={formData.fullName}
+                onChange={handleChange}
+                disabled={isDisabled}
+                aria-invalid={Boolean(fieldErrors.fullName)}
+                aria-describedby={fieldErrors.fullName ? `${formId}-name-error` : undefined}
+                required
+              />
+            </div>
+            {fieldErrors.fullName && (
+              <p id={`${formId}-name-error`} role="alert" className="mt-2 text-sm leading-5 text-[#B91C1C]">
+                {fieldErrors.fullName}
+              </p>
+            )}
+          </div>
 
-        {isLoading ? "Submitting…" : "Get A Call Back"}
-      </button>
+          <div>
+            <div className="relative">
+              <Phone size={18} strokeWidth={1.7} aria-hidden="true"
+                className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-[#68565E]" />
+              <input
+                ref={phoneRef}
+                id={`${formId}-phone`}
+                name="phone"
+                aria-label="Phone number"
+                type="tel"
+                inputMode="tel"
+                autoComplete="tel"
+                enterKeyHint="send"
+                placeholder="Enter your phone number"
+                className={inputClass(Boolean(fieldErrors.phone))}
+                value={formData.phone}
+                onChange={handleChange}
+                disabled={isDisabled}
+                aria-invalid={Boolean(fieldErrors.phone)}
+                aria-describedby={fieldErrors.phone ? `${formId}-phone-error` : undefined}
+                required
+              />
+            </div>
+            {fieldErrors.phone && (
+              <p id={`${formId}-phone-error`} role="alert" className="mt-2 text-sm leading-5 text-[#B91C1C]">
+                {fieldErrors.phone}
+              </p>
+            )}
+          </div>
+        </div>
 
-      <div role="status" aria-live="polite" aria-atomic="true">
-        {successMessage && (
-          <p className="mt-4 text-center text-[14px] font-medium leading-[22px] text-[#14381F]">
-            {successMessage}
+        {visibleError && (
+          <p id={`${formId}-error`} role="alert"
+            className="mt-4 rounded-lg border border-[#FECACA] bg-[#FEF2F2] px-3 py-3 text-sm leading-6 text-[#991B1B]">
+            {visibleError}
           </p>
         )}
+
+        <button
+          type="submit"
+          disabled={isDisabled}
+          className="mt-5 inline-flex min-h-[52px] w-full touch-manipulation items-center justify-center gap-2.5 rounded-lg border border-transparent bg-[#8F2946] px-5 py-3 text-base font-semibold leading-6 text-white transition-colors duration-200 enabled:cursor-pointer enabled:hover:bg-[#742039] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#8F2946] disabled:cursor-not-allowed disabled:bg-[#EAD9DF] disabled:text-[#68565E] motion-reduce:transition-none"
+        >
+          {isLoading && <LoaderCircle size={18} className="shrink-0 animate-spin motion-reduce:animate-none" aria-hidden="true" />}
+          {isLoading ? "Submitting…" : "Get A Call Back"}
+        </button>
+
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {successMessage && (
+            <p className="mt-4 flex items-start gap-2 rounded-lg border border-[#EAD9DF] bg-[#FAF7F8] p-3 text-sm leading-6 text-[#39252E]">
+              <span>{successMessage}</span>
+            </p>
+          )}
+        </div>
       </div>
     </form>
   );
-};
-
-export default HeroForm;
+}

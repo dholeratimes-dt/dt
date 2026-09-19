@@ -255,14 +255,13 @@
 //     </div>
 //   );
 // }
-
-
 "use client";
 
 import { useEffect, useState } from "react";
 
 export default function BulkLand({ title, buttonName, pageName }) {
   const [isLoading, setIsLoading] = useState(false);
+
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -279,11 +278,13 @@ export default function BulkLand({ title, buttonName, pageName }) {
     const storedCount = Number(
       localStorage.getItem("formSubmissionCount") || 0,
     );
+
     const lastSubmissionTime = Number(
       localStorage.getItem("lastSubmissionTime") || 0,
     );
 
     const twentyFourHours = 24 * 60 * 60 * 1000;
+
     const isWithinLimitPeriod =
       Date.now() - lastSubmissionTime < twentyFourHours;
 
@@ -361,6 +362,7 @@ export default function BulkLand({ title, buttonName, pageName }) {
       setErrorMessage(
         "Please enter a valid phone number between 10 and 15 digits.",
       );
+
       return false;
     }
 
@@ -368,7 +370,9 @@ export default function BulkLand({ title, buttonName, pageName }) {
       setErrorMessage(
         "You have reached the maximum submission limit. Please try again after 24 hours.",
       );
+
       setIsDisabled(true);
+
       return false;
     }
 
@@ -381,10 +385,12 @@ export default function BulkLand({ title, buttonName, pageName }) {
         "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
         {
           method: "POST",
+
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
           },
+
           body: JSON.stringify({
             fields: {
               name: formData.fullName,
@@ -392,7 +398,9 @@ export default function BulkLand({ title, buttonName, pageName }) {
               email: formData.email,
               source: getLeadSource(),
             },
+
             source: "Dholera Times Website",
+
             tags: [
               "Dholera Investment",
               "Website Lead",
@@ -418,6 +426,7 @@ export default function BulkLand({ title, buttonName, pageName }) {
         setErrorMessage(
           "Your submission was received with an unexpected response.",
         );
+
         return;
       }
 
@@ -430,12 +439,21 @@ export default function BulkLand({ title, buttonName, pageName }) {
       setShowPopup(true);
 
       const newCount = submissionCount + 1;
+
       setSubmissionCount(newCount);
 
-      localStorage.setItem("formSubmissionCount", newCount.toString());
-      localStorage.setItem("lastSubmissionTime", Date.now().toString());
+      localStorage.setItem(
+        "formSubmissionCount",
+        newCount.toString(),
+      );
+
+      localStorage.setItem(
+        "lastSubmissionTime",
+        Date.now().toString(),
+      );
 
       window.dataLayer = window.dataLayer || [];
+
       window.dataLayer.push({
         event: "lead_form",
         page_name: pageName,
@@ -446,8 +464,10 @@ export default function BulkLand({ title, buttonName, pageName }) {
       }
     } catch (error) {
       console.error("Error submitting form:", error);
+
       setErrorMessage(
-        error?.message || "Something went wrong. Please try again.",
+        error?.message ||
+          "Something went wrong. Please try again.",
       );
     } finally {
       setIsLoading(false);
@@ -464,46 +484,65 @@ export default function BulkLand({ title, buttonName, pageName }) {
     if (!validateForm()) return;
 
     setIsLoading(true);
+
     await submitLead();
   };
 
+  /*
+   * Light premium input styling using
+   * the burgundy and dusty-blush palette.
+   */
   const inputClass = `
     h-12 w-full min-w-0 appearance-none
-    rounded-lg border border-[#14381F]
-    bg-white px-4
-    text-[16px] font-normal leading-6 text-[#14381F]
-    placeholder:text-[#14381F]/65
-    caret-[#14381F] accent-[#14381F]
+    rounded-lg
+    border border-[#EAD9DF]
+    bg-[#F7EBEF]
+    px-4
+    text-[16px] font-normal leading-6 text-[#39252E]
+    placeholder:text-[#8A737D]
+    caret-[#8F2946]
+    accent-[#8F2946]
     outline-none ring-0
     transition-colors duration-200
-    hover:bg-[#FAFCF8]
-    focus:border-[#14381F]
-    focus:bg-white focus:outline-none
-    focus:ring-2 focus:ring-[#14381F]/20
+
+    hover:border-[#E0A4B5]
+    hover:bg-[#F5E8ED]
+
+    focus:border-[#8F2946]
+    focus:bg-white
+    focus:outline-none
+    focus:ring-2
+    focus:ring-[#8F2946]/15
     focus:ring-offset-0
-    focus-visible:border-[#14381F]
+
+    focus-visible:border-[#8F2946]
     focus-visible:outline-none
-    focus-visible:ring-2 focus-visible:ring-[#14381F]/20
-    disabled:cursor-not-allowed disabled:opacity-60
+    focus-visible:ring-2
+    focus-visible:ring-[#8F2946]/15
+
+    disabled:cursor-not-allowed
+    disabled:opacity-60
+
     motion-reduce:transition-none
   `;
 
   const labelClass = `
-    mb-2 block text-[14px] font-semibold
-    leading-5 text-[#14381F]
+    mb-2 block
+    text-[14px] font-semibold
+    leading-5 text-[#39252E]
   `;
 
   return (
     <section
       aria-labelledby="bulk-land-form-heading"
       className="
-        bg-[#FFFDF5] bg-gradient-to-br
-        from-[#FFFDF5] via-[#FAFCF8] to-[#EDF3EB]
+        bg-[#FAF7F8]
         px-4 py-10
         min-[414px]:px-6
         md:px-8 md:py-14
         lg:py-16
-        selection:bg-[#F4D35E] selection:text-[#14381F]
+        selection:bg-[#E0A4B5]
+        selection:text-[#39252E]
       "
     >
       <div className="mx-auto w-full max-w-7xl">
@@ -520,7 +559,7 @@ export default function BulkLand({ title, buttonName, pageName }) {
               id="bulk-land-form-heading"
               className="
                 text-[28px] font-bold leading-[36px]
-                tracking-tight text-[#14381F]
+                tracking-tight text-[#39252E]
                 md:text-[36px] md:leading-[44px]
                 lg:text-[40px] lg:leading-[48px]
               "
@@ -532,7 +571,7 @@ export default function BulkLand({ title, buttonName, pageName }) {
               className="
                 mt-4 max-w-[470px]
                 text-[16px] font-normal leading-[26px]
-                text-[#14381F]/80
+                text-[#68565E]
                 md:text-[17px] md:leading-[28px]
               "
             >
@@ -547,31 +586,35 @@ export default function BulkLand({ title, buttonName, pageName }) {
                 sm:grid-cols-2 lg:grid-cols-1
               "
             >
-              <div className="flex items-center gap-3 text-[14px] font-medium leading-5 text-[#14381F]">
+              <div className="flex items-center gap-3 text-[14px] font-medium leading-5 text-[#51414A]">
                 <span
                   aria-hidden="true"
                   className="
                     flex h-6 w-6 shrink-0 items-center justify-center
-                    rounded-full bg-[#F4D35E]
-                    text-[12px] font-bold text-[#14381F]
+                    rounded-full
+                    bg-[#F7EBEF]
+                    text-[12px] font-bold text-[#8F2946]
                   "
                 >
                   ✓
                 </span>
+
                 Quick response from our team
               </div>
 
-              <div className="flex items-center gap-3 text-[14px] font-medium leading-5 text-[#14381F]">
+              <div className="flex items-center gap-3 text-[14px] font-medium leading-5 text-[#51414A]">
                 <span
                   aria-hidden="true"
                   className="
                     flex h-6 w-6 shrink-0 items-center justify-center
-                    rounded-full bg-[#F4D35E]
-                    text-[12px] font-bold text-[#14381F]
+                    rounded-full
+                    bg-[#F7EBEF]
+                    text-[12px] font-bold text-[#8F2946]
                   "
                 >
                   ✓
                 </span>
+
                 No obligation enquiry
               </div>
             </div>
@@ -580,10 +623,12 @@ export default function BulkLand({ title, buttonName, pageName }) {
           {/* Right form area */}
           <div
             className="
-              min-w-0 rounded-2xl
-              border border-[#14381F]/15
-              bg-white p-5
-              shadow-[0_16px_44px_-24px_rgba(20,56,31,0.25)]
+              min-w-0
+              rounded-2xl
+              border border-[#E0A4B5]/60
+              bg-white
+              p-5
+              shadow-[0_16px_44px_-24px_rgba(116,32,57,0.18)]
               min-[414px]:p-6
               md:p-8
             "
@@ -592,16 +637,20 @@ export default function BulkLand({ title, buttonName, pageName }) {
               <div
                 className="
                   flex min-h-[280px] flex-col
-                  items-center justify-center text-center
+                  items-center justify-center
+                  text-center
                 "
                 role="status"
                 aria-live="polite"
               >
                 <div
                   className="
-                    mb-5 flex h-16 w-16 items-center justify-center
-                    rounded-full bg-[#F4D35E]/25
-                    ring-1 ring-[#F4D35E]/60
+                    mb-5
+                    flex h-16 w-16
+                    items-center justify-center
+                    rounded-full
+                    border border-[#E0A4B5]/50
+                    bg-[#F7EBEF]
                   "
                 >
                   <svg
@@ -609,7 +658,7 @@ export default function BulkLand({ title, buttonName, pageName }) {
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    className="h-8 w-8 text-[#14381F]"
+                    className="h-8 w-8 text-[#8F2946]"
                     aria-hidden="true"
                   >
                     <path
@@ -621,11 +670,17 @@ export default function BulkLand({ title, buttonName, pageName }) {
                   </svg>
                 </div>
 
-                <h3 className="text-[24px] font-bold leading-8 text-[#14381F]">
+                <h3 className="text-[24px] font-bold leading-8 text-[#39252E]">
                   Thank You!
                 </h3>
 
-                <p className="mt-2 max-w-[460px] text-[15px] leading-6 text-[#14381F]/70">
+                <p
+                  className="
+                    mt-2 max-w-[460px]
+                    text-[15px] leading-6
+                    text-[#68565E]
+                  "
+                >
                   Your request has been submitted successfully. Our team
                   will contact you shortly.
                 </p>
@@ -634,12 +689,19 @@ export default function BulkLand({ title, buttonName, pageName }) {
               <div className="flex min-h-[250px] items-center justify-center text-center">
                 <div
                   className="
-                    max-w-[470px] rounded-lg
-                    border border-[#F4D35E]/60
-                    bg-[#FFF8DC] px-5 py-4
+                    max-w-[470px]
+                    rounded-lg
+                    border border-[#E0A4B5]/60
+                    bg-[#F7EBEF]
+                    px-5 py-4
                   "
                 >
-                  <p className="text-[15px] font-medium leading-6 text-[#14381F]">
+                  <p
+                    className="
+                      text-[15px] font-medium leading-6
+                      text-[#51414A]
+                    "
+                  >
                     You have reached the maximum submission limit.
                     Please try again after 24 hours.
                   </p>
@@ -654,15 +716,24 @@ export default function BulkLand({ title, buttonName, pageName }) {
                 <div className="mb-6">
                   <h3
                     className="
-                      text-[20px] font-semibold leading-7 text-[#14381F]
+                      text-[20px] font-semibold leading-7
+                      text-[#39252E]
                       md:text-[22px] md:leading-[30px]
                     "
                   >
                     Tell us your requirements
                   </h3>
 
-                  <p className="mt-1 text-[14px] leading-[22px] text-[#14381F]/70">
-                    Fields marked with * are required.
+                  <p
+                    className="
+                      mt-1
+                      text-[14px] leading-[22px]
+                      text-[#68565E]
+                    "
+                  >
+                    Fields marked with{" "}
+                    <span className="text-[#8F2946]">*</span>{" "}
+                    are required.
                   </p>
                 </div>
 
@@ -670,11 +741,13 @@ export default function BulkLand({ title, buttonName, pageName }) {
                   <div
                     role="alert"
                     className="
-                      mb-5 rounded-lg
-                      border border-[#F4D35E]/60
-                      bg-[#FFF8DC] px-4 py-3
+                      mb-5
+                      rounded-lg
+                      border border-[#E0A4B5]/60
+                      bg-[#F7EBEF]
+                      px-4 py-3
                       text-[14px] font-medium leading-[22px]
-                      text-[#14381F]
+                      text-[#742039]
                     "
                   >
                     {errorMessage}
@@ -683,9 +756,15 @@ export default function BulkLand({ title, buttonName, pageName }) {
 
                 <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6">
                   <div className="min-w-0">
-                    <label htmlFor="fullName" className={labelClass}>
+                    <label
+                      htmlFor="fullName"
+                      className={labelClass}
+                    >
                       Full Name{" "}
-                      <span className="text-[#14381F]" aria-hidden="true">
+                      <span
+                        className="text-[#8F2946]"
+                        aria-hidden="true"
+                      >
                         *
                       </span>
                     </label>
@@ -705,9 +784,15 @@ export default function BulkLand({ title, buttonName, pageName }) {
                   </div>
 
                   <div className="min-w-0">
-                    <label htmlFor="phone" className={labelClass}>
+                    <label
+                      htmlFor="phone"
+                      className={labelClass}
+                    >
                       Phone Number{" "}
-                      <span className="text-[#14381F]" aria-hidden="true">
+                      <span
+                        className="text-[#8F2946]"
+                        aria-hidden="true"
+                      >
                         *
                       </span>
                     </label>
@@ -732,18 +817,29 @@ export default function BulkLand({ title, buttonName, pageName }) {
                   type="submit"
                   disabled={isLoading || isDisabled}
                   className="
-                    mt-6 inline-flex min-h-12 w-full
-                    touch-manipulation items-center justify-center gap-2
-                    rounded-lg bg-[#14381F] px-6 py-3
-                    text-[17px] font-semibold leading-6 text-white
+                    mt-6
+                    inline-flex min-h-12 w-full
+                    touch-manipulation
+                    items-center justify-center gap-2
+                    rounded-lg
+                    bg-[#8F2946]
+                    px-6 py-3
+                    text-[17px] font-semibold leading-6
+                    text-white
                     transition-colors duration-200
-                    enabled:hover:bg-[#20472C]
-                    enabled:active:bg-[#0D2918]
+
+                    enabled:hover:bg-[#742039]
+                    enabled:active:bg-[#642033]
+
                     focus-visible:outline-none
-                    focus-visible:ring-2 focus-visible:ring-[#14381F]
+                    focus-visible:ring-2
+                    focus-visible:ring-[#8F2946]
                     focus-visible:ring-offset-2
                     focus-visible:ring-offset-white
-                    disabled:cursor-not-allowed disabled:opacity-60
+
+                    disabled:cursor-not-allowed
+                    disabled:opacity-60
+
                     motion-reduce:transition-none
                   "
                 >
@@ -752,16 +848,24 @@ export default function BulkLand({ title, buttonName, pageName }) {
                       <span
                         aria-hidden="true"
                         className="
-                          h-4 w-4 animate-spin rounded-full
-                          border-2 border-white/40 border-t-white
+                          h-4 w-4
+                          animate-spin
+                          rounded-full
+                          border-2
+                          border-white/30
+                          border-t-white
                           motion-reduce:animate-none
                         "
                       />
+
                       Submitting...
                     </>
                   ) : (
                     <>
-                      <span>{buttonName || "Get A Call Back"}</span>
+                      <span>
+                        {buttonName || "Get A Call Back"}
+                      </span>
+
                       <span aria-hidden="true">→</span>
                     </>
                   )}

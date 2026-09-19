@@ -340,26 +340,1682 @@
 //   );
 // }
 
+
+
+
+// "use client";
+
+// import {
+//   useEffect,
+//   useId,
+//   useRef,
+//   useState,
+// } from "react";
+
+// import {
+//   ChevronDown,
+//   ChevronRight,
+//   Menu,
+//   X,
+// } from "lucide-react";
+
+// import { FaWhatsapp } from "react-icons/fa";
+
+// import Image from "next/image";
+// import Link from "next/link";
+// import { usePathname } from "next/navigation";
+
+// import logo from "@/assets/dt.webp";
+// import { trackPageView } from "@/lib/fbpixel";
+
+// /* ============================================================
+//    NAVIGATION DATA
+// ============================================================ */
+
+// const PRIMARY = [
+//   {
+//     title: "Dholera SIR",
+//     path: "/dholera-sir",
+//   },
+//   {
+//     title: "Residential Projects",
+//     path: "/dholera-residential-plots",
+//   },
+//   {
+//     title: "Bulk Land",
+//     path: "/bulk-land",
+//   },
+// ];
+
+// const UPDATES = [
+//   {
+//     title: "Dholera News",
+//     path: "/dholera-updates/latest-updates",
+//     description: "Infrastructure and development updates",
+//   },
+//   {
+//     title: "Blogs & Insights",
+//     path: "/dholera-updates/blogs",
+//     description: "Explore Dholera in more detail",
+//   },
+//   {
+//     title: "Photo Gallery",
+//     path: "/gallery/dholera-sir-progress",
+//     description: "See development on the ground",
+//   },
+// ];
+
+// const MORE = [
+//   {
+//     title: "About Us",
+//     path: "/about",
+//     description: "Get to know Dholera Times",
+//   },
+//   {
+//     title: "NRI Guide",
+//     path: "/nri-investment-guide-dholera",
+//     description: "Information for overseas buyers",
+//   },
+//   {
+//     title: "Channel Partner",
+//     path: "/channel-partner",
+//     description: "Explore opportunities to work with us",
+//   },
+// ];
+
+// const CONTACT = {
+//   title: "Contact Us",
+//   path: "/contact/inquiry",
+// };
+
+// /* ============================================================
+//    COMPONENT
+// ============================================================ */
+
+// export default function Navbar({
+//   whatsappNumber = "",
+// }) {
+//   const pathname = usePathname() || "/";
+//   const uid = useId().replace(/:/g, "");
+
+//   const [dropdown, setDropdown] =
+//     useState(null);
+
+//   const [mobileOpen, setMobileOpen] =
+//     useState(false);
+
+//   const [
+//     mobileVisible,
+//     setMobileVisible,
+//   ] = useState(false);
+
+//   const [scrolled, setScrolled] =
+//     useState(false);
+
+//   const closeTimerRef = useRef(null);
+//   const frameRef = useRef(null);
+//   const navRef = useRef(null);
+//   const dialogRef = useRef(null);
+//   const menuButtonRef = useRef(null);
+//   const lastTrackedPath =
+//     useRef(null);
+
+//   const isHome = pathname === "/";
+
+//   /* ============================================================
+//      ROUTE HELPERS
+//   ============================================================ */
+
+//   const active = (path) =>
+//     pathname === path ||
+//     pathname.startsWith(
+//       `${path}/`,
+//     );
+
+//   const current = (path) =>
+//     pathname === path
+//       ? "page"
+//       : undefined;
+
+//   /* ============================================================
+//      WHATSAPP
+//   ============================================================ */
+
+//   const number = String(
+//     whatsappNumber,
+//   ).replace(/[^0-9]/g, "");
+
+//   const hasWhatsApp =
+//     /^[1-9][0-9]{7,14}$/.test(
+//       number,
+//     );
+
+//   const enquiryHref = hasWhatsApp
+//     ? `https://wa.me/${number}?text=${encodeURIComponent(
+//         "Hello Dholera Times, I would like to explore properties in Dholera.",
+//       )}`
+//     : CONTACT.path;
+
+//   /* ============================================================
+//      MOBILE MENU
+//   ============================================================ */
+
+//   function closeMobile(
+//     restoreFocus = true,
+//   ) {
+//     cancelAnimationFrame(
+//       frameRef.current,
+//     );
+
+//     clearTimeout(
+//       closeTimerRef.current,
+//     );
+
+//     setMobileVisible(false);
+
+//     const reduceMotion =
+//       window.matchMedia(
+//         "(prefers-reduced-motion: reduce)",
+//       ).matches;
+
+//     const delay =
+//       reduceMotion ? 0 : 250;
+
+//     closeTimerRef.current =
+//       setTimeout(() => {
+//         dialogRef.current?.close();
+
+//         setMobileOpen(false);
+
+//         if (
+//           restoreFocus &&
+//           menuButtonRef.current
+//             ?.getClientRects()
+//             .length
+//         ) {
+//           menuButtonRef.current.focus();
+//         }
+//       }, delay);
+//   }
+
+//   function openMobile() {
+//     clearTimeout(
+//       closeTimerRef.current,
+//     );
+
+//     cancelAnimationFrame(
+//       frameRef.current,
+//     );
+
+//     setDropdown(null);
+
+//     setMobileVisible(false);
+
+//     if (
+//       !dialogRef.current?.open
+//     ) {
+//       dialogRef.current?.showModal();
+//     }
+
+//     setMobileOpen(true);
+
+//     frameRef.current =
+//       requestAnimationFrame(() => {
+//         frameRef.current =
+//           requestAnimationFrame(() => {
+//             setMobileVisible(true);
+//           });
+//       });
+//   }
+
+//   /* ============================================================
+//      SCROLL STATE
+//   ============================================================ */
+
+//   useEffect(() => {
+//     const handleScroll = () => {
+//       setScrolled(
+//         window.scrollY > 20,
+//       );
+//     };
+
+//     handleScroll();
+
+//     window.addEventListener(
+//       "scroll",
+//       handleScroll,
+//       {
+//         passive: true,
+//       },
+//     );
+
+//     return () => {
+//       window.removeEventListener(
+//         "scroll",
+//         handleScroll,
+//       );
+//     };
+//   }, []);
+
+//   /* ============================================================
+//      CLEANUP
+//   ============================================================ */
+
+//   useEffect(
+//     () => () => {
+//       clearTimeout(
+//         closeTimerRef.current,
+//       );
+
+//       cancelAnimationFrame(
+//         frameRef.current,
+//       );
+//     },
+//     [],
+//   );
+
+//   /* ============================================================
+//      ROUTE CHANGE
+//   ============================================================ */
+
+//   useEffect(() => {
+//     clearTimeout(
+//       closeTimerRef.current,
+//     );
+
+//     cancelAnimationFrame(
+//       frameRef.current,
+//     );
+
+//     setMobileVisible(false);
+
+//     setDropdown(null);
+
+//     dialogRef.current?.close();
+
+//     setMobileOpen(false);
+
+//     if (
+//       lastTrackedPath.current !==
+//       pathname
+//     ) {
+//       lastTrackedPath.current =
+//         pathname;
+
+//       try {
+//         trackPageView();
+//       } catch (error) {
+//         console.warn(
+//           "Navbar page-view tracking failed",
+//           error,
+//         );
+//       }
+//     }
+//   }, [pathname]);
+
+//   /* ============================================================
+//      BODY SCROLL LOCK
+//   ============================================================ */
+
+//   useEffect(() => {
+//     if (!mobileOpen) return;
+
+//     const alreadyLocked =
+//       document.body.classList.contains(
+//         "overflow-hidden",
+//       );
+
+//     document.body.classList.add(
+//       "overflow-hidden",
+//     );
+
+//     return () => {
+//       if (!alreadyLocked) {
+//         document.body.classList.remove(
+//           "overflow-hidden",
+//         );
+//       }
+//     };
+//   }, [mobileOpen]);
+
+//   /* ============================================================
+//      DROPDOWN OUTSIDE CLICK
+//   ============================================================ */
+
+//   useEffect(() => {
+//     if (!dropdown) return;
+
+//     const dismiss = (event) => {
+//       if (
+//         !navRef.current?.contains(
+//           event.target,
+//         )
+//       ) {
+//         setDropdown(null);
+//       }
+//     };
+
+//     document.addEventListener(
+//       "pointerdown",
+//       dismiss,
+//     );
+
+//     document.addEventListener(
+//       "focusin",
+//       dismiss,
+//     );
+
+//     return () => {
+//       document.removeEventListener(
+//         "pointerdown",
+//         dismiss,
+//       );
+
+//       document.removeEventListener(
+//         "focusin",
+//         dismiss,
+//       );
+//     };
+//   }, [dropdown]);
+
+//   /* ============================================================
+//      RESPONSIVE CLEANUP
+//   ============================================================ */
+
+//   useEffect(() => {
+//     const desktop =
+//       window.matchMedia(
+//         "(min-width: 1280px)",
+//       );
+
+//     const handleChange = () => {
+//       setDropdown(null);
+
+//       if (desktop.matches) {
+//         clearTimeout(
+//           closeTimerRef.current,
+//         );
+
+//         cancelAnimationFrame(
+//           frameRef.current,
+//         );
+
+//         setMobileVisible(false);
+
+//         const hadFocus =
+//           dialogRef.current?.contains(
+//             document.activeElement,
+//           );
+
+//         dialogRef.current?.close();
+
+//         setMobileOpen(false);
+
+//         if (hadFocus) {
+//           navRef.current
+//             ?.querySelector("a")
+//             ?.focus();
+//         }
+//       }
+//     };
+
+//     desktop.addEventListener(
+//       "change",
+//       handleChange,
+//     );
+
+//     return () =>
+//       desktop.removeEventListener(
+//         "change",
+//         handleChange,
+//       );
+//   }, []);
+
+//   /* ============================================================
+//      ENQUIRY CTA
+//   ============================================================ */
+
+//   function enquiry(
+//     className,
+//     onClick,
+//   ) {
+//     return (
+//       <Link
+//         href={enquiryHref}
+//         className={className}
+//         onClick={onClick}
+//         target={
+//           hasWhatsApp
+//             ? "_blank"
+//             : undefined
+//         }
+//         rel={
+//           hasWhatsApp
+//             ? "noopener noreferrer"
+//             : undefined
+//         }
+//         aria-label={
+//           hasWhatsApp
+//             ? "Enquire on WhatsApp (opens in a new tab)"
+//             : undefined
+//         }
+//       >
+//         <FaWhatsapp
+//           size={22}
+//           aria-hidden="true"
+//           className="
+//             shrink-0
+//             text-[#25D366]
+//           "
+//         />
+
+//         <span className="whitespace-nowrap">
+//           Enquire now
+//         </span>
+//       </Link>
+//     );
+//   }
+
+//   /* ============================================================
+//      DESKTOP DROPDOWN
+//   ============================================================ */
+
+//   function renderDropdown(
+//     key,
+//     title,
+//     items,
+//   ) {
+//     const expanded =
+//       dropdown === key;
+
+//     const containsActive =
+//       items.some((item) =>
+//         active(item.path),
+//       );
+
+//     return (
+//       <div
+//         className="relative"
+//         onMouseEnter={() =>
+//           setDropdown(key)
+//         }
+//         onMouseLeave={() =>
+//           setDropdown(null)
+//         }
+//         onBlur={(event) => {
+//           if (
+//             !event.currentTarget.contains(
+//               event.relatedTarget,
+//             )
+//           ) {
+//             setDropdown(null);
+//           }
+//         }}
+//         onKeyDown={(event) => {
+//           if (
+//             event.key ===
+//               "Escape" &&
+//             expanded
+//           ) {
+//             event.preventDefault();
+
+//             setDropdown(null);
+
+//             event.currentTarget
+//               .querySelector("button")
+//               ?.focus();
+//           }
+//         }}
+//       >
+//         <button
+//           type="button"
+//           aria-expanded={expanded}
+//           aria-controls={`${uid}-${key}`}
+//           onClick={() =>
+//             setDropdown(
+//               expanded
+//                 ? null
+//                 : key,
+//             )
+//           }
+//           className="
+//             group
+//             relative
+
+//             inline-flex
+//             min-h-[48px]
+
+//             items-center
+//             justify-center
+
+//             gap-1.5
+
+//             whitespace-nowrap
+
+//             px-3
+//             py-2.5
+
+//             text-[17px]
+//             font-semibold
+//             leading-6
+
+//             text-white
+
+//             transition-colors
+//             duration-200
+
+//             hover:text-[#F7DCE5]
+
+//             focus-visible:outline-none
+//             focus-visible:ring-2
+//             focus-visible:ring-white
+//             focus-visible:ring-offset-2
+//             focus-visible:ring-offset-transparent
+
+//             min-[1440px]:px-4
+
+//             motion-reduce:transition-none
+//           "
+//         >
+//           <span>
+//             {title}
+//           </span>
+
+//           <ChevronDown
+//             size={16}
+//             strokeWidth={2}
+//             aria-hidden="true"
+//             className={`
+//               shrink-0
+
+//               transition-transform
+//               duration-200
+
+//               ${
+//                 expanded
+//                   ? "rotate-180"
+//                   : ""
+//               }
+
+//               motion-reduce:transition-none
+//             `}
+//           />
+
+//           <span
+//             aria-hidden="true"
+//             className={`
+//               absolute
+
+//               bottom-[3px]
+//               left-3
+//               right-3
+
+//               h-[2px]
+
+//               origin-center
+
+//               rounded-full
+
+//               bg-[#F1C8D4]
+
+//               transition-transform
+//               duration-200
+
+//               ${
+//                 containsActive ||
+//                 expanded
+//                   ? "scale-x-100"
+//                   : "scale-x-0 group-hover:scale-x-100"
+//               }
+
+//               motion-reduce:transition-none
+//             `}
+//           />
+//         </button>
+
+//         {/* Dropdown panel */}
+//         <div
+//           id={`${uid}-${key}`}
+//           hidden={!expanded}
+//           className="
+//             absolute
+
+//             right-0
+//             top-full
+
+//             z-50
+
+//             w-[350px]
+
+//             pt-3
+//           "
+//         >
+//           <div
+//             className="
+//               overflow-hidden
+
+//               rounded-2xl
+
+//               border
+//               border-[#EAD9DF]
+
+//               bg-[#FFFDFE]
+
+//               p-2.5
+
+//               text-[#39252E]
+
+//               shadow-[0_24px_60px_-24px_rgba(57,37,46,0.34)]
+//             "
+//           >
+//             <p
+//               className="
+//                 px-3
+//                 pb-2
+//                 pt-2
+
+//                 text-[11px]
+//                 font-semibold
+//                 uppercase
+//                 leading-5
+
+//                 tracking-[0.14em]
+
+//                 text-[#8F2946]
+//               "
+//             >
+//               {key === "updates"
+//                 ? "News & perspectives"
+//                 : "Dholera Times"}
+//             </p>
+
+//             <div className="space-y-1">
+//               {items.map(
+//                 (item) => {
+//                   const isActive =
+//                     active(
+//                       item.path,
+//                     );
+
+//                   return (
+//                     <Link
+//                       key={item.path}
+//                       href={item.path}
+//                       aria-current={current(
+//                         item.path,
+//                       )}
+//                       onClick={() =>
+//                         setDropdown(
+//                           null,
+//                         )
+//                       }
+//                       className={`
+//                         group
+
+//                         flex
+//                         min-h-[68px]
+
+//                         items-center
+//                         justify-between
+
+//                         gap-4
+
+//                         rounded-xl
+
+//                         px-3
+//                         py-3
+
+//                         transition-colors
+//                         duration-200
+
+//                         ${
+//                           isActive
+//                             ? "bg-[#F3E7EC]"
+//                             : "hover:bg-[#FAF7F8]"
+//                         }
+
+//                         focus-visible:outline-none
+//                         focus-visible:ring-2
+//                         focus-visible:ring-[#8F2946]
+//                         focus-visible:ring-inset
+
+//                         motion-reduce:transition-none
+//                       `}
+//                     >
+//                       <span className="min-w-0">
+//                         <strong
+//                           className="
+//                             block
+
+//                             text-[17px]
+//                             font-semibold
+//                             leading-6
+
+//                             tracking-[-0.01em]
+
+//                             text-[#39252E]
+//                           "
+//                         >
+//                           {item.title}
+//                         </strong>
+
+//                         <small
+//                           className="
+//                             mt-0.5
+//                             block
+
+//                             text-[13px]
+//                             font-normal
+//                             leading-5
+
+//                             text-[#68565E]
+//                           "
+//                         >
+//                           {item.description}
+//                         </small>
+//                       </span>
+
+//                       <ChevronRight
+//                         size={17}
+//                         strokeWidth={1.8}
+//                         aria-hidden="true"
+//                         className="
+//                           shrink-0
+
+//                           text-[#8F2946]
+
+//                           transition-transform
+//                           duration-200
+
+//                           group-hover:translate-x-0.5
+
+//                           motion-reduce:transform-none
+//                           motion-reduce:transition-none
+//                         "
+//                       />
+//                     </Link>
+//                   );
+//                 },
+//               )}
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     );
+//   }
+
+//   /* ============================================================
+//      DESKTOP LINK STYLE
+//   ============================================================ */
+
+//   const desktopLinkClass = `
+//     group
+//     relative
+
+//     inline-flex
+//     min-h-[48px]
+
+//     items-center
+//     justify-center
+
+//     whitespace-nowrap
+
+//     px-3
+//     py-2.5
+
+//     text-[17px]
+//     font-semibold
+//     leading-6
+
+//     text-white
+
+//     transition-colors
+//     duration-200
+
+//     hover:text-[#F7DCE5]
+
+//     focus-visible:outline-none
+//     focus-visible:ring-2
+//     focus-visible:ring-white
+//     focus-visible:ring-offset-2
+//     focus-visible:ring-offset-transparent
+
+//     min-[1440px]:px-4
+
+//     motion-reduce:transition-none
+//   `;
+
+//   return (
+//     <>
+//       {/* ======================================================
+//           BURGUNDY GRADIENT NAVBAR
+//       ====================================================== */}
+
+//       <header
+//         className={`
+//           sticky
+//           top-0
+
+//           z-50
+
+//           w-full
+
+//           bg-gradient-to-r
+//           from-[#742039]
+//           via-[#8F2946]
+//           to-[#A13A57]
+
+//           ${
+//             scrolled
+//               ? `
+//                 shadow-[0_10px_30px_-22px_rgba(57,37,46,0.65)]
+//               `
+//               : `
+//                 shadow-[0_6px_20px_-20px_rgba(57,37,46,0.45)]
+//               `
+//           }
+
+//           ${
+//             isHome
+//               ? `
+//                 -mb-[72px]
+
+//                 min-[480px]:-mb-[76px]
+
+//                 min-[1280px]:-mb-[80px]
+//               `
+//               : ""
+//           }
+
+//           transition-shadow
+//           duration-300
+//           ease-out
+
+//           motion-reduce:transition-none
+//         `}
+//       >
+//         <div
+//           className="
+//             mx-auto
+
+//             flex
+
+//             min-h-[72px]
+//             w-full
+//             max-w-[1536px]
+
+//             items-center
+
+//             gap-5
+
+//             px-4
+//             py-2.5
+
+//             min-[480px]:min-h-[76px]
+//             min-[480px]:px-6
+
+//             md:px-8
+
+//             min-[1280px]:min-h-[80px]
+
+//             min-[1440px]:gap-7
+//           "
+//         >
+//           {/* =================================================
+//               LOGO
+//           ================================================== */}
+
+//           <Link
+//             href="/"
+//             aria-label="Dholera Times home"
+//             className="
+//               inline-flex
+//               shrink-0
+//               items-center
+
+//               rounded-lg
+
+//               focus-visible:outline-none
+//               focus-visible:ring-2
+//               focus-visible:ring-white
+//               focus-visible:ring-offset-2
+//               focus-visible:ring-offset-[#8F2946]
+//             "
+//           >
+//             <Image
+//               src={logo}
+//               alt="Dholera Times"
+//               width={150}
+//               height={150}
+//               priority
+//               className="
+//                 h-[50px]
+//                 w-auto
+
+//                 object-contain
+
+//                 drop-shadow-[0_2px_7px_rgba(57,37,46,0.30)]
+
+//                 min-[480px]:h-[52px]
+
+//                 min-[1280px]:h-[54px]
+//               "
+//             />
+//           </Link>
+
+//           {/* =================================================
+//               DESKTOP NAVIGATION
+//           ================================================== */}
+
+//           <nav
+//             ref={navRef}
+//             aria-label="Main navigation"
+//             className="
+//               ml-auto
+
+//               hidden
+
+//               items-center
+
+//               gap-0.5
+
+//               min-[1280px]:flex
+
+//               min-[1440px]:gap-1
+//             "
+//           >
+//             {PRIMARY.map(
+//               (item) => {
+//                 const isActive =
+//                   active(
+//                     item.path,
+//                   );
+
+//                 return (
+//                   <Link
+//                     key={item.path}
+//                     href={item.path}
+//                     aria-current={current(
+//                       item.path,
+//                     )}
+//                     onClick={() =>
+//                       setDropdown(
+//                         null,
+//                       )
+//                     }
+//                     className={
+//                       desktopLinkClass
+//                     }
+//                   >
+//                     {item.title}
+
+//                     <span
+//                       aria-hidden="true"
+//                       className={`
+//                         absolute
+
+//                         bottom-[3px]
+//                         left-3
+//                         right-3
+
+//                         h-[2px]
+
+//                         origin-center
+
+//                         rounded-full
+
+//                         bg-[#F1C8D4]
+
+//                         transition-transform
+//                         duration-200
+
+//                         ${
+//                           isActive
+//                             ? "scale-x-100"
+//                             : "scale-x-0 group-hover:scale-x-100"
+//                         }
+
+//                         motion-reduce:transition-none
+//                       `}
+//                     />
+//                   </Link>
+//                 );
+//               },
+//             )}
+
+//             {renderDropdown(
+//               "updates",
+//               "Updates",
+//               UPDATES,
+//             )}
+
+//             {renderDropdown(
+//               "more",
+//               "More",
+//               MORE,
+//             )}
+
+//             {/* =================================================
+//                 CONTACT
+//             ================================================== */}
+
+//             <Link
+//               href={CONTACT.path}
+//               aria-current={current(
+//                 CONTACT.path,
+//               )}
+//               onClick={() =>
+//                 setDropdown(null)
+//               }
+//               className={`
+//                 ml-2
+
+//                 inline-flex
+//                 min-h-[48px]
+
+//                 items-center
+//                 justify-center
+
+//                 whitespace-nowrap
+
+//                 rounded-full
+
+//                 border
+//                 border-white/30
+
+//                 bg-white/10
+
+//                 px-5
+//                 py-2.5
+
+//                 text-[16px]
+//                 font-semibold
+//                 leading-6
+
+//                 text-white
+
+//                 transition-[background-color,border-color,transform]
+//                 duration-200
+
+//                 hover:-translate-y-px
+
+//                 hover:border-white/50
+//                 hover:bg-white/16
+
+//                 active:translate-y-0
+
+//                 focus-visible:outline-none
+//                 focus-visible:ring-2
+//                 focus-visible:ring-white
+//                 focus-visible:ring-offset-2
+//                 focus-visible:ring-offset-[#8F2946]
+
+//                 ${
+//                   active(
+//                     CONTACT.path,
+//                   )
+//                     ? "border-white/55 bg-white/16"
+//                     : ""
+//                 }
+
+//                 motion-reduce:transform-none
+//                 motion-reduce:transition-none
+//               `}
+//             >
+//               Contact us
+//             </Link>
+//           </nav>
+
+//           {/* =================================================
+//               MOBILE MENU BUTTON
+//           ================================================== */}
+
+//           <button
+//             ref={menuButtonRef}
+//             type="button"
+//             aria-label="Open navigation"
+//             aria-expanded={
+//               mobileOpen
+//             }
+//             aria-controls={`${uid}-mobile`}
+//             aria-haspopup="dialog"
+//             onClick={openMobile}
+//             className="
+//               ml-auto
+
+//               grid
+//               h-11
+//               w-11
+//               shrink-0
+
+//               place-items-center
+
+//               rounded-full
+
+//               bg-white/12
+
+//               text-white
+
+//               transition-[background-color,transform]
+//               duration-200
+
+//               hover:bg-white/20
+
+//               active:scale-95
+
+//               focus-visible:outline-none
+//               focus-visible:ring-2
+//               focus-visible:ring-white
+//               focus-visible:ring-offset-2
+//               focus-visible:ring-offset-[#8F2946]
+
+//               min-[480px]:h-12
+//               min-[480px]:w-12
+
+//               min-[1280px]:hidden
+
+//               motion-reduce:transform-none
+//               motion-reduce:transition-none
+//             "
+//           >
+//             <Menu
+//               size={24}
+//               strokeWidth={2}
+//               aria-hidden="true"
+//             />
+//           </button>
+//         </div>
+//       </header>
+
+//       {/* ======================================================
+//           MOBILE NAVIGATION
+//       ====================================================== */}
+
+//       <dialog
+//         ref={dialogRef}
+//         id={`${uid}-mobile`}
+//         aria-labelledby={`${uid}-title`}
+//         onCancel={(event) => {
+//           event.preventDefault();
+
+//           closeMobile();
+//         }}
+//         onClose={() => {
+//           setMobileOpen(false);
+
+//           setMobileVisible(false);
+//         }}
+//         onClick={(event) => {
+//           if (
+//             event.target ===
+//             event.currentTarget
+//           ) {
+//             closeMobile();
+//           }
+//         }}
+//         className={`
+//           fixed
+//           inset-0
+
+//           m-0
+
+//           h-[100dvh]
+//           max-h-[100dvh]
+
+//           w-full
+//           max-w-none
+
+//           overflow-hidden
+
+//           border-0
+
+//           bg-[#FAF7F8]
+
+//           p-0
+
+//           text-[#39252E]
+
+//           shadow-[0_28px_70px_-24px_rgba(57,37,46,0.45)]
+
+//           backdrop:bg-[#39252E]/45
+//           backdrop:backdrop-blur-[2px]
+
+//           transition-[transform,opacity]
+//           duration-[250ms]
+//           ease-out
+
+//           ${
+//             mobileVisible
+//               ? "translate-y-0 opacity-100"
+//               : "-translate-y-full opacity-0"
+//           }
+
+//           motion-reduce:transition-none
+//         `}
+//       >
+//         <div
+//           className="
+//             flex
+//             h-full
+//             flex-col
+//           "
+//         >
+//           {/* =================================================
+//               MOBILE HEADER
+//           ================================================== */}
+
+//           <div
+//             className="
+//               flex
+//               min-h-[72px]
+//               shrink-0
+
+//               items-center
+//               justify-between
+
+//               gap-4
+
+//               bg-gradient-to-r
+//               from-[#742039]
+//               via-[#8F2946]
+//               to-[#A13A57]
+
+//               px-4
+
+//               pb-2
+//               pt-[max(10px,env(safe-area-inset-top))]
+
+//               min-[480px]:px-6
+//             "
+//           >
+//             <h2
+//               id={`${uid}-title`}
+//               className="sr-only"
+//             >
+//               Dholera Times navigation
+//             </h2>
+
+//             <Link
+//               href="/"
+//               onClick={() =>
+//                 closeMobile()
+//               }
+//               aria-label="Dholera Times home"
+//               className="
+//                 inline-flex
+//                 min-h-12
+//                 shrink-0
+//                 items-center
+
+//                 rounded-lg
+
+//                 focus-visible:outline-none
+//                 focus-visible:ring-2
+//                 focus-visible:ring-white
+//               "
+//             >
+//               <Image
+//                 src={logo}
+//                 alt="Dholera Times"
+//                 width={150}
+//                 height={150}
+//                 className="
+//                   block
+//                   h-11
+//                   w-auto
+//                   object-contain
+//                 "
+//               />
+//             </Link>
+
+//             <button
+//               type="button"
+//               aria-label="Close navigation"
+//               autoFocus
+//               onClick={() =>
+//                 closeMobile()
+//               }
+//               className="
+//                 grid
+//                 h-11
+//                 w-11
+//                 shrink-0
+
+//                 place-items-center
+
+//                 rounded-full
+
+//                 bg-white/12
+
+//                 text-white
+
+//                 transition-[background-color,transform]
+//                 duration-200
+
+//                 hover:bg-white/20
+
+//                 active:scale-95
+
+//                 focus-visible:outline-none
+//                 focus-visible:ring-2
+//                 focus-visible:ring-white
+
+//                 motion-reduce:transform-none
+//                 motion-reduce:transition-none
+//               "
+//             >
+//               <X
+//                 size={23}
+//                 strokeWidth={2}
+//                 aria-hidden="true"
+//               />
+//             </button>
+//           </div>
+
+//           {/* =================================================
+//               MOBILE LINKS
+//           ================================================== */}
+
+//           <nav
+//             aria-label="Mobile navigation"
+//             className="
+//               min-h-0
+//               flex-1
+
+//               overflow-y-auto
+//               overscroll-contain
+
+//               px-4
+//               pb-5
+//               pt-5
+
+//               min-[480px]:px-6
+
+//               [scrollbar-width:thin]
+//               [scrollbar-color:#E0A4B5_transparent]
+
+//               [&::-webkit-scrollbar]:w-1
+
+//               [&::-webkit-scrollbar-thumb]:rounded-full
+//               [&::-webkit-scrollbar-thumb]:bg-[#E0A4B5]
+//             "
+//           >
+//             {[
+//               {
+//                 title:
+//                   "Properties & location",
+//                 items: PRIMARY,
+//               },
+//               {
+//                 title:
+//                   "News & resources",
+//                 items: UPDATES,
+//               },
+//               {
+//                 title:
+//                   "Company & support",
+//                 items: [
+//                   ...MORE,
+//                   CONTACT,
+//                 ],
+//               },
+//             ].map(
+//               (
+//                 group,
+//                 groupIndex,
+//               ) => (
+//                 <section
+//                   key={group.title}
+//                   className={`
+//                     ${
+//                       groupIndex === 0
+//                         ? ""
+//                         : `
+//                           mt-5
+//                           border-t
+//                           border-[#EAD9DF]
+//                           pt-5
+//                         `
+//                     }
+//                   `}
+//                 >
+//                   <h3
+//                     className="
+//                       mb-2
+
+//                       px-2
+
+//                       text-[12px]
+//                       font-semibold
+//                       uppercase
+//                       leading-5
+
+//                       tracking-[0.14em]
+
+//                       text-[#8F2946]
+//                     "
+//                   >
+//                     {group.title}
+//                   </h3>
+
+//                   <div className="space-y-1">
+//                     {group.items.map(
+//                       (item) => {
+//                         const isActive =
+//                           active(
+//                             item.path,
+//                           );
+
+//                         return (
+//                           <Link
+//                             key={item.path}
+//                             href={item.path}
+//                             aria-current={current(
+//                               item.path,
+//                             )}
+//                             onClick={() =>
+//                               closeMobile()
+//                             }
+//                             className={`
+//                               group
+
+//                               flex
+//                               min-h-[54px]
+
+//                               touch-manipulation
+
+//                               items-center
+//                               justify-between
+
+//                               gap-4
+
+//                               rounded-xl
+
+//                               px-3
+//                               py-3
+
+//                               text-[17px]
+//                               leading-6
+
+//                               transition-colors
+//                               duration-150
+
+//                               ${
+//                                 isActive
+//                                   ? `
+//                                     bg-[#F3E7EC]
+
+//                                     font-semibold
+
+//                                     text-[#8F2946]
+//                                   `
+//                                   : `
+//                                     font-medium
+
+//                                     text-[#39252E]
+
+//                                     hover:bg-[#F7EEF1]
+
+//                                     active:bg-[#F3E7EC]
+//                                   `
+//                               }
+
+//                               focus-visible:outline-none
+//                               focus-visible:ring-2
+//                               focus-visible:ring-[#8F2946]
+//                               focus-visible:ring-inset
+
+//                               motion-reduce:transition-none
+//                             `}
+//                           >
+//                             <span className="min-w-0">
+//                               {item.title}
+//                             </span>
+
+//                             <ChevronRight
+//                               size={18}
+//                               strokeWidth={1.9}
+//                               aria-hidden="true"
+//                               className={`
+//                                 shrink-0
+
+//                                 ${
+//                                   isActive
+//                                     ? "text-[#8F2946]"
+//                                     : "text-[#7C6870]"
+//                                 }
+
+//                                 transition-transform
+//                                 duration-200
+
+//                                 group-hover:translate-x-0.5
+
+//                                 motion-reduce:transform-none
+//                               `}
+//                             />
+//                           </Link>
+//                         );
+//                       },
+//                     )}
+//                   </div>
+//                 </section>
+//               ),
+//             )}
+//           </nav>
+
+//           {/* =================================================
+//               MOBILE ENQUIRY
+//           ================================================== */}
+
+//           <div
+//             className="
+//               shrink-0
+
+//               border-t
+//               border-[#EAD9DF]
+
+//               bg-white
+
+//               px-4
+
+//               pb-[max(14px,env(safe-area-inset-bottom))]
+//               pt-3
+
+//               min-[480px]:px-6
+//             "
+//           >
+//             <p
+//               className="
+//                 mb-2
+
+//                 text-[14px]
+//                 font-normal
+//                 leading-5
+
+//                 text-[#68565E]
+//               "
+//             >
+//               Let’s find a property that fits your plans.
+//             </p>
+
+//             {enquiry(
+//               `
+//                 flex
+//                 min-h-[50px]
+//                 w-full
+
+//                 items-center
+//                 justify-center
+
+//                 gap-2.5
+
+//                 rounded-xl
+
+//                 bg-[#8F2946]
+
+//                 px-5
+//                 py-3
+
+//                 text-[17px]
+//                 font-semibold
+//                 leading-6
+
+//                 text-white
+
+//                 transition-[background-color,transform]
+//                 duration-200
+
+//                 hover:bg-[#742039]
+
+//                 active:scale-[0.99]
+
+//                 focus-visible:outline-none
+//                 focus-visible:ring-2
+//                 focus-visible:ring-[#8F2946]
+//                 focus-visible:ring-offset-2
+
+//                 motion-reduce:transform-none
+//                 motion-reduce:transition-none
+//               `,
+//               () =>
+//                 closeMobile(),
+//             )}
+//           </div>
+//         </div>
+//       </dialog>
+//     </>
+//   );
+// }
+
+
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
 import {
-  ArrowUpRight,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+} from "react";
+
+import {
   ChevronDown,
   ChevronRight,
   Menu,
   X,
 } from "lucide-react";
+
+import { FaWhatsapp } from "react-icons/fa";
+
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import logo from "@/assets/dt.webp";
+import logo from "@/assets/DTLOGO.png";
 import { trackPageView } from "@/lib/fbpixel";
 
-/* =========================================================
+/* ============================================================
    NAVIGATION DATA
-========================================================= */
+============================================================ */
 
 const PRIMARY = [
   {
@@ -417,90 +2073,157 @@ const CONTACT = {
   path: "/contact/inquiry",
 };
 
-/* =========================================================
-   NAVBAR
-========================================================= */
+/* ============================================================
+   COMPONENT
+============================================================ */
 
-export default function Navbar() {
-  const pathname = usePathname() || "/";
+export default function Navbar({
+  whatsappNumber = "",
+}) {
+  const pathname = usePathname() || "";
   const uid = useId().replace(/:/g, "");
 
   const [dropdown, setDropdown] = useState(null);
-  const [mobileMounted, setMobileMounted] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileVisible, setMobileVisible] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  const navRef = useRef(null);
-  const menuButtonRef = useRef(null);
-  const closeButtonRef = useRef(null);
   const closeTimerRef = useRef(null);
+  const frameRef = useRef(null);
+  const navRef = useRef(null);
+  const dialogRef = useRef(null);
+  const menuButtonRef = useRef(null);
   const lastTrackedPath = useRef(null);
 
-  /* =======================================================
+  const isHome = pathname === "/";
+
+  /* ============================================================
      ROUTE HELPERS
-  ======================================================= */
+  ============================================================ */
 
   const active = (path) =>
-    pathname === path || pathname.startsWith(`${path}/`);
+    pathname === path ||
+    pathname.startsWith(`${path}/`);
 
-  const current = (path) => (pathname === path ? "page" : undefined);
+  const current = (path) =>
+    pathname === path ? "page" : undefined;
 
-  /* =======================================================
+  /* ============================================================
+     WHATSAPP
+  ============================================================ */
+
+  const number = String(
+    whatsappNumber,
+  ).replace(/[^0-9]/g, "");
+
+  const hasWhatsApp =
+    /^[1-9][0-9]{7,14}$/.test(number);
+
+  const enquiryHref = hasWhatsApp
+    ? `https://wa.me/${number}?text=${encodeURIComponent(
+        "Hello Dholera Times, I would like to explore properties in Dholera.",
+      )}`
+    : CONTACT.path;
+
+  /* ============================================================
      MOBILE MENU
-  ======================================================= */
+  ============================================================ */
 
-  const openMobile = () => {
-    setDropdown(null);
+  function closeMobile(restoreFocus = true) {
+    cancelAnimationFrame(frameRef.current);
+    clearTimeout(closeTimerRef.current);
 
-    if (closeTimerRef.current) {
-      clearTimeout(closeTimerRef.current);
-    }
+    setMobileVisible(false);
 
-    setMobileMounted(true);
+    const reduceMotion =
+      window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
 
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        setMobileOpen(true);
-        closeButtonRef.current?.focus();
-      });
-    });
-  };
-
-  const closeMobile = () => {
-    setMobileOpen(false);
-
-    if (closeTimerRef.current) {
-      clearTimeout(closeTimerRef.current);
-    }
+    const delay = reduceMotion ? 0 : 250;
 
     closeTimerRef.current = setTimeout(() => {
-      setMobileMounted(false);
+      dialogRef.current?.close();
 
-      if (menuButtonRef.current?.getClientRects().length) {
+      setMobileOpen(false);
+
+      if (
+        restoreFocus &&
+        menuButtonRef.current?.getClientRects().length
+      ) {
         menuButtonRef.current.focus();
       }
-    }, 320);
-  };
+    }, delay);
+  }
 
-  /* =======================================================
-     CLEANUP
-  ======================================================= */
+  function openMobile() {
+    clearTimeout(closeTimerRef.current);
+    cancelAnimationFrame(frameRef.current);
+
+    setDropdown(null);
+    setMobileVisible(false);
+
+    if (!dialogRef.current?.open) {
+      dialogRef.current?.showModal();
+    }
+
+    setMobileOpen(true);
+
+    frameRef.current = requestAnimationFrame(() => {
+      frameRef.current = requestAnimationFrame(() => {
+        setMobileVisible(true);
+      });
+    });
+  }
+
+  /* ============================================================
+     SCROLL STATE
+  ============================================================ */
 
   useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 24);
+    };
+
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
+
     return () => {
-      if (closeTimerRef.current) {
-        clearTimeout(closeTimerRef.current);
-      }
+      window.removeEventListener(
+        "scroll",
+        handleScroll,
+      );
     };
   }, []);
 
-  /* =======================================================
-     PAGE TRACKING + ROUTE CHANGE
-  ======================================================= */
+  /* ============================================================
+     CLEANUP
+  ============================================================ */
+
+  useEffect(
+    () => () => {
+      clearTimeout(closeTimerRef.current);
+      cancelAnimationFrame(frameRef.current);
+    },
+    [],
+  );
+
+  /* ============================================================
+     ROUTE CHANGE
+  ============================================================ */
 
   useEffect(() => {
+    clearTimeout(closeTimerRef.current);
+    cancelAnimationFrame(frameRef.current);
+
+    setMobileVisible(false);
     setDropdown(null);
+
+    dialogRef.current?.close();
     setMobileOpen(false);
-    setMobileMounted(false);
 
     if (lastTrackedPath.current !== pathname) {
       lastTrackedPath.current = pathname;
@@ -508,105 +2231,211 @@ export default function Navbar() {
       try {
         trackPageView();
       } catch (error) {
-        console.warn("Navbar page-view tracking failed", error);
+        console.warn(
+          "Navbar page-view tracking failed",
+          error,
+        );
       }
     }
   }, [pathname]);
 
-  /* =======================================================
-     LOCK BODY SCROLL
-  ======================================================= */
+  /* ============================================================
+     BODY SCROLL LOCK
+  ============================================================ */
 
   useEffect(() => {
-    if (!mobileMounted) return;
+    if (!mobileOpen) return;
 
-    const body = document.body;
-    const previousOverflow = body.style.overflow;
+    const alreadyLocked =
+      document.body.classList.contains(
+        "overflow-hidden",
+      );
 
-    body.style.overflow = "hidden";
+    document.body.classList.add(
+      "overflow-hidden",
+    );
 
     return () => {
-      body.style.overflow = previousOverflow;
-    };
-  }, [mobileMounted]);
-
-  /* =======================================================
-     ESCAPE KEY
-  ======================================================= */
-
-  useEffect(() => {
-    if (!mobileMounted) return;
-
-    const handleEscape = (event) => {
-      if (event.key === "Escape") {
-        closeMobile();
+      if (!alreadyLocked) {
+        document.body.classList.remove(
+          "overflow-hidden",
+        );
       }
     };
+  }, [mobileOpen]);
 
-    document.addEventListener("keydown", handleEscape);
-
-    return () => {
-      document.removeEventListener("keydown", handleEscape);
-    };
-  }, [mobileMounted]);
-
-  /* =======================================================
-     DESKTOP OUTSIDE CLICK
-  ======================================================= */
+  /* ============================================================
+     OUTSIDE DROPDOWN CLICK
+  ============================================================ */
 
   useEffect(() => {
     if (!dropdown) return;
 
-    const handleOutside = (event) => {
-      if (!navRef.current?.contains(event.target)) {
+    const dismiss = (event) => {
+      if (
+        !navRef.current?.contains(event.target)
+      ) {
         setDropdown(null);
       }
     };
 
-    document.addEventListener("pointerdown", handleOutside);
+    document.addEventListener(
+      "pointerdown",
+      dismiss,
+    );
+
+    document.addEventListener(
+      "focusin",
+      dismiss,
+    );
 
     return () => {
-      document.removeEventListener("pointerdown", handleOutside);
+      document.removeEventListener(
+        "pointerdown",
+        dismiss,
+      );
+
+      document.removeEventListener(
+        "focusin",
+        dismiss,
+      );
     };
   }, [dropdown]);
 
-  /* =======================================================
-     DESKTOP BREAKPOINT
-  ======================================================= */
+  /* ============================================================
+     RESPONSIVE CLEANUP
+  ============================================================ */
 
   useEffect(() => {
-    const desktop = window.matchMedia("(min-width: 1200px)");
+    const desktop = window.matchMedia(
+      "(min-width: 1280px)",
+    );
 
-    const handleBreakpoint = () => {
+    const handleChange = () => {
+      setDropdown(null);
+
       if (desktop.matches) {
-        setDropdown(null);
+        clearTimeout(closeTimerRef.current);
+        cancelAnimationFrame(frameRef.current);
+
+        setMobileVisible(false);
+
+        const hadFocus =
+          dialogRef.current?.contains(
+            document.activeElement,
+          );
+
+        dialogRef.current?.close();
         setMobileOpen(false);
-        setMobileMounted(false);
+
+        if (hadFocus) {
+          navRef.current
+            ?.querySelector("a")
+            ?.focus();
+        }
       }
     };
 
-    desktop.addEventListener("change", handleBreakpoint);
+    desktop.addEventListener(
+      "change",
+      handleChange,
+    );
 
-    return () => {
-      desktop.removeEventListener("change", handleBreakpoint);
-    };
+    return () =>
+      desktop.removeEventListener(
+        "change",
+        handleChange,
+      );
   }, []);
 
-  /* =======================================================
-     DESKTOP DROPDOWN
-  ======================================================= */
+  /* ============================================================
+     ENQUIRY CTA
+  ============================================================ */
 
-  const renderDropdown = (key, title, items) => {
+  function enquiry(className, onClick) {
+    return (
+      <Link
+        href={enquiryHref}
+        className={className}
+        onClick={onClick}
+        target={
+          hasWhatsApp
+            ? "_blank"
+            : undefined
+        }
+        rel={
+          hasWhatsApp
+            ? "noopener noreferrer"
+            : undefined
+        }
+        aria-label={
+          hasWhatsApp
+            ? "Enquire on WhatsApp (opens in a new tab)"
+            : undefined
+        }
+      >
+        <FaWhatsapp
+          size={22}
+          aria-hidden="true"
+          className="
+            shrink-0
+            text-[#25D366]
+          "
+        />
+
+        <span className="whitespace-nowrap">
+          Enquire now
+        </span>
+      </Link>
+    );
+  }
+
+  /* ============================================================
+     DESKTOP DROPDOWN
+  ============================================================ */
+
+  function renderDropdown(
+    key,
+    title,
+    items,
+  ) {
     const expanded = dropdown === key;
-    const dropdownActive = items.some((item) => active(item.path));
+
+    const containsActive =
+      items.some((item) =>
+        active(item.path),
+      );
 
     return (
       <div
         className="relative"
-        onKeyDown={(event) => {
-          if (event.key === "Escape" && expanded) {
-            event.preventDefault();
+        onMouseEnter={() =>
+          setDropdown(key)
+        }
+        onMouseLeave={() =>
+          setDropdown(null)
+        }
+        onBlur={(event) => {
+          if (
+            !event.currentTarget.contains(
+              event.relatedTarget,
+            )
+          ) {
             setDropdown(null);
+          }
+        }}
+        onKeyDown={(event) => {
+          if (
+            event.key === "Escape" &&
+            expanded
+          ) {
+            event.preventDefault();
+
+            setDropdown(null);
+
+            event.currentTarget
+              .querySelector("button")
+              ?.focus();
           }
         }}
       >
@@ -614,208 +2443,398 @@ export default function Navbar() {
           type="button"
           aria-expanded={expanded}
           aria-controls={`${uid}-${key}`}
-          onClick={() => setDropdown(expanded ? null : key)}
-          className={`
+          onClick={() =>
+            setDropdown(
+              expanded ? null : key,
+            )
+          }
+          className="
+            group
             relative
+
             inline-flex
-            h-11
+            min-h-[48px]
+
             items-center
             justify-center
-            gap-2
+
+            gap-1.5
+
             whitespace-nowrap
-            rounded-lg
+
             px-3
+            py-2.5
+
             text-[17px]
-            font-medium
-            leading-[26px]
+            font-semibold
+            leading-6
+
+            text-white
+
             transition-colors
             duration-200
-            focus-visible:outline
-            focus-visible:outline-2
-            focus-visible:outline-offset-2
-            focus-visible:outline-white
-            ${
-              dropdownActive
-                ? "text-[#D6B873]"
-                : "text-white hover:bg-white/[0.06] hover:text-white"
-            }
-          `}
+
+            hover:text-[#F7DCE5]
+
+            focus-visible:outline-none
+            focus-visible:ring-2
+            focus-visible:ring-white
+            focus-visible:ring-offset-2
+            focus-visible:ring-offset-transparent
+
+            min-[1440px]:px-4
+
+            motion-reduce:transition-none
+          "
         >
           <span>{title}</span>
 
           <ChevronDown
-            size={17}
-            strokeWidth={1.8}
+            size={16}
+            strokeWidth={2}
             aria-hidden="true"
             className={`
               shrink-0
+
               transition-transform
               duration-200
-              ${expanded ? "rotate-180" : ""}
+
+              ${
+                expanded
+                  ? "rotate-180"
+                  : ""
+              }
+
+              motion-reduce:transition-none
             `}
           />
 
-          {dropdownActive && (
-            <span
-              aria-hidden="true"
-              className="
-                absolute
-                bottom-[2px]
-                left-3
-                right-3
-                h-[2px]
-                rounded-full
-                bg-[#426A77]
-              "
-            />
-          )}
+          <span
+            aria-hidden="true"
+            className={`
+              absolute
+              bottom-[3px]
+              left-3
+              right-3
+
+              h-[2px]
+
+              origin-center
+              rounded-full
+
+              bg-[#F4D6DF]
+
+              transition-transform
+              duration-200
+
+              ${
+                containsActive || expanded
+                  ? "scale-x-100"
+                  : "scale-x-0 group-hover:scale-x-100"
+              }
+
+              motion-reduce:transition-none
+            `}
+          />
         </button>
 
-        {expanded && (
+        {/* Dropdown hover bridge */}
+        <div
+          id={`${uid}-${key}`}
+          hidden={!expanded}
+          className="
+            absolute
+
+            right-0
+            top-full
+
+            z-50
+
+            w-[350px]
+
+            pt-3
+          "
+        >
+          {/* Dropdown card */}
           <div
-            id={`${uid}-${key}`}
             className="
-              absolute
-              right-0
-              top-full
-              z-[70]
-              mt-3
-              w-[340px]
               overflow-hidden
-              rounded-lg
+
+              rounded-2xl
+
               border
-              border-[#E5E7EB]
-              bg-white
-              p-3
-              text-[#151F28]
-              shadow-[0_18px_48px_rgba(21,31,40,0.16)]
+              border-[#EAD9DF]
+
+              bg-[#FFFDFE]/95
+
+              p-2.5
+
+              text-[#39252E]
+
+              shadow-[0_24px_60px_-24px_rgba(57,37,46,0.34)]
+
+              backdrop-blur-xl
             "
           >
             <p
               className="
                 px-3
-                pb-3
+                pb-2
                 pt-2
-                text-xs
+
+                text-[11px]
                 font-semibold
                 uppercase
-                leading-[18px]
-                tracking-[1px]
-                text-[#63717A]
+                leading-5
+
+                tracking-[0.14em]
+
+                text-[#8F2946]
               "
             >
               {key === "updates"
-                ? "Explore the latest"
-                : "Get to know us"}
+                ? "News & perspectives"
+                : "Dholera Times"}
             </p>
 
-            {items.map((item) => (
-              <Link
-                key={item.path}
-                href={item.path}
-                aria-current={current(item.path)}
-                onClick={() => setDropdown(null)}
-                className={`
-                  group
-                  flex
-                  items-center
-                  justify-between
-                  gap-3
-                  rounded-lg
-                  px-3
-                  py-3
-                  transition-colors
-                  duration-200
-                  ${
-                    active(item.path)
-                      ? "bg-[#426A77]/15"
-                      : "hover:bg-[#F9FAFB]"
-                  }
-                `}
-              >
-                <span className="min-w-0">
-                  <strong
-                    className="
-                      block
-                      text-base
-                      font-medium
-                      leading-6
-                      text-[#151F28]
-                    "
-                  >
-                    {item.title}
-                  </strong>
+            <div className="space-y-1">
+              {items.map((item) => {
+                const isActive =
+                  active(item.path);
 
-                  <small
-                    className="
-                      mt-1
-                      block
-                      text-sm
-                      font-normal
-                      leading-[22px]
-                      text-[#63717A]
-                    "
-                  >
-                    {item.description}
-                  </small>
-                </span>
+                return (
+                  <Link
+                    key={item.path}
+                    href={item.path}
+                    aria-current={current(
+                      item.path,
+                    )}
+                    onClick={() =>
+                      setDropdown(null)
+                    }
+                    className={`
+                      group
 
-                <ChevronRight
-                  size={18}
-                  strokeWidth={1.8}
-                  aria-hidden="true"
-                  className="
-                    shrink-0
-                    text-[#63717A]
-                    transition-transform
-                    duration-200
-                    group-hover:translate-x-0.5
-                  "
-                />
-              </Link>
-            ))}
+                      flex
+                      min-h-[68px]
+
+                      items-center
+                      justify-between
+
+                      gap-4
+
+                      rounded-xl
+
+                      px-3
+                      py-3
+
+                      transition-colors
+                      duration-200
+
+                      ${
+                        isActive
+                          ? "bg-[#F3E7EC]"
+                          : "hover:bg-[#FAF7F8]"
+                      }
+
+                      focus-visible:outline-none
+                      focus-visible:ring-2
+                      focus-visible:ring-[#8F2946]
+                      focus-visible:ring-inset
+
+                      motion-reduce:transition-none
+                    `}
+                  >
+                    <span className="min-w-0">
+                      <strong
+                        className="
+                          block
+
+                          text-[17px]
+                          font-semibold
+                          leading-6
+
+                          tracking-[-0.01em]
+
+                          text-[#39252E]
+                        "
+                      >
+                        {item.title}
+                      </strong>
+
+                      <small
+                        className="
+                          mt-0.5
+                          block
+
+                          text-[13px]
+                          font-normal
+                          leading-5
+
+                          text-[#68565E]
+                        "
+                      >
+                        {item.description}
+                      </small>
+                    </span>
+
+                    <ChevronRight
+                      size={17}
+                      strokeWidth={1.8}
+                      aria-hidden="true"
+                      className="
+                        shrink-0
+
+                        text-[#8F2946]
+
+                        transition-transform
+                        duration-200
+
+                        group-hover:translate-x-0.5
+
+                        motion-reduce:transform-none
+                        motion-reduce:transition-none
+                      "
+                    />
+                  </Link>
+                );
+              })}
+            </div>
           </div>
-        )}
+        </div>
       </div>
     );
-  };
+  }
+
+  /* ============================================================
+     DESKTOP LINK CLASS
+  ============================================================ */
+
+  const desktopLinkClass = `
+    group
+    relative
+
+    inline-flex
+    min-h-[48px]
+
+    items-center
+    justify-center
+
+    whitespace-nowrap
+
+    px-3
+    py-2.5
+
+    text-[17px]
+    font-semibold
+    leading-6
+
+    text-white
+
+    transition-colors
+    duration-200
+
+    hover:text-[#F7DCE5]
+
+    focus-visible:outline-none
+    focus-visible:ring-2
+    focus-visible:ring-white
+    focus-visible:ring-offset-2
+    focus-visible:ring-offset-transparent
+
+    min-[1440px]:px-4
+
+    motion-reduce:transition-none
+  `;
 
   return (
     <>
-      {/* =====================================================
-          MAIN NAVBAR
+      {/* ======================================================
+          #8F2946 TRANSPARENT GLASS NAVBAR
       ====================================================== */}
 
       <header
-        className="
-          sticky
-          top-0
-          z-50
-          m-0
-          w-full
-          border-b
-          border-white/10
-          bg-[#14381F]
-          p-0
-        "
+className={`
+  sticky
+  top-0
+
+  z-50
+
+  w-full
+
+  bg-gradient-to-r
+
+  ${
+    scrolled
+      ? `
+        from-[#8F2946]/[0.76]
+        via-[#8F2946]/[0.70]
+        to-[#8F2946]/[0.76]
+
+        backdrop-blur-xl
+
+        shadow-[0_8px_26px_-24px_rgba(57,37,46,0.32)]
+      `
+      : `
+        from-[#8F2946]/[0.68]
+        via-[#8F2946]/[0.60]
+        to-[#8F2946]/[0.68]
+
+        backdrop-blur-lg
+
+        shadow-[0_6px_20px_-22px_rgba(57,37,46,0.22)]
+      `
+  }
+
+  ${
+    isHome
+      ? `
+        -mb-[72px]
+
+        min-[480px]:-mb-[76px]
+
+        min-[1280px]:-mb-[80px]
+      `
+      : ""
+  }
+
+  transition-[background-color,backdrop-filter,box-shadow]
+  duration-300
+  ease-out
+
+  motion-reduce:transition-none
+`}
       >
         <div
           className="
+            mx-auto
+
             flex
-            h-[72px]
+
+            min-h-[72px]
             w-full
+            max-w-[1536px]
+
             items-center
-            gap-4
+
+            gap-5
+
             px-4
-            min-[414px]:px-6
-            min-[1200px]:h-[76px]
-            min-[1200px]:gap-5
-            min-[1200px]:px-8
-            min-[1440px]:px-10
-            min-[1600px]:px-12
+            py-2.5
+
+            min-[480px]:min-h-[76px]
+            min-[480px]:px-6
+
+            md:px-8
+
+            min-[1280px]:min-h-[80px]
+
+            min-[1440px]:gap-7
           "
         >
-          {/* Logo */}
+          {/* =================================================
+              LOGO
+          ================================================== */}
 
           <Link
             href="/"
@@ -824,10 +2843,14 @@ export default function Navbar() {
               inline-flex
               shrink-0
               items-center
-              focus-visible:outline
-              focus-visible:outline-2
-              focus-visible:outline-offset-2
-              focus-visible:outline-white
+
+              rounded-lg
+
+              focus-visible:outline-none
+              focus-visible:ring-2
+              focus-visible:ring-white
+              focus-visible:ring-offset-2
+              focus-visible:ring-offset-[#8F2946]
             "
           >
             <Image
@@ -837,561 +2860,708 @@ export default function Navbar() {
               height={150}
               priority
               className="
-                block
-                h-[52px]
+                h-[50px]
                 w-auto
+
                 object-contain
-                min-[1200px]:h-[54px]
+
+                drop-shadow-[0_2px_7px_rgba(57,37,46,0.28)]
+
+                min-[480px]:h-[52px]
+
+                min-[1280px]:h-[54px]
               "
             />
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* =================================================
+              DESKTOP NAVIGATION
+          ================================================== */}
 
           <nav
             ref={navRef}
             aria-label="Main navigation"
             className="
               ml-auto
+
               hidden
+
               items-center
-              justify-end
-              gap-1
-              min-[1200px]:flex
+
+              gap-0.5
+
+              min-[1280px]:flex
+
+              min-[1440px]:gap-1
             "
           >
-            {PRIMARY.map((item) => (
-              <Link
-                key={item.path}
-                href={item.path}
-                aria-current={current(item.path)}
-                onClick={() => setDropdown(null)}
-                className={`
-                  relative
-                  inline-flex
-                  h-11
-                  items-center
-                  whitespace-nowrap
-                  rounded-lg
-                  px-3
-                  text-[17px]
-                  font-medium
-                  leading-[26px]
-                  transition-colors
-                  duration-200
-                  focus-visible:outline
-                  focus-visible:outline-2
-                  focus-visible:outline-offset-2
-                  focus-visible:outline-white
-                  ${
-                    active(item.path)
-                      ? "text-[#D6B873]"
-                      : "text-white hover:bg-white/[0.06] hover:text-white"
-                  }
-                `}
-              >
-                {item.title}
+            {PRIMARY.map((item) => {
+              const isActive =
+                active(item.path);
 
-                {active(item.path) && (
+              return (
+                <Link
+                  key={item.path}
+                  href={item.path}
+                  aria-current={current(
+                    item.path,
+                  )}
+                  onClick={() =>
+                    setDropdown(null)
+                  }
+                  className={
+                    desktopLinkClass
+                  }
+                >
+                  {item.title}
+
                   <span
                     aria-hidden="true"
-                    className="
+                    className={`
                       absolute
-                      bottom-[2px]
+
+                      bottom-[3px]
                       left-3
                       right-3
-                      h-[2px]
-                      rounded-full
-                      bg-[#426A77]
-                    "
-                  />
-                )}
-              </Link>
-            ))}
 
-            {renderDropdown("updates", "Updates", UPDATES)}
-            {renderDropdown("more", "More", MORE)}
+                      h-[2px]
+
+                      origin-center
+                      rounded-full
+
+                      bg-[#F4D6DF]
+
+                      transition-transform
+                      duration-200
+
+                      ${
+                        isActive
+                          ? "scale-x-100"
+                          : "scale-x-0 group-hover:scale-x-100"
+                      }
+
+                      motion-reduce:transition-none
+                    `}
+                  />
+                </Link>
+              );
+            })}
+
+            {renderDropdown(
+              "updates",
+              "Updates",
+              UPDATES,
+            )}
+
+            {renderDropdown(
+              "more",
+              "More",
+              MORE,
+            )}
+
+            {/* =================================================
+                CONTACT
+            ================================================== */}
 
             <Link
               href={CONTACT.path}
-              aria-current={current(CONTACT.path)}
-              onClick={() => setDropdown(null)}
+              aria-current={current(
+                CONTACT.path,
+              )}
+              onClick={() =>
+                setDropdown(null)
+              }
               className={`
-                relative
+                ml-2
+
                 inline-flex
-                h-11
+                min-h-[48px]
+
                 items-center
+                justify-center
+
                 whitespace-nowrap
-                rounded-lg
-                px-3
-                text-[17px]
-                font-medium
-                leading-[26px]
-                transition-colors
+
+                rounded-full
+
+                border
+                border-white/35
+
+                bg-white/[0.10]
+
+                px-5
+                py-2.5
+
+                text-[16px]
+                font-semibold
+                leading-6
+
+                text-white
+
+                backdrop-blur-sm
+
+                transition-[background-color,border-color,transform]
                 duration-200
-                focus-visible:outline
-                focus-visible:outline-2
-                focus-visible:outline-offset-2
-                focus-visible:outline-white
+
+                hover:-translate-y-px
+
+                hover:border-white/55
+                hover:bg-white/[0.18]
+
+                active:translate-y-0
+
+                focus-visible:outline-none
+                focus-visible:ring-2
+                focus-visible:ring-white
+                focus-visible:ring-offset-2
+                focus-visible:ring-offset-[#8F2946]
+
                 ${
                   active(CONTACT.path)
-                    ? "text-[#D6B873]"
-                    : "text-white hover:bg-white/[0.06] hover:text-white"
+                    ? `
+                      border-white/60
+                      bg-white/[0.18]
+                    `
+                    : ""
                 }
+
+                motion-reduce:transform-none
+                motion-reduce:transition-none
               `}
             >
-              Contact Us
-
-              {active(CONTACT.path) && (
-                <span
-                  aria-hidden="true"
-                  className="
-                    absolute
-                    bottom-[2px]
-                    left-3
-                    right-3
-                    h-[2px]
-                    rounded-full
-                    bg-[#426A77]
-                  "
-                />
-              )}
+              Contact us
             </Link>
           </nav>
 
-          {/* Mobile Menu Button */}
+          {/* =================================================
+              MOBILE MENU BUTTON
+          ================================================== */}
 
-          <div className="ml-auto flex items-center min-[1200px]:hidden">
-            <button
-              ref={menuButtonRef}
-              type="button"
-              aria-label="Open navigation menu"
-              aria-expanded={mobileOpen}
-              aria-controls={`${uid}-mobile`}
-              onClick={openMobile}
-              className="
-                grid
-                h-12
-                w-12
-                shrink-0
-                place-items-center
-                rounded-lg
-                border
-                border-white/[0.18]
-                bg-transparent
-                text-white
-                transition
-                duration-200
-                hover:border-white/30
-                hover:bg-white/[0.06]
-                active:scale-95
-                focus-visible:outline
-                focus-visible:outline-2
-                focus-visible:outline-offset-2
-                focus-visible:outline-white
-              "
-            >
-              <Menu size={26} strokeWidth={1.8} aria-hidden="true" />
-            </button>
-          </div>
+          <button
+            ref={menuButtonRef}
+            type="button"
+            aria-label="Open navigation"
+            aria-expanded={
+              mobileOpen
+            }
+            aria-controls={`${uid}-mobile`}
+            aria-haspopup="dialog"
+            onClick={openMobile}
+            className="
+              ml-auto
+
+              grid
+              h-11
+              w-11
+              shrink-0
+
+              place-items-center
+
+              rounded-full
+
+              border
+              border-white/20
+
+              bg-white/[0.10]
+
+              text-white
+
+              backdrop-blur-sm
+
+              transition-[background-color,border-color,transform]
+              duration-200
+
+              hover:border-white/35
+              hover:bg-white/[0.18]
+
+              active:scale-95
+
+              focus-visible:outline-none
+              focus-visible:ring-2
+              focus-visible:ring-white
+              focus-visible:ring-offset-2
+              focus-visible:ring-offset-[#8F2946]
+
+              min-[480px]:h-12
+              min-[480px]:w-12
+
+              min-[1280px]:hidden
+
+              motion-reduce:transform-none
+              motion-reduce:transition-none
+            "
+          >
+            <Menu
+              size={24}
+              strokeWidth={2}
+              aria-hidden="true"
+            />
+          </button>
         </div>
       </header>
 
-      {/* =====================================================
+      {/* ======================================================
           MOBILE NAVIGATION
       ====================================================== */}
 
-      {mobileMounted && (
+      <dialog
+        ref={dialogRef}
+        id={`${uid}-mobile`}
+        aria-labelledby={`${uid}-title`}
+        onCancel={(event) => {
+          event.preventDefault();
+
+          closeMobile();
+        }}
+        onClose={() => {
+          setMobileOpen(false);
+
+          setMobileVisible(false);
+        }}
+        onClick={(event) => {
+          if (
+            event.target ===
+            event.currentTarget
+          ) {
+            closeMobile();
+          }
+        }}
+        className={`
+          fixed
+          inset-0
+
+          m-0
+
+          h-[100dvh]
+          max-h-[100dvh]
+
+          w-full
+          max-w-none
+
+          overflow-hidden
+
+          border-0
+
+          bg-[#FAF7F8]
+
+          p-0
+
+          text-[#39252E]
+
+          shadow-[0_28px_70px_-24px_rgba(57,37,46,0.45)]
+
+          backdrop:bg-[#39252E]/45
+          backdrop:backdrop-blur-[2px]
+
+          transition-[transform,opacity]
+          duration-[250ms]
+          ease-out
+
+          ${
+            mobileVisible
+              ? "translate-y-0 opacity-100"
+              : "-translate-y-full opacity-0"
+          }
+
+          motion-reduce:transition-none
+        `}
+      >
         <div
-          id={`${uid}-mobile`}
           className="
-            fixed
-            inset-0
-            z-[100]
-            min-[1200px]:hidden
+            flex
+            h-full
+            flex-col
           "
         >
-          {/* Backdrop */}
-
-          <button
-            type="button"
-            aria-label="Close navigation menu"
-            onClick={closeMobile}
-            className={`
-              absolute
-              inset-0
-              h-full
-              w-full
-              cursor-default
-              bg-[#151F28]/60
-              backdrop-blur-[2px]
-              transition-opacity
-              duration-300
-              ${mobileOpen ? "opacity-100" : "opacity-0"}
-            `}
-          />
-
-          {/* Top Sheet */}
+          {/* =================================================
+              MOBILE HEADER
+          ================================================== */}
 
           <div
-            className={`
-              absolute
-              inset-x-0
-              top-0
+            className="
               flex
-              h-[70vh]
-              h-[70dvh]
-              flex-col
-              overflow-hidden
-              rounded-b-xl
-              bg-[#15232C]
-              text-white
-              shadow-[0_20px_60px_rgba(21,31,40,0.28)]
-              transition-[transform,opacity]
-              duration-[380ms]
-              ease-[cubic-bezier(0.16,1,0.3,1)]
-              ${
-                mobileOpen
-                  ? "translate-y-0 opacity-100"
-                  : "-translate-y-full opacity-0"
-              }
-            `}
-          >
-            {/* Mobile Header */}
+              min-h-[72px]
+              shrink-0
 
-            <div
+              items-center
+              justify-between
+
+              gap-4
+
+              bg-gradient-to-r
+              from-[#8F2946]/[0.96]
+              via-[#8F2946]/[0.88]
+              to-[#8F2946]/[0.96]
+
+              px-4
+
+              pb-2
+              pt-[max(10px,env(safe-area-inset-top))]
+
+              backdrop-blur-xl
+
+              min-[480px]:px-6
+            "
+          >
+            <h2
+              id={`${uid}-title`}
+              className="sr-only"
+            >
+              Dholera Times navigation
+            </h2>
+
+            <Link
+              href="/"
+              onClick={() =>
+                closeMobile()
+              }
+              aria-label="Dholera Times home"
               className="
-                flex
-                h-[72px]
+                inline-flex
+                min-h-12
                 shrink-0
                 items-center
-                justify-between
-                border-b
-                border-white/10
-                px-4
-                min-[414px]:px-6
+
+                rounded-lg
+
+                focus-visible:outline-none
+                focus-visible:ring-2
+                focus-visible:ring-white
               "
             >
-              <Link
-                href="/"
-                onClick={closeMobile}
-                aria-label="Dholera Times home"
-                className="inline-flex items-center"
-              >
-                <Image
-                  src={logo}
-                  alt="Dholera Times"
-                  width={150}
-                  height={150}
-                  className="block h-[52px] w-auto object-contain"
-                />
-              </Link>
-
-              <button
-                ref={closeButtonRef}
-                type="button"
-                aria-label="Close navigation menu"
-                onClick={closeMobile}
+              <Image
+                src={logo}
+                alt="Dholera Times"
+                width={150}
+                height={150}
                 className="
-                  grid
-                  h-12
-                  w-12
-                  place-items-center
-                  rounded-lg
-                  border
-                  border-white/[0.16]
-                  bg-transparent
-                  text-white
-                  transition
-                  duration-200
-                  hover:border-white/30
-                  hover:bg-white/[0.06]
-                  active:scale-95
-                  focus-visible:outline
-                  focus-visible:outline-2
-                  focus-visible:outline-offset-2
-                  focus-visible:outline-white
+                  block
+                  h-11
+                  w-auto
+                  object-contain
                 "
-              >
-                <X size={26} strokeWidth={1.8} aria-hidden="true" />
-              </button>
-            </div>
+              />
+            </Link>
 
-            {/* Scrollable Navigation */}
-
-            <div
+            <button
+              type="button"
+              aria-label="Close navigation"
+              autoFocus
+              onClick={() =>
+                closeMobile()
+              }
               className="
-                min-h-0
-                flex-1
-                overflow-y-auto
-                overscroll-contain
-                px-4
-                py-6
-                min-[414px]:px-6
-              "
-            >
-              <p
-                className="
-                  mb-3
-                  text-xs
-                  font-semibold
-                  uppercase
-                  leading-[18px]
-                  tracking-[1px]
-                  text-[#D6B873]
-                "
-              >
-                Explore Dholera
-              </p>
-
-              <nav aria-label="Mobile navigation">
-                {/* Primary */}
-
-                <div>
-                  {PRIMARY.map((item) => (
-                    <Link
-                      key={item.path}
-                      href={item.path}
-                      aria-current={current(item.path)}
-                      onClick={closeMobile}
-                      className={`
-                        group
-                        flex
-                        min-h-12
-                        items-center
-                        justify-between
-                        gap-3
-                        rounded-lg
-                        px-3
-                        py-3
-                        text-base
-                        font-medium
-                        leading-6
-                        transition
-                        duration-200
-                        ${
-                          active(item.path)
-                            ? "bg-[#426A77]/15 text-[#D6B873]"
-                            : "text-white hover:bg-white/[0.06]"
-                        }
-                      `}
-                    >
-                      <span>{item.title}</span>
-
-                      <ChevronRight
-                        size={18}
-                        strokeWidth={1.8}
-                        aria-hidden="true"
-                        className="
-                          shrink-0
-                          text-white
-                          transition-transform
-                          duration-200
-                          group-hover:translate-x-0.5
-                        "
-                      />
-                    </Link>
-                  ))}
-                </div>
-
-                {/* News & Resources */}
-
-                <div
-                  className="
-                    mt-4
-                    border-t
-                    border-white/[0.12]
-                    pt-4
-                  "
-                >
-                  <p
-                    className="
-                      mb-2
-                      px-3
-                      text-xs
-                      font-semibold
-                      uppercase
-                      leading-[18px]
-                      tracking-[1px]
-                      text-white
-                    "
-                  >
-                    News & resources
-                  </p>
-
-                  {UPDATES.map((item) => (
-                    <Link
-                      key={item.path}
-                      href={item.path}
-                      aria-current={current(item.path)}
-                      onClick={closeMobile}
-                      className={`
-                        group
-                        flex
-                        min-h-12
-                        items-center
-                        justify-between
-                        gap-3
-                        rounded-lg
-                        px-3
-                        py-3
-                        text-base
-                        font-medium
-                        leading-6
-                        transition
-                        duration-200
-                        ${
-                          active(item.path)
-                            ? "bg-[#426A77]/15 text-[#D6B873]"
-                            : "text-white hover:bg-white/[0.06]"
-                        }
-                      `}
-                    >
-                      <span>{item.title}</span>
-
-                      <ChevronRight
-                        size={17}
-                        strokeWidth={1.8}
-                        aria-hidden="true"
-                        className="
-                          shrink-0
-                          text-white
-                          transition-transform
-                          duration-200
-                          group-hover:translate-x-0.5
-                        "
-                      />
-                    </Link>
-                  ))}
-                </div>
-
-                {/* Company */}
-
-                <div
-                  className="
-                    mt-4
-                    border-t
-                    border-white/[0.12]
-                    pt-4
-                  "
-                >
-                  <p
-                    className="
-                      mb-2
-                      px-3
-                      text-xs
-                      font-semibold
-                      uppercase
-                      leading-[18px]
-                      tracking-[1px]
-                      text-white
-                    "
-                  >
-                    Dholera Times
-                  </p>
-
-                  {[...MORE, CONTACT].map((item) => (
-                    <Link
-                      key={item.path}
-                      href={item.path}
-                      aria-current={current(item.path)}
-                      onClick={closeMobile}
-                      className={`
-                        group
-                        flex
-                        min-h-12
-                        items-center
-                        justify-between
-                        gap-3
-                        rounded-lg
-                        px-3
-                        py-3
-                        text-base
-                        font-medium
-                        leading-6
-                        transition
-                        duration-200
-                        ${
-                          active(item.path)
-                            ? "bg-[#426A77]/15 text-[#D6B873]"
-                            : "text-white hover:bg-white/[0.06]"
-                        }
-                      `}
-                    >
-                      <span>{item.title}</span>
-
-                      <ChevronRight
-                        size={17}
-                        strokeWidth={1.8}
-                        aria-hidden="true"
-                        className="
-                          shrink-0
-                          text-white
-                          transition-transform
-                          duration-200
-                          group-hover:translate-x-0.5
-                        "
-                      />
-                    </Link>
-                  ))}
-                </div>
-              </nav>
-            </div>
-
-            {/* Mobile CTA */}
-
-            <div
-              className="
+                grid
+                h-11
+                w-11
                 shrink-0
-                border-t
-                border-white/[0.12]
-                bg-[#15232C]
-                px-4
-                pt-3
-                pb-[max(12px,env(safe-area-inset-bottom))]
-                min-[414px]:px-6
+
+                place-items-center
+
+                rounded-full
+
+                border
+                border-white/20
+
+                bg-white/[0.10]
+
+                text-white
+
+                transition-[background-color,border-color,transform]
+                duration-200
+
+                hover:border-white/35
+                hover:bg-white/[0.18]
+
+                active:scale-95
+
+                focus-visible:outline-none
+                focus-visible:ring-2
+                focus-visible:ring-white
+
+                motion-reduce:transform-none
+                motion-reduce:transition-none
               "
             >
-              <Link
-                href={CONTACT.path}
-                onClick={closeMobile}
-                className="
-                  flex
-                  min-h-12
-                  w-full
-                  items-center
-                  justify-between
-                  gap-3
-                  rounded-lg
-                  bg-[#426A77]
-                  px-6
-                  py-3
-                  text-base
-                  font-semibold
-                  leading-6
-                  text-[#151F28]
-                  transition
-                  duration-200
-                  hover:bg-[#DDBF78]
-                  active:scale-[0.99]
-                  focus-visible:outline
-                  focus-visible:outline-2
-                  focus-visible:outline-offset-2
-                  focus-visible:outline-white
-                "
-              >
-                <span>Discuss your requirements</span>
+              <X
+                size={23}
+                strokeWidth={2}
+                aria-hidden="true"
+              />
+            </button>
+          </div>
 
-                <ArrowUpRight
-                  size={19}
-                  strokeWidth={1.9}
-                  aria-hidden="true"
-                />
-              </Link>
-            </div>
+          {/* =================================================
+              MOBILE LINKS
+          ================================================== */}
+
+          <nav
+            aria-label="Mobile navigation"
+            className="
+              min-h-0
+              flex-1
+
+              overflow-y-auto
+              overscroll-contain
+
+              px-4
+              pb-5
+              pt-5
+
+              min-[480px]:px-6
+
+              [scrollbar-width:thin]
+              [scrollbar-color:#E0A4B5_transparent]
+
+              [&::-webkit-scrollbar]:w-1
+
+              [&::-webkit-scrollbar-thumb]:rounded-full
+              [&::-webkit-scrollbar-thumb]:bg-[#E0A4B5]
+            "
+          >
+            {[
+              {
+                title:
+                  "Properties & location",
+                items: PRIMARY,
+              },
+              {
+                title:
+                  "News & resources",
+                items: UPDATES,
+              },
+              {
+                title:
+                  "Company & support",
+                items: [
+                  ...MORE,
+                  CONTACT,
+                ],
+              },
+            ].map(
+              (
+                group,
+                groupIndex,
+              ) => (
+                <section
+                  key={group.title}
+                  className={`
+                    ${
+                      groupIndex === 0
+                        ? ""
+                        : `
+                          mt-5
+                          border-t
+                          border-[#EAD9DF]
+                          pt-5
+                        `
+                    }
+                  `}
+                >
+                  <h3
+                    className="
+                      mb-2
+
+                      px-2
+
+                      text-[12px]
+                      font-semibold
+                      uppercase
+                      leading-5
+
+                      tracking-[0.14em]
+
+                      text-[#8F2946]
+                    "
+                  >
+                    {group.title}
+                  </h3>
+
+                  <div className="space-y-1">
+                    {group.items.map(
+                      (item) => {
+                        const isActive =
+                          active(
+                            item.path,
+                          );
+
+                        return (
+                          <Link
+                            key={item.path}
+                            href={item.path}
+                            aria-current={current(
+                              item.path,
+                            )}
+                            onClick={() =>
+                              closeMobile()
+                            }
+                            className={`
+                              group
+
+                              flex
+                              min-h-[54px]
+
+                              touch-manipulation
+
+                              items-center
+                              justify-between
+
+                              gap-4
+
+                              rounded-xl
+
+                              px-3
+                              py-3
+
+                              text-[17px]
+                              leading-6
+
+                              transition-colors
+                              duration-150
+
+                              ${
+                                isActive
+                                  ? `
+                                    bg-[#F3E7EC]
+
+                                    font-semibold
+
+                                    text-[#8F2946]
+                                  `
+                                  : `
+                                    font-medium
+
+                                    text-[#39252E]
+
+                                    hover:bg-[#F7EEF1]
+
+                                    active:bg-[#F3E7EC]
+                                  `
+                              }
+
+                              focus-visible:outline-none
+                              focus-visible:ring-2
+                              focus-visible:ring-[#8F2946]
+                              focus-visible:ring-inset
+
+                              motion-reduce:transition-none
+                            `}
+                          >
+                            <span className="min-w-0">
+                              {item.title}
+                            </span>
+
+                            <ChevronRight
+                              size={18}
+                              strokeWidth={1.9}
+                              aria-hidden="true"
+                              className={`
+                                shrink-0
+
+                                ${
+                                  isActive
+                                    ? "text-[#8F2946]"
+                                    : "text-[#7C6870]"
+                                }
+
+                                transition-transform
+                                duration-200
+
+                                group-hover:translate-x-0.5
+
+                                motion-reduce:transform-none
+                              `}
+                            />
+                          </Link>
+                        );
+                      },
+                    )}
+                  </div>
+                </section>
+              ),
+            )}
+          </nav>
+
+          {/* =================================================
+              MOBILE ENQUIRY
+          ================================================== */}
+
+          <div
+            className="
+              shrink-0
+
+              border-t
+              border-[#EAD9DF]
+
+              bg-white
+
+              px-4
+
+              pb-[max(14px,env(safe-area-inset-bottom))]
+              pt-3
+
+              min-[480px]:px-6
+            "
+          >
+            <p
+              className="
+                mb-2
+
+                text-[14px]
+                font-normal
+                leading-5
+
+                text-[#68565E]
+              "
+            >
+              Let’s find a property that fits your plans.
+            </p>
+
+            {enquiry(
+              `
+                flex
+                min-h-[50px]
+                w-full
+
+                items-center
+                justify-center
+
+                gap-2.5
+
+                rounded-xl
+
+                bg-[#8F2946]
+
+                px-5
+                py-3
+
+                text-[17px]
+                font-semibold
+                leading-6
+
+                text-white
+
+                transition-[background-color,transform]
+                duration-200
+
+                hover:bg-[#742039]
+
+                active:scale-[0.99]
+
+                focus-visible:outline-none
+                focus-visible:ring-2
+                focus-visible:ring-[#8F2946]
+                focus-visible:ring-offset-2
+
+                motion-reduce:transform-none
+                motion-reduce:transition-none
+              `,
+              () =>
+                closeMobile(),
+            )}
           </div>
         </div>
-      )}
+      </dialog>
     </>
   );
 }

@@ -258,8 +258,10 @@
 // }
 
 
+
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight, Check, MapPin } from "lucide-react";
 
 import dholeraSite from "@/assets/dholera-smart-city-home-image2.webp";
 
@@ -275,57 +277,19 @@ export default function Dholera() {
   return (
     <section
       aria-labelledby="dholera-heading"
-      className="relative isolate overflow-hidden bg-[#14381F] px-4 py-10 text-[#FFF8DC] min-[414px]:px-6 md:px-8 lg:py-10"
-      style={{
-        backgroundImage: `
-          radial-gradient(
-            ellipse at 0% 0%,
-            rgba(244, 211, 94, 0.10),
-            transparent 48%
-          ),
-          radial-gradient(
-            ellipse at 100% 100%,
-            rgba(65, 116, 64, 0.20),
-            transparent 50%
-          ),
-          linear-gradient(
-            135deg,
-            #1C4629 0%,
-            #14381F 45%,
-            #0B2414 100%
-          )
-        `,
-      }}
+      className="relative isolate overflow-hidden border-y border-[#EAD9DF] bg-[#F3E7EC] px-4 py-10 text-[#39252E] selection:bg-[#E0A4B5] selection:text-[#39252E] min-[414px]:px-6 md:px-8 md:py-12 lg:py-14"
     >
-      {/* Subtle section edge */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#F4D35E]/35 to-transparent"
-      />
-
-      <div className="relative mx-auto max-w-7xl">
-        {/* Heading */}
-        <header className="mb-6 lg:mb-7">
-          <div className="mb-3 flex items-center gap-2">
-            <span
-              aria-hidden="true"
-              className="h-1.5 w-1.5 rounded-full bg-[#F4D35E]"
-            />
-
-            <p className="text-[11px] font-semibold tracking-[0.14em] text-[#F4D35E]">
-              DHOLERA SMART CITY
-            </p>
-          </div>
-
-          <h1
+      <div className="mx-auto max-w-7xl">
+        <header className="mb-6 lg:mb-8">
+          <h2
             id="dholera-heading"
-            className="text-[28px] font-bold leading-[1.2] tracking-tight text-[#FFF8DC] sm:text-[32px] lg:text-[36px]"
+            className="max-w-5xl text-[26px] font-semibold leading-[1.25] tracking-tight text-[#39252E] sm:text-[32px] lg:text-[38px]"
           >
             Invest in India&apos;s First Planned Smart City:{" "}
-            <span className="text-[#F4D35E]">Dholera SIR</span>
-          </h1>
+            <span className="text-[#8F2946] underline decoration-[#E0A4B5] decoration-[3px] underline-offset-[6px]">Dholera SIR</span>
+          </h2>
 
-          <p className="mt-3 max-w-6xl text-[16px] leading-[26px] text-[#D5E0D3]">
+          <p className="mt-4 max-w-5xl text-base leading-7 text-[#68565E]">
             Spanning over 920 sq km, Dholera SIR is part of Delhi–Mumbai
             Industrial Corridor (DMIC). With large-scale infrastructure
             planning, industrial growth, and future-ready connectivity, it has
@@ -333,10 +297,8 @@ export default function Dholera() {
           </p>
         </header>
 
-        {/* Slightly wider image with balanced desktop height */}
-        <div className="grid items-stretch gap-5 lg:min-h-[410px] lg:grid-cols-[minmax(0,1.08fr)_minmax(0,1fr)] lg:gap-6">
-          {/* Image */}
-          <figure className="relative m-0 aspect-[10/7] min-w-0 overflow-hidden rounded-[20px] border border-[#F4D35E]/25 bg-[#0B2414] shadow-[0_16px_40px_-24px_rgba(0,0,0,0.65)] lg:aspect-auto">
+        <div className="grid items-stretch gap-5 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,1fr)] lg:gap-6">
+          <figure className="relative m-0 aspect-[10/7] min-w-0 overflow-hidden rounded-2xl border border-[#E0A4B5]/50 bg-[#F2E7EB] lg:aspect-auto lg:min-h-[420px]">
             <Image
               src={dholeraSite}
               alt="ABCD Building in Dholera Smart City"
@@ -345,150 +307,57 @@ export default function Dholera() {
               className="object-cover object-center"
             />
 
-            <figcaption className="absolute bottom-4 left-4 right-4 flex items-center gap-2.5 rounded-xl border border-white/15 bg-[#0B2414]/95 px-3.5 py-3 sm:right-auto">
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#F4D35E]/10">
-                <svg
-                  aria-hidden="true"
-                  focusable="false"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  className="h-5 w-5 text-[#F4D35E]"
-                >
-                  <path
-                    d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z"
-                    stroke="currentColor"
-                    strokeWidth="1.7"
-                    strokeLinejoin="round"
-                  />
-                  <circle
-                    cx="12"
-                    cy="10"
-                    r="2.5"
-                    stroke="currentColor"
-                    strokeWidth="1.7"
-                  />
-                </svg>
+            <figcaption className="absolute bottom-3 left-3 right-3 flex items-center gap-3 rounded-xl border border-[#EAD9DF] bg-white shadow-[0_4px_16px_rgba(116,32,57,0.08)] px-3.5 py-3 sm:bottom-4 sm:left-4 sm:right-auto sm:pr-5">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#F7EBEF] text-[#8F2946]">
+                <MapPin size={19} strokeWidth={1.7} aria-hidden="true" />
               </span>
-
-              <div>
-                <p className="text-xs font-semibold text-[#FFF8DC]">
+              <div className="min-w-0">
+                <p className="text-sm font-medium leading-5 text-[#39252E]">
                   Dholera Smart City
                 </p>
-                <p className="mt-0.5 text-[11px] text-[#D5E0D3]">
+                <p className="mt-0.5 text-xs leading-5 text-[#68565E]">
                   Gujarat, India
                 </p>
               </div>
             </figcaption>
           </figure>
 
-          {/* Gradient card frame */}
-          <div className="min-w-0 rounded-[20px] bg-gradient-to-br from-[#F4D35E]/35 via-white/10 to-[#F4D35E]/10 p-px shadow-[0_16px_40px_-28px_rgba(0,0,0,0.55)]">
-            <div
-              className="flex h-full flex-col rounded-[19px] p-5 lg:p-6"
-              style={{
-                backgroundImage: `
-                  radial-gradient(
-                    ellipse at 100% 0%,
-                    rgba(244, 211, 94, 0.08),
-                    transparent 60%
-                  ),
-                  linear-gradient(
-                    145deg,
-                    #20472C 0%,
-                    #14381F 60%,
-                    #102E1B 100%
-                  )
-                `,
-              }}
-            >
-              <div className="border-b border-[#F4D35E]/20 pb-3 lg:pb-4">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#F4D35E] lg:text-[11px]">
-                  The location advantage
-                </p>
+          <div className="flex min-w-0 flex-col rounded-2xl border border-[#E0A4B5]/60 bg-white shadow-[0_8px_28px_rgba(116,32,57,0.05)] p-5 sm:p-6 lg:p-7">
+            <div className="border-b border-[#EAD9DF] pb-4">
+              <p className="text-xs font-medium uppercase leading-5 tracking-[0.13em] text-[#8F2946]">
+                The location advantage
+              </p>
+              <h3 className="mt-2 text-[22px] font-semibold leading-7 tracking-tight text-[#39252E] sm:text-[24px] sm:leading-8">
+                Key highlights of Dholera
+              </h3>
+            </div>
 
-                <h2 className="mt-1.5 text-[21px] font-semibold leading-7 tracking-tight text-[#FFF8DC] lg:text-[24px] lg:leading-8">
-                  Key highlights of Dholera
-                </h2>
-              </div>
+            <ul className="mt-1 divide-y divide-[#EFE3E7]">
+              {locationFeatures.map((feature) => (
+                <li key={feature} className="flex items-start gap-3 py-3.5">
+                  <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[#E0A4B5]/60 bg-[#F7EBEF] text-[#8F2946]">
+                    <Check size={12} strokeWidth={2} aria-hidden="true" />
+                  </span>
+                  <span className="min-w-0 text-base leading-[26px] text-[#51414A]">
+                    {feature}
+                  </span>
+                </li>
+              ))}
+            </ul>
 
-              {/* Feature list */}
-              <ul className="mt-1 divide-y divide-[#F4D35E]/15">
-                {locationFeatures.map((feature) => (
-                  <li
-                    key={feature}
-                    className="flex items-start gap-3 py-3"
-                  >
-                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[#F4D35E]/25 bg-[#F4D35E]/10 text-[#F4D35E]">
-                      <svg
-                        aria-hidden="true"
-                        focusable="false"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                        className="h-3 w-3"
-                      >
-                        <path
-                          d="m4.5 10 3.5 3.5 7.5-7.5"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </span>
-
-                    <span className="text-[16px] leading-[26px] text-[#E5EBDE] lg:text-[15px] lg:leading-6">
-                      {feature}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-
-              {/* Primary action */}
-              <div className="mt-auto pt-4">
-                <Link
-                  href="/dholera-sir"
-                  className="
-                    group relative isolate inline-flex min-h-[50px] w-full
-                    items-center justify-center gap-3 overflow-hidden
-                    rounded-xl border border-[#FFE9A0]/50
-                    bg-[#F4D35E] bg-gradient-to-br
-                    from-[#FAE9A0] via-[#F4D35E] to-[#DDB638]
-                    px-5 py-3 text-[15px] font-bold leading-6
-                    text-[#14381F]
-                    shadow-[0_6px_18px_-10px_rgba(244,211,94,0.45)]
-                    transition-shadow duration-200
-                    hover:shadow-[0_8px_22px_-8px_rgba(244,211,94,0.6)]
-                    focus-visible:outline-none focus-visible:ring-2
-                    focus-visible:ring-[#F4D35E]
-                    focus-visible:ring-offset-4
-                    focus-visible:ring-offset-[#102E1B]
-                    motion-reduce:transition-none
-                  "
-                >
-                  <span
-                    aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 bg-white/10 opacity-0 transition-opacity duration-200 group-hover:opacity-100 motion-reduce:transition-none"
-                  />
-
-                  <span className="relative">About Dholera SIR</span>
-
-                  <svg
-                    aria-hidden="true"
-                    focusable="false"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    className="relative h-4 w-4 shrink-0 transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transform-none motion-reduce:transition-none"
-                  >
-                    <path
-                      d="M5 12h14m-6-6 6 6-6 6"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </Link>
-              </div>
+            <div className="mt-auto pt-5">
+              <Link
+                href="/dholera-sir"
+                className="group inline-flex min-h-[52px] w-full touch-manipulation items-center justify-center gap-3 rounded-lg bg-[#8F2946] px-5 py-3 text-base font-semibold leading-6 text-white transition-colors duration-200 hover:bg-[#742039] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#8F2946] motion-reduce:transition-none"
+              >
+                <span>About Dholera SIR</span>
+                <ArrowRight
+                  size={18}
+                  strokeWidth={1.8}
+                  aria-hidden="true"
+                  className="shrink-0 transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transform-none motion-reduce:transition-none"
+                />
+              </Link>
             </div>
           </div>
         </div>
