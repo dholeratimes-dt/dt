@@ -296,7 +296,7 @@ export default function FAQS() {
         bg-[#F3E7EC]
 
         px-4
-        py-12
+        py-10
 
         selection:bg-[#E0A4B5]
         selection:text-[#39252E]
@@ -307,9 +307,9 @@ export default function FAQS() {
         sm:py-14
 
         md:px-8
-        md:py-20
+        md:py-12
 
-        lg:py-[88px]
+        lg:py-[70px]
       "
     >
       {/* Background decoration */}
@@ -388,7 +388,7 @@ export default function FAQS() {
             min-w-0
 
             md:sticky
-            md:top-28
+            md:top-22
           "
         >
           {/* Eyebrow
@@ -396,7 +396,7 @@ export default function FAQS() {
               Desktop: moved above heading so heading aligns
               with FAQ card
           */}
-          <div
+          {/* <div
             className="
               mb-4
               flex
@@ -423,7 +423,7 @@ export default function FAQS() {
             <p
               className="
                 text-xs
-                font-semibold
+                font-bold
                 uppercase
                 leading-5
 
@@ -434,7 +434,7 @@ export default function FAQS() {
             >
               Need clarity?
             </p>
-          </div>
+          </div> */}
 
           {/* Heading */}
           <h2

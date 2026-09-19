@@ -333,14 +333,12 @@ const TestimonialPagination = () => {
         min-[414px]:px-5
 
         sm:px-6
-        sm:py-14
+        sm:py-10
 
         md:px-8
-        md:py-16
+        md:py-12
 
-        lg:py-20
-
-        xl:py-[88px]
+        lg:py-14
       "
     >
       {/* =====================================================

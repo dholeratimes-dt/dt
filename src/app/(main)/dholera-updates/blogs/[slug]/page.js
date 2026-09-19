@@ -777,7 +777,7 @@ export default async function BlogDetail({ params }) {
               <div className="sticky space-y-4 top-24">
                 <div className=" pt-4 max-w-xl mx-auto">
                   <LeadFormSlug
-                    title="Buy Residential Plot near Dholera SIR Starting From ₹8 Lakh"
+                    title="Buy Residential Plot near Dholera SIR Starting From ₹10 Lakh"
                     buttonName="Know More"
                   />
                 </div>

@@ -539,8 +539,8 @@ export default function BulkLand({ title, buttonName, pageName }) {
         bg-[#FAF7F8]
         px-4 py-10
         min-[414px]:px-6
-        md:px-8 md:py-14
-        lg:py-16
+        md:px-8 md:py-12
+        lg:py-14
         selection:bg-[#E0A4B5]
         selection:text-[#39252E]
       "

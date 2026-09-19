@@ -13,7 +13,7 @@ export default function page() {
         <Hero />
         <WestWynAboutSection />
         <div>
-          <CommonForm title="Get Plots Starting From ₹8 Lakh in Dholera" />
+          <CommonForm title="Get Plots Starting From ₹10 Lakh in Dholera" />
         </div>
         <WestWynEstate />
         <ProjectAmenities />

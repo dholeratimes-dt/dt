@@ -277,13 +277,42 @@ export default function Dholera() {
   return (
     <section
       aria-labelledby="dholera-heading"
-      className="relative isolate overflow-hidden border-y border-[#EAD9DF] bg-[#F3E7EC] px-4 py-10 text-[#39252E] selection:bg-[#E0A4B5] selection:text-[#39252E] min-[414px]:px-6 md:px-8 md:py-12 lg:py-14"
-    >
+
+          className="
+          relative
+          isolate
+          overflow-hidden
+
+          border-y
+          border-[#EAD9DF]
+          bg-[#F3E7EC]
+
+          px-4
+          py-10
+
+          text-[#39252E]
+
+          selection:bg-[#E0A4B5]
+          selection:text-[#39252E]
+
+          min-[414px]:px-5
+
+          sm:px-6
+          sm:py-12
+
+          md:px-8
+          md:py-12
+
+          lg:px-10
+          lg:py-12
+          ">
+      {/* className="relative isolate overflow-hidden border-y border-[#EAD9DF] bg-[#F3E7EC] px-4 py-8 text-[#39252E] selection:bg-[#E0A4B5] selection:text-[#39252E] min-[414px]:px-6 md:px-8 md:py-12 lg:py-14 lg:px:10"
+    > */}
       <div className="mx-auto max-w-7xl">
         <header className="mb-6 lg:mb-8">
           <h2
             id="dholera-heading"
-            className="max-w-5xl text-[26px] font-semibold leading-[1.25] tracking-tight text-[#39252E] sm:text-[32px] lg:text-[38px]"
+            className="max-w-5xl text-[clamp(1.75rem,3vw,2.5rem)] font-bold font-semibold leading-[1.25] tracking-tight text-[#39252E]"
           >
             Invest in India&apos;s First Planned Smart City:{" "}
             <span className="text-[#8F2946] underline decoration-[#E0A4B5] decoration-[3px] underline-offset-[6px]">Dholera SIR</span>
@@ -324,9 +353,9 @@ export default function Dholera() {
 
           <div className="flex min-w-0 flex-col rounded-2xl border border-[#E0A4B5]/60 bg-white shadow-[0_8px_28px_rgba(116,32,57,0.05)] p-5 sm:p-6 lg:p-7">
             <div className="border-b border-[#EAD9DF] pb-4">
-              <p className="text-xs font-medium uppercase leading-5 tracking-[0.13em] text-[#8F2946]">
-                The location advantage
-              </p>
+           {/* <p className="text-xs font-bold uppercase leading-5 tracking-[0.13em] text-[#8F2946]">
+  The location advantage
+</p> */}
               <h3 className="mt-2 text-[22px] font-semibold leading-7 tracking-tight text-[#39252E] sm:text-[24px] sm:leading-8">
                 Key highlights of Dholera
               </h3>

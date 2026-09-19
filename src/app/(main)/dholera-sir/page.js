@@ -131,7 +131,7 @@ export default async function BlogsPage() {
       </div>
 
       <BulkLand
-        title="Invest in Registry-Ready Plots in Dholera Starting from ₹8 Lakh"
+        title="Invest in Registry-Ready Plots in Dholera Starting from ₹10 Lakh"
         buttonName="Get A Call Back"
         pageName="aboutSir"
       />

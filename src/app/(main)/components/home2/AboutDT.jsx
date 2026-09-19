@@ -10,13 +10,13 @@ const PROJECTS = [
   {
     image: img2,
     name: "WestWyn Residency",
-    subtext: "Registry-Ready Plots From ₹8 Lakh*",
+    subtext: "Registry-Ready Plots From ₹10 Lakh*",
     tag: "Premium Plots",
     href: "/dholera-residential-plots/westwyn-residency",
     description:
       "WestWyn Residency is a gated plotting society in Pipariya, Dholera, offering residential plots with immediate possession and long-term growth potential.It is designed for buyers seeking a well-connected location, and a promising residential opportunity in Dholera’s emerging growth areas.",
     points: [
-      "Starting from ₹8 lakh",
+      "Starting from ₹10 lakh",
       "Prime Location: 5 Minutes from SIR boundary, 30 Minutes from Dholera International Airport",
       "Documentation: NA/NOC/Title clear plots, Registry-ready",
       "Premium Amenities: Project Boundary, Gated Community, App-Based Management, EV Charging Station, 24/7 Security & CCTV",

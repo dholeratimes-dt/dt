@@ -109,7 +109,7 @@ export default async function BlogsPage() {
           <div className="lg:w-1/4 lg:sticky lg:top-6">
             <div className="bg-white p-6 rounded-xl shadow-md border-l-4 border-[#d7b56d]  mb-8">
               <LeadForm
-                title="Invest in Registry Ready Dholera Plots Starting from ₹8 Lakh"
+                title="Invest in Registry Ready Dholera Plots Starting from ₹10 Lakh"
                 buttonName="Know More"
               />
             </div>
