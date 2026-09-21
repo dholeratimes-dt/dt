@@ -191,7 +191,41 @@ export default function WhyDT() {
     <section
       id="westwyn-county"
       aria-labelledby="why-dt-heading"
-      className="border-y  bg-[#F3E7EC] bg-gradient-to-br from-[#EEDDE4] via-[#F7EFF2] to-white px-4 py-10 text-[#39252E] selection:bg-[#E0A4B5] selection:text-[#39252E] min-[414px]:px-6 md:px-8 md:py-12 lg:py-14"
+
+            className="
+        w-full
+        border-y
+        border-[#EAD9DF]
+
+        bg-[#F3E7EC]
+        bg-gradient-to-br
+        from-[#EEDDE4]
+        via-[#F7EFF2]
+        to-white
+
+        px-4
+        pt-10
+        pb-12
+
+        text-[#39252E]
+
+        selection:bg-[#E0A4B5]
+        selection:text-[#39252E]
+
+        min-[414px]:px-6
+        min-[414px]:pt-11
+        min-[414px]:pb-14
+
+        sm:pt-12
+        sm:pb-14
+
+        md:px-8
+        md:pt-14
+        md:pb-16
+
+        lg:pt-14
+        lg:pb-[72px]
+      "
     >
       <div className="mx-auto w-full max-w-7xl">
         <header className="grid min-w-0 grid-cols-1 gap-4 md:gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center lg:gap-12">

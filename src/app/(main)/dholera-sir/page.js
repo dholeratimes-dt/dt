@@ -14,6 +14,9 @@ import { FaPhone, FaWhatsapp } from "react-icons/fa";
 import BulkLand from "../components/BulkLandForm";
 import BlogSlider from "./BlogSlider";
 
+import MegaProjectsSection from "./MegaProject";
+import WhyInvestDholera from "./WhyInvest";
+
 export default async function BlogsPage() {
   // Fetch data and handle potential errors
   let posts = [];
@@ -61,7 +64,13 @@ export default async function BlogsPage() {
     }
   }
 
-  
+  const whatsappMessage =
+    "Hello Dholera Times, I am interested in buying a plot in Dholera. Please share the available details.";
+
+  const whatsappLink = `https://wa.me/919958993549?text=${encodeURIComponent(
+    whatsappMessage,
+  )}`;
+
   return (
     <>
       <title>About Dholera SIR | Smart City Dholera Gujarat</title>
@@ -95,12 +104,75 @@ export default async function BlogsPage() {
       </div>
 
       {/* What Is Dholera Smart City Section */}
-      <div className="bg-white py-14 px-4">
-        <div className="max-w-7xl mx-auto">
-          <p className="text-3xl md:text-4xl text-center font-bold text-gray-900 mb-6">
+      <section
+        aria-labelledby="dholera-smart-city-heading"
+        className="
+          w-full
+          bg-white
+
+          px-4
+          py-8
+
+          min-[414px]:px-6
+
+          sm:py-12
+
+          md:px-8
+          md:py-12
+
+          lg:py-12
+        "
+      >
+        <div className="mx-auto w-full max-w-7xl">
+          {/* Heading */}
+          <h2
+            id="dholera-smart-city-heading"
+            className="
+              max-w-4xl
+
+              text-left
+              text-[clamp(1.75rem,2.5vw,2.5rem)]
+
+              font-semibold
+              leading-[1.2]
+              tracking-[-0.025em]
+
+              text-[#8F2946]
+
+              md:mx-auto
+              md:text-center
+            "
+          >
             What Is Dholera Smart City?
-          </p>
-          <div className="space-y-5 text-gray-700 text-base md:text-lg leading-relaxed">
+          </h2>
+
+          {/* Content */}
+          <div
+            className="
+              mx-auto
+              mt-4
+              max-w-5xl
+
+              space-y-5
+
+              text-[16px]
+              font-normal
+              leading-[1.75]
+
+              text-[#5C4851]
+
+              sm:mt-5
+              sm:text-[16px]
+              sm:leading-[1.8]
+
+              md:mt-8
+              md:space-y-6
+              md:text-[17px]
+
+              lg:text-[18px]
+              lg:leading-[1.8]
+            "
+          >
             <p>
               Dholera SIR (Special Investment Region) is one of India&apos;s
               most ambitious greenfield smart city developments, planned in
@@ -111,6 +183,7 @@ export default async function BlogsPage() {
               described by NICDC as the largest node under DMIC, with a planned
               area of around 920 sq. km.
             </p>
+
             <p>
               What makes Dholera Smart City different is its long-term planning.
               Instead of growing in an unplanned way, the city is being
@@ -120,6 +193,7 @@ export default async function BlogsPage() {
               intended to create a strong foundation for industries, businesses,
               professionals, and future residents.
             </p>
+
             <p>
               For businesses searching for a location with scale,
               infrastructure, and future growth potential, Dholera SIR Gujarat
@@ -128,7 +202,7 @@ export default async function BlogsPage() {
             </p>
           </div>
         </div>
-      </div>
+      </section>
 
       <BulkLand
         title="Invest in Registry-Ready Plots in Dholera Starting from ₹10 Lakh"
@@ -136,230 +210,441 @@ export default async function BlogsPage() {
         pageName="aboutSir"
       />
 
-      {/* Mega Projects Section */}
-      <div className="bg-gray-50 py-14 px-4 flex flex-col max-sm:flex-col-reverse lg:flex-row gap-8">
-        <div className="lg:w-1/4 sticky top-6">
-          <div className="bg-white p-6 translate-y-16 rounded-xl shadow-md border-l-4 border-[#d7b56d]">
-            <h2 className="text-2xl font-semibold mb-6 text-gray-800">
-              Latest News on Dholera SIR
-            </h2>
-            {trendingBlogs.length > 0 ? (
-              <div className="space-y-6">
-                {trendingBlogs.map((post) => (
-                  <TrendingBlogItem key={post._id} post={post} />
-                ))}
-              </div>
-            ) : (
-              <p className="text-gray-500">No news available at the moment.</p>
-            )}
-          </div>
-        </div>
+      {/* Bottom CTA Section */}
+      <div
+        className="
+          w-full
 
-        <div className="lg:w-3/4">
-          <h2 className="text-2xl md:text-3xl text-center font-bold text-gray-900 mb-8">
-            Mega Projects in Dholera
+          bg-gradient-to-r
+          from-[#39252E]
+          via-[#742039]
+          to-[#8F2946]
+
+          px-4
+          py-6
+          pb-8
+
+          text-white
+
+          min-[414px]:px-6
+          min-[414px]:py-11
+
+          sm:py-12
+
+          md:px-8
+          md:py-12
+
+          lg:py-12
+        "
+      >
+        <div
+          className="
+            mx-auto
+            w-full
+            max-w-7xl
+
+            text-center
+          "
+        >
+          <h2
+            className="
+              mx-auto
+              max-w-3xl
+
+              text-[clamp(1.75rem,2.5vw,2.375rem)]
+
+              font-semibold
+              leading-[1.2]
+              tracking-[-0.025em]
+
+              text-white
+            "
+          >
+            Stay Updated with Dholera SIR
           </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div className="bg-white border-2 border-black rounded-lg p-5 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="text-3xl mb-3">🛣️</div>
-              <h4 className="text-lg font-bold mb-2">
-                Ahmedabad-Dholera Expressway
-              </h4>
-              <p className="text-gray-700 text-sm">
-                High-Speed Connectivity Corridor to Dholera
-              </p>
-            </div>
 
-            <div className="bg-white border-2 border-black rounded-lg p-5 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="text-3xl mb-3">✈️</div>
-              <h4 className="text-lg font-bold mb-2">
-                Dholera International Airport
-              </h4>
-              <p className="text-gray-700 text-sm">
-                India&apos;s Second Largest Airport
-              </p>
-            </div>
+          <p
+            className="
+              mx-auto
 
-            <div className="bg-white border-2 border-black rounded-lg p-5 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="text-3xl mb-3">💻</div>
-              <h4 className="text-lg font-bold mb-2">
-                Tata Semiconductor Plant
-              </h4>
-              <p className="text-gray-700 text-sm">
-                India&apos;s First Semiconductor Fab
-              </p>
-            </div>
+              mt-4
+              max-w-2xl
 
-            <div className="bg-white border-2 border-black rounded-lg p-5 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="text-3xl mb-3">☀️</div>
-              <h4 className="text-lg font-bold mb-2">
-                Dholera Solar Park
-              </h4>
-              <p className="text-gray-700 text-sm">
-                One of Asia&apos;s Largest Solar Plants
-              </p>
-            </div>
+              text-[15px]
+              font-normal
+              leading-7
 
-            <div className="bg-white border-2 border-black rounded-lg p-5 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="text-3xl mb-3">🚢</div>
-              <h4 className="text-lg font-bold mb-2">Dholera Sea Port</h4>
-              <p className="text-gray-700 text-sm">
-                Proposed Deep-Sea Trade Gateway
-              </p>
-            </div>
+              text-[#F1DDE3]
 
-            <div className="bg-white border-2 border-black rounded-lg p-5 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="text-3xl mb-3">🚇</div>
-              <h4 className="text-lg font-bold mb-2">
-                Dholera Monorail
-              </h4>
-              <p className="text-gray-700 text-sm">High Speed Metro And Rail</p>
-            </div>
+              sm:mt-5
+              sm:text-[16px]
 
-            <div className="bg-white border-2 border-black rounded-lg p-5 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="text-3xl mb-3">🏢</div>
-              <h4 className="text-lg font-bold mb-2">ABCD Building</h4>
-              <p className="text-gray-700 text-sm">
-                Dholera&apos;s Central Command Hub
-              </p>
-            </div>
-
-            <div className="bg-white border-2 border-black rounded-lg p-5 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="text-3xl mb-3">🏘️</div>
-              <h4 className="text-lg font-bold mb-2">Activation Area</h4>
-              <p className="text-gray-700 text-sm">
-                Dholera&apos;s First Operational Smart Zone
-              </p>
-            </div>
-
-            <div className="bg-white border-2 border-black rounded-lg p-5 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="text-3xl mb-3">🏭</div>
-              <h4 className="text-lg font-bold mb-2">DMIC</h4>
-              <p className="text-gray-700 text-sm">
-                India&apos;s Largest Industrial Corridor
-              </p>
-            </div>
-
-            <div className="bg-white border-2 border-black rounded-lg p-5 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="text-3xl mb-3">🚂</div>
-              <h4 className="text-lg font-bold mb-2">
-                Dedicated Freight Corridor
-              </h4>
-              <p className="text-gray-700 text-sm">
-                High-Speed National Freight Network
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Why Invest in Dholera Section */}
-      <div className="bg-white py-14 px-4">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-2xl md:text-3xl text-center font-bold text-gray-900 mb-4">
-            Why Invest in Dholera?
-          </h2>
-          <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-10 text-center max-w-3xl mx-auto">
-            Investing in Dholera attracts attention because the city is being
-            built around long-term infrastructure, industrial growth, and
-            strategic connectivity. It is not just a land story; it is an
-            infrastructure-led development story. Here are the strongest reasons
-            why Dholera investment stands out:
+              md:text-[17px]
+            "
+          >
+            Subscribe to our newsletter for the latest dholera investment
+            opportunities and updates.
           </p>
 
-          {/* 2x2 Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Reason 1 */}
-            <div className="border-l-4 border-[#d7b56d] pl-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
-                Strategic Location
-              </h3>
-              <p className="text-gray-700 leading-relaxed">
-                Dholera enjoys a highly strategic location in Gujarat, making it
-                one of the most promising emerging investment destinations in
-                India. Its planned connectivity with Ahmedabad and other major
-                industrial corridors increases its importance for business,
-                logistics, trade, and future urban growth. With road, airport,
-                sea port, and railway connectivity, Dholera is being seen as a
-                gateway for long-term development and economic expansion.
-              </p>
-            </div>
+          <Link
+            href="/contact"
+            className="
+              mt-6
 
-            {/* Reason 2 */}
-            <div className="border-l-4 border-[#d7b56d] pl-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
-                India&apos;s First Planned Greenfield Smart City
-              </h3>
-              <p className="text-gray-700 leading-relaxed">
-                Dholera is India&apos;s first planned greenfield smart city,
-                developing with a modern vision from scratch. Unlike other
-                cities that expand in an unstructured way, Dholera is being
-                designed with planned roads, utility networks, industrial zones,
-                residential areas, and plug &amp; play infrastructure. This
-                planned development model creates strong potential for
-                sustainable growth, better livability, and organized urban
-                expansion.
-              </p>
-            </div>
+              inline-flex
+              min-h-[48px]
 
-            {/* Reason 3 */}
-            <div className="border-l-4 border-[#d7b56d] pl-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
-                Major Companies in Dholera
-              </h3>
-              <p className="text-gray-700 leading-relaxed">
-                Many big companies have invested in Dholera such as Tata
-                Electronics, Tata Chemicals, ReNew, Polycab India, Jabil, and
-                more. With investments exceeding ₹3 lakh crore, Dholera SIR is
-                evolving into a long-term hub for advanced manufacturing, clean
-                energy, and planned urban infrastructure.
-              </p>
-            </div>
+              items-center
+              justify-center
 
-            {/* Reason 4 */}
-            <div className="border-l-4 border-[#d7b56d] pl-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
-                Future-Ready Urban Vision
-              </h3>
-              <p className="text-gray-700 leading-relaxed">
-                Dholera is not just being developed as an industrial zone, but
-                as a future-ready smart city built for the next generation. Its
-                vision includes modern infrastructure, better mobility,
-                efficient urban planning, integrated utilities, and a strong
-                environment for business growth. This future-focused approach
-                makes Dholera appealing to investors who want to be part of a
-                location that is planned for tomorrow&apos;s economy, urban
-                lifestyle, and industrial transformation.
-              </p>
-            </div>
-          </div>
+              rounded-lg
+
+              bg-white
+
+              px-6
+              py-3
+
+              text-[15px]
+              font-semibold
+              leading-6
+
+              text-[#8F2946]
+
+              shadow-[0_10px_28px_rgba(57,37,46,0.22)]
+
+              transition-[background-color,color,transform,box-shadow]
+              duration-200
+
+              hover:-translate-y-0.5
+              hover:bg-[#F7EBEF]
+              hover:text-[#742039]
+              hover:shadow-[0_14px_32px_rgba(57,37,46,0.28)]
+
+              active:translate-y-0
+
+              focus-visible:outline-none
+              focus-visible:ring-2
+              focus-visible:ring-white
+              focus-visible:ring-offset-2
+              focus-visible:ring-offset-[#742039]
+
+              sm:mt-7
+              sm:px-7
+
+              md:min-h-[50px]
+              md:text-[16px]
+
+              motion-reduce:transform-none
+              motion-reduce:transition-none
+            "
+          >
+            Contact Us
+          </Link>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto">
-        <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl p-8 mb-16 border border-white/20">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
-            <div className="text-center lg:text-left">
-              <h2 className="text-2xl font-bold text-[#151f28] mb-3">
-                🚀 Ready to Invest in Dholera SIR?
-              </h2>
-              <p className="text-gray-600 text-lg">
-                Get expert guidance and exclusive investment opportunities
-              </p>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link
-                href="tel:+919958993549"
-                className="bg-[#d3b36b] text-white flex justify-center items-center gap-2 px-8 py-3 rounded-xl font-semibold hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
+      {/* Mega Projects Section */}
+      <MegaProjectsSection />
+
+      {/* Why Invest in Dholera Section */}
+
+      <WhyInvestDholera />
+
+      <div
+        className="
+          w-full
+
+          px-4
+
+          min-[414px]:px-6
+          md:px-8
+        "
+      >
+        <div className="mx-auto w-full max-w-7xl">
+          <div
+            className="
+              group
+              relative
+              overflow-hidden
+
+              rounded-2xl
+
+              border
+              border-[#EAD9DF]
+
+              bg-white
+
+              px-5
+              py-6
+
+              shadow-[0_8px_28px_rgba(57,37,46,0.05)]
+
+              transition-[border-color,box-shadow]
+              duration-300
+
+              hover:border-[#DCA9B8]
+              hover:shadow-[0_16px_40px_rgba(143,41,70,0.09)]
+
+              sm:px-6
+              sm:py-7
+
+              md:px-8
+              md:py-8
+
+              lg:px-10
+              lg:py-9
+
+              motion-reduce:transition-none
+            "
+          >
+            {/* Top accent */}
+            <div
+              aria-hidden="true"
+              className="
+                absolute
+                inset-x-0
+                top-0
+
+                h-[3px]
+
+                origin-left
+                scale-x-[0.22]
+
+                bg-gradient-to-r
+                from-[#8F2946]
+                via-[#B95672]
+                to-[#E0A4B5]
+
+                transition-transform
+                duration-500
+                ease-out
+
+                group-hover:scale-x-100
+
+                motion-reduce:transition-none
+              "
+            />
+
+            <div
+              className="
+                flex
+                flex-col
+
+                items-center
+                justify-between
+
+                gap-6
+
+                lg:flex-row
+                lg:gap-10
+              "
+            >
+              {/* ==================================================
+                  CONTENT
+              =================================================== */}
+
+              <div
+                className="
+                  min-w-0
+                  flex-1
+
+                  text-center
+
+                  lg:text-left
+                "
               >
-                <FaPhone className="rotate-90" /> Call Now
-              </Link>
-              <Link
-                href="https://wa.me/919958993549?text=Hi"
-                className="border-2 border-[#151f28] text-[#d3b36b] flex justify-center items-center gap-2 px-8 py-3 rounded-xl font-semibold hover:bg-[#caac66] hover:text-white transition-all duration-300"
+                <h2
+                  className="
+                    text-[24px]
+                    font-semibold
+                    leading-[1.25]
+
+                    tracking-[-0.02em]
+
+                    text-[#39252E]
+
+                    sm:text-[26px]
+
+                    lg:text-[28px]
+                  "
+                >
+                  Ready to Invest in{" "}
+                  <span className="text-[#8F2946]">Dholera SIR?</span>
+                </h2>
+
+                <p
+                  className="
+                    mx-auto
+                    mt-2.5
+
+                    max-w-2xl
+
+                    text-[15px]
+                    font-normal
+                    leading-7
+
+                    text-[#68565E]
+
+                    sm:text-[16px]
+
+                    lg:mx-0
+                    lg:mt-3
+                    lg:text-[17px]
+                  "
+                >
+                  Get expert guidance and exclusive investment opportunities
+                </p>
+              </div>
+
+              {/* ==================================================
+                  ACTIONS
+              =================================================== */}
+
+              <div
+                className="
+                  flex
+                  w-full
+                  flex-col
+
+                  gap-3
+
+                  sm:w-auto
+                  sm:flex-row
+                  sm:gap-4
+
+                  lg:shrink-0
+                "
               >
-                <FaWhatsapp /> WhatsApp Us
-              </Link>
+                {/* CALL */}
+                <Link
+                  href="tel:+919958993549"
+                  className="
+                    inline-flex
+                    min-h-[50px]
+                    w-full
+
+                    items-center
+                    justify-center
+                    gap-2.5
+
+                    rounded-xl
+
+                    bg-[#8F2946]
+
+                    px-6
+                    py-3
+
+                    text-[15px]
+                    font-semibold
+                    leading-6
+
+                    text-white
+
+                    shadow-[0_8px_20px_rgba(143,41,70,0.18)]
+
+                    transition-[background-color,transform,box-shadow]
+                    duration-200
+
+                    hover:-translate-y-0.5
+                    hover:bg-[#742039]
+                    hover:shadow-[0_12px_26px_rgba(116,32,57,0.24)]
+
+                    active:translate-y-0
+
+                    focus-visible:outline-none
+                    focus-visible:ring-2
+                    focus-visible:ring-[#8F2946]
+                    focus-visible:ring-offset-2
+
+                    sm:w-auto
+                    sm:min-w-[150px]
+
+                    motion-reduce:transform-none
+                    motion-reduce:transition-none
+                  "
+                >
+                  <FaPhone
+                    aria-hidden="true"
+                    className="
+                      shrink-0
+                      rotate-90
+
+                      text-[15px]
+                    "
+                  />
+
+                  <span>Call Now</span>
+                </Link>
+
+                {/* WHATSAPP */}
+
+                <Link
+                  href={whatsappLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="
+                      inline-flex
+                      min-h-[50px]
+                      w-full
+
+                      items-center
+                      justify-center
+                      gap-2.5
+
+                      rounded-xl
+
+                      border
+                      border-[#8F2946]/50
+
+                      bg-[#F7EBEF]
+
+                      px-6
+                      py-3
+
+                      text-[15px]
+                      font-semibold
+                      leading-6
+
+                      text-[#8F2946]
+
+                      shadow-[0_4px_14px_rgba(143,41,70,0.05)]
+
+                      transition-[background-color,border-color,color,transform,box-shadow]
+                      duration-200
+                      ease-out
+
+                      active:bg-[#742039]
+                      active:text-white
+
+                      focus-visible:outline-none
+                      focus-visible:ring-2
+                      focus-visible:ring-[#8F2946]
+                      focus-visible:ring-offset-2
+
+                      sm:w-auto
+                      sm:min-w-[160px]
+
+                      md:hover:-translate-y-0.5
+                      md:hover:border-[#8F2946]
+                      md:hover:bg-[#8F2946]
+                      md:hover:text-white
+                      md:hover:shadow-[0_10px_24px_rgba(143,41,70,0.16)]
+
+                      motion-reduce:transform-none
+                      motion-reduce:transition-none
+                    "
+                >
+                  <FaWhatsapp
+                    aria-hidden="true"
+                    className="
+                        shrink-0
+                        text-[19px]
+                      "
+                  />
+
+                  <span>WhatsApp Us</span>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -371,27 +656,8 @@ export default async function BlogsPage() {
           {/* Left Sidebar */}
 
           {/* Blog Grid */}
-          <BlogSlider posts={safePosts} />
         </div>
-      </div>
-
-      {/* Bottom CTA Section */}
-      <div className="bg-[#151f28] text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">
-            Stay Updated with Dholera SIR
-          </h2>
-          <p className="text-lg text-gray-300 mb-8">
-            Subscribe to our newsletter for the latest dholera investment
-            opportunities and updates.
-          </p>
-          <Link
-            href="/contact"
-            className="bg-[#b69b5e] hover:bg-[#d3b36b] text-white px-8 py-3 rounded-lg font-bold transition-colors shadow-lg"
-          >
-            Contact Us
-          </Link>
-        </div>
+        <BlogSlider posts={safePosts} />
       </div>
     </>
   );

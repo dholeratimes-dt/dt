@@ -174,7 +174,7 @@ const WestWynAboutSection = () => {
           <div className="h-full flex flex-col">
             <p className="text-base text-gray-600 text-left max-w-4xl mx-auto leading-relaxed mb-4">
               Looking for a secure and future-ready investment? WestWyn
-              Residency offers government approved plots in Dholera starting ₹8
+              Residency offers government approved plots in Dholera starting ₹10
               lakh, designed for buyers who value location, connectivity, and
               long-term growth. Located in Pipariya, one of the most Developed
               zones in Dholera. Further, this premium residential plotted

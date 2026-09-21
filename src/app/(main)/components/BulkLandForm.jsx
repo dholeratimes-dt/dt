@@ -537,7 +537,7 @@ export default function BulkLand({ title, buttonName, pageName }) {
       aria-labelledby="bulk-land-form-heading"
       className="
         bg-[#FAF7F8]
-        px-4 py-10
+        px-4 py-8 pb-10
         min-[414px]:px-6
         md:px-8 md:py-12
         lg:py-14
