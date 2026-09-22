@@ -38,7 +38,7 @@ export default async function BlogsPage() {
   const trendingBlogs = safePosts.slice(0, 2);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white ">
       <link
         rel="canonical"
         href="https://www.dholeratimes.com/dholera-updates/blogs"
@@ -71,9 +71,8 @@ export default async function BlogsPage() {
             <h1 className="text-2xl md:text-4xl font-bold text-white mb-2">
               Explore Dholera SIR Growth and Updates
             </h1>
-            <div className="flex justify-center">
+            {/* <div className="flex justify-center">
               {" "}
-              {/* Added this wrapper div */}
               <Link
                 href="https://wa.me/+919958993549"
                 aria-label="Invest today on WhatsApp"
@@ -83,7 +82,7 @@ export default async function BlogsPage() {
                   <span>Invest Today</span>
                 </span>
               </Link>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -106,20 +105,89 @@ export default async function BlogsPage() {
             </div>
           </div>
 
-          <div className="lg:w-1/4 lg:sticky lg:top-6">
-            <div className="bg-white p-6 rounded-xl shadow-md border-l-4 border-[#d7b56d]  mb-8">
+          <div className="lg:w-1/4 lg:sticky lg:top-6
+          
+              
+              lg:sticky
+              lg:top-[-178px]
+              lg:z-30
+              lg:mt-0
+              lg:self-start
+          ">
+            {/* <div className="bg-white p-6 rounded-xl shadow-md border-l-4 border-[#d7b56d]  mb-8"> */}
               <LeadForm
                 title="Invest in Registry Ready Dholera Plots Starting from ₹10 Lakh"
                 buttonName="Know More"
               />
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-[#d7b56d] ">
-              <h2 className="text-2xl text-red-500 font-bold mb-6">
+            {/* </div> */}
+
+            <div
+              className="
+                relative
+                overflow-hidden
+
+                rounded-2xl
+
+                border
+                border-[#EAD9DF]
+
+                bg-white
+
+                p-5
+                mt-10
+                lg:mt-10
+
+                shadow-[0_8px_26px_rgba(57,37,46,0.05)]
+
+                sm:p-6
+              "
+            >
+              {/* Accent */}
+              <div
+                aria-hidden="true"
+                className="
+                  mb-4
+
+                  h-1
+                  w-10
+
+                  rounded-full
+
+                  bg-[#E0A4B5]
+                "
+              />
+
+              {/* Heading */}
+              <h2
+                className="
+                  text-[20px]
+                  font-semibold
+                  leading-[1.3]
+
+                  tracking-[-0.02em]
+
+                  text-[#39252E]
+
+                  sm:text-[21px]
+                "
+              >
                 Recent Posts
               </h2>
-              <div className="space-y-6">
+
+              {/* Posts */}
+              <div
+                className="
+                  mt-5
+
+                  divide-y
+                  divide-[#EAD9DF]
+                "
+              >
                 {trendingBlogs.map((post) => (
-                  <TrendingBlogItem key={post._id} post={post} />
+                  <TrendingBlogItem
+                    key={post._id}
+                    post={post}
+                  />
                 ))}
               </div>
             </div>

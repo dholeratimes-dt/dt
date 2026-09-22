@@ -41,13 +41,10 @@ export default async function sitemap() {
     { url: `${BASE_URL}/about`,                   priority: 0.7, changeFrequency: "monthly" },
     { url: `${BASE_URL}/contact/inquiry`,         priority: 0.6, changeFrequency: "monthly" },
     { url: `${BASE_URL}/channel-partner`,         priority: 0.6, changeFrequency: "monthly" },
-    { url: `${BASE_URL}/bulk-land`,               priority: 0.6, changeFrequency: "monthly" },
-    { url: `${BASE_URL}/gallery/dholera-sir-progress`,                 priority: 0.5, changeFrequency: "monthly" },
-    { url: `${BASE_URL}/infopack`,                priority: 0.5, changeFrequency: "monthly" },
-    { url: `${BASE_URL}/policies`,                priority: 0.3, changeFrequency: "yearly" },
-    { url: `${BASE_URL}/dholera-updates/blogs`,   priority: 0.8, changeFrequency: "daily" },
+    { url: `${BASE_URL}/gallery/dholera-sir-progress`,       priority: 0.5, changeFrequency: "monthly" },
+    { url: `${BASE_URL}/dholera-updates/blogs`,              priority: 0.8, changeFrequency: "daily" },
     { url: `${BASE_URL}/dholera-updates/latest-updates`,     priority: 0.7, changeFrequency: "daily" },
-    { url: `${BASE_URL}/dholera-sir`,       priority: 0.7, changeFrequency: "monthly" },
+    { url: `${BASE_URL}/dholera-sir`,                        priority: 0.7, changeFrequency: "monthly" },
     { url: `${BASE_URL}/nri-investment-guide-dholera`,       priority: 0.7, changeFrequency: "monthly" },
 
   ].map((page) => ({ ...page }));
@@ -81,3 +78,4 @@ export default async function sitemap() {
     ...aboutDholeraUrls,
   ];
 }
+

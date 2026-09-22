@@ -288,7 +288,8 @@ export default function Dholera() {
           bg-[#F3E7EC]
 
           px-4
-          py-10
+          py-8
+
 
           text-[#39252E]
 

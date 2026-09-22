@@ -197,6 +197,8 @@
 // }
 
 
+
+
 "use client";
 
 import {
@@ -204,6 +206,8 @@ import {
   useEffect,
   useState,
 } from "react";
+
+import Image from "next/image";
 
 import {
   ChevronLeft,
@@ -242,50 +246,15 @@ const slides = [
   },
 ];
 
-const DESKTOP_WIDTHS = [
-  640,
-  750,
-  828,
-  1080,
-  1200,
-  1920,
-];
-
-const MOBILE_WIDTHS = [640];
-
 /* ============================================================
-   NEXT IMAGE URL
-============================================================ */
+   HERO IMAGE
 
-function nextImageUrl(
-  src,
-  width,
-  quality = 85,
-) {
-  return `/_next/image?url=${encodeURIComponent(
-    src,
-  )}&w=${width}&q=${quality}`;
-}
+   Phone:
+   Existing vertical 5/8 behavior.
 
-function buildSrcSet(
-  image,
-  widths,
-  quality = 85,
-) {
-  return widths
-    .map(
-      (width) =>
-        `${nextImageUrl(
-          image.src,
-          width,
-          quality,
-        )} ${width}w`,
-    )
-    .join(", ");
-}
-
-/* ============================================================
-   RESPONSIVE HERO IMAGE
+   Tablet/Desktop:
+   Desktop image is rendered at its NATURAL aspect ratio.
+   There is no fixed hero height and no object-contain box.
 ============================================================ */
 
 function HeroSlideImage({
@@ -293,59 +262,49 @@ function HeroSlideImage({
   isFirst,
 }) {
   return (
-    <picture
-      className="
-        block
-        h-full
-        w-full
-      "
-    >
-      <source
-        media="(min-width: 768px)"
-        sizes="100vw"
-        srcSet={buildSrcSet(
-          slide.desktop,
-          DESKTOP_WIDTHS,
-        )}
-      />
+    <>
+      {/* MOBILE */}
 
-      <source
-        media="(max-width: 767px)"
-        sizes="100vw"
-        srcSet={buildSrcSet(
-          slide.mobile,
-          MOBILE_WIDTHS,
-        )}
-      />
-
-      <img
-        src={nextImageUrl(
-          slide.mobile.src,
-          640,
-        )}
-        alt={slide.alt}
-        width={slide.mobile.width}
-        height={slide.mobile.height}
-        loading={
-          isFirst
-            ? "eager"
-            : "lazy"
-        }
-        fetchPriority={
-          isFirst
-            ? "high"
-            : "auto"
-        }
-        decoding="async"
+      <div
         className="
-          h-full
+          relative
+
+          aspect-[5/8]
           w-full
 
-          object-cover
-          object-center
+          md:hidden
+        "
+      >
+        <Image
+          src={slide.mobile}
+          alt={slide.alt}
+          fill
+          priority={isFirst}
+          sizes="100vw"
+          className="
+            object-cover
+            object-center
+          "
+        />
+      </div>
+
+      {/* TABLET / DESKTOP */}
+
+      <Image
+        src={slide.desktop}
+        alt={slide.alt}
+        priority={isFirst}
+        sizes="100vw"
+        className="
+          hidden
+
+          h-auto
+          w-full
+
+          md:block
         "
       />
-    </picture>
+    </>
   );
 }
 
@@ -375,7 +334,7 @@ export default function HOME2() {
   ] = useState(false);
 
   /* ==========================================================
-     RESTORE FORM SUBMISSION COUNT
+     RESTORE SUBMISSION COUNT
   ========================================================== */
 
   useEffect(() => {
@@ -386,19 +345,21 @@ export default function HOME2() {
       return;
     }
 
-    const storedCount = parseInt(
-      localStorage.getItem(
-        "heroFormSubmissionCount",
-      ) || "0",
-      10,
-    );
+    const storedCount =
+      Number.parseInt(
+        localStorage.getItem(
+          "heroFormSubmissionCount",
+        ) || "0",
+        10,
+      );
 
-    const lastSubmission = parseInt(
-      localStorage.getItem(
-        "heroFormLastSubmissionTime",
-      ) || "0",
-      10,
-    );
+    const lastSubmission =
+      Number.parseInt(
+        localStorage.getItem(
+          "heroFormLastSubmissionTime",
+        ) || "0",
+        10,
+      );
 
     if (lastSubmission) {
       const hoursPassed =
@@ -416,14 +377,15 @@ export default function HOME2() {
           "heroFormLastSubmissionTime",
           Date.now().toString(),
         );
+
+        setSubmissionCount(0);
+        setIsDisabled(false);
       } else {
         setSubmissionCount(
           storedCount,
         );
 
-        if (
-          storedCount >= 20
-        ) {
+        if (storedCount >= 20) {
           setIsDisabled(true);
         }
       }
@@ -431,11 +393,15 @@ export default function HOME2() {
       setSubmissionCount(
         storedCount,
       );
+
+      if (storedCount >= 20) {
+        setIsDisabled(true);
+      }
     }
   }, []);
 
   /* ==========================================================
-     UPDATE SUBMISSION COUNT
+     UPDATE COUNT
   ========================================================== */
 
   const updateSubmissionCount =
@@ -470,7 +436,7 @@ export default function HOME2() {
     }, []);
 
   /* ==========================================================
-     FORM SUCCESS
+     SUCCESS
   ========================================================== */
 
   const handleFormSuccess =
@@ -481,7 +447,7 @@ export default function HOME2() {
     }, [updateSubmissionCount]);
 
   /* ==========================================================
-     SLIDER CONTROLS
+     SLIDER
   ========================================================== */
 
   const nextSlide =
@@ -505,21 +471,25 @@ export default function HOME2() {
     }, []);
 
   /* ==========================================================
-     AUTO SLIDE
+     AUTO PLAY
   ========================================================== */
 
   useEffect(() => {
-    const id = setInterval(
-      nextSlide,
-      5000,
-    );
+    const interval =
+      setInterval(
+        nextSlide,
+        5000,
+      );
 
-    return () =>
-      clearInterval(id);
+    return () => {
+      clearInterval(
+        interval,
+      );
+    };
   }, [nextSlide]);
 
   /* ==========================================================
-     TAILWIND-ONLY SLIDER POSITION
+     SLIDER POSITION
   ========================================================== */
 
   const trackPosition = [
@@ -528,13 +498,9 @@ export default function HOME2() {
     "-translate-x-[200%]",
   ][currentSlide];
 
-  /* ==========================================================
-     RENDER
-  ========================================================== */
-
   return (
     <>
-      {/* ======================================================
+      {/* =====================================================
           SUCCESS POPUP
       ====================================================== */}
 
@@ -543,7 +509,6 @@ export default function HOME2() {
           className="
             fixed
             inset-0
-
             z-[100]
 
             flex
@@ -553,6 +518,7 @@ export default function HOME2() {
             bg-[#39252E]/65
 
             px-4
+            py-6
 
             backdrop-blur-[2px]
           "
@@ -597,7 +563,6 @@ export default function HOME2() {
                 mt-2
 
                 text-[15px]
-                font-normal
                 leading-6
 
                 text-[#68565E]
@@ -629,25 +594,13 @@ export default function HOME2() {
 
                 text-[15px]
                 font-semibold
-                leading-6
 
                 text-white
 
-                transition-[background-color,transform]
+                transition-colors
                 duration-200
 
-                hover:-translate-y-px
                 hover:bg-[#742039]
-
-                active:translate-y-0
-
-                focus-visible:outline-none
-                focus-visible:ring-2
-                focus-visible:ring-[#8F2946]
-                focus-visible:ring-offset-2
-
-                motion-reduce:transform-none
-                motion-reduce:transition-none
               "
             >
               Close
@@ -656,24 +609,45 @@ export default function HOME2() {
         </div>
       )}
 
-      {/* ======================================================
+      {/* =====================================================
           HERO
+
+          IMPORTANT:
+
+          Mobile:
+          Navbar is still overlay-style, therefore the existing
+          72px / 76px compensation remains.
+
+          >=768px:
+          Navbar is normal flow.
+          No padding.
+          No margin.
+          No fixed hero height.
       ====================================================== */}
 
       <section
+        aria-roledescription="carousel"
         className="
           relative
 
+          m-0
           w-full
 
           overflow-hidden
 
-          bg-[#39252E]
+          bg-transparent
+
+          p-0
+
+          pt-[72px]
+
+          min-[480px]:pt-[76px]
+
+          md:pt-0
         "
-        aria-roledescription="carousel"
       >
-        {/* ====================================================
-            SLIDER TRACK
+        {/* ===================================================
+            SLIDER
         ==================================================== */}
 
         <div
@@ -681,50 +655,61 @@ export default function HOME2() {
             flex
             w-full
 
+            items-start
+
             transform-gpu
 
             ${trackPosition}
 
             transition-transform
             duration-700
+
             ease-[cubic-bezier(0.22,1,0.36,1)]
 
             motion-reduce:transition-none
           `}
         >
           {slides.map(
-            (
-              slide,
-              index,
-            ) => {
+            (slide, index) => {
               const isFirst =
                 index === 0;
 
               return (
                 <div
                   key={index}
+                  aria-hidden={
+                    currentSlide !==
+                    index
+                  }
                   className="
                     relative
 
                     w-full
                     min-w-full
+
                     flex-shrink-0
+
+                    m-0
+                    p-0
                   "
-                  aria-hidden={
-                    currentSlide !==
-                    index
-                  }
                 >
+                  {/* =========================================
+                      IMAGE CONTAINER
+
+                      NO desktop fixed height.
+                      NO object-contain letterboxing.
+                  ========================================== */}
+
                   <div
                     className="
                       relative
 
+                      m-0
                       w-full
 
-                      aspect-[5/8]
+                      overflow-hidden
 
-                      md:aspect-auto
-                      md:h-[clamp(650px,84vh,880px)]
+                      p-0
                     "
                   >
                     <HeroSlideImage
@@ -734,11 +719,13 @@ export default function HOME2() {
                       }
                     />
 
-                    {/* Mobile image treatment */}
+                    {/* MOBILE OVERLAY */}
 
                     <div
                       aria-hidden="true"
                       className="
+                        pointer-events-none
+
                         absolute
                         inset-0
 
@@ -751,41 +738,24 @@ export default function HOME2() {
                       "
                     />
 
-                    {/* Desktop premium overlay */}
+                    {/* DESKTOP OVERLAY */}
 
                     <div
                       aria-hidden="true"
                       className="
+                        pointer-events-none
+
                         absolute
                         inset-0
 
                         hidden
 
                         bg-gradient-to-r
-                        from-[#39252E]/38
-                        via-[#39252E]/5
-                        to-[#742039]/38
+                        from-[#39252E]/10
+                        via-transparent
+                        to-[#742039]/10
 
                         md:block
-                      "
-                    />
-
-                    {/* Soft top treatment for transparent navbar */}
-
-                    <div
-                      aria-hidden="true"
-                      className="
-                        absolute
-                        inset-x-0
-                        top-0
-
-                        h-36
-
-                        bg-gradient-to-b
-                        from-[#39252E]/30
-                        to-transparent
-
-                        md:h-40
                       "
                     />
                   </div>
@@ -795,15 +765,19 @@ export default function HOME2() {
           )}
         </div>
 
-        {/* ====================================================
-            DESKTOP HERO FORM
+        {/* ===================================================
+            DESKTOP / TABLET FORM
+
+            top-1/2 now references only the actual banner,
+            because there is no desktop top spacer.
         ==================================================== */}
 
         <div
           className="
             absolute
+
+            right-[clamp(1.5rem,4.5vw,5rem)]
             top-1/2
-            right-[clamp(3.5rem,5vw,6rem)]
 
             z-20
 
@@ -812,9 +786,9 @@ export default function HOME2() {
             -translate-y-1/2
 
             md:block
-            md:w-[360px]
+            md:w-[330px]
 
-            lg:w-[400px]
+            lg:w-[380px]
 
             xl:w-[420px]
           "
@@ -829,8 +803,8 @@ export default function HOME2() {
           />
         </div>
 
-        {/* ====================================================
-            MOBILE HERO FORM
+        {/* ===================================================
+            PHONE FORM
         ==================================================== */}
 
         <div
@@ -849,6 +823,7 @@ export default function HOME2() {
           <div
             className="
               mx-auto
+
               w-full
               max-w-[520px]
             "
@@ -864,16 +839,16 @@ export default function HOME2() {
           </div>
         </div>
 
-        {/* ====================================================
-            DESKTOP CAROUSEL CONTROLS
+        {/* ===================================================
+            CONTROLS
         ==================================================== */}
 
         <div
           className="
             absolute
 
-            bottom-7
-            left-6
+            bottom-4
+            left-4
 
             z-20
 
@@ -885,12 +860,12 @@ export default function HOME2() {
 
             md:flex
 
-            lg:bottom-8
-            lg:left-8
+            lg:bottom-5
+            lg:left-6
+
+            xl:left-8
           "
         >
-          {/* Previous */}
-
           <button
             type="button"
             onClick={prevSlide}
@@ -905,11 +880,13 @@ export default function HOME2() {
               rounded-full
 
               border
-              border-white/30
+              border-white/45
 
-              bg-white/12
+              bg-[#39252E]/38
 
               text-white
+
+              shadow-[0_4px_18px_rgba(57,37,46,0.18)]
 
               backdrop-blur-md
 
@@ -917,19 +894,16 @@ export default function HOME2() {
               duration-200
 
               hover:-translate-y-px
-              hover:border-white/50
-              hover:bg-white/20
+              hover:border-white/70
+              hover:bg-[#39252E]/55
 
               active:translate-y-0
 
               focus-visible:outline-none
               focus-visible:ring-2
               focus-visible:ring-white
-              focus-visible:ring-offset-2
-              focus-visible:ring-offset-[#39252E]
 
               motion-reduce:transform-none
-              motion-reduce:transition-none
             "
           >
             <ChevronLeft
@@ -938,8 +912,6 @@ export default function HOME2() {
               aria-hidden="true"
             />
           </button>
-
-          {/* Next */}
 
           <button
             type="button"
@@ -955,11 +927,13 @@ export default function HOME2() {
               rounded-full
 
               border
-              border-white/30
+              border-white/45
 
-              bg-white/12
+              bg-[#39252E]/38
 
               text-white
+
+              shadow-[0_4px_18px_rgba(57,37,46,0.18)]
 
               backdrop-blur-md
 
@@ -967,19 +941,16 @@ export default function HOME2() {
               duration-200
 
               hover:-translate-y-px
-              hover:border-white/50
-              hover:bg-white/20
+              hover:border-white/70
+              hover:bg-[#39252E]/55
 
               active:translate-y-0
 
               focus-visible:outline-none
               focus-visible:ring-2
               focus-visible:ring-white
-              focus-visible:ring-offset-2
-              focus-visible:ring-offset-[#39252E]
 
               motion-reduce:transform-none
-              motion-reduce:transition-none
             "
           >
             <ChevronRight

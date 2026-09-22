@@ -395,6 +395,8 @@
 
 // export default HeroForm;
 
+
+
 "use client";
 
 import { useId, useRef, useState } from "react";
@@ -519,9 +521,9 @@ export default function HeroForm({
       aria-labelledby={`${formId}-heading`}
       aria-describedby={visibleError ? `${formId}-error` : undefined}
       aria-busy={isLoading}
-      className="mx-auto w-full min-w-0 max-w-[420px] overflow-hidden rounded-2xl border border-[#E0A4B5]/60 bg-white text-[#39252E] shadow-[0_16px_48px_rgba(116,32,57,0.10)] selection:bg-[#E0A4B5] selection:text-[#39252E]"
+      className="mx-auto w-full mb-8 lg:mt-8 min-w-0 max-w-[420px] overflow-hidden rounded-2xl border border-[#E0A4B5]/60 bg-white text-[#39252E] shadow-[0_16px_48px_rgba(116,32,57,0.10)] selection:bg-[#E0A4B5] selection:text-[#39252E]"
     >
-      <div className="p-5 sm:p-6">
+      <div className="p-5 pb-6 sm:p-6 lg:pb-8">
         <h3
           id={`${formId}-heading`}
           className="text-[20px] font-semibold leading-7 tracking-tight text-[#8F2946] sm:text-[22px] sm:leading-[30px] lg:text-[24px] lg:leading-8"

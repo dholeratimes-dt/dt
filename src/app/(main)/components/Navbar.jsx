@@ -1,346 +1,3 @@
-// "use client";
-// import { useState, useEffect, useRef } from "react";
-// import { Menu, X } from "lucide-react";
-// import Link from "next/link";
-// import Image from "next/image";
-// import { usePathname } from "next/navigation";
-// import { trackPageView } from "@/lib/fbpixel";
-// import logo from "@/assets/dt.webp";
-// import logo2 from "@/assets/dtlogobg.png";
-// import call from "@/assets/call.svg";
-
-// const DESKTOP_OVERFLOW = [
-//   { title: "Gallery", path: "/gallery/dholera-sir-progress" },
-//   { title: "About Us", path: "/about" },
-//   { title: "NRI Guide", path: "/nri-investment-guide-dholera" },
-//   { title: "Channel Partner", path: "/channel-partner" },
-// ];
-
-// const MAIN_LINKS = [
-//   { title: "Dholera SIR", path: "/dholera-sir" },
-//   { title: "Dholera Blogs", path: "/dholera-updates/blogs" },
-//   { title: "Dholera News", path: "/dholera-updates/latest-updates" },
-//   { title: "Bulk Land", path: "/bulk-land" },
-//   { title: "Contact Us", path: "/contact/inquiry" },
-// ];
-
-// const MOBILE_LINKS = [
-//   { title: "About Dholera SIR", path: "/dholera-sir" },
-//   { title: "Dholera Blogs", path: "/dholera-updates/blogs" },
-//   { title: "Dholera News", path: "/dholera-updates/latest-updates" },
-//   { title: "Bulk Land Deals", path: "/bulk-land" },
-//   { title: "Gallery", path: "/gallery/dholera-sir-progress" },
-//   { title: "About Us", path: "/about" },
-//   { title: "Contact Us", path: "/contact/inquiry" },
-// ];
-
-// export default function Navbar() {
-//   const [isMenuOpen, setIsMenuOpen] = useState(false);
-//   const [isMobileMenuVisible, setIsMobileMenuVisible] = useState(false);
-//   const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(false);
-
-//   const desktopMenuRef = useRef(null);
-//   const menuOpenRef = useRef(null);
-//   const closeTimerRef = useRef(null);
-
-//   const pathname = usePathname();
-
-//   useEffect(() => {
-//     trackPageView();
-//   }, [pathname]);
-
-//   const isActivePath = (path) => pathname === path || pathname.startsWith(`${path}/`);
-
-//   const desktopLinkClass = (path) =>
-//     `px-4 py-2 rounded-lg transition-all duration-300 ${
-//       isActivePath(path)
-//         ? "bg-[#debe6b] text-black"
-//         : "text-white hover:bg-white/10"
-//     }`;
-
-//   const mobileLinkClass = (path) =>
-//     `flex items-center text-lg py-4 px-4 rounded-xl transition-all duration-300 ${
-//       isActivePath(path)
-//         ? "bg-[#debe6b] text-black"
-//         : "text-white hover:bg-white/10"
-//     }`;
-
-//   const handleCallClick = () => {
-//     window.dataLayer = window.dataLayer || [];
-//     window.dataLayer.push({
-//       event: "call_click_organic",
-//       lead_type: "call",
-//       device: window.innerWidth <= 768 ? "mobile" : "desktop",
-//     });
-//     window.location.href = "tel:+919958993549";
-//   };
-
-//   const openMenu = () => {
-//     if (closeTimerRef.current) {
-//       clearTimeout(closeTimerRef.current);
-//     }
-
-//     setIsMobileMenuVisible(true);
-//     setIsMenuOpen(true);
-//   };
-
-//   const closeMenu = () => {
-//     setIsMenuOpen(false);
-
-//     if (closeTimerRef.current) {
-//       clearTimeout(closeTimerRef.current);
-//     }
-
-//     closeTimerRef.current = setTimeout(() => {
-//       setIsMobileMenuVisible(false);
-//     }, 280);
-//   };
-
-//   const toggleMenu = () => {
-//     if (isMobileMenuVisible && isMenuOpen) {
-//       closeMenu();
-//       return;
-//     }
-
-//     openMenu();
-//   };
-
-//   useEffect(() => {
-//     function handler(e) {
-//       if (desktopMenuRef.current && !desktopMenuRef.current.contains(e.target)) {
-//         setIsDesktopMenuOpen(false);
-//       }
-
-//       if (menuOpenRef.current && !menuOpenRef.current.contains(e.target)) {
-//         closeMenu();
-//       }
-//     }
-
-//     document.addEventListener("mousedown", handler);
-//     return () => document.removeEventListener("mousedown", handler);
-//   }, []);
-
-//   useEffect(() => {
-//     return () => {
-//       if (closeTimerRef.current) {
-//         clearTimeout(closeTimerRef.current);
-//       }
-//     };
-//   }, []);
-
-//   return (
-//     <nav className="fixed z-40 w-full max-sm:pt-2 max-sm:pb-2 pt-4 pb-4 bg-[#151f28] shadow-[0_0.5rem_1.75rem_rgba(0,0,0,0.16)]">
-//       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-//         <div className="flex justify-between h-14 max-sm:h-16 items-center">
-//           <div className="flex-shrink-0">
-//             <Link href="/">
-//               <Image
-//                 src={logo}
-//                 alt="Dholera Times Logo"
-//                 width={150}
-//                 height={150}
-//                 className="h-16 w-auto max-sm:h-16"
-//               />
-//             </Link>
-//           </div>
-
-//           <div className="hidden lg:flex items-center space-x-1">
-//             <div className="flex items-baseline space-x-1">
-
-//               {MAIN_LINKS.map((item) => (
-//                 <Link
-//                   key={item.path}
-//                   href={item.path}
-//                   className={desktopLinkClass(item.path)}
-//                 >
-//                   {item.title}
-//                 </Link>
-//               ))}
-//             </div>
-
-//             <div className="relative ml-4" ref={desktopMenuRef}>
-//               <button
-//                 type="button"
-//                 aria-label="Open more navigation links"
-//                 aria-expanded={isDesktopMenuOpen}
-//                 onClick={() => setIsDesktopMenuOpen((p) => !p)}
-//                 className={`text-white p-2 rounded-lg transition-all duration-300 ${
-//                   isDesktopMenuOpen ? "bg-white/15" : "hover:bg-white/10"
-//                 }`}
-//               >
-//                 <Menu className="h-6 w-6" />
-//               </button>
-
-//               {isDesktopMenuOpen && (
-//                 <div className="absolute right-0 mt-2 w-64 origin-top-right bg-white shadow-xl rounded-xl z-50 border border-gray-100 overflow-hidden animate-[dropdownIn_180ms_ease-out]">
-//                   {DESKTOP_OVERFLOW.map((item) => (
-//                     <Link
-//                       key={item.path}
-//                       href={item.path}
-//                       className={`block px-4 py-3 transition-colors duration-150 ${
-//                         isActivePath(item.path)
-//                           ? "bg-[#deae3c] text-black"
-//                           : "text-gray-700 hover:bg-gray-50"
-//                       }`}
-//                       onClick={() => setIsDesktopMenuOpen(false)}
-//                     >
-//                       {item.title}
-//                     </Link>
-//                   ))}
-//                 </div>
-//               )}
-//             </div>
-//           </div>
-
-//           <div className="lg:hidden flex items-center gap-4">
-//             <div
-//               onClick={handleCallClick}
-//               className="relative text-[#d8b66d] mt-3 flex items-center space-x-2 cursor-pointer transition-transform duration-300 hover:scale-[1.04] active:scale-95"
-//             >
-//               <span className="relative z-10 inline-flex h-[1.875rem] w-[1.875rem] items-center justify-center animate-[callNowFloat_2.5s_ease-in-out_infinite]">
-//                 <span className="pointer-events-none absolute left-1/2 top-1/2 h-10 w-10 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#d8b66d]/70 animate-[callNowPulse_1.9s_ease-out_infinite]" />
-//                 <Image
-//                   src={call}
-//                   alt="call"
-//                   height={30}
-//                   width={30}
-//                   className="animate-image-tint"
-//                 />
-//               </span>
-//               <p className="animate-color-change">Call Now</p>
-//             </div>
-//             <button
-//               type="button"
-//               aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-//               aria-expanded={isMenuOpen}
-//               onClick={toggleMenu}
-//               className="rounded-lg p-2 transition-colors duration-200 hover:bg-white/10"
-//             >
-//               {isMenuOpen ? (
-//                 <X className="h-6 w-6 text-white" />
-//               ) : (
-//                 <Menu className="h-6 w-6 text-white" />
-//               )}
-//             </button>
-//           </div>
-//         </div>
-//       </div>
-
-//       {isMobileMenuVisible && (
-//         <div
-//           ref={menuOpenRef}
-//           className={`lg:hidden bg-gradient-to-br from-slate-900 to-slate-800 backdrop-blur-md fixed top-0 left-0 w-full h-screen z-50 p-6 overflow-y-auto ${
-//             isMenuOpen
-//               ? "animate-[mobileMenuIn_360ms_ease-out]"
-//               : "animate-[mobileMenuOut_280ms_ease-in_forwards]"
-//           }`}
-//         >
-//           <div className="flex justify-between items-center mb-8">
-//             <Link href="/" onClick={closeMenu}>
-//               <Image
-//                 src={logo2}
-//                 alt="Dholera Times Logo"
-//                 width={120}
-//                 height={120}
-//               />
-//             </Link>
-//             <button
-//               type="button"
-//               aria-label="Close navigation menu"
-//               onClick={closeMenu}
-//               className="rounded-lg p-2 transition-colors duration-200 hover:bg-white/10"
-//             >
-//               <X className="h-8 w-8 text-white" />
-//             </button>
-//           </div>
-
-//           <div className="space-y-2">
-//             {MOBILE_LINKS.map((item, index) => (
-//               <Link
-//                 key={item.path}
-//                 href={item.path}
-//                 className={`${mobileLinkClass(item.path)} animate-[mobileMenuItemIn_320ms_ease-out_both]`}
-//                 style={{ animationDelay: `${index * 45}ms` }}
-//                 onClick={closeMenu}
-//               >
-//                 <span className="ml-2">{item.title}</span>
-//               </Link>
-//             ))}
-//           </div>
-//         </div>
-//       )}
-
-//       <style jsx global>{`
-//         @keyframes callNowFloat {
-//           0%,
-//           100% {
-//             transform: translateY(0);
-//           }
-//           50% {
-//             transform: translateY(-0.25rem);
-//           }
-//         }
-
-//         @keyframes callNowPulse {
-//           0% {
-//             opacity: 0.75;
-//             transform: translate(-50%, -50%) scale(0.88);
-//           }
-//           100% {
-//             opacity: 0;
-//             transform: translate(-50%, -50%) scale(1.5);
-//           }
-//         }
-
-//         @keyframes dropdownIn {
-//           from {
-//             opacity: 0;
-//             transform: translateY(-0.375rem) scale(0.98);
-//           }
-//           to {
-//             opacity: 1;
-//             transform: translateY(0) scale(1);
-//           }
-//         }
-
-//         @keyframes mobileMenuIn {
-//           from {
-//             opacity: 0;
-//             transform: translateY(-0.75rem);
-//           }
-//           to {
-//             opacity: 1;
-//             transform: translateY(0);
-//           }
-//         }
-
-//         @keyframes mobileMenuOut {
-//           from {
-//             opacity: 1;
-//             transform: translateY(0);
-//           }
-//           to {
-//             opacity: 0;
-//             transform: translateY(-0.75rem);
-//           }
-//         }
-
-//         @keyframes mobileMenuItemIn {
-//           from {
-//             opacity: 0;
-//             transform: translateX(-0.5rem);
-//           }
-//           to {
-//             opacity: 1;
-//             transform: translateX(0);
-//           }
-//         }
-//       `}</style>
-//     </nav>
-//   );
-// }
-
-
 
 
 // "use client";
@@ -365,45 +22,48 @@
 // import Link from "next/link";
 // import { usePathname } from "next/navigation";
 
-// import logo from "@/assets/dt.webp";
+// import logo from "@/assets/DTLOGO.png";
 // import { trackPageView } from "@/lib/fbpixel";
 
 // /* ============================================================
-//    NAVIGATION DATA
+//    MAIN NAVIGATION
+
+//    Residential Projects removed for now
+//    Bulk Land removed for now
+//    Updates dropdown removed
+
+//    Added directly:
+//    - Dholera News
+//    - Blogs & Insights
+//    - Photo Gallery
 // ============================================================ */
 
 // const PRIMARY = [
+//   {
+//     title: "Home",
+//     path: "/",
+//   },
 //   {
 //     title: "Dholera SIR",
 //     path: "/dholera-sir",
 //   },
 //   {
-//     title: "Residential Projects",
-//     path: "/dholera-residential-plots",
-//   },
-//   {
-//     title: "Bulk Land",
-//     path: "/bulk-land",
-//   },
-// ];
-
-// const UPDATES = [
-//   {
 //     title: "Dholera News",
 //     path: "/dholera-updates/latest-updates",
-//     description: "Infrastructure and development updates",
 //   },
 //   {
 //     title: "Blogs & Insights",
 //     path: "/dholera-updates/blogs",
-//     description: "Explore Dholera in more detail",
 //   },
 //   {
 //     title: "Photo Gallery",
 //     path: "/gallery/dholera-sir-progress",
-//     description: "See development on the ground",
 //   },
 // ];
+
+// /* ============================================================
+//    MORE DROPDOWN
+// ============================================================ */
 
 // const MORE = [
 //   {
@@ -429,7 +89,7 @@
 // };
 
 // /* ============================================================
-//    COMPONENT
+//    NAVBAR
 // ============================================================ */
 
 // export default function Navbar({
@@ -438,27 +98,17 @@
 //   const pathname = usePathname() || "/";
 //   const uid = useId().replace(/:/g, "");
 
-//   const [dropdown, setDropdown] =
-//     useState(null);
-
-//   const [mobileOpen, setMobileOpen] =
-//     useState(false);
-
-//   const [
-//     mobileVisible,
-//     setMobileVisible,
-//   ] = useState(false);
-
-//   const [scrolled, setScrolled] =
-//     useState(false);
+//   const [dropdown, setDropdown] = useState(null);
+//   const [mobileOpen, setMobileOpen] = useState(false);
+//   const [mobileVisible, setMobileVisible] = useState(false);
+//   const [scrolled, setScrolled] = useState(false);
 
 //   const closeTimerRef = useRef(null);
 //   const frameRef = useRef(null);
 //   const navRef = useRef(null);
 //   const dialogRef = useRef(null);
 //   const menuButtonRef = useRef(null);
-//   const lastTrackedPath =
-//     useRef(null);
+//   const lastTrackedPath = useRef(null);
 
 //   const isHome = pathname === "/";
 
@@ -468,9 +118,7 @@
 
 //   const active = (path) =>
 //     pathname === path ||
-//     pathname.startsWith(
-//       `${path}/`,
-//     );
+//     pathname.startsWith(`${path}/`);
 
 //   const current = (path) =>
 //     pathname === path
@@ -486,18 +134,20 @@
 //   ).replace(/[^0-9]/g, "");
 
 //   const hasWhatsApp =
-//     /^[1-9][0-9]{7,14}$/.test(
-//       number,
-//     );
+//     /^[1-9][0-9]{7,14}$/.test(number);
 
-//   const enquiryHref = hasWhatsApp
-//     ? `https://wa.me/${number}?text=${encodeURIComponent(
-//         "Hello Dholera Times, I would like to explore properties in Dholera.",
-//       )}`
-//     : CONTACT.path;
+//   const whatsappMessage =
+//     "Hello Dholera Times, I am interested in buying a plot in Dholera. Please share the available projects, pricing, location, and other details.";
+
+//   const enquiryHref =
+//     hasWhatsApp
+//       ? `https://wa.me/${number}?text=${encodeURIComponent(
+//           whatsappMessage,
+//         )}`
+//       : CONTACT.path;
 
 //   /* ============================================================
-//      MOBILE MENU
+//      CLOSE MOBILE MENU
 //   ============================================================ */
 
 //   function closeMobile(
@@ -538,6 +188,10 @@
 //       }, delay);
 //   }
 
+//   /* ============================================================
+//      OPEN MOBILE MENU
+//   ============================================================ */
+
 //   function openMobile() {
 //     clearTimeout(
 //       closeTimerRef.current,
@@ -548,7 +202,6 @@
 //     );
 
 //     setDropdown(null);
-
 //     setMobileVisible(false);
 
 //     if (
@@ -569,13 +222,13 @@
 //   }
 
 //   /* ============================================================
-//      SCROLL STATE
+//      SCROLL
 //   ============================================================ */
 
 //   useEffect(() => {
 //     const handleScroll = () => {
 //       setScrolled(
-//         window.scrollY > 20,
+//         window.scrollY > 24,
 //       );
 //     };
 
@@ -628,11 +281,9 @@
 //     );
 
 //     setMobileVisible(false);
-
 //     setDropdown(null);
 
 //     dialogRef.current?.close();
-
 //     setMobileOpen(false);
 
 //     if (
@@ -679,7 +330,7 @@
 //   }, [mobileOpen]);
 
 //   /* ============================================================
-//      DROPDOWN OUTSIDE CLICK
+//      CLOSE DROPDOWN ON OUTSIDE CLICK
 //   ============================================================ */
 
 //   useEffect(() => {
@@ -719,7 +370,7 @@
 //   }, [dropdown]);
 
 //   /* ============================================================
-//      RESPONSIVE CLEANUP
+//      DESKTOP / MOBILE BREAKPOINT CLEANUP
 //   ============================================================ */
 
 //   useEffect(() => {
@@ -772,7 +423,7 @@
 //   }, []);
 
 //   /* ============================================================
-//      ENQUIRY CTA
+//      WHATSAPP ENQUIRY
 //   ============================================================ */
 
 //   function enquiry(
@@ -817,7 +468,7 @@
 //   }
 
 //   /* ============================================================
-//      DESKTOP DROPDOWN
+//      MORE DROPDOWN
 //   ============================================================ */
 
 //   function renderDropdown(
@@ -853,8 +504,7 @@
 //         }}
 //         onKeyDown={(event) => {
 //           if (
-//             event.key ===
-//               "Escape" &&
+//             event.key === "Escape" &&
 //             expanded
 //           ) {
 //             event.preventDefault();
@@ -899,6 +549,8 @@
 //             font-semibold
 //             leading-6
 
+//             tracking-[-0.01em]
+
 //             text-white
 
 //             transition-colors
@@ -910,16 +562,14 @@
 //             focus-visible:ring-2
 //             focus-visible:ring-white
 //             focus-visible:ring-offset-2
-//             focus-visible:ring-offset-transparent
+//             focus-visible:ring-offset-[#742039]
 
 //             min-[1440px]:px-4
 
 //             motion-reduce:transition-none
 //           "
 //         >
-//           <span>
-//             {title}
-//           </span>
+//           <span>{title}</span>
 
 //           <ChevronDown
 //             size={16}
@@ -953,10 +603,9 @@
 //               h-[2px]
 
 //               origin-center
-
 //               rounded-full
 
-//               bg-[#F1C8D4]
+//               bg-[#F4D6DF]
 
 //               transition-transform
 //               duration-200
@@ -973,16 +622,14 @@
 //           />
 //         </button>
 
-//         {/* Dropdown panel */}
+//         {/* Dropdown */}
 //         <div
 //           id={`${uid}-${key}`}
 //           hidden={!expanded}
 //           className="
 //             absolute
-
 //             right-0
 //             top-full
-
 //             z-50
 
 //             w-[350px]
@@ -999,7 +646,7 @@
 //               border
 //               border-[#EAD9DF]
 
-//               bg-[#FFFDFE]
+//               bg-white
 
 //               p-2.5
 
@@ -1024,9 +671,7 @@
 //                 text-[#8F2946]
 //               "
 //             >
-//               {key === "updates"
-//                 ? "News & perspectives"
-//                 : "Dholera Times"}
+//               Dholera Times
 //             </p>
 
 //             <div className="space-y-1">
@@ -1045,9 +690,7 @@
 //                         item.path,
 //                       )}
 //                       onClick={() =>
-//                         setDropdown(
-//                           null,
-//                         )
+//                         setDropdown(null)
 //                       }
 //                       className={`
 //                         group
@@ -1065,7 +708,7 @@
 //                         px-3
 //                         py-3
 
-//                         transition-colors
+//                         transition-[background-color,transform]
 //                         duration-200
 
 //                         ${
@@ -1074,11 +717,14 @@
 //                             : "hover:bg-[#FAF7F8]"
 //                         }
 
+//                         hover:translate-x-0.5
+
 //                         focus-visible:outline-none
 //                         focus-visible:ring-2
 //                         focus-visible:ring-[#8F2946]
 //                         focus-visible:ring-inset
 
+//                         motion-reduce:transform-none
 //                         motion-reduce:transition-none
 //                       `}
 //                     >
@@ -1130,7 +776,6 @@
 //                           group-hover:translate-x-0.5
 
 //                           motion-reduce:transform-none
-//                           motion-reduce:transition-none
 //                         "
 //                       />
 //                     </Link>
@@ -1167,6 +812,8 @@
 //     font-semibold
 //     leading-6
 
+//     tracking-[-0.01em]
+
 //     text-white
 
 //     transition-colors
@@ -1178,7 +825,7 @@
 //     focus-visible:ring-2
 //     focus-visible:ring-white
 //     focus-visible:ring-offset-2
-//     focus-visible:ring-offset-transparent
+//     focus-visible:ring-offset-[#742039]
 
 //     min-[1440px]:px-4
 
@@ -1188,48 +835,40 @@
 //   return (
 //     <>
 //       {/* ======================================================
-//           BURGUNDY GRADIENT NAVBAR
+//           NAVBAR
 //       ====================================================== */}
 
 //       <header
 //         className={`
 //           sticky
 //           top-0
-
 //           z-50
 
 //           w-full
 
 //           bg-gradient-to-r
-//           from-[#742039]
-//           via-[#8F2946]
-//           to-[#A13A57]
+//           from-[#39252E]
+//           via-[#742039]
+//           to-[#8F2946]
 
 //           ${
 //             scrolled
-//               ? `
-//                 shadow-[0_10px_30px_-22px_rgba(57,37,46,0.65)]
-//               `
-//               : `
-//                 shadow-[0_6px_20px_-20px_rgba(57,37,46,0.45)]
-//               `
+//               ? "shadow-[0_10px_30px_-16px_rgba(57,37,46,0.48)]"
+//               : "shadow-[0_6px_20px_-16px_rgba(57,37,46,0.34)]"
 //           }
 
 //           ${
 //             isHome
 //               ? `
-//                 -mb-[72px]
-
-//                 min-[480px]:-mb-[76px]
-
-//                 min-[1280px]:-mb-[80px]
-//               `
+//                   -mb-[72px]
+//                   min-[480px]:-mb-[76px]
+//                   min-[1280px]:-mb-[80px]
+//                 `
 //               : ""
 //           }
 
 //           transition-shadow
 //           duration-300
-//           ease-out
 
 //           motion-reduce:transition-none
 //         `}
@@ -1249,7 +888,7 @@
 //             gap-5
 
 //             px-4
-//             py-2.5
+//             py-2
 
 //             min-[480px]:min-h-[76px]
 //             min-[480px]:px-6
@@ -1273,13 +912,20 @@
 //               shrink-0
 //               items-center
 
-//               rounded-lg
+//               rounded-md
+
+//               transition-transform
+//               duration-200
+
+//               hover:scale-[1.015]
 
 //               focus-visible:outline-none
 //               focus-visible:ring-2
 //               focus-visible:ring-white
 //               focus-visible:ring-offset-2
-//               focus-visible:ring-offset-[#8F2946]
+//               focus-visible:ring-offset-[#742039]
+
+//               motion-reduce:transform-none
 //             "
 //           >
 //             <Image
@@ -1294,7 +940,7 @@
 
 //                 object-contain
 
-//                 drop-shadow-[0_2px_7px_rgba(57,37,46,0.30)]
+//                 drop-shadow-[0_3px_8px_rgba(32,16,22,0.28)]
 
 //                 min-[480px]:h-[52px]
 
@@ -1324,6 +970,15 @@
 //               min-[1440px]:gap-1
 //             "
 //           >
+//             {/* ===============================================
+//                 DIRECT NAV LINKS
+
+//                 Dholera SIR
+//                 Dholera News
+//                 Blogs & Insights
+//                 Photo Gallery
+//             ================================================ */}
+
 //             {PRIMARY.map(
 //               (item) => {
 //                 const isActive =
@@ -1339,9 +994,7 @@
 //                       item.path,
 //                     )}
 //                     onClick={() =>
-//                       setDropdown(
-//                         null,
-//                       )
+//                       setDropdown(null)
 //                     }
 //                     className={
 //                       desktopLinkClass
@@ -1361,10 +1014,9 @@
 //                         h-[2px]
 
 //                         origin-center
-
 //                         rounded-full
 
-//                         bg-[#F1C8D4]
+//                         bg-[#F4D6DF]
 
 //                         transition-transform
 //                         duration-200
@@ -1383,11 +1035,9 @@
 //               },
 //             )}
 
-//             {renderDropdown(
-//               "updates",
-//               "Updates",
-//               UPDATES,
-//             )}
+//             {/* ===============================================
+//                 ONLY MORE REMAINS AS DROPDOWN
+//             ================================================ */}
 
 //             {renderDropdown(
 //               "more",
@@ -1399,7 +1049,7 @@
 //                 CONTACT
 //             ================================================== */}
 
-//             <Link
+//             {/* <Link
 //               href={CONTACT.path}
 //               aria-current={current(
 //                 CONTACT.path,
@@ -1408,10 +1058,10 @@
 //                 setDropdown(null)
 //               }
 //               className={`
-//                 ml-2
+//                 ml-3
 
 //                 inline-flex
-//                 min-h-[48px]
+//                 min-h-[46px]
 
 //                 items-center
 //                 justify-center
@@ -1421,9 +1071,9 @@
 //                 rounded-full
 
 //                 border
-//                 border-white/30
+//                 border-white/35
 
-//                 bg-white/10
+//                 bg-transparent
 
 //                 px-5
 //                 py-2.5
@@ -1434,27 +1084,36 @@
 
 //                 text-white
 
-//                 transition-[background-color,border-color,transform]
+//                 transition-[background-color,border-color,color,transform,box-shadow]
 //                 duration-200
+//                 ease-out
 
 //                 hover:-translate-y-px
 
-//                 hover:border-white/50
-//                 hover:bg-white/16
+//                 hover:border-white/60
+//                 hover:bg-white/[0.10]
+//                 hover:text-white
+
+//                 hover:shadow-[0_6px_18px_rgba(35,14,22,0.14)]
 
 //                 active:translate-y-0
+//                 active:bg-white/[0.14]
 
 //                 focus-visible:outline-none
 //                 focus-visible:ring-2
 //                 focus-visible:ring-white
 //                 focus-visible:ring-offset-2
-//                 focus-visible:ring-offset-[#8F2946]
+//                 focus-visible:ring-offset-[#742039]
 
 //                 ${
 //                   active(
 //                     CONTACT.path,
 //                   )
-//                     ? "border-white/55 bg-white/16"
+//                     ? `
+//                         border-white/65
+//                         bg-white/[0.12]
+//                         text-white
+//                       `
 //                     : ""
 //                 }
 
@@ -1463,20 +1122,18 @@
 //               `}
 //             >
 //               Contact us
-//             </Link>
+//             </Link> */}
 //           </nav>
 
 //           {/* =================================================
-//               MOBILE MENU BUTTON
+//               MOBILE MENU ICON
 //           ================================================== */}
 
 //           <button
 //             ref={menuButtonRef}
 //             type="button"
 //             aria-label="Open navigation"
-//             aria-expanded={
-//               mobileOpen
-//             }
+//             aria-expanded={mobileOpen}
 //             aria-controls={`${uid}-mobile`}
 //             aria-haspopup="dialog"
 //             onClick={openMobile}
@@ -1488,18 +1145,16 @@
 //               w-11
 //               shrink-0
 
+//               touch-manipulation
+
 //               place-items-center
-
-//               rounded-full
-
-//               bg-white/12
 
 //               text-white
 
-//               transition-[background-color,transform]
+//               transition-[color,transform]
 //               duration-200
 
-//               hover:bg-white/20
+//               hover:text-[#F7DCE5]
 
 //               active:scale-95
 
@@ -1507,10 +1162,7 @@
 //               focus-visible:ring-2
 //               focus-visible:ring-white
 //               focus-visible:ring-offset-2
-//               focus-visible:ring-offset-[#8F2946]
-
-//               min-[480px]:h-12
-//               min-[480px]:w-12
+//               focus-visible:ring-offset-[#742039]
 
 //               min-[1280px]:hidden
 
@@ -1519,7 +1171,7 @@
 //             "
 //           >
 //             <Menu
-//               size={24}
+//               size={30}
 //               strokeWidth={2}
 //               aria-hidden="true"
 //             />
@@ -1542,7 +1194,6 @@
 //         }}
 //         onClose={() => {
 //           setMobileOpen(false);
-
 //           setMobileVisible(false);
 //         }}
 //         onClick={(event) => {
@@ -1577,8 +1228,7 @@
 
 //           shadow-[0_28px_70px_-24px_rgba(57,37,46,0.45)]
 
-//           backdrop:bg-[#39252E]/45
-//           backdrop:backdrop-blur-[2px]
+//           backdrop:bg-[#39252E]/50
 
 //           transition-[transform,opacity]
 //           duration-[250ms]
@@ -1616,14 +1266,16 @@
 //               gap-4
 
 //               bg-gradient-to-r
-//               from-[#742039]
-//               via-[#8F2946]
-//               to-[#A13A57]
+//               from-[#39252E]
+//               via-[#742039]
+//               to-[#8F2946]
 
 //               px-4
 
 //               pb-2
 //               pt-[max(10px,env(safe-area-inset-top))]
+
+//               shadow-[0_8px_24px_-18px_rgba(57,37,46,0.55)]
 
 //               min-[480px]:px-6
 //             "
@@ -1647,7 +1299,7 @@
 //                 shrink-0
 //                 items-center
 
-//                 rounded-lg
+//                 rounded-md
 
 //                 focus-visible:outline-none
 //                 focus-visible:ring-2
@@ -1663,10 +1315,17 @@
 //                   block
 //                   h-11
 //                   w-auto
+
 //                   object-contain
+
+//                   drop-shadow-[0_3px_8px_rgba(32,16,22,0.26)]
 //                 "
 //               />
 //             </Link>
+
+//             {/* =================================================
+//                 CLOSE ICON
+//             ================================================== */}
 
 //             <button
 //               type="button"
@@ -1681,18 +1340,16 @@
 //                 w-11
 //                 shrink-0
 
+//                 touch-manipulation
+
 //                 place-items-center
-
-//                 rounded-full
-
-//                 bg-white/12
 
 //                 text-white
 
-//                 transition-[background-color,transform]
+//                 transition-[color,transform]
 //                 duration-200
 
-//                 hover:bg-white/20
+//                 hover:text-[#F7DCE5]
 
 //                 active:scale-95
 
@@ -1705,7 +1362,7 @@
 //               "
 //             >
 //               <X
-//                 size={23}
+//                 size={29}
 //                 strokeWidth={2}
 //                 aria-hidden="true"
 //               />
@@ -1742,18 +1399,11 @@
 //           >
 //             {[
 //               {
-//                 title:
-//                   "Properties & location",
+//                 title: "Dholera",
 //                 items: PRIMARY,
 //               },
 //               {
-//                 title:
-//                   "News & resources",
-//                 items: UPDATES,
-//               },
-//               {
-//                 title:
-//                   "Company & support",
+//                 title: "Company & support",
 //                 items: [
 //                   ...MORE,
 //                   CONTACT,
@@ -1771,11 +1421,13 @@
 //                       groupIndex === 0
 //                         ? ""
 //                         : `
-//                           mt-5
-//                           border-t
-//                           border-[#EAD9DF]
-//                           pt-5
-//                         `
+//                             mt-5
+
+//                             border-t
+//                             border-[#EAD9DF]
+
+//                             pt-5
+//                           `
 //                     }
 //                   `}
 //                 >
@@ -1843,21 +1495,21 @@
 //                               ${
 //                                 isActive
 //                                   ? `
-//                                     bg-[#F3E7EC]
+//                                       bg-[#F3E7EC]
 
-//                                     font-semibold
+//                                       font-semibold
 
-//                                     text-[#8F2946]
-//                                   `
+//                                       text-[#8F2946]
+//                                     `
 //                                   : `
-//                                     font-medium
+//                                       font-medium
 
-//                                     text-[#39252E]
+//                                       text-[#39252E]
 
-//                                     hover:bg-[#F7EEF1]
+//                                       hover:bg-[#F7EEF1]
 
-//                                     active:bg-[#F3E7EC]
-//                                   `
+//                                       active:bg-[#F3E7EC]
+//                                     `
 //                               }
 
 //                               focus-visible:outline-none
@@ -1949,9 +1601,11 @@
 
 //                 gap-2.5
 
-//                 rounded-xl
+//                 rounded-lg
 
-//                 bg-[#8F2946]
+//                 bg-gradient-to-r
+//                 from-[#742039]
+//                 to-[#8F2946]
 
 //                 px-5
 //                 py-3
@@ -1962,12 +1616,15 @@
 
 //                 text-white
 
-//                 transition-[background-color,transform]
+//                 shadow-[0_7px_18px_rgba(116,32,57,0.18)]
+
+//                 transition-[transform,box-shadow,filter]
 //                 duration-200
 
-//                 hover:bg-[#742039]
+//                 hover:-translate-y-0.5
+//                 hover:brightness-105
 
-//                 active:scale-[0.99]
+//                 active:translate-y-0
 
 //                 focus-visible:outline-none
 //                 focus-visible:ring-2
@@ -2014,39 +1671,29 @@ import logo from "@/assets/DTLOGO.png";
 import { trackPageView } from "@/lib/fbpixel";
 
 /* ============================================================
-   NAVIGATION DATA
+   NAVIGATION
 ============================================================ */
 
-const PRIMARY = [
+const MAIN_LINKS = [
+  {
+    title: "Home",
+    path: "/",
+  },
   {
     title: "Dholera SIR",
     path: "/dholera-sir",
   },
   {
-    title: "Residential Projects",
-    path: "/dholera-residential-plots",
-  },
-  {
-    title: "Bulk Land",
-    path: "/bulk-land",
-  },
-];
-
-const UPDATES = [
-  {
     title: "Dholera News",
     path: "/dholera-updates/latest-updates",
-    description: "Infrastructure and development updates",
   },
   {
     title: "Blogs & Insights",
     path: "/dholera-updates/blogs",
-    description: "Explore Dholera in more detail",
   },
   {
     title: "Photo Gallery",
     path: "/gallery/dholera-sir-progress",
-    description: "See development on the ground",
   },
 ];
 
@@ -2074,39 +1721,68 @@ const CONTACT = {
 };
 
 /* ============================================================
-   COMPONENT
+   NAVBAR
 ============================================================ */
 
 export default function Navbar({
   whatsappNumber = "",
 }) {
-  const pathname = usePathname() || "";
+  const pathname = usePathname() || "/";
   const uid = useId().replace(/:/g, "");
 
-  const [dropdown, setDropdown] = useState(null);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobileVisible, setMobileVisible] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [dropdown, setDropdown] =
+    useState(null);
 
-  const closeTimerRef = useRef(null);
+  const [mobileOpen, setMobileOpen] =
+    useState(false);
+
+  const [
+    mobileVisible,
+    setMobileVisible,
+  ] = useState(false);
+
+  const [scrolled, setScrolled] =
+    useState(false);
+
+  const closeTimerRef =
+    useRef(null);
+
   const frameRef = useRef(null);
-  const navRef = useRef(null);
-  const dialogRef = useRef(null);
-  const menuButtonRef = useRef(null);
-  const lastTrackedPath = useRef(null);
 
-  const isHome = pathname === "/";
+  const navRef = useRef(null);
+
+  const dialogRef = useRef(null);
+
+  const menuButtonRef =
+    useRef(null);
+
+  const lastTrackedPath =
+    useRef(null);
+
+  const isHome =
+    pathname === "/";
 
   /* ============================================================
      ROUTE HELPERS
   ============================================================ */
 
-  const active = (path) =>
-    pathname === path ||
-    pathname.startsWith(`${path}/`);
+  const active = (path) => {
+    if (path === "/") {
+      return pathname === "/";
+    }
+
+    return (
+      pathname === path ||
+      pathname.startsWith(
+        `${path}/`,
+      )
+    );
+  };
 
   const current = (path) =>
-    pathname === path ? "page" : undefined;
+    pathname === path
+      ? "page"
+      : undefined;
 
   /* ============================================================
      WHATSAPP
@@ -2117,21 +1793,34 @@ export default function Navbar({
   ).replace(/[^0-9]/g, "");
 
   const hasWhatsApp =
-    /^[1-9][0-9]{7,14}$/.test(number);
+    /^[1-9][0-9]{7,14}$/.test(
+      number,
+    );
 
-  const enquiryHref = hasWhatsApp
-    ? `https://wa.me/${number}?text=${encodeURIComponent(
-        "Hello Dholera Times, I would like to explore properties in Dholera.",
-      )}`
-    : CONTACT.path;
+  const whatsappMessage =
+    "Hello Dholera Times, I am interested in buying a plot in Dholera. Please share the available projects, pricing, location, and other details.";
+
+  const enquiryHref =
+    hasWhatsApp
+      ? `https://wa.me/${number}?text=${encodeURIComponent(
+          whatsappMessage,
+        )}`
+      : CONTACT.path;
 
   /* ============================================================
-     MOBILE MENU
+     MOBILE OPEN / CLOSE
   ============================================================ */
 
-  function closeMobile(restoreFocus = true) {
-    cancelAnimationFrame(frameRef.current);
-    clearTimeout(closeTimerRef.current);
+  function closeMobile(
+    restoreFocus = true,
+  ) {
+    cancelAnimationFrame(
+      frameRef.current,
+    );
+
+    clearTimeout(
+      closeTimerRef.current,
+    );
 
     setMobileVisible(false);
 
@@ -2140,40 +1829,57 @@ export default function Navbar({
         "(prefers-reduced-motion: reduce)",
       ).matches;
 
-    const delay = reduceMotion ? 0 : 250;
+    const delay =
+      reduceMotion ? 0 : 250;
 
-    closeTimerRef.current = setTimeout(() => {
-      dialogRef.current?.close();
+    closeTimerRef.current =
+      setTimeout(() => {
+        dialogRef.current?.close();
 
-      setMobileOpen(false);
+        setMobileOpen(false);
 
-      if (
-        restoreFocus &&
-        menuButtonRef.current?.getClientRects().length
-      ) {
-        menuButtonRef.current.focus();
-      }
-    }, delay);
+        if (
+          restoreFocus &&
+          menuButtonRef.current
+            ?.getClientRects()
+            .length
+        ) {
+          menuButtonRef.current.focus();
+        }
+      }, delay);
   }
 
   function openMobile() {
-    clearTimeout(closeTimerRef.current);
-    cancelAnimationFrame(frameRef.current);
+    clearTimeout(
+      closeTimerRef.current,
+    );
+
+    cancelAnimationFrame(
+      frameRef.current,
+    );
 
     setDropdown(null);
     setMobileVisible(false);
 
-    if (!dialogRef.current?.open) {
+    if (
+      !dialogRef.current?.open
+    ) {
       dialogRef.current?.showModal();
     }
 
     setMobileOpen(true);
 
-    frameRef.current = requestAnimationFrame(() => {
-      frameRef.current = requestAnimationFrame(() => {
-        setMobileVisible(true);
+    frameRef.current =
+      requestAnimationFrame(() => {
+        frameRef.current =
+          requestAnimationFrame(
+            () => {
+              setMobileVisible(
+                true,
+              );
+            },
+          );
       });
-    });
   }
 
   /* ============================================================
@@ -2182,14 +1888,20 @@ export default function Navbar({
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 24);
+      setScrolled(
+        window.scrollY > 24,
+      );
     };
 
     handleScroll();
 
-    window.addEventListener("scroll", handleScroll, {
-      passive: true,
-    });
+    window.addEventListener(
+      "scroll",
+      handleScroll,
+      {
+        passive: true,
+      },
+    );
 
     return () => {
       window.removeEventListener(
@@ -2205,8 +1917,13 @@ export default function Navbar({
 
   useEffect(
     () => () => {
-      clearTimeout(closeTimerRef.current);
-      cancelAnimationFrame(frameRef.current);
+      clearTimeout(
+        closeTimerRef.current,
+      );
+
+      cancelAnimationFrame(
+        frameRef.current,
+      );
     },
     [],
   );
@@ -2216,17 +1933,27 @@ export default function Navbar({
   ============================================================ */
 
   useEffect(() => {
-    clearTimeout(closeTimerRef.current);
-    cancelAnimationFrame(frameRef.current);
+    clearTimeout(
+      closeTimerRef.current,
+    );
 
-    setMobileVisible(false);
+    cancelAnimationFrame(
+      frameRef.current,
+    );
+
     setDropdown(null);
+    setMobileVisible(false);
 
     dialogRef.current?.close();
+
     setMobileOpen(false);
 
-    if (lastTrackedPath.current !== pathname) {
-      lastTrackedPath.current = pathname;
+    if (
+      lastTrackedPath.current !==
+      pathname
+    ) {
+      lastTrackedPath.current =
+        pathname;
 
       try {
         trackPageView();
@@ -2240,11 +1967,13 @@ export default function Navbar({
   }, [pathname]);
 
   /* ============================================================
-     BODY SCROLL LOCK
+     BODY LOCK
   ============================================================ */
 
   useEffect(() => {
-    if (!mobileOpen) return;
+    if (!mobileOpen) {
+      return;
+    }
 
     const alreadyLocked =
       document.body.classList.contains(
@@ -2265,7 +1994,7 @@ export default function Navbar({
   }, [mobileOpen]);
 
   /* ============================================================
-     OUTSIDE DROPDOWN CLICK
+     CLOSE DROPDOWN OUTSIDE
   ============================================================ */
 
   useEffect(() => {
@@ -2273,7 +2002,9 @@ export default function Navbar({
 
     const dismiss = (event) => {
       if (
-        !navRef.current?.contains(event.target)
+        !navRef.current?.contains(
+          event.target,
+        )
       ) {
         setDropdown(null);
       }
@@ -2303,36 +2034,32 @@ export default function Navbar({
   }, [dropdown]);
 
   /* ============================================================
-     RESPONSIVE CLEANUP
+     DESKTOP CLEANUP
   ============================================================ */
 
   useEffect(() => {
-    const desktop = window.matchMedia(
-      "(min-width: 1280px)",
-    );
+    const desktop =
+      window.matchMedia(
+        "(min-width: 1280px)",
+      );
 
     const handleChange = () => {
       setDropdown(null);
 
       if (desktop.matches) {
-        clearTimeout(closeTimerRef.current);
-        cancelAnimationFrame(frameRef.current);
+        clearTimeout(
+          closeTimerRef.current,
+        );
+
+        cancelAnimationFrame(
+          frameRef.current,
+        );
 
         setMobileVisible(false);
 
-        const hadFocus =
-          dialogRef.current?.contains(
-            document.activeElement,
-          );
-
         dialogRef.current?.close();
-        setMobileOpen(false);
 
-        if (hadFocus) {
-          navRef.current
-            ?.querySelector("a")
-            ?.focus();
-        }
+        setMobileOpen(false);
       }
     };
 
@@ -2341,68 +2068,24 @@ export default function Navbar({
       handleChange,
     );
 
-    return () =>
+    return () => {
       desktop.removeEventListener(
         "change",
         handleChange,
       );
+    };
   }, []);
 
   /* ============================================================
-     ENQUIRY CTA
+     MORE DROPDOWN
   ============================================================ */
 
-  function enquiry(className, onClick) {
-    return (
-      <Link
-        href={enquiryHref}
-        className={className}
-        onClick={onClick}
-        target={
-          hasWhatsApp
-            ? "_blank"
-            : undefined
-        }
-        rel={
-          hasWhatsApp
-            ? "noopener noreferrer"
-            : undefined
-        }
-        aria-label={
-          hasWhatsApp
-            ? "Enquire on WhatsApp (opens in a new tab)"
-            : undefined
-        }
-      >
-        <FaWhatsapp
-          size={22}
-          aria-hidden="true"
-          className="
-            shrink-0
-            text-[#25D366]
-          "
-        />
-
-        <span className="whitespace-nowrap">
-          Enquire now
-        </span>
-      </Link>
-    );
-  }
-
-  /* ============================================================
-     DESKTOP DROPDOWN
-  ============================================================ */
-
-  function renderDropdown(
-    key,
-    title,
-    items,
-  ) {
-    const expanded = dropdown === key;
+  const renderMoreDropdown = () => {
+    const expanded =
+      dropdown === "more";
 
     const containsActive =
-      items.some((item) =>
+      MORE.some((item) =>
         active(item.path),
       );
 
@@ -2410,7 +2093,7 @@ export default function Navbar({
       <div
         className="relative"
         onMouseEnter={() =>
-          setDropdown(key)
+          setDropdown("more")
         }
         onMouseLeave={() =>
           setDropdown(null)
@@ -2426,26 +2109,31 @@ export default function Navbar({
         }}
         onKeyDown={(event) => {
           if (
-            event.key === "Escape" &&
+            event.key ===
+              "Escape" &&
             expanded
           ) {
-            event.preventDefault();
-
             setDropdown(null);
 
             event.currentTarget
-              .querySelector("button")
+              .querySelector(
+                "button",
+              )
               ?.focus();
           }
         }}
       >
         <button
           type="button"
-          aria-expanded={expanded}
-          aria-controls={`${uid}-${key}`}
+          aria-expanded={
+            expanded
+          }
+          aria-controls={`${uid}-more`}
           onClick={() =>
             setDropdown(
-              expanded ? null : key,
+              expanded
+                ? null
+                : "more",
             )
           }
           className="
@@ -2480,22 +2168,18 @@ export default function Navbar({
             focus-visible:ring-2
             focus-visible:ring-white
             focus-visible:ring-offset-2
-            focus-visible:ring-offset-transparent
+            focus-visible:ring-offset-[#742039]
 
             min-[1440px]:px-4
-
-            motion-reduce:transition-none
           "
         >
-          <span>{title}</span>
+          <span>More</span>
 
           <ChevronDown
             size={16}
             strokeWidth={2}
             aria-hidden="true"
             className={`
-              shrink-0
-
               transition-transform
               duration-200
 
@@ -2504,8 +2188,6 @@ export default function Navbar({
                   ? "rotate-180"
                   : ""
               }
-
-              motion-reduce:transition-none
             `}
           />
 
@@ -2528,19 +2210,17 @@ export default function Navbar({
               duration-200
 
               ${
-                containsActive || expanded
+                expanded ||
+                containsActive
                   ? "scale-x-100"
                   : "scale-x-0 group-hover:scale-x-100"
               }
-
-              motion-reduce:transition-none
             `}
           />
         </button>
 
-        {/* Dropdown hover bridge */}
         <div
-          id={`${uid}-${key}`}
+          id={`${uid}-more`}
           hidden={!expanded}
           className="
             absolute
@@ -2550,12 +2230,11 @@ export default function Navbar({
 
             z-50
 
-            w-[350px]
+            w-[340px]
 
             pt-3
           "
         >
-          {/* Dropdown card */}
           <div
             className="
               overflow-hidden
@@ -2565,15 +2244,11 @@ export default function Navbar({
               border
               border-[#EAD9DF]
 
-              bg-[#FFFDFE]/95
+              bg-white
 
               p-2.5
 
-              text-[#39252E]
-
               shadow-[0_24px_60px_-24px_rgba(57,37,46,0.34)]
-
-              backdrop-blur-xl
             "
           >
             <p
@@ -2585,126 +2260,111 @@ export default function Navbar({
                 text-[11px]
                 font-semibold
                 uppercase
-                leading-5
 
                 tracking-[0.14em]
 
                 text-[#8F2946]
               "
             >
-              {key === "updates"
-                ? "News & perspectives"
-                : "Dholera Times"}
+              Dholera Times
             </p>
 
             <div className="space-y-1">
-              {items.map((item) => {
-                const isActive =
-                  active(item.path);
-
-                return (
-                  <Link
-                    key={item.path}
-                    href={item.path}
-                    aria-current={current(
+              {MORE.map(
+                (item) => {
+                  const isActive =
+                    active(
                       item.path,
-                    )}
-                    onClick={() =>
-                      setDropdown(null)
-                    }
-                    className={`
-                      group
+                    );
 
-                      flex
-                      min-h-[68px]
-
-                      items-center
-                      justify-between
-
-                      gap-4
-
-                      rounded-xl
-
-                      px-3
-                      py-3
-
-                      transition-colors
-                      duration-200
-
-                      ${
-                        isActive
-                          ? "bg-[#F3E7EC]"
-                          : "hover:bg-[#FAF7F8]"
+                  return (
+                    <Link
+                      key={
+                        item.path
                       }
+                      href={
+                        item.path
+                      }
+                      onClick={() =>
+                        setDropdown(
+                          null,
+                        )
+                      }
+                      className={`
+                        group
 
-                      focus-visible:outline-none
-                      focus-visible:ring-2
-                      focus-visible:ring-[#8F2946]
-                      focus-visible:ring-inset
+                        flex
+                        min-h-[68px]
 
-                      motion-reduce:transition-none
-                    `}
-                  >
-                    <span className="min-w-0">
-                      <strong
+                        items-center
+                        justify-between
+
+                        gap-4
+
+                        rounded-xl
+
+                        px-3
+                        py-3
+
+                        ${
+                          isActive
+                            ? "bg-[#F3E7EC]"
+                            : "hover:bg-[#FAF7F8]"
+                        }
+                      `}
+                    >
+                      <span className="min-w-0">
+                        <strong
+                          className="
+                            block
+
+                            text-[17px]
+                            font-semibold
+                            leading-6
+
+                            text-[#39252E]
+                          "
+                        >
+                          {
+                            item.title
+                          }
+                        </strong>
+
+                        <small
+                          className="
+                            mt-0.5
+                            block
+
+                            text-[13px]
+                            leading-5
+
+                            text-[#68565E]
+                          "
+                        >
+                          {
+                            item.description
+                          }
+                        </small>
+                      </span>
+
+                      <ChevronRight
+                        size={17}
+                        aria-hidden="true"
                         className="
-                          block
-
-                          text-[17px]
-                          font-semibold
-                          leading-6
-
-                          tracking-[-0.01em]
-
-                          text-[#39252E]
+                          shrink-0
+                          text-[#8F2946]
                         "
-                      >
-                        {item.title}
-                      </strong>
-
-                      <small
-                        className="
-                          mt-0.5
-                          block
-
-                          text-[13px]
-                          font-normal
-                          leading-5
-
-                          text-[#68565E]
-                        "
-                      >
-                        {item.description}
-                      </small>
-                    </span>
-
-                    <ChevronRight
-                      size={17}
-                      strokeWidth={1.8}
-                      aria-hidden="true"
-                      className="
-                        shrink-0
-
-                        text-[#8F2946]
-
-                        transition-transform
-                        duration-200
-
-                        group-hover:translate-x-0.5
-
-                        motion-reduce:transform-none
-                        motion-reduce:transition-none
-                      "
-                    />
-                  </Link>
-                );
-              })}
+                      />
+                    </Link>
+                  );
+                },
+              )}
             </div>
           </div>
         </div>
       </div>
     );
-  }
+  };
 
   /* ============================================================
      DESKTOP LINK CLASS
@@ -2740,70 +2400,58 @@ export default function Navbar({
     focus-visible:ring-2
     focus-visible:ring-white
     focus-visible:ring-offset-2
-    focus-visible:ring-offset-transparent
+    focus-visible:ring-offset-[#742039]
 
     min-[1440px]:px-4
-
-    motion-reduce:transition-none
   `;
 
   return (
     <>
-      {/* ======================================================
-          #8F2946 TRANSPARENT GLASS NAVBAR
+      {/* =====================================================
+          HEADER
+
+          PHONE:
+          Navbar overlaps hero exactly as before.
+
+          >= MD:
+          Normal document flow.
+          No overlap and no blank compensation area.
       ====================================================== */}
 
       <header
-className={`
-  sticky
-  top-0
+        className={`
+          sticky
+          top-0
+          z-50
 
-  z-50
+          w-full
 
-  w-full
+          bg-gradient-to-r
+          from-[#39252E]
+          via-[#742039]
+          to-[#8F2946]
 
-  bg-gradient-to-r
+          ${
+            scrolled
+              ? "shadow-[0_10px_30px_-16px_rgba(57,37,46,0.48)]"
+              : "shadow-[0_6px_20px_-16px_rgba(57,37,46,0.34)]"
+          }
 
-  ${
-    scrolled
-      ? `
-        from-[#8F2946]/[0.76]
-        via-[#8F2946]/[0.70]
-        to-[#8F2946]/[0.76]
+          ${
+            isHome
+              ? `
+                  -mb-[72px]
 
-        backdrop-blur-xl
+                  min-[480px]:-mb-[76px]
 
-        shadow-[0_8px_26px_-24px_rgba(57,37,46,0.32)]
-      `
-      : `
-        from-[#8F2946]/[0.68]
-        via-[#8F2946]/[0.60]
-        to-[#8F2946]/[0.68]
+                  md:mb-0
+                `
+              : ""
+          }
 
-        backdrop-blur-lg
-
-        shadow-[0_6px_20px_-22px_rgba(57,37,46,0.22)]
-      `
-  }
-
-  ${
-    isHome
-      ? `
-        -mb-[72px]
-
-        min-[480px]:-mb-[76px]
-
-        min-[1280px]:-mb-[80px]
-      `
-      : ""
-  }
-
-  transition-[background-color,backdrop-filter,box-shadow]
-  duration-300
-  ease-out
-
-  motion-reduce:transition-none
-`}
+          transition-shadow
+          duration-300
+        `}
       >
         <div
           className="
@@ -2820,7 +2468,7 @@ className={`
             gap-5
 
             px-4
-            py-2.5
+            py-2
 
             min-[480px]:min-h-[76px]
             min-[480px]:px-6
@@ -2832,9 +2480,7 @@ className={`
             min-[1440px]:gap-7
           "
         >
-          {/* =================================================
-              LOGO
-          ================================================== */}
+          {/* LOGO */}
 
           <Link
             href="/"
@@ -2844,13 +2490,11 @@ className={`
               shrink-0
               items-center
 
-              rounded-lg
+              rounded-md
 
               focus-visible:outline-none
               focus-visible:ring-2
               focus-visible:ring-white
-              focus-visible:ring-offset-2
-              focus-visible:ring-offset-[#8F2946]
             "
           >
             <Image
@@ -2865,7 +2509,7 @@ className={`
 
                 object-contain
 
-                drop-shadow-[0_2px_7px_rgba(57,37,46,0.28)]
+                drop-shadow-[0_3px_8px_rgba(32,16,22,0.28)]
 
                 min-[480px]:h-[52px]
 
@@ -2874,9 +2518,7 @@ className={`
             />
           </Link>
 
-          {/* =================================================
-              DESKTOP NAVIGATION
-          ================================================== */}
+          {/* DESKTOP */}
 
           <nav
             ref={navRef}
@@ -2895,73 +2537,69 @@ className={`
               min-[1440px]:gap-1
             "
           >
-            {PRIMARY.map((item) => {
-              const isActive =
-                active(item.path);
-
-              return (
-                <Link
-                  key={item.path}
-                  href={item.path}
-                  aria-current={current(
+            {MAIN_LINKS.map(
+              (item) => {
+                const isActive =
+                  active(
                     item.path,
-                  )}
-                  onClick={() =>
-                    setDropdown(null)
-                  }
-                  className={
-                    desktopLinkClass
-                  }
-                >
-                  {item.title}
+                  );
 
-                  <span
-                    aria-hidden="true"
-                    className={`
-                      absolute
+                return (
+                  <Link
+                    key={
+                      item.path
+                    }
+                    href={
+                      item.path
+                    }
+                    aria-current={current(
+                      item.path,
+                    )}
+                    onClick={() =>
+                      setDropdown(
+                        null,
+                      )
+                    }
+                    className={
+                      desktopLinkClass
+                    }
+                  >
+                    {
+                      item.title
+                    }
 
-                      bottom-[3px]
-                      left-3
-                      right-3
+                    <span
+                      aria-hidden="true"
+                      className={`
+                        absolute
 
-                      h-[2px]
+                        bottom-[3px]
+                        left-3
+                        right-3
 
-                      origin-center
-                      rounded-full
+                        h-[2px]
 
-                      bg-[#F4D6DF]
+                        origin-center
+                        rounded-full
 
-                      transition-transform
-                      duration-200
+                        bg-[#F4D6DF]
 
-                      ${
-                        isActive
-                          ? "scale-x-100"
-                          : "scale-x-0 group-hover:scale-x-100"
-                      }
+                        transition-transform
+                        duration-200
 
-                      motion-reduce:transition-none
-                    `}
-                  />
-                </Link>
-              );
-            })}
-
-            {renderDropdown(
-              "updates",
-              "Updates",
-              UPDATES,
+                        ${
+                          isActive
+                            ? "scale-x-100"
+                            : "scale-x-0 group-hover:scale-x-100"
+                        }
+                      `}
+                    />
+                  </Link>
+                );
+              },
             )}
 
-            {renderDropdown(
-              "more",
-              "More",
-              MORE,
-            )}
-
-            {/* =================================================
-                CONTACT
-            ================================================== */}
+            {renderMoreDropdown()}
 
             <Link
               href={CONTACT.path}
@@ -2972,10 +2610,10 @@ className={`
                 setDropdown(null)
               }
               className={`
-                ml-2
+                ml-3
 
                 inline-flex
-                min-h-[48px]
+                min-h-[46px]
 
                 items-center
                 justify-center
@@ -2987,55 +2625,37 @@ className={`
                 border
                 border-white/35
 
-                bg-white/[0.10]
+                bg-transparent
 
                 px-5
                 py-2.5
 
                 text-[16px]
                 font-semibold
-                leading-6
 
                 text-white
-
-                backdrop-blur-sm
 
                 transition-[background-color,border-color,transform]
                 duration-200
 
                 hover:-translate-y-px
-
-                hover:border-white/55
-                hover:bg-white/[0.18]
-
-                active:translate-y-0
-
-                focus-visible:outline-none
-                focus-visible:ring-2
-                focus-visible:ring-white
-                focus-visible:ring-offset-2
-                focus-visible:ring-offset-[#8F2946]
+                hover:border-white/60
+                hover:bg-white/10
 
                 ${
-                  active(CONTACT.path)
-                    ? `
-                      border-white/60
-                      bg-white/[0.18]
-                    `
+                  active(
+                    CONTACT.path,
+                  )
+                    ? "border-white/65 bg-white/10"
                     : ""
                 }
-
-                motion-reduce:transform-none
-                motion-reduce:transition-none
               `}
             >
               Contact us
             </Link>
           </nav>
 
-          {/* =================================================
-              MOBILE MENU BUTTON
-          ================================================== */}
+          {/* MOBILE MENU */}
 
           <button
             ref={menuButtonRef}
@@ -3045,7 +2665,6 @@ className={`
               mobileOpen
             }
             aria-controls={`${uid}-mobile`}
-            aria-haspopup="dialog"
             onClick={openMobile}
             className="
               ml-auto
@@ -3053,46 +2672,20 @@ className={`
               grid
               h-11
               w-11
-              shrink-0
 
               place-items-center
 
-              rounded-full
-
-              border
-              border-white/20
-
-              bg-white/[0.10]
-
               text-white
 
-              backdrop-blur-sm
-
-              transition-[background-color,border-color,transform]
-              duration-200
-
-              hover:border-white/35
-              hover:bg-white/[0.18]
-
-              active:scale-95
+              min-[1280px]:hidden
 
               focus-visible:outline-none
               focus-visible:ring-2
               focus-visible:ring-white
-              focus-visible:ring-offset-2
-              focus-visible:ring-offset-[#8F2946]
-
-              min-[480px]:h-12
-              min-[480px]:w-12
-
-              min-[1280px]:hidden
-
-              motion-reduce:transform-none
-              motion-reduce:transition-none
             "
           >
             <Menu
-              size={24}
+              size={30}
               strokeWidth={2}
               aria-hidden="true"
             />
@@ -3100,14 +2693,13 @@ className={`
         </div>
       </header>
 
-      {/* ======================================================
-          MOBILE NAVIGATION
+      {/* =====================================================
+          MOBILE NAV
       ====================================================== */}
 
       <dialog
         ref={dialogRef}
         id={`${uid}-mobile`}
-        aria-labelledby={`${uid}-title`}
         onCancel={(event) => {
           event.preventDefault();
 
@@ -3115,16 +2707,7 @@ className={`
         }}
         onClose={() => {
           setMobileOpen(false);
-
           setMobileVisible(false);
-        }}
-        onClick={(event) => {
-          if (
-            event.target ===
-            event.currentTarget
-          ) {
-            closeMobile();
-          }
         }}
         className={`
           fixed
@@ -3148,34 +2731,20 @@ className={`
 
           text-[#39252E]
 
-          shadow-[0_28px_70px_-24px_rgba(57,37,46,0.45)]
-
-          backdrop:bg-[#39252E]/45
-          backdrop:backdrop-blur-[2px]
+          backdrop:bg-[#39252E]/50
 
           transition-[transform,opacity]
           duration-[250ms]
-          ease-out
 
           ${
             mobileVisible
               ? "translate-y-0 opacity-100"
               : "-translate-y-full opacity-0"
           }
-
-          motion-reduce:transition-none
         `}
       >
-        <div
-          className="
-            flex
-            h-full
-            flex-col
-          "
-        >
-          {/* =================================================
-              MOBILE HEADER
-          ================================================== */}
+        <div className="flex h-full flex-col">
+          {/* MOBILE HEADER */}
 
           <div
             className="
@@ -3186,48 +2755,22 @@ className={`
               items-center
               justify-between
 
-              gap-4
-
               bg-gradient-to-r
-              from-[#8F2946]/[0.96]
-              via-[#8F2946]/[0.88]
-              to-[#8F2946]/[0.96]
+              from-[#39252E]
+              via-[#742039]
+              to-[#8F2946]
 
               px-4
-
-              pb-2
-              pt-[max(10px,env(safe-area-inset-top))]
-
-              backdrop-blur-xl
 
               min-[480px]:px-6
             "
           >
-            <h2
-              id={`${uid}-title`}
-              className="sr-only"
-            >
-              Dholera Times navigation
-            </h2>
-
             <Link
               href="/"
               onClick={() =>
                 closeMobile()
               }
               aria-label="Dholera Times home"
-              className="
-                inline-flex
-                min-h-12
-                shrink-0
-                items-center
-
-                rounded-lg
-
-                focus-visible:outline-none
-                focus-visible:ring-2
-                focus-visible:ring-white
-              "
             >
               <Image
                 src={logo}
@@ -3235,9 +2778,9 @@ className={`
                 width={150}
                 height={150}
                 className="
-                  block
                   h-11
                   w-auto
+
                   object-contain
                 "
               />
@@ -3246,7 +2789,6 @@ className={`
             <button
               type="button"
               aria-label="Close navigation"
-              autoFocus
               onClick={() =>
                 closeMobile()
               }
@@ -3254,237 +2796,169 @@ className={`
                 grid
                 h-11
                 w-11
-                shrink-0
 
                 place-items-center
 
-                rounded-full
-
-                border
-                border-white/20
-
-                bg-white/[0.10]
-
                 text-white
-
-                transition-[background-color,border-color,transform]
-                duration-200
-
-                hover:border-white/35
-                hover:bg-white/[0.18]
-
-                active:scale-95
 
                 focus-visible:outline-none
                 focus-visible:ring-2
                 focus-visible:ring-white
-
-                motion-reduce:transform-none
-                motion-reduce:transition-none
               "
             >
               <X
-                size={23}
+                size={29}
                 strokeWidth={2}
-                aria-hidden="true"
               />
             </button>
           </div>
 
-          {/* =================================================
-              MOBILE LINKS
-          ================================================== */}
+          {/* LINKS */}
 
           <nav
-            aria-label="Mobile navigation"
             className="
               min-h-0
               flex-1
 
               overflow-y-auto
-              overscroll-contain
 
               px-4
-              pb-5
-              pt-5
+              py-5
 
               min-[480px]:px-6
-
-              [scrollbar-width:thin]
-              [scrollbar-color:#E0A4B5_transparent]
-
-              [&::-webkit-scrollbar]:w-1
-
-              [&::-webkit-scrollbar-thumb]:rounded-full
-              [&::-webkit-scrollbar-thumb]:bg-[#E0A4B5]
             "
           >
-            {[
-              {
-                title:
-                  "Properties & location",
-                items: PRIMARY,
-              },
-              {
-                title:
-                  "News & resources",
-                items: UPDATES,
-              },
-              {
-                title:
-                  "Company & support",
-                items: [
-                  ...MORE,
-                  CONTACT,
-                ],
-              },
-            ].map(
-              (
-                group,
-                groupIndex,
-              ) => (
-                <section
-                  key={group.title}
-                  className={`
-                    ${
-                      groupIndex === 0
-                        ? ""
-                        : `
-                          mt-5
-                          border-t
-                          border-[#EAD9DF]
-                          pt-5
-                        `
-                    }
-                  `}
-                >
-                  <h3
-                    className="
-                      mb-2
+            <div className="space-y-1">
+              {MAIN_LINKS.map(
+                (item) => {
+                  const isActive =
+                    active(
+                      item.path,
+                    );
 
-                      px-2
+                  return (
+                    <Link
+                      key={
+                        item.path
+                      }
+                      href={
+                        item.path
+                      }
+                      onClick={() =>
+                        closeMobile()
+                      }
+                      className={`
+                        flex
+                        min-h-[54px]
 
-                      text-[12px]
-                      font-semibold
-                      uppercase
-                      leading-5
+                        items-center
+                        justify-between
 
-                      tracking-[0.14em]
+                        rounded-xl
 
-                      text-[#8F2946]
-                    "
-                  >
-                    {group.title}
-                  </h3>
+                        px-3
+                        py-3
 
-                  <div className="space-y-1">
-                    {group.items.map(
-                      (item) => {
-                        const isActive =
-                          active(
-                            item.path,
-                          );
+                        text-[17px]
 
-                        return (
-                          <Link
-                            key={item.path}
-                            href={item.path}
-                            aria-current={current(
-                              item.path,
-                            )}
-                            onClick={() =>
-                              closeMobile()
-                            }
-                            className={`
-                              group
+                        ${
+                          isActive
+                            ? "bg-[#F3E7EC] font-semibold text-[#8F2946]"
+                            : "font-medium text-[#39252E] hover:bg-[#F7EEF1]"
+                        }
+                      `}
+                    >
+                      {
+                        item.title
+                      }
 
-                              flex
-                              min-h-[54px]
+                      <ChevronRight
+                        size={18}
+                        aria-hidden="true"
+                      />
+                    </Link>
+                  );
+                },
+              )}
+            </div>
 
-                              touch-manipulation
+            <div
+              className="
+                mt-5
 
-                              items-center
-                              justify-between
+                border-t
+                border-[#EAD9DF]
 
-                              gap-4
+                pt-5
+              "
+            >
+              <p
+                className="
+                  mb-2
 
-                              rounded-xl
+                  px-2
 
-                              px-3
-                              py-3
+                  text-[12px]
+                  font-semibold
+                  uppercase
 
-                              text-[17px]
-                              leading-6
+                  tracking-[0.14em]
 
-                              transition-colors
-                              duration-150
+                  text-[#8F2946]
+                "
+              >
+                More
+              </p>
 
-                              ${
-                                isActive
-                                  ? `
-                                    bg-[#F3E7EC]
+              <div className="space-y-1">
+                {MORE.map(
+                  (item) => (
+                    <Link
+                      key={
+                        item.path
+                      }
+                      href={
+                        item.path
+                      }
+                      onClick={() =>
+                        closeMobile()
+                      }
+                      className="
+                        flex
+                        min-h-[54px]
 
-                                    font-semibold
+                        items-center
+                        justify-between
 
-                                    text-[#8F2946]
-                                  `
-                                  : `
-                                    font-medium
+                        rounded-xl
 
-                                    text-[#39252E]
+                        px-3
+                        py-3
 
-                                    hover:bg-[#F7EEF1]
+                        text-[17px]
+                        font-medium
 
-                                    active:bg-[#F3E7EC]
-                                  `
-                              }
+                        text-[#39252E]
 
-                              focus-visible:outline-none
-                              focus-visible:ring-2
-                              focus-visible:ring-[#8F2946]
-                              focus-visible:ring-inset
+                        hover:bg-[#F7EEF1]
+                      "
+                    >
+                      {
+                        item.title
+                      }
 
-                              motion-reduce:transition-none
-                            `}
-                          >
-                            <span className="min-w-0">
-                              {item.title}
-                            </span>
-
-                            <ChevronRight
-                              size={18}
-                              strokeWidth={1.9}
-                              aria-hidden="true"
-                              className={`
-                                shrink-0
-
-                                ${
-                                  isActive
-                                    ? "text-[#8F2946]"
-                                    : "text-[#7C6870]"
-                                }
-
-                                transition-transform
-                                duration-200
-
-                                group-hover:translate-x-0.5
-
-                                motion-reduce:transform-none
-                              `}
-                            />
-                          </Link>
-                        );
-                      },
-                    )}
-                  </div>
-                </section>
-              ),
-            )}
+                      <ChevronRight
+                        size={18}
+                        aria-hidden="true"
+                      />
+                    </Link>
+                  ),
+                )}
+              </div>
+            </div>
           </nav>
 
-          {/* =================================================
-              MOBILE ENQUIRY
-          ================================================== */}
+          {/* MOBILE CTA */}
 
           <div
             className="
@@ -3495,30 +2969,27 @@ className={`
 
               bg-white
 
-              px-4
-
-              pb-[max(14px,env(safe-area-inset-bottom))]
-              pt-3
+              p-4
 
               min-[480px]:px-6
             "
           >
-            <p
+            <Link
+              href={enquiryHref}
+              target={
+                hasWhatsApp
+                  ? "_blank"
+                  : undefined
+              }
+              rel={
+                hasWhatsApp
+                  ? "noopener noreferrer"
+                  : undefined
+              }
+              onClick={() =>
+                closeMobile()
+              }
               className="
-                mb-2
-
-                text-[14px]
-                font-normal
-                leading-5
-
-                text-[#68565E]
-              "
-            >
-              Let’s find a property that fits your plans.
-            </p>
-
-            {enquiry(
-              `
                 flex
                 min-h-[50px]
                 w-full
@@ -3528,37 +2999,30 @@ className={`
 
                 gap-2.5
 
-                rounded-xl
+                rounded-lg
 
-                bg-[#8F2946]
+                bg-gradient-to-r
+                from-[#742039]
+                to-[#8F2946]
 
                 px-5
                 py-3
 
-                text-[17px]
+                text-[16px]
                 font-semibold
-                leading-6
 
                 text-white
+              "
+            >
+              {hasWhatsApp && (
+                <FaWhatsapp
+                  size={21}
+                  aria-hidden="true"
+                />
+              )}
 
-                transition-[background-color,transform]
-                duration-200
-
-                hover:bg-[#742039]
-
-                active:scale-[0.99]
-
-                focus-visible:outline-none
-                focus-visible:ring-2
-                focus-visible:ring-[#8F2946]
-                focus-visible:ring-offset-2
-
-                motion-reduce:transform-none
-                motion-reduce:transition-none
-              `,
-              () =>
-                closeMobile(),
-            )}
+              Enquire now
+            </Link>
           </div>
         </div>
       </dialog>
