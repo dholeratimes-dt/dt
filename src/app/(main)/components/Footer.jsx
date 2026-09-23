@@ -1,972 +1,26 @@
-// "use client";
-
-// import React from "react";
-// import { FaEnvelope, FaPhone, FaPhoneAlt, FaUser } from "react-icons/fa";
-// import { usePathname } from "next/navigation";
-
-// const SANITY_CONTENT_ROUTES = [
-//   "/dholera-sir",
-//   "/dholera-updates/blogs",
-//   "/dholera-updates/latest-updates",
-// ];
-
-// export default function Footer() {
-//   const pathname = usePathname();
-//   const showProjectLinks = SANITY_CONTENT_ROUTES.some(
-//     (route) => pathname === route || pathname?.startsWith(`${route}/`),
-//   );
-
-//   return (
-//     <>
-//       <footer className="bg-[#151f28] text-gray-400 space-y-8 pt-8 ">
-//         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-//           {/* First 3-column row with company info, links, policy */}
-//           <div
-//             className={`grid gap-12 mb-12 ${
-//               showProjectLinks
-//                 ? "md:grid-cols-4 md:gap-32"
-//                 : "md:grid-cols-3 md:gap-24"
-//             }`}
-//           >
-//             <div className="text-white">
-//               <div className="mb-6">
-//                 <h2 className="text-lg font-semibold mb-3">Contact Us</h2>
-//                 <p className="font-semibold text-blue-400">Head Office</p>
-
-//                 <p className="text-gray-300">
-//                   CGJ - 194, Dlf Capital Greens, Shivaji Marg, Karampura
-//                   Industrial Area, Karam Pura, Delhi - 110015, India
-//                 </p>
-//               </div>
-
-//               {/* Social Media Links */}
-//               <div className="flex space-x-4 mb-6">
-//                 <a
-//                   href="https://www.facebook.com/share/19FvyusnzA/"
-//                   className="text-gray-400 hover:text-white transition-colors duration-300"
-//                   aria-label="Facebook"
-//                   target="_blank"
-//                   rel="noopener noreferrer"
-//                 >
-//                   <svg
-//                     className="h-6 w-6"
-//                     fill="currentColor"
-//                     viewBox="0 0 24 24"
-//                   >
-//                     <path
-//                       fillRule="evenodd"
-//                       d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-//                       clipRule="evenodd"
-//                     />
-//                   </svg>
-//                 </a>
-
-//                 <a
-//                   href="https://www.instagram.com/dholeratimesofficial/"
-//                   className="text-gray-400 hover:text-white transition-colors duration-300"
-//                   aria-label="Instagram"
-//                   target="_blank"
-//                   rel="noopener noreferrer"
-//                 >
-//                   <svg
-//                     className="h-6 w-6"
-//                     fill="currentColor"
-//                     viewBox="0 0 24 24"
-//                   >
-//                     <path
-//                       fillRule="evenodd"
-//                       d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
-//                       clipRule="evenodd"
-//                     />
-//                   </svg>
-//                 </a>
-
-//                 <a
-//                   href="https://x.com/dholeratimes"
-//                   className="text-gray-400 hover:text-white transition-colors duration-300"
-//                   aria-label="Twitter"
-//                   target="_blank"
-//                   rel="noopener noreferrer"
-//                 >
-//                   <svg
-//                     className="h-6 w-6"
-//                     fill="currentColor"
-//                     viewBox="0 0 24 24"
-//                   >
-//                     <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-//                   </svg>
-//                 </a>
-
-//                 <a
-//                   href="https://www.linkedin.com/company/dholera-times"
-//                   className="text-gray-400 hover:text-white transition-colors duration-300"
-//                   aria-label="LinkedIn"
-//                   target="_blank"
-//                   rel="noopener noreferrer"
-//                 >
-//                   <svg
-//                     className="h-6 w-6"
-//                     fill="currentColor"
-//                     viewBox="0 0 50 50"
-//                   >
-//                     <path d="M41,4H9C6.24,4,4,6.24,4,9v32c0,2.76,2.24,5,5,5h32c2.76,0,5-2.24,5-5V9C46,6.24,43.76,4,41,4z M17,20v19h-6V20H17z M11,14.47c0-1.4,1.2-2.47,3-2.47s2.93,1.07,3,2.47c0,1.4-1.12,2.53-3,2.53C12.2,17,11,15.87,11,14.47z M39,39h-6c0,0,0-9.26,0-10 c0-2-1-4-3.5-4.04h-0.08C27,24.96,26,27.02,26,29c0,0.91,0,10,0,10h-6V20h6v2.56c0,0,1.93-2.56,5.81-2.56 c3.97,0,7.19,2.73,7.19,8.26V39z"></path>
-//                   </svg>
-//                 </a>
-//               </div>
-
-//               {/* Phone and Email */}
-//               <div className="space-y-3 text-blue-500">
-//                 <a
-//                   href="tel:+919958993549"
-//                   className="flex items-center  transition-colors duration-300"
-//                 >
-//                   <FaPhoneAlt className="mr-2" />
-//                   <span>+91 99589 93549</span>
-//                 </a>
-
-//                 <a
-//                   href="mailto:info@dholeratimes.com"
-//                   className="flex items-center  transition-colors duration-300"
-//                 >
-//                   <FaEnvelope className="" /> &nbsp;
-//                   <span>info@dholeratimes.com</span>
-//                 </a>
-//               </div>
-//             </div>
-//             {showProjectLinks && (
-//               <div>
-//                 <h2 className="text-white text-lg font-semibold mb-4">
-//                   Projects
-//                 </h2>
-//                 <ul className="space-y-2">
-//                   <li>
-//                     <a
-//                       href="/dholera-residential-plots/westwyn-residency"
-//                       className="hover:text-white transition"
-//                     >
-//                       WestWyn Residency
-//                     </a>
-//                   </li>
-//                   <li>
-//                     <a
-//                       href="/dholera-residential-plots/westwyn-estate"
-//                       className="hover:text-white transition"
-//                     >
-//                       WestWyn Estates
-//                     </a>
-//                   </li>
-//                   <li>
-//                     <a
-//                       href="/dholera-residential-plots/westwyn-county"
-//                       className="hover:text-white transition"
-//                     >
-//                       WestWyn County
-//                     </a>
-//                   </li>
-//                 </ul>
-//               </div>
-//             )}
-
-//             <div className="">
-//               <h2 className="text-white text-lg font-semibold mb-4">
-//                 Useful Links
-//               </h2>
-//               <ul className="space-y-2">
-//                 <li>
-//                   <a
-//                     href="/dholera-sir"
-//                     className="hover:text-white transition"
-//                   >
-//                     Dholera SIR
-//                   </a>
-//                 </li>
-//                 <li>
-//                   <a
-//                     href="/dholera-updates/latest-updates"
-//                     className="hover:text-white transition"
-//                   >
-//                     Latest News
-//                   </a>
-//                 </li>
-//                 <li>
-//                   <a
-//                     href="/dholera-updates/blogs"
-//                     className="hover:text-white transition"
-//                   >
-//                     Blogs
-//                   </a>
-//                 </li>
-                
-//               </ul>
-//             </div>
-
-//             <div className="">
-//               <h2 className="text-white text-lg font-semibold mb-4">Support</h2>
-//               <ul className="space-y-2">
-//                 <li>
-//                   <a href="/about" className="hover:text-white transition">
-//                     About Us
-//                   </a>
-//                 </li>
-//                 <li>
-//                   <a
-//                     href="/policies/privacy"
-//                     className="hover:text-white transition"
-//                   >
-//                     Privacy Policy
-//                   </a>
-//                 </li>
-//                 <li>
-//                   <a
-//                     href="/policies/termsandconditions"
-//                     className="hover:text-white transition"
-//                   >
-//                     Terms & Conditions
-//                   </a>
-//                 </li>
-//                 <li>
-//                   <a
-//                     href="/contact/inquiry"
-//                     className="hover:text-white transition"
-//                   >
-//                     Contact Us
-//                   </a>
-//                 </li>
-//               </ul>
-//             </div>
-//           </div>
-
-//           {/* Second row for Connect With Us and Map in one row */}
-//           <div className="">
-//             {/* Mobile-only map */}
-//             <div className="md:hidden w-full h-48 rounded overflow-hidden">
-//               <iframe
-//                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4203.4823453415875!2d77.03488882442701!3d28.41943917746384!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87ed979cce195a67%3A0xa6ea8ada5da2aaf5!2sDholera%20Times!5e1!3m2!1sen!2sin!4v1744797963851!5m2!1sen!2sin"
-//                 className="w-full h-full"
-//                 style={{ border: 0 }}
-//                 allowFullScreen=""
-//                 loading="lazy"
-//                 referrerPolicy="no-referrer-when-downgrade"
-//                 title="Location map"
-//               ></iframe>
-//             </div>
-
-//             {/* Desktop-only map */}
-//             <div className="hidden md:block rounded overflow-hidden">
-//               <iframe
-//                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4203.4823453415875!2d77.03488882442701!3d28.41943917746384!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87ed979cce195a67%3A0xa6ea8ada5da2aaf5!2sDholera%20Times!5e1!3m2!1sen!2sin!4v1744797963851!5m2!1sen!2sin"
-//                 className="w-full"
-//                 height={350}
-//                 style={{ border: 0 }}
-//                 allowFullScreen=""
-//                 loading="lazy"
-//                 referrerPolicy="no-referrer-when-downgrade"
-//                 title="Location map"
-//               ></iframe>
-//             </div>
-//           </div>
-//         </div>
-//         <p className="text-sm text-center pt-5">
-//           &copy; {new Date().getFullYear()} Dholera Times. All rights reserved.
-//         </p>
-//       </footer>
-//     </>
-//   );
-// }
-
-
-// "use client";
-
-// import React from "react";
-// import Image from "next/image";
-// import {
-//   FaEnvelope,
-//   FaPhoneAlt,
-// } from "react-icons/fa";
-// import { usePathname } from "next/navigation";
-
-// import FooterBgImg from "@/assets/abcd.webp";
-
-// const SANITY_CONTENT_ROUTES = [
-//   "/dholera-sir",
-//   "/dholera-updates/blogs",
-//   "/dholera-updates/latest-updates",
-// ];
-
-// export default function Footer() {
-//   const pathname = usePathname();
-
-//   const showProjectLinks =
-//     SANITY_CONTENT_ROUTES.some(
-//       (route) =>
-//         pathname === route ||
-//         pathname?.startsWith(`${route}/`),
-//     );
-
-//   /* =========================================================
-//      SHARED STYLES
-//   ========================================================= */
-
-//   const headingClass = `
-//     text-[16px]
-//     font-semibold
-//     leading-6
-//     tracking-[-0.01em]
-//     text-white
-
-//     sm:text-[17px]
-//   `;
-
-//   const linkClass = `
-//     inline-flex
-//     min-h-[34px]
-//     items-center
-
-//     text-[14px]
-//     font-normal
-//     leading-5
-
-//     text-[#F6E9ED]
-
-//     transition-[color,transform]
-//     duration-200
-
-//     hover:translate-x-0.5
-//     hover:text-white
-
-//     focus-visible:outline-none
-//     focus-visible:ring-2
-//     focus-visible:ring-[#EBCFD7]
-//     focus-visible:ring-offset-2
-//     focus-visible:ring-offset-[#742039]
-
-//     sm:text-[15px]
-//     sm:leading-6
-
-//     motion-reduce:transform-none
-//     motion-reduce:transition-none
-//   `;
-
-//   const contactLinkClass = `
-//     group
-
-//     inline-flex
-//     min-h-[40px]
-//     w-fit
-//     max-w-full
-
-//     items-center
-//     gap-2.5
-
-//     text-[14px]
-//     font-medium
-//     leading-5
-
-//     text-[#FFF8FA]
-
-//     transition-colors
-//     duration-200
-
-//     hover:text-white
-
-//     focus-visible:outline-none
-//     focus-visible:ring-2
-//     focus-visible:ring-[#EBCFD7]
-//     focus-visible:ring-offset-2
-//     focus-visible:ring-offset-[#742039]
-
-//     sm:text-[15px]
-//     sm:leading-6
-
-//     motion-reduce:transition-none
-//   `;
-
-//   const socialClass = `
-//     inline-flex
-//     h-9
-//     w-9
-//     shrink-0
-
-//     items-center
-//     justify-center
-
-//     rounded-full
-
-//     bg-white/10
-
-//     text-[#FFF8FA]
-
-//     transition-[background-color,color,transform]
-//     duration-200
-
-//     hover:-translate-y-0.5
-//     hover:bg-white
-//     hover:text-[#8F2946]
-
-//     focus-visible:outline-none
-//     focus-visible:ring-2
-//     focus-visible:ring-white
-//     focus-visible:ring-offset-2
-//     focus-visible:ring-offset-[#742039]
-
-//     motion-reduce:transform-none
-//     motion-reduce:transition-none
-//   `;
-
-//   /* =========================================================
-//      SOCIAL ICONS
-//   ========================================================= */
-
-//   const SocialLinks = () => (
-//     <div
-//       className="
-//         flex
-//         flex-wrap
-//         items-center
-//         gap-2
-//       "
-//     >
-//       {/* Facebook */}
-//       <a
-//         href="https://www.facebook.com/share/19FvyusnzA/"
-//         aria-label="Facebook"
-//         target="_blank"
-//         rel="noopener noreferrer"
-//         className={socialClass}
-//       >
-//         <svg
-//           className="h-[17px] w-[17px]"
-//           fill="currentColor"
-//           viewBox="0 0 24 24"
-//           aria-hidden="true"
-//         >
-//           <path
-//             fillRule="evenodd"
-//             d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-//             clipRule="evenodd"
-//           />
-//         </svg>
-//       </a>
-
-//       {/* Instagram */}
-//       <a
-//         href="https://www.instagram.com/dholeratimesofficial/"
-//         aria-label="Instagram"
-//         target="_blank"
-//         rel="noopener noreferrer"
-//         className={socialClass}
-//       >
-//         <svg
-//           className="h-[17px] w-[17px]"
-//           fill="currentColor"
-//           viewBox="0 0 24 24"
-//           aria-hidden="true"
-//         >
-//           <path
-//             fillRule="evenodd"
-//             d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
-//             clipRule="evenodd"
-//           />
-//         </svg>
-//       </a>
-
-//       {/* X / Twitter */}
-//       <a
-//         href="https://x.com/dholeratimes"
-//         aria-label="X"
-//         target="_blank"
-//         rel="noopener noreferrer"
-//         className={socialClass}
-//       >
-//         <svg
-//           className="h-[17px] w-[17px]"
-//           fill="currentColor"
-//           viewBox="0 0 24 24"
-//           aria-hidden="true"
-//         >
-//           <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-//         </svg>
-//       </a>
-
-//       {/* LinkedIn */}
-//       <a
-//         href="https://www.linkedin.com/company/dholera-times"
-//         aria-label="LinkedIn"
-//         target="_blank"
-//         rel="noopener noreferrer"
-//         className={socialClass}
-//       >
-//         <svg
-//           className="h-[17px] w-[17px]"
-//           fill="currentColor"
-//           viewBox="0 0 50 50"
-//           aria-hidden="true"
-//         >
-//           <path d="M41,4H9C6.24,4,4,6.24,4,9v32c0,2.76,2.24,5,5,5h32c2.76,0,5-2.24,5-5V9C46,6.24,43.76,4,41,4z M17,20v19h-6V20H17z M11,14.47c0-1.4,1.2-2.47,3-2.47s2.93,1.07,3,2.47c0,1.4-1.12,2.53-3,2.53C12.2,17,11,15.87,11,14.47z M39,39h-6c0,0,0-9.26,0-10 c0-2-1-4-3.5-4.04h-0.08C27,24.96,26,27.02,26,29c0,0.91,0,10,0,10h-6V20h6v2.56c0,0,1.93-2.56,5.81-2.56 c3.97,0,7.19,2.73,7.19,8.26V39z" />
-//         </svg>
-//       </a>
-//     </div>
-//   );
-
-//   return (
-//     <footer
-//       className="
-//         relative
-//         isolate
-//         overflow-hidden
-
-//         bg-[#8F2946]
-
-//         text-[#F7E9ED]
-
-//         selection:bg-white
-//         selection:text-[#8F2946]
-//       "
-//     >
-//       {/* =====================================================
-//           BACKGROUND IMAGE
-//       ====================================================== */}
-
-//       <Image
-//         src={FooterBgImg}
-//         alt=""
-//         fill
-//         sizes="100vw"
-//         aria-hidden="true"
-//         className="
-//           -z-30
-
-//           object-cover
-//           object-center
-//         "
-//       />
-
-//       {/* =====================================================
-//           BACKGROUND OVERLAYS
-//       ====================================================== */}
-
-//       <div
-//         aria-hidden="true"
-//         className="
-//           pointer-events-none
-//           absolute
-//           inset-0
-//           -z-20
-
-//           bg-[#8F2946]/90
-//         "
-//       />
-
-//       <div
-//         aria-hidden="true"
-//         className="
-//           pointer-events-none
-//           absolute
-//           inset-0
-//           -z-10
-
-//           bg-gradient-to-r
-
-//           from-[#742039]/92
-//           via-[#8F2946]/85
-//           to-[#742039]/88
-//         "
-//       />
-
-//       {/* =====================================================
-//           MAIN FOOTER
-//       ====================================================== */}
-
-//       <div
-//         className="
-//           mx-auto
-//           w-full
-//           max-w-7xl
-
-//           px-4
-//           py-9
-
-//           min-[414px]:px-5
-
-//           sm:px-6
-//           sm:py-10
-
-//           md:px-8
-//           md:py-11
-
-//           lg:py-12
-//         "
-//       >
-//         {/* ===================================================
-//             FOUR-COLUMN STRUCTURE
-//         ==================================================== */}
-
-//         <div
-//           className="
-//             grid
-//             grid-cols-1
-
-//             gap-x-8
-//             gap-y-8
-
-//             min-[560px]:grid-cols-2
-
-//             min-[560px]:gap-x-10
-//             min-[560px]:gap-y-9
-
-//             lg:grid-cols-4
-//             lg:gap-x-10
-
-//             xl:gap-x-14
-//           "
-//         >
-//           {/* =================================================
-//               1. CONTACT / ADDRESS
-//           ================================================== */}
-
-//           <section className="min-w-0">
-//             <h2 className={headingClass}>
-//               Contact Us
-//             </h2>
-
-//             <div className="mt-4">
-//               <p
-//                 className="
-//                   text-[11px]
-//                   font-semibold
-//                   uppercase
-//                   leading-5
-
-//                   tracking-[0.13em]
-
-//                   text-[#EBCFD7]
-
-//                   sm:text-[12px]
-//                 "
-//               >
-//                 Head Office
-//               </p>
-
-//               <address
-//                 className="
-//                   mt-2
-
-//                   max-w-[330px]
-
-//                   not-italic
-
-//                   text-[14px]
-//                   font-normal
-//                   leading-6
-
-//                   text-[#FFF8FA]
-
-//                   sm:text-[15px]
-//                   sm:leading-[26px]
-//                 "
-//               >
-//                 CGJ - 194, Dlf Capital Greens,
-//                 Shivaji Marg, Karampura Industrial
-//                 Area, Karam Pura, Delhi - 110015,
-//                 India
-//               </address>
-//             </div>
-
-//             <div
-//               className="
-//                 mt-4
-//                 space-y-0.5
-//               "
-//             >
-//               <a
-//                 href="tel:+919958993549"
-//                 className={contactLinkClass}
-//               >
-//                 <FaPhoneAlt
-//                   aria-hidden="true"
-//                   className="
-//                     h-[14px]
-//                     w-[14px]
-//                     shrink-0
-
-//                     text-[#EBCFD7]
-//                   "
-//                 />
-
-//                 <span>
-//                   +91 99589 93549
-//                 </span>
-//               </a>
-
-//               <a
-//                 href="mailto:info@dholeratimes.com"
-//                 className={contactLinkClass}
-//               >
-//                 <FaEnvelope
-//                   aria-hidden="true"
-//                   className="
-//                     h-[14px]
-//                     w-[14px]
-//                     shrink-0
-
-//                     text-[#EBCFD7]
-//                   "
-//                 />
-
-//                 <span className="break-all">
-//                   info@dholeratimes.com
-//                 </span>
-//               </a>
-//             </div>
-//           </section>
-
-//           {/* =================================================
-//               2. USEFUL LINKS
-//           ================================================== */}
-
-//           <section className="min-w-0">
-//             <h2 className={headingClass}>
-//               Useful Links
-//             </h2>
-
-//             <ul
-//               className="
-//                 mt-3.5
-//                 space-y-0.5
-//               "
-//             >
-//               <li>
-//                 <a
-//                   href="/dholera-sir"
-//                   className={linkClass}
-//                 >
-//                   Dholera SIR
-//                 </a>
-//               </li>
-
-//               <li>
-//                 <a
-//                   href="/dholera-updates/latest-updates"
-//                   className={linkClass}
-//                 >
-//                   Latest News
-//                 </a>
-//               </li>
-
-//               <li>
-//                 <a
-//                   href="/dholera-updates/blogs"
-//                   className={linkClass}
-//                 >
-//                   Blogs
-//                 </a>
-//               </li>
-//             </ul>
-//           </section>
-
-//           {/* =================================================
-//               3. SUPPORT
-//           ================================================== */}
-
-//           <section className="min-w-0">
-//             <h2 className={headingClass}>
-//               Support
-//             </h2>
-
-//             <ul
-//               className="
-//                 mt-3.5
-//                 space-y-0.5
-//               "
-//             >
-//               <li>
-//                 <a
-//                   href="/about"
-//                   className={linkClass}
-//                 >
-//                   About Us
-//                 </a>
-//               </li>
-
-//               <li>
-//                 <a
-//                   href="/policies/privacy"
-//                   className={linkClass}
-//                 >
-//                   Privacy Policy
-//                 </a>
-//               </li>
-
-//               <li>
-//                 <a
-//                   href="/policies/termsandconditions"
-//                   className={linkClass}
-//                 >
-//                   Terms &amp; Conditions
-//                 </a>
-//               </li>
-
-//               <li>
-//                 <a
-//                   href="/contact/inquiry"
-//                   className={linkClass}
-//                 >
-//                   Contact Us
-//                 </a>
-//               </li>
-//             </ul>
-//           </section>
-
-//           {/* =================================================
-//               4. PROJECTS OR SOCIAL LINKS
-
-//               Preserve the existing route-based Projects logic.
-//           ================================================== */}
-
-//           <section className="min-w-0">
-//             {showProjectLinks ? (
-//               <>
-//                 <h2 className={headingClass}>
-//                   Projects
-//                 </h2>
-
-//                 <ul
-//                   className="
-//                     mt-3.5
-//                     space-y-0.5
-//                   "
-//                 >
-//                   <li>
-//                     <a
-//                       href="/dholera-residential-plots/westwyn-residency"
-//                       className={linkClass}
-//                     >
-//                       WestWyn Residency
-//                     </a>
-//                   </li>
-
-//                   <li>
-//                     <a
-//                       href="/dholera-residential-plots/westwyn-estate"
-//                       className={linkClass}
-//                     >
-//                       WestWyn Estates
-//                     </a>
-//                   </li>
-
-//                   <li>
-//                     <a
-//                       href="/dholera-residential-plots/westwyn-county"
-//                       className={linkClass}
-//                     >
-//                       WestWyn County
-//                     </a>
-//                   </li>
-//                 </ul>
-
-//                 <div className="mt-5">
-//                   <SocialLinks />
-//                 </div>
-//               </>
-//             ) : (
-//               <div
-//                 className="
-//                   flex
-//                   h-full
-
-//                   items-start
-
-//                   lg:justify-end
-//                 "
-//               >
-//                 <div>
-//                   <div
-//                     className="
-//                       pt-0
-
-//                       lg:pt-[2px]
-//                     "
-//                   >
-//                     <SocialLinks />
-//                   </div>
-//                 </div>
-//               </div>
-//             )}
-//           </section>
-//         </div>
-//       </div>
-
-//       {/* =====================================================
-//           COPYRIGHT
-//       ====================================================== */}
-
-//       <div
-//         className="
-//           bg-[#742039]/70
-
-//           backdrop-blur-sm
-//         "
-//       >
-//         <div
-//           className="
-//             mx-auto
-
-//             flex
-//             min-h-[50px]
-//             w-full
-//             max-w-7xl
-
-//             items-center
-//             justify-center
-
-//             px-4
-//             py-3
-
-//             min-[414px]:px-5
-
-//             sm:px-6
-
-//             md:px-8
-//           "
-//         >
-//           <p
-//             className="
-//               text-center
-
-//               text-[12px]
-//               font-normal
-//               leading-5
-
-//               text-[#F1DDE3]
-
-//               sm:text-[13px]
-//             "
-//           >
-//             &copy; {new Date().getFullYear()} Dholera Times.
-//             All rights reserved.
-//           </p>
-//         </div>
-//       </div>
-//     </footer>
-//   );
-// }
-
-
-
 "use client";
 
-import React from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 import {
   FaEnvelope,
   FaPhoneAlt,
 } from "react-icons/fa";
-import { usePathname } from "next/navigation";
+
+/* ============================================================
+   ROUTES
+============================================================ */
 
 const SANITY_CONTENT_ROUTES = [
   "/dholera-sir",
   "/dholera-updates/blogs",
   "/dholera-updates/latest-updates",
 ];
+
+/* ============================================================
+   FOOTER
+============================================================ */
 
 export default function Footer() {
   const pathname = usePathname();
@@ -975,31 +29,47 @@ export default function Footer() {
     SANITY_CONTENT_ROUTES.some(
       (route) =>
         pathname === route ||
-        pathname?.startsWith(`${route}/`),
+        pathname?.startsWith(
+          `${route}/`,
+        ),
     );
 
-  /* =========================================================
+  /* ==========================================================
      SHARED STYLES
-  ========================================================= */
+  ========================================================== */
+
+  const headingWrapperClass = `
+    w-full
+
+    border-b
+    border-white/15
+
+    pb-3
+  `;
 
   const headingClass = `
-    text-[16px]
+    text-[17px]
     font-semibold
     leading-6
-    tracking-[-0.01em]
+
+    tracking-[-0.015em]
+
     text-white
 
-    sm:text-[17px]
+    sm:text-[18px]
   `;
 
   const linkClass = `
+    group
+
     inline-flex
-    min-h-[34px]
+    min-h-[40px]
+
     items-center
 
     text-[14px]
     font-normal
-    leading-5
+    leading-6
 
     text-[#F6E9ED]
 
@@ -1016,7 +86,6 @@ export default function Footer() {
     focus-visible:ring-offset-[#8F2946]
 
     sm:text-[15px]
-    sm:leading-6
 
     motion-reduce:transform-none
     motion-reduce:transition-none
@@ -1025,17 +94,17 @@ export default function Footer() {
   const contactLinkClass = `
     group
 
-    inline-flex
-    min-h-[40px]
-    w-fit
-    max-w-full
+    flex
+    min-h-[44px]
+    w-full
 
     items-center
-    gap-2.5
+
+    gap-3
 
     text-[14px]
     font-medium
-    leading-5
+    leading-6
 
     text-[#FFF8FA]
 
@@ -1051,15 +120,15 @@ export default function Footer() {
     focus-visible:ring-offset-[#8F2946]
 
     sm:text-[15px]
-    sm:leading-6
 
     motion-reduce:transition-none
   `;
 
   const socialClass = `
     inline-flex
-    h-9
-    w-9
+
+    h-11
+    w-11
     shrink-0
 
     items-center
@@ -1067,21 +136,26 @@ export default function Footer() {
 
     rounded-full
 
-    bg-white/10
+    border
+    border-white/15
+
+    bg-white/[0.08]
 
     text-white
 
-    ring-1
-    ring-inset
-    ring-white/15
+    shadow-[0_4px_14px_rgba(57,37,46,0.10)]
 
-    transition-[background-color,color,transform,box-shadow]
+    transition-[background-color,border-color,color,transform,box-shadow]
     duration-200
 
     hover:-translate-y-0.5
+    hover:border-white
     hover:bg-white
     hover:text-[#8F2946]
-    hover:ring-white
+
+    hover:shadow-[0_8px_20px_rgba(57,37,46,0.16)]
+
+    active:translate-y-0
 
     focus-visible:outline-none
     focus-visible:ring-2
@@ -1093,20 +167,23 @@ export default function Footer() {
     motion-reduce:transition-none
   `;
 
-  /* =========================================================
-     SOCIAL ICONS
-  ========================================================= */
+  /* ==========================================================
+     SOCIAL LINKS
+  ========================================================== */
 
   const SocialLinks = () => (
     <div
       className="
         flex
         flex-wrap
+
         items-center
-        gap-2
+
+        gap-3
       "
     >
-      {/* Facebook */}
+      {/* FACEBOOK */}
+
       <a
         href="https://www.facebook.com/share/19FvyusnzA/"
         aria-label="Facebook"
@@ -1128,7 +205,8 @@ export default function Footer() {
         </svg>
       </a>
 
-      {/* Instagram */}
+      {/* INSTAGRAM */}
+
       <a
         href="https://www.instagram.com/dholeratimesofficial/"
         aria-label="Instagram"
@@ -1150,7 +228,8 @@ export default function Footer() {
         </svg>
       </a>
 
-      {/* X */}
+      {/* X / TWITTER */}
+
       <a
         href="https://x.com/dholeratimes"
         aria-label="X"
@@ -1159,16 +238,17 @@ export default function Footer() {
         className={socialClass}
       >
         <svg
-          className="h-[17px] w-[17px]"
+          className="h-[16px] w-[16px]"
           fill="currentColor"
           viewBox="0 0 24 24"
           aria-hidden="true"
         >
-          <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817-5.967 6.817H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z" />
         </svg>
       </a>
 
-      {/* LinkedIn */}
+      {/* LINKEDIN */}
+
       <a
         href="https://www.linkedin.com/company/dholera-times"
         aria-label="LinkedIn"
@@ -1182,11 +262,15 @@ export default function Footer() {
           viewBox="0 0 50 50"
           aria-hidden="true"
         >
-          <path d="M41,4H9C6.24,4,4,6.24,4,9v32c0,2.76,2.24,5,5,5h32c2.76,0,5-2.24,5-5V9C46,6.24,43.76,4,41,4z M17,20v19h-6V20H17z M11,14.47c0-1.4,1.2-2.47,3-2.47s2.93,1.07,3,2.47c0,1.4-1.12,2.53-3,2.53C12.2,17,11,15.87,11,14.47z M39,39h-6c0,0,0-9.26,0-10 c0-2-1-4-3.5-4.04h-0.08C27,24.96,26,27.02,26,29c0,0.91,0,10,0,10h-6V20h6v2.56c0,0,1.93-2.56,5.81-2.56 c3.97,0,7.19,2.73,7.19,8.26V39z" />
+          <path d="M41,4H9C6.24,4,4,6.24,4,9v32c0,2.76,2.24,5,5,5h32c2.76,0,5-2.24,5-5V9C46,6.24,43.76,4,41,4z M17,20v19h-6V20H17z M11,14.47c0-1.4,1.2-2.47,3-2.47s2.93,1.07,3,2.47c0,1.4-1.12,2.53-3,2.53C12.2,17,11,15.87,11,14.47z M39,39h-6c0,0,0-9.26,0-10c0-2-1-4-3.5-4.04h-0.08C27,24.96,26,27.02,26,29c0,0.91,0,10,0,10h-6V20h6v2.56c0,0,1.93-2.56,5.81-2.56c3.97,0,7.19,2.73,7.19,8.26V39z" />
         </svg>
       </a>
     </div>
   );
+
+  /* ==========================================================
+     FOOTER UI
+  ========================================================== */
 
   return (
     <footer
@@ -1195,9 +279,9 @@ export default function Footer() {
         overflow-hidden
 
         bg-gradient-to-br
-        from-[#742039]
+        from-[#612033]
         via-[#8F2946]
-        to-[#9D3653]
+        to-[#A83657]
 
         text-[#F7E9ED]
 
@@ -1206,7 +290,7 @@ export default function Footer() {
       "
     >
       {/* =====================================================
-          SUBTLE DEPTH - NO IMAGE
+          SUBTLE BACKGROUND DEPTH
       ====================================================== */}
 
       <div
@@ -1219,12 +303,12 @@ export default function Footer() {
           bg-gradient-to-b
           from-white/[0.025]
           via-transparent
-          to-[#742039]/20
+          to-[#4B1828]/20
         "
       />
 
       {/* =====================================================
-          MAIN FOOTER
+          MAIN FOOTER CONTENT
       ====================================================== */}
 
       <div
@@ -1239,46 +323,129 @@ export default function Footer() {
           py-9
 
           min-[414px]:px-5
+          min-[414px]:py-10
 
           sm:px-6
-          sm:py-10
+          sm:py-11
 
           md:px-8
-          md:py-11
 
-          lg:py-12
+          lg:py-14
         "
       >
-        {/* ===================================================
-            FOUR COLUMN LAYOUT
-        ==================================================== */}
-
         <div
           className="
             grid
             grid-cols-1
 
-            gap-x-8
-            gap-y-8
+            gap-y-9
 
-            min-[560px]:grid-cols-2
-            min-[560px]:gap-x-10
-            min-[560px]:gap-y-9
+            sm:grid-cols-2
+            sm:gap-x-10
+            sm:gap-y-11
 
-            lg:grid-cols-4
-            lg:gap-x-10
+            lg:grid-cols-[1.55fr_0.8fr_0.9fr_1fr]
+            lg:items-start
+            lg:gap-x-12
+            lg:gap-y-0
 
-            xl:gap-x-14
+            xl:grid-cols-[1.6fr_0.8fr_0.9fr_1.05fr]
+            xl:gap-x-16
           "
         >
           {/* =================================================
-              COLUMN 1 — CONTACT
+              FOLLOW US
+              PHONE -> FIRST
+              TABLET / DESKTOP -> FOURTH
           ================================================== */}
 
-          <section className="min-w-0">
-            <h2 className={headingClass}>
-              Contact Us
-            </h2>
+          <section
+            className="
+              order-1
+              min-w-0
+
+              sm:order-4
+
+              lg:pl-2
+            "
+          >
+            <div className={headingWrapperClass}>
+              <h2 className={headingClass}>
+                Follow Us
+              </h2>
+            </div>
+
+            <div className="mt-4">
+              <SocialLinks />
+            </div>
+
+            {showProjectLinks && (
+              <div className="mt-8">
+                <h3
+                  className="
+                    text-[16px]
+                    font-semibold
+                    leading-6
+
+                    text-white
+
+                    sm:text-[17px]
+                  "
+                >
+                  Projects
+                </h3>
+
+                <ul className="mt-3 space-y-0.5">
+                  <li>
+                    <Link
+                      href="/dholera-residential-plots/westwyn-residency"
+                      className={linkClass}
+                    >
+                      WestWyn Residency
+                    </Link>
+                  </li>
+
+                  <li>
+                    <Link
+                      href="/dholera-residential-plots/westwyn-estate"
+                      className={linkClass}
+                    >
+                      WestWyn Estates
+                    </Link>
+                  </li>
+
+                  <li>
+                    <Link
+                      href="/dholera-residential-plots/westwyn-county"
+                      className={linkClass}
+                    >
+                      WestWyn County
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            )}
+          </section>
+
+          {/* =================================================
+              CONTACT US
+              PHONE -> SECOND
+              TABLET / DESKTOP -> FIRST
+          ================================================== */}
+
+          <section
+            className="
+              order-2
+              min-w-0
+
+              sm:order-1
+            "
+          >
+            <div className={headingWrapperClass}>
+              <h2 className={headingClass}>
+                Contact Us
+              </h2>
+            </div>
 
             <div className="mt-4">
               <p
@@ -1288,7 +455,7 @@ export default function Footer() {
                   uppercase
                   leading-5
 
-                  tracking-[0.13em]
+                  tracking-[0.14em]
 
                   text-[#F0CED8]
 
@@ -1301,19 +468,16 @@ export default function Footer() {
               <address
                 className="
                   mt-2
-
-                  max-w-[330px]
+                  max-w-[410px]
 
                   not-italic
 
                   text-[14px]
-                  font-normal
-                  leading-6
+                  leading-[1.7]
 
                   text-[#FFF8FA]
 
                   sm:text-[15px]
-                  sm:leading-[26px]
                 "
               >
                 CGJ - 194, Dlf Capital Greens,
@@ -1323,28 +487,35 @@ export default function Footer() {
               </address>
             </div>
 
-            <div
-              className="
-                mt-4
-                space-y-0.5
-              "
-            >
+            <div className="mt-5 space-y-2 sm:mt-6">
               <a
                 href="tel:+919958993549"
                 className={contactLinkClass}
               >
-                <FaPhoneAlt
-                  aria-hidden="true"
+                <span
                   className="
-                    h-[14px]
-                    w-[14px]
+                    flex
+                    h-8
+                    w-8
                     shrink-0
 
-                    text-[#F0CED8]
-                  "
-                />
+                    items-center
+                    justify-center
 
-                <span>
+                    rounded-full
+
+                    bg-white/[0.08]
+
+                    text-[#F4CFDA]
+                  "
+                >
+                  <FaPhoneAlt
+                    aria-hidden="true"
+                    className="h-[13px] w-[13px]"
+                  />
+                </span>
+
+                <span className="leading-none">
                   +91 99589 93549
                 </span>
               </a>
@@ -1353,18 +524,30 @@ export default function Footer() {
                 href="mailto:info@dholeratimes.com"
                 className={contactLinkClass}
               >
-                <FaEnvelope
-                  aria-hidden="true"
+                <span
                   className="
-                    h-[14px]
-                    w-[14px]
+                    flex
+                    h-8
+                    w-8
                     shrink-0
 
-                    text-[#F0CED8]
-                  "
-                />
+                    items-center
+                    justify-center
 
-                <span className="break-all">
+                    rounded-full
+
+                    bg-white/[0.08]
+
+                    text-[#F4CFDA]
+                  "
+                >
+                  <FaEnvelope
+                    aria-hidden="true"
+                    className="h-[13px] w-[13px]"
+                  />
+                </span>
+
+                <span className="min-w-0 break-words leading-none">
                   info@dholeratimes.com
                 </span>
               </a>
@@ -1372,165 +555,118 @@ export default function Footer() {
           </section>
 
           {/* =================================================
-              COLUMN 2 — USEFUL LINKS
+              USEFUL LINKS
+              PHONE -> THIRD
+              DESKTOP -> SECOND
           ================================================== */}
 
-          <section className="min-w-0">
-            <h2 className={headingClass}>
-              Useful Links
-            </h2>
+          <section
+            className="
+              order-3
+              min-w-0
 
-            <ul
-              className="
-                mt-3.5
-                space-y-0.5
-              "
-            >
+              sm:order-2
+            "
+          >
+            <div className={headingWrapperClass}>
+              <h2 className={headingClass}>
+                Quick Links
+              </h2>
+            </div>
+
+            <ul className="mt-4 space-y-0.5">
               <li>
-                <a
+                <Link
                   href="/dholera-sir"
                   className={linkClass}
                 >
                   Dholera SIR
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a
+                <Link
                   href="/dholera-updates/latest-updates"
                   className={linkClass}
                 >
                   Latest News
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a
+                <Link
                   href="/dholera-updates/blogs"
                   className={linkClass}
                 >
                   Blogs
-                </a>
+                </Link>
               </li>
-            </ul>
-          </section>
 
-          {/* =================================================
-              COLUMN 3 — SUPPORT
-          ================================================== */}
-
-          <section className="min-w-0">
-            <h2 className={headingClass}>
-              Support
-            </h2>
-
-            <ul
-              className="
-                mt-3.5
-                space-y-0.5
-              "
-            >
               <li>
-                <a
+                <Link
                   href="/about"
                   className={linkClass}
                 >
                   About Us
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a
-                  href="/policies/privacy"
-                  className={linkClass}
-                >
-                  Privacy Policy
-                </a>
-              </li>
-
-              <li>
-                <a
-                  href="/policies/termsandconditions"
-                  className={linkClass}
-                >
-                  Terms &amp; Conditions
-                </a>
-              </li>
-
-              <li>
-                <a
+                <Link
                   href="/contact/inquiry"
                   className={linkClass}
                 >
                   Contact Us
-                </a>
+                </Link>
               </li>
+
+             
             </ul>
           </section>
 
           {/* =================================================
-              COLUMN 4 — PROJECTS / SOCIAL
+              SUPPORT
+              PHONE -> FOURTH
+              DESKTOP -> THIRD
           ================================================== */}
 
-          <section className="min-w-0">
-            {showProjectLinks ? (
-              <>
-                <h2 className={headingClass}>
-                  Projects
-                </h2>
+          <section
+            className="
+              order-4
+              min-w-0
 
-                <ul
-                  className="
-                    mt-3.5
-                    space-y-0.5
-                  "
+              sm:order-3
+            "
+          >
+            <div className={headingWrapperClass}>
+              <h2 className={headingClass}>
+                Polices
+              </h2>
+            </div>
+
+            <ul className="mt-4 space-y-0.5">
+             
+
+              <li>
+                <Link
+                  href="/policies/privacy"
+                  className={linkClass}
                 >
-                  <li>
-                    <a
-                      href="/dholera-residential-plots/westwyn-residency"
-                      className={linkClass}
-                    >
-                      WestWyn Residency
-                    </a>
-                  </li>
+                  Privacy Policy
+                </Link>
+              </li>
 
-                  <li>
-                    <a
-                      href="/dholera-residential-plots/westwyn-estate"
-                      className={linkClass}
-                    >
-                      WestWyn Estates
-                    </a>
-                  </li>
+              <li>
+                <Link
+                  href="/policies/termsandconditions"
+                  className={linkClass}
+                >
+                  Terms &amp; Conditions
+                </Link>
+              </li>
 
-                  <li>
-                    <a
-                      href="/dholera-residential-plots/westwyn-county"
-                      className={linkClass}
-                    >
-                      WestWyn County
-                    </a>
-                  </li>
-                </ul>
-
-                <div className="mt-5">
-                  <SocialLinks />
-                </div>
-              </>
-            ) : (
-              <div
-                className="
-                  flex
-                  h-full
-
-                  items-start
-
-                  lg:justify-end
-                "
-              >
-                <SocialLinks />
-              </div>
-            )}
+              
+            </ul>
           </section>
         </div>
       </div>
@@ -1543,7 +679,7 @@ export default function Footer() {
         className="
           relative
 
-          bg-[#742039]/70
+          bg-[#5F1B31]/55
 
           backdrop-blur-sm
         "
@@ -1553,7 +689,7 @@ export default function Footer() {
             mx-auto
 
             flex
-            min-h-[50px]
+            min-h-[54px]
             w-full
             max-w-7xl
 
@@ -1583,8 +719,9 @@ export default function Footer() {
               sm:text-[13px]
             "
           >
-            &copy; {new Date().getFullYear()} Dholera Times.
-            All rights reserved.
+            &copy;{" "}
+            {new Date().getFullYear()}{" "}
+            Dholera Times. All rights reserved.
           </p>
         </div>
       </div>

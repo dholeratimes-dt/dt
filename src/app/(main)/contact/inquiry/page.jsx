@@ -139,16 +139,57 @@ export default function ContactDetails() {
 
         {/* Contact Cards Section */}
         <div className="bg-white pt-4 pb-2">
-          <h1 className="text-center mb-6 font-bold text-4xl max-sm:text-3xl max-sm:ml-4 max-sm:text-left">
-            Get Expert Guidance on Dholera Smart City
-          </h1>
-          <p className="max-w-5xl mx-auto pb-6">
-            Looking for trusted guidance on Dholera Smart City investment
-            opportunities? Contact Dholera Times for expert assistance on
-            residential plots, project updates, legal clarity, site visits, and
-            investment consultation. Our team helps investors make informed
-            decisions with transparent support and verified information.
-          </p>
+          <div className="mx-auto w-full max-w-6xl px-4 py-2 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+            <h1
+              className="
+                mx-auto
+                mb-4
+                max-w-4xl
+
+                text-left
+                text-3xl
+                font-bold
+                leading-tight
+                tracking-[-0.02em]
+
+                text-[#39252E]
+
+                sm:mb-5
+                sm:text-center
+                sm:text-4xl
+
+                lg:mb-6
+                lg:text-5xl
+              "
+            >
+              Get Expert Guidance on Dholera Smart City
+            </h1>
+
+            <p
+              className="
+                mx-auto
+                max-w-5xl
+
+                text-left
+                text-[15px]
+                leading-7
+
+                text-[#68565E]
+
+                sm:text-center
+                sm:text-[16px]
+                sm:leading-8
+
+                lg:text-[17px]
+              "
+            >
+              Looking for trusted guidance on Dholera Smart City investment
+              opportunities? Contact Dholera Times for expert assistance on
+              residential plots, project updates, legal clarity, site visits, and
+              investment consultation. Our team helps investors make informed
+              decisions with transparent support and verified information.
+            </p>
+          </div>
           <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 px-6 md:px-10">
             {/* Call Us */}
             <div className="hover:scale-105 shadow-2xl transition-transform duration-300">
@@ -238,45 +279,7 @@ export default function ContactDetails() {
                 />
               </div>
             </div>
-            <div className="space-y-5 text-center">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">
-                Follow Us
-              </h2>
-              <div className="flex justify-center space-x-6">
-                <a
-                  href="https://www.facebook.com/profile.php?id=61573763438050"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 text-3xl hover:text-blue-800"
-                >
-                  <FaFacebook />
-                </a>
-                <a
-                  href="https://x.com/dholeratimes"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-400 text-3xl hover:text-blue-600"
-                >
-                  <FaTwitter />
-                </a>
-                <a
-                  href="https://www.instagram.com/dholeratimes/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-pink-500 text-3xl hover:text-pink-700"
-                >
-                  <FaInstagram />
-                </a>
-                <a
-                  href="https://www.linkedin.com/company/dholera-times"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-700 text-3xl hover:text-blue-900"
-                >
-                  <FaLinkedin />
-                </a>
-              </div>
-            </div>
+         
           </div>
         </div>
       </div>
