@@ -35,15 +35,23 @@ export default async function sitemap() {
       {},
       SANITY_OPTIONS
     ),
+    
 
     client.fetch(
       `
         *[
           _type == "post"
-          && "Updates" in categories[]->title
-          && site == "dholera-times"
-          && defined(slug.current)
-          && coalesce(seo.noIndex, noIndex, false) == false
+          &&
+          (
+            "Updates" in categories[]->title ||
+            "News" in categories[]->title
+          )
+          &&
+          site == "dholera-times"
+          &&
+          defined(slug.current)
+          &&
+          coalesce(seo.noIndex, noIndex, false) == false
         ]
         | order(_updatedAt desc)
         {
@@ -54,7 +62,6 @@ export default async function sitemap() {
       {},
       SANITY_OPTIONS
     ),
-
 
     client.fetch(
       `
@@ -158,7 +165,7 @@ export default async function sitemap() {
     priority: 0.7,
   }));
 
-  
+
   return [
     ...staticPages,
     ...updateUrls,

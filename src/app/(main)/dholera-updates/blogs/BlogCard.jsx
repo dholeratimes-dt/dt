@@ -40,28 +40,44 @@ export default function BlogCard({ post }) {
       ? `/dholera-updates/blogs/${slug}`
       : "/dholera-updates/blogs";
 
-  const publishedDate = post.publishedAt || post._createdAt;
-  const validPublishedDate = getValidDate(publishedDate);
+  const publishedDate =
+    post.publishedAt || post._createdAt;
+
+  const validPublishedDate =
+    getValidDate(publishedDate);
 
   const imageUrl = post.mainImage
-    ? getSanityImageUrl(post.mainImage, 1200, 800)
+    ? getSanityImageUrl(
+        post.mainImage,
+        1200,
+        800,
+      )
     : null;
 
   return (
     <article
       className="
         group
+
         aspect-[4/5]
-        w-full min-w-0 overflow-hidden
+
+        w-full
+        min-w-0
+
+        overflow-hidden
 
         rounded-[16px]
-        border border-[#E0A4B5]/60
+
+        border
+        border-[#E0A4B5]/60
+
         bg-white
 
         shadow-[0_5px_18px_rgba(57,37,46,0.05)]
 
         transition-[transform,border-color,box-shadow]
-        duration-300 ease-out
+        duration-300
+        ease-out
 
         focus-within:border-[#8F2946]
 
@@ -80,8 +96,12 @@ export default function BlogCard({ post }) {
       <Link
         href={href}
         className="
-          grid h-full min-h-0
-          grid-rows-[6fr_4fr]
+          grid
+          h-full
+          min-h-0
+
+          grid-rows-[55fr_45fr]
+
           rounded-[inherit]
 
           focus-visible:outline-none
@@ -91,14 +111,18 @@ export default function BlogCard({ post }) {
         "
       >
         {/* ===================================================
-            IMAGE — 60%
+            IMAGE — 55%
         ==================================================== */}
 
         <div
           className="
             relative
-            min-h-0 w-full
+
+            min-h-0
+            w-full
+
             overflow-hidden
+
             bg-[#F3E7EC]
           "
         >
@@ -134,8 +158,12 @@ export default function BlogCard({ post }) {
           ) : (
             <div
               className="
-                flex h-full w-full
-                items-center justify-center
+                flex
+                h-full
+                w-full
+
+                items-center
+                justify-center
 
                 bg-gradient-to-br
                 from-[#F3E7EC]
@@ -145,7 +173,9 @@ export default function BlogCard({ post }) {
             >
               <span
                 className="
-                  px-4 text-center
+                  px-4
+
+                  text-center
 
                   text-[13px]
                   font-medium
@@ -166,10 +196,12 @@ export default function BlogCard({ post }) {
             aria-hidden="true"
             className="
               pointer-events-none
-              absolute inset-0
+
+              absolute
+              inset-0
 
               bg-gradient-to-t
-              from-[#39252E]/16
+              from-[#39252E]/14
               via-transparent
               to-transparent
             "
@@ -177,20 +209,22 @@ export default function BlogCard({ post }) {
         </div>
 
         {/* ===================================================
-            CONTENT — 40%
+            CONTENT — 45%
         ==================================================== */}
 
         <div
           className="
-            flex min-h-0 flex-col
+            flex
+            min-h-0
+            flex-col
 
             px-4
             pb-4
             pt-4
 
-            min-[414px]:px-[18px]
-            min-[414px]:pb-[18px]
-            min-[414px]:pt-[17px]
+            min-[390px]:px-[18px]
+            min-[390px]:pb-[17px]
+            min-[390px]:pt-[17px]
 
             sm:px-5
             sm:pb-5
@@ -199,15 +233,19 @@ export default function BlogCard({ post }) {
             lg:px-5
             lg:pb-5
             lg:pt-5
+
+            xl:px-6
           "
         >
           {/* =================================================
               TITLE
+              Maximum 2 lines + ellipsis
           ================================================== */}
 
           <h3
             className="
               line-clamp-2
+              overflow-hidden
 
               text-[16px]
               font-semibold
@@ -221,6 +259,7 @@ export default function BlogCard({ post }) {
               duration-200
 
               min-[390px]:text-[16.5px]
+              min-[390px]:leading-[23px]
 
               sm:text-[17px]
               sm:leading-[24px]
@@ -239,26 +278,40 @@ export default function BlogCard({ post }) {
           ================================================== */}
 
           {validPublishedDate && (
-            <time
-              dateTime={validPublishedDate.toISOString()}
+            <div
               className="
                 mt-2.5
-                block
 
-                text-[13px]
-                font-medium
-                leading-5
-
-                text-[#76636B]
+                shrink-0
 
                 sm:mt-3
-                sm:text-[13.5px]
 
-                lg:text-[14px]
+                lg:mt-3
               "
             >
-              {formatDate(publishedDate)}
-            </time>
+              <time
+                dateTime={
+                  validPublishedDate.toISOString()
+                }
+                className="
+                  block
+
+                  text-[13px]
+                  font-medium
+                  leading-5
+
+                  text-[#76636B]
+
+                  sm:text-[13.5px]
+
+                  lg:text-[14px]
+                "
+              >
+                {formatDate(
+                  publishedDate,
+                )}
+              </time>
+            </div>
           )}
 
           {/* =================================================
@@ -269,10 +322,14 @@ export default function BlogCard({ post }) {
             className="
               mt-auto
 
+              shrink-0
+
               border-t
               border-[#EAD9DF]
 
               pt-3
+
+              min-[390px]:pt-3.5
 
               sm:pt-3.5
 
@@ -282,6 +339,7 @@ export default function BlogCard({ post }) {
             <div
               className="
                 flex
+
                 items-center
                 justify-between
 
@@ -318,8 +376,10 @@ export default function BlogCard({ post }) {
                 aria-hidden="true"
                 className="
                   flex
+
                   h-8
                   w-8
+
                   shrink-0
 
                   items-center
@@ -328,11 +388,15 @@ export default function BlogCard({ post }) {
                   rounded-full
 
                   bg-[#F7EBEF]
+
                   text-[#8F2946]
 
                   transition-[transform,background-color,color]
                   duration-200
                   ease-out
+
+                  min-[390px]:h-9
+                  min-[390px]:w-9
 
                   sm:h-9
                   sm:w-9
@@ -341,9 +405,6 @@ export default function BlogCard({ post }) {
                   md:group-hover:bg-[#8F2946]
                   md:group-hover:text-white
 
-                  lg:h-9
-                  lg:w-9
-
                   motion-reduce:transform-none
                 "
               >
@@ -351,8 +412,8 @@ export default function BlogCard({ post }) {
                   size={16}
                   strokeWidth={2}
                   className="
-                    sm:h-[17px]
-                    sm:w-[17px]
+                    min-[390px]:h-[17px]
+                    min-[390px]:w-[17px]
                   "
                 />
               </span>
