@@ -140,7 +140,7 @@ const galleryImages = [
    Therefore the background deck has ONE fixed direction.
 ============================================================ */
 
-const MOBILE_VISIBLE_CARDS = 10;
+const MOBILE_VISIBLE_CARDS = 6;
 
 const mobileFanStack = [
   /* ========================================================
@@ -297,6 +297,7 @@ const getFanPosition = (
 
 function MobileGalleryCard({
   image,
+  priority = false,
 }) {
   return (
     <>
@@ -319,13 +320,17 @@ function MobileGalleryCard({
           src={image.src}
           alt={image.alt}
           fill
-          sizes="(max-width: 639px) 310px"
+          priority={priority}
+          loading={
+            priority
+              ? "eager"
+              : "lazy"
+          }
+          sizes="310px"
           draggable={false}
           className="
             pointer-events-none
-
             select-none
-
             object-cover
             object-center
           "
@@ -1484,8 +1489,7 @@ export default function DholeraProgressPage() {
 
       let transition =
         `
-          transform 350ms cubic-bezier(0.22, 1, 0.36, 1),
-          opacity 240ms ease
+          transform 350ms cubic-bezier(0.22,1,0.36,1)
         `;
 
       /*
@@ -1576,8 +1580,11 @@ export default function DholeraProgressPage() {
         WebkitTouchCallout:
           "none",
 
+                  
         willChange:
-          "transform, opacity",
+          position === 0
+            ? "transform"
+            : "auto",
 
         backfaceVisibility:
           "hidden",
@@ -1955,13 +1962,20 @@ export default function DholeraProgressPage() {
               "
               aria-label="Swipeable Dholera gallery"
             >
-              {mobileCards.map(
+              {mobileCards
+                .slice(0, MOBILE_VISIBLE_CARDS)
+                .map(
                 (
                   image,
                   position,
                 ) => (
                   <button
                     key={image.id}
+
+                    onDragStart={(event) =>
+                      event.preventDefault()
+                    }
+
                     ref={
                       position === 0
                         ? mobileCardRef
@@ -2057,6 +2071,7 @@ export default function DholeraProgressPage() {
                   >
                     <MobileGalleryCard
                       image={image}
+                      priority={position === 0}
                     />
                   </button>
                 ),
