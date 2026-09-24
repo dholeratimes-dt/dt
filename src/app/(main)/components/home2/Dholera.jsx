@@ -27,7 +27,7 @@ export default function Dholera() {
           bg-[#F3E7EC]
 
           px-4
-          py-8
+          py-6
 
 
           text-[#39252E]
@@ -38,13 +38,13 @@ export default function Dholera() {
           min-[414px]:px-5
 
           sm:px-6
-          sm:py-12
+          sm:py-10
 
           md:px-8
-          md:py-12
+          md:py-10
 
           lg:px-10
-          lg:py-12
+          lg:py-10
           ">
       {/* className="relative isolate overflow-hidden border-y border-[#EAD9DF] bg-[#F3E7EC] px-4 py-8 text-[#39252E] selection:bg-[#E0A4B5] selection:text-[#39252E] min-[414px]:px-6 md:px-8 md:py-12 lg:py-14 lg:px:10"
     > */}

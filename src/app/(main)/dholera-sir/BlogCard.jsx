@@ -301,7 +301,8 @@ export default function BlogCard({ post }) {
               text-[13px]
               leading-5
 
-              text-[#78666E]
+              font-medium
+              text-[#2563EB]
 
               sm:text-[14px]
             "
@@ -315,7 +316,7 @@ export default function BlogCard({ post }) {
               </time>
             )}
 
-            <div>
+            {/* <div>
               <span className="text-[#78666E]">
                 Posted By{" "}
               </span>
@@ -328,7 +329,7 @@ export default function BlogCard({ post }) {
               >
                 {authorName}
               </span>
-            </div>
+            </div> */}
           </div>
 
           {/* CTA */}

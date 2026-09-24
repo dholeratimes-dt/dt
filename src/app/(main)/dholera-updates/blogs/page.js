@@ -92,6 +92,7 @@ export default async function BlogsPage() {
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Trending Section - Left Sidebar */}
 
+
           {/* Blog Grid */}
           <div className="lg:w-3/4">
             <div className="md:hidden">

@@ -110,12 +110,6 @@ export default function Navbar() {
                 Dholera News
               </Link>
 
-              <Link
-                href="/bulk-land"
-                className="text-white hover:bg-white/10 px-4 py-2 rounded-lg transition-all duration-300"
-              >
-                Bulk Land
-              </Link>
               
               <Link
                 href="/contact/inquiry"
@@ -207,7 +201,6 @@ export default function Navbar() {
                 title: "Dholera News",
                 path: "/dholera-updates/latest-updates",
               },
-              { title: "Bulk Land Deals", path: "/bulk-land" },
               { title: "Gallery", path: "/gallery/dholera-sir-progress" },
               { title: "About Us", path: "/about" },
               { title: "Contact Us", path: "/contact/inquiry" },

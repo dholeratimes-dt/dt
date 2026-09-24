@@ -121,10 +121,7 @@ export default function page() {
         name="keywords"
         content="Dholera Smart City, Dholera, Gujarat, Dholera International Airport, Dholera Project, Invest in Dholera"
       />
-      <link
-        rel="canonical"
-        href="https://www.dholeratimes.com/bulk-land/city-centre"
-      />
+
 
       <div className="relative h-[50vh] w-full ">
         {/* Banner Image */}

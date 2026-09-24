@@ -19,42 +19,42 @@ export default function page() {
       id: 1,
       title: "Residential Zone",
       image: residential,
-      href: "/bulk-land/residential",
+      href: "/",
       description: "Suitable for buyers exploring bulk land for plotted development, housing planning, township-style use, or long-term residential investment in Dholera SIR.",
     },
     {
       id: 2,
       title: "Industrial Zone",
       image: industrial,
-      href: "/bulk-land/industrial",
+      href: "/",
       description: "Bulk land options for buyers tracking industrial growth, manufacturing activity, warehouse planning, and infrastructure-linked development around Dholera.",
     },
     {
       id: 3,
       title: "High Access Corridor",
       image: hac,
-      href: "/bulk-land/high-access-corridor",
+      href: "/",
       description: "Land options positioned around important access routes, suitable for buyers who prefer better road connectivity, movement visibility, and future development access.",
     },
     {
       id: 4,
       title: "City Centre",
       image: cityCenter,
-      href: "/bulk-land/city-centre",
+      href: "/",
       description: "Bulk land options around central development areas, suitable for buyers exploring commercial, mixed-use, service-based, or future urban planning opportunities.",
     },
     {
       id: 5,
       title: "Knowledge & IT",
       image: knowledge,
-      href: "/bulk-land/knowledge-it",
+      href: "/",
       description: "Suitable for buyers exploring land around education, IT, office, institutional, or future service-sector development possibilities in Dholera SIR.",
     },
     {
       id: 6,
       title: "Recreation & Sports",
       image: recreation,
-      href: "/bulk-land/recreation-sports",
+      href: "/",
       description: "Land options near lifestyle, recreation, sports, and community-focused development areas, suitable for long-term planning around future social infrastructure.",
     },
   ];
@@ -72,7 +72,6 @@ export default function page() {
         name="keywords"
         content="Dholera Smart City, Dholera Gujarat, Dholera SIR, Dholera Project, Invest in Dholera, Dholera Property Investment"
       />
-      <link rel="canonical" href="https://www.dholeratimes.com/bulk-land" />
       <div id="hero" className="relative w-full overflow-hidden">
         {/* ── DESKTOP (lg+): translateX sliding ──────────────────────────── */}
         <div

@@ -636,7 +636,7 @@ export default async function BlogDetail({ params }) {
                         key={category._id || category.title}
                         className="px-3 py-1 bg-blue-50 text-blue-600 text-sm rounded-full"
                       >
-                        Blogs
+                        Blogs dddd
                       </span>
                     ))}
                   </div>
@@ -675,6 +675,7 @@ export default async function BlogDetail({ params }) {
                     )}
 
                     {post.readingTime && (
+
                       <div className="flex items-center">
                         <svg
                           className="w-4 h-4 mr-1"
@@ -699,6 +700,141 @@ export default async function BlogDetail({ params }) {
 
               {/* Featured Image */}
               {post.mainImage && (
+                <div
+                  className="
+                    mb-7
+                    w-full
+
+                    sm:mb-8
+                    lg:mb-9
+                  "
+                >
+                  <div
+                    className="
+                      relative
+
+                      mx-auto
+                      w-full
+                      max-w-[700px]
+
+                      overflow-hidden
+
+                      rounded-xl
+
+                      bg-[#F3E7EC]
+
+                      shadow-[0_8px_28px_rgba(57,37,46,0.10)]
+
+                      sm:rounded-2xl
+                    "
+                  >
+                    {/* =====================================================
+                        FEATURED IMAGE
+                    ====================================================== */}
+
+                    <Image
+                      src={getSanityImageUrl(post.mainImage, 1200, 800)}
+                      alt={
+                        post.mainImage?.alt ||
+                        post.title ||
+                        "Dholera update"
+                      }
+                      width={1200}
+                      height={800}
+                      unoptimized
+                      priority
+                      sizes="
+                        (max-width: 639px) calc(100vw - 32px),
+                        (max-width: 1023px) 680px,
+                        680px
+                      "
+                      className="
+                        block
+                        h-auto
+                        w-full
+                        object-contain
+                      "
+                    />
+
+                    {/* =====================================================
+                        SUBTLE IMAGE OVERLAY
+                    ====================================================== */}
+
+                    <div
+                      aria-hidden="true"
+                      className="
+                        pointer-events-none
+
+                        absolute
+                        inset-0
+
+                        bg-gradient-to-t
+                        from-[#39252E]/10
+                        via-transparent
+                        to-black/[0.03]
+                      "
+                    />
+
+                    {/* =====================================================
+                        READ TIME BADGE
+                        Responsive for phone + desktop
+                    ====================================================== */}
+
+                    <div
+                      className="
+                        absolute
+
+                        left-3
+                        top-3
+                        z-20
+
+                        flex
+                        items-center
+                        justify-center
+
+                        rounded-full
+
+                        bg-[#183746]/95
+
+                        px-3
+                        py-1.5
+
+                        text-[11px]
+                        font-semibold
+                        leading-none
+
+                        text-[#F6E7B0]
+
+                        shadow-[0_4px_14px_rgba(0,0,0,0.22)]
+
+                        backdrop-blur-md
+
+                        min-[390px]:left-4
+                        min-[390px]:top-4
+                        min-[390px]:px-3.5
+                        min-[390px]:py-[7px]
+                        min-[390px]:text-[12px]
+
+                        sm:left-5
+                        sm:top-5
+                        sm:px-4
+                        sm:py-2
+                        sm:text-[13px]
+
+                        lg:left-6
+                        lg:top-6
+                        lg:px-[18px]
+                        lg:py-[9px]
+                        lg:text-[14px]
+                      "
+                    >
+                      4 min read
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* {post.mainImage && (
                 <div className="mb-10 overflow-hidden rounded-xl shadow-lg aspect-[3/2]">
                   <Image
                     src={getSanityImageUrl(post.mainImage, 1200, 800)}
@@ -710,7 +846,7 @@ export default async function BlogDetail({ params }) {
                     priority
                   />
                 </div>
-              )}
+              )} */}
               <TableOfContents items={headingTree} />
               {/* Content */}
               <div className="bg-white rounded-xl shadow-2xl text-black leading-5 shadow-t-2xl p-8 border border-gray-200">

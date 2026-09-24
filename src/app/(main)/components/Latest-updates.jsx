@@ -343,8 +343,9 @@ function RelatedBlogCard({ item, type }) {
 
               text-[13px]
               leading-5
+              font-semibold
 
-              text-[#68565E]
+              text-[#39252E]
 
               lg:text-[14px]
               lg:leading-6
@@ -355,23 +356,6 @@ function RelatedBlogCard({ item, type }) {
                 {formatDate(publishedDate)}
               </time>
             )}
-
-            <span
-              className="
-                mt-1
-                block
-
-                text-[14px]
-                font-medium
-                leading-6
-
-                text-[#39252E]
-
-                lg:text-[15px]
-              "
-            >
-              Dholera Times
-            </span>
           </div>
 
           {/* CTA */}
