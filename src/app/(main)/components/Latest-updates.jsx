@@ -93,10 +93,21 @@
 //   );
 // }
 
+
 import Image from "next/image";
 import Link from "next/link";
 
-import { getblogs, getNews } from "@/sanity/lib/api";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
+
+import {
+  getblogs,
+  getNews,
+} from "@/sanity/lib/api";
 
 import { getSanityImageUrl } from "@/sanity/lib/image";
 
@@ -109,7 +120,9 @@ function parseDate(date) {
 
   const parsed = new Date(date);
 
-  return Number.isNaN(parsed.getTime()) ? null : parsed;
+  return Number.isNaN(parsed.getTime())
+    ? null
+    : parsed;
 }
 
 function formatDate(date) {
@@ -119,77 +132,85 @@ function formatDate(date) {
 
   return parsed.toLocaleDateString("en-US", {
     day: "numeric",
-    month: "long",
+    month: "short",
     year: "numeric",
     timeZone: "Asia/Kolkata",
   });
 }
 
 /* ============================================================
-   CARD
+   UPDATE CARD
 ============================================================ */
 
-function RelatedBlogCard({ item, type }) {
+function RelatedBlogCard({
+  item,
+  type,
+}) {
   const basePath =
     type === "blog"
       ? "/dholera-updates/blogs"
       : "/dholera-updates/latest-updates";
 
-  const href = item.slug?.current
-    ? `${basePath}/${item.slug.current}`
-    : basePath;
+  const href =
+    item.slug?.current
+      ? `${basePath}/${item.slug.current}`
+      : basePath;
 
-  const publishedDate = item.publishedAt || item._createdAt;
+  const publishedDate =
+    item.publishedAt ||
+    item._createdAt;
 
-  const parsedDate = parseDate(publishedDate);
+  const parsedDate =
+    parseDate(publishedDate);
 
-  const imageUrl = item.mainImage
-    ? getSanityImageUrl(item.mainImage, 1200, 800)
-    : null;
+  const imageUrl =
+    item.mainImage
+      ? getSanityImageUrl(
+          item.mainImage,
+          900,
+          600,
+        )
+      : null;
 
   return (
     <article
       className="
         group
 
-        flex
-        h-full
+        w-[78vw]
+        max-w-[290px]
 
-        w-[84vw]
-        max-w-[320px]
         shrink-0
-
         snap-start
-        flex-col
 
         overflow-hidden
 
-        rounded-2xl
+        rounded-xl
 
         border
-        border-[#E0A4B5]/60
+        border-[#EAD9DF]
 
         bg-white
 
-        shadow-[0_6px_22px_rgba(116,32,57,0.05)]
+        shadow-[0_4px_16px_rgba(57,37,46,0.045)]
 
-        transition-[border-color,box-shadow,transform]
+        transition-[transform,border-color,box-shadow]
         duration-300
-
-        hover:-translate-y-1
-        hover:border-[#8F2946]/75
-        hover:shadow-[0_16px_36px_rgba(116,32,57,0.11)]
+        ease-out
 
         focus-within:border-[#8F2946]
 
-        sm:w-[320px]
+        sm:w-[280px]
 
-        md:max-w-[330px]
-        md:w-[330px]
+        md:w-[290px]
 
         lg:w-full
         lg:max-w-none
         lg:min-w-0
+
+        lg:hover:-translate-y-1
+        lg:hover:border-[#E0A4B5]
+        lg:hover:shadow-[0_12px_28px_rgba(116,32,57,0.09)]
 
         motion-reduce:transform-none
         motion-reduce:transition-none
@@ -200,27 +221,28 @@ function RelatedBlogCard({ item, type }) {
         className="
           flex
           h-full
+          min-h-0
           flex-col
 
-          rounded-2xl
+          rounded-[inherit]
 
           focus-visible:outline-none
-
           focus-visible:ring-2
           focus-visible:ring-inset
           focus-visible:ring-[#8F2946]
         "
       >
-        {/* ==================================================
+        {/* ===================================================
             IMAGE
-        =================================================== */}
+        ==================================================== */}
 
         <div
           className="
             relative
 
-            aspect-[3/2]
+            aspect-[16/10]
             w-full
+
             shrink-0
 
             overflow-hidden
@@ -228,30 +250,32 @@ function RelatedBlogCard({ item, type }) {
             border-b
             border-[#EAD9DF]
 
-            bg-[#FAF7F8]
+            bg-[#F3E7EC]
           "
         >
           {imageUrl ? (
             <Image
               src={imageUrl}
-              alt={item.mainImage?.alt || item.title || "Dholera update"}
+              alt={
+                item.mainImage?.alt ||
+                item.title ||
+                "Dholera update"
+              }
               fill
               sizes="
-                (min-width: 1280px) 302px,
-                (min-width: 1024px) calc((100vw - 124px) / 4),
-                (min-width: 768px) 330px,
-                (min-width: 414px) 320px,
-                84vw
+                (max-width: 639px) 78vw,
+                (max-width: 1023px) 290px,
+                20vw
               "
-              loading="lazy"
               className="
                 object-cover
+                object-center
 
                 transition-transform
                 duration-500
                 ease-out
 
-                group-hover:scale-[1.035]
+                lg:group-hover:scale-[1.035]
 
                 motion-reduce:transform-none
                 motion-reduce:transition-none
@@ -267,49 +291,75 @@ function RelatedBlogCard({ item, type }) {
                 items-center
                 justify-center
 
-                bg-[#FAF7F8]
+                bg-gradient-to-br
+                from-[#F3E7EC]
+                via-[#F7EFF2]
+                to-[#FAF7F8]
               "
             >
               <span
                 className="
-                  text-[14px]
-                  font-normal
+                  px-4
+
+                  text-center
+
+                  text-[13px]
+                  font-medium
 
                   text-[#68565E]
                 "
               >
-                No image
+                No image available
               </span>
             </div>
           )}
+
+          {/* IMAGE DEPTH */}
+
+          <div
+            aria-hidden="true"
+            className="
+              pointer-events-none
+
+              absolute
+              inset-0
+
+              bg-gradient-to-t
+              from-[#39252E]/10
+              via-transparent
+              to-transparent
+            "
+          />
         </div>
 
-        {/* ==================================================
-            CARD CONTENT
-        =================================================== */}
+        {/* ===================================================
+            CONTENT
+        ==================================================== */}
 
         <div
           className="
             flex
+            min-h-0
             flex-1
             flex-col
 
-            p-4
-
-            sm:p-[18px]
-
-            lg:p-5
+            px-4
+            pb-4
+            pt-4
           "
         >
-          {/* TITLE */}
+          {/* =================================================
+              TITLE
+          ================================================== */}
 
           <h3
             className="
               line-clamp-2
+              overflow-hidden
 
-              text-[16px]
+              text-[14.5px]
               font-semibold
-              leading-[24px]
+              leading-[21px]
 
               tracking-[-0.01em]
 
@@ -318,16 +368,13 @@ function RelatedBlogCard({ item, type }) {
               transition-colors
               duration-200
 
-              group-hover:text-[#8F2946]
+              sm:text-[15px]
+              sm:leading-[22px]
 
-              sm:text-[17px]
-              sm:leading-[25px]
+              lg:text-[15px]
+              lg:leading-[22px]
 
-              lg:text-[17px]
-              lg:leading-[26px]
-
-              xl:text-[18px]
-              xl:leading-7
+              lg:group-hover:text-[#8F2946]
 
               motion-reduce:transition-none
             "
@@ -335,45 +382,49 @@ function RelatedBlogCard({ item, type }) {
             {item.title}
           </h3>
 
-          {/* DATE + AUTHOR */}
+          {/* =================================================
+              DATE
+          ================================================== */}
 
-          <div
-            className="
-              mt-3
+          {parsedDate && (
+            <time
+              dateTime={
+                parsedDate.toISOString()
+              }
+              className="
+                mt-2.5
 
-              text-[13px]
-              leading-5
-              font-semibold
+                block
+                shrink-0
 
-              text-[#39252E]
+                text-[12px]
+                font-medium
+                leading-5
 
-              lg:text-[14px]
-              lg:leading-6
-            "
-          >
-            {parsedDate && (
-              <time dateTime={parsedDate.toISOString()} className="block">
-                {formatDate(publishedDate)}
-              </time>
-            )}
-          </div>
+                text-[#8F2946]
 
-          {/* CTA */}
+                sm:text-[12.5px]
+              "
+            >
+              {formatDate(
+                publishedDate,
+              )}
+            </time>
+          )}
+
+          {/* =================================================
+              EXPLORE MORE
+          ================================================== */}
 
           <div
             className="
               mt-auto
-              pt-5
+
+              pt-4
             "
           >
             <div
               className="
-                flex
-
-                min-h-[52px]
-
-                items-end
-
                 border-t
                 border-[#EAD9DF]
 
@@ -384,38 +435,42 @@ function RelatedBlogCard({ item, type }) {
                 className="
                   inline-flex
 
-                  min-h-[42px]
+                  min-h-[38px]
 
                   items-center
                   justify-center
 
+                  gap-1.5
+
                   rounded-lg
 
-                  bg-[#8F2946]
+                  bg-[#F7EBEF]
 
-                  px-4
-                  py-2.5
+                  px-3.5
+                  py-2
 
-                  text-[14px]
+                  text-[13px]
                   font-semibold
                   leading-5
 
-                  text-white
+                  text-[#8F2946]
 
-                  transition-colors
+                  transition-[background-color,color,transform]
                   duration-200
+                  ease-out
 
-                  group-hover:bg-[#742039]
+                  group-hover:bg-[#8F2946]
+                  group-hover:text-white
 
-                  group-focus-visible:bg-[#742039]
+                  sm:text-[13.5px]
 
-                  lg:px-[18px]
-                  lg:text-[15px]
-
+                  motion-reduce:transform-none
                   motion-reduce:transition-none
                 "
               >
-                Explore More
+                <span>
+                  Explore More
+                </span>
               </span>
             </div>
           </div>
@@ -430,27 +485,49 @@ function RelatedBlogCard({ item, type }) {
 ============================================================ */
 
 export default async function LatestUpdates() {
-  const [blogsData, updatesData] = await Promise.all([getblogs(), getNews()]);
+  const [
+    blogsData,
+    updatesData,
+  ] = await Promise.all([
+    getblogs(),
+    getNews(),
+  ]);
+
+  /* ============================================================
+     MERGE BLOGS + NEWS
+  ============================================================ */
 
   const content = [
-    ...(blogsData || []).map((item) => ({
-      ...item,
-      _type: "blog",
-    })),
+    ...(blogsData || []).map(
+      (item) => ({
+        ...item,
+        _type: "blog",
+      }),
+    ),
 
-    ...(updatesData || []).map((item) => ({
-      ...item,
-      _type: "news",
-    })),
+    ...(updatesData || []).map(
+      (item) => ({
+        ...item,
+        _type: "news",
+      }),
+    ),
   ]
     .sort((a, b) => {
-      const dateA = parseDate(a.publishedAt || a._createdAt)?.getTime() ?? 0;
+      const dateA =
+        parseDate(
+          a.publishedAt ||
+            a._createdAt,
+        )?.getTime() ?? 0;
 
-      const dateB = parseDate(b.publishedAt || b._createdAt)?.getTime() ?? 0;
+      const dateB =
+        parseDate(
+          b.publishedAt ||
+            b._createdAt,
+        )?.getTime() ?? 0;
 
       return dateB - dateA;
     })
-    .slice(0, 4);
+    .slice(0, 5);
 
   if (!content.length) {
     return null;
@@ -462,31 +539,26 @@ export default async function LatestUpdates() {
       className="
         w-full
 
-        bg-[#FAF7F8]
+        bg-white
 
         px-4
-        py-10
+        py-8
 
         selection:bg-[#E0A4B5]
         selection:text-[#39252E]
 
-        min-[414px]:px-6
+        min-[414px]:px-5
 
-        sm:py-12
+        sm:px-6
+        sm:py-10
 
         md:px-8
-        md:py-12
+        md:py-10
 
+        lg:px-10
         lg:py-12
       "
     >
-      {/* ====================================================
-          STANDARD WEBSITE CONTAINER
-
-          Same width as WhyDT:
-          max-w-7xl = 1280px
-      ===================================================== */}
-
       <div
         className="
           mx-auto
@@ -494,48 +566,128 @@ export default async function LatestUpdates() {
           max-w-7xl
         "
       >
-        {/* ==================================================
+        {/* ===================================================
             SECTION HEADER
-        =================================================== */}
+        ==================================================== */}
 
         <header
           className="
-            mb-7
+            mb-5
 
-            md:mb-9
+            flex
+            flex-col
 
-            lg:mb-10
+            gap-3
+
+            sm:mb-6
+
+            md:flex-row
+            md:items-center
+            md:justify-between
+            md:gap-6
+
+            lg:mb-7
           "
         >
-        
+          {/* TITLE */}
 
           <h2
             id="latest-updates-heading"
             className="
-              max-w-[920px]
-
               text-left
 
-              text-[clamp(1.75rem,2.5vw,2.375rem)]
+              text-[28px]
+              font-bold
+              leading-[1.2]
 
+              tracking-[-0.025em]
+
+              text-[#39252E]
+
+              sm:text-[30px]
+
+              md:text-[32px]
+
+              lg:text-[34px]
+            "
+          >
+            Latest Dholera{" "}
+            <span className="text-[#8F2946]">
+              News &amp; Updates
+            </span>
+          </h2>
+
+          {/* =================================================
+              VIEW ALL UPDATES
+          ================================================== */}
+
+          <Link
+            href="/dholera-updates/latest-updates"
+            className="
+              group/view
+
+              inline-flex
+              w-fit
+
+              shrink-0
+
+              items-center
+
+              gap-1.5
+
+              text-[13px]
               font-semibold
-              leading-[1.25]
-
-              tracking-tight
+              leading-5
 
               text-[#8F2946]
 
-              md:mx-auto
-              md:text-center
+              transition-colors
+              duration-200
+
+              hover:text-[#742039]
+
+              focus-visible:outline
+              focus-visible:outline-2
+              focus-visible:outline-offset-4
+              focus-visible:outline-[#8F2946]
+
+              sm:text-[14px]
+
+              md:self-center
             "
           >
-            Stay Updated with Dholera&apos;s Latest Developments
-          </h2>
+            <span>
+              View All Updates
+            </span>
+
+            <ArrowRight
+              size={16}
+              strokeWidth={1.9}
+              aria-hidden="true"
+              className="
+                shrink-0
+
+                transition-transform
+                duration-200
+
+                group-hover/view:translate-x-1
+
+                motion-reduce:transform-none
+                motion-reduce:transition-none
+              "
+            />
+          </Link>
         </header>
 
-        {/* ==================================================
+        {/* ===================================================
             CARDS
-        =================================================== */}
+
+            Phone / Tablet:
+            Horizontal swipe
+
+            Desktop:
+            5 cards in one row
+        ==================================================== */}
 
         <div
           role="region"
@@ -545,7 +697,7 @@ export default async function LatestUpdates() {
             flex
 
             snap-x
-            snap-proximity
+            snap-mandatory
 
             items-stretch
 
@@ -554,9 +706,7 @@ export default async function LatestUpdates() {
             overflow-x-auto
             overscroll-x-contain
 
-            rounded-lg
-
-            pb-4
+            pb-1
             pt-1
 
             focus-visible:outline
@@ -566,34 +716,147 @@ export default async function LatestUpdates() {
 
             sm:gap-5
 
-            md:gap-6
+            md:gap-5
 
             lg:grid
-            lg:grid-cols-4
-            lg:gap-5
+            lg:grid-cols-5
+            lg:gap-4
+
             lg:overflow-visible
             lg:pb-0
 
-            xl:gap-6
+            xl:gap-5
 
-            [&::-webkit-scrollbar]:h-1.5
+            [&::-webkit-scrollbar]:hidden
 
-            [&::-webkit-scrollbar-thumb]:rounded-full
-            [&::-webkit-scrollbar-thumb]:bg-[#8F2946]
+            [-ms-overflow-style:none]
 
-            [&::-webkit-scrollbar-track]:bg-[#EAD9DF]
-
-            [scrollbar-width:thin]
-            [scrollbar-color:#8F2946_#EAD9DF]
+            [scrollbar-width:none]
           "
         >
-          {content.map((item) => (
-            <RelatedBlogCard
-              key={`${item._type}-${item._id || item.slug?.current || item.title}`}
-              item={item}
-              type={item._type}
-            />
-          ))}
+          {content.map(
+            (item) => (
+              <RelatedBlogCard
+                key={`${
+                  item._type
+                }-${
+                  item._id ||
+                  item.slug?.current ||
+                  item.title
+                }`}
+                item={item}
+                type={item._type}
+              />
+            ),
+          )}
+        </div>
+
+        {/* ===================================================
+            SWIPE INDICATOR
+
+            Phone + Tablet only
+        ==================================================== */}
+
+        <div
+          aria-hidden="true"
+          className="
+            mt-5
+
+            flex
+            items-center
+            justify-center
+
+            lg:hidden
+          "
+        >
+          <div
+            className="
+              inline-flex
+
+              items-center
+              justify-center
+
+              gap-3
+
+              text-[#8F2946]
+            "
+          >
+            {/* LEFT ICON */}
+
+            <span
+              className="
+                flex
+
+                h-8
+                w-8
+
+                items-center
+                justify-center
+
+                rounded-full
+
+                border
+                border-[#E0A4B5]/70
+
+                bg-[#F7EBEF]
+
+                text-[#8F2946]
+              "
+            >
+              <ChevronLeft
+                size={17}
+                strokeWidth={2}
+                aria-hidden="true"
+              />
+            </span>
+
+            {/* TEXT */}
+
+            <span
+              className="
+                text-[12px]
+                font-semibold
+                leading-5
+
+                tracking-[0.04em]
+
+                text-[#8F2946]
+
+                sm:text-[13px]
+              "
+            >
+              Swipe
+            </span>
+
+            {/* RIGHT ICON */}
+
+            <span
+              className="
+                flex
+
+                h-8
+                w-8
+
+                items-center
+                justify-center
+
+                rounded-full
+
+                border
+                border-[#E0A4B5]/70
+
+                bg-[#F7EBEF]
+
+                text-[#8F2946]
+              "
+            >
+              <ChevronRight
+                size={17}
+                strokeWidth={2}
+                aria-hidden="true"
+              />
+            </span>
+          </div>
         </div>
       </div>
     </section>

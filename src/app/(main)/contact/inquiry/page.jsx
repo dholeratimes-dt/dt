@@ -1,288 +1,1863 @@
-"use client";
 import Image from "next/image";
-import get from "@/assets/contact-dholera-times-desktop.webp";
-import getM from "@/assets/contact-dholera-times-mobile.webp";
+import Link from "next/link";
+
+
 import {
-  FaPhoneAlt,
-  FaHeadset,
-  FaFacebook,
-  FaTwitter,
-  FaInstagram,
-  FaLinkedin,
-  FaMapMarkerAlt,
-} from "react-icons/fa";
-import { CiMail } from "react-icons/ci";
-import ContactForm from "../../components/ContactForm";
+  ArrowRight,
+  Building2,
+  CheckCircle2,
+  FileSearch,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Newspaper,
+  Phone,
+  SearchCheck,
+  TrendingUp,
+} from "lucide-react";
+
 import { FaWhatsapp } from "react-icons/fa";
 
-export default function ContactDetails() {
-  const schemaData = {
-    "@context": "https://schema.org",
-    "@type": "RealEstateAgent",
+import ContactForm from "../../components/NewContactForm";
+import get from "@/assets/contact-dholera-times-desktop.webp";
+import getM from "@/assets/contact-dholera-times-mobile.webp";
+
+/* ============================================================
+   SEO METADATA
+============================================================ */
+
+export const metadata = {
+  title: {
+    absolute:
+      "Contact Dholera Times | Dholera News & Property Enquiries",
+  },
+
+  description:
+    "Contact Dholera Times for Dholera Smart City information, news enquiries, residential plots, pricing, site visits and property assistance.",
+
+  keywords: [
+    "Contact Dholera Times",
+    "Dholera Times contact",
+    "Dholera property enquiry",
+    "Dholera plots enquiry",
+    "Dholera site visit",
+    "Dholera Smart City information",
+  ],
+
+  alternates: {
+    canonical:
+      "https://www.dholeratimes.com/contact/inquiry",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+
+  openGraph: {
+    title:
+      "Contact Dholera Times | Dholera News & Property Enquiries",
+
+    description:
+      "Contact Dholera Times for Dholera Smart City information, news enquiries, residential plots, pricing, site visits and property assistance.",
+
+    url:
+      "https://www.dholeratimes.com/contact/inquiry",
+
+    siteName: "Dholera Times",
+
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary",
+
+    title:
+      "Contact Dholera Times | Dholera News & Property Enquiries",
+
+    description:
+      "Contact Dholera Times for Dholera Smart City information, news enquiries, residential plots, pricing, site visits and property assistance.",
+  },
+};
+
+/* ============================================================
+   DATA
+============================================================ */
+
+const helpItems = [
+  {
+    title:
+      "Investment Consultation & Advisory",
+
+    description:
+      "Get guidance on Dholera investment opportunities, locations, infrastructure impact, property options, pricing and key risks before making a decision.",
+
+    icon: TrendingUp,
+  },
+  {
+    title:
+      "Dholera Investment Insights",
+
+    description:
+      "Understand market trends, development progress, land and plot prices, major infrastructure projects and emerging investment opportunities across Dholera.",
+
+    icon: SearchCheck,
+  },
+  {
+    title:
+      "Residential Plots in Dholera",
+
+    description:
+      "Explore residential plots in the Dholera region with details on location, plot sizes, pricing, documentation and current availability with Dholera Times.",
+
+    icon: Building2,
+  },
+  {
+    title:
+      "Property Comparison & Due Diligence",
+
+    description:
+      "Compare locations and property options based on development status, connectivity, documentation, pricing and proximity to Dholera SIR.",
+
+    icon: FileSearch,
+  },
+  {
+    title:
+      "Dholera Information & Business Enquiries",
+
+    description:
+      "Contact us for information about Dholera SIR, infrastructure, industries, company developments, media enquiries, partnerships or business opportunities.",
+
+    icon: Newspaper,
+  },
+];
+
+const faqItems = [
+  {
+    question:
+      "How can I contact Dholera Times?",
+
+    answer:
+      "You can contact Dholera Times by phone, WhatsApp, email or the enquiry form on this page.",
+  },
+  {
+    question:
+      "Can I enquire about residential plots in Dholera?",
+
+    answer:
+      "Yes. Our team can provide information about available residential plots, locations, sizes, pricing and documentation.",
+  },
+  {
+    question:
+      "Can Dholera Times arrange a site visit?",
+
+    answer:
+      "Yes. Our team can help arrange a site visit in Dholera so you can understand the location and surrounding development.",
+  },
+  {
+    question:
+      "Can I share Dholera news or development information?",
+
+    answer:
+      "Yes. Companies, authorities, readers and local sources can contact us to share Dholera-related news, announcements or development information for review.",
+  },
+  {
+    question:
+      "How do I report incorrect information?",
+
+    answer:
+      "You can email or contact our team with the page URL and correction details. We review reliable new information and update our coverage when required.",
+  },
+];
+
+/* ============================================================
+   STRUCTURED DATA
+============================================================ */
+
+const contactPageSchema = {
+  "@context": "https://schema.org",
+
+  "@type": "ContactPage",
+
+  name: "Contact Dholera Times",
+
+  description:
+    "Contact Dholera Times for Dholera Smart City information, news enquiries, residential plots, pricing, site visits and property assistance.",
+
+  url:
+    "https://www.dholeratimes.com/contact/inquiry",
+
+  mainEntity: {
+    "@type": "Organization",
+
     name: "Dholera Times",
-    image: "",
-    "@id": "",
-    url: "https://www.dholeratimes.com/",
-    telephone: "+91 99589 93549",
-    priceRange: "7Lac",
+
+    url:
+      "https://www.dholeratimes.com/",
+
+    email:
+      "info@dholeratimes.com",
+
+    telephone:
+      "+91 99589 93549",
+
     address: {
       "@type": "PostalAddress",
-      streetAddress: "JMD MEGAPOLIS, 620, Badshahpur Sohna Rd Hwy, Sector 48",
-      addressLocality: "Gurugram",
-      postalCode: "122018",
-      addressCountry: "IN",
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: 28.4195542,
-      longitude: 77.0386216,
-    },
-    openingHoursSpecification: {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday",
-      ],
-      opens: "10:30",
-      closes: "19:30",
-    },
-    sameAs: [
-      "https://www.facebook.com/people/Dholera-Times",
-      "https://x.com/dholeratimes/",
-      "https://www.instagram.com/p/DJVtydWBCoK/",
-      "https://www.youtube.com/@dholeratimes",
-      "https://www.linkedin.com/company/dholera-times",
-      "https://www.dholeratimes.com/",
-    ],
-  };
 
-  const breadcrumb = {
-    "@context": "https://schema.org/",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: "https://www.dholeratimes.com/",
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Contact Us",
-        item: "https://www.dholeratimes.com/contact",
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: "Inquiry",
-        item: "https://www.dholeratimes.com/contact/inquiry",
-      },
-    ],
-  };
+      streetAddress:
+        "CGJ - 194, DLF Capital Greens, Shivaji Marg, Karampura Industrial Area",
 
+      addressLocality:
+        "Karam Pura",
+
+      addressRegion:
+        "Delhi",
+
+      postalCode:
+        "110015",
+
+      addressCountry:
+        "IN",
+    },
+
+    contactPoint: {
+      "@type": "ContactPoint",
+
+      telephone:
+        "+91 99589 93549",
+
+      email:
+        "info@dholeratimes.com",
+
+      contactType:
+        "customer service",
+    },
+  },
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+
+  "@type": "FAQPage",
+
+  mainEntity: faqItems.map(
+    (faq) => ({
+      "@type": "Question",
+
+      name:
+        faq.question,
+
+      acceptedAnswer: {
+        "@type": "Answer",
+
+        text:
+          faq.answer,
+      },
+    }),
+  ),
+};
+
+const breadcrumbSchema = {
+  "@context":
+    "https://schema.org",
+
+  "@type":
+    "BreadcrumbList",
+
+  itemListElement: [
+    {
+      "@type":
+        "ListItem",
+
+      position: 1,
+
+      name:
+        "Home",
+
+      item:
+        "https://www.dholeratimes.com/",
+    },
+    {
+      "@type":
+        "ListItem",
+
+      position: 2,
+
+      name:
+        "Contact Us",
+
+      item:
+        "https://www.dholeratimes.com/contact/inquiry",
+    },
+  ],
+};
+
+/* ============================================================
+   PAGE
+============================================================ */
+
+export default function ContactPage() {
   return (
     <>
-      <meta name="robots" content="index, dofollow" />
+      {/* =====================================================
+          SCHEMA
+      ====================================================== */}
 
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+        dangerouslySetInnerHTML={{
+          __html:
+            JSON.stringify(
+              contactPageSchema,
+            ),
+        }}
       />
+
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+        dangerouslySetInnerHTML={{
+          __html:
+            JSON.stringify(
+              faqSchema,
+            ),
+        }}
       />
-      <div className="bg-gray-900 w-full">
-        <title>
-          Contact Us | Dholera Times – Real Estate Experts in Dholera Smart City
-        </title>
-        <meta
-          name="description"
-          content="Get in touch with our team for plot bookings, site visits, or investment advice in Dholera Smart City. Call, WhatsApp or visit us."
-        />
-        <meta
-          name="keywords"
-          content="Expert guidance on dholera Smart City, Contact dholera times , Dholera investment consultation, Book plot in dholera , Dholera inquiry, Dholera Investment "
-        />
-        <link
-          rel="canonical"
-          href="https://www.dholeratimes.com/contact/inquiry"
-        />
 
-        <div className="relative h-[50vh] w-full ">
-          {/* Banner Image */}
-          <Image
-            src={get}
-            alt="Get in touch with Dholera Times team for inquiries and support"
-            className="h-full w-full object-cover max-sm:hidden"
-            fill
-            priority
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html:
+            JSON.stringify(
+              breadcrumbSchema,
+            ),
+        }}
+      />
+
+      {/* ============================================================
+          CONTACT PAGE BANNER
+        ============================================================ */}
+
+    <section
+      aria-label="Contact Dholera Times"
+      className="
+        w-full
+
+        overflow-hidden
+
+        bg-white
+      "
+    >
+      {/* MOBILE BANNER */}
+
+      <Image
+        src={getM}
+        alt="Contact Dholera Times"
+        priority
+        quality={90}
+        sizes="100vw"
+        className="
+          block
+          h-auto
+          w-full
+
+          object-cover
+
+          md:hidden
+        "
+      />
+
+      {/* DESKTOP / TABLET BANNER */}
+
+      <Image
+        src={get}
+        alt="Contact Dholera Times"
+        priority
+        quality={90}
+        sizes="100vw"
+        className="
+          hidden
+          h-auto
+          w-full
+
+          object-cover
+
+          md:block
+        "
+      />
+    </section>
+
+      <main
+        className="
+          overflow-hidden
+
+          bg-white
+
+          text-black
+
+          selection:bg-[#EC1C40]
+          selection:text-white
+        "
+      >
+        {/* ===================================================
+            HERO / CONTACT INTRO
+        ==================================================== */}
+
+        <section
+          className="
+            relative
+
+            overflow-hidden
+
+            border-b
+            border-black/10
+
+            bg-white
+
+            px-4
+            py-10
+
+            min-[414px]:px-5
+
+            sm:px-6
+            sm:py-12
+
+            md:px-8
+            md:py-14
+
+            lg:px-10
+            lg:py-20
+          "
+        >
+          {/* BACKGROUND DETAIL */}
+
+          <div
+            aria-hidden="true"
+            className="
+              pointer-events-none
+
+              absolute
+
+              -right-32
+              -top-40
+
+              h-[420px]
+              w-[420px]
+
+              rounded-full
+
+              bg-[#EC1C40]/[0.055]
+
+              blur-3xl
+            "
           />
-          <Image
-            src={getM}
-            alt="Get in touch with Dholera Times team for inquiries and support"
-            className="h-full w-full object-cover md:hidden"
-            fill
-            priority
-          />
-        </div>
-      </div>
 
-      <div className="">
-        {/* Header Section */}
+          <div
+            className="
+              relative
 
-        {/* Contact Cards Section */}
-        <div className="bg-white pt-4 pb-2">
-          <div className="mx-auto w-full max-w-6xl px-4 py-2 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
-            <h1
+              mx-auto
+
+              grid
+              w-full
+              max-w-7xl
+
+              grid-cols-1
+
+              gap-9
+
+              lg:grid-cols-[minmax(0,1.02fr)_minmax(410px,0.98fr)]
+              lg:items-center
+              lg:gap-14
+            "
+          >
+            {/* ===============================================
+                INTRO
+            ================================================ */}
+
+            <div
               className="
-                mx-auto
-                mb-4
-                max-w-4xl
-
-                text-left
-                text-3xl
-                font-bold
-                leading-tight
-                tracking-[-0.02em]
-
-                text-[#39252E]
-
-                sm:mb-5
-                sm:text-center
-                sm:text-4xl
-
-                lg:mb-6
-                lg:text-5xl
+                max-w-3xl
               "
             >
-              Get Expert Guidance on Dholera Smart City
-            </h1>
+              <p
+                className="
+                  mb-3
 
-            <p
+                  text-[11px]
+                  font-bold
+                  uppercase
+                  leading-5
+
+                  tracking-[0.16em]
+
+                  text-[#EC1C40]
+
+                  sm:text-[12px]
+                "
+              >
+                Contact Dholera Times
+              </p>
+
+              <h1
+                className="
+                  max-w-3xl
+
+                  text-[36px]
+                  font-bold
+                  leading-[1.08]
+
+                  tracking-[-0.04em]
+
+                  text-black
+
+                  min-[414px]:text-[40px]
+
+                  sm:text-[46px]
+
+                  md:text-[52px]
+
+                  lg:text-[58px]
+                "
+              >
+                Contact{" "}
+                <span className="text-[#EC1C40]">
+                  Us
+                </span>
+              </h1>
+
+              <div
+                className="
+                  mt-6
+
+                  max-w-3xl
+
+                  space-y-4
+
+                  text-[15px]
+                  leading-7
+
+                  text-black/65
+
+                  sm:text-[16px]
+                  sm:leading-7
+
+                  lg:text-[17px]
+                  lg:leading-8
+                "
+              >
+                <p>
+                  Have a question
+                  about Dholera
+                  Smart City, want
+                  to share an
+                  update, or need
+                  help exploring
+                  residential
+                  plots in
+                  Dholera?
+                </p>
+
+                <p>
+                  Connect with the
+                  Dholera Times
+                  team for
+                  information,
+                  property
+                  assistance,
+                  site visits and
+                  general
+                  enquiries.
+                </p>
+              </div>
+            </div>
+
+            {/* ===============================================
+                CONTACT PANEL
+            ================================================ */}
+
+            <div
               className="
-                mx-auto
-                max-w-5xl
+                relative
 
-                text-left
-                text-[15px]
-                leading-7
+                overflow-hidden
 
-                text-[#68565E]
+                rounded-[26px]
 
-                sm:text-center
-                sm:text-[16px]
-                sm:leading-8
+                bg-black
 
-                lg:text-[17px]
+                p-3
+
+                shadow-[0_30px_80px_-45px_rgba(0,0,0,0.75)]
+
+                sm:p-4
+
+                lg:rounded-[30px]
               "
             >
-              Looking for trusted guidance on Dholera Smart City investment
-              opportunities? Contact Dholera Times for expert assistance on
-              residential plots, project updates, legal clarity, site visits, and
-              investment consultation. Our team helps investors make informed
-              decisions with transparent support and verified information.
-            </p>
-          </div>
-          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 px-6 md:px-10">
-            {/* Call Us */}
-            <div className="hover:scale-105 shadow-2xl transition-transform duration-300">
-              <a
-                href="tel:+919958993549"
-                className="bg-gray-100 p-6 rounded-lg shadow-md flex justify-center gap-4 items-center text-center"
+              <div
+                aria-hidden="true"
+                className="
+                  pointer-events-none
+
+                  absolute
+                  -right-24
+                  -top-24
+
+                  h-[220px]
+                  w-[220px]
+
+                  rounded-full
+
+                  bg-[#EC1C40]/20
+
+                  blur-3xl
+                "
+              />
+
+              <div
+                className="
+                  relative
+
+                  grid
+                  grid-cols-1
+
+                  gap-2.5
+                "
               >
-                <FaPhoneAlt className="text-gray-800 text-3xl" />
-                <h2 className="text-lg font-semibold text-gray-800">Call Us</h2>
-              </a>
-            </div>
+                {/* CALL / WHATSAPP */}
 
-            {/* WhatsApp */}
-            <div className="hover:scale-105 shadow-2xl transition-transform duration-300">
-              <a
-                href="https://api.whatsapp.com/send?phone=919958993549"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-gray-100 p-6 rounded-lg shadow-md flex justify-center gap-4 items-center text-center"
-              >
-                <FaWhatsapp className="text-gray-800 text-3xl" />
-                <h2 className="text-lg font-semibold text-gray-800">
-                  WhatsApp Us
-                </h2>
-                
-              </a>
-            </div>
-          </div>
+                <div
+                  className="
+                    rounded-[18px]
 
-          {/* Address Section */}
+                    border
+                    border-white/10
 
-          {/* Social Media Links */}
-          <div className="mt-10 ">
-            {/* Contact Info & Contact Form */}
-            <div className="flex flex-col max-sm:flex-col-reverse md:flex-row justify-center items-center gap-16 p-6">
-              {/* Contact Info Section */}
-              <div className="max-w-2xl text-left">
-                <div className="space-y-8">
-                  <div>
-                    <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                      Speak With Dholera Property Experts
-                    </h2>
-                    <p className="text-gray-600 text-base leading-relaxed">
-                      Whether you want details about Dholera plots, pricing,
-                      location advantages, or government-backed infrastructure
-                      developments, our experts are here to assist you.
-                    </p>
+                    bg-white/[0.055]
+
+                    p-5
+
+                    sm:p-6
+                  "
+                >
+                  <div
+                    className="
+                      flex
+
+                      items-start
+
+                      gap-4
+                    "
+                  >
+                    <span
+                      className="
+                        flex
+                        h-11
+                        w-11
+
+                        shrink-0
+
+                        items-center
+                        justify-center
+
+                        rounded-xl
+
+                        bg-[#EC1C40]
+
+                        text-white
+                      "
+                    >
+                      <Phone
+                        size={20}
+                        strokeWidth={1.8}
+                        aria-hidden="true"
+                      />
+                    </span>
+
+                    <div className="min-w-0">
+                      <p
+                        className="
+                          text-[12px]
+                          font-semibold
+                          uppercase
+
+                          tracking-[0.1em]
+
+                          text-white/50
+                        "
+                      >
+                        Call or WhatsApp
+                      </p>
+
+                      <a
+                        href="tel:+919958993549"
+                        className="
+                          mt-1.5
+
+                          block
+
+                          text-[19px]
+                          font-bold
+                          leading-7
+
+                          text-white
+
+                          transition-colors
+                          duration-200
+
+                          hover:text-[#EC1C40]
+
+                          sm:text-[21px]
+                        "
+                      >
+                        +91 99589 93549
+                      </a>
+
+                      <p
+                        className="
+                          mt-2
+
+                          text-[13px]
+                          leading-6
+
+                          text-white/60
+
+                          sm:text-[14px]
+                        "
+                      >
+                        For property
+                        enquiries,
+                        site visits
+                        and general
+                        assistance.
+                      </p>
+
+                      <div
+                        className="
+                          mt-4
+
+                          flex
+                          flex-wrap
+
+                          gap-2
+                        "
+                      >
+                        <a
+                          href="tel:+919958993549"
+                          className="
+                            inline-flex
+                            min-h-[42px]
+
+                            items-center
+                            justify-center
+
+                            gap-2
+
+                            rounded-lg
+
+                            bg-white
+
+                            px-4
+                            py-2
+
+                            text-[13px]
+                            font-semibold
+
+                            text-black
+
+                            transition-colors
+                            duration-200
+
+                            hover:bg-[#EC1C40]
+                            hover:text-white
+                          "
+                        >
+                          <Phone
+                            size={15}
+                            aria-hidden="true"
+                          />
+
+                          Call
+                        </a>
+
+                        <a
+                          href="https://wa.me/919958993549"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="
+                            inline-flex
+                            min-h-[42px]
+
+                            items-center
+                            justify-center
+
+                            gap-2
+
+                            rounded-lg
+
+                            border
+                            border-white/15
+
+                            px-4
+                            py-2
+
+                            text-[13px]
+                            font-semibold
+
+                            text-white
+
+                            transition-colors
+                            duration-200
+
+                            hover:border-[#EC1C40]
+                            hover:bg-[#EC1C40]
+                          "
+                        >
+                          <FaWhatsapp
+                            size={17}
+                            aria-hidden="true"
+                          />
+
+                          WhatsApp
+                        </a>
+                      </div>
+                    </div>
                   </div>
+                </div>
 
-                  <ul className="space-y-4">
-                    {[
-                      "Get answers to your Dholera investment questions",
-                      "Request project details and pricing",
-                      "Book a Dholera site visit",
-                      "Get guidance on registry-ready plots",
-                      "Discuss long-term investment opportunities",
-                    ].map((item, index) => (
-                      <li key={index} className="flex items-start gap-3">
-                        <span className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-green-100 flex items-center justify-center">
-                          <svg
-                            className="w-3 h-3 text-green-600"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth={3}
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M5 13l4 4L19 7"
-                            />
-                          </svg>
-                        </span>
-                        <span className="text-gray-700 text-base">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
+                {/* EMAIL */}
+
+                <a
+                  href="mailto:info@dholeratimes.com"
+                  className="
+                    group
+
+                    rounded-[18px]
+
+                    border
+                    border-white/10
+
+                    bg-white/[0.055]
+
+                    p-5
+
+                    transition-[background-color,border-color]
+                    duration-200
+
+                    hover:border-[#EC1C40]/50
+                    hover:bg-white/[0.075]
+
+                    sm:p-6
+                  "
+                >
+                  <div
+                    className="
+                      flex
+                      items-start
+
+                      gap-4
+                    "
+                  >
+                    <span
+                      className="
+                        flex
+                        h-11
+                        w-11
+
+                        shrink-0
+
+                        items-center
+                        justify-center
+
+                        rounded-xl
+
+                        bg-white/10
+
+                        text-[#EC1C40]
+                      "
+                    >
+                      <Mail
+                        size={20}
+                        strokeWidth={1.8}
+                        aria-hidden="true"
+                      />
+                    </span>
+
+                    <div className="min-w-0">
+                      <p
+                        className="
+                          text-[12px]
+                          font-semibold
+                          uppercase
+
+                          tracking-[0.1em]
+
+                          text-white/50
+                        "
+                      >
+                        Email
+                      </p>
+
+                      <p
+                        className="
+                          mt-1.5
+
+                          break-all
+
+                          text-[16px]
+                          font-bold
+
+                          text-white
+
+                          group-hover:text-[#EC1C40]
+
+                          sm:text-[17px]
+                        "
+                      >
+                        info@dholeratimes.com
+                      </p>
+
+                      <p
+                        className="
+                          mt-2
+
+                          text-[13px]
+                          leading-6
+
+                          text-white/60
+
+                          sm:text-[14px]
+                        "
+                      >
+                        For general,
+                        news, media
+                        and business
+                        enquiries.
+                      </p>
+                    </div>
+                  </div>
+                </a>
+
+                {/* OFFICE */}
+
+                <div
+                  className="
+                    rounded-[18px]
+
+                    border
+                    border-white/10
+
+                    bg-white/[0.055]
+
+                    p-5
+
+                    sm:p-6
+                  "
+                >
+                  <div
+                    className="
+                      flex
+                      items-start
+
+                      gap-4
+                    "
+                  >
+                    <span
+                      className="
+                        flex
+                        h-11
+                        w-11
+
+                        shrink-0
+
+                        items-center
+                        justify-center
+
+                        rounded-xl
+
+                        bg-white/10
+
+                        text-[#EC1C40]
+                      "
+                    >
+                      <MapPin
+                        size={20}
+                        strokeWidth={1.8}
+                        aria-hidden="true"
+                      />
+                    </span>
+
+                    <address
+                      className="
+                        min-w-0
+
+                        not-italic
+                      "
+                    >
+                      <p
+                        className="
+                          text-[12px]
+                          font-semibold
+                          uppercase
+
+                          tracking-[0.1em]
+
+                          text-white/50
+                        "
+                      >
+                        Head Office
+                      </p>
+
+                      <p
+                        className="
+                          mt-1.5
+
+                          text-[14px]
+                          font-medium
+                          leading-6
+
+                          text-white/75
+
+                          sm:text-[15px]
+                        "
+                      >
+                        CGJ - 194,
+                        DLF Capital
+                        Greens,
+                        Shivaji Marg,
+                        Karampura
+                        Industrial
+                        Area, Karam
+                        Pura, Delhi -
+                        110015,
+                        India
+                      </p>
+                    </address>
+                  </div>
                 </div>
               </div>
-
-              {/* Contact Form Section */}
-              <div>
-                <ContactForm
-                  title="Enquire Now"
-                  headline="Book your free consultation with our Dholera expert — no obligations, just guidance. Fields marked with * are mandatory."
-                  buttonName="Get A Call Back"
-                />
-              </div>
             </div>
-         
           </div>
-        </div>
-      </div>
+        </section>
+
+        {/* ===================================================
+            HOW CAN WE HELP
+        ==================================================== */}
+
+        <section
+          className="
+            bg-black/[0.025]
+
+            px-4
+            py-12
+
+            min-[414px]:px-5
+
+            sm:px-6
+            sm:py-14
+
+            md:px-8
+
+            lg:px-10
+            lg:py-20
+          "
+        >
+          <div
+            className="
+              mx-auto
+              w-full
+              max-w-7xl
+            "
+          >
+            <header
+              className="
+                max-w-4xl
+              "
+            >
+              <p
+                className="
+                  text-[11px]
+                  font-bold
+                  uppercase
+
+                  tracking-[0.16em]
+
+                  text-[#EC1C40]
+
+                  sm:text-[12px]
+                "
+              >
+                Dholera Times
+              </p>
+
+              <h2
+                className="
+                  mt-3
+
+                  text-[28px]
+                  font-bold
+                  leading-[1.15]
+
+                  tracking-[-0.03em]
+
+                  text-black
+
+                  sm:text-[32px]
+
+                  md:text-[36px]
+
+                  lg:text-[40px]
+                "
+              >
+                How Can We{" "}
+                <span className="text-[#EC1C40]">
+                  Help?
+                </span>
+              </h2>
+
+              <p
+                className="
+                  mt-4
+
+                  max-w-4xl
+
+                  text-[15px]
+                  leading-7
+
+                  text-black/65
+
+                  sm:text-[16px]
+
+                  md:text-[17px]
+                "
+              >
+                Dholera Times
+                helps investors,
+                property buyers
+                and businesses
+                understand
+                Dholera with on
+                ground insights,
+                investment
+                consultation and
+                property advisory
+                support.
+              </p>
+            </header>
+
+            {/* CARDS */}
+
+            <div
+              className="
+                mt-8
+
+                grid
+                grid-cols-1
+
+                gap-4
+
+                md:grid-cols-2
+
+                lg:grid-cols-6
+              "
+            >
+              {helpItems.map(
+                (
+                  {
+                    title,
+                    description,
+                    icon: Icon,
+                  },
+                  index,
+                ) => (
+                  <article
+                    key={title}
+                    className={`
+                      group
+
+                      relative
+
+                      overflow-hidden
+
+                      rounded-[22px]
+
+                      border
+                      border-black/10
+
+                      bg-white
+
+                      p-5
+
+                      shadow-[0_12px_38px_-32px_rgba(0,0,0,0.28)]
+
+                      transition-[transform,border-color,box-shadow]
+                      duration-300
+
+                      hover:-translate-y-1
+                      hover:border-[#EC1C40]/30
+                      hover:shadow-[0_22px_50px_-34px_rgba(0,0,0,0.38)]
+
+                      sm:p-6
+
+                      ${
+                        index < 3
+                          ? "lg:col-span-2"
+                          : "lg:col-span-3"
+                      }
+
+                      motion-reduce:transform-none
+                    `}
+                  >
+                    <div
+                      aria-hidden="true"
+                      className="
+                        absolute
+                        inset-x-0
+                        top-0
+
+                        h-[3px]
+
+                        origin-left
+                        scale-x-0
+
+                        bg-[#EC1C40]
+
+                        transition-transform
+                        duration-300
+
+                        group-hover:scale-x-100
+                      "
+                    />
+
+                    <span
+                      className="
+                        flex
+
+                        h-11
+                        w-11
+
+                        items-center
+                        justify-center
+
+                        rounded-xl
+
+                        bg-[#EC1C40]/10
+
+                        text-[#EC1C40]
+
+                        transition-[background-color,color]
+                        duration-300
+
+                        group-hover:bg-[#EC1C40]
+                        group-hover:text-white
+                      "
+                    >
+                      <Icon
+                        size={20}
+                        strokeWidth={1.8}
+                        aria-hidden="true"
+                      />
+                    </span>
+
+                    <h3
+                      className="
+                        mt-5
+
+                        text-[18px]
+                        font-bold
+                        leading-6
+
+                        tracking-[-0.015em]
+
+                        text-black
+
+                        sm:text-[19px]
+                      "
+                    >
+                      {title}
+                    </h3>
+
+                    <p
+                      className="
+                        mt-3
+
+                        text-[14px]
+                        leading-6
+
+                        text-black/60
+
+                        sm:text-[15px]
+                        sm:leading-7
+                      "
+                    >
+                      {description}
+                    </p>
+                  </article>
+                ),
+              )}
+            </div>
+          </div>
+        </section>
+
+                {/* ===================================================
+            CLOSING
+        ==================================================== */}
+
+        <section
+          className="
+            bg-black
+
+            px-4
+            py-12
+
+            text-white
+
+            min-[414px]:px-5
+
+            sm:px-6
+            sm:py-14
+
+            md:px-8
+
+            lg:px-10
+            lg:py-16
+          "
+        >
+          <div
+            className="
+              mx-auto
+
+              flex
+              w-full
+              max-w-7xl
+
+              flex-col
+
+              gap-6
+
+              lg:flex-row
+              lg:items-center
+              lg:justify-between
+              lg:gap-10
+            "
+          >
+            <div className="max-w-3xl">
+              <h2
+                className="
+                  text-[28px]
+                  font-bold
+                  leading-[1.15]
+
+                  tracking-[-0.03em]
+
+                  text-white
+
+                  sm:text-[32px]
+
+                  lg:text-[38px]
+                "
+              >
+                Dholera Matlab{" "}
+                <span className="text-[#EC1C40]">
+                  Dholera Times
+                </span>
+              </h2>
+
+              <p
+                className="
+                  mt-4
+
+                  text-[15px]
+                  leading-7
+
+                  text-white/65
+
+                  sm:text-[16px]
+                "
+              >
+                Whether you want
+                to understand
+                Dholera, share
+                an update or
+                explore property
+                opportunities,
+                our team is here
+                to help.
+              </p>
+            </div>
+
+            <Link
+              href="#send-enquiry"
+              className="
+                inline-flex
+                min-h-[50px]
+                w-fit
+
+                shrink-0
+
+                items-center
+                justify-center
+
+                gap-2
+
+                rounded-xl
+
+                bg-[#EC1C40]
+
+                px-5
+                py-3
+
+                text-[14px]
+                font-semibold
+
+                text-white
+
+                transition-[background-color,transform]
+                duration-200
+
+                hover:-translate-y-0.5
+                hover:bg-[#d81839]
+
+                sm:text-[15px]
+
+                motion-reduce:transform-none
+              "
+            >
+              Send Us an Enquiry
+
+              <ArrowRight
+                size={17}
+                aria-hidden="true"
+              />
+            </Link>
+          </div>
+        </section>
+
+        {/* ===================================================
+            ENQUIRY
+        ==================================================== */}
+
+        <section
+          id="send-enquiry"
+          className="
+            scroll-mt-24
+
+            border-y
+            border-black/10
+
+            bg-white
+
+            px-4
+            py-12
+
+            min-[414px]:px-5
+
+            sm:px-6
+            sm:py-14
+
+            md:px-8
+
+            lg:px-10
+            lg:py-20
+          "
+        >
+          <div
+            className="
+              mx-auto
+
+              grid
+              w-full
+              max-w-7xl
+
+              grid-cols-1
+
+              gap-10
+
+              lg:grid-cols-[minmax(0,0.82fr)_minmax(500px,1.18fr)]
+              lg:items-center
+              lg:gap-16
+
+              xl:gap-20
+            "
+          >
+            {/* ========================================================
+                LEFT CONTENT
+            ========================================================= */}
+
+            <div
+              className="
+                max-w-xl
+
+                lg:pr-4
+              "
+            >
+              {/* EYEBROW */}
+
+              <p
+                className="
+                  text-[11px]
+                  font-bold
+                  uppercase
+                  leading-5
+
+                  tracking-[0.16em]
+
+                  text-[#EC1C40]
+
+                  sm:text-[12px]
+                "
+              >
+                Contact Dholera Times
+              </p>
+
+              {/* HEADING */}
+
+              <h2
+                className="
+                  mt-3
+
+                  text-[30px]
+                  font-bold
+                  leading-[1.12]
+
+                  tracking-[-0.035em]
+
+                  text-black
+
+                  min-[414px]:text-[32px]
+
+                  sm:text-[36px]
+
+                  lg:text-[42px]
+                "
+              >
+                Tell Us What You{" "}
+                <span className="text-[#EC1C40]">
+                  Need
+                </span>
+              </h2>
+
+              {/* INTRO */}
+
+              <div
+                className="
+                  mt-5
+
+                  space-y-4
+
+                  text-[15px]
+                  leading-7
+
+                  text-black/65
+
+                  sm:text-[16px]
+
+                  lg:text-[17px]
+                  lg:leading-8
+                "
+              >
+                <p>
+                  Whether you want to understand Dholera Smart City,
+                  explore residential plots, check pricing or arrange
+                  a site visit, share your requirements with our team.
+                </p>
+
+                <p>
+                  You can also contact Dholera Times for Dholera
+                  development updates, news information, media
+                  enquiries and business-related communication.
+                </p>
+              </div>
+
+            </div>
+
+            {/* ========================================================
+                RIGHT FORM
+            ========================================================= */}
+
+            <div
+              className="
+                w-full
+
+                lg:justify-self-end
+              "
+            >
+              <ContactForm
+                title="Send Us an Enquiry"
+                headline="Tell us what you need and the relevant Dholera Times team will get back to you."
+                buttonName="Send Enquiry"
+                maxWidth="620px"
+              />
+            </div>
+          </div>
+        </section>
+
+
+        {/* ===================================================
+            FAQ
+        ==================================================== */}
+
+        <section
+          className="
+            bg-black/[0.025]
+
+            px-4
+            py-12
+
+            min-[414px]:px-5
+
+            sm:px-6
+            sm:py-14
+
+            md:px-8
+
+            lg:px-10
+            lg:py-20
+          "
+        >
+          <div
+            className="
+              mx-auto
+
+              grid
+              w-full
+              max-w-7xl
+
+              grid-cols-1
+
+              gap-7
+
+              lg:grid-cols-[minmax(240px,0.42fr)_minmax(0,1.58fr)]
+              lg:gap-12
+            "
+          >
+            {/* LEFT */}
+
+            <div>
+              <p
+                className="
+                  text-[11px]
+                  font-bold
+                  uppercase
+
+                  tracking-[0.16em]
+
+                  text-[#EC1C40]
+
+                  sm:text-[12px]
+                "
+              >
+                FAQs
+              </p>
+
+              <h2
+                className="
+                  mt-3
+
+                  text-[30px]
+                  font-bold
+                  leading-[1.12]
+
+                  tracking-[-0.035em]
+
+                  text-black
+
+                  sm:text-[34px]
+
+                  lg:text-[40px]
+                "
+              >
+                Frequently Asked{" "}
+                <span className="text-[#EC1C40]">
+                  Questions
+                </span>
+              </h2>
+            </div>
+
+            {/* FAQ LIST */}
+
+            <div
+              className="
+                overflow-hidden
+
+                rounded-[22px]
+
+                border
+                border-black/10
+
+                bg-white
+              "
+            >
+              {faqItems.map(
+                (
+                  {
+                    question,
+                    answer,
+                  },
+                ) => (
+                  <details
+                    key={
+                      question
+                    }
+                    className="
+                      group
+
+                      border-b
+                      border-black/10
+
+                      last:border-b-0
+                    "
+                  >
+                    <summary
+                      className="
+                        flex
+                        min-h-[74px]
+
+                        cursor-pointer
+                        list-none
+
+                        items-center
+                        justify-between
+
+                        gap-4
+
+                        px-4
+                        py-4
+
+                        [&::-webkit-details-marker]:hidden
+
+                        min-[414px]:px-5
+
+                        sm:min-h-[80px]
+                        sm:px-6
+
+                        lg:px-7
+                      "
+                    >
+                      <span
+                        className="
+                          text-[15px]
+                          font-semibold
+                          leading-6
+
+                          text-black
+
+                          sm:text-[16px]
+                        "
+                      >
+                        {
+                          question
+                        }
+                      </span>
+
+                      <span
+                        className="
+                          relative
+
+                          flex
+                          h-9
+                          w-9
+
+                          shrink-0
+
+                          items-center
+                          justify-center
+
+                          rounded-full
+
+                          border
+                          border-black/10
+
+                          bg-[#EC1C40]/5
+                        "
+                      >
+                        <span
+                          className="
+                            absolute
+
+                            h-[2px]
+                            w-3.5
+
+                            rounded-full
+
+                            bg-[#EC1C40]
+                          "
+                        />
+
+                        <span
+                          className="
+                            absolute
+
+                            h-3.5
+                            w-[2px]
+
+                            rounded-full
+
+                            bg-[#EC1C40]
+
+                            transition-transform
+                            duration-200
+
+                            group-open:scale-y-0
+                          "
+                        />
+                      </span>
+                    </summary>
+
+                    <div
+                      className="
+                        px-4
+                        pb-5
+
+                        min-[414px]:px-5
+
+                        sm:px-6
+                        sm:pb-6
+
+                        lg:px-7
+                      "
+                    >
+                      <div
+                        className="
+                          border-t
+                          border-black/10
+
+                          pt-4
+                        "
+                      >
+                        <p
+                          className="
+                            text-[15px]
+                            leading-7
+
+                            text-black/65
+
+                            sm:text-[16px]
+                          "
+                        >
+                          {
+                            answer
+                          }
+                        </p>
+                      </div>
+                    </div>
+                  </details>
+                ),
+              )}
+            </div>
+          </div>
+        </section>
+
+
+      </main>
     </>
   );
 }

@@ -1,11 +1,10 @@
 "use client";
 
-import {
-  useEffect,
-  useId,
-  useRef,
-  useState,
-} from "react";
+import { useEffect, useId, useRef, useState } from "react";
+
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import {
   ChevronDown,
@@ -14,15 +13,11 @@ import {
 
 import { FaWhatsapp } from "react-icons/fa";
 
-import Image from "next/image";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-
 import logo from "@/assets/DTLOGO.png";
 import { trackPageView } from "@/lib/fbpixel";
 
 /* ============================================================
-   NAVIGATION
+   NAVIGATION DATA
 ============================================================ */
 
 const MAIN_LINKS = [
@@ -66,19 +61,13 @@ const CONTACT = {
   path: "/contact/inquiry",
 };
 
-/*
- * PHONE ONLY:
- * Contact Us is added to the drawer.
- *
- * Desktop More dropdown continues using MORE only.
- */
 const MOBILE_MORE = [
   ...MORE,
   CONTACT,
 ];
 
 /* ============================================================
-   MOBILE LINK ANIMATION DELAYS
+   MOBILE ANIMATION
 ============================================================ */
 
 const MAIN_LINK_DELAYS = [
@@ -95,14 +84,10 @@ const MORE_LINK_DELAYS = [
   "delay-[940ms]",
 ];
 
-/* ============================================================
-   MOBILE MOTION
-============================================================ */
-
 const MOBILE_MOTION_DURATION = 1000;
 
 /* ============================================================
-   NAVBAR
+   COMPONENT
 ============================================================ */
 
 export default function Navbar({
@@ -111,8 +96,10 @@ export default function Navbar({
   const pathname =
     usePathname() || "/";
 
-  const uid =
-    useId().replace(/:/g, "");
+  const uid = useId().replace(
+    /:/g,
+    "",
+  );
 
   const [
     dropdown,
@@ -152,9 +139,9 @@ export default function Navbar({
   const isHome =
     pathname === "/";
 
-  /* ============================================================
-     ROUTE HELPERS
-  ============================================================ */
+  /* ==========================================================
+     ACTIVE ROUTE
+  ========================================================== */
 
   const active = (path) => {
     if (path === "/") {
@@ -174,9 +161,9 @@ export default function Navbar({
       ? "page"
       : undefined;
 
-  /* ============================================================
+  /* ==========================================================
      WHATSAPP
-  ============================================================ */
+  ========================================================== */
 
   const number = String(
     whatsappNumber,
@@ -197,9 +184,9 @@ export default function Navbar({
         )}`
       : CONTACT.path;
 
-  /* ============================================================
-     OPEN MOBILE
-  ============================================================ */
+  /* ==========================================================
+     MOBILE MENU
+  ========================================================== */
 
   function openMobile() {
     clearTimeout(
@@ -229,10 +216,6 @@ export default function Navbar({
       );
   }
 
-  /* ============================================================
-     CLOSE MOBILE
-  ============================================================ */
-
   function closeMobile(
     restoreFocus = true,
   ) {
@@ -252,8 +235,7 @@ export default function Navbar({
 
         if (
           restoreFocus &&
-          menuButtonRef.current
-            ?.getClientRects()
+          menuButtonRef.current?.getClientRects()
             .length
         ) {
           menuButtonRef.current.focus();
@@ -270,9 +252,9 @@ export default function Navbar({
     openMobile();
   }
 
-  /* ============================================================
+  /* ==========================================================
      SCROLL STATE
-  ============================================================ */
+  ========================================================== */
 
   useEffect(() => {
     const handleScroll = () => {
@@ -299,9 +281,9 @@ export default function Navbar({
     };
   }, []);
 
-  /* ============================================================
+  /* ==========================================================
      CLEANUP
-  ============================================================ */
+  ========================================================== */
 
   useEffect(
     () => () => {
@@ -316,9 +298,9 @@ export default function Navbar({
     [],
   );
 
-  /* ============================================================
+  /* ==========================================================
      ROUTE CHANGE
-  ============================================================ */
+  ========================================================== */
 
   useEffect(() => {
     clearTimeout(
@@ -351,9 +333,9 @@ export default function Navbar({
     }
   }, [pathname]);
 
-  /* ============================================================
+  /* ==========================================================
      BODY SCROLL LOCK
-  ============================================================ */
+  ========================================================== */
 
   useEffect(() => {
     if (!mobileOpen) {
@@ -378,9 +360,9 @@ export default function Navbar({
     };
   }, [mobileOpen]);
 
-  /* ============================================================
+  /* ==========================================================
      ESCAPE KEY
-  ============================================================ */
+  ========================================================== */
 
   useEffect(() => {
     if (!mobileOpen) {
@@ -410,9 +392,9 @@ export default function Navbar({
     };
   }, [mobileOpen]);
 
-  /* ============================================================
-     CLOSE DESKTOP DROPDOWN OUTSIDE
-  ============================================================ */
+  /* ==========================================================
+     DESKTOP DROPDOWN DISMISS
+  ========================================================== */
 
   useEffect(() => {
     if (!dropdown) {
@@ -454,9 +436,9 @@ export default function Navbar({
     };
   }, [dropdown]);
 
-  /* ============================================================
-     DESKTOP CLEANUP
-  ============================================================ */
+  /* ==========================================================
+     DESKTOP BREAKPOINT
+  ========================================================== */
 
   useEffect(() => {
     const desktop =
@@ -494,13 +476,9 @@ export default function Navbar({
     };
   }, []);
 
-  /* ============================================================
-     DESKTOP MORE DROPDOWN
-
-     IMPORTANT:
-     Uses MORE, not MOBILE_MORE.
-     Contact Us therefore stays separate on desktop.
-  ============================================================ */
+  /* ==========================================================
+     MORE DROPDOWN
+  ========================================================== */
 
   const renderMoreDropdown =
     () => {
@@ -546,6 +524,8 @@ export default function Navbar({
             }
           }}
         >
+          {/* MORE BUTTON */}
+
           <button
             type="button"
             aria-expanded={
@@ -580,18 +560,18 @@ export default function Navbar({
               font-semibold
               leading-6
 
-              text-white
+              text-black
 
               transition-colors
               duration-200
 
-              hover:text-[#F7DCE5]
+              hover:text-[#EC1C40]
 
               focus-visible:outline-none
               focus-visible:ring-2
-              focus-visible:ring-white
+              focus-visible:ring-[#EC1C40]
               focus-visible:ring-offset-2
-              focus-visible:ring-offset-[#742039]
+              focus-visible:ring-offset-white
 
               min-[1440px]:px-4
             "
@@ -616,6 +596,8 @@ export default function Navbar({
               `}
             />
 
+            {/* ACTIVE / HOVER LINE */}
+
             <span
               aria-hidden="true"
               className={`
@@ -628,9 +610,10 @@ export default function Navbar({
                 h-[2px]
 
                 origin-center
+
                 rounded-full
 
-                bg-[#F4D6DF]
+                bg-[#EC1C40]
 
                 transition-transform
                 duration-200
@@ -644,6 +627,8 @@ export default function Navbar({
               `}
             />
           </button>
+
+          {/* DROPDOWN */}
 
           <div
             id={`${uid}-more`}
@@ -666,13 +651,13 @@ export default function Navbar({
                 rounded-2xl
 
                 border
-                border-[#EAD9DF]
+                border-black/10
 
                 bg-white
 
                 p-2.5
 
-                shadow-[0_24px_60px_-24px_rgba(57,37,46,0.34)]
+                shadow-[0_24px_60px_-24px_rgba(0,0,0,0.24)]
               "
             >
               <p
@@ -687,7 +672,7 @@ export default function Navbar({
 
                   tracking-[0.14em]
 
-                  text-[#8F2946]
+                  text-[#EC1C40]
                 "
               >
                 Dholera Times
@@ -730,10 +715,13 @@ export default function Navbar({
                           px-3
                           py-3
 
+                          transition-colors
+                          duration-200
+
                           ${
                             isActive
-                              ? "bg-[#F3E7EC]"
-                              : "hover:bg-[#FAF7F8]"
+                              ? "bg-[#EC1C40]/5"
+                              : "hover:bg-[#EC1C40]/5"
                           }
                         `}
                       >
@@ -746,7 +734,7 @@ export default function Navbar({
                               font-semibold
                               leading-6
 
-                              text-[#39252E]
+                              text-black
                             "
                           >
                             {
@@ -757,12 +745,13 @@ export default function Navbar({
                           <small
                             className="
                               mt-0.5
+
                               block
 
                               text-[13px]
                               leading-5
 
-                              text-[#68565E]
+                              text-black/60
                             "
                           >
                             {
@@ -773,10 +762,19 @@ export default function Navbar({
 
                         <ChevronRight
                           size={17}
+                          strokeWidth={
+                            1.9
+                          }
                           aria-hidden="true"
                           className="
                             shrink-0
-                            text-[#8F2946]
+
+                            text-[#EC1C40]
+
+                            transition-transform
+                            duration-200
+
+                            group-hover:translate-x-0.5
                           "
                         />
                       </Link>
@@ -790,9 +788,9 @@ export default function Navbar({
       );
     };
 
-  /* ============================================================
-     DESKTOP LINK
-  ============================================================ */
+  /* ==========================================================
+     DESKTOP LINK CLASS
+  ========================================================== */
 
   const desktopLinkClass = `
     group
@@ -813,27 +811,31 @@ export default function Navbar({
     font-semibold
     leading-6
 
-    text-white
+    text-black
 
     transition-colors
     duration-200
 
-    hover:text-[#F7DCE5]
+    hover:text-[#EC1C40]
 
     focus-visible:outline-none
     focus-visible:ring-2
-    focus-visible:ring-white
+    focus-visible:ring-[#EC1C40]
     focus-visible:ring-offset-2
-    focus-visible:ring-offset-[#742039]
+    focus-visible:ring-offset-white
 
     min-[1440px]:px-4
   `;
 
+  /* ============================================================
+     RETURN
+  ============================================================ */
+
   return (
     <>
-      {/* =====================================================
-          NAVBAR
-      ====================================================== */}
+      {/* =======================================================
+          DESKTOP / MOBILE TOP NAVBAR
+      ======================================================== */}
 
       <header
         className={`
@@ -843,15 +845,18 @@ export default function Navbar({
 
           w-full
 
-          bg-gradient-to-r
-          from-[#39252E]
-          via-[#742039]
-          to-[#8F2946]
+          bg-transparent
+
+          backdrop-blur-md
+          backdrop-saturate-150
+
+          border-b
+          border-black/10
 
           ${
             scrolled
-              ? "shadow-[0_10px_30px_-16px_rgba(57,37,46,0.48)]"
-              : "shadow-[0_6px_20px_-16px_rgba(57,37,46,0.34)]"
+              ? "shadow-[0_10px_30px_-20px_rgba(0,0,0,0.24)]"
+              : "shadow-none"
           }
 
           ${
@@ -866,7 +871,7 @@ export default function Navbar({
               : ""
           }
 
-          transition-shadow
+          transition-[box-shadow,border-color]
           duration-300
 
           motion-reduce:transition-none
@@ -877,8 +882,8 @@ export default function Navbar({
             mx-auto
 
             flex
-
             min-h-[72px]
+
             w-full
             max-w-[1536px]
 
@@ -899,7 +904,9 @@ export default function Navbar({
             min-[1440px]:gap-7
           "
         >
-          {/* LOGO */}
+          {/* =================================================
+              LOGO
+          ================================================== */}
 
           <Link
             href="/"
@@ -914,7 +921,9 @@ export default function Navbar({
 
               focus-visible:outline-none
               focus-visible:ring-2
-              focus-visible:ring-white
+              focus-visible:ring-[#EC1C40]
+              focus-visible:ring-offset-2
+              focus-visible:ring-offset-white
             "
           >
             <Image
@@ -929,7 +938,7 @@ export default function Navbar({
 
                 object-contain
 
-                drop-shadow-[0_3px_8px_rgba(32,16,22,0.28)]
+                drop-shadow-[0_2px_6px_rgba(0,0,0,0.10)]
 
                 min-[480px]:h-[52px]
 
@@ -990,6 +999,8 @@ export default function Navbar({
                       item.title
                     }
 
+                    {/* ACTIVE LINE */}
+
                     <span
                       aria-hidden="true"
                       className={`
@@ -1002,9 +1013,10 @@ export default function Navbar({
                         h-[2px]
 
                         origin-center
+
                         rounded-full
 
-                        bg-[#F4D6DF]
+                        bg-[#EC1C40]
 
                         transition-transform
                         duration-200
@@ -1021,9 +1033,11 @@ export default function Navbar({
               },
             )}
 
+            {/* MORE */}
+
             {renderMoreDropdown()}
 
-            {/* CONTACT ON DESKTOP */}
+            {/* CONTACT */}
 
             <Link
               href={CONTACT.path}
@@ -1047,9 +1061,6 @@ export default function Navbar({
                 rounded-full
 
                 border
-                border-white/35
-
-                bg-transparent
 
                 px-5
                 py-2.5
@@ -1057,29 +1068,37 @@ export default function Navbar({
                 text-[16px]
                 font-semibold
 
-                text-white
-
-                transition-[background-color,border-color,transform]
+                transition-[background-color,color,border-color,transform,box-shadow]
                 duration-200
-
-                hover:-translate-y-px
-                hover:border-white/60
-                hover:bg-white/10
 
                 active:translate-y-0
 
                 focus-visible:outline-none
                 focus-visible:ring-2
-                focus-visible:ring-white
+                focus-visible:ring-[#EC1C40]
                 focus-visible:ring-offset-2
-                focus-visible:ring-offset-[#742039]
+                focus-visible:ring-offset-white
 
                 ${
                   active(
                     CONTACT.path,
                   )
-                    ? "border-white/65 bg-white/10"
-                    : ""
+                    ? `
+                        border-[#EC1C40]
+                        bg-[#EC1C40]
+                        text-white
+                      `
+                    : `
+                        border-[#EC1C40]
+                        bg-transparent
+                        text-[#EC1C40]
+
+                        hover:-translate-y-px
+                        hover:bg-[#EC1C40]
+                        hover:text-white
+
+                        hover:shadow-[0_8px_22px_-14px_rgba(236,28,64,0.55)]
+                      `
                 }
 
                 motion-reduce:transform-none
@@ -1089,7 +1108,7 @@ export default function Navbar({
             </Link>
           </nav>
 
-          {/* MOBILE BUTTON PLACEHOLDER */}
+          {/* MOBILE SPACER */}
 
           <span
             aria-hidden="true"
@@ -1098,6 +1117,7 @@ export default function Navbar({
 
               h-11
               w-11
+
               shrink-0
 
               min-[1280px]:hidden
@@ -1106,9 +1126,9 @@ export default function Navbar({
         </div>
       </header>
 
-      {/* =====================================================
-          HAMBURGER / X
-      ====================================================== */}
+      {/* =======================================================
+          MOBILE MENU BUTTON
+      ======================================================== */}
 
       <button
         ref={menuButtonRef}
@@ -1123,7 +1143,7 @@ export default function Navbar({
         }
         aria-controls={`${uid}-mobile`}
         onClick={toggleMobile}
-        className="
+        className={`
           fixed
 
           right-4
@@ -1141,13 +1161,17 @@ export default function Navbar({
           justify-center
 
           border-0
+
           bg-transparent
+
           p-0
 
-          text-white
-
           shadow-none
+
           outline-none
+
+          transition-colors
+          duration-200
 
           min-[480px]:right-6
           min-[480px]:top-[16px]
@@ -1155,7 +1179,6 @@ export default function Navbar({
           min-[1280px]:hidden
 
           hover:bg-transparent
-          hover:text-white
 
           active:bg-transparent
 
@@ -1164,7 +1187,13 @@ export default function Navbar({
 
           focus-visible:bg-transparent
           focus-visible:outline-none
-        "
+
+          ${
+            mobileVisible
+              ? "text-white"
+              : "text-black"
+          }
+        `}
       >
         <span
           aria-hidden="true"
@@ -1172,6 +1201,7 @@ export default function Navbar({
             relative
 
             block
+
             h-[24px]
             w-[28px]
 
@@ -1197,20 +1227,13 @@ export default function Navbar({
               will-change-transform
 
               transition-[top,transform]
-
               duration-[1000ms]
               ease-linear
 
               ${
                 mobileVisible
-                  ? `
-                      top-[11px]
-                      rotate-45
-                    `
-                  : `
-                      top-[4px]
-                      rotate-0
-                    `
+                  ? "top-[11px] rotate-45"
+                  : "top-[4px] rotate-0"
               }
             `}
           />
@@ -1228,18 +1251,13 @@ export default function Navbar({
               will-change-transform
 
               transition-transform
-
               duration-[1000ms]
               ease-linear
 
               ${
                 mobileVisible
-                  ? `
-                      -translate-x-[calc(35vw-38px)]
-                    `
-                  : `
-                      translate-x-0
-                    `
+                  ? "-translate-x-[calc(35vw-38px)]"
+                  : "translate-x-0"
               }
             `}
           >
@@ -1261,14 +1279,12 @@ export default function Navbar({
                   mobileVisible
                     ? `
                         opacity-0
-
-                        duration-[800ms]
-                        delay-[5200ms]
+                        duration-[250ms]
+                        delay-[700ms]
                       `
                     : `
                         opacity-100
-
-                        duration-[800ms]
+                        duration-[150ms]
                         delay-0
                       `
                 }
@@ -1295,29 +1311,22 @@ export default function Navbar({
               will-change-transform
 
               transition-[top,transform]
-
               duration-[1000ms]
               ease-linear
 
               ${
                 mobileVisible
-                  ? `
-                      top-[11px]
-                      -rotate-45
-                    `
-                  : `
-                      top-[18px]
-                      rotate-0
-                    `
+                  ? "top-[11px] -rotate-45"
+                  : "top-[18px] rotate-0"
               }
             `}
           />
         </span>
       </button>
 
-      {/* =====================================================
-          MOBILE MENU
-      ====================================================== */}
+      {/* =======================================================
+          MOBILE DRAWER
+      ======================================================== */}
 
       {mobileOpen && (
         <div
@@ -1336,7 +1345,9 @@ export default function Navbar({
             min-[1280px]:hidden
           "
         >
-          {/* BACKDROP */}
+          {/* =================================================
+              OVERLAY
+          ================================================== */}
 
           <button
             type="button"
@@ -1353,12 +1364,11 @@ export default function Navbar({
 
               cursor-default
 
-              bg-[#24131A]/55
+              bg-black/45
 
               backdrop-blur-[2px]
 
               transition-opacity
-
               duration-[1000ms]
               ease-linear
 
@@ -1371,7 +1381,7 @@ export default function Navbar({
           />
 
           {/* =================================================
-              MOBILE DRAWER
+              DRAWER
           ================================================== */}
 
           <aside
@@ -1385,7 +1395,6 @@ export default function Navbar({
               flex
 
               h-[100dvh]
-
               w-[65vw]
 
               flex-col
@@ -1393,22 +1402,18 @@ export default function Navbar({
               overflow-hidden
 
               border-r
-              border-white/15
+              border-black/10
 
-              bg-gradient-to-b
-              from-[#39252E]
-              via-[#742039]
-              to-[#8F2946]
+              bg-white
 
-              text-white
+              text-black
 
-              shadow-[24px_0_70px_-28px_rgba(22,7,14,0.75)]
+              shadow-[24px_0_70px_-30px_rgba(0,0,0,0.32)]
 
               will-change-transform
               transform-gpu
 
               transition-transform
-
               duration-[1000ms]
               ease-linear
 
@@ -1419,21 +1424,21 @@ export default function Navbar({
               }
             `}
           >
-            {/* =================================================
-                MOBILE NAVIGATION
-            ================================================== */}
+            {/* ===============================================
+                MOBILE LINKS
+            ================================================ */}
 
             <nav
               aria-label="Mobile navigation"
               className="
                 min-h-0
+
                 flex-1
 
                 overscroll-contain
                 overflow-y-auto
 
                 px-3
-
                 pb-4
                 pt-4
 
@@ -1441,9 +1446,7 @@ export default function Navbar({
                 min-[414px]:pt-5
               "
             >
-              {/* ===============================================
-                  MAIN LINKS
-              ================================================ */}
+              {/* MAIN LINKS */}
 
               <div className="space-y-1">
                 {MAIN_LINKS.map(
@@ -1476,6 +1479,7 @@ export default function Navbar({
                           group
 
                           flex
+
                           min-h-[48px]
 
                           items-center
@@ -1495,7 +1499,6 @@ export default function Navbar({
                           leading-6
 
                           transition-[background-color,border-color,color,transform,opacity]
-
                           duration-[780ms]
 
                           ease-[cubic-bezier(0.16,1,0.3,1)]
@@ -1508,45 +1511,36 @@ export default function Navbar({
 
                           ${
                             mobileVisible
-                              ? `
-                                  translate-x-0
-                                  opacity-100
-                                `
-                              : `
-                                  -translate-x-4
-                                  opacity-0
-                                `
+                              ? "translate-x-0 opacity-100"
+                              : "-translate-x-4 opacity-0"
                           }
 
                           ${
                             isActive
                               ? `
-                                  border-white/15
-
-                                  bg-white/[0.12]
+                                  border-[#EC1C40]/20
+                                  bg-[#EC1C40]/5
 
                                   font-semibold
 
-                                  text-white
-
-                                  shadow-[0_5px_18px_rgba(26,8,15,0.10)]
+                                  text-[#EC1C40]
                                 `
                               : `
                                   border-transparent
 
-                                  text-[#FFF6F8]
+                                  text-black/75
 
-                                  hover:border-white/10
-
-                                  hover:bg-white/[0.07]
+                                  hover:border-[#EC1C40]/10
+                                  hover:bg-[#EC1C40]/5
+                                  hover:text-black
                                 `
                           }
 
                           focus-visible:outline-none
                           focus-visible:ring-2
-                          focus-visible:ring-white
+                          focus-visible:ring-[#EC1C40]
                           focus-visible:ring-offset-1
-                          focus-visible:ring-offset-[#742039]
+                          focus-visible:ring-offset-white
 
                           motion-reduce:transform-none
                           motion-reduce:transition-none
@@ -1560,7 +1554,9 @@ export default function Navbar({
 
                         <ChevronRight
                           size={16}
-                          strokeWidth={1.9}
+                          strokeWidth={
+                            1.9
+                          }
                           aria-hidden="true"
                           className={`
                             shrink-0
@@ -1570,8 +1566,8 @@ export default function Navbar({
 
                             ${
                               isActive
-                                ? "text-white"
-                                : "text-[#E9C6D1] group-hover:translate-x-0.5 group-hover:text-white"
+                                ? "text-[#EC1C40]"
+                                : "text-black/40 group-hover:translate-x-0.5 group-hover:text-[#EC1C40]"
                             }
 
                             motion-reduce:transform-none
@@ -1583,19 +1579,16 @@ export default function Navbar({
                 )}
               </div>
 
-              {/* ===============================================
+              {/* =============================================
                   MORE
-
-                  PHONE ONLY:
-                  Contact Us is included here.
-              ================================================ */}
+              ============================================== */}
 
               <div
                 className="
                   mt-4
 
                   border-t
-                  border-white/15
+                  border-black/10
 
                   pt-4
                 "
@@ -1613,26 +1606,18 @@ export default function Navbar({
 
                     tracking-[0.16em]
 
-                    text-[#F1CFDA]
+                    text-[#EC1C40]
 
                     transition-[transform,opacity]
-
                     duration-[780ms]
-
                     delay-[820ms]
 
                     ease-[cubic-bezier(0.16,1,0.3,1)]
 
                     ${
                       mobileVisible
-                        ? `
-                            translate-x-0
-                            opacity-100
-                          `
-                        : `
-                            -translate-x-4
-                            opacity-0
-                          `
+                        ? "translate-x-0 opacity-100"
+                        : "-translate-x-4 opacity-0"
                     }
 
                     motion-reduce:transform-none
@@ -1673,6 +1658,7 @@ export default function Navbar({
                             group
 
                             flex
+
                             min-h-[48px]
 
                             items-center
@@ -1692,7 +1678,6 @@ export default function Navbar({
                             leading-6
 
                             transition-[background-color,border-color,color,transform,opacity]
-
                             duration-[780ms]
 
                             ease-[cubic-bezier(0.16,1,0.3,1)]
@@ -1705,43 +1690,36 @@ export default function Navbar({
 
                             ${
                               mobileVisible
-                                ? `
-                                    translate-x-0
-                                    opacity-100
-                                  `
-                                : `
-                                    -translate-x-4
-                                    opacity-0
-                                  `
+                                ? "translate-x-0 opacity-100"
+                                : "-translate-x-4 opacity-0"
                             }
 
                             ${
                               isActive
                                 ? `
-                                    border-white/15
-
-                                    bg-white/[0.12]
+                                    border-[#EC1C40]/20
+                                    bg-[#EC1C40]/5
 
                                     font-semibold
 
-                                    text-white
+                                    text-[#EC1C40]
                                   `
                                 : `
                                     border-transparent
 
-                                    text-[#FFF6F8]
+                                    text-black/75
 
-                                    hover:border-white/10
-
-                                    hover:bg-white/[0.07]
+                                    hover:border-[#EC1C40]/10
+                                    hover:bg-[#EC1C40]/5
+                                    hover:text-black
                                   `
                             }
 
                             focus-visible:outline-none
                             focus-visible:ring-2
-                            focus-visible:ring-white
+                            focus-visible:ring-[#EC1C40]
                             focus-visible:ring-offset-1
-                            focus-visible:ring-offset-[#742039]
+                            focus-visible:ring-offset-white
 
                             motion-reduce:transform-none
                             motion-reduce:transition-none
@@ -1755,17 +1733,20 @@ export default function Navbar({
 
                           <ChevronRight
                             size={16}
-                            strokeWidth={1.9}
+                            strokeWidth={
+                              1.9
+                            }
                             aria-hidden="true"
                             className="
                               shrink-0
 
-                              text-[#E9C6D1]
+                              text-black/40
 
-                              transition-transform
+                              transition-[color,transform]
                               duration-300
 
                               group-hover:translate-x-0.5
+                              group-hover:text-[#EC1C40]
 
                               motion-reduce:transform-none
                             "
@@ -1778,44 +1759,34 @@ export default function Navbar({
               </div>
             </nav>
 
-            {/* =================================================
-                CTA
-            ================================================== */}
+            {/* ===============================================
+                MOBILE ENQUIRE CTA
+            ================================================ */}
 
             <div
               className={`
                 shrink-0
 
                 border-t
-                border-white/15
+                border-black/10
 
-                bg-[#4B1B2A]/35
+                bg-white
 
                 px-3
 
                 pb-[max(12px,env(safe-area-inset-bottom))]
                 pt-3
 
-                backdrop-blur-sm
-
                 transition-[transform,opacity]
-
                 duration-[780ms]
-
                 delay-[1050ms]
 
                 ease-[cubic-bezier(0.16,1,0.3,1)]
 
                 ${
                   mobileVisible
-                    ? `
-                        translate-y-0
-                        opacity-100
-                      `
-                    : `
-                        translate-y-3
-                        opacity-0
-                      `
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-3 opacity-0"
                 }
 
                 motion-reduce:transform-none
@@ -1823,7 +1794,9 @@ export default function Navbar({
               `}
             >
               <Link
-                href={enquiryHref}
+                href={
+                  enquiryHref
+                }
                 target={
                   hasWhatsApp
                     ? "_blank"
@@ -1841,7 +1814,9 @@ export default function Navbar({
                 }
                 className="
                   flex
+
                   min-h-[48px]
+
                   w-full
 
                   touch-manipulation
@@ -1854,9 +1829,9 @@ export default function Navbar({
                   rounded-xl
 
                   border
-                  border-white/25
+                  border-[#EC1C40]
 
-                  bg-white/[0.10]
+                  bg-[#EC1C40]
 
                   px-3
                   py-3
@@ -1867,23 +1842,22 @@ export default function Navbar({
 
                   text-white
 
-                  shadow-[0_8px_22px_rgba(27,8,15,0.15)]
+                  shadow-[0_8px_22px_-14px_rgba(236,28,64,0.60)]
 
-                  backdrop-blur-sm
-
-                  transition-[background-color,border-color,transform]
+                  transition-[transform,box-shadow]
                   duration-300
 
-                  hover:border-white/40
-                  hover:bg-white/[0.15]
+                  hover:-translate-y-px
+
+                  hover:shadow-[0_12px_26px_-14px_rgba(236,28,64,0.70)]
 
                   active:scale-[0.985]
 
                   focus-visible:outline-none
                   focus-visible:ring-2
-                  focus-visible:ring-white
+                  focus-visible:ring-[#EC1C40]
                   focus-visible:ring-offset-2
-                  focus-visible:ring-offset-[#742039]
+                  focus-visible:ring-offset-white
 
                   motion-reduce:transform-none
                 "

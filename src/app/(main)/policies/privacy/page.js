@@ -1,551 +1,1812 @@
-import React from "react";
-import hero from "@/assets/hero5.webp";
 import Image from "next/image";
 
-export default function PrivacyPolicy() {
+import {
+  Mail,
+  MapPin,
+  Phone,
+} from "lucide-react";
+
+import hero from "@/assets/hero5.webp";
+
+/* ============================================================
+   SEO METADATA
+============================================================ */
+
+export const metadata = {
+  title: "Privacy Policy | Dholera Times",
+
+  description:
+    "Read the Dholera Times Privacy Policy to understand how we collect, use, protect and manage personal information submitted through our website and services.",
+
+  alternates: {
+    canonical:
+      "https://www.dholeratimes.com/policies/privacypolicy",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+
+  openGraph: {
+    title: "Privacy Policy | Dholera Times",
+
+    description:
+      "Read the Dholera Times Privacy Policy to understand how we collect, use, protect and manage personal information submitted through our website and services.",
+
+    url:
+      "https://www.dholeratimes.com/policies/privacypolicy",
+
+    siteName: "Dholera Times",
+
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+
+    title: "Privacy Policy | Dholera Times",
+
+    description:
+      "Read the Dholera Times Privacy Policy to understand how we collect, use, protect and manage personal information submitted through our website and services.",
+  },
+};
+
+/* ============================================================
+   TABLE OF CONTENTS
+============================================================ */
+
+const tableOfContents = [
+  {
+    id: "information-we-collect",
+    label: "Information We May Collect",
+  },
+  {
+    id: "how-we-use-information",
+    label: "How We Use Your Information",
+  },
+  {
+    id: "investment-property-enquiries",
+    label: "Investment & Property Enquiries",
+  },
+  {
+    id: "news-editorial-communication",
+    label: "News, Updates & Editorial Communication",
+  },
+  {
+    id: "calls-whatsapp",
+    label: "Calls, WhatsApp & Other Communications",
+  },
+  {
+    id: "cookies-analytics",
+    label: "Cookies & Analytics",
+  },
+  {
+    id: "share-information",
+    label: "How We May Share Information",
+  },
+  {
+    id: "third-party",
+    label: "Third-Party Websites & Services",
+  },
+  {
+    id: "data-security",
+    label: "Data Security",
+  },
+  {
+    id: "retention",
+    label: "How Long We Keep Information",
+  },
+  {
+    id: "privacy-rights",
+    label: "Your Privacy Choices & Rights",
+  },
+  {
+    id: "children",
+    label: "Children’s Privacy",
+  },
+  {
+    id: "international-users",
+    label: "International Users",
+  },
+  {
+    id: "investment-financial",
+    label: "Investment & Financial Information",
+  },
+  {
+    id: "changes",
+    label: "Changes to This Privacy Policy",
+  },
+  {
+    id: "contact",
+    label: "Contact Us About Privacy",
+  },
+];
+
+/* ============================================================
+   POLICY SECTION
+============================================================ */
+
+function PolicySection({
+  number,
+  id,
+  title,
+  children,
+}) {
   return (
-    <>
-      <meta name="robots" content="noindex, nofollow" />
+    <section
+      id={id}
+      className="
+        scroll-mt-24
 
-      <link
-        rel="canonical"
-        href="https://www.dholeratimes.com/policies/privacy"
-      />
-      <link
-        rel="canonical"
-        href="https://www.dholeratimes.com/policies/privacy"
-      />
-      <div className="relative w-full h-[40vh]">
-        <Image src={hero} alt="hero" layout="fill" objectFit="cover" priority />
+        border-b
+        border-black/10
+
+        py-7
+
+        first:pt-0
+
+        last:border-b-0
+        last:pb-0
+
+        sm:scroll-mt-28
+        sm:py-8
+
+        lg:py-9
+      "
+    >
+      <div
+        className="
+          flex
+          items-start
+
+          gap-0
+
+          sm:gap-5
+        "
+      >
+        {/* ===================================================
+            NUMBER
+
+            Hidden on phone.
+            Visible from sm breakpoint.
+        ==================================================== */}
+
+        <span
+          aria-hidden="true"
+          className="
+            hidden
+
+            h-9
+            min-w-9
+
+            shrink-0
+
+            items-center
+            justify-center
+
+            rounded-full
+
+            bg-[#EC1C40]/10
+
+            px-2
+
+            text-[13px]
+            font-bold
+            leading-none
+
+            text-[#EC1C40]
+
+            sm:flex
+          "
+        >
+          {String(number).padStart(2, "0")}
+        </span>
+
+        {/* ===================================================
+            SECTION CONTENT
+        ==================================================== */}
+
+        <div className="min-w-0 flex-1">
+          <h2
+            className="
+              text-[21px]
+              font-bold
+              leading-[1.3]
+
+              tracking-[-0.025em]
+
+              text-black
+
+              sm:text-[22px]
+
+              lg:text-[24px]
+            "
+          >
+            {title}
+          </h2>
+
+          <div
+            className="
+              mt-4
+
+              space-y-4
+
+              text-[15px]
+              leading-7
+
+              text-black/65
+
+              sm:text-[16px]
+              sm:text-black/70
+            "
+          >
+            {children}
+          </div>
+        </div>
       </div>
-      <div className="max-w-7xl mx-auto py-16 px-5 leading-relaxed">
-        <h1 className="text-5xl font-bold pb-6">Privacy Policy</h1>
+    </section>
+  );
+}
 
-        <p>
-          When you use our Service, our policies regarding the collection, use,
-          and disclosure of personal data, as well as your options regarding
-          that data, are outlined on this page.
-        </p>
-        <br />
-        <p>
-          Free Privacy Policy is used to manage our Dholera Times privacy
-          policy. We use your data to provide and improve the Service. By using
-          the Service, you agree to the collection and use of information in
-          accordance with this policy.
-        </p>
-        <br />
-        <p>
-          Terms used in this Privacy Policy have the same meanings as our Terms
-          and Conditions, which can be found at{" "}
-          <span className="text-blue-500 underline font-bold">
-            <a href="https://www.dholeratimes.com/">www.dholeratimes.com</a>
-          </span>{" "}
-          , unless otherwise specified.
-        </p>
+/* ============================================================
+   BULLET LIST
+============================================================ */
 
-        <h2 className="text-5xl font-bold pt-6">
-          INFORMATION COLLECTION AND USE
-        </h2>
-        <br />
-        <p>
-          In order to provide and enhance our service to you, we collect a
-          variety of information for various purposes.
-        </p>
+function BulletList({ children }) {
+  return (
+    <ul
+      className="
+        list-disc
 
-        <h3 className="text-xl font-semibold pt-4">
-          Types of Information Captured Personal Data
-        </h3>
+        space-y-2.5
 
-        <p>
-          While using our Service, we may ask you to provide us with certain
-          personally identifiable information that can be used to contact or
-          identify you ("Personal Data").
-        </p>
+        pl-5
 
-        <p>
-          Information that can be used to identify a person can include, but is
-          not limited to:
-        </p>
-        <br />
+        marker:text-[#EC1C40]
+      "
+    >
+      {children}
+    </ul>
+  );
+}
 
-        <ul className="list-disc ml-6 space-y-2">
-          <li>Your email address</li>
-          <li>Name</li>
-          <li>A contact number</li>
-          <li>City, State, Province, and ZIP/Postal code of the address</li>
-        </ul>
-        <br />
-        <p>
-          Data from Cookies and Usage Data—information about how the Service is
-          accessed and utilized—may also be collected by us.
-        </p>
+/* ============================================================
+   PRIVACY POLICY PAGE
+============================================================ */
 
-        <p>
-          Information like your computer's Internet Protocol address (IP
-          address) may be included in this Usage Data. IP address, the type and
-          version of your browser, the pages of our Service that you visit, the
-          time and date of your visit, the amount of time spent on those pages,
-          and other diagnostic information.
-        </p>
+export default function PrivacyPolicyPage() {
+  return (
+    <main
+      className="
+        min-h-screen
 
-        <h3 className="text-xl font-semibold pt-4">Tracking & Cookies Data</h3>
+        bg-white
 
-        <p>
-          We use cookies and similar tracking technologies to track the activity
-          on our Service and hold certain information.
-        </p>
+        text-black
 
-        <p>
-          Cookies are files with small amount of data which may include an
-          anonymous unique identifier. From a website, cookies are sent to your
-          browser and stored on your device.
-        </p>
+        selection:bg-[#EC1C40]
+        selection:text-white
+      "
+    >
+      {/* =====================================================
+          HERO IMAGE
+      ====================================================== */}
 
-        <p>
-          Tracking technologies also used are beacons, tags, and scripts to
-          collect and track information and to improve and analyze our Service.
-        </p>
+      <section
+        aria-label="Dholera Times Privacy Policy"
+        className="
+          relative
 
-        <p>
-          You have the ability to tell your browser when a cookie is being sent
-          or to reject all cookies. However, if you do not accept cookies, you
-          may not be able to use some portions of our Service.
-        </p>
+          w-full
 
-        <p>We use a few examples of cookies:</p>
-        <br />
-        <ul className="list-disc ml-6 space-y-2">
-          <li>
-            <strong>Session Cookies:</strong> Our Service is run by Session
-            Cookies.
-          </li>
-          <li>
-            <strong>Personalization Cookies:</strong> We use Preference Cookies
-            to remember your preferences and various settings.
-          </li>
-          <li>
-            <strong>Security Cookies:</strong> We use Security Cookies for
-            security purposes.
-          </li>
-        </ul>
+          overflow-hidden
 
-        <h2 className="text-2xl font-bold pt-6">DATA APPLICATION</h2>
+          border-b
+          border-black/10
 
-        <h3 className="text-xl font-semibold pt-4">
-          Dholera Times uses the collected data for various purposes
-        </h3>
-        <br />
+          bg-black
+        "
+      >
+        <div
+          className="
+            relative
 
-        <ul className="list-disc ml-6 space-y-2">
-          <li>To maintain and provide the Service</li>
-          <li>To inform you of service enhancements</li>
-          <li>
-            To permit you to use our Service's interactive features when you
-            choose to
-          </li>
-          <li>To support and care for customers</li>
-          <li>
-            To provide useful analysis or data for the purpose of enhancing the
-            Service
-          </li>
-          <li>To monitor the usage of the Service</li>
-          <li>To find, avoid and fix technical problems</li>
-        </ul>
+            aspect-[16/9]
 
-        <h2 className="text-2xl font-bold pt-6">DATA TRANSFER</h2>
+            w-full
 
-        <p>
-          Your information, including Personal Data, may be transferred to — and
-          maintained on — computers located outside of your state, province,
-          country or other governmental jurisdiction where the data protection
-          laws may differ than those from your jurisdiction.
-        </p>
+            min-[480px]:aspect-[16/8]
 
-        <p>
-          If you are located outside India and choose to provide information to
-          us, please note that we transfer the data, including Personal Data, to
-          India and process it there.
-        </p>
+            sm:aspect-[16/7]
 
-        <p>
-          Your consent to this Privacy Policy followed by your submission of
-          such information represents your agreement to that transfer.
-        </p>
+            md:aspect-[16/6]
 
-        <p>
-          Dholera Times will ensure that your data is handled securely and in
-          accordance with this Privacy Policy.
-        </p>
+            lg:aspect-[16/5]
 
-        <p>
-          No Personal Data will be transferred to a country or organization
-          unless there are adequate controls in place to ensure the security of
-          your data and other personal information.
-        </p>
+            xl:aspect-[16/4.5]
+          "
+        >
+          <Image
+            src={hero}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="
+              object-cover
+              object-center
+            "
+          />
 
-        <h2 className="text-2xl font-bold pt-6">DISCLOSURE OF DATA</h2>
+          <div
+            aria-hidden="true"
+            className="
+              absolute
+              inset-0
 
-        <p>
-          Requirements of the Law Dholera Times may share your Personal Data if
-          it believes that doing so is required to :
-        </p>
-        <br />
+              bg-black/[0.06]
+            "
+          />
+        </div>
+      </section>
 
-        <ul className="list-disc ml-6 space-y-2">
-          <li>To comply with a legal obligation</li>
-          <li>To protect and defend the rights or property of Dholera Times</li>
-          <li>
-            To prevent or investigate possible wrongdoing in connection with the
-            Service
-          </li>
-          <li>
-            To protect the personal safety of users of the Service or the public
-          </li>
-          <li>To protect against legal liability</li>
-        </ul>
+      {/* =====================================================
+          PRIVACY POLICY INTRO
+      ====================================================== */}
 
-        <h2 className="text-2xl font-bold pt-6">SECURITY OF DATA</h2>
+      <section
+        className="
+          border-b
+          border-black/10
 
-        <p>
-          The security of your data is important to us, but remember that no
-          method of transmission over the Internet, or method of electronic
-          storage is 100% secure.
-        </p>
+          bg-white
 
-        <p>
-          While we strive to use commercially acceptable means to protect your
-          Personal Data, we cannot guarantee its absolute security.
-        </p>
+          px-4
+          py-8
 
-        <h2 className="text-2xl font-bold pt-6">SERVICE PROVIDERS</h2>
+          min-[414px]:px-5
 
-        <p>
-          We may employ "Service Providers," which are businesses and
-          individuals, who provide our service, provide it on our behalf,
-          provide services related to our service, or assist us in analyzing how
-          our service is used.
-        </p>
+          sm:px-6
+          sm:py-11
 
-        <p>
-          The only reason these third parties have access to your Personal Data
-          is to carry out these tasks for us. They are not allowed to use or
-          disclose it for any other purpose.
-        </p>
+          md:px-8
+          md:py-12
 
-        <h3 className="text-xl font-semibold pt-4">Analytics</h3>
+          lg:px-10
+          lg:py-14
+        "
+      >
+        <div
+          className="
+            mx-auto
+            w-full
+            max-w-7xl
+          "
+        >
+          <div className="max-w-4xl">
+            <h1
+              className="
+                text-[32px]
+                font-bold
+                leading-[1.1]
 
-        <p>
-          Our Service may be monitored and analyzed by third-party Service
-          Providers.
-        </p>
+                tracking-[-0.035em]
 
-        <h3 className="text-xl font-semibold pt-4">Google Analytics</h3>
+                text-black
 
-        <p>
-          Google Analytics is a web analytics service that monitors and reports
-          traffic to websites. Google uses the data collected to track and
-          monitor the use of our Service. Other Google services can access this
-          data. Google may personalize and contextualize its own advertising
-          network's advertisements using the collected data. You can opt-out of
-          having made your activity on the Service available to Google Analytics
-          by installing the Google Analytics opt-out browser add-on. The add-on
-          prevents the JavaScript versions of Google Analytics (ga.js,
-          analytics.js, and dc.js) from sharing activity-related information
-          with Google Analytics.
-        </p>
-        <br />
-        <p>
-          For more information on the privacy practices of Google, please visit
-          the Google Privacy & Terms web page:{" "}
-          <a
-            href="https://policies.google.com/privacy?hl=en"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 underline font-bold"
+                min-[414px]:text-[34px]
+
+                sm:text-[40px]
+
+                md:text-[46px]
+
+                lg:text-[52px]
+              "
+            >
+              Privacy{" "}
+              <span className="text-[#EC1C40]">
+                Policy
+              </span>
+            </h1>
+
+            <p
+              className="
+                mt-4
+
+                text-[13px]
+                font-semibold
+                leading-5
+
+                text-black/60
+
+                sm:mt-5
+                sm:text-[14px]
+              "
+            >
+              Last Updated: 23 September 2026
+            </p>
+
+            <div
+              className="
+                mt-6
+
+                max-w-4xl
+
+                space-y-4
+
+                text-[15px]
+                leading-7
+
+                text-black/65
+
+                sm:mt-7
+                sm:text-[16px]
+                sm:text-black/70
+              "
+            >
+              <p>
+                Dholera Times respects your privacy and is committed
+                to handling your personal information responsibly and
+                transparently.
+              </p>
+
+              <p>
+                This Privacy Policy explains how Dholera Times
+                (“Dholera Times,” “we,” “our,” or “us”) may collect,
+                use, store and share information when you visit{" "}
+                <a
+                  href="http://www.dholeratimes.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="
+                    font-semibold
+
+                    text-[#EC1C40]
+
+                    underline
+                    decoration-[#EC1C40]/30
+                    underline-offset-4
+
+                    transition-colors
+                    duration-200
+
+                    hover:text-black
+                  "
+                >
+                  www.dholeratimes.com
+                </a>
+                , submit an enquiry, request investment consultation,
+                explore property opportunities, book a site visit,
+                subscribe to updates or communicate with our team.
+              </p>
+
+              <p>
+                By using our website or voluntarily providing your
+                information, you acknowledge the practices described
+                in this Privacy Policy.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================
+          MAIN POLICY
+      ====================================================== */}
+
+      <section
+        className="
+          bg-white
+
+          px-4
+          py-8
+
+          min-[414px]:px-5
+
+          sm:px-6
+          sm:py-10
+
+          md:px-8
+
+          lg:px-10
+          lg:py-12
+        "
+      >
+        <div
+          className="
+            mx-auto
+
+            grid
+            w-full
+            max-w-7xl
+
+            grid-cols-1
+
+            gap-8
+
+            lg:grid-cols-[280px_minmax(0,1fr)]
+            lg:items-start
+            lg:gap-10
+
+            xl:grid-cols-[300px_minmax(0,1fr)]
+            xl:gap-14
+          "
+        >
+          {/* =================================================
+              DESKTOP TABLE OF CONTENTS
+          ================================================== */}
+
+          <aside
+            className="
+              hidden
+              min-w-0
+
+              lg:sticky
+              lg:top-24
+              lg:block
+            "
           >
-            https://policies.google.com/privacy?hl=en
-          </a>
-        </p>
+            <nav
+              aria-label="Privacy Policy sections"
+              className="
+                max-h-[calc(100vh-120px)]
 
-        <h2 className="text-2xl font-bold pt-6">LINKS TO OTHER SITES</h2>
+                overflow-y-auto
 
-        <p>
-          Our Service may contain links to other sites that are not operated by
-          us. You will be taken to the website of the third party if you click
-          on a link. We strongly recommend that you examine the Privacy Policies
-          of each website you visit. We have no control over and assume no
-          responsibility for the content, privacy policies or practices of any
-          third party sites or services.
-        </p>
+                rounded-2xl
 
-        <h2 className="text-2xl font-bold pt-6">CHILDREN'S PRIVACY</h2>
+                border
+                border-black/10
 
-        <p>
-          Our Service does not address anyone under the age of 18 ("Children").
-        </p>
+                bg-black/[0.02]
 
-        <p>
-          We do not knowingly collect personally identifiable information from
-          anyone under the age of 18.
-        </p>
+                p-2
+              "
+            >
+              {tableOfContents.map(
+                (item, index) => (
+                  <a
+                    key={item.id}
+                    href={`#${item.id}`}
+                    className="
+                      group
 
-        <p>
-          Please get in touch with us if you are a parent or guardian and are
-          aware that your child has provided us with personal information.
-        </p>
+                      flex
+                      items-start
 
-        <p>
-          We take steps to delete the information from our servers whenever we
-          learn that we have collected Personal Data from children without
-          verifying parental consent.
-        </p>
+                      gap-2.5
 
-        <h2 className="text-2xl font-bold pt-6">
-          CHANGES TO THIS POLICY ON PRIVACY
-        </h2>
+                      rounded-lg
 
-        <p>
-          We may update our Privacy Policy from time to time. By publishing the
-          updated Privacy Policy on this page, we will notify you of any
-          changes. We will let you know via email and/or a prominent notice on
-          our Service, prior to the change becoming effective and update the
-          "effective date" at the top of this Privacy Policy.
-        </p>
+                      px-3
+                      py-2.5
 
-        <p>
-          You should check this Privacy Policy on a regular basis for any
-          changes. Changes to this Privacy Policy are effective when they are
-          posted on this page.
-        </p>
+                      text-[13px]
+                      font-medium
+                      leading-5
 
-        <h2 className="text-2xl font-bold pt-6">CONTACT US</h2>
+                      text-black/60
 
-        <p>
-          If you have any questions about this Privacy Policy, please contact
-          us:
-        </p>
+                      transition-[background-color,color]
+                      duration-200
 
-        <p>
-          By email:{" "}
-          <a
-            href="mailto:info@dholeratimes.com"
-            className="text-blue-600 underline font-bold"
+                      hover:bg-[#EC1C40]/5
+                      hover:text-black
+
+                      focus-visible:outline-none
+                      focus-visible:ring-2
+                      focus-visible:ring-[#EC1C40]
+                    "
+                  >
+                    <span
+                      className="
+                        mt-[1px]
+
+                        min-w-[22px]
+
+                        text-[11px]
+                        font-bold
+
+                        text-[#EC1C40]
+                      "
+                    >
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+
+                    <span>
+                      {item.label}
+                    </span>
+                  </a>
+                ),
+              )}
+            </nav>
+          </aside>
+
+          {/* =================================================
+              PRIVACY POLICY CONTENT
+
+              Phone:
+              Plain document / no card.
+
+              Tablet + desktop:
+              Rounded document container.
+          ================================================== */}
+
+          <article
+            className="
+              min-w-0
+
+              bg-white
+
+              sm:rounded-2xl
+
+              sm:border
+              sm:border-black/10
+
+              sm:p-7
+
+              sm:shadow-[0_12px_38px_-28px_rgba(0,0,0,0.20)]
+
+              md:p-8
+
+              lg:p-9
+
+              xl:p-10
+            "
           >
-            info@dholeratimes.com
-          </a>
-        </p>
-        <br />
+            {/* =================================================
+                1. INFORMATION WE MAY COLLECT
+            ================================================== */}
 
-        <p>
-          People who are concerned about how their "Personally identifiable
-          information" (PII) is used online can benefit more from this privacy
-          policy. Information that can be used alone or in conjunction with
-          other information to identify, contact, or locate a single person, or
-          to identify an individual in context, is referred to as PII in US
-          privacy law and information security. Please read our privacy policy
-          carefully to get a clear understanding of how we collect, use, protect
-          or otherwise handle your Personally Identifiable Information in
-          accordance with our website.
-        </p>
+            <PolicySection
+              number={1}
+              id="information-we-collect"
+              title="Information We May Collect"
+            >
+              <p>
+                The information we collect depends on how you interact
+                with Dholera Times.
+              </p>
 
-        <h2 className="text-2xl font-bold pt-6">
-          What personal information do we collect?
-        </h2>
+              <h3
+                className="
+                  text-[17px]
+                  font-bold
+                  leading-6
 
-        <p>
-          If necessary, you may be asked to enter your name, email address,
-          mailing address, phone number, or other information when placing an
-          order or registering on our website.
-        </p>
+                  text-black
+                "
+              >
+                Information You Provide
+              </h3>
 
-        <h2 className="text-2xl font-bold pt-6">
-          When do we collect information?
-        </h2>
+              <p>
+                You may provide information such as:
+              </p>
 
-        <p>
-          We collect information from you when you register on our site,
-          subscribe to a newsletter, fill out a form or enter information on our
-          site.
-        </p>
+              <BulletList>
+                <li>Name</li>
+                <li>Mobile number</li>
+                <li>Email address</li>
+                <li>City or country</li>
+                <li>Enquiry or message</li>
+                <li>Property requirements</li>
+                <li>Preferred plot size or budget</li>
+                <li>Investment preferences</li>
+                <li>Site visit requirements</li>
 
-        <h2 className="text-2xl font-bold pt-6">
-          How do we use your information?
-        </h2>
+                <li>
+                  NRI or overseas buyer information, where relevant
+                </li>
 
-        <p>
-          When you register, purchase, sign up for our newsletter, respond to a
-          survey or marketing communication, browse the website, or use certain
-          other site features, we may use the information we collect about you
-          in the following ways:
-        </p>
-        <br />
+                <li>
+                  Information shared during calls, WhatsApp
+                  conversations or consultations
+                </li>
+              </BulletList>
 
-        <ul className="list-disc ml-6 space-y-2">
-          <li>
-            To personalize user's experience and to allow us to deliver the type
-            of content and product offerings in which you are most interested.
-          </li>
-          <li>To improve our website in order to better serve you.</li>
-          <li>
-            To allow us to better service you in responding to your customer
-            service requests.
-          </li>
-          <li>
-            To manage a survey, contest, promotion, or other feature of the
-            website.
-          </li>
-          <li>
-            To send you emails on a regular basis about your order or other
-            products and services.
-          </li>
-        </ul>
+              <p>
+                You are not required to provide personal information
+                simply to read news, articles or general information
+                on our website.
+              </p>
 
-        <h2 className="text-2xl font-bold pt-6">
-          How do we safeguard visitor data?
-        </h2>
+              <h3
+                className="
+                  pt-2
 
-        <p>
-          In order to ensure the safety of your visit, our website is regularly
-          scanned for known vulnerabilities and security flaws. We use regular
-          Malware Scanning.
-        </p>
+                  text-[17px]
+                  font-bold
+                  leading-6
 
-        <h2 className="text-2xl font-bold pt-6">Do we employ "cookies"?</h2>
+                  text-black
+                "
+              >
+                Information Collected Automatically
+              </h3>
 
-        <p>
-          Yes. Cookies are small files that a site or its service provider
-          transfers to your computer's hard drive through your Web browser (if
-          you allow) that enables the site's or service provider's systems to
-          recognize your browser and capture and remember certain information.
-        </p>
+              <p>
+                When you visit our website, certain technical
+                information may be collected automatically, including:
+              </p>
 
-        <p>
-          For instance, we use cookies to help us remember and process the items
-          in your shopping cart.
-        </p>
+              <BulletList>
+                <li>IP address</li>
+                <li>Browser type</li>
+                <li>Device type</li>
+                <li>Operating system</li>
+                <li>Pages visited</li>
+                <li>Time spent on the website</li>
+                <li>Referring website or source</li>
 
-        <p>
-          They are also used to help us understand your preferences based on
-          previous or current site activity, which enables us to provide you
-          with improved services.
-        </p>
+                <li>
+                  Approximate location based on technical information
+                </li>
 
-        <p>
-          We also use cookies to help us compile aggregate data about site
-          traffic and site interaction so that we can offer better site
-          experiences and tools in the future.
-        </p>
+                <li>Cookie and analytics data</li>
+              </BulletList>
 
-        <h3 className="text-xl font-semibold pt-4">Cookies enable us to:</h3>
+              <p>
+                This information helps us understand how visitors use
+                the website and improve its performance.
+              </p>
+            </PolicySection>
 
-        <ul className="list-disc ml-6 space-y-2">
-          <li>Understand and save user's preferences for future visits.</li>
-          <li>
-            In order to provide better site experiences and tools in the future,
-            compile aggregate data about site traffic and interactions.
-          </li>
-        </ul>
+            {/* =================================================
+                2. HOW WE USE YOUR INFORMATION
+            ================================================== */}
 
-        <p>
-          Additionally, we may employ reputable third-party services to track
-          this data on our behalf. You can choose to have your computer warn you
-          each time a cookie is being sent, or you can choose to turn off all
-          cookies. You do this through your browser (like Internet Explorer)
-          settings, because every browser is a little bit different, the correct
-          way to change your cookies is in the Help menu of your browser.
-        </p>
-        <br />
+            <PolicySection
+              number={2}
+              id="how-we-use-information"
+              title="How We Use Your Information"
+            >
+              <p>
+                We may use personal information to:
+              </p>
 
-        <p>The user experience will not be impacted if cookies are disabled.</p>
+              <BulletList>
+                <li>
+                  Respond to your enquiries
+                </li>
 
-        <h2 className="text-2xl font-bold pt-6">Third Party Disclosure</h2>
+                <li>
+                  Provide Dholera investment consultation or property
+                  advisory support
+                </li>
 
-        <p>
-          We do not sell, trade, or otherwise transfer to outside parties your
-          personally identifiable information.
-        </p>
+                <li>
+                  Share residential plot details, pricing and
+                  availability requested by you
+                </li>
 
-        <h2 className="text-2xl font-bold pt-6">Third party links</h2>
+                <li>
+                  Arrange Dholera site visits
+                </li>
 
-        <p>
-          Occasionally, at our discretion, we may include or offer third party
-          products or services on our website. These third party sites have
-          separate and independent privacy policies.
-        </p>
+                <li>
+                  Provide information about Dholera Smart City and
+                  Dholera SIR
+                </li>
 
-        <p>
-          We therefore have no responsibility or liability for the content and
-          activities of these linked sites. Nonetheless, we seek to protect the
-          integrity of our site and welcome any feedback about these sites.
-        </p>
+                <li>
+                  Assist with property comparison, documentation and
+                  buying-related queries
+                </li>
 
-        <h2 className="text-2xl font-bold pt-6">The CAN-SPAM Act</h2>
+                <li>
+                  Send requested news, updates or investment
+                  information
+                </li>
 
-        <p>
-          The CAN-SPAM Act is a law that sets the rules for commercial email,
-          establishes requirements for commercial messages, gives recipients the
-          right to have emails stopped from being sent to them, and spells out
-          tough penalties for violations.
-        </p>
+                <li>
+                  Communicate through phone, email, SMS or WhatsApp
+                  where appropriate
+                </li>
 
-        <p>
-          Your email address is collected so that we can: Send information and
-          respond to questions and other requests.
-        </p>
+                <li>
+                  Manage customer and enquiry records
+                </li>
 
-        <h3 className="text-xl font-semibold pt-4">
-          To be in accordance with CANSPAM we agree to the following:
-        </h3>
-        <br />
+                <li>
+                  Improve our website, content and services
+                </li>
 
-        <ul className="list-disc ml-6 space-y-2">
-          <li>
-            DO NOT use email addresses or subjects that are false or misleading.
-          </li>
-          <li>
-            Identify the message as an advertisement in some reasonable way
-          </li>
-          <li>
-            Provide the actual address of our company or the location of our
-            headquarters.
-          </li>
-          <li>
-            Monitor third party email marketing services for compliance, if one
-            is used.
-          </li>
-          <li>Respond promptly to requests to unsubscribe or opt-out</li>
-          <li>
-            Provide an unsubscribe link at the bottom of each email for users to
-            use.
-          </li>
-        </ul>
+                <li>
+                  Understand website usage and visitor interests
+                </li>
 
-        <p>
-          You can send us an email at{" "}
-          <a
-            href="mailto:info@dholeratimes.com"
-            className="text-blue-600 underline font-bold"
-          >
-            info@dholeratimes.com
-          </a>{" "}
-          to unsubscribe at any time, and we will promptly remove you from any
-          and all correspondence.
-        </p>
+                <li>
+                  Detect misuse, fraud or security threats
+                </li>
 
-        <h2 className="text-2xl font-bold pt-6">Contacting Us</h2>
+                <li>
+                  Meet applicable legal or regulatory requirements
+                </li>
+              </BulletList>
 
-        <p>
-          Please use the contact information provided below to get in touch with
-          us if you have any questions about this privacy policy. Send an email
-          to{" "}
-          <a
-            href="mailto:info@dholeratimes.com"
-            className="text-blue-600 underline font-bold"
-          >
-            info@dholeratimes.com
-          </a>
-        </p>
-      </div>
-    </>
+              <p>
+                We aim to collect and use only the information
+                reasonably required for these purposes.
+              </p>
+            </PolicySection>
+
+            {/* =================================================
+                3. INVESTMENT & PROPERTY ENQUIRIES
+            ================================================== */}
+
+            <PolicySection
+              number={3}
+              id="investment-property-enquiries"
+              title="Investment & Property Enquiries"
+            >
+              <p>
+                When you submit an enquiry related to Dholera
+                investment, residential plots, property consultation
+                or site visits, our team may contact you using the
+                details you provide.
+              </p>
+
+              <p>
+                This may include communication regarding:
+              </p>
+
+              <BulletList>
+                <li>Available residential plots</li>
+                <li>Current pricing</li>
+                <li>Locations</li>
+                <li>Property documentation</li>
+                <li>Site visits</li>
+                <li>Investment insights</li>
+                <li>Property comparison</li>
+                <li>Registration or purchase assistance</li>
+                <li>Related Dholera property opportunities</li>
+              </BulletList>
+
+              <p>
+                Submitting an enquiry does not require you to purchase
+                any property or service.
+              </p>
+            </PolicySection>
+
+            {/* =================================================
+                4. NEWS, UPDATES & EDITORIAL COMMUNICATION
+            ================================================== */}
+
+            <PolicySection
+              number={4}
+              id="news-editorial-communication"
+              title="News, Updates & Editorial Communication"
+            >
+              <p>
+                Dholera Times also operates as a Dholera-focused
+                information platform.
+              </p>
+
+              <p>
+                If you contact us regarding:
+              </p>
+
+              <BulletList>
+                <li>News tips</li>
+                <li>Company announcements</li>
+                <li>Development updates</li>
+                <li>Corrections</li>
+                <li>Media enquiries</li>
+                <li>Partnerships</li>
+                <li>Business information</li>
+              </BulletList>
+
+              <p>
+                We may use the information provided to review and
+                respond to your communication.
+              </p>
+
+              <p>
+                Information submitted as a news tip or source material
+                will be handled according to its nature. Please do not
+                submit confidential or sensitive information unless
+                necessary and appropriate.
+              </p>
+            </PolicySection>
+
+            {/* =================================================
+                5. CALLS, WHATSAPP & OTHER COMMUNICATIONS
+            ================================================== */}
+
+            <PolicySection
+              number={5}
+              id="calls-whatsapp"
+              title="Calls, WhatsApp & Other Communications"
+            >
+              <p>
+                If you contact us or request a callback, we may
+                communicate with you by:
+              </p>
+
+              <BulletList>
+                <li>Phone</li>
+                <li>WhatsApp</li>
+                <li>Email</li>
+                <li>SMS</li>
+
+                <li>
+                  Other communication channels you choose to use
+                </li>
+              </BulletList>
+
+              <p>
+                Where required, marketing or promotional communication
+                will be sent in accordance with applicable consent and
+                communication requirements.
+              </p>
+
+              <p>
+                You can ask us to stop promotional communication at
+                any time by contacting us or using an available
+                unsubscribe or opt-out option.
+              </p>
+
+              <p>
+                Operational communication relating to an enquiry or
+                service already requested may still be sent where
+                necessary.
+              </p>
+            </PolicySection>
+
+            {/* =================================================
+                6. COOKIES & ANALYTICS
+            ================================================== */}
+
+            <PolicySection
+              number={6}
+              id="cookies-analytics"
+              title="Cookies & Analytics"
+            >
+              <p>
+                Dholera Times may use cookies and similar technologies
+                to operate and improve the website.
+              </p>
+
+              <p>
+                Cookies may help us:
+              </p>
+
+              <BulletList>
+                <li>Keep the website functioning correctly</li>
+                <li>Remember visitor preferences</li>
+                <li>Understand website traffic</li>
+                <li>Measure page performance</li>
+
+                <li>
+                  Understand which content visitors find useful
+                </li>
+
+                <li>
+                  Measure marketing campaigns
+                </li>
+
+                <li>
+                  Improve user experience
+                </li>
+              </BulletList>
+
+              <p>
+                We may use third-party analytics or advertising tools
+                where appropriate.
+              </p>
+
+              <p>
+                Where required by applicable law, visitors will be
+                given appropriate choices regarding non-essential
+                cookies.
+              </p>
+
+              <p>
+                You can also manage cookies through your browser
+                settings. Disabling certain cookies may affect some
+                website features.
+              </p>
+            </PolicySection>
+
+            {/* =================================================
+                7. HOW WE MAY SHARE INFORMATION
+            ================================================== */}
+
+            <PolicySection
+              number={7}
+              id="share-information"
+              title="How We May Share Information"
+            >
+              <p>
+                We do not disclose personal information unnecessarily.
+              </p>
+
+              <p>
+                We may share information with third parties where
+                reasonably required to operate our services,
+                including:
+              </p>
+
+              <h3 className="text-[17px] font-bold text-black">
+                Service Providers
+              </h3>
+
+              <p>
+                Companies that help us with services such as:
+              </p>
+
+              <BulletList>
+                <li>Website hosting</li>
+                <li>Customer relationship management</li>
+                <li>Email communication</li>
+                <li>Analytics</li>
+                <li>Cloud storage</li>
+                <li>IT and security</li>
+                <li>Messaging or communication tools</li>
+              </BulletList>
+
+              <p>
+                These providers may process information only as
+                required to provide their services.
+              </p>
+
+              <h3
+                className="
+                  pt-2
+
+                  text-[17px]
+                  font-bold
+
+                  text-black
+                "
+              >
+                Property or Service Partners
+              </h3>
+
+              <p>
+                If you enquire about a specific property, service or
+                opportunity, relevant information may be shared with
+                an authorised property, project or service partner
+                where necessary to fulfil your request or where you
+                have agreed to such sharing.
+              </p>
+
+              <h3
+                className="
+                  pt-2
+
+                  text-[17px]
+                  font-bold
+
+                  text-black
+                "
+              >
+                Professional Advisers
+              </h3>
+
+              <p>
+                Information may be shared with legal, accounting or
+                other professional advisers where reasonably
+                necessary.
+              </p>
+
+              <h3
+                className="
+                  pt-2
+
+                  text-[17px]
+                  font-bold
+
+                  text-black
+                "
+              >
+                Legal Requirements
+              </h3>
+
+              <p>
+                We may disclose information where required by law,
+                court order, regulatory authority or a lawful
+                government request.
+              </p>
+
+              <h3
+                className="
+                  pt-2
+
+                  text-[17px]
+                  font-bold
+
+                  text-black
+                "
+              >
+                Business Changes
+              </h3>
+
+              <p>
+                If Dholera Times undergoes a merger, restructuring,
+                acquisition, sale or transfer of business assets,
+                information may be transferred as part of that
+                transaction subject to applicable law.
+              </p>
+            </PolicySection>
+
+            {/* =================================================
+                8. THIRD-PARTY WEBSITES & SERVICES
+            ================================================== */}
+
+            <PolicySection
+              number={8}
+              id="third-party"
+              title="Third-Party Websites & Services"
+            >
+              <p>
+                Our website may contain links to:
+              </p>
+
+              <BulletList>
+                <li>Government websites</li>
+                <li>Official project authorities</li>
+                <li>Company websites</li>
+                <li>Social media platforms</li>
+                <li>Maps</li>
+                <li>News sources</li>
+                <li>Property or business partners</li>
+                <li>Other third-party websites</li>
+              </BulletList>
+
+              <p>
+                Dholera Times does not control the privacy practices
+                of third-party websites.
+              </p>
+
+              <p>
+                When you leave our website, the privacy policy and
+                terms of the third-party service will apply.
+              </p>
+
+              <p>
+                We recommend reviewing those policies before providing
+                personal information.
+              </p>
+            </PolicySection>
+
+            {/* =================================================
+                9. DATA SECURITY
+            ================================================== */}
+
+            <PolicySection
+              number={9}
+              id="data-security"
+              title="Data Security"
+            >
+              <p>
+                We take reasonable technical and organisational
+                measures to protect personal information against:
+              </p>
+
+              <BulletList>
+                <li>Unauthorised access</li>
+                <li>Loss</li>
+                <li>Misuse</li>
+                <li>Alteration</li>
+                <li>Disclosure</li>
+                <li>Destruction</li>
+              </BulletList>
+
+              <p>
+                However, no website, internet transmission or
+                electronic storage system can be guaranteed to be
+                completely secure.
+              </p>
+
+              <p>
+                Users should therefore avoid sending unnecessary
+                sensitive information through ordinary website forms,
+                email or messaging platforms.
+              </p>
+            </PolicySection>
+
+            {/* =================================================
+                10. HOW LONG WE KEEP INFORMATION
+            ================================================== */}
+
+            <PolicySection
+              number={10}
+              id="retention"
+              title="How Long We Keep Information"
+            >
+              <p>
+                We retain personal information only for as long as
+                reasonably necessary for the purpose for which it was
+                collected, including:
+              </p>
+
+              <BulletList>
+                <li>Responding to enquiries</li>
+                <li>Providing requested services</li>
+                <li>Maintaining necessary business records</li>
+                <li>Handling ongoing customer relationships</li>
+
+                <li>
+                  Meeting legal, regulatory or accounting requirements
+                </li>
+
+                <li>Resolving disputes</li>
+                <li>Protecting against fraud or misuse</li>
+              </BulletList>
+
+              <p>
+                When information is no longer reasonably required, we
+                may delete, anonymise or securely dispose of it,
+                subject to applicable legal requirements.
+              </p>
+            </PolicySection>
+
+            {/* =================================================
+                11. YOUR PRIVACY CHOICES & RIGHTS
+            ================================================== */}
+
+            <PolicySection
+              number={11}
+              id="privacy-rights"
+              title="Your Privacy Choices & Rights"
+            >
+              <p>
+                Depending on applicable law and your circumstances,
+                you may have the right to:
+              </p>
+
+              <BulletList>
+                <li>
+                  Ask what personal information we hold about you
+                </li>
+
+                <li>
+                  Request correction of inaccurate information
+                </li>
+
+                <li>
+                  Request updating of incomplete information
+                </li>
+
+                <li>
+                  Request deletion or erasure where applicable
+                </li>
+
+                <li>
+                  Withdraw consent where processing is based on
+                  consent
+                </li>
+
+                <li>
+                  Opt out of promotional communication
+                </li>
+
+                <li>
+                  Raise a complaint or grievance regarding how your
+                  information is handled
+                </li>
+              </BulletList>
+
+              <p>
+                Withdrawal of consent does not affect processing that
+                was lawful before the withdrawal or information we
+                are required to retain under applicable law.
+              </p>
+
+              <p>
+                To make a privacy-related request, contact us using
+                the details below.
+              </p>
+            </PolicySection>
+
+            {/* =================================================
+                12. CHILDREN'S PRIVACY
+            ================================================== */}
+
+            <PolicySection
+              number={12}
+              id="children"
+              title="Children’s Privacy"
+            >
+              <p>
+                Our property consultation, investment advisory and
+                enquiry services are intended for adults.
+              </p>
+
+              <p>
+                We do not knowingly solicit personal information from
+                children for property or investment services.
+              </p>
+
+              <p>
+                If we learn that personal information relating to a
+                child has been collected inappropriately, we will take
+                reasonable steps to address it in accordance with
+                applicable law.
+              </p>
+            </PolicySection>
+
+            {/* =================================================
+                13. INTERNATIONAL USERS
+            ================================================== */}
+
+            <PolicySection
+              number={13}
+              id="international-users"
+              title="International Users"
+            >
+              <p>
+                Dholera Times may be accessed by NRIs and other users
+                located outside India.
+              </p>
+
+              <p>
+                Information submitted through our website may be
+                processed or stored in India or through service
+                providers operating in other jurisdictions.
+              </p>
+
+              <p>
+                Where applicable, we will handle cross-border
+                processing and transfers in accordance with relevant
+                legal requirements.
+              </p>
+            </PolicySection>
+
+            {/* =================================================
+                14. INVESTMENT & FINANCIAL INFORMATION
+            ================================================== */}
+
+            <PolicySection
+              number={14}
+              id="investment-financial"
+              title="Investment & Financial Information"
+            >
+              <p>
+                Content published by Dholera Times regarding Dholera
+                investment, property prices, infrastructure, market
+                trends and investment opportunities is provided for
+                general information and research purposes.
+              </p>
+
+              <p>
+                Personal information submitted for investment
+                consultation may be used to understand your
+                requirements and provide relevant property or market
+                information.
+              </p>
+
+              <p>
+                Dholera Times does not guarantee future property
+                appreciation, investment returns or market
+                performance.
+              </p>
+
+              <p>
+                Users should independently evaluate legal, financial,
+                tax and investment considerations before making a
+                transaction.
+              </p>
+            </PolicySection>
+
+            {/* =================================================
+                15. CHANGES
+            ================================================== */}
+
+            <PolicySection
+              number={15}
+              id="changes"
+              title="Changes to This Privacy Policy"
+            >
+              <p>
+                We may update this Privacy Policy from time to time to
+                reflect:
+              </p>
+
+              <BulletList>
+                <li>Changes to our services</li>
+                <li>New website features</li>
+                <li>Changes in technology</li>
+
+                <li>
+                  Changes in legal or regulatory requirements
+                </li>
+
+                <li>
+                  Changes in our information-handling practices
+                </li>
+              </BulletList>
+
+              <p>
+                When material changes are made, the “Last Updated”
+                date at the top of this page will be revised.
+              </p>
+
+              <p>
+                We encourage users to review this page periodically.
+              </p>
+            </PolicySection>
+
+            {/* =================================================
+                16. CONTACT
+            ================================================== */}
+
+            <PolicySection
+              number={16}
+              id="contact"
+              title="Contact Us About Privacy"
+            >
+              <p>
+                If you have a question, request or complaint regarding
+                this Privacy Policy or your personal information,
+                contact:
+              </p>
+
+              <p className="font-semibold text-black">
+                Dholera Times
+              </p>
+
+              <div
+                className="
+                  grid
+                  grid-cols-1
+
+                  gap-3
+
+                  sm:grid-cols-2
+                "
+              >
+                {/* EMAIL */}
+
+                <a
+                  href="mailto:info@dholeratimes.com?subject=Privacy%20Request"
+                  className="
+                    flex
+                    items-start
+
+                    gap-3
+
+                    rounded-xl
+
+                    border
+                    border-black/10
+
+                    bg-black/[0.02]
+
+                    p-4
+
+                    transition-[background-color,border-color]
+                    duration-200
+
+                    hover:border-[#EC1C40]/25
+                    hover:bg-[#EC1C40]/5
+                  "
+                >
+                  <span
+                    className="
+                      flex
+                      h-9
+                      w-9
+
+                      shrink-0
+
+                      items-center
+                      justify-center
+
+                      rounded-lg
+
+                      bg-[#EC1C40]/10
+
+                      text-[#EC1C40]
+                    "
+                  >
+                    <Mail
+                      size={17}
+                      aria-hidden="true"
+                    />
+                  </span>
+
+                  <span className="min-w-0">
+                    <span
+                      className="
+                        block
+
+                        text-[12px]
+                        font-semibold
+
+                        text-black/50
+                      "
+                    >
+                      Email
+                    </span>
+
+                    <span
+                      className="
+                        mt-1
+
+                        block
+
+                        break-all
+
+                        text-[14px]
+                        font-semibold
+
+                        text-black
+
+                        sm:text-[15px]
+                      "
+                    >
+                      info@dholeratimes.com
+                    </span>
+                  </span>
+                </a>
+
+                {/* PHONE */}
+
+                <a
+                  href="tel:+919958993549"
+                  className="
+                    flex
+                    items-start
+
+                    gap-3
+
+                    rounded-xl
+
+                    border
+                    border-black/10
+
+                    bg-black/[0.02]
+
+                    p-4
+
+                    transition-[background-color,border-color]
+                    duration-200
+
+                    hover:border-[#EC1C40]/25
+                    hover:bg-[#EC1C40]/5
+                  "
+                >
+                  <span
+                    className="
+                      flex
+                      h-9
+                      w-9
+
+                      shrink-0
+
+                      items-center
+                      justify-center
+
+                      rounded-lg
+
+                      bg-[#EC1C40]/10
+
+                      text-[#EC1C40]
+                    "
+                  >
+                    <Phone
+                      size={17}
+                      aria-hidden="true"
+                    />
+                  </span>
+
+                  <span>
+                    <span
+                      className="
+                        block
+
+                        text-[12px]
+                        font-semibold
+
+                        text-black/50
+                      "
+                    >
+                      Phone
+                    </span>
+
+                    <span
+                      className="
+                        mt-1
+
+                        block
+
+                        text-[14px]
+                        font-semibold
+
+                        text-black
+
+                        sm:text-[15px]
+                      "
+                    >
+                      +91 99589 93549
+                    </span>
+                  </span>
+                </a>
+
+                {/* ADDRESS */}
+
+                <div
+                  className="
+                    flex
+                    items-start
+
+                    gap-3
+
+                    rounded-xl
+
+                    border
+                    border-black/10
+
+                    bg-black/[0.02]
+
+                    p-4
+
+                    sm:col-span-2
+                  "
+                >
+                  <span
+                    className="
+                      flex
+                      h-9
+                      w-9
+
+                      shrink-0
+
+                      items-center
+                      justify-center
+
+                      rounded-lg
+
+                      bg-[#EC1C40]/10
+
+                      text-[#EC1C40]
+                    "
+                  >
+                    <MapPin
+                      size={17}
+                      aria-hidden="true"
+                    />
+                  </span>
+
+                  <span>
+                    <span
+                      className="
+                        block
+
+                        text-[12px]
+                        font-semibold
+
+                        text-black/50
+                      "
+                    >
+                      Head Office
+                    </span>
+
+                    <span
+                      className="
+                        mt-1
+
+                        block
+
+                        text-[14px]
+                        font-medium
+                        leading-6
+
+                        text-black/70
+
+                        sm:text-[15px]
+                      "
+                    >
+                      CGJ - 194, DLF Capital Greens Shivaji
+                      Marg, Karampura Industrial Area Karam
+                      Pura, Delhi - 110015 India
+                    </span>
+                  </span>
+                </div>
+              </div>
+
+              <p>
+                Please include{" "}
+                <strong className="font-semibold text-black">
+                  “Privacy Request”
+                </strong>{" "}
+                in the subject line of privacy-related emails so our
+                team can identify your request appropriately.
+              </p>
+            </PolicySection>
+
+            {/* =================================================
+                CLOSING
+            ================================================== */}
+
+            <section
+              className="
+                mt-8
+
+                border-t
+                border-black/10
+
+                pt-7
+
+                sm:mt-9
+
+                sm:rounded-2xl
+                sm:border-0
+                sm:bg-black
+                sm:p-6
+
+                md:p-7
+              "
+            >
+              <h2
+                className="
+                  text-[21px]
+                  font-bold
+                  leading-[1.3]
+
+                  tracking-[-0.02em]
+
+                  text-black
+
+                  sm:text-[23px]
+                  sm:text-white
+                "
+              >
+                Your Privacy{" "}
+                <span className="text-[#EC1C40]">
+                  Matters to Us
+                </span>
+              </h2>
+
+              <div
+                className="
+                  mt-4
+
+                  space-y-4
+
+                  text-[15px]
+                  leading-7
+
+                  text-black/65
+
+                  sm:text-white/70
+                "
+              >
+                <p>
+                  Dholera Times aims to provide Dholera Smart City
+                  news, investment insights, property information and
+                  advisory services while respecting the privacy of
+                  the people who use our platform.
+                </p>
+
+                <p
+                  className="
+                    font-semibold
+
+                    text-black
+
+                    sm:text-white
+                  "
+                >
+                  Dholera Matlab Dholera Times.
+                </p>
+              </div>
+            </section>
+          </article>
+        </div>
+      </section>
+    </main>
   );
 }

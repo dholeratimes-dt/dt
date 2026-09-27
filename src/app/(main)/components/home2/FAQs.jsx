@@ -1,128 +1,47 @@
 "use client";
 
 import { useId, useState } from "react";
-import {
-  Plus,
-  Minus,
-  ChevronDown,
-  ChevronUp,
-  Phone,
-} from "lucide-react";
+import { Minus, Plus } from "lucide-react";
+
+/* ============================================================
+   FAQ DATA
+============================================================ */
 
 const faqs = [
   {
-    question:
-      "What kind of residential plots does Dholera Times offer in Dholera?",
+    question: "What is Dholera Smart City?",
     answer:
-      "Dholera Times helps buyers explore residential plot options in prime locations in Dholera, including projects with registry-ready documentation and buyer support.",
+      "Dholera Smart City also refers to Dholera Special Investment Region (Dholera SIR), a planned industrial city in Gujarat being developed as part of the Delhi-Mumbai Industrial Corridor.",
   },
   {
-    question: "Are the plots registry-ready?",
+    question: "What are the latest developments in Dholera?",
     answer:
-      "Yes, Dholera Times highlights projects with registry-ready documentation so buyers can move forward with more clarity and confidence.",
+      "Major developments include infrastructure, transportation, industrial projects, semiconductor manufacturing and expansion of the Dholera SIR ecosystem. Dholera Times tracks these developments individually as their status changes.",
   },
   {
-    question: "Can I get immediate possession of the plot?",
+    question: "Where can I find the latest Dholera news?",
     answer:
-      "Some projects offer immediate possession, depending on the location and project type. Our team can help you check the current availability and possession details.",
+      "You can follow the Dholera Times Latest Updates section for recent infrastructure, industry, government and investment developments.",
   },
   {
-    question: "How can Dholera Times help me choose the right plot?",
+    question: "Is Dholera good for investment?",
     answer:
-      "Dholera Times helps buyers compare plot options based on budget, location, project type, and buying goals, with support from enquiry to booking.",
-  },
-  {
-    question: "Do you provide site visit support?",
-    answer:
-      "Yes, our team can assist you with site visit planning so you can better understand the project location, surroundings, and plot options.",
-  },
-  {
-    question: "Is Dholera a good place to buy a residential plot?",
-    answer:
-      "Dholera is gaining attention because of its planned development, infrastructure growth, and future connectivity. Many buyers explore it for long-term residential and investment potential.",
-  },
-  {
-    question: "What documents should I check before booking a plot?",
-    answer:
-      "Buyers should check registry status, title clarity, project details, and other important documents before booking. Dholera Times helps guide buyers through this process.",
-  },
-  {
-    question: "Can I talk to your team before making a decision?",
-    answer:
-      "Yes, you can connect with the Dholera Times team for project details, pricing, location guidance, and support before booking.",
+      "Dholera has significant infrastructure and industrial development activity, but individual investment decisions depend on location, price, legal status, development stage, investment horizon and risk tolerance.",
   },
 ];
+
+/* ============================================================
+   FAQ COMPONENT
+============================================================ */
 
 export default function FAQS() {
   const faqId = useId();
 
   const [openIndex, setOpenIndex] = useState(null);
-  const [showAll, setShowAll] = useState(false);
-
-  const displayedFaqs = showAll ? faqs : faqs.slice(0, 5);
 
   const toggleFAQ = (index) => {
     setOpenIndex((current) =>
-      current === index ? null : index
-    );
-  };
-
-  const toggleShowAll = () => {
-    if (
-      showAll &&
-      openIndex !== null &&
-      openIndex >= 5
-    ) {
-      setOpenIndex(null);
-    }
-
-    setShowAll((current) => !current);
-  };
-
-  const renderAnswer = (answer) => {
-    if (Array.isArray(answer)) {
-      return (
-        <ul
-          className="
-            list-disc
-            space-y-2.5
-            pl-5
-
-            text-[15px]
-            font-normal
-            leading-[26px]
-            text-[#68565E]
-
-            marker:text-[#8F2946]
-
-            sm:text-[16px]
-            sm:leading-7
-          "
-        >
-          {answer.map((item, index) => (
-            <li key={index}>{item}</li>
-          ))}
-        </ul>
-      );
-    }
-
-    return (
-      <p
-        className="
-          max-w-[720px]
-
-          text-[15px]
-          font-normal
-          leading-[26px]
-
-          text-[#68565E]
-
-          sm:text-[16px]
-          sm:leading-7
-        "
-      >
-        {answer}
-      </p>
+      current === index ? null : index,
     );
   };
 
@@ -130,17 +49,14 @@ export default function FAQS() {
     <section
       aria-labelledby={`${faqId}-heading`}
       className="
-        relative
-        isolate
-        overflow-hidden
+        w-full
 
-        border-y
-        border-[#EAD9DF]
-
-        bg-[#F3E7EC]
+        bg-[#FAF7F8]
 
         px-4
-        py-10
+        py-8
+
+        text-[#39252E]
 
         selection:bg-[#E0A4B5]
         selection:text-[#39252E]
@@ -148,59 +64,15 @@ export default function FAQS() {
         min-[414px]:px-5
 
         sm:px-6
-        sm:py-14
+        sm:py-10
 
         md:px-8
-        md:py-12
+        md:py-10
 
-        lg:py-[70px]
+        lg:px-10
+        lg:py-12
       "
     >
-      {/* Background decoration */}
-      <div
-        aria-hidden="true"
-        className="
-          pointer-events-none
-          absolute
-          inset-0
-          -z-10
-        "
-      >
-        <div
-          className="
-            absolute
-            -left-40
-            -top-48
-
-            h-[420px]
-            w-[420px]
-
-            rounded-full
-
-            bg-[#8F2946]/[0.035]
-
-            blur-3xl
-          "
-        />
-
-        <div
-          className="
-            absolute
-            -bottom-56
-            right-[-180px]
-
-            h-[460px]
-            w-[460px]
-
-            rounded-full
-
-            bg-white/40
-
-            blur-3xl
-          "
-        />
-      </div>
-
       <div
         className="
           mx-auto
@@ -211,272 +83,101 @@ export default function FAQS() {
 
           grid-cols-1
 
-          gap-10
+          gap-6
 
-          md:grid-cols-[minmax(0,0.72fr)_minmax(0,1.55fr)]
+          md:grid-cols-[minmax(220px,0.6fr)_minmax(0,1.4fr)]
           md:items-start
-          md:gap-12
+          md:gap-8
 
-          lg:gap-16
+          lg:grid-cols-[minmax(280px,0.62fr)_minmax(0,1.38fr)]
+          lg:gap-12
 
-          xl:gap-[72px]
+          xl:grid-cols-[minmax(310px,0.65fr)_minmax(0,1.35fr)]
+          xl:gap-16
         "
       >
-        {/* =====================================================
-            LEFT CONTENT
-        ====================================================== */}
+        {/* ===================================================
+            LEFT SIDE
+        ==================================================== */}
 
         <div
           className="
-            relative
             min-w-0
 
             md:sticky
-            md:top-22
+            md:top-24
           "
         >
-          {/* Eyebrow
-              Mobile: normal flow
-              Desktop: moved above heading so heading aligns
-              with FAQ card
-          */}
-          {/* <div
-            className="
-              mb-4
-              flex
-              items-center
-              gap-3
-
-              md:absolute
-              md:-top-9
-              md:left-0
-              md:mb-0
-            "
-          >
-            <span
-              aria-hidden="true"
-              className="
-                h-px
-                w-7
-                shrink-0
-
-                bg-[#8F2946]
-              "
-            />
-
-            <p
-              className="
-                text-xs
-                font-bold
-                uppercase
-                leading-5
-
-                tracking-[0.16em]
-
-                text-[#8F2946]
-              "
-            >
-              Need clarity?
-            </p>
-          </div> */}
-
-          {/* Heading */}
           <h2
             id={`${faqId}-heading`}
             className="
-              max-w-[400px]
+              max-w-[390px]
 
-              text-[30px]
-              font-semibold
-              leading-[1.18]
+              text-[28px]
+              font-bold
+              leading-[1.12]
 
-              tracking-[-0.025em]
+              tracking-[-0.03em]
 
               text-[#39252E]
 
-              min-[414px]:text-[32px]
+              sm:text-[30px]
 
-              sm:text-[34px]
+              md:text-[32px]
 
-              md:text-[38px]
-              md:leading-[1.16]
+              lg:text-[38px]
+              lg:leading-[1.15]
 
-              lg:text-[42px]
+              xl:text-[40px]
             "
           >
             Frequently Asked{" "}
-            <span className="text-[#8F2946]">
+            <span
+              className="
+                block
+
+                text-[#8F2946]
+
+                sm:inline
+                md:block
+              "
+            >
               Questions
             </span>
           </h2>
-
-          {/* Supporting text */}
-          <p
-            className="
-              mt-5
-              max-w-[380px]
-
-              text-[15px]
-              leading-[26px]
-
-              text-[#68565E]
-
-              sm:text-[16px]
-              sm:leading-7
-
-              md:mt-6
-            "
-          >
-            Have more questions? Speak directly with
-            our team for project, pricing, location,
-            and booking guidance.
-          </p>
-
-          {/* Divider */}
-          <div
-            aria-hidden="true"
-            className="
-              my-6
-              h-px
-              max-w-[380px]
-
-              bg-[#E0A4B5]/60
-
-              sm:my-7
-
-              md:my-8
-            "
-          />
-
-          {/* CTA */}
-          <a
-            href="tel:+919958993549"
-            className="
-              group
-
-              inline-flex
-              min-h-[52px]
-
-              w-full
-
-              items-center
-              justify-center
-              gap-3
-
-              rounded-lg
-
-              bg-[#8F2946]
-
-              px-6
-              py-3
-
-              text-[15px]
-              font-semibold
-              leading-6
-
-              text-white
-
-              shadow-[0_8px_22px_-14px_rgba(116,32,57,0.65)]
-
-              transition-[background-color,transform,box-shadow]
-              duration-200
-
-              hover:-translate-y-0.5
-              hover:bg-[#742039]
-              hover:shadow-[0_12px_26px_-14px_rgba(116,32,57,0.75)]
-
-              active:translate-y-0
-
-              focus-visible:outline
-              focus-visible:outline-2
-              focus-visible:outline-offset-4
-              focus-visible:outline-[#8F2946]
-
-              sm:w-auto
-
-              motion-reduce:transform-none
-              motion-reduce:transition-none
-            "
-          >
-            <Phone
-              size={18}
-              strokeWidth={1.8}
-              aria-hidden="true"
-              className="shrink-0"
-            />
-
-            <span>Give us a missed call</span>
-          </a>
-
-          {/* Trust line */}
-          <div
-            className="
-              mt-4
-
-              flex
-              items-center
-              gap-2
-
-              text-[12px]
-              font-medium
-              leading-5
-
-              text-[#68565E]
-
-              sm:mt-5
-            "
-          >
-            <span
-              aria-hidden="true"
-              className="
-                h-1.5
-                w-1.5
-                shrink-0
-
-                rounded-full
-
-                bg-[#8F2946]
-              "
-            />
-
-            <span>
-              Direct assistance from our team
-            </span>
-          </div>
         </div>
 
-        {/* =====================================================
-            RIGHT FAQ AREA
-        ====================================================== */}
+        {/* ===================================================
+            RIGHT SIDE — FAQ ACCORDION
+        ==================================================== */}
 
         <div className="min-w-0">
           <div
-            id={`${faqId}-list`}
             className="
               overflow-hidden
 
-              rounded-xl
+              rounded-2xl
 
               border
-              border-[#E0A4B5]/60
+              border-[#E0C7D0]
 
               bg-white
 
-              shadow-[0_18px_50px_-35px_rgba(116,32,57,0.28)]
-
-              sm:rounded-2xl
+              shadow-[0_12px_30px_rgba(57,37,46,0.045)]
             "
           >
-            {displayedFaqs.map((faq, index) => {
+            {faqs.map((faq, index) => {
               const isOpen =
                 openIndex === index;
 
-              const questionId = `${faqId}-question-${index}`;
+              const questionId =
+                `${faqId}-question-${index}`;
 
-              const answerId = `${faqId}-answer-${index}`;
+              const answerId =
+                `${faqId}-answer-${index}`;
 
               return (
-                <div
+                <article
                   key={faq.question}
                   className={`
                     relative
@@ -489,21 +190,25 @@ export default function FAQS() {
                     transition-colors
                     duration-200
 
-                    motion-reduce:transition-none
-
                     ${
                       isOpen
-                        ? "bg-[#F7EBEF]"
-                        : "bg-white hover:bg-[#FBF7F8]"
+                        ? "bg-[#FFFDFE]"
+                        : "bg-white hover:bg-[#FCF9FA]"
                     }
+
+                    motion-reduce:transition-none
                   `}
                 >
-                  {/* Active accent */}
+                  {/* =========================================
+                      ACTIVE LEFT LINE
+                  ========================================== */}
+
                   {isOpen && (
                     <span
                       aria-hidden="true"
                       className="
                         absolute
+
                         bottom-0
                         left-0
                         top-0
@@ -514,6 +219,10 @@ export default function FAQS() {
                       "
                     />
                   )}
+
+                  {/* =========================================
+                      QUESTION
+                  ========================================== */}
 
                   <h3>
                     <button
@@ -528,7 +237,6 @@ export default function FAQS() {
                         group
 
                         flex
-                        min-h-[76px]
                         w-full
 
                         items-center
@@ -537,46 +245,52 @@ export default function FAQS() {
                         gap-4
 
                         px-4
-                        py-[18px]
+                        py-5
 
                         text-left
 
                         focus-visible:outline-none
                         focus-visible:ring-2
-                        focus-visible:ring-[#8F2946]
                         focus-visible:ring-inset
+                        focus-visible:ring-[#8F2946]
 
                         min-[414px]:px-5
 
-                        sm:min-h-[80px]
-                        sm:gap-5
+                        sm:min-h-[78px]
                         sm:px-6
                         sm:py-5
 
-                        md:min-h-[84px]
+                        md:min-h-[82px]
                         md:px-7
 
-                        lg:min-h-[85px]
+                        lg:min-h-[84px]
                         lg:px-8
                         lg:py-[22px]
                       "
                     >
+                      {/* QUESTION TEXT */}
+
                       <span
                         className={`
                           min-w-0
                           pr-2
 
-                          text-[16px]
+                          text-[15.5px]
                           font-semibold
                           leading-[24px]
+
+                          tracking-[-0.01em]
 
                           transition-colors
                           duration-200
 
+                          sm:text-[16px]
                           sm:leading-[25px]
 
-                          md:text-[17px]
-                          md:leading-[27px]
+                          md:text-[16.5px]
+
+                          lg:text-[17px]
+                          lg:leading-[27px]
 
                           ${
                             isOpen
@@ -588,11 +302,15 @@ export default function FAQS() {
                         {faq.question}
                       </span>
 
+                      {/* PLUS / MINUS */}
+
                       <span
                         className={`
                           flex
+
                           h-9
                           w-9
+
                           shrink-0
 
                           items-center
@@ -602,43 +320,42 @@ export default function FAQS() {
 
                           border
 
-                          transition-[background-color,border-color,color]
+                          transition-[background-color,border-color,color,transform]
                           duration-200
 
                           sm:h-10
                           sm:w-10
 
-                          motion-reduce:transition-none
-
                           ${
                             isOpen
-                              ? "border-[#8F2946] bg-[#8F2946] text-white"
-                              : "border-[#E0A4B5]/60 bg-[#F7EBEF] text-[#8F2946] group-hover:border-[#8F2946]/50 group-hover:bg-[#F3E7EC]"
+                              ? `
+                                  border-[#8F2946]
+                                  bg-[#8F2946]
+                                  text-white
+                                `
+                              : `
+                                  border-[#E0A4B5]/60
+                                  bg-[#F7EBEF]
+                                  text-[#8F2946]
+
+                                  group-hover:border-[#8F2946]/60
+                                  group-hover:bg-[#F3E7EC]
+                                `
                           }
+
+                          motion-reduce:transition-none
                         `}
                       >
                         {isOpen ? (
                           <Minus
-                            className="
-                              h-4
-                              w-4
-
-                              sm:h-[18px]
-                              sm:w-[18px]
-                            "
-                            strokeWidth={2}
+                            size={18}
+                            strokeWidth={1.9}
                             aria-hidden="true"
                           />
                         ) : (
                           <Plus
-                            className="
-                              h-4
-                              w-4
-
-                              sm:h-[18px]
-                              sm:w-[18px]
-                            "
-                            strokeWidth={2}
+                            size={18}
+                            strokeWidth={1.9}
                             aria-hidden="true"
                           />
                         )}
@@ -646,7 +363,10 @@ export default function FAQS() {
                     </button>
                   </h3>
 
-                  {/* Answer */}
+                  {/* =========================================
+                      ANSWER
+                  ========================================== */}
+
                   <div
                     id={answerId}
                     role="region"
@@ -662,148 +382,43 @@ export default function FAQS() {
                       sm:pb-6
 
                       md:px-7
-                      md:pb-7
 
                       lg:px-8
-                      lg:pb-8
+                      lg:pb-7
                     "
                   >
                     <div
                       className="
                         border-t
-                        border-[#E0A4B5]/50
+                        border-[#EAD9DF]
 
                         pt-4
 
                         sm:pt-5
                       "
                     >
-                      {renderAnswer(faq.answer)}
+                      <p
+                        className="
+                          max-w-[850px]
+
+                          text-[15px]
+                          font-normal
+                          leading-[26px]
+
+                          text-[#68565E]
+
+                          sm:text-[16px]
+                          sm:leading-7
+                        "
+                      >
+                        {faq.answer}
+                      </p>
                     </div>
                   </div>
-                </div>
+                </article>
               );
             })}
           </div>
-
-          {/* =====================================================
-              SHOW MORE / LESS
-          ====================================================== */}
-
-          {faqs.length > 5 && (
-            <div
-              className="
-                mt-5
-
-                flex
-                justify-center
-
-                sm:mt-6
-
-                md:mt-7
-              "
-            >
-              <button
-                type="button"
-                onClick={toggleShowAll}
-                aria-expanded={showAll}
-                aria-controls={`${faqId}-list`}
-                className="
-                  group
-
-                  inline-flex
-                  min-h-[46px]
-
-                  w-full
-
-                  items-center
-                  justify-center
-                  gap-2
-
-                  rounded-lg
-
-                  border
-                  border-[#E0A4B5]/70
-
-                  bg-white
-
-                  px-5
-                  py-2.5
-
-                  text-[14px]
-                  font-semibold
-                  leading-6
-
-                  text-[#8F2946]
-
-                  transition-[background-color,border-color,color]
-                  duration-200
-
-                  hover:border-[#8F2946]/50
-                  hover:bg-[#F7EBEF]
-                  hover:text-[#742039]
-
-                  focus-visible:outline-none
-                  focus-visible:ring-2
-                  focus-visible:ring-[#8F2946]
-                  focus-visible:ring-offset-2
-                  focus-visible:ring-offset-[#F3E7EC]
-
-                  sm:w-auto
-                  sm:px-6
-
-                  motion-reduce:transition-none
-                "
-              >
-                {showAll ? (
-                  <>
-                    <span>Show Less</span>
-
-                    <ChevronUp
-                      className="
-                        h-5
-                        w-5
-                        shrink-0
-
-                        transition-transform
-                        duration-200
-
-                        group-hover:-translate-y-0.5
-
-                        motion-reduce:transform-none
-                        motion-reduce:transition-none
-                      "
-                      aria-hidden="true"
-                    />
-                  </>
-                ) : (
-                  <>
-                    <span>
-                      Show More FAQs (
-                      {faqs.length - 5} more)
-                    </span>
-
-                    <ChevronDown
-                      className="
-                        h-5
-                        w-5
-                        shrink-0
-
-                        transition-transform
-                        duration-200
-
-                        group-hover:translate-y-0.5
-
-                        motion-reduce:transform-none
-                        motion-reduce:transition-none
-                      "
-                      aria-hidden="true"
-                    />
-                  </>
-                )}
-              </button>
-            </div>
-          )}
         </div>
       </div>
     </section>

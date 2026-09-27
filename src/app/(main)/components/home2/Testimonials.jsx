@@ -1,14 +1,16 @@
-
-
 "use client";
 
 import { useState } from "react";
+
 import {
   ChevronLeft,
   ChevronRight,
   Quote,
 } from "lucide-react";
-import { FaPhone, FaWhatsapp } from "react-icons/fa";
+
+/* ============================================================
+   TESTIMONIAL DATA
+============================================================ */
 
 const testimonials = [
   {
@@ -49,42 +51,63 @@ const testimonials = [
   },
 ];
 
+/* ============================================================
+   SETTINGS
+============================================================ */
+
 const TESTIMONIALS_PER_PAGE = 3;
 
+/* ============================================================
+   COMPONENT
+============================================================ */
+
 const TestimonialPagination = () => {
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] =
+    useState(1);
 
   const totalPages = Math.ceil(
-    testimonials.length / TESTIMONIALS_PER_PAGE,
+    testimonials.length /
+      TESTIMONIALS_PER_PAGE,
   );
 
   const firstIndex =
-    (currentPage - 1) * TESTIMONIALS_PER_PAGE;
+    (currentPage - 1) *
+    TESTIMONIALS_PER_PAGE;
 
-  const currentTestimonials = testimonials.slice(
-    firstIndex,
-    firstIndex + TESTIMONIALS_PER_PAGE,
-  );
+  const currentTestimonials =
+    testimonials.slice(
+      firstIndex,
+      firstIndex +
+        TESTIMONIALS_PER_PAGE,
+    );
 
   const paginationButtonClass = `
     inline-flex
-    h-12
-    w-12
+
+    h-11
+    w-11
+
     shrink-0
+
     items-center
     justify-center
 
     rounded-full
+
     border
 
     transition-[background-color,border-color,color,transform,box-shadow]
     duration-200
+    ease-out
 
     focus-visible:outline-none
     focus-visible:ring-2
     focus-visible:ring-[#8F2946]
     focus-visible:ring-offset-2
-    focus-visible:ring-offset-[#FAF7F8]
+    focus-visible:ring-offset-white
+
+    sm:h-12
+    sm:w-12
 
     motion-reduce:transform-none
     motion-reduce:transition-none
@@ -98,18 +121,15 @@ const TestimonialPagination = () => {
         isolate
         overflow-hidden
 
-        border-y
-        border-[#E8DDE1]
-
-        bg-[#FAF7F8]
+        bg-white
 
         px-4
-        py-12
+        py-8
 
-        text-[#35272D]
+        text-[#39252E]
 
-        selection:bg-[#E8C6D1]
-        selection:text-[#35272D]
+        selection:bg-[#E0A4B5]
+        selection:text-[#39252E]
 
         min-[414px]:px-5
 
@@ -117,33 +137,57 @@ const TestimonialPagination = () => {
         sm:py-10
 
         md:px-8
-        md:py-12
+        md:py-10
 
-        lg:py-14
+        lg:px-10
+        lg:py-12
       "
     >
       {/* =====================================================
-          BACKGROUND DETAILS
+          SUBTLE BACKGROUND DETAIL
+
+          White remains the dominant section background.
       ====================================================== */}
 
       <div
         aria-hidden="true"
         className="
           pointer-events-none
+
           absolute
           inset-0
           -z-10
+
           overflow-hidden
         "
       >
         <div
           className="
             absolute
-            -left-48
-            -top-56
 
-            h-[460px]
-            w-[460px]
+            -left-44
+            -top-52
+
+            h-[420px]
+            w-[420px]
+
+            rounded-full
+
+            bg-[#E0A4B5]/[0.055]
+
+            blur-3xl
+          "
+        />
+
+        <div
+          className="
+            absolute
+
+            -bottom-52
+            -right-40
+
+            h-[440px]
+            w-[440px]
 
             rounded-full
 
@@ -152,114 +196,76 @@ const TestimonialPagination = () => {
             blur-3xl
           "
         />
-
-        <div
-          className="
-            absolute
-            -bottom-56
-            -right-44
-
-            h-[480px]
-            w-[480px]
-
-            rounded-full
-
-            bg-[#E8C6D1]/20
-
-            blur-3xl
-          "
-        />
       </div>
 
-      <div className="mx-auto w-full max-w-7xl">
-        {/* =====================================================
+      <div
+        className="
+          mx-auto
+          w-full
+          max-w-7xl
+        "
+      >
+        {/* ===================================================
             HEADING
-        ====================================================== */}
+        ==================================================== */}
 
         <header
           className="
             mx-auto
-            mb-9
+
+            mb-7
+
             max-w-3xl
+
             text-center
 
-            sm:mb-11
+            sm:mb-8
 
-            md:mb-12
+            md:mb-9
 
-            lg:mb-14
+            lg:mb-10
           "
         >
-          {/* Eyebrow */}
-          <div
+          {/* EYEBROW */}
+
+          <p
             className="
-              mb-3
+              mb-2
 
-              flex
-              items-center
-              justify-center
+              text-[11px]
+              font-semibold
+              uppercase
+              leading-5
 
-              gap-3
+              tracking-[0.15em]
 
-              sm:mb-4
+              text-[#8F2946]
+
+              sm:mb-3
+              sm:text-xs
             "
           >
-            <span
-              aria-hidden="true"
-              className="
-                h-px
-                w-7
-                shrink-0
+            Customer Experiences
+          </p>
 
-                bg-[#8F2946]
-              "
-            />
+          {/* TITLE */}
 
-            <p
-              className="
-                text-xs
-                font-semibold
-                uppercase
-                leading-5
-
-                tracking-[0.16em]
-
-                text-[#8F2946]
-              "
-            >
-              Customer Experiences
-            </p>
-
-            <span
-              aria-hidden="true"
-              className="
-                h-px
-                w-7
-                shrink-0
-
-                bg-[#8F2946]
-              "
-            />
-          </div>
-
-          {/* Heading */}
           <h2
             id="testimonials-heading"
             className="
-              text-[30px]
-              font-semibold
+              text-[28px]
+              font-bold
               leading-[1.2]
 
               tracking-[-0.025em]
 
-              text-[#35272D]
+              text-[#39252E]
 
-              min-[414px]:text-[32px]
+              sm:text-[30px]
 
-              sm:text-[36px]
+              md:text-[32px]
 
-              lg:text-[42px]
-              lg:leading-[1.16]
+              lg:text-[34px]
             "
           >
             What our customers{" "}
@@ -269,9 +275,9 @@ const TestimonialPagination = () => {
           </h2>
         </header>
 
-        {/* =====================================================
+        {/* ===================================================
             TESTIMONIAL CARDS
-        ====================================================== */}
+        ==================================================== */}
 
         <div
           id="testimonial-cards"
@@ -280,6 +286,7 @@ const TestimonialPagination = () => {
           className="
             grid
             grid-cols-1
+
             items-stretch
 
             gap-4
@@ -292,184 +299,211 @@ const TestimonialPagination = () => {
             lg:gap-6
           "
         >
-          {currentTestimonials.map((testimonial) => (
-            <figure
-              key={testimonial.name}
-              className="
-                group
-
-                relative
-
-                flex
-                h-full
-                min-w-0
-                flex-col
-
-                overflow-hidden
-
-                rounded-xl
-
-                border
-                border-[#E8DDE1]
-
-                bg-white
-
-                p-5
-
-                shadow-[0_12px_34px_-24px_rgba(70,37,49,0.18)]
-
-                transition-[border-color,transform,box-shadow]
-                duration-300
-
-                hover:-translate-y-0.5
-                hover:border-[#DFC8D0]
-                hover:shadow-[0_18px_42px_-26px_rgba(70,37,49,0.24)]
-
-                min-[414px]:p-6
-
-                sm:rounded-2xl
-                sm:p-7
-
-                md:p-6
-
-                lg:p-7
-
-                motion-reduce:transform-none
-                motion-reduce:transition-none
-              "
-            >
-              {/* Top hover accent */}
-              <span
-                aria-hidden="true"
+          {currentTestimonials.map(
+            (testimonial) => (
+              <figure
+                key={
+                  testimonial.name
+                }
                 className="
-                  absolute
-                  inset-x-0
-                  top-0
+                  group
 
-                  h-[3px]
-
-                  origin-left
-                  scale-x-0
-
-                  bg-[#8F2946]
-
-                  transition-transform
-                  duration-300
-
-                  group-hover:scale-x-100
-
-                  motion-reduce:transition-none
-                "
-              />
-
-              {/* Quote icon */}
-              <div
-                aria-hidden="true"
-                className="
-                  mb-5
+                  relative
 
                   flex
-                  h-11
-                  w-11
-                  shrink-0
+                  h-full
+                  min-w-0
+                  flex-col
 
-                  items-center
-                  justify-center
+                  overflow-hidden
 
-                  rounded-xl
+                  rounded-2xl
 
                   border
-                  border-[#DFC8D0]
+                  border-[#EAD9DF]
 
-                  bg-[#F7ECEF]
+                  bg-[#FAF7F8]
 
-                  text-[#8F2946]
+                  p-5
 
-                  transition-[background-color,border-color,color]
-                  duration-200
+                  shadow-[0_6px_20px_rgba(57,37,46,0.035)]
 
-                  group-hover:border-[#8F2946]
-                  group-hover:bg-[#8F2946]
-                  group-hover:text-white
+                  transition-[background-color,border-color,transform,box-shadow]
+                  duration-300
+                  ease-out
 
-                  sm:mb-6
+                  hover:-translate-y-0.5
+                  hover:border-[#E0A4B5]
+                  hover:bg-white
+                  hover:shadow-[0_14px_34px_rgba(116,32,57,0.08)]
 
+                  min-[414px]:p-6
+
+                  sm:p-6
+
+                  lg:p-7
+
+                  motion-reduce:transform-none
                   motion-reduce:transition-none
                 "
               >
-                <Quote
-                  className="h-5 w-5"
-                  strokeWidth={1.8}
+                {/* =========================================
+                    TOP HOVER ACCENT
+                ========================================== */}
+
+                <span
                   aria-hidden="true"
+                  className="
+                    absolute
+                    inset-x-0
+                    top-0
+
+                    h-[3px]
+
+                    origin-left
+                    scale-x-0
+
+                    bg-[#8F2946]
+
+                    transition-transform
+                    duration-300
+                    ease-out
+
+                    group-hover:scale-x-100
+
+                    motion-reduce:transition-none
+                  "
                 />
-              </div>
 
-              {/* Quote */}
-              <blockquote className="flex-1">
-                <p
+                {/* =========================================
+                    QUOTE ICON
+                ========================================== */}
+
+                <div
+                  aria-hidden="true"
                   className="
-                    text-[15px]
-                    font-normal
-                    leading-[27px]
+                    mb-5
 
-                    text-[#53464C]
+                    flex
+                    h-11
+                    w-11
 
-                    sm:text-[16px]
-                    sm:leading-[28px]
+                    shrink-0
+
+                    items-center
+                    justify-center
+
+                    rounded-xl
+
+                    border
+                    border-[#E0A4B5]/55
+
+                    bg-[#F7EBEF]
+
+                    text-[#8F2946]
+
+                    transition-[background-color,border-color,color]
+                    duration-200
+
+                    group-hover:border-[#8F2946]
+                    group-hover:bg-[#8F2946]
+                    group-hover:text-white
+
+                    sm:mb-6
+
+                    motion-reduce:transition-none
                   "
                 >
-                  {testimonial.quote}
-                </p>
-              </blockquote>
+                  <Quote
+                    size={20}
+                    strokeWidth={1.8}
+                    aria-hidden="true"
+                  />
+                </div>
 
-              {/* Customer */}
-              <figcaption
-                className="
-                  mt-6
+                {/* =========================================
+                    TESTIMONIAL
+                ========================================== */}
 
-                  border-t
-                  border-[#E8DDE1]
-
-                  pt-5
-
-                  sm:mt-7
-                "
-              >
-                <p
+                <blockquote
                   className="
-                    text-[16px]
-                    font-semibold
-                    leading-6
-
-                    tracking-tight
-
-                    text-[#35272D]
+                    flex-1
                   "
                 >
-                  {testimonial.name}
-                </p>
+                  <p
+                    className="
+                      text-[15px]
+                      font-normal
+                      leading-[27px]
 
-                <p
+                      text-[#68565E]
+
+                      sm:text-[16px]
+                      sm:leading-[28px]
+                    "
+                  >
+                    {
+                      testimonial.quote
+                    }
+                  </p>
+                </blockquote>
+
+                {/* =========================================
+                    CUSTOMER
+                ========================================== */}
+
+                <figcaption
                   className="
-                    mt-1
+                    mt-6
 
-                    text-[13px]
-                    font-medium
-                    leading-5
+                    border-t
+                    border-[#EAD9DF]
 
-                    text-[#74666C]
+                    pt-5
+
+                    sm:mt-7
                   "
                 >
-                  {testimonial.location}
-                </p>
-              </figcaption>
-            </figure>
-          ))}
+                  <p
+                    className="
+                      text-[16px]
+                      font-semibold
+                      leading-6
+
+                      tracking-tight
+
+                      text-[#39252E]
+                    "
+                  >
+                    {
+                      testimonial.name
+                    }
+                  </p>
+
+                  <p
+                    className="
+                      mt-1
+
+                      text-[13px]
+                      font-medium
+                      leading-5
+
+                      text-[#78666E]
+                    "
+                  >
+                    {
+                      testimonial.location
+                    }
+                  </p>
+                </figcaption>
+              </figure>
+            ),
+          )}
         </div>
 
-        {/* =====================================================
+        {/* ===================================================
             PAGINATION
-        ====================================================== */}
+        ==================================================== */}
 
         <nav
           aria-label="Testimonial pagination"
@@ -482,67 +516,89 @@ const TestimonialPagination = () => {
 
             gap-2.5
 
-            sm:mt-9
+            sm:mt-8
             sm:gap-3
 
-            lg:mt-10
+            lg:mt-9
           "
         >
-          {/* Previous */}
+          {/* PREVIOUS */}
+
           <button
             type="button"
             onClick={() =>
-              setCurrentPage((page) =>
-                Math.max(1, page - 1),
+              setCurrentPage(
+                (page) =>
+                  Math.max(
+                    1,
+                    page - 1,
+                  ),
               )
             }
-            disabled={currentPage === 1}
+            disabled={
+              currentPage === 1
+            }
             aria-label="Previous testimonials"
             aria-controls="testimonial-cards"
             className={`
               ${paginationButtonClass}
 
-              border-[#DFC8D0]
+              border-[#DEC7CF]
+
               bg-white
+
               text-[#742039]
 
               enabled:hover:-translate-y-0.5
               enabled:hover:border-[#8F2946]
-              enabled:hover:bg-[#F7ECEF]
+              enabled:hover:bg-[#F7EBEF]
               enabled:hover:text-[#8F2946]
 
               disabled:cursor-not-allowed
-              disabled:border-[#E8DDE1]
+              disabled:border-[#EAD9DF]
+              disabled:bg-[#FAF7F8]
               disabled:text-[#A8999F]
               disabled:opacity-60
             `}
           >
             <ChevronLeft
               aria-hidden="true"
-              className="h-5 w-5"
+              size={20}
               strokeWidth={2}
             />
           </button>
 
-          {/* Page numbers */}
+          {/* PAGE NUMBERS */}
+
           {Array.from(
-            { length: totalPages },
+            {
+              length:
+                totalPages,
+            },
             (_, index) => {
-              const pageNumber = index + 1;
+              const pageNumber =
+                index + 1;
 
               const isActive =
-                currentPage === pageNumber;
+                currentPage ===
+                pageNumber;
 
               return (
                 <button
-                  key={pageNumber}
+                  key={
+                    pageNumber
+                  }
                   type="button"
                   onClick={() =>
-                    setCurrentPage(pageNumber)
+                    setCurrentPage(
+                      pageNumber,
+                    )
                   }
                   aria-label={`Testimonial page ${pageNumber}`}
                   aria-current={
-                    isActive ? "page" : undefined
+                    isActive
+                      ? "page"
+                      : undefined
                   }
                   aria-controls="testimonial-cards"
                   className={`
@@ -554,371 +610,84 @@ const TestimonialPagination = () => {
                     ${
                       isActive
                         ? `
-                          border-[#8F2946]
-                          bg-[#8F2946]
-                          text-white
+                            border-[#8F2946]
 
-                          shadow-[0_8px_20px_-12px_rgba(116,32,57,0.48)]
-                        `
+                            bg-[#8F2946]
+
+                            text-white
+
+                            shadow-[0_8px_20px_-12px_rgba(116,32,57,0.48)]
+                          `
                         : `
-                          border-[#DFC8D0]
-                          bg-white
-                          text-[#742039]
+                            border-[#DEC7CF]
 
-                          hover:-translate-y-0.5
-                          hover:border-[#8F2946]
-                          hover:bg-[#F7ECEF]
-                          hover:text-[#8F2946]
-                        `
+                            bg-white
+
+                            text-[#742039]
+
+                            hover:-translate-y-0.5
+                            hover:border-[#8F2946]
+                            hover:bg-[#F7EBEF]
+                            hover:text-[#8F2946]
+                          `
                     }
                   `}
                 >
-                  {pageNumber}
+                  {
+                    pageNumber
+                  }
                 </button>
               );
             },
           )}
 
-          {/* Next */}
+          {/* NEXT */}
+
           <button
             type="button"
             onClick={() =>
-              setCurrentPage((page) =>
-                Math.min(totalPages, page + 1),
+              setCurrentPage(
+                (page) =>
+                  Math.min(
+                    totalPages,
+                    page + 1,
+                  ),
               )
             }
-            disabled={currentPage === totalPages}
+            disabled={
+              currentPage ===
+              totalPages
+            }
             aria-label="Next testimonials"
             aria-controls="testimonial-cards"
             className={`
               ${paginationButtonClass}
 
-              border-[#DFC8D0]
+              border-[#DEC7CF]
+
               bg-white
+
               text-[#742039]
 
               enabled:hover:-translate-y-0.5
               enabled:hover:border-[#8F2946]
-              enabled:hover:bg-[#F7ECEF]
+              enabled:hover:bg-[#F7EBEF]
               enabled:hover:text-[#8F2946]
 
               disabled:cursor-not-allowed
-              disabled:border-[#E8DDE1]
+              disabled:border-[#EAD9DF]
+              disabled:bg-[#FAF7F8]
               disabled:text-[#A8999F]
               disabled:opacity-60
             `}
           >
             <ChevronRight
               aria-hidden="true"
-              className="h-5 w-5"
+              size={20}
               strokeWidth={2}
             />
           </button>
         </nav>
-
-        {/* =====================================================
-            CTA
-        ====================================================== */}
-
-        <div
-          className="
-            relative
-
-            mt-10
-
-            overflow-hidden
-
-            rounded-xl
-
-            border
-            border-[#DFC8D0]
-
-            bg-[#F7ECEF]
-
-            p-5
-
-            shadow-[0_18px_48px_-34px_rgba(70,37,49,0.24)]
-
-            min-[414px]:p-6
-
-            sm:mt-12
-            sm:rounded-2xl
-            sm:p-7
-
-            md:mt-14
-            md:p-8
-
-            lg:mt-16
-            lg:p-10
-          "
-        >
-          {/* Decorative background */}
-          <div
-            aria-hidden="true"
-            className="
-              pointer-events-none
-
-              absolute
-              -right-20
-              -top-28
-
-              h-72
-              w-72
-
-              rounded-full
-
-              bg-white/60
-
-              blur-3xl
-            "
-          />
-
-          {/* Top accent */}
-          <div
-            aria-hidden="true"
-            className="
-              absolute
-              left-0
-              top-0
-
-              h-[3px]
-              w-full
-
-              bg-[#8F2946]
-            "
-          />
-
-          <div
-            className="
-              relative
-
-              flex
-              flex-col
-
-              items-center
-              justify-between
-
-              gap-7
-
-              lg:flex-row
-              lg:gap-12
-            "
-          >
-            {/* CTA copy */}
-            <div
-              className="
-                max-w-xl
-
-                text-center
-
-                lg:text-left
-              "
-            >
-              <p
-                className="
-                  text-xs
-                  font-semibold
-                  uppercase
-                  leading-5
-
-                  tracking-[0.15em]
-
-                  text-[#8F2946]
-                "
-              >
-                Investment Assistance
-              </p>
-
-              <h2
-                className="
-                  mt-2
-
-                  text-[26px]
-                  font-semibold
-                  leading-[1.25]
-
-                  tracking-[-0.02em]
-
-                  text-[#35272D]
-
-                  min-[414px]:text-[28px]
-
-                  sm:text-[32px]
-                "
-              >
-                Ready to Invest in Dholera?
-              </h2>
-
-              <p
-                className="
-                  mx-auto
-                  mt-3
-                  max-w-xl
-
-                  text-[15px]
-                  font-normal
-                  leading-[26px]
-
-                  text-[#62545A]
-
-                  sm:text-[16px]
-                  sm:leading-7
-
-                  lg:mx-0
-                "
-              >
-                Get expert guidance and exclusive investment
-                opportunities
-              </p>
-            </div>
-
-            {/* CTA buttons */}
-            <div
-              className="
-                flex
-                w-full
-
-                flex-col
-
-                gap-3
-
-                sm:w-auto
-                sm:flex-row
-
-                lg:shrink-0
-              "
-            >
-              {/* Call */}
-              <a
-                href="tel:+919958993549"
-                className="
-                  inline-flex
-                  min-h-[52px]
-
-                  items-center
-                  justify-center
-
-                  gap-2.5
-
-                  rounded-lg
-
-                  border
-                  border-[#8F2946]
-
-                  bg-[#8F2946]
-
-                  px-6
-                  py-3
-
-                  text-[15px]
-                  font-semibold
-                  leading-6
-
-                  text-white
-
-                  shadow-[0_8px_20px_-12px_rgba(116,32,57,0.5)]
-
-                  transition-[background-color,border-color,transform,box-shadow]
-                  duration-200
-
-                  hover:-translate-y-0.5
-                  hover:border-[#742039]
-                  hover:bg-[#742039]
-                  hover:shadow-[0_10px_24px_-12px_rgba(116,32,57,0.55)]
-
-                  active:translate-y-0
-
-                  focus-visible:outline-none
-                  focus-visible:ring-2
-                  focus-visible:ring-[#8F2946]
-                  focus-visible:ring-offset-2
-                  focus-visible:ring-offset-[#F7ECEF]
-
-                  sm:min-w-[140px]
-
-                  motion-reduce:transform-none
-                  motion-reduce:transition-none
-                "
-              >
-                <FaPhone
-                  aria-hidden="true"
-                  className="
-                    h-4
-                    w-4
-                    shrink-0
-                    rotate-90
-                  "
-                />
-
-                <span>Call Now</span>
-              </a>
-
-              {/* WhatsApp */}
-              <a
-                href="https://wa.me/919958993549?text=Hi"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="
-                  inline-flex
-                  min-h-[52px]
-
-                  items-center
-                  justify-center
-
-                  gap-2.5
-
-                  rounded-lg
-
-                  border
-                  border-[#CFA9B6]
-
-                  bg-white
-
-                  px-6
-                  py-3
-
-                  text-[15px]
-                  font-semibold
-                  leading-6
-
-                  text-[#742039]
-
-                  transition-[background-color,border-color,color,transform]
-                  duration-200
-
-                  hover:-translate-y-0.5
-                  hover:border-[#8F2946]
-                  hover:bg-[#FAF7F8]
-                  hover:text-[#8F2946]
-
-                  active:translate-y-0
-
-                  focus-visible:outline-none
-                  focus-visible:ring-2
-                  focus-visible:ring-[#8F2946]
-                  focus-visible:ring-offset-2
-                  focus-visible:ring-offset-[#F7ECEF]
-
-                  sm:min-w-[160px]
-
-                  motion-reduce:transform-none
-                  motion-reduce:transition-none
-                "
-              >
-                <FaWhatsapp
-                  aria-hidden="true"
-                  className="
-                    h-5
-                    w-5
-                    shrink-0
-                  "
-                />
-
-                <span>WhatsApp Us</span>
-              </a>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );

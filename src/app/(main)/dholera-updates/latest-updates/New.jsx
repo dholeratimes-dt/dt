@@ -173,13 +173,12 @@
 //   );
 // }
 
-import { getNews } from "@/sanity/lib/api";
 
+
+import { getNews } from "@/sanity/lib/api";
 import Image from "next/image";
 import Link from "next/link";
-
 import { urlFor } from "@/sanity/lib/image";
-
 import SidebarWithForm from "./Sidebar";
 
 /* ============================================================
@@ -244,21 +243,21 @@ function NewsCard({ post, index }) {
         rounded-2xl
 
         border
-        border-[#E0A4B5]/70
+        border-black/10
 
         bg-white
 
-        shadow-[0_5px_18px_rgba(57,37,46,0.045)]
+        shadow-[0_5px_18px_rgba(0,0,0,0.045)]
 
         transition-[border-color,box-shadow,transform]
         duration-300
         ease-out
 
         md:hover:-translate-y-1
-        md:hover:border-[#8F2946]
-        md:hover:shadow-[0_16px_36px_rgba(116,32,57,0.11)]
+        md:hover:border-[#EC1C40]/40
+        md:hover:shadow-[0_16px_36px_rgba(236,28,64,0.10)]
 
-        focus-within:border-[#8F2946]
+        focus-within:border-[#EC1C40]
 
         motion-reduce:transform-none
         motion-reduce:transition-none
@@ -277,10 +276,12 @@ function NewsCard({ post, index }) {
           focus-visible:outline-none
           focus-visible:ring-2
           focus-visible:ring-inset
-          focus-visible:ring-[#8F2946]
+          focus-visible:ring-[#EC1C40]
         "
       >
-        {/* IMAGE */}
+        {/* ===================================================
+            IMAGE
+        ==================================================== */}
 
         <div
           className="
@@ -289,13 +290,21 @@ function NewsCard({ post, index }) {
             w-full
             shrink-0
             overflow-hidden
-            bg-[#F3E7EC]
+
+            bg-black/[0.03]
           "
         >
           {post.mainImage ? (
             <Image
-              src={urlFor(post.mainImage).width(900).height(506).url()}
-              alt={post.mainImage?.alt || post.title || "Dholera SIR news"}
+              src={urlFor(post.mainImage)
+                .width(900)
+                .height(506)
+                .url()}
+              alt={
+                post.mainImage?.alt ||
+                post.title ||
+                "Dholera SIR news"
+              }
               fill
               sizes="
                 (max-width: 767px) calc(100vw - 32px),
@@ -326,12 +335,19 @@ function NewsCard({ post, index }) {
                 justify-center
 
                 bg-gradient-to-br
-                from-[#F3E7EC]
-                via-[#F7EEF1]
-                to-[#FAF7F8]
+                from-[#EC1C40]/[0.055]
+                via-[#EC1C40]/[0.025]
+                to-white
               "
             >
-              <span className="text-[14px] font-medium text-[#78666E]">
+              <span
+                className="
+                  text-[14px]
+                  font-medium
+
+                  text-black/55
+                "
+              >
                 No image available
               </span>
             </div>
@@ -341,18 +357,21 @@ function NewsCard({ post, index }) {
             aria-hidden="true"
             className="
               pointer-events-none
+
               absolute
               inset-0
 
               bg-gradient-to-t
-              from-[#39252E]/15
+              from-black/15
               via-transparent
               to-transparent
             "
           />
         </div>
 
-        {/* CONTENT */}
+        {/* ===================================================
+            CONTENT
+        ==================================================== */}
 
         <div
           className="
@@ -377,19 +396,20 @@ function NewsCard({ post, index }) {
 
               tracking-[-0.015em]
 
-              text-[#39252E]
+              text-black
 
               transition-colors
               duration-200
 
               md:min-h-[52px]
-              md:group-hover:text-[#8F2946]
+              md:group-hover:text-[#EC1C40]
 
               lg:text-[18px]
               lg:leading-[27px]
             "
           >
-            {post.title || `Dholera Investment Guide ${index + 1}`}
+            {post.title ||
+              `Dholera Investment Guide ${index + 1}`}
           </h2>
 
           <div
@@ -405,7 +425,7 @@ function NewsCard({ post, index }) {
               gap-3
 
               border-t
-              border-[#EAD9DF]
+              border-black/10
 
               pt-3
             "
@@ -415,12 +435,14 @@ function NewsCard({ post, index }) {
                 text-[13px]
                 leading-5
 
-                text-[#78666E]
+                text-black/55
 
                 sm:text-[14px]
               "
             >
-              {formatDate(post.publishedAt || post._createdAt)}
+              {formatDate(
+                post.publishedAt || post._createdAt,
+              )}
             </p>
 
             <span
@@ -436,12 +458,12 @@ function NewsCard({ post, index }) {
                 font-semibold
                 leading-6
 
-                text-[#8F2946]
+                text-[#EC1C40]
 
                 transition-colors
                 duration-200
 
-                md:group-hover:text-[#742039]
+                md:group-hover:text-[#EC1C40]
 
                 sm:text-[15px]
               "
@@ -459,7 +481,10 @@ function NewsCard({ post, index }) {
    PAGINATION
 ============================================================ */
 
-function Pagination({ currentPage, totalPages }) {
+function Pagination({
+  currentPage,
+  totalPages,
+}) {
   if (totalPages <= 1) {
     return null;
   }
@@ -489,11 +514,15 @@ function Pagination({ currentPage, totalPages }) {
         sm:gap-3
       "
     >
-      {/* PREVIOUS */}
+      {/* ===================================================
+          PREVIOUS
+      ==================================================== */}
 
       {currentPage > 1 ? (
         <Link
-          href={getPageHref(currentPage - 1)}
+          href={getPageHref(
+            currentPage - 1,
+          )}
           aria-label="Previous page"
           className="
             inline-flex
@@ -505,7 +534,7 @@ function Pagination({ currentPage, totalPages }) {
             rounded-lg
 
             border
-            border-[#DFC9D1]
+            border-black/10
 
             bg-white
 
@@ -515,18 +544,18 @@ function Pagination({ currentPage, totalPages }) {
             text-[14px]
             font-semibold
 
-            text-[#39252E]
+            text-black
 
             transition-[background-color,border-color,color]
             duration-200
 
-            hover:border-[#8F2946]
-            hover:bg-[#F7EBEF]
-            hover:text-[#8F2946]
+            hover:border-[#EC1C40]/40
+            hover:bg-[#EC1C40]/5
+            hover:text-[#EC1C40]
 
             focus-visible:outline-none
             focus-visible:ring-2
-            focus-visible:ring-[#8F2946]
+            focus-visible:ring-[#EC1C40]
             focus-visible:ring-offset-2
           "
         >
@@ -547,9 +576,9 @@ function Pagination({ currentPage, totalPages }) {
             rounded-lg
 
             border
-            border-[#EAD9DF]
+            border-black/10
 
-            bg-[#F7F4F5]
+            bg-black/[0.03]
 
             px-4
             py-2
@@ -557,14 +586,16 @@ function Pagination({ currentPage, totalPages }) {
             text-[14px]
             font-semibold
 
-            text-[#A18E96]
+            text-black/35
           "
         >
           ← Previous
         </span>
       )}
 
-      {/* PAGE NUMBERS */}
+      {/* ===================================================
+          PAGE NUMBERS
+      ==================================================== */}
 
       <div
         className="
@@ -578,7 +609,8 @@ function Pagination({ currentPage, totalPages }) {
         "
       >
         {pages.map((page) => {
-          const active = page === currentPage;
+          const active =
+            page === currentPage;
 
           return active ? (
             <span
@@ -594,7 +626,7 @@ function Pagination({ currentPage, totalPages }) {
 
                 rounded-lg
 
-                bg-[#8F2946]
+                bg-[#EC1C40]
 
                 px-3
 
@@ -603,7 +635,7 @@ function Pagination({ currentPage, totalPages }) {
 
                 text-white
 
-                shadow-[0_5px_14px_rgba(143,41,70,0.18)]
+                shadow-[0_5px_14px_rgba(236,28,64,0.20)]
               "
             >
               {page}
@@ -624,7 +656,7 @@ function Pagination({ currentPage, totalPages }) {
                 rounded-lg
 
                 border
-                border-[#DFC9D1]
+                border-black/10
 
                 bg-white
 
@@ -633,18 +665,18 @@ function Pagination({ currentPage, totalPages }) {
                 text-[14px]
                 font-semibold
 
-                text-[#39252E]
+                text-black
 
                 transition-[background-color,border-color,color]
                 duration-200
 
-                hover:border-[#8F2946]
-                hover:bg-[#F7EBEF]
-                hover:text-[#8F2946]
+                hover:border-[#EC1C40]/40
+                hover:bg-[#EC1C40]/5
+                hover:text-[#EC1C40]
 
                 focus-visible:outline-none
                 focus-visible:ring-2
-                focus-visible:ring-[#8F2946]
+                focus-visible:ring-[#EC1C40]
                 focus-visible:ring-offset-2
               "
             >
@@ -654,11 +686,15 @@ function Pagination({ currentPage, totalPages }) {
         })}
       </div>
 
-      {/* NEXT */}
+      {/* ===================================================
+          NEXT
+      ==================================================== */}
 
       {currentPage < totalPages ? (
         <Link
-          href={getPageHref(currentPage + 1)}
+          href={getPageHref(
+            currentPage + 1,
+          )}
           aria-label="Next page"
           className="
             inline-flex
@@ -670,7 +706,7 @@ function Pagination({ currentPage, totalPages }) {
             rounded-lg
 
             border
-            border-[#DFC9D1]
+            border-black/10
 
             bg-white
 
@@ -680,18 +716,18 @@ function Pagination({ currentPage, totalPages }) {
             text-[14px]
             font-semibold
 
-            text-[#39252E]
+            text-black
 
             transition-[background-color,border-color,color]
             duration-200
 
-            hover:border-[#8F2946]
-            hover:bg-[#F7EBEF]
-            hover:text-[#8F2946]
+            hover:border-[#EC1C40]/40
+            hover:bg-[#EC1C40]/5
+            hover:text-[#EC1C40]
 
             focus-visible:outline-none
             focus-visible:ring-2
-            focus-visible:ring-[#8F2946]
+            focus-visible:ring-[#EC1C40]
             focus-visible:ring-offset-2
           "
         >
@@ -712,9 +748,9 @@ function Pagination({ currentPage, totalPages }) {
             rounded-lg
 
             border
-            border-[#EAD9DF]
+            border-black/10
 
-            bg-[#F7F4F5]
+            bg-black/[0.03]
 
             px-4
             py-2
@@ -722,7 +758,7 @@ function Pagination({ currentPage, totalPages }) {
             text-[14px]
             font-semibold
 
-            text-[#A18E96]
+            text-black/35
           "
         >
           Next →
@@ -736,7 +772,9 @@ function Pagination({ currentPage, totalPages }) {
    PAGE
 ============================================================ */
 
-export default async function New({ searchParams }) {
+export default async function New({
+  searchParams,
+}) {
   /* =========================================================
      FETCH NEWS
   ========================================================= */
@@ -744,49 +782,84 @@ export default async function New({ searchParams }) {
   let posts = [];
 
   try {
-    const postsData = await getNews();
+    const postsData =
+      await getNews();
 
-    posts = Array.isArray(postsData) ? [...postsData] : [];
+    posts = Array.isArray(
+      postsData,
+    )
+      ? [...postsData]
+      : [];
 
     posts.sort((a, b) => {
-      const dateA = new Date(a.publishedAt || a._createdAt || 0);
+      const dateA =
+        new Date(
+          a.publishedAt ||
+            a._createdAt ||
+            0,
+        );
 
-      const dateB = new Date(b.publishedAt || b._createdAt || 0);
+      const dateB =
+        new Date(
+          b.publishedAt ||
+            b._createdAt ||
+            0,
+        );
 
       return dateB - dateA;
     });
   } catch (error) {
-    console.error("Error fetching news:", error);
+    console.error(
+      "Error fetching news:",
+      error,
+    );
   }
 
   /* =========================================================
      NORMALIZE
   ========================================================= */
 
-  const safePosts = posts.map((post) => ({
-    ...post,
+  const safePosts =
+    posts.map((post) => ({
+      ...post,
 
-    mainImage: post.mainImage || null,
+      mainImage:
+        post.mainImage || null,
 
-    slug: post.slug?.current
-      ? {
-          current: post.slug.current,
-        }
-      : {
-          current: "#",
-        },
-  }));
+      slug:
+        post.slug?.current
+          ? {
+              current:
+                post.slug.current,
+            }
+          : {
+              current: "#",
+            },
+    }));
 
   /* =========================================================
      SIDEBAR ARTICLES
+
      These stay based on all posts, not current page.
   ========================================================= */
 
-  const popularArticles = [...safePosts]
+  const popularArticles = [
+    ...safePosts,
+  ]
     .sort((a, b) => {
-      const dateA = new Date(a.publishedAt || a._createdAt || 0);
+      const dateA =
+        new Date(
+          a.publishedAt ||
+            a._createdAt ||
+            0,
+        );
 
-      const dateB = new Date(b.publishedAt || b._createdAt || 0);
+      const dateB =
+        new Date(
+          b.publishedAt ||
+            b._createdAt ||
+            0,
+        );
 
       return dateB - dateA;
     })
@@ -799,29 +872,58 @@ export default async function New({ searchParams }) {
      therefore await it first.
   ========================================================= */
 
-  const resolvedSearchParams = await searchParams;
+  const resolvedSearchParams =
+    await searchParams;
 
-  const requestedPage = Number.parseInt(resolvedSearchParams?.page || "1", 10);
+  const requestedPage =
+    Number.parseInt(
+      resolvedSearchParams?.page ||
+        "1",
+      10,
+    );
 
-  const totalPosts = safePosts.length;
+  const totalPosts =
+    safePosts.length;
 
-  const totalPages = Math.max(1, Math.ceil(totalPosts / POSTS_PER_PAGE));
+  const totalPages =
+    Math.max(
+      1,
+      Math.ceil(
+        totalPosts /
+          POSTS_PER_PAGE,
+      ),
+    );
 
-  const currentPage = Number.isFinite(requestedPage)
-    ? Math.min(Math.max(requestedPage, 1), totalPages)
-    : 1;
+  const currentPage =
+    Number.isFinite(
+      requestedPage,
+    )
+      ? Math.min(
+          Math.max(
+            requestedPage,
+            1,
+          ),
+          totalPages,
+        )
+      : 1;
 
-  const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+  const startIndex =
+    (currentPage - 1) *
+    POSTS_PER_PAGE;
 
-  const paginatedPosts = safePosts.slice(
-    startIndex,
-    startIndex + POSTS_PER_PAGE,
-  );
+  const paginatedPosts =
+    safePosts.slice(
+      startIndex,
+      startIndex +
+        POSTS_PER_PAGE,
+    );
 
   return (
     <>
       <title>
-        Dholera Latest News &amp; Project Updates | Smart City Progress
+        Dholera Latest News &amp;
+        Project Updates | Smart City
+        Progress
       </title>
 
       <meta
@@ -834,20 +936,26 @@ export default async function New({ searchParams }) {
         href="https://www.dholeratimes.com/dholera-updates/latest-updates"
       />
 
-      <meta name="robots" content="index, follow" />
+      <meta
+        name="robots"
+        content="index, follow"
+      />
 
       <main
         className="
           relative
+
           min-h-screen
 
-          bg-[#FAF7F8]
+          bg-white
 
-          selection:bg-[#E0A4B5]
-          selection:text-[#39252E]
+          selection:bg-[#EC1C40]
+          selection:text-white
         "
       >
-        {/* BACKGROUND */}
+        {/* ===================================================
+            BACKGROUND
+        ==================================================== */}
 
         <div
           aria-hidden="true"
@@ -861,15 +969,17 @@ export default async function New({ searchParams }) {
             h-[280px]
 
             bg-gradient-to-b
-            from-[#F3E7EC]
-            via-[#F8F0F3]
+            from-[#EC1C40]/[0.055]
+            via-[#EC1C40]/[0.02]
             to-transparent
 
             sm:h-[320px]
           "
         />
 
-        {/* CONTAINER */}
+        {/* ===================================================
+            CONTAINER
+        ==================================================== */}
 
         <div
           className="
@@ -914,11 +1024,14 @@ export default async function New({ searchParams }) {
               xl:gap-12
             "
           >
-            {/* SIDEBAR */}
+            {/* =================================================
+                SIDEBAR
+            ================================================== */}
 
             <aside
               className="
                 order-2
+
                 min-w-0
 
                 lg:order-1
@@ -926,15 +1039,22 @@ export default async function New({ searchParams }) {
                 lg:self-stretch
               "
             >
-              <SidebarWithForm popularArticles={popularArticles} />
+              <SidebarWithForm
+                popularArticles={
+                  popularArticles
+                }
+              />
             </aside>
 
-            {/* NEWS */}
+            {/* =================================================
+                NEWS
+            ================================================== */}
 
             <section
               aria-labelledby="latest-news-heading"
               className="
                 order-1
+
                 min-w-0
 
                 lg:order-2
@@ -962,7 +1082,7 @@ export default async function New({ searchParams }) {
 
                     tracking-[-0.025em]
 
-                    text-[#39252E]
+                    text-black
 
                     min-[414px]:text-[30px]
 
@@ -973,8 +1093,15 @@ export default async function New({ searchParams }) {
                     lg:text-[42px]
                   "
                 >
-                  Dholera SIR{" "}
-                  <span className="text-[#8F2946]">Latest Updates</span>
+                  Dholera Smart City{" "}
+                  <span
+                    className="
+                      text-[#EC1C40]
+                    "
+                  >
+                    Latest News &amp;
+                    Updates
+                  </span>
                 </h1>
 
                 <p
@@ -986,7 +1113,7 @@ export default async function New({ searchParams }) {
                     text-[15px]
                     leading-[25px]
 
-                    text-[#68565E]
+                    text-black/65
 
                     min-[414px]:leading-7
 
@@ -996,15 +1123,25 @@ export default async function New({ searchParams }) {
                     md:mt-5
                   "
                 >
-                  Stay updated with the latest insights about Dholera SIR,
-                  infrastructure developments, and smart city investment
-                  opportunities.
+                  Follow the latest
+                  Dholera news and
+                  Dholera SIR updates
+                  covering
+                  infrastructure,
+                  industries,
+                  semiconductors,
+                  government decisions
+                  and major development
+                  projects.
                 </p>
               </header>
 
-              {safePosts.length > 0 ? (
+              {safePosts.length >
+              0 ? (
                 <>
-                  {/* 10 POSTS PER PAGE */}
+                  {/* =========================================
+                      10 POSTS PER PAGE
+                  ========================================== */}
 
                   <div
                     className="
@@ -1017,20 +1154,42 @@ export default async function New({ searchParams }) {
                       md:gap-6
                     "
                   >
-                    {paginatedPosts.map((post, index) => (
-                      <NewsCard
-                        key={post._id || post.slug?.current || index}
-                        post={post}
-                        index={startIndex + index}
-                      />
-                    ))}
+                    {paginatedPosts.map(
+                      (
+                        post,
+                        index,
+                      ) => (
+                        <NewsCard
+                          key={
+                            post._id ||
+                            post
+                              .slug
+                              ?.current ||
+                            index
+                          }
+                          post={
+                            post
+                          }
+                          index={
+                            startIndex +
+                            index
+                          }
+                        />
+                      ),
+                    )}
                   </div>
 
-                  {/* PAGINATION */}
+                  {/* =========================================
+                      PAGINATION
+                  ========================================== */}
 
                   <Pagination
-                    currentPage={currentPage}
-                    totalPages={totalPages}
+                    currentPage={
+                      currentPage
+                    }
+                    totalPages={
+                      totalPages
+                    }
                   />
                 </>
               ) : (
@@ -1039,13 +1198,13 @@ export default async function New({ searchParams }) {
                     rounded-2xl
 
                     border
-                    border-[#E0A4B5]/60
+                    border-black/10
 
                     bg-white
 
                     p-5
 
-                    shadow-[0_8px_28px_rgba(57,37,46,0.05)]
+                    shadow-[0_8px_28px_rgba(0,0,0,0.05)]
 
                     min-[414px]:p-6
 
@@ -1058,28 +1217,40 @@ export default async function New({ searchParams }) {
                       font-semibold
                       leading-[1.3]
 
-                      text-[#39252E]
+                      text-black
 
                       sm:text-[22px]
                     "
                   >
-                    Dholera SIR Investment Updates Coming Soon
+                    Dholera SIR
+                    Investment Updates
+                    Coming Soon
                   </h2>
 
                   <p
                     className="
                       mt-3
+
                       max-w-xl
 
                       text-[15px]
                       leading-7
 
-                      text-[#68565E]
+                      text-black/65
                     "
                   >
-                    We&apos;re preparing comprehensive guides about investment
-                    opportunities in Dholera Special Investment Region. Stay
-                    tuned for expert insights on India&apos;s first smart city.
+                    We&apos;re
+                    preparing
+                    comprehensive
+                    guides about
+                    investment
+                    opportunities in
+                    Dholera Special
+                    Investment Region.
+                    Stay tuned for
+                    expert insights on
+                    India&apos;s first
+                    smart city.
                   </p>
 
                   <p
@@ -1089,10 +1260,11 @@ export default async function New({ searchParams }) {
                       text-[13px]
                       font-medium
 
-                      text-[#8A747D]
+                      text-black/45
                     "
                   >
-                    Content will be available soon
+                    Content will be
+                    available soon
                   </p>
                 </div>
               )}

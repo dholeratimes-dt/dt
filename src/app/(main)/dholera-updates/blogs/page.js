@@ -117,8 +117,8 @@ export default async function BlogsPage() {
           ">
             {/* <div className="bg-white p-6 rounded-xl shadow-md border-l-4 border-[#d7b56d]  mb-8"> */}
               <LeadForm
-                title="Invest in Registry Ready Dholera Plots Starting from ₹10 Lakh"
-                buttonName="Know More"
+                title="Plan Your Dholera Investment"
+                buttonName="Get Property Details"
               />
             {/* </div> */}
 

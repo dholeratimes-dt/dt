@@ -378,53 +378,6 @@ export default function Footer() {
             <div className="mt-4">
               <SocialLinks />
             </div>
-
-            {showProjectLinks && (
-              <div className="mt-8">
-                <h3
-                  className="
-                    text-[16px]
-                    font-semibold
-                    leading-6
-
-                    text-white
-
-                    sm:text-[17px]
-                  "
-                >
-                  Projects
-                </h3>
-
-                <ul className="mt-3 space-y-0.5">
-                  <li>
-                    <Link
-                      href="/dholera-residential-plots/westwyn-residency"
-                      className={linkClass}
-                    >
-                      WestWyn Residency
-                    </Link>
-                  </li>
-
-                  <li>
-                    <Link
-                      href="/dholera-residential-plots/westwyn-estate"
-                      className={linkClass}
-                    >
-                      WestWyn Estates
-                    </Link>
-                  </li>
-
-                  <li>
-                    <Link
-                      href="/dholera-residential-plots/westwyn-county"
-                      className={linkClass}
-                    >
-                      WestWyn County
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            )}
           </section>
 
           {/* =================================================
@@ -662,6 +615,16 @@ export default function Footer() {
                   className={linkClass}
                 >
                   Terms &amp; Conditions
+                </Link>
+              </li>
+
+
+              <li>
+                <Link
+                  href="/copyright"
+                  className={linkClass}
+                >
+                  Copyright Policy
                 </Link>
               </li>
 
