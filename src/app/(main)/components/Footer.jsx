@@ -71,19 +71,19 @@ export default function Footer() {
     font-normal
     leading-6
 
-    text-[#F6E9ED]
+    text-white/70
 
     transition-[color,transform]
     duration-200
 
     hover:translate-x-0.5
-    hover:text-white
+    hover:text-[#EC1C40]
 
     focus-visible:outline-none
     focus-visible:ring-2
-    focus-visible:ring-[#F0CED8]
+    focus-visible:ring-[#EC1C40]
     focus-visible:ring-offset-2
-    focus-visible:ring-offset-[#8F2946]
+    focus-visible:ring-offset-black
 
     sm:text-[15px]
 
@@ -106,18 +106,18 @@ export default function Footer() {
     font-medium
     leading-6
 
-    text-[#FFF8FA]
+    text-white/80
 
     transition-colors
     duration-200
 
-    hover:text-white
+    hover:text-[#EC1C40]
 
     focus-visible:outline-none
     focus-visible:ring-2
-    focus-visible:ring-[#F0CED8]
+    focus-visible:ring-[#EC1C40]
     focus-visible:ring-offset-2
-    focus-visible:ring-offset-[#8F2946]
+    focus-visible:ring-offset-black
 
     sm:text-[15px]
 
@@ -129,6 +129,7 @@ export default function Footer() {
 
     h-11
     w-11
+
     shrink-0
 
     items-center
@@ -139,29 +140,30 @@ export default function Footer() {
     border
     border-white/15
 
-    bg-white/[0.08]
+    bg-white/[0.07]
 
     text-white
 
-    shadow-[0_4px_14px_rgba(57,37,46,0.10)]
+    shadow-[0_4px_14px_rgba(0,0,0,0.16)]
 
     transition-[background-color,border-color,color,transform,box-shadow]
     duration-200
 
     hover:-translate-y-0.5
-    hover:border-white
-    hover:bg-white
-    hover:text-[#8F2946]
 
-    hover:shadow-[0_8px_20px_rgba(57,37,46,0.16)]
+    hover:border-[#EC1C40]
+    hover:bg-[#EC1C40]
+    hover:text-white
+
+    hover:shadow-[0_8px_20px_rgba(236,28,64,0.20)]
 
     active:translate-y-0
 
     focus-visible:outline-none
     focus-visible:ring-2
-    focus-visible:ring-white
+    focus-visible:ring-[#EC1C40]
     focus-visible:ring-offset-2
-    focus-visible:ring-offset-[#8F2946]
+    focus-visible:ring-offset-black
 
     motion-reduce:transform-none
     motion-reduce:transition-none
@@ -278,32 +280,52 @@ export default function Footer() {
         relative
         overflow-hidden
 
-        bg-gradient-to-br
-        from-[#612033]
-        via-[#8F2946]
-        to-[#A83657]
+        bg-black
 
-        text-[#F7E9ED]
+        text-white/80
 
-        selection:bg-white
-        selection:text-[#8F2946]
+        selection:bg-[#EC1C40]
+        selection:text-white
       "
     >
       {/* =====================================================
           SUBTLE BACKGROUND DEPTH
       ====================================================== */}
 
+        <div
+            aria-hidden="true"
+            className="
+              pointer-events-none
+
+              absolute
+              inset-0
+
+              bg-gradient-to-b
+              from-white/[0.025]
+              via-transparent
+              to-black
+            "
+          />
+
+      {/* RED GLOW */}
+
       <div
         aria-hidden="true"
         className="
           pointer-events-none
-          absolute
-          inset-0
 
-          bg-gradient-to-b
-          from-white/[0.025]
-          via-transparent
-          to-[#4B1828]/20
+          absolute
+          -bottom-40
+          -right-32
+
+          h-[360px]
+          w-[360px]
+
+          rounded-full
+
+          bg-[#EC1C40]/10
+
+          blur-3xl
         "
       />
 
@@ -355,6 +377,7 @@ export default function Footer() {
         >
           {/* =================================================
               FOLLOW US
+
               PHONE -> FIRST
               TABLET / DESKTOP -> FOURTH
           ================================================== */}
@@ -382,6 +405,7 @@ export default function Footer() {
 
           {/* =================================================
               CONTACT US
+
               PHONE -> SECOND
               TABLET / DESKTOP -> FIRST
           ================================================== */}
@@ -410,7 +434,7 @@ export default function Footer() {
 
                   tracking-[0.14em]
 
-                  text-[#F0CED8]
+                  text-[#EC1C40]
 
                   sm:text-[12px]
                 "
@@ -428,7 +452,7 @@ export default function Footer() {
                   text-[14px]
                   leading-[1.7]
 
-                  text-[#FFF8FA]
+                  text-white/80
 
                   sm:text-[15px]
                 "
@@ -450,6 +474,7 @@ export default function Footer() {
                     flex
                     h-8
                     w-8
+
                     shrink-0
 
                     items-center
@@ -457,9 +482,15 @@ export default function Footer() {
 
                     rounded-full
 
-                    bg-white/[0.08]
+                    bg-[#EC1C40]/10
 
-                    text-[#F4CFDA]
+                    text-[#EC1C40]
+
+                    transition-[background-color,color]
+                    duration-200
+
+                    group-hover:bg-[#EC1C40]
+                    group-hover:text-white
                   "
                 >
                   <FaPhoneAlt
@@ -482,6 +513,7 @@ export default function Footer() {
                     flex
                     h-8
                     w-8
+
                     shrink-0
 
                     items-center
@@ -489,9 +521,15 @@ export default function Footer() {
 
                     rounded-full
 
-                    bg-white/[0.08]
+                    bg-[#EC1C40]/10
 
-                    text-[#F4CFDA]
+                    text-[#EC1C40]
+
+                    transition-[background-color,color]
+                    duration-200
+
+                    group-hover:bg-[#EC1C40]
+                    group-hover:text-white
                   "
                 >
                   <FaEnvelope
@@ -509,6 +547,7 @@ export default function Footer() {
 
           {/* =================================================
               USEFUL LINKS
+
               PHONE -> THIRD
               DESKTOP -> SECOND
           ================================================== */}
@@ -572,13 +611,12 @@ export default function Footer() {
                   Contact Us
                 </Link>
               </li>
-
-             
             </ul>
           </section>
 
           {/* =================================================
               SUPPORT
+
               PHONE -> FOURTH
               DESKTOP -> THIRD
           ================================================== */}
@@ -598,8 +636,6 @@ export default function Footer() {
             </div>
 
             <ul className="mt-4 space-y-0.5">
-             
-
               <li>
                 <Link
                   href="/policies/privacy"
@@ -618,7 +654,6 @@ export default function Footer() {
                 </Link>
               </li>
 
-
               <li>
                 <Link
                   href="/copyright"
@@ -627,8 +662,6 @@ export default function Footer() {
                   Copyright Policy
                 </Link>
               </li>
-
-              
             </ul>
           </section>
         </div>
@@ -642,7 +675,10 @@ export default function Footer() {
         className="
           relative
 
-          bg-[#5F1B31]/55
+          border-t
+          border-white/10
+
+          bg-white/[0.035]
 
           backdrop-blur-sm
         "
@@ -677,7 +713,7 @@ export default function Footer() {
               font-normal
               leading-5
 
-              text-[#F3DFE5]
+              text-white/60
 
               sm:text-[13px]
             "

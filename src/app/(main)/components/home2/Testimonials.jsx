@@ -102,7 +102,7 @@ const TestimonialPagination = () => {
 
     focus-visible:outline-none
     focus-visible:ring-2
-    focus-visible:ring-[#8F2946]
+    focus-visible:ring-[#EC1C40]
     focus-visible:ring-offset-2
     focus-visible:ring-offset-white
 
@@ -126,10 +126,10 @@ const TestimonialPagination = () => {
         px-4
         py-8
 
-        text-[#39252E]
+        text-black
 
-        selection:bg-[#E0A4B5]
-        selection:text-[#39252E]
+        selection:bg-[#EC1C40]
+        selection:text-white
 
         min-[414px]:px-5
 
@@ -145,8 +145,6 @@ const TestimonialPagination = () => {
     >
       {/* =====================================================
           SUBTLE BACKGROUND DETAIL
-
-          White remains the dominant section background.
       ====================================================== */}
 
       <div
@@ -173,7 +171,7 @@ const TestimonialPagination = () => {
 
             rounded-full
 
-            bg-[#E0A4B5]/[0.055]
+            bg-[#EC1C40]/5
 
             blur-3xl
           "
@@ -191,7 +189,7 @@ const TestimonialPagination = () => {
 
             rounded-full
 
-            bg-[#8F2946]/[0.025]
+            bg-black/[0.02]
 
             blur-3xl
           "
@@ -239,7 +237,7 @@ const TestimonialPagination = () => {
 
               tracking-[0.15em]
 
-              text-[#8F2946]
+              text-[#EC1C40]
 
               sm:mb-3
               sm:text-xs
@@ -259,7 +257,7 @@ const TestimonialPagination = () => {
 
               tracking-[-0.025em]
 
-              text-[#39252E]
+              text-black
 
               sm:text-[30px]
 
@@ -269,7 +267,7 @@ const TestimonialPagination = () => {
             "
           >
             What our customers{" "}
-            <span className="text-[#8F2946]">
+            <span className="text-[#EC1C40]">
               say
             </span>
           </h2>
@@ -302,9 +300,7 @@ const TestimonialPagination = () => {
           {currentTestimonials.map(
             (testimonial) => (
               <figure
-                key={
-                  testimonial.name
-                }
+                key={testimonial.name}
                 className="
                   group
 
@@ -320,22 +316,22 @@ const TestimonialPagination = () => {
                   rounded-2xl
 
                   border
-                  border-[#EAD9DF]
+                  border-black/10
 
-                  bg-[#FAF7F8]
+                  bg-white
 
                   p-5
 
-                  shadow-[0_6px_20px_rgba(57,37,46,0.035)]
+                  shadow-[0_6px_20px_rgba(0,0,0,0.035)]
 
                   transition-[background-color,border-color,transform,box-shadow]
                   duration-300
                   ease-out
 
                   hover:-translate-y-0.5
-                  hover:border-[#E0A4B5]
+                  hover:border-[#EC1C40]/30
                   hover:bg-white
-                  hover:shadow-[0_14px_34px_rgba(116,32,57,0.08)]
+                  hover:shadow-[0_14px_34px_rgba(0,0,0,0.08)]
 
                   min-[414px]:p-6
 
@@ -363,7 +359,7 @@ const TestimonialPagination = () => {
                     origin-left
                     scale-x-0
 
-                    bg-[#8F2946]
+                    bg-[#EC1C40]
 
                     transition-transform
                     duration-300
@@ -396,17 +392,17 @@ const TestimonialPagination = () => {
                     rounded-xl
 
                     border
-                    border-[#E0A4B5]/55
+                    border-[#EC1C40]/20
 
-                    bg-[#F7EBEF]
+                    bg-[#EC1C40]/10
 
-                    text-[#8F2946]
+                    text-[#EC1C40]
 
                     transition-[background-color,border-color,color]
                     duration-200
 
-                    group-hover:border-[#8F2946]
-                    group-hover:bg-[#8F2946]
+                    group-hover:border-[#EC1C40]
+                    group-hover:bg-[#EC1C40]
                     group-hover:text-white
 
                     sm:mb-6
@@ -425,26 +421,20 @@ const TestimonialPagination = () => {
                     TESTIMONIAL
                 ========================================== */}
 
-                <blockquote
-                  className="
-                    flex-1
-                  "
-                >
+                <blockquote className="flex-1">
                   <p
                     className="
                       text-[15px]
                       font-normal
                       leading-[27px]
 
-                      text-[#68565E]
+                      text-black/65
 
                       sm:text-[16px]
                       sm:leading-[28px]
                     "
                   >
-                    {
-                      testimonial.quote
-                    }
+                    {testimonial.quote}
                   </p>
                 </blockquote>
 
@@ -457,7 +447,7 @@ const TestimonialPagination = () => {
                     mt-6
 
                     border-t
-                    border-[#EAD9DF]
+                    border-black/10
 
                     pt-5
 
@@ -472,12 +462,10 @@ const TestimonialPagination = () => {
 
                       tracking-tight
 
-                      text-[#39252E]
+                      text-black
                     "
                   >
-                    {
-                      testimonial.name
-                    }
+                    {testimonial.name}
                   </p>
 
                   <p
@@ -488,12 +476,10 @@ const TestimonialPagination = () => {
                       font-medium
                       leading-5
 
-                      text-[#78666E]
+                      text-black/50
                     "
                   >
-                    {
-                      testimonial.location
-                    }
+                    {testimonial.location}
                   </p>
                 </figcaption>
               </figure>
@@ -543,21 +529,21 @@ const TestimonialPagination = () => {
             className={`
               ${paginationButtonClass}
 
-              border-[#DEC7CF]
+              border-black/15
 
               bg-white
 
-              text-[#742039]
+              text-black
 
               enabled:hover:-translate-y-0.5
-              enabled:hover:border-[#8F2946]
-              enabled:hover:bg-[#F7EBEF]
-              enabled:hover:text-[#8F2946]
+              enabled:hover:border-[#EC1C40]
+              enabled:hover:bg-[#EC1C40]/5
+              enabled:hover:text-[#EC1C40]
 
               disabled:cursor-not-allowed
-              disabled:border-[#EAD9DF]
-              disabled:bg-[#FAF7F8]
-              disabled:text-[#A8999F]
+              disabled:border-black/10
+              disabled:bg-black/[0.025]
+              disabled:text-black/30
               disabled:opacity-60
             `}
           >
@@ -585,9 +571,7 @@ const TestimonialPagination = () => {
 
               return (
                 <button
-                  key={
-                    pageNumber
-                  }
+                  key={pageNumber}
                   type="button"
                   onClick={() =>
                     setCurrentPage(
@@ -610,32 +594,30 @@ const TestimonialPagination = () => {
                     ${
                       isActive
                         ? `
-                            border-[#8F2946]
+                            border-[#EC1C40]
 
-                            bg-[#8F2946]
+                            bg-[#EC1C40]
 
                             text-white
 
-                            shadow-[0_8px_20px_-12px_rgba(116,32,57,0.48)]
+                            shadow-[0_8px_20px_-12px_rgba(236,28,64,0.48)]
                           `
                         : `
-                            border-[#DEC7CF]
+                            border-black/15
 
                             bg-white
 
-                            text-[#742039]
+                            text-black
 
                             hover:-translate-y-0.5
-                            hover:border-[#8F2946]
-                            hover:bg-[#F7EBEF]
-                            hover:text-[#8F2946]
+                            hover:border-[#EC1C40]
+                            hover:bg-[#EC1C40]/5
+                            hover:text-[#EC1C40]
                           `
                     }
                   `}
                 >
-                  {
-                    pageNumber
-                  }
+                  {pageNumber}
                 </button>
               );
             },
@@ -663,21 +645,21 @@ const TestimonialPagination = () => {
             className={`
               ${paginationButtonClass}
 
-              border-[#DEC7CF]
+              border-black/15
 
               bg-white
 
-              text-[#742039]
+              text-black
 
               enabled:hover:-translate-y-0.5
-              enabled:hover:border-[#8F2946]
-              enabled:hover:bg-[#F7EBEF]
-              enabled:hover:text-[#8F2946]
+              enabled:hover:border-[#EC1C40]
+              enabled:hover:bg-[#EC1C40]/5
+              enabled:hover:text-[#EC1C40]
 
               disabled:cursor-not-allowed
-              disabled:border-[#EAD9DF]
-              disabled:bg-[#FAF7F8]
-              disabled:text-[#A8999F]
+              disabled:border-black/10
+              disabled:bg-black/[0.025]
+              disabled:text-black/30
               disabled:opacity-60
             `}
           >

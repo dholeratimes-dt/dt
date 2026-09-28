@@ -82,15 +82,15 @@ export default function Dholera() {
         isolate
         overflow-hidden
 
-        bg-[#FAF7F8]
+        bg-white
 
         px-4
         py-8
 
-        text-[#39252E]
+        text-black
 
-        selection:bg-[#E0A4B5]
-        selection:text-[#39252E]
+        selection:bg-[#EC1C40]
+        selection:text-white
 
         min-[414px]:px-5
 
@@ -123,7 +123,7 @@ export default function Dholera() {
 
           rounded-full
 
-          bg-[#E0A4B5]/10
+          bg-[#EC1C40]/5
 
           blur-3xl
         "
@@ -144,7 +144,7 @@ export default function Dholera() {
 
           rounded-full
 
-          bg-[#8F2946]/[0.05]
+          bg-[#EC1C40]/[0.035]
 
           blur-3xl
         "
@@ -160,7 +160,7 @@ export default function Dholera() {
             w-full
 
             border-b
-            border-[#EAD9DF]
+            border-black/10
 
             pb-5
 
@@ -180,7 +180,7 @@ export default function Dholera() {
 
               tracking-[-0.025em]
 
-              text-[#39252E]
+              text-black
 
               sm:text-[30px]
 
@@ -189,10 +189,7 @@ export default function Dholera() {
               lg:text-[34px]
             "
           >
-            What Is{" "}
-            <span className="text-[#8F2946]">
-              Dholera Smart City?
-            </span>
+            What Is Dholera Smart City?
           </h2>
 
           <p
@@ -205,7 +202,7 @@ export default function Dholera() {
               text-[15px]
               leading-7
 
-              text-[#68565E]
+              text-black/65
 
               sm:mt-4
               sm:text-[16px]
@@ -273,11 +270,11 @@ export default function Dholera() {
               rounded-2xl
 
               border
-              border-[#DEC7CF]
+              border-black/10
 
-              bg-[#EEDDE4]
+              bg-black/[0.03]
 
-              shadow-[0_10px_30px_rgba(57,37,46,0.08)]
+              shadow-[0_10px_30px_rgba(0,0,0,0.08)]
 
               sm:rounded-[22px]
 
@@ -323,7 +320,7 @@ export default function Dholera() {
 
                 bg-gradient-to-t
 
-                from-[#39252E]/26
+                from-black/25
                 via-transparent
                 to-transparent
               "
@@ -373,7 +370,7 @@ export default function Dholera() {
                 px-3.5
                 py-3
 
-                shadow-[0_6px_20px_rgba(57,37,46,0.12)]
+                shadow-[0_6px_20px_rgba(0,0,0,0.12)]
 
                 backdrop-blur-sm
 
@@ -399,9 +396,9 @@ export default function Dholera() {
 
                   rounded-lg
 
-                  bg-[#F7EBEF]
+                  bg-[#EC1C40]/10
 
-                  text-[#8F2946]
+                  text-[#EC1C40]
                 "
               >
                 <MapPin
@@ -418,7 +415,7 @@ export default function Dholera() {
                     font-semibold
                     leading-5
 
-                    text-[#39252E]
+                    text-black
 
                     sm:text-[15px]
                   "
@@ -433,7 +430,7 @@ export default function Dholera() {
                     text-[12px]
                     leading-5
 
-                    text-[#68565E]
+                    text-black/60
 
                     sm:text-[13px]
                   "
@@ -457,11 +454,11 @@ export default function Dholera() {
               rounded-2xl
 
               border
-              border-[#DEC7CF]
+              border-black/10
 
               bg-white
 
-              shadow-[0_8px_26px_rgba(57,37,46,0.05)]
+              shadow-[0_8px_26px_rgba(0,0,0,0.05)]
 
               sm:rounded-[22px]
             "
@@ -473,11 +470,11 @@ export default function Dholera() {
             <div
               className="
                 border-b
-                border-[#EAD9DF]
+                border-black/10
 
                 bg-gradient-to-r
-                from-[#F3E7EC]
-                via-[#F7EFF2]
+                from-[#EC1C40]/5
+                via-[#EC1C40]/[0.025]
                 to-white
 
                 px-4
@@ -497,7 +494,7 @@ export default function Dholera() {
 
                   tracking-[-0.02em]
 
-                  text-[#39252E]
+                  text-black
 
                   sm:text-[21px]
                   sm:leading-7
@@ -558,7 +555,7 @@ export default function Dholera() {
 
                         gap-3.5
 
-                        border-[#EFE3E7]
+                        border-black/10
 
                         py-4
 
@@ -609,19 +606,20 @@ export default function Dholera() {
                           rounded-full
 
                           border
-                          border-[#E0A4B5]/45
+                          border-[#EC1C40]/20
 
-                          bg-[#F7EBEF]
+                          bg-[#EC1C40]/10
 
-                          text-[#8F2946]
+                          text-[#EC1C40]
 
                           transition-[background-color,color,border-color,transform]
                           duration-300
                           ease-out
 
                           md:group-hover:-translate-y-0.5
-                          md:group-hover:border-[#8F2946]/30
-                          md:group-hover:bg-[#8F2946]
+
+                          md:group-hover:border-[#EC1C40]/30
+                          md:group-hover:bg-[#EC1C40]
                           md:group-hover:text-white
 
                           motion-reduce:transform-none
@@ -644,7 +642,7 @@ export default function Dholera() {
                             font-semibold
                             leading-6
 
-                            text-[#39252E]
+                            text-black
 
                             sm:text-[16px]
                           "
@@ -659,7 +657,7 @@ export default function Dholera() {
                             text-[13px]
                             leading-5
 
-                            text-[#68565E]
+                            text-black/60
 
                             sm:text-[14px]
                             sm:leading-[22px]

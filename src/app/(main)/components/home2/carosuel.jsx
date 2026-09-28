@@ -6,81 +6,38 @@ import {
   useState,
 } from "react";
 
-
-
 import Image from "next/image";
 
-import {
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
+import hero3 from "@/assets/hero/DT-Home-Banner-Web.webp";
+import heroM2 from "@/assets/hero/DT-Home-Banner-Phone.webp";
 
-import hero1 from "@/assets/hero/abcd-building-dholera-homepage.webp";
-import hero2 from "@/assets/hero/dholera-sir-indias-first-semiconductor-city-homepage.webp";
-import hero3 from "@/assets/hero/dholera-smart-city-indias-planned-smart-city-homepage.webp";
-
-import heroM1 from "@/assets/hero/abcd-building-dholera-homepage-mobile.webp";
-import heroM2 from "@/assets/hero/dholera-sir-indias-first-semiconductor-city-homepage-mobile.webp";
-import heroM3 from "@/assets/hero/dholera-smart-city-mobile-banner-dholera-times.webp";
 
 import HeroForm from "./HeroForm";
 
-/* ============================================================
-   SLIDES
-============================================================ */
 
-const slides = [
-  {
-    desktop: hero1,
-    mobile: heroM1,
-    alt: "ABCD Building Dholera",
-  },
-  {
-    desktop: hero2,
-    mobile: heroM2,
-    alt: "TATA Semiconductor Plant Dholera",
-  },
-  {
-    desktop: hero3,
-    mobile: heroM3,
-    alt: "Dholera Activation Area",
-  },
-];
-
-/* ============================================================
-   HERO IMAGE
-
-   Phone:
-   Existing vertical 5/8 behavior.
-
-   Tablet/Desktop:
-   Desktop image is rendered at its NATURAL aspect ratio.
-   There is no fixed hero height and no object-contain box.
-============================================================ */
-
-function HeroSlideImage({
-  slide,
-  isFirst,
-}) {
+function HeroImage() {
   return (
     <>
-      {/* MOBILE */}
+      {/* =====================================================
+          MOBILE
+      ====================================================== */}
 
       <div
         className="
           relative
 
           aspect-[5/8]
+
           w-full
 
           md:hidden
         "
       >
         <Image
-          src={slide.mobile}
-          alt={slide.alt}
+          src={heroM2}
+          alt="Dholera Times"
           fill
-          priority={isFirst}
+          priority
           sizes="100vw"
           className="
             object-cover
@@ -89,12 +46,14 @@ function HeroSlideImage({
         />
       </div>
 
-      {/* TABLET / DESKTOP */}
+      {/* =====================================================
+          TABLET / DESKTOP
+      ====================================================== */}
 
       <Image
-        src={slide.desktop}
-        alt={slide.alt}
-        priority={isFirst}
+        src={hero3}
+        alt="Dholera Times"
+        priority
         sizes="100vw"
         className="
           hidden
@@ -114,11 +73,6 @@ function HeroSlideImage({
 ============================================================ */
 
 export default function HOME2() {
-  const [
-    currentSlide,
-    setCurrentSlide,
-  ] = useState(0);
-
   const [
     showPopup,
     setShowPopup,
@@ -168,7 +122,9 @@ export default function HOME2() {
           lastSubmission) /
         (1000 * 60 * 60);
 
-      if (hoursPassed >= 24) {
+      if (
+        hoursPassed >= 24
+      ) {
         localStorage.setItem(
           "heroFormSubmissionCount",
           "0",
@@ -180,13 +136,16 @@ export default function HOME2() {
         );
 
         setSubmissionCount(0);
+
         setIsDisabled(false);
       } else {
         setSubmissionCount(
           storedCount,
         );
 
-        if (storedCount >= 20) {
+        if (
+          storedCount >= 20
+        ) {
           setIsDisabled(true);
         }
       }
@@ -195,7 +154,9 @@ export default function HOME2() {
         storedCount,
       );
 
-      if (storedCount >= 20) {
+      if (
+        storedCount >= 20
+      ) {
         setIsDisabled(true);
       }
     }
@@ -223,11 +184,15 @@ export default function HOME2() {
 
             localStorage.setItem(
               "heroFormLastSubmissionTime",
-              String(Date.now()),
+              String(
+                Date.now(),
+              ),
             );
           }
 
-          if (next >= 20) {
+          if (
+            next >= 20
+          ) {
             setIsDisabled(true);
           }
 
@@ -245,59 +210,9 @@ export default function HOME2() {
       setShowPopup(true);
 
       updateSubmissionCount();
-    }, [updateSubmissionCount]);
-
-  /* ==========================================================
-     SLIDER
-  ========================================================== */
-
-  const nextSlide =
-    useCallback(() => {
-      setCurrentSlide(
-        (previous) =>
-          (previous + 1) %
-          slides.length,
-      );
-    }, []);
-
-  const prevSlide =
-    useCallback(() => {
-      setCurrentSlide(
-        (previous) =>
-          (previous -
-            1 +
-            slides.length) %
-          slides.length,
-      );
-    }, []);
-
-  /* ==========================================================
-     AUTO PLAY
-  ========================================================== */
-
-  useEffect(() => {
-    const interval =
-      setInterval(
-        nextSlide,
-        5000,
-      );
-
-    return () => {
-      clearInterval(
-        interval,
-      );
-    };
-  }, [nextSlide]);
-
-  /* ==========================================================
-     SLIDER POSITION
-  ========================================================== */
-
-  const trackPosition = [
-    "translate-x-0",
-    "-translate-x-full",
-    "-translate-x-[200%]",
-  ][currentSlide];
+    }, [
+      updateSubmissionCount,
+    ]);
 
   return (
     <>
@@ -313,6 +228,7 @@ export default function HOME2() {
             z-[100]
 
             flex
+
             items-center
             justify-center
 
@@ -369,13 +285,16 @@ export default function HOME2() {
                 text-[#68565E]
               "
             >
-              Our team will get back to you shortly.
+              Our team will get
+              back to you shortly.
             </p>
 
             <button
               type="button"
               onClick={() =>
-                setShowPopup(false)
+                setShowPopup(
+                  false,
+                )
               }
               className="
                 mt-5
@@ -413,19 +332,22 @@ export default function HOME2() {
       {/* =====================================================
           HERO
 
-          Mobile:
+          Phone:
+          DTphonebanner.png
           Navbar remains overlay-style.
 
-          Tablet/Desktop:
-          Hero form is visible from md breakpoint and above.
+          Tablet / Desktop:
+          DTBanner1.png
+          Hero form remains visible from md breakpoint.
       ====================================================== */}
 
       <section
-        aria-roledescription="carousel"
+        aria-label="Dholera Times"
         className="
           relative
 
           m-0
+
           w-full
 
           overflow-hidden
@@ -442,115 +364,69 @@ export default function HOME2() {
         "
       >
         {/* ===================================================
-            SLIDER
+            STATIC BANNER
         ==================================================== */}
 
         <div
-          className={`
-            flex
+          className="
+            relative
+
+            m-0
+
             w-full
 
-            items-start
+            overflow-hidden
 
-            transform-gpu
-
-            ${trackPosition}
-
-            transition-transform
-            duration-700
-
-            ease-[cubic-bezier(0.22,1,0.36,1)]
-
-            motion-reduce:transition-none
-          `}
+            p-0
+          "
         >
-          {slides.map(
-            (slide, index) => {
-              const isFirst =
-                index === 0;
+          <HeroImage />
 
-              return (
-                <div
-                  key={index}
-                  aria-hidden={
-                    currentSlide !==
-                    index
-                  }
-                  className="
-                    relative
+          {/* =================================================
+              MOBILE OVERLAY
+          ================================================== */}
 
-                    w-full
-                    min-w-full
+          <div
+            aria-hidden="true"
+            className="
+              pointer-events-none
 
-                    flex-shrink-0
+              absolute
+              inset-0
 
-                    m-0
-                    p-0
-                  "
-                >
-                  <div
-                    className="
-                      relative
+              bg-gradient-to-b
 
-                      m-0
-                      w-full
+              from-[#39252E]/20
+              via-transparent
+              to-[#39252E]/35
 
-                      overflow-hidden
+              md:hidden
+            "
+          />
 
-                      p-0
-                    "
-                  >
-                    <HeroSlideImage
-                      slide={slide}
-                      isFirst={
-                        isFirst
-                      }
-                    />
+          {/* =================================================
+              TABLET / DESKTOP OVERLAY
+          ================================================== */}
 
-                    {/* MOBILE OVERLAY */}
+          <div
+            aria-hidden="true"
+            className="
+              pointer-events-none
 
-                    <div
-                      aria-hidden="true"
-                      className="
-                        pointer-events-none
+              absolute
+              inset-0
 
-                        absolute
-                        inset-0
+              hidden
 
-                        bg-gradient-to-b
-                        from-[#39252E]/20
-                        via-transparent
-                        to-[#39252E]/35
+              bg-gradient-to-r
 
-                        md:hidden
-                      "
-                    />
+              from-[#39252E]/10
+              via-transparent
+              to-[#742039]/10
 
-                    {/* DESKTOP OVERLAY */}
-
-                    <div
-                      aria-hidden="true"
-                      className="
-                        pointer-events-none
-
-                        absolute
-                        inset-0
-
-                        hidden
-
-                        bg-gradient-to-r
-                        from-[#39252E]/10
-                        via-transparent
-                        to-[#742039]/10
-
-                        md:block
-                      "
-                    />
-                  </div>
-                </div>
-              );
-            },
-          )}
+              md:block
+            "
+          />
         </div>
 
         {/* ===================================================
@@ -589,128 +465,6 @@ export default function HOME2() {
               handleFormSuccess
             }
           />
-        </div>
-
-        {/* ===================================================
-            CONTROLS
-        ==================================================== */}
-
-        <div
-          className="
-            absolute
-
-            bottom-4
-            left-4
-
-            z-20
-
-            hidden
-
-            items-center
-
-            gap-2
-
-            md:flex
-
-            lg:bottom-5
-            lg:left-6
-
-            xl:left-8
-          "
-        >
-          <button
-            type="button"
-            onClick={prevSlide}
-            aria-label="Previous slide"
-            className="
-              grid
-              h-12
-              w-12
-
-              place-items-center
-
-              rounded-full
-
-              border
-              border-white/45
-
-              bg-[#39252E]/38
-
-              text-white
-
-              shadow-[0_4px_18px_rgba(57,37,46,0.18)]
-
-              backdrop-blur-md
-
-              transition-[background-color,border-color,transform]
-              duration-200
-
-              hover:-translate-y-px
-              hover:border-white/70
-              hover:bg-[#39252E]/55
-
-              active:translate-y-0
-
-              focus-visible:outline-none
-              focus-visible:ring-2
-              focus-visible:ring-white
-
-              motion-reduce:transform-none
-            "
-          >
-            <ChevronLeft
-              size={22}
-              strokeWidth={1.8}
-              aria-hidden="true"
-            />
-          </button>
-
-          <button
-            type="button"
-            onClick={nextSlide}
-            aria-label="Next slide"
-            className="
-              grid
-              h-12
-              w-12
-
-              place-items-center
-
-              rounded-full
-
-              border
-              border-white/45
-
-              bg-[#39252E]/38
-
-              text-white
-
-              shadow-[0_4px_18px_rgba(57,37,46,0.18)]
-
-              backdrop-blur-md
-
-              transition-[background-color,border-color,transform]
-              duration-200
-
-              hover:-translate-y-px
-              hover:border-white/70
-              hover:bg-[#39252E]/55
-
-              active:translate-y-0
-
-              focus-visible:outline-none
-              focus-visible:ring-2
-              focus-visible:ring-white
-
-              motion-reduce:transform-none
-            "
-          >
-            <ChevronRight
-              size={22}
-              strokeWidth={1.8}
-              aria-hidden="true"
-            />
-          </button>
         </div>
       </section>
     </>

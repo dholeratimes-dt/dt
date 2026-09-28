@@ -51,15 +51,15 @@ export default function FAQS() {
       className="
         w-full
 
-        bg-[#FAF7F8]
+        bg-white
 
         px-4
         py-8
 
-        text-[#39252E]
+        text-black
 
-        selection:bg-[#E0A4B5]
-        selection:text-[#39252E]
+        selection:bg-[#EC1C40]
+        selection:text-white
 
         min-[414px]:px-5
 
@@ -119,7 +119,7 @@ export default function FAQS() {
 
               tracking-[-0.03em]
 
-              text-[#39252E]
+              text-black
 
               sm:text-[30px]
 
@@ -132,13 +132,15 @@ export default function FAQS() {
             "
           >
             Frequently Asked{" "}
+
             <span
               className="
                 block
 
-                text-[#8F2946]
+                text-[#EC1C40]
 
                 sm:inline
+
                 md:block
               "
             >
@@ -159,11 +161,11 @@ export default function FAQS() {
               rounded-2xl
 
               border
-              border-[#E0C7D0]
+              border-black/10
 
               bg-white
 
-              shadow-[0_12px_30px_rgba(57,37,46,0.045)]
+              shadow-[0_12px_30px_rgba(0,0,0,0.045)]
             "
           >
             {faqs.map((faq, index) => {
@@ -183,7 +185,7 @@ export default function FAQS() {
                     relative
 
                     border-b
-                    border-[#EAD9DF]
+                    border-black/10
 
                     last:border-b-0
 
@@ -192,8 +194,8 @@ export default function FAQS() {
 
                     ${
                       isOpen
-                        ? "bg-[#FFFDFE]"
-                        : "bg-white hover:bg-[#FCF9FA]"
+                        ? "bg-[#EC1C40]/[0.018]"
+                        : "bg-white hover:bg-black/[0.018]"
                     }
 
                     motion-reduce:transition-none
@@ -215,7 +217,7 @@ export default function FAQS() {
 
                         w-[3px]
 
-                        bg-[#8F2946]
+                        bg-[#EC1C40]
                       "
                     />
                   )}
@@ -252,7 +254,7 @@ export default function FAQS() {
                         focus-visible:outline-none
                         focus-visible:ring-2
                         focus-visible:ring-inset
-                        focus-visible:ring-[#8F2946]
+                        focus-visible:ring-[#EC1C40]
 
                         min-[414px]:px-5
 
@@ -294,8 +296,8 @@ export default function FAQS() {
 
                           ${
                             isOpen
-                              ? "text-[#39252E]"
-                              : "text-[#51414A] group-hover:text-[#39252E]"
+                              ? "text-black"
+                              : "text-black/75 group-hover:text-black"
                           }
                         `}
                       >
@@ -329,17 +331,22 @@ export default function FAQS() {
                           ${
                             isOpen
                               ? `
-                                  border-[#8F2946]
-                                  bg-[#8F2946]
+                                  border-[#EC1C40]
+
+                                  bg-[#EC1C40]
+
                                   text-white
                                 `
                               : `
-                                  border-[#E0A4B5]/60
-                                  bg-[#F7EBEF]
-                                  text-[#8F2946]
+                                  border-[#EC1C40]/20
 
-                                  group-hover:border-[#8F2946]/60
-                                  group-hover:bg-[#F3E7EC]
+                                  bg-[#EC1C40]/5
+
+                                  text-[#EC1C40]
+
+                                  group-hover:border-[#EC1C40]/40
+
+                                  group-hover:bg-[#EC1C40]/10
                                 `
                           }
 
@@ -390,7 +397,7 @@ export default function FAQS() {
                     <div
                       className="
                         border-t
-                        border-[#EAD9DF]
+                        border-black/10
 
                         pt-4
 
@@ -405,7 +412,7 @@ export default function FAQS() {
                           font-normal
                           leading-[26px]
 
-                          text-[#68565E]
+                          text-black/65
 
                           sm:text-[16px]
                           sm:leading-7

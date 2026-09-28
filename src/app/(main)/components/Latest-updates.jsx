@@ -93,7 +93,6 @@
 //   );
 // }
 
-
 import Image from "next/image";
 import Link from "next/link";
 
@@ -188,17 +187,17 @@ function RelatedBlogCard({
         rounded-xl
 
         border
-        border-[#EAD9DF]
+        border-black/10
 
         bg-white
 
-        shadow-[0_4px_16px_rgba(57,37,46,0.045)]
+        shadow-[0_4px_16px_rgba(0,0,0,0.045)]
 
         transition-[transform,border-color,box-shadow]
         duration-300
         ease-out
 
-        focus-within:border-[#8F2946]
+        focus-within:border-[#EC1C40]
 
         sm:w-[280px]
 
@@ -209,8 +208,8 @@ function RelatedBlogCard({
         lg:min-w-0
 
         lg:hover:-translate-y-1
-        lg:hover:border-[#E0A4B5]
-        lg:hover:shadow-[0_12px_28px_rgba(116,32,57,0.09)]
+        lg:hover:border-[#EC1C40]/30
+        lg:hover:shadow-[0_12px_28px_rgba(0,0,0,0.08)]
 
         motion-reduce:transform-none
         motion-reduce:transition-none
@@ -229,7 +228,7 @@ function RelatedBlogCard({
           focus-visible:outline-none
           focus-visible:ring-2
           focus-visible:ring-inset
-          focus-visible:ring-[#8F2946]
+          focus-visible:ring-[#EC1C40]
         "
       >
         {/* ===================================================
@@ -248,9 +247,9 @@ function RelatedBlogCard({
             overflow-hidden
 
             border-b
-            border-[#EAD9DF]
+            border-black/10
 
-            bg-[#F3E7EC]
+            bg-[#EC1C40]/5
           "
         >
           {imageUrl ? (
@@ -292,9 +291,9 @@ function RelatedBlogCard({
                 justify-center
 
                 bg-gradient-to-br
-                from-[#F3E7EC]
-                via-[#F7EFF2]
-                to-[#FAF7F8]
+                from-[#EC1C40]/5
+                via-[#EC1C40]/[0.035]
+                to-white
               "
             >
               <span
@@ -306,7 +305,7 @@ function RelatedBlogCard({
                   text-[13px]
                   font-medium
 
-                  text-[#68565E]
+                  text-black/60
                 "
               >
                 No image available
@@ -325,7 +324,7 @@ function RelatedBlogCard({
               inset-0
 
               bg-gradient-to-t
-              from-[#39252E]/10
+              from-black/10
               via-transparent
               to-transparent
             "
@@ -363,20 +362,13 @@ function RelatedBlogCard({
 
               tracking-[-0.01em]
 
-              text-[#39252E]
-
-              transition-colors
-              duration-200
+              text-black
 
               sm:text-[15px]
               sm:leading-[22px]
 
               lg:text-[15px]
               lg:leading-[22px]
-
-              lg:group-hover:text-[#8F2946]
-
-              motion-reduce:transition-none
             "
           >
             {item.title}
@@ -401,7 +393,7 @@ function RelatedBlogCard({
                 font-medium
                 leading-5
 
-                text-[#8F2946]
+                text-[#EC1C40]
 
                 sm:text-[12.5px]
               "
@@ -426,7 +418,7 @@ function RelatedBlogCard({
             <div
               className="
                 border-t
-                border-[#EAD9DF]
+                border-black/10
 
                 pt-3
               "
@@ -444,7 +436,7 @@ function RelatedBlogCard({
 
                   rounded-lg
 
-                  bg-[#F7EBEF]
+                  bg-black/[0.045]
 
                   px-3.5
                   py-2
@@ -453,13 +445,13 @@ function RelatedBlogCard({
                   font-semibold
                   leading-5
 
-                  text-[#8F2946]
+                  text-black
 
                   transition-[background-color,color,transform]
                   duration-200
                   ease-out
 
-                  group-hover:bg-[#8F2946]
+                  group-hover:bg-[#EC1C40]
                   group-hover:text-white
 
                   sm:text-[13.5px]
@@ -544,8 +536,8 @@ export default async function LatestUpdates() {
         px-4
         py-8
 
-        selection:bg-[#E0A4B5]
-        selection:text-[#39252E]
+        selection:bg-[#EC1C40]
+        selection:text-white
 
         min-[414px]:px-5
 
@@ -602,7 +594,7 @@ export default async function LatestUpdates() {
 
               tracking-[-0.025em]
 
-              text-[#39252E]
+              text-black
 
               sm:text-[30px]
 
@@ -612,7 +604,8 @@ export default async function LatestUpdates() {
             "
           >
             Latest Dholera{" "}
-            <span className="text-[#8F2946]">
+
+            <span className="text-[#EC1C40]">
               News &amp; Updates
             </span>
           </h2>
@@ -639,17 +632,17 @@ export default async function LatestUpdates() {
               font-semibold
               leading-5
 
-              text-[#8F2946]
+              text-[#EC1C40]
 
               transition-colors
               duration-200
 
-              hover:text-[#742039]
+              hover:text-black
 
               focus-visible:outline
               focus-visible:outline-2
               focus-visible:outline-offset-4
-              focus-visible:outline-[#8F2946]
+              focus-visible:outline-[#EC1C40]
 
               sm:text-[14px]
 
@@ -712,7 +705,7 @@ export default async function LatestUpdates() {
             focus-visible:outline
             focus-visible:outline-2
             focus-visible:outline-offset-4
-            focus-visible:outline-[#8F2946]
+            focus-visible:outline-[#EC1C40]
 
             sm:gap-5
 
@@ -737,9 +730,7 @@ export default async function LatestUpdates() {
           {content.map(
             (item) => (
               <RelatedBlogCard
-                key={`${
-                  item._type
-                }-${
+                key={`${item._type}-${
                   item._id ||
                   item.slug?.current ||
                   item.title
@@ -753,8 +744,6 @@ export default async function LatestUpdates() {
 
         {/* ===================================================
             SWIPE INDICATOR
-
-            Phone + Tablet only
         ==================================================== */}
 
         <div
@@ -778,10 +767,10 @@ export default async function LatestUpdates() {
 
               gap-3
 
-              text-[#8F2946]
+              text-[#EC1C40]
             "
           >
-            {/* LEFT ICON */}
+            {/* LEFT */}
 
             <span
               className="
@@ -796,11 +785,11 @@ export default async function LatestUpdates() {
                 rounded-full
 
                 border
-                border-[#E0A4B5]/70
+                border-[#EC1C40]/20
 
-                bg-[#F7EBEF]
+                bg-[#EC1C40]/5
 
-                text-[#8F2946]
+                text-[#EC1C40]
               "
             >
               <ChevronLeft
@@ -820,7 +809,7 @@ export default async function LatestUpdates() {
 
                 tracking-[0.04em]
 
-                text-[#8F2946]
+                text-[#EC1C40]
 
                 sm:text-[13px]
               "
@@ -828,7 +817,7 @@ export default async function LatestUpdates() {
               Swipe
             </span>
 
-            {/* RIGHT ICON */}
+            {/* RIGHT */}
 
             <span
               className="
@@ -843,11 +832,11 @@ export default async function LatestUpdates() {
                 rounded-full
 
                 border
-                border-[#E0A4B5]/70
+                border-[#EC1C40]/20
 
-                bg-[#F7EBEF]
+                bg-[#EC1C40]/5
 
-                text-[#8F2946]
+                text-[#EC1C40]
               "
             >
               <ChevronRight
