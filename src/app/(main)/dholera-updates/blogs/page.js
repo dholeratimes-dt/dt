@@ -1,3 +1,5 @@
+
+
 import { getblogs } from "@/sanity/lib/api";
 import BlogCard from "./BlogCard";
 import MobileBlogSwiper from "./MobileBlog";
@@ -11,139 +13,259 @@ import Link from "next/link";
 
 export default async function BlogsPage() {
   let posts = [];
+
   try {
     const postsData = await getblogs();
-    posts = Array.isArray(postsData) ? postsData : [];
+
+    posts = Array.isArray(postsData)
+      ? postsData
+      : [];
 
     // Sort by publishedAt date (newest first)
     posts.sort((a, b) => {
-      const dateA = new Date(a.publishedAt || a._createdAt || 0);
-      const dateB = new Date(b.publishedAt || b._createdAt || 0);
-      return dateB - dateA; // Descending order (newest first)
+      const dateA = new Date(
+        a.publishedAt ||
+          a._createdAt ||
+          0,
+      );
+
+      const dateB = new Date(
+        b.publishedAt ||
+          b._createdAt ||
+          0,
+      );
+
+      return dateB - dateA;
     });
 
-    console.log("Posts data fetched:", posts.length);
+    console.log(
+      "Posts data fetched:",
+      posts.length,
+    );
   } catch (error) {
-    console.error("Error fetching blog posts:", error);
+    console.error(
+      "Error fetching blog posts:",
+      error,
+    );
   }
 
   // Add error handling for post data
-  const safePosts = posts.map((post) => ({
-    ...post,
-    author: post.author || "Dholera Times",
-    mainImage: post.mainImage || null,
-    slug: post.slug || { current: "#" },
-  }));
+  const safePosts = posts.map(
+    (post) => ({
+      ...post,
 
-  const trendingBlogs = safePosts.slice(0, 2);
+      author:
+        post.author ||
+        "Dholera Times",
+
+      mainImage:
+        post.mainImage ||
+        null,
+
+      slug:
+        post.slug || {
+          current: "#",
+        },
+    }),
+  );
+
+  const trendingBlogs =
+    safePosts.slice(0, 2);
 
   return (
-    <div className="min-h-screen bg-white ">
+    <div className="min-h-screen bg-white">
       <link
         rel="canonical"
         href="https://www.dholeratimes.com/dholera-updates/blogs"
       />
-      <title>Explore Dholera SIR Growth and Updates</title>
+
+      <title>
+        Explore Dholera SIR Growth and Updates
+      </title>
+
       <meta
         name="description"
         content="Read expert Dholera Smart City blogs, investment guides, price analysis and infrastructure updates from Dholera Times."
       />
-      <meta name="robots" content="index, follow" />
 
-      {/* Hero Section */}
-      <div className="relative md:h-96 w-full h-[50vh] overflow-hidden">
+      <meta
+        name="robots"
+        content="index, follow"
+      />
+
+      {/* =====================================================
+          HERO SECTION
+      ====================================================== */}
+
+      <section
+        className="
+          relative
+          w-full
+          overflow-hidden
+          bg-black
+        "
+      >
+        {/* ===================================================
+            DESKTOP / TABLET BANNER
+
+            Important:
+            No fixed height.
+            Image keeps its original aspect ratio.
+        ==================================================== */}
+
         <Image
           src={hero}
           alt="Dholera Smart City Gujarat"
-          className="object-cover w-full h-[50vh] max-sm:hidden"
           priority
           sizes="100vw"
+          className="
+            hidden
+            h-auto
+            w-full
+
+            md:block
+          "
         />
+
+        {/* ===================================================
+            MOBILE BANNER
+
+            Uses its own original mobile aspect ratio.
+        ==================================================== */}
+
         <Image
           src={heroM}
           alt="Dholera Smart City Gujarat"
-          className="object-cover w-full h-[50vh] md:hidden"
           priority
           sizes="100vw"
+          className="
+            block
+            h-auto
+            w-full
+
+            md:hidden
+          "
         />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center px-6 py-10">
-            <h1 className="text-2xl md:text-4xl font-bold text-white mb-2">
-              Explore Dholera SIR Growth and Updates
-            </h1>
-            {/* <div className="flex justify-center">
-              {" "}
-              <Link
-                href="https://wa.me/+919958993549"
-                aria-label="Invest today on WhatsApp"
-              >
-                <span className="bg-[#b69b5e] hover:bg-[#d3b36b] text-white font-semibold px-6 py-3 rounded-lg transition-colors duration-200 shadow-md flex items-center space-x-2">
-                  <FaWhatsapp className="text-lg font-semibold" />
-                  <span>Invest Today</span>
-                </span>
-              </Link>
-            </div> */}
-          </div>
-        </div>
-      </div>
+      </section>
 
-      {/* Main Content */}
-      <div className="max-w-8xl mx-auto px-4 py-8 md:py-12 ml-4 md:ml-12 mr-4 md:mr-12">
-        <div className="flex flex-col lg:flex-row gap-6">
-          {/* Trending Section - Left Sidebar */}
+      {/* =====================================================
+          MAIN CONTENT
+      ====================================================== */}
 
+      <div
+        className="
+          max-w-8xl
+          mx-auto
+          px-4
+          py-8
 
-          {/* Blog Grid */}
+          md:ml-12
+          md:mr-12
+          md:py-12
+        "
+      >
+        <div
+          className="
+            flex
+            flex-col
+            gap-6
+
+            lg:flex-row
+          "
+        >
+          {/* =================================================
+              BLOG GRID
+          ================================================== */}
+
           <div className="lg:w-3/4">
+            {/* Mobile */}
+
             <div className="md:hidden">
-              <MobileBlogSwiper posts={safePosts} />
+              <MobileBlogSwiper
+                posts={safePosts}
+              />
             </div>
 
-            <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 ">
-              {safePosts.map((post) => (
-                <BlogCard key={post._id} post={post} />
-              ))}
+            {/* Desktop / Tablet */}
+
+            <div
+              className="
+                hidden
+
+                gap-4
+
+                md:grid
+                md:grid-cols-2
+                md:gap-6
+
+                lg:grid-cols-3
+              "
+            >
+              {safePosts.map(
+                (post) => (
+                  <BlogCard
+                    key={post._id}
+                    post={post}
+                  />
+                ),
+              )}
             </div>
           </div>
 
-          <div className="lg:w-1/4 lg:sticky lg:top-6
-          
-              
+          {/* =================================================
+              RIGHT SIDEBAR
+          ================================================== */}
+
+          <div
+            className="
+              lg:w-1/4
+
               lg:sticky
               lg:top-[-178px]
               lg:z-30
+
               lg:mt-0
               lg:self-start
-          ">
-            {/* <div className="bg-white p-6 rounded-xl shadow-md border-l-4 border-[#d7b56d]  mb-8"> */}
-              <LeadForm
-                title="Plan Your Dholera Investment"
-                buttonName="Get Property Details"
-              />
-            {/* </div> */}
+            "
+          >
+            {/* =================================================
+                LEAD FORM
+            ================================================== */}
+
+            <LeadForm
+              title="Plan Your Dholera Investment"
+              buttonName="Get Property Details"
+            />
+
+            {/* =================================================
+                RECENT POSTS
+            ================================================== */}
 
             <div
               className="
                 relative
                 overflow-hidden
 
+                mt-10
+
                 rounded-2xl
 
                 border
-                border-[#EAD9DF]
+                border-black/10
 
                 bg-white
 
                 p-5
-                mt-10
-                lg:mt-10
 
-                shadow-[0_8px_26px_rgba(57,37,46,0.05)]
+                shadow-[0_8px_26px_rgba(0,0,0,0.05)]
 
                 sm:p-6
+
+                lg:mt-10
               "
             >
               {/* Accent */}
+
               <div
                 aria-hidden="true"
                 className="
@@ -154,11 +276,12 @@ export default async function BlogsPage() {
 
                   rounded-full
 
-                  bg-[#E0A4B5]
+                  bg-[#EC1C40]
                 "
               />
 
               {/* Heading */}
+
               <h2
                 className="
                   text-[20px]
@@ -167,7 +290,7 @@ export default async function BlogsPage() {
 
                   tracking-[-0.02em]
 
-                  text-[#39252E]
+                  text-black
 
                   sm:text-[21px]
                 "
@@ -176,20 +299,23 @@ export default async function BlogsPage() {
               </h2>
 
               {/* Posts */}
+
               <div
                 className="
                   mt-5
 
                   divide-y
-                  divide-[#EAD9DF]
+                  divide-black/10
                 "
               >
-                {trendingBlogs.map((post) => (
-                  <TrendingBlogItem
-                    key={post._id}
-                    post={post}
-                  />
-                ))}
+                {trendingBlogs.map(
+                  (post) => (
+                    <TrendingBlogItem
+                      key={post._id}
+                      post={post}
+                    />
+                  ),
+                )}
               </div>
             </div>
           </div>

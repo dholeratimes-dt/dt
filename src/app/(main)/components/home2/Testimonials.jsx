@@ -1,6 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import {
+  useRef,
+  useState,
+} from "react";
 
 import {
   ChevronLeft,
@@ -58,12 +61,222 @@ const testimonials = [
 const TESTIMONIALS_PER_PAGE = 3;
 
 /* ============================================================
+   TESTIMONIAL CARD
+============================================================ */
+
+function TestimonialCard({
+  testimonial,
+  mobile = false,
+}) {
+  return (
+    <figure
+      className={`
+        group
+
+        relative
+
+        flex
+        h-full
+        min-w-0
+        flex-col
+
+        overflow-hidden
+
+        rounded-2xl
+
+        border
+        border-black/10
+
+        bg-white
+
+        p-5
+
+        shadow-[0_6px_20px_rgba(0,0,0,0.035)]
+
+        transition-[background-color,border-color,transform,box-shadow]
+        duration-300
+        ease-out
+
+        hover:-translate-y-0.5
+        hover:border-[#EC1C40]/30
+        hover:bg-white
+        hover:shadow-[0_14px_34px_rgba(0,0,0,0.08)]
+
+        min-[414px]:p-6
+
+        sm:p-6
+
+        lg:p-7
+
+        motion-reduce:transform-none
+        motion-reduce:transition-none
+
+        ${
+          mobile
+            ? `
+              min-h-[340px]
+              w-full
+            `
+            : ""
+        }
+      `}
+    >
+      {/* =====================================================
+          TOP ACCENT
+      ====================================================== */}
+
+      <span
+        aria-hidden="true"
+        className="
+          absolute
+          inset-x-0
+          top-0
+
+          h-[3px]
+
+          origin-left
+          scale-x-0
+
+          bg-[#EC1C40]
+
+          transition-transform
+          duration-300
+          ease-out
+
+          group-hover:scale-x-100
+
+          motion-reduce:transition-none
+        "
+      />
+
+      {/* =====================================================
+          QUOTE ICON
+      ====================================================== */}
+
+      <div
+        aria-hidden="true"
+        className="
+          mb-5
+
+          flex
+          h-11
+          w-11
+
+          shrink-0
+
+          items-center
+          justify-center
+
+          rounded-xl
+
+          border
+          border-[#EC1C40]/20
+
+          bg-[#EC1C40]/10
+
+          text-[#EC1C40]
+
+          transition-[background-color,border-color,color]
+          duration-200
+
+          group-hover:border-[#EC1C40]
+          group-hover:bg-[#EC1C40]
+          group-hover:text-white
+
+          sm:mb-6
+
+          motion-reduce:transition-none
+        "
+      >
+        <Quote
+          size={20}
+          strokeWidth={1.8}
+          aria-hidden="true"
+        />
+      </div>
+
+      {/* =====================================================
+          TESTIMONIAL TEXT
+      ====================================================== */}
+
+      <blockquote className="flex-1">
+        <p
+          className="
+            text-[15px]
+            font-normal
+            leading-[27px]
+
+            text-black/65
+
+            sm:text-[16px]
+            sm:leading-[28px]
+          "
+        >
+          {testimonial.quote}
+        </p>
+      </blockquote>
+
+      {/* =====================================================
+          CUSTOMER
+      ====================================================== */}
+
+      <figcaption
+        className="
+          mt-6
+
+          border-t
+          border-black/10
+
+          pt-5
+
+          sm:mt-7
+        "
+      >
+        <p
+          className="
+            text-[16px]
+            font-semibold
+            leading-6
+
+            tracking-tight
+
+            text-black
+          "
+        >
+          {testimonial.name}
+        </p>
+
+        <p
+          className="
+            mt-1
+
+            text-[13px]
+            font-medium
+            leading-5
+
+            text-black/50
+          "
+        >
+          {testimonial.location}
+        </p>
+      </figcaption>
+    </figure>
+  );
+}
+
+/* ============================================================
    COMPONENT
 ============================================================ */
 
 const TestimonialPagination = () => {
-  const [currentPage, setCurrentPage] =
-    useState(1);
+  /* =========================================================
+     DESKTOP PAGINATION
+  ========================================================= */
+
+  const [
+    currentPage,
+    setCurrentPage,
+  ] = useState(1);
 
   const totalPages = Math.ceil(
     testimonials.length /
@@ -80,6 +293,100 @@ const TestimonialPagination = () => {
       firstIndex +
         TESTIMONIALS_PER_PAGE,
     );
+
+  /* =========================================================
+     MOBILE SLIDER
+  ========================================================= */
+
+  const sliderRef =
+    useRef(null);
+
+  const [
+    mobileSlide,
+    setMobileSlide,
+  ] = useState(0);
+
+  /* =========================================================
+     GO TO MOBILE SLIDE
+  ========================================================= */
+
+  const goToSlide = (index) => {
+    const safeIndex =
+      Math.max(
+        0,
+        Math.min(
+          testimonials.length -
+            1,
+          index,
+        ),
+      );
+
+    const slider =
+      sliderRef.current;
+
+    if (!slider) {
+      return;
+    }
+
+    const width =
+      slider.clientWidth;
+
+    slider.scrollTo({
+      left:
+        width *
+        safeIndex,
+      behavior: "smooth",
+    });
+
+    setMobileSlide(
+      safeIndex,
+    );
+  };
+
+  /* =========================================================
+     DETECT SWIPE / SCROLL POSITION
+  ========================================================= */
+
+  const handleMobileScroll =
+    () => {
+      const slider =
+        sliderRef.current;
+
+      if (!slider) {
+        return;
+      }
+
+      const width =
+        slider.clientWidth;
+
+      if (!width) {
+        return;
+      }
+
+      const index =
+        Math.round(
+          slider.scrollLeft /
+            width,
+        );
+
+      const safeIndex =
+        Math.max(
+          0,
+          Math.min(
+            testimonials.length -
+              1,
+            index,
+          ),
+        );
+
+      setMobileSlide(
+        safeIndex,
+      );
+    };
+
+  /* =========================================================
+     DESKTOP BUTTON CLASS
+  ========================================================= */
 
   const paginationButtonClass = `
     inline-flex
@@ -140,65 +447,19 @@ const TestimonialPagination = () => {
         md:py-10
 
         lg:px-10
-        lg:py-12
+        lg:py-10
       "
     >
       {/* =====================================================
-          SUBTLE BACKGROUND DETAIL
+          BACKGROUND DETAIL
       ====================================================== */}
 
-      <div
-        aria-hidden="true"
-        className="
-          pointer-events-none
-
-          absolute
-          inset-0
-          -z-10
-
-          overflow-hidden
-        "
-      >
-        <div
-          className="
-            absolute
-
-            -left-44
-            -top-52
-
-            h-[420px]
-            w-[420px]
-
-            rounded-full
-
-            bg-[#EC1C40]/5
-
-            blur-3xl
-          "
-        />
-
-        <div
-          className="
-            absolute
-
-            -bottom-52
-            -right-40
-
-            h-[440px]
-            w-[440px]
-
-            rounded-full
-
-            bg-black/[0.02]
-
-            blur-3xl
-          "
-        />
-      </div>
+      
 
       <div
         className="
           mx-auto
+
           w-full
           max-w-7xl
         "
@@ -209,13 +470,11 @@ const TestimonialPagination = () => {
 
         <header
           className="
-            mx-auto
-
             mb-7
 
             max-w-3xl
 
-            text-center
+            text-left
 
             sm:mb-8
 
@@ -224,30 +483,6 @@ const TestimonialPagination = () => {
             lg:mb-10
           "
         >
-          {/* EYEBROW */}
-
-          <p
-            className="
-              mb-2
-
-              text-[11px]
-              font-semibold
-              uppercase
-              leading-5
-
-              tracking-[0.15em]
-
-              text-[#EC1C40]
-
-              sm:mb-3
-              sm:text-xs
-            "
-          >
-            Customer Experiences
-          </p>
-
-          {/* TITLE */}
-
           <h2
             id="testimonials-heading"
             className="
@@ -274,7 +509,339 @@ const TestimonialPagination = () => {
         </header>
 
         {/* ===================================================
-            TESTIMONIAL CARDS
+            MOBILE SLIDER
+
+            Below md:
+            - one testimonial per view
+            - finger swipe
+            - scroll snap
+        ==================================================== */}
+
+        <div className="md:hidden">
+          <div
+            ref={sliderRef}
+            id="testimonial-mobile-slider"
+            onScroll={
+              handleMobileScroll
+            }
+            className="
+              flex
+
+              w-full
+
+              snap-x
+              snap-mandatory
+
+              overflow-x-auto
+              overflow-y-hidden
+
+              scroll-smooth
+
+              overscroll-x-contain
+
+              [scrollbar-width:none]
+
+              [&::-webkit-scrollbar]:hidden
+            "
+          >
+            {testimonials.map(
+              (
+                testimonial,
+                index,
+              ) => (
+                <div
+                  key={
+                    testimonial.name
+                  }
+                  className="
+                    w-full
+                    min-w-full
+                    shrink-0
+
+                    snap-center
+
+                    px-[1px]
+                  "
+                >
+                  <TestimonialCard
+                    testimonial={
+                      testimonial
+                    }
+                    mobile
+                  />
+                </div>
+              ),
+            )}
+          </div>
+
+          {/* =================================================
+              MOBILE SLIDER CONTROLS
+          ================================================== */}
+
+          <div
+            className="
+              mt-5
+
+              flex
+
+              items-center
+              justify-between
+
+              gap-4
+            "
+          >
+            {/* PREVIOUS */}
+
+            <button
+              type="button"
+              onClick={() =>
+                goToSlide(
+                  mobileSlide -
+                    1,
+                )
+              }
+              disabled={
+                mobileSlide === 0
+              }
+              aria-label="Previous testimonial"
+              aria-controls="testimonial-mobile-slider"
+              className="
+                inline-flex
+
+                h-11
+                w-11
+
+                shrink-0
+
+                items-center
+                justify-center
+
+                rounded-full
+
+                border
+                border-black/15
+
+                bg-white
+
+                text-black
+
+                shadow-[0_4px_14px_rgba(0,0,0,0.04)]
+
+                transition-[background-color,border-color,color,transform]
+                duration-200
+
+                enabled:active:scale-95
+
+                enabled:hover:border-[#EC1C40]
+                enabled:hover:bg-[#EC1C40]/5
+                enabled:hover:text-[#EC1C40]
+
+                disabled:cursor-not-allowed
+                disabled:bg-black/[0.025]
+                disabled:text-black/25
+
+                focus-visible:outline-none
+                focus-visible:ring-2
+                focus-visible:ring-[#EC1C40]
+                focus-visible:ring-offset-2
+              "
+            >
+              <ChevronLeft
+                size={19}
+                strokeWidth={2}
+                aria-hidden="true"
+              />
+            </button>
+
+            {/* ===============================================
+                DOTS + COUNTER
+            ================================================ */}
+
+            <div
+              className="
+                flex
+
+                flex-1
+
+                flex-col
+
+                items-center
+                justify-center
+
+                gap-2
+              "
+            >
+              {/* DOTS */}
+
+              <div
+                className="
+                  flex
+
+                  items-center
+                  justify-center
+
+                  gap-1.5
+                "
+              >
+                {testimonials.map(
+                  (
+                    testimonial,
+                    index,
+                  ) => {
+                    const active =
+                      mobileSlide ===
+                      index;
+
+                    return (
+                      <button
+                        key={
+                          testimonial.name
+                        }
+                        type="button"
+                        onClick={() =>
+                          goToSlide(
+                            index,
+                          )
+                        }
+                        aria-label={`Go to testimonial ${
+                          index +
+                          1
+                        }`}
+                        aria-current={
+                          active
+                            ? "true"
+                            : undefined
+                        }
+                        className={`
+                          h-2
+
+                          rounded-full
+
+                          transition-[width,background-color]
+                          duration-200
+
+                          ${
+                            active
+                              ? `
+                                w-6
+
+                                bg-[#EC1C40]
+                              `
+                              : `
+                                w-2
+
+                                bg-black/15
+
+                                hover:bg-black/25
+                              `
+                          }
+                        `}
+                      />
+                    );
+                  },
+                )}
+              </div>
+
+              {/* COUNTER */}
+
+              <p
+                aria-live="polite"
+                className="
+                  text-[13px]
+                  font-medium
+                  leading-5
+
+                  text-black/50
+                "
+              >
+                <span
+                  className="
+                    font-semibold
+                    text-[#EC1C40]
+                  "
+                >
+                  {mobileSlide +
+                    1}
+                </span>{" "}
+                /{" "}
+                {
+                  testimonials.length
+                }
+              </p>
+            </div>
+
+            {/* NEXT */}
+
+            <button
+              type="button"
+              onClick={() =>
+                goToSlide(
+                  mobileSlide +
+                    1,
+                )
+              }
+              disabled={
+                mobileSlide ===
+                testimonials.length -
+                  1
+              }
+              aria-label="Next testimonial"
+              aria-controls="testimonial-mobile-slider"
+              className="
+                inline-flex
+
+                h-11
+                w-11
+
+                shrink-0
+
+                items-center
+                justify-center
+
+                rounded-full
+
+                border
+                border-black/15
+
+                bg-white
+
+                text-black
+
+                shadow-[0_4px_14px_rgba(0,0,0,0.04)]
+
+                transition-[background-color,border-color,color,transform]
+                duration-200
+
+                enabled:active:scale-95
+
+                enabled:hover:border-[#EC1C40]
+                enabled:hover:bg-[#EC1C40]/5
+                enabled:hover:text-[#EC1C40]
+
+                disabled:cursor-not-allowed
+                disabled:bg-black/[0.025]
+                disabled:text-black/25
+
+                focus-visible:outline-none
+                focus-visible:ring-2
+                focus-visible:ring-[#EC1C40]
+                focus-visible:ring-offset-2
+              "
+            >
+              <ChevronRight
+                size={19}
+                strokeWidth={2}
+                aria-hidden="true"
+              />
+            </button>
+          </div>
+        </div>
+
+        {/* ===================================================
+            DESKTOP TESTIMONIAL GRID
+
+            md and above:
+            original 3-column design
         ==================================================== */}
 
         <div
@@ -282,228 +849,52 @@ const TestimonialPagination = () => {
           aria-live="polite"
           aria-atomic="true"
           className="
-            grid
-            grid-cols-1
+            hidden
+
+            grid-cols-3
 
             items-stretch
 
-            gap-4
+            gap-5
 
-            sm:gap-5
-
-            md:grid-cols-3
-            md:gap-5
+            md:grid
 
             lg:gap-6
           "
         >
           {currentTestimonials.map(
             (testimonial) => (
-              <figure
-                key={testimonial.name}
-                className="
-                  group
-
-                  relative
-
-                  flex
-                  h-full
-                  min-w-0
-                  flex-col
-
-                  overflow-hidden
-
-                  rounded-2xl
-
-                  border
-                  border-black/10
-
-                  bg-white
-
-                  p-5
-
-                  shadow-[0_6px_20px_rgba(0,0,0,0.035)]
-
-                  transition-[background-color,border-color,transform,box-shadow]
-                  duration-300
-                  ease-out
-
-                  hover:-translate-y-0.5
-                  hover:border-[#EC1C40]/30
-                  hover:bg-white
-                  hover:shadow-[0_14px_34px_rgba(0,0,0,0.08)]
-
-                  min-[414px]:p-6
-
-                  sm:p-6
-
-                  lg:p-7
-
-                  motion-reduce:transform-none
-                  motion-reduce:transition-none
-                "
-              >
-                {/* =========================================
-                    TOP HOVER ACCENT
-                ========================================== */}
-
-                <span
-                  aria-hidden="true"
-                  className="
-                    absolute
-                    inset-x-0
-                    top-0
-
-                    h-[3px]
-
-                    origin-left
-                    scale-x-0
-
-                    bg-[#EC1C40]
-
-                    transition-transform
-                    duration-300
-                    ease-out
-
-                    group-hover:scale-x-100
-
-                    motion-reduce:transition-none
-                  "
-                />
-
-                {/* =========================================
-                    QUOTE ICON
-                ========================================== */}
-
-                <div
-                  aria-hidden="true"
-                  className="
-                    mb-5
-
-                    flex
-                    h-11
-                    w-11
-
-                    shrink-0
-
-                    items-center
-                    justify-center
-
-                    rounded-xl
-
-                    border
-                    border-[#EC1C40]/20
-
-                    bg-[#EC1C40]/10
-
-                    text-[#EC1C40]
-
-                    transition-[background-color,border-color,color]
-                    duration-200
-
-                    group-hover:border-[#EC1C40]
-                    group-hover:bg-[#EC1C40]
-                    group-hover:text-white
-
-                    sm:mb-6
-
-                    motion-reduce:transition-none
-                  "
-                >
-                  <Quote
-                    size={20}
-                    strokeWidth={1.8}
-                    aria-hidden="true"
-                  />
-                </div>
-
-                {/* =========================================
-                    TESTIMONIAL
-                ========================================== */}
-
-                <blockquote className="flex-1">
-                  <p
-                    className="
-                      text-[15px]
-                      font-normal
-                      leading-[27px]
-
-                      text-black/65
-
-                      sm:text-[16px]
-                      sm:leading-[28px]
-                    "
-                  >
-                    {testimonial.quote}
-                  </p>
-                </blockquote>
-
-                {/* =========================================
-                    CUSTOMER
-                ========================================== */}
-
-                <figcaption
-                  className="
-                    mt-6
-
-                    border-t
-                    border-black/10
-
-                    pt-5
-
-                    sm:mt-7
-                  "
-                >
-                  <p
-                    className="
-                      text-[16px]
-                      font-semibold
-                      leading-6
-
-                      tracking-tight
-
-                      text-black
-                    "
-                  >
-                    {testimonial.name}
-                  </p>
-
-                  <p
-                    className="
-                      mt-1
-
-                      text-[13px]
-                      font-medium
-                      leading-5
-
-                      text-black/50
-                    "
-                  >
-                    {testimonial.location}
-                  </p>
-                </figcaption>
-              </figure>
+              <TestimonialCard
+                key={
+                  testimonial.name
+                }
+                testimonial={
+                  testimonial
+                }
+              />
             ),
           )}
         </div>
 
         {/* ===================================================
-            PAGINATION
+            DESKTOP PAGINATION
+
+            Hidden on mobile.
         ==================================================== */}
 
         <nav
           aria-label="Testimonial pagination"
           className="
-            mt-7
+            mt-8
 
-            flex
+            hidden
+
             items-center
             justify-center
 
-            gap-2.5
+            gap-3
 
-            sm:mt-8
-            sm:gap-3
+            md:flex
 
             lg:mt-9
           "
@@ -571,7 +962,9 @@ const TestimonialPagination = () => {
 
               return (
                 <button
-                  key={pageNumber}
+                  key={
+                    pageNumber
+                  }
                   type="button"
                   onClick={() =>
                     setCurrentPage(
@@ -594,30 +987,32 @@ const TestimonialPagination = () => {
                     ${
                       isActive
                         ? `
-                            border-[#EC1C40]
+                          border-[#EC1C40]
 
-                            bg-[#EC1C40]
+                          bg-[#EC1C40]
 
-                            text-white
+                          text-white
 
-                            shadow-[0_8px_20px_-12px_rgba(236,28,64,0.48)]
-                          `
+                          shadow-[0_8px_20px_-12px_rgba(236,28,64,0.48)]
+                        `
                         : `
-                            border-black/15
+                          border-black/15
 
-                            bg-white
+                          bg-white
 
-                            text-black
+                          text-black
 
-                            hover:-translate-y-0.5
-                            hover:border-[#EC1C40]
-                            hover:bg-[#EC1C40]/5
-                            hover:text-[#EC1C40]
-                          `
+                          hover:-translate-y-0.5
+                          hover:border-[#EC1C40]
+                          hover:bg-[#EC1C40]/5
+                          hover:text-[#EC1C40]
+                        `
                     }
                   `}
                 >
-                  {pageNumber}
+                  {
+                    pageNumber
+                  }
                 </button>
               );
             },

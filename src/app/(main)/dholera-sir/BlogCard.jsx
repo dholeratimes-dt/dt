@@ -1,79 +1,3 @@
-// import Image from "next/image";
-// import Link from "next/link";
-// import { getSanityImageUrl } from "@/sanity/lib/image";
-
-// export default function BlogCard({ post }) {
-//   // Handle author object properly
-//   const authorName =
-//     typeof post.author === "object"
-//       ? post.author.name || "Unknown"
-//       : post.author;
-
-//   return (
-//     <div className="flex h-full flex-col overflow-hidden rounded-lg bg-white shadow-2xl transition-transform duration-300 md:hover:scale-[1.02]">
-//       {/* Image */}
-//       <Link
-//         href={`/dholera-sir/${post.slug.current}`}
-//         className="flex h-full flex-col"
-//       >
-//         {/* Changed to aspect-[3/2] to match your image ratio */}
-//         <div className="relative aspect-[3/2] w-full">
-//           {post.mainImage ? (
-//             <Image
-//               src={getSanityImageUrl(post.mainImage, 1200, 800)}
-//               alt={post.mainImage?.alt || post.title || "Dholera SIR"}
-//               width={1200}
-//               height={800}
-//               unoptimized
-//               sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
-//               className="object-cover"
-//             />
-//           ) : (
-//             <div className="flex h-full w-full items-center justify-center bg-gray-200">
-//               <span className="text-gray-400">No image available</span>
-//             </div>
-//           )}
-//         </div>
-
-//         {/* Content */}
-//         <div className="flex flex-grow flex-col">
-//           <div className="mt-auto flex h-full w-full flex-col space-y-3 bg-[#151f28] px-4 py-3 font-semibold text-[#d6b873] transition-all hover:bg-[#d6b873] hover:text-[#151f28]">
-//             {/* Title */}
-//             <h3 className="min-h-[3.5rem] text-[clamp(1.125rem,2vw,1.25rem)] font-semibold leading-[1.4] line-clamp-2">
-//               {post.title}
-//             </h3>
-
-//             {/* Meta info */}
-//             <div className="text-sm leading-[1.6] text-gray-400">
-//               <time
-//                 dateTime={new Date(post.publishedAt).toISOString()}
-//                 className="text-gray-500"
-//               >
-//                 {new Date(post.publishedAt).toLocaleDateString("en-US", {
-//                   day: "numeric",
-//                   month: "long",
-//                   year: "numeric",
-//                 })}
-//               </time>
-//               <div>
-//                 Posted By{" "}
-//                 <span className="font-medium text-white">{authorName}</span>
-//               </div>
-//             </div>
-
-//             {/* CTA */}
-//             <div className="text-base underline underline-offset-4">
-//               Explore More
-//             </div>
-//           </div>
-//         </div>
-//       </Link>
-//     </div>
-//   );
-// }
-
-
-
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
@@ -140,19 +64,19 @@ export default function BlogCard({ post }) {
         rounded-2xl
 
         border
-        border-[#8F2946]/55
+        border-black/10
 
         bg-white
 
-        shadow-[0_6px_22px_rgba(57,37,46,0.05)]
+        shadow-[0_6px_22px_rgba(0,0,0,0.04)]
 
         transition-[transform,border-color,box-shadow]
         duration-300
         ease-out
 
         md:hover:-translate-y-1
-        md:hover:border-[#DCA9B8]
-        md:hover:shadow-[0_16px_36px_rgba(143,41,70,0.10)]
+        md:hover:border-[#EC1C40]/30
+        md:hover:shadow-[0_16px_36px_rgba(0,0,0,0.08)]
 
         motion-reduce:transform-none
         motion-reduce:transition-none
@@ -170,7 +94,7 @@ export default function BlogCard({ post }) {
 
           focus-visible:outline-none
           focus-visible:ring-2
-          focus-visible:ring-[#8F2946]
+          focus-visible:ring-[#EC1C40]
           focus-visible:ring-offset-2
         "
       >
@@ -182,7 +106,7 @@ export default function BlogCard({ post }) {
             w-full
             shrink-0
             overflow-hidden
-            bg-[#F7EBEF]
+            bg-black/[0.025]
           "
         >
           {imageUrl ? (
@@ -220,11 +144,19 @@ export default function BlogCard({ post }) {
                 w-full
                 items-center
                 justify-center
-                bg-[#F7EBEF]
+
+                bg-black/[0.025]
+
                 px-4
               "
             >
-              <span className="text-[14px] font-medium text-[#78666E]">
+              <span
+                className="
+                  text-[14px]
+                  font-medium
+                  text-black/60
+                "
+              >
                 No image available
               </span>
             </div>
@@ -238,7 +170,7 @@ export default function BlogCard({ post }) {
               inset-0
 
               bg-gradient-to-t
-              from-[#39252E]/12
+              from-black/10
               via-transparent
               to-transparent
             "
@@ -273,12 +205,8 @@ export default function BlogCard({ post }) {
 
               tracking-[-0.015em]
 
-              text-[#39252E]
+              text-black
 
-              transition-colors
-              duration-200
-
-              group-hover:text-[#8F2946]
 
               sm:min-h-[52px]
               sm:text-[18px]
@@ -299,10 +227,10 @@ export default function BlogCard({ post }) {
               space-y-1
 
               text-[13px]
+              font-medium
               leading-5
 
-              font-medium
-              text-[#2563EB]
+              text-black/60
 
               sm:text-[14px]
             "
@@ -317,14 +245,14 @@ export default function BlogCard({ post }) {
             )}
 
             {/* <div>
-              <span className="text-[#78666E]">
+              <span className="text-black/60">
                 Posted By{" "}
               </span>
 
               <span
                 className="
                   font-medium
-                  text-[#2563EB]
+                  text-[#EC1C40]
                 "
               >
                 {authorName}
@@ -343,7 +271,7 @@ export default function BlogCard({ post }) {
                 justify-between
 
                 border-t
-                border-[#EAD9DF]
+                border-black/10
 
                 pt-3
               "
@@ -354,12 +282,12 @@ export default function BlogCard({ post }) {
                   font-semibold
                   leading-6
 
-                  text-[#8F2946]
+                  text-[#EC1C40]
 
                   transition-colors
                   duration-200
 
-                  group-hover:text-[#742039]
+                  group-hover:text-[#EC1C40]
 
                   sm:text-[15px]
                 "
@@ -379,19 +307,24 @@ export default function BlogCard({ post }) {
 
                   rounded-full
 
-                  bg-[#F7EBEF]
+                  border
+                  border-[#EC1C40]/10
 
-                  text-[#8F2946]
+                  bg-[#EC1C40]/5
 
-                  shadow-[0_4px_12px_rgba(143,41,70,0.06)]
+                  text-[#EC1C40]
 
-                  transition-[background-color,color,transform,box-shadow]
+                  shadow-[0_4px_12px_rgba(0,0,0,0.04)]
+
+                  transition-[background-color,color,border-color,transform,box-shadow]
                   duration-200
 
                   md:group-hover:-translate-y-0.5
                   md:group-hover:translate-x-0.5
-                  md:group-hover:bg-[#8F2946]
+                  md:group-hover:border-[#EC1C40]
+                  md:group-hover:bg-[#EC1C40]
                   md:group-hover:text-white
+                  md:group-hover:shadow-[0_6px_16px_rgba(236,28,64,0.18)]
 
                   motion-reduce:transform-none
                   motion-reduce:transition-none

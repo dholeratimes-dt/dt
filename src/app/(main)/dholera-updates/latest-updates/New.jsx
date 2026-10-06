@@ -173,28 +173,31 @@
 //   );
 // }
 
-
-
 import { getNews } from "@/sanity/lib/api";
+
 import Image from "next/image";
 import Link from "next/link";
+
 import { urlFor } from "@/sanity/lib/image";
+
 import SidebarWithForm from "./Sidebar";
+import MobileNews from "./MobileNews";
 
 /* ============================================================
    SETTINGS
 ============================================================ */
 
-const POSTS_PER_PAGE = 10;
-
-const PAGE_PATH = "/dholera-updates/latest-updates";
+const PAGE_PATH =
+  "/dholera-updates/latest-updates";
 
 /* ============================================================
    DATE
 ============================================================ */
 
 const formatDate = (dateString) => {
-  if (!dateString) return "";
+  if (!dateString) {
+    return "";
+  }
 
   const date = new Date(dateString);
 
@@ -210,34 +213,28 @@ const formatDate = (dateString) => {
 };
 
 /* ============================================================
-   PAGINATION URL
+   DESKTOP NEWS CARD
 ============================================================ */
 
-const getPageHref = (page) => {
-  if (page <= 1) {
-    return PAGE_PATH;
-  }
-
-  return `${PAGE_PATH}?page=${page}`;
-};
-
-/* ============================================================
-   NEWS CARD
-============================================================ */
-
-function NewsCard({ post, index }) {
+function NewsCard({
+  post,
+  index,
+}) {
   const href =
-    post.slug?.current && post.slug.current !== "#"
-      ? `/dholera-updates/latest-updates/${post.slug.current}`
+    post.slug?.current &&
+    post.slug.current !== "#"
+      ? `${PAGE_PATH}/${post.slug.current}`
       : PAGE_PATH;
 
   return (
     <article
       className="
         group
+
         flex
         min-w-0
         flex-col
+
         overflow-hidden
 
         rounded-2xl
@@ -286,9 +283,12 @@ function NewsCard({ post, index }) {
         <div
           className="
             relative
+
             aspect-[16/9]
+
             w-full
             shrink-0
+
             overflow-hidden
 
             bg-black/[0.03]
@@ -296,7 +296,9 @@ function NewsCard({ post, index }) {
         >
           {post.mainImage ? (
             <Image
-              src={urlFor(post.mainImage)
+              src={urlFor(
+                post.mainImage,
+              )
                 .width(900)
                 .height(506)
                 .url()}
@@ -307,7 +309,6 @@ function NewsCard({ post, index }) {
               }
               fill
               sizes="
-                (max-width: 767px) calc(100vw - 32px),
                 (max-width: 1279px) 45vw,
                 430px
               "
@@ -379,16 +380,14 @@ function NewsCard({ post, index }) {
             flex-1
             flex-col
 
-            p-4
-
-            min-[414px]:p-[18px]
-
-            sm:p-5
+            p-5
           "
         >
           <h2
             className="
               line-clamp-2
+
+              min-h-[52px]
 
               text-[17px]
               font-semibold
@@ -398,18 +397,14 @@ function NewsCard({ post, index }) {
 
               text-black
 
-              transition-colors
-              duration-200
-
-              md:min-h-[52px]
-              md:group-hover:text-[#EC1C40]
-
               lg:text-[18px]
               lg:leading-[27px]
             "
           >
             {post.title ||
-              `Dholera Investment Guide ${index + 1}`}
+              `Dholera Investment Guide ${
+                index + 1
+              }`}
           </h2>
 
           <div
@@ -432,40 +427,31 @@ function NewsCard({ post, index }) {
           >
             <p
               className="
-                text-[13px]
+                text-[14px]
                 leading-5
 
                 text-black/55
-
-                sm:text-[14px]
               "
             >
               {formatDate(
-                post.publishedAt || post._createdAt,
+                post.publishedAt ||
+                  post._createdAt,
               )}
             </p>
 
             <span
               className="
                 inline-flex
-                min-h-11
                 shrink-0
 
                 items-center
                 justify-center
 
-                text-[14px]
+                text-[15px]
                 font-semibold
                 leading-6
 
                 text-[#EC1C40]
-
-                transition-colors
-                duration-200
-
-                md:group-hover:text-[#EC1C40]
-
-                sm:text-[15px]
               "
             >
               Read More →
@@ -478,303 +464,10 @@ function NewsCard({ post, index }) {
 }
 
 /* ============================================================
-   PAGINATION
-============================================================ */
-
-function Pagination({
-  currentPage,
-  totalPages,
-}) {
-  if (totalPages <= 1) {
-    return null;
-  }
-
-  const pages = Array.from(
-    {
-      length: totalPages,
-    },
-    (_, index) => index + 1,
-  );
-
-  return (
-    <nav
-      aria-label="News pagination"
-      className="
-        mt-8
-
-        flex
-        flex-wrap
-
-        items-center
-        justify-center
-
-        gap-2
-
-        sm:mt-10
-        sm:gap-3
-      "
-    >
-      {/* ===================================================
-          PREVIOUS
-      ==================================================== */}
-
-      {currentPage > 1 ? (
-        <Link
-          href={getPageHref(
-            currentPage - 1,
-          )}
-          aria-label="Previous page"
-          className="
-            inline-flex
-            min-h-11
-
-            items-center
-            justify-center
-
-            rounded-lg
-
-            border
-            border-black/10
-
-            bg-white
-
-            px-4
-            py-2
-
-            text-[14px]
-            font-semibold
-
-            text-black
-
-            transition-[background-color,border-color,color]
-            duration-200
-
-            hover:border-[#EC1C40]/40
-            hover:bg-[#EC1C40]/5
-            hover:text-[#EC1C40]
-
-            focus-visible:outline-none
-            focus-visible:ring-2
-            focus-visible:ring-[#EC1C40]
-            focus-visible:ring-offset-2
-          "
-        >
-          ← Previous
-        </Link>
-      ) : (
-        <span
-          aria-disabled="true"
-          className="
-            inline-flex
-            min-h-11
-
-            cursor-not-allowed
-
-            items-center
-            justify-center
-
-            rounded-lg
-
-            border
-            border-black/10
-
-            bg-black/[0.03]
-
-            px-4
-            py-2
-
-            text-[14px]
-            font-semibold
-
-            text-black/35
-          "
-        >
-          ← Previous
-        </span>
-      )}
-
-      {/* ===================================================
-          PAGE NUMBERS
-      ==================================================== */}
-
-      <div
-        className="
-          flex
-          flex-wrap
-
-          items-center
-          justify-center
-
-          gap-2
-        "
-      >
-        {pages.map((page) => {
-          const active =
-            page === currentPage;
-
-          return active ? (
-            <span
-              key={page}
-              aria-current="page"
-              className="
-                inline-flex
-                h-11
-                min-w-11
-
-                items-center
-                justify-center
-
-                rounded-lg
-
-                bg-[#EC1C40]
-
-                px-3
-
-                text-[14px]
-                font-semibold
-
-                text-white
-
-                shadow-[0_5px_14px_rgba(236,28,64,0.20)]
-              "
-            >
-              {page}
-            </span>
-          ) : (
-            <Link
-              key={page}
-              href={getPageHref(page)}
-              aria-label={`Go to page ${page}`}
-              className="
-                inline-flex
-                h-11
-                min-w-11
-
-                items-center
-                justify-center
-
-                rounded-lg
-
-                border
-                border-black/10
-
-                bg-white
-
-                px-3
-
-                text-[14px]
-                font-semibold
-
-                text-black
-
-                transition-[background-color,border-color,color]
-                duration-200
-
-                hover:border-[#EC1C40]/40
-                hover:bg-[#EC1C40]/5
-                hover:text-[#EC1C40]
-
-                focus-visible:outline-none
-                focus-visible:ring-2
-                focus-visible:ring-[#EC1C40]
-                focus-visible:ring-offset-2
-              "
-            >
-              {page}
-            </Link>
-          );
-        })}
-      </div>
-
-      {/* ===================================================
-          NEXT
-      ==================================================== */}
-
-      {currentPage < totalPages ? (
-        <Link
-          href={getPageHref(
-            currentPage + 1,
-          )}
-          aria-label="Next page"
-          className="
-            inline-flex
-            min-h-11
-
-            items-center
-            justify-center
-
-            rounded-lg
-
-            border
-            border-black/10
-
-            bg-white
-
-            px-4
-            py-2
-
-            text-[14px]
-            font-semibold
-
-            text-black
-
-            transition-[background-color,border-color,color]
-            duration-200
-
-            hover:border-[#EC1C40]/40
-            hover:bg-[#EC1C40]/5
-            hover:text-[#EC1C40]
-
-            focus-visible:outline-none
-            focus-visible:ring-2
-            focus-visible:ring-[#EC1C40]
-            focus-visible:ring-offset-2
-          "
-        >
-          Next →
-        </Link>
-      ) : (
-        <span
-          aria-disabled="true"
-          className="
-            inline-flex
-            min-h-11
-
-            cursor-not-allowed
-
-            items-center
-            justify-center
-
-            rounded-lg
-
-            border
-            border-black/10
-
-            bg-black/[0.03]
-
-            px-4
-            py-2
-
-            text-[14px]
-            font-semibold
-
-            text-black/35
-          "
-        >
-          Next →
-        </span>
-      )}
-    </nav>
-  );
-}
-
-/* ============================================================
    PAGE
 ============================================================ */
 
-export default async function New({
-  searchParams,
-}) {
+export default async function New() {
   /* =========================================================
      FETCH NEWS
   ========================================================= */
@@ -791,20 +484,22 @@ export default async function New({
       ? [...postsData]
       : [];
 
-    posts.sort((a, b) => {
-      const dateA =
-        new Date(
-          a.publishedAt ||
-            a._createdAt ||
-            0,
-        );
+    /* =======================================================
+       SORT NEWEST FIRST
+    ======================================================= */
 
-      const dateB =
-        new Date(
-          b.publishedAt ||
-            b._createdAt ||
-            0,
-        );
+    posts.sort((a, b) => {
+      const dateA = new Date(
+        a.publishedAt ||
+          a._createdAt ||
+          0,
+      );
+
+      const dateB = new Date(
+        b.publishedAt ||
+          b._createdAt ||
+          0,
+      );
 
       return dateB - dateA;
     });
@@ -816,11 +511,11 @@ export default async function New({
   }
 
   /* =========================================================
-     NORMALIZE
+     NORMALIZE POSTS
   ========================================================= */
 
-  const safePosts =
-    posts.map((post) => ({
+  const safePosts = posts.map(
+    (post) => ({
       ...post,
 
       mainImage:
@@ -835,91 +530,39 @@ export default async function New({
           : {
               current: "#",
             },
-    }));
+    }),
+  );
 
   /* =========================================================
-     SIDEBAR ARTICLES
-
-     These stay based on all posts, not current page.
+     POPULAR ARTICLES
   ========================================================= */
 
   const popularArticles = [
     ...safePosts,
   ]
     .sort((a, b) => {
-      const dateA =
-        new Date(
-          a.publishedAt ||
-            a._createdAt ||
-            0,
-        );
+      const dateA = new Date(
+        a.publishedAt ||
+          a._createdAt ||
+          0,
+      );
 
-      const dateB =
-        new Date(
-          b.publishedAt ||
-            b._createdAt ||
-            0,
-        );
+      const dateB = new Date(
+        b.publishedAt ||
+          b._createdAt ||
+          0,
+      );
 
       return dateB - dateA;
     })
     .slice(0, 3);
 
-  /* =========================================================
-     PAGINATION
-
-     Next.js 15 searchParams can be async,
-     therefore await it first.
-  ========================================================= */
-
-  const resolvedSearchParams =
-    await searchParams;
-
-  const requestedPage =
-    Number.parseInt(
-      resolvedSearchParams?.page ||
-        "1",
-      10,
-    );
-
-  const totalPosts =
-    safePosts.length;
-
-  const totalPages =
-    Math.max(
-      1,
-      Math.ceil(
-        totalPosts /
-          POSTS_PER_PAGE,
-      ),
-    );
-
-  const currentPage =
-    Number.isFinite(
-      requestedPage,
-    )
-      ? Math.min(
-          Math.max(
-            requestedPage,
-            1,
-          ),
-          totalPages,
-        )
-      : 1;
-
-  const startIndex =
-    (currentPage - 1) *
-    POSTS_PER_PAGE;
-
-  const paginatedPosts =
-    safePosts.slice(
-      startIndex,
-      startIndex +
-        POSTS_PER_PAGE,
-    );
-
   return (
     <>
+      {/* =====================================================
+          SEO
+      ====================================================== */}
+
       <title>
         Dholera Latest News &amp;
         Project Updates | Smart City
@@ -941,13 +584,31 @@ export default async function New({
         content="index, follow"
       />
 
+      {/* =====================================================
+          PAGE
+
+          IMPORTANT:
+          overflow-x-clip is safe for sticky.
+
+          Do NOT use:
+          overflow-hidden
+          overflow-auto
+          overflow-y-auto
+
+          on this element.
+      ====================================================== */}
+
       <main
         className="
           relative
 
           min-h-screen
 
+          overflow-x-clip
+
           bg-white
+
+          text-black
 
           selection:bg-[#EC1C40]
           selection:text-white
@@ -968,17 +629,12 @@ export default async function New({
 
             h-[280px]
 
-            bg-gradient-to-b
-            from-[#EC1C40]/[0.055]
-            via-[#EC1C40]/[0.02]
-            to-transparent
-
             sm:h-[320px]
           "
         />
 
         {/* ===================================================
-            CONTAINER
+            MAIN CONTAINER
         ==================================================== */}
 
         <div
@@ -987,6 +643,7 @@ export default async function New({
             z-10
 
             mx-auto
+
             w-full
             max-w-7xl
 
@@ -1009,6 +666,16 @@ export default async function New({
             lg:pt-14
           "
         >
+          {/* =================================================
+              TWO COLUMN LAYOUT
+
+              IMPORTANT:
+              items-stretch makes the LEFT grid column
+              as tall as the RIGHT news column.
+
+              That gives sticky enough vertical room.
+          ================================================== */}
+
           <div
             className="
               grid
@@ -1017,15 +684,24 @@ export default async function New({
               gap-10
 
               lg:grid-cols-[320px_minmax(0,1fr)]
+
               lg:items-stretch
+
               lg:gap-10
 
               xl:grid-cols-[350px_minmax(0,1fr)]
+
               xl:gap-12
             "
           >
             {/* =================================================
-                SIDEBAR
+                LEFT SIDEBAR
+
+                Desktop:
+                column stretches to same height as news.
+
+                Mobile:
+                appears after the news.
             ================================================== */}
 
             <aside
@@ -1035,19 +711,47 @@ export default async function New({
                 min-w-0
 
                 lg:order-1
+
                 lg:h-full
+
                 lg:self-stretch
               "
             >
-              <SidebarWithForm
-                popularArticles={
-                  popularArticles
-                }
-              />
+              {/* ===============================================
+                  STICKY SIDEBAR
+
+                  top-24 = 96px from viewport top.
+
+                  This leaves space for your fixed/sticky header.
+              ================================================ */}
+
+              <div
+                className="
+                  lg:sticky
+
+                  lg:top-24
+
+                  lg:self-start
+                "
+              >
+                <SidebarWithForm
+                  popularArticles={
+                    popularArticles
+                  }
+                />
+              </div>
             </aside>
 
             {/* =================================================
-                NEWS
+                RIGHT NEWS COLUMN
+
+                IMPORTANT:
+                There is NO fixed height.
+                There is NO internal overflow.
+
+                Therefore the normal browser/page scroll moves
+                this news column while the left sidebar stays
+                sticky.
             ================================================== */}
 
             <section
@@ -1060,6 +764,10 @@ export default async function New({
                 lg:order-2
               "
             >
+              {/* =================================================
+                  HEADER
+              ================================================== */}
+
               <header
                 className="
                   mb-6
@@ -1074,6 +782,8 @@ export default async function New({
                 <h1
                   id="latest-news-heading"
                   className="
+                    scroll-mt-24
+
                     max-w-[760px]
 
                     text-[28px]
@@ -1136,25 +846,49 @@ export default async function New({
                 </p>
               </header>
 
+              {/* =================================================
+                  POSTS
+              ================================================== */}
+
               {safePosts.length >
               0 ? (
                 <>
-                  {/* =========================================
-                      10 POSTS PER PAGE
-                  ========================================== */}
+                  {/* =============================================
+                      PHONE
+
+                      Client-side pagination.
+                  ============================================== */}
+
+                  <div className="md:hidden">
+                    <MobileNews
+                      posts={
+                        safePosts
+                      }
+                    />
+                  </div>
+
+                  {/* =============================================
+                      TABLET + DESKTOP
+
+                      All posts appear here.
+                      This column creates the long scrolling height.
+                  ============================================== */}
 
                   <div
                     className="
-                      grid
-                      grid-cols-1
+                      hidden
 
-                      gap-5
+                      grid-cols-2
 
-                      md:grid-cols-2
-                      md:gap-6
+                      gap-x-6
+                      gap-y-6
+
+                      md:grid
+
+                      lg:gap-y-7
                     "
                   >
-                    {paginatedPosts.map(
+                    {safePosts.map(
                       (
                         post,
                         index,
@@ -1162,8 +896,7 @@ export default async function New({
                         <NewsCard
                           key={
                             post._id ||
-                            post
-                              .slug
+                            post.slug
                               ?.current ||
                             index
                           }
@@ -1171,28 +904,18 @@ export default async function New({
                             post
                           }
                           index={
-                            startIndex +
                             index
                           }
                         />
                       ),
                     )}
                   </div>
-
-                  {/* =========================================
-                      PAGINATION
-                  ========================================== */}
-
-                  <Pagination
-                    currentPage={
-                      currentPage
-                    }
-                    totalPages={
-                      totalPages
-                    }
-                  />
                 </>
               ) : (
+                /* ===============================================
+                   EMPTY STATE
+                ================================================ */
+
                 <div
                   className="
                     rounded-2xl
@@ -1239,16 +962,14 @@ export default async function New({
                       text-black/65
                     "
                   >
-                    We&apos;re
-                    preparing
-                    comprehensive
-                    guides about
-                    investment
+                    We&apos;re preparing
+                    comprehensive guides
+                    about investment
                     opportunities in
                     Dholera Special
                     Investment Region.
-                    Stay tuned for
-                    expert insights on
+                    Stay tuned for expert
+                    insights on
                     India&apos;s first
                     smart city.
                   </p>

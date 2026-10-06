@@ -1,132 +1,3 @@
-// "use client";
-
-// import { useState, useEffect } from "react";
-// import BlogCard from "./BlogCard";
-
-// export default function BlogSlider({ posts }) {
-//   const [current, setCurrent] = useState(0);
-//   const [cols, setCols] = useState(3);
-
-//   useEffect(() => {
-//     const update = () => {
-//       if (window.innerWidth >= 1024) setCols(3);
-//       else if (window.innerWidth >= 768) setCols(2);
-//       else setCols(1);
-//     };
-//     update();
-//     window.addEventListener("resize", update);
-//     return () => window.removeEventListener("resize", update);
-//   }, []);
-
-//   // Reset to first slide when cols change
-//   useEffect(() => {
-//     setCurrent(0);
-//   }, [cols]);
-
-//   const totalSlides = Math.ceil(posts.length / cols);
-//   const clamp = (n) => Math.min(Math.max(n, 0), totalSlides - 1);
-
-//   const prev = () => setCurrent((c) => clamp(c - 1));
-//   const next = () => setCurrent((c) => clamp(c + 1));
-
-//   if (!posts.length) {
-//     return (
-//       <div className="rounded-xl bg-white p-[clamp(1.25rem,2.5vw,2rem)] text-center shadow-md">
-//         <h3 className="mb-2 text-xl font-semibold text-gray-800">
-//           No Blog Posts Available
-//         </h3>
-//         <p className="text-gray-600">
-//           Check back soon for information about Dholera SIR investment
-//           opportunities.
-//         </p>
-//       </div>
-//     );
-//   }
-
-//   // Group posts into pages of `cols`
-//   const pages = Array.from({ length: totalSlides }, (_, i) =>
-//     posts.slice(i * cols, i * cols + cols)
-//   );
-
-//   return (
-//     <div className="mx-auto max-w-7xl">
-//       {/* Viewport */}
-//       <div className="w-full overflow-hidden">
-//         <div
-//           className="flex transition-transform duration-500 ease-in-out"
-//           style={{ transform: `translateX(-${current * 100}%)` }}
-//         >
-//           {pages.map((page, pageIdx) => (
-//             <div
-//               key={pageIdx}
-//               className="grid w-full min-w-0 flex-shrink-0 gap-[clamp(1rem,2vw,1.5rem)]"
-//               style={{
-//                 gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
-//                 minWidth: "100%",
-//               }}
-//             >
-//               {page.map((post) => (
-//                 <div key={post._id} className="min-w-0">
-//                   <BlogCard post={post} />
-//                 </div>
-//               ))}
-
-//               {/* Fill empty slots on last page so layout doesn't break */}
-//               {page.length < cols &&
-//                 Array.from({ length: cols - page.length }).map((_, i) => (
-//                   <div key={`empty-${i}`} className="hidden min-w-0 md:block" />
-//                 ))}
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-
-//       {/* Controls */}
-//       <div className="mt-6 flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
-//         {/* Dots */}
-//         <div className="flex max-w-full flex-wrap items-center justify-center gap-2 sm:justify-start">
-//           {pages.map((_, i) => (
-//             <button
-//               key={i}
-//               onClick={() => setCurrent(i)}
-//               aria-label={`Go to slide ${i + 1}`}
-//               className="rounded-full transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d7b56d] focus-visible:ring-offset-2"
-//               style={{
-//                 height: 8,
-//                 width: i === current ? 28 : 8,
-//                 background: i === current ? "#d7b56d" : "#d1c9b8",
-//               }}
-//             />
-//           ))}
-//         </div>
-
-//         {/* Arrows */}
-//         <div className="flex gap-3">
-//           <button
-//             onClick={prev}
-//             disabled={current === 0}
-//             aria-label="Previous"
-//             className="flex h-10 w-10 items-center justify-center rounded-full border-2 text-base font-bold transition-all duration-200 hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-30"
-//             style={{ borderColor: "#d7b56d", color: "#d7b56d" }}
-//           >
-//             <span aria-hidden="true">&larr;</span>
-//           </button>
-//           <button
-//             onClick={next}
-//             disabled={current === totalSlides - 1}
-//             aria-label="Next"
-//             className="flex h-10 w-10 items-center justify-center rounded-full text-base font-bold text-white transition-all duration-200 hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-30"
-//             style={{ background: "#d7b56d" }}
-//           >
-//             <span aria-hidden="true">&rarr;</span>
-//           </button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-
 "use client";
 
 import {
@@ -256,7 +127,7 @@ export default function BlogSlider({
         className="
           w-full
 
-          bg-[#FAF7F8]
+          bg-black/[0.025]
 
           px-5
           py-8
@@ -275,7 +146,7 @@ export default function BlogSlider({
 
             tracking-[-0.015em]
 
-            text-[#39252E]
+            text-black
 
             sm:text-[22px]
           "
@@ -293,7 +164,7 @@ export default function BlogSlider({
             text-[14px]
             leading-6
 
-            text-[#68565E]
+            text-black/60
 
             sm:text-[15px]
           "
@@ -485,13 +356,13 @@ export default function BlogSlider({
 
                       focus-visible:outline-none
                       focus-visible:ring-2
-                      focus-visible:ring-[#8F2946]
+                      focus-visible:ring-[#EC1C40]
                       focus-visible:ring-offset-2
 
                       ${
                         isActive
-                          ? "w-7 bg-[#8F2946]"
-                          : "w-2 bg-[#E0A4B5]"
+                          ? "w-7 bg-[#EC1C40]"
+                          : "w-2 bg-black/15 hover:bg-[#EC1C40]/40"
                       }
 
                       motion-reduce:transition-none
@@ -518,6 +389,7 @@ export default function BlogSlider({
             "
           >
             {/* PREVIOUS */}
+
             <button
               type="button"
               onClick={prev}
@@ -535,30 +407,40 @@ export default function BlogSlider({
 
                 rounded-full
 
-                bg-[#F7EBEF]
+                border
+                border-[#EC1C40]/10
 
-                text-[#8F2946]
+                bg-[#EC1C40]/5
 
-                shadow-[0_5px_16px_rgba(143,41,70,0.08)]
+                text-[#EC1C40]
 
-                transition-[background-color,color,transform,box-shadow]
+                shadow-[0_5px_16px_rgba(0,0,0,0.05)]
+
+                transition-[background-color,color,border-color,transform,box-shadow]
                 duration-200
 
                 hover:-translate-y-0.5
-                hover:bg-[#8F2946]
+                hover:border-[#EC1C40]
+                hover:bg-[#EC1C40]
                 hover:text-white
-                hover:shadow-[0_9px_20px_rgba(143,41,70,0.16)]
+                hover:shadow-[0_9px_20px_rgba(0,0,0,0.10)]
 
                 active:translate-y-0
 
                 disabled:cursor-not-allowed
-                disabled:bg-[#F5EFF1]
-                disabled:text-[#C9B8BE]
+                disabled:border-black/5
+                disabled:bg-black/[0.025]
+                disabled:text-black/25
                 disabled:shadow-none
+
+                disabled:hover:translate-y-0
+                disabled:hover:border-black/5
+                disabled:hover:bg-black/[0.025]
+                disabled:hover:text-black/25
 
                 focus-visible:outline-none
                 focus-visible:ring-2
-                focus-visible:ring-[#8F2946]
+                focus-visible:ring-[#EC1C40]
                 focus-visible:ring-offset-2
 
                 sm:h-12
@@ -582,6 +464,7 @@ export default function BlogSlider({
             </button>
 
             {/* NEXT */}
+
             <button
               type="button"
               onClick={next}
@@ -600,29 +483,38 @@ export default function BlogSlider({
 
                 rounded-full
 
-                bg-[#8F2946]
+                border
+                border-[#EC1C40]
+
+                bg-[#EC1C40]
 
                 text-white
 
-                shadow-[0_7px_18px_rgba(143,41,70,0.18)]
+                shadow-[0_7px_18px_rgba(236,28,64,0.18)]
 
-                transition-[background-color,transform,box-shadow]
+                transition-[background-color,border-color,transform,box-shadow]
                 duration-200
 
                 hover:-translate-y-0.5
-                hover:bg-[#742039]
-                hover:shadow-[0_10px_24px_rgba(116,32,57,0.24)]
+                hover:bg-[#EC1C40]
+                hover:shadow-[0_10px_24px_rgba(236,28,64,0.24)]
 
                 active:translate-y-0
 
                 disabled:cursor-not-allowed
-                disabled:bg-[#E8DADF]
-                disabled:text-[#A9949C]
+                disabled:border-black/5
+                disabled:bg-black/[0.04]
+                disabled:text-black/25
                 disabled:shadow-none
+
+                disabled:hover:translate-y-0
+                disabled:hover:border-black/5
+                disabled:hover:bg-black/[0.04]
+                disabled:hover:text-black/25
 
                 focus-visible:outline-none
                 focus-visible:ring-2
-                focus-visible:ring-[#8F2946]
+                focus-visible:ring-[#EC1C40]
                 focus-visible:ring-offset-2
 
                 sm:h-12

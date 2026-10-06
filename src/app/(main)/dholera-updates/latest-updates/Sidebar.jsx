@@ -607,20 +607,7 @@ export default function SidebarWithForm({
 
               w-[3px]
 
-              bg-[#8F2946]
-            "
-          />
-
-          <div
-            aria-hidden="true"
-            className="
-              mb-4
-              h-1
-              w-10
-
-              rounded-full
-
-              bg-[#E0A4B5]
+              bg-[#EC1C40]
             "
           />
 
@@ -685,11 +672,11 @@ export default function SidebarWithForm({
 
                 hover:border-[#D3A7B6]
 
-                focus:border-[#8F2946]
+                focus:border-[#EC1C40]
                 focus:bg-white
                 focus:outline-none
                 focus:ring-4
-                focus:ring-[#8F2946]/10
+                focus:ring-[#EC1C40]/10
               "
             />
 
@@ -732,11 +719,11 @@ export default function SidebarWithForm({
 
                 hover:border-[#D3A7B6]
 
-                focus:border-[#8F2946]
+                focus:border-[#EC1C40]
                 focus:bg-white
                 focus:outline-none
                 focus:ring-4
-                focus:ring-[#8F2946]/10
+                focus:ring-[#EC1C40]/10
               "
             />
 
@@ -758,7 +745,7 @@ export default function SidebarWithForm({
                   font-medium
                   leading-5
 
-                  text-[#8F2946]
+                  text-[#EC1C40]
                 "
               >
                 {errorMessage}
@@ -788,7 +775,7 @@ export default function SidebarWithForm({
 
                 rounded-xl
 
-                bg-[#8F2946]
+                bg-[#EC1C40]
 
                 px-5
                 py-3
@@ -816,7 +803,7 @@ export default function SidebarWithForm({
 
                 focus-visible:outline-none
                 focus-visible:ring-2
-                focus-visible:ring-[#8F2946]
+                focus-visible:ring-[#EC1C40]
                 focus-visible:ring-offset-2
 
                 motion-reduce:transform-none
@@ -1206,7 +1193,7 @@ export default function SidebarWithForm({
 
                 [&_label]:!text-[#51414A]
 
-                [&_svg]:!text-[#8F2946]
+                [&_svg]:!text-[#EC1C40]
 
                 [&_input]:!min-h-[54px]
 
@@ -1226,10 +1213,10 @@ export default function SidebarWithForm({
 
                 [&_input:hover]:!border-[#D7ABB9]
 
-                [&_input:focus]:!border-[#8F2946]
+                [&_input:focus]:!border-[#EC1C40]
                 [&_input:focus]:!outline-none
                 [&_input:focus]:!ring-4
-                [&_input:focus]:!ring-[#8F2946]/10
+                [&_input:focus]:!ring-[#EC1C40]/10
 
                 [&_textarea]:!rounded-xl
 
@@ -1242,10 +1229,10 @@ export default function SidebarWithForm({
 
                 [&_textarea]:placeholder:!text-[#9A858E]
 
-                [&_textarea:focus]:!border-[#8F2946]
+                [&_textarea:focus]:!border-[#EC1C40]
                 [&_textarea:focus]:!outline-none
                 [&_textarea:focus]:!ring-4
-                [&_textarea:focus]:!ring-[#8F2946]/10
+                [&_textarea:focus]:!ring-[#EC1C40]/10
 
                 [&_form_button]:!min-h-[52px]
 
@@ -1253,7 +1240,7 @@ export default function SidebarWithForm({
 
                 [&_form_button]:!border-0
 
-                [&_form_button]:!bg-[#8F2946]
+                [&_form_button]:!bg-[#EC1C40]
 
                 [&_form_button]:!px-5
                 [&_form_button]:!py-3
@@ -1277,7 +1264,7 @@ export default function SidebarWithForm({
 
                 [&_form_button:focus-visible]:!outline-none
                 [&_form_button:focus-visible]:!ring-2
-                [&_form_button:focus-visible]:!ring-[#8F2946]
+                [&_form_button:focus-visible]:!ring-[#EC1C40]
                 [&_form_button:focus-visible]:!ring-offset-2
               "
             >
@@ -1294,7 +1281,7 @@ export default function SidebarWithForm({
 
                   !bg-gradient-to-r
                   !from-[#742039]
-                  !via-[#8F2946]
+                  !via-[#EC1C40]
                   !to-[#C9738B]
                 "
               />
@@ -1426,7 +1413,7 @@ export default function SidebarWithForm({
 
                   bg-gradient-to-r
                   from-[#742039]
-                  via-[#8F2946]
+                  via-[#EC1C40]
                   to-[#C9738B]
                 "
               />
@@ -1452,7 +1439,7 @@ export default function SidebarWithForm({
                   text-[22px]
                   font-semibold
 
-                  text-[#8F2946]
+                  text-[#EC1C40]
 
                   shadow-[0_5px_16px_rgba(143,41,70,0.08)]
                 "
@@ -1520,7 +1507,7 @@ export default function SidebarWithForm({
 
                   rounded-xl
 
-                  bg-[#8F2946]
+                  bg-[#EC1C40]
 
                   px-5
                   py-3
@@ -1545,7 +1532,7 @@ export default function SidebarWithForm({
 
                   focus-visible:outline-none
                   focus-visible:ring-2
-                  focus-visible:ring-[#8F2946]
+                  focus-visible:ring-[#EC1C40]
                   focus-visible:ring-offset-2
 
                   motion-reduce:transform-none

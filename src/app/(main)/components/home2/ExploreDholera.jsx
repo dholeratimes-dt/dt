@@ -1,12 +1,8 @@
 import Link from "next/link";
 
-import {
-  Building2,
-  Factory,
-  Home,
-  Landmark,
-  Phone,
-} from "lucide-react";
+import { Building2, Factory, Home, Landmark, Phone } from "lucide-react";
+
+import PopupForm from "./PopUpForm";
 
 /* ============================================================
    EXPLORE DHOLERA DATA
@@ -68,23 +64,26 @@ export default function ExploreDholera() {
           bg-black
 
           px-4
-          py-9
+          py-8
+          mt-4
 
           text-white
 
           selection:bg-[#EC1C40]
           selection:text-white
 
-          min-[414px]:px-5
+          min-[375px]:px-5
+          min-[414px]:px-6
 
-          sm:px-6
+          sm:px-8
           sm:py-10
 
-          md:px-8
-          md:py-11
 
-          lg:px-10
-          lg:py-12
+          md:px-10
+          md:py-10
+
+          lg:px-8
+          lg:py-10
         "
       >
         {/* =====================================================
@@ -132,7 +131,7 @@ export default function ExploreDholera() {
         />
 
         {/* =====================================================
-            SUBTLE TOP/BOTTOM DEPTH
+            SUBTLE TOP / BOTTOM DEPTH
         ====================================================== */}
 
         <div
@@ -193,17 +192,20 @@ export default function ExploreDholera() {
           <h2
             id="plot-investment-heading"
             className="
-              max-w-4xl
+              w-full
 
-              text-[26px]
+              text-[25px]
               font-bold
-              leading-[1.25]
+              leading-[1.28]
 
               tracking-[-0.025em]
 
               text-white
 
+              min-[375px]:text-[26px]
+
               sm:text-[30px]
+              sm:leading-[1.25]
 
               md:text-[32px]
 
@@ -211,14 +213,45 @@ export default function ExploreDholera() {
             "
           >
             Invest in Registry Ready Plots in Dholera{" "}
-            <span className="text-[#EC1C40]">
-              From ₹10 Lakh
-            </span>
+            <span className="text-[#EC1C40]">From ₹10 Lakh</span>
           </h2>
 
-          {/* CTA */}
+          {/* =====================================================
+              CTA BUTTONS
 
-          <div className="mt-6 sm:mt-7">
+              MOBILE:
+              same horizontal left/right layout as desktop
+          ====================================================== */}
+
+          <div
+            className="
+              mt-7
+
+              grid
+              w-full
+              max-w-[390px]
+
+              grid-cols-2
+
+              items-stretch
+
+              gap-3
+
+              min-[375px]:gap-3.5
+
+              sm:mt-8
+              sm:flex
+              sm:w-auto
+              sm:max-w-none
+              sm:items-center
+              sm:justify-center
+              sm:gap-4
+            "
+          >
+            {/* =================================================
+                GET A CALL BACK
+            ================================================== */}
+
             <a
               href="tel:+919958993549"
               className="
@@ -227,25 +260,26 @@ export default function ExploreDholera() {
                 inline-flex
 
                 min-h-[50px]
+                min-w-0
 
                 items-center
                 justify-center
 
-                gap-2.5
+                gap-2
 
-                rounded-xl
+                rounded-none
 
                 border
                 border-white/30
 
                 bg-white
 
-                px-5
+                px-3
                 py-3
 
-                text-[15px]
+                text-[13px]
                 font-semibold
-                leading-6
+                leading-5
 
                 text-black
 
@@ -256,11 +290,9 @@ export default function ExploreDholera() {
                 ease-out
 
                 hover:-translate-y-0.5
-
                 hover:border-[#EC1C40]
                 hover:bg-[#EC1C40]
                 hover:text-white
-
                 hover:shadow-[0_12px_28px_rgba(236,28,64,0.24)]
 
                 active:translate-y-0
@@ -270,7 +302,11 @@ export default function ExploreDholera() {
                 focus-visible:outline-offset-4
                 focus-visible:outline-white
 
+                min-[375px]:px-3.5
+                min-[375px]:text-[13.5px]
+
                 sm:min-h-[52px]
+                sm:min-w-[196px]
                 sm:px-6
                 sm:text-[16px]
 
@@ -279,43 +315,94 @@ export default function ExploreDholera() {
               "
             >
               <Phone
-                size={18}
+                size={17}
                 strokeWidth={1.9}
                 aria-hidden="true"
-                className="shrink-0"
+                className="
+                  shrink-0
+
+                  sm:h-[18px]
+                  sm:w-[18px]
+                "
               />
 
-              <span>Get A Call Back</span>
+              <span className="whitespace-nowrap">Get A Call Back</span>
             </a>
+
+            {/* =================================================
+                GET IN TOUCH
+            ================================================== */}
+
+            <button
+              type="button"
+              data-open-dholera-popup
+              className="
+                group
+
+                inline-flex
+
+                min-h-[50px]
+                min-w-0
+
+                items-center
+                justify-center
+
+                rounded-none
+
+                border
+                border-[#EC1C40]
+
+                bg-[#EC1C40]
+
+                px-3
+                py-3
+
+                text-[13px]
+                font-semibold
+                leading-5
+
+                text-white
+
+                shadow-[0_8px_24px_rgba(236,28,64,0.20)]
+
+                transition-[background-color,color,border-color,transform,box-shadow]
+                duration-200
+                ease-out
+
+                hover:-translate-y-0.5
+                hover:border-white
+                hover:bg-white
+                hover:text-black
+                hover:shadow-[0_12px_28px_rgba(0,0,0,0.20)]
+
+                active:translate-y-0
+
+                focus-visible:outline
+                focus-visible:outline-2
+                focus-visible:outline-offset-4
+                focus-visible:outline-white
+
+                min-[375px]:px-3.5
+                min-[375px]:text-[13.5px]
+
+                sm:min-h-[52px]
+                sm:min-w-[148px]
+                sm:px-6
+                sm:text-[16px]
+
+                motion-reduce:transform-none
+                motion-reduce:transition-none
+              "
+            >
+              <span className="whitespace-nowrap">Get In Touch</span>
+            </button>
           </div>
 
-          {/* SECONDARY CONTACT LINK */}
+          {/* =====================================================
+              POPUP
+          ====================================================== */}
 
-          <Link
-            href="/contact/inquiry"
-            className="
-              mt-4
-
-              text-[13px]
-              font-medium
-              leading-5
-
-              text-white/75
-
-              underline
-              decoration-white/30
-              underline-offset-4
-
-              transition-colors
-              duration-200
-
-              hover:text-[#EC1C40]
-
-              sm:text-[14px]
-            "
-          >
-            Get in Touch
-          </Link>
+          <PopupForm />
         </div>
       </section>
 
@@ -340,20 +427,21 @@ export default function ExploreDholera() {
           selection:bg-[#EC1C40]
           selection:text-white
 
-          min-[414px]:px-5
+          min-[375px]:px-5
+          min-[414px]:px-6
 
-          sm:px-6
-          sm:py-10
+          sm:px-8
+          sm:py-12
 
-          md:px-8
-          md:py-10
+          md:px-10
+          md:py-12
 
-          lg:px-10
-          lg:py-12
+          lg:px-12
+          lg:py-10
         "
       >
         {/* =====================================================
-            VERY SUBTLE BACKGROUND ACCENTS
+            BACKGROUND ACCENTS
         ====================================================== */}
 
         <div
@@ -398,18 +486,25 @@ export default function ExploreDholera() {
           "
         />
 
-        <div className="mx-auto w-full max-w-7xl">
+        <div
+          className="
+            mx-auto
+
+            w-full
+            max-w-7xl
+          "
+        >
           {/* ===================================================
               HEADER
           ==================================================== */}
 
           <header
             className="
-              mb-6
+              mb-7
 
-              sm:mb-7
+              sm:mb-8
 
-              lg:mb-8
+              lg:mb-9
             "
           >
             <h2
@@ -430,10 +525,7 @@ export default function ExploreDholera() {
                 lg:text-[34px]
               "
             >
-              Explore{" "}
-              <span className="text-[#EC1C40]">
-                Dholera
-              </span>
+              Explore <span className="text-[#EC1C40]">Dholera</span>
             </h2>
 
             <p
@@ -441,19 +533,22 @@ export default function ExploreDholera() {
                 mt-3
 
                 w-full
+                max-w-4xl
 
                 text-[15px]
                 leading-7
 
                 text-black/65
 
+                sm:mt-4
                 sm:text-[16px]
 
+                lg:max-w-none
                 lg:whitespace-nowrap
               "
             >
-              Explore key information about Dholera Smart City, industries,
-              real estate and investment guidance.
+              Explore key information about Dholera Smart City, industries, real
+              estate and investment guidance.
             </p>
           </header>
 
@@ -470,9 +565,9 @@ export default function ExploreDholera() {
               grid
               grid-cols-1
 
-              gap-4
+              gap-5
 
-              sm:gap-5
+              sm:gap-6
 
               md:grid-cols-2
 
@@ -483,13 +578,7 @@ export default function ExploreDholera() {
             "
           >
             {exploreItems.map(
-              ({
-                title,
-                description,
-                button,
-                href,
-                icon: Icon,
-              }) => (
+              ({ title, description, button, href, icon: Icon }) => (
                 <article
                   key={title}
                   className="
@@ -514,7 +603,9 @@ export default function ExploreDholera() {
                     duration-300
                     ease-out
 
-                    sm:p-5
+                    min-[414px]:p-6
+
+                    md:p-5
 
                     lg:min-h-[245px]
                     lg:p-5
@@ -538,6 +629,7 @@ export default function ExploreDholera() {
                   <div
                     className="
                       flex
+
                       items-center
 
                       gap-3
@@ -575,11 +667,7 @@ export default function ExploreDholera() {
                         md:group-hover:text-white
                       "
                     >
-                      <Icon
-                        size={20}
-                        strokeWidth={1.8}
-                        aria-hidden="true"
-                      />
+                      <Icon size={20} strokeWidth={1.8} aria-hidden="true" />
                     </span>
 
                     <h3

@@ -499,134 +499,171 @@ export default function CopyrightPolicyPage() {
               LEFT SIDEBAR
           ================================================== */}
 
-          <aside
-            className="
-              min-w-0
+<aside
+  className="
+    min-w-0
 
-              lg:sticky
-              lg:top-24
+    lg:sticky
+    lg:top-24
+    lg:self-start
+  "
+>
+  <div
+    className="
+      overflow-hidden
+
+      rounded-2xl
+
+      border
+      border-black/10
+
+      bg-black/[0.02]
+    "
+  >
+    {/* =====================================================
+        HEADER
+    ====================================================== */}
+
+    <div
+      className="
+        border-b
+        border-black/10
+
+        bg-white/70
+
+        px-5
+        py-4
+      "
+    >
+      <div
+        className="
+          flex
+          items-center
+
+          gap-2.5
+        "
+      >
+        <FileCheck2
+          size={18}
+          strokeWidth={1.9}
+          aria-hidden="true"
+          className="
+            shrink-0
+            text-[#EC1C40]
+          "
+        />
+
+        <h2
+          className="
+            text-[15px]
+            font-bold
+            leading-6
+
+            text-black
+          "
+        >
+          Contents
+        </h2>
+      </div>
+    </div>
+
+    {/* =====================================================
+        SCROLLABLE CONTENT
+
+        Scroll remains enabled.
+        Scrollbar is hidden on all major browsers.
+    ====================================================== */}
+
+    <nav
+      aria-label="Copyright policy sections"
+      className="
+        max-h-[62vh]
+
+        overflow-y-auto
+        overscroll-contain
+
+        p-2
+
+        [scrollbar-width:none]
+        [-ms-overflow-style:none]
+
+        [&::-webkit-scrollbar]:hidden
+      "
+    >
+      {tableOfContents.map(
+        (
+          item,
+          index,
+        ) => (
+          <a
+            key={item.id}
+            href={`#${item.id}`}
+            className="
+              group
+
+              flex
+              items-start
+
+              gap-2.5
+
+              rounded-lg
+
+              px-3
+              py-2.5
+
+              text-[13px]
+              font-medium
+              leading-5
+
+              text-black/60
+
+              transition-[background-color,color]
+              duration-200
+
+              hover:bg-[#EC1C40]/5
+              hover:text-black
+
+              focus-visible:outline-none
+              focus-visible:ring-2
+              focus-visible:ring-[#EC1C40]
+              focus-visible:ring-inset
             "
           >
-            <div
+            {/* NUMBER */}
+
+            <span
               className="
-                overflow-hidden
+                mt-[1px]
 
-                rounded-2xl
+                min-w-[22px]
+                shrink-0
 
-                border
-                border-black/10
+                text-[11px]
+                font-bold
+                leading-5
 
-                bg-black/[0.02]
+                text-[#EC1C40]
               "
             >
-              <div
-                className="
-                  border-b
-                  border-black/10
+              {String(
+                index + 1,
+              ).padStart(
+                2,
+                "0",
+              )}
+            </span>
 
-                  px-5
-                  py-4
-                "
-              >
-                <div
-                  className="
-                    flex
-                    items-center
+            {/* LABEL */}
 
-                    gap-2.5
-                  "
-                >
-                  <FileCheck2
-                    size={18}
-                    strokeWidth={1.9}
-                    aria-hidden="true"
-                    className="text-[#EC1C40]"
-                  />
-
-                  <h2
-                    className="
-                      text-[15px]
-                      font-bold
-
-                      text-black
-                    "
-                  >
-                    Contents
-                  </h2>
-                </div>
-              </div>
-
-              <nav
-                aria-label="Copyright policy sections"
-                className="
-                  max-h-[62vh]
-
-                  overflow-y-auto
-
-                  p-2
-                "
-              >
-                {tableOfContents.map(
-                  (item, index) => (
-                    <a
-                      key={item.id}
-                      href={`#${item.id}`}
-                      className="
-                        group
-
-                        flex
-
-                        items-start
-
-                        gap-2.5
-
-                        rounded-lg
-
-                        px-3
-                        py-2.5
-
-                        text-[13px]
-                        font-medium
-                        leading-5
-
-                        text-black/60
-
-                        transition-[background-color,color]
-                        duration-200
-
-                        hover:bg-[#EC1C40]/5
-                        hover:text-black
-
-                        focus-visible:outline-none
-                        focus-visible:ring-2
-                        focus-visible:ring-[#EC1C40]
-                      "
-                    >
-                      <span
-                        className="
-                          mt-[1px]
-
-                          min-w-[22px]
-
-                          text-[11px]
-                          font-bold
-
-                          text-[#EC1C40]
-                        "
-                      >
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-
-                      <span>
-                        {item.label}
-                      </span>
-                    </a>
-                  ),
-                )}
-              </nav>
-            </div>
-          </aside>
-
+            <span className="min-w-0">
+              {item.label}
+            </span>
+          </a>
+        ),
+      )}
+    </nav>
+  </div>
+</aside>
           {/* =================================================
               POLICY CONTENT
           ================================================== */}
@@ -1511,7 +1548,7 @@ export default function CopyrightPolicyPage() {
                   </span>
 
                   <span>
-                    <span
+                    {/* <span
                       className="
                         block
 
@@ -1525,7 +1562,7 @@ export default function CopyrightPolicyPage() {
                       "
                     >
                       Head Office
-                    </span>
+                    </span> */}
 
                     <span
                       className="

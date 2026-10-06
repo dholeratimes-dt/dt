@@ -1,92 +1,768 @@
-// import { getblogs, getNews } from '@/sanity/lib/api';
-// import Image from 'next/image';
-// import Link from 'next/link';
-// import { getSanityImageUrl } from '@/sanity/lib/image';
+// import Image from "next/image";
+// import Link from "next/link";
 
-// function RelatedBlogCard({ item, type }) {
-//   const slug =
-//     type === 'blog'
-//       ? `/dholera-updates/blogs/${item.slug?.current || '#'}`
-//       : `/dholera-updates/latest-updates/${item.slug?.current || '#'}`;
+// import { ArrowRight } from "lucide-react";
+
+// import {
+//   getblogs,
+//   getNews,
+// } from "@/sanity/lib/api";
+
+// import { getSanityImageUrl } from "@/sanity/lib/image";
+
+// /* ============================================================
+//    DATE HELPERS
+// ============================================================ */
+
+// function parseDate(date) {
+//   if (!date) return null;
+
+//   const parsed = new Date(date);
+
+//   return Number.isNaN(parsed.getTime())
+//     ? null
+//     : parsed;
+// }
+
+// function formatDate(date) {
+//   const parsed = parseDate(date);
+
+//   if (!parsed) return "";
+
+//   return parsed.toLocaleDateString("en-US", {
+//     day: "numeric",
+//     month: "short",
+//     year: "numeric",
+//     timeZone: "Asia/Kolkata",
+//   });
+// }
+
+// /* ============================================================
+//    UPDATE CARD
+// ============================================================ */
+
+// function RelatedBlogCard({
+//   item,
+//   type,
+// }) {
+//   const basePath =
+//     type === "blog"
+//       ? "/dholera-updates/blogs"
+//       : "/dholera-updates/latest-updates";
+
+//   const href =
+//     item.slug?.current
+//       ? `${basePath}/${item.slug.current}`
+//       : basePath;
+
+//   const publishedDate =
+//     item.publishedAt ||
+//     item._createdAt;
+
+//   const parsedDate =
+//     parseDate(
+//       publishedDate,
+//     );
+
+//   const imageUrl =
+//     item.mainImage
+//       ? getSanityImageUrl(
+//           item.mainImage,
+//           900,
+//           506,
+//         )
+//       : null;
 
 //   return (
-//     <div className='flex-shrink-0  w-56 md:w-72 mx-3 snap-center cursor-pointer'>
-//       <div className='rounded-xl  overflow-hidden bg-white border border-[#426A77] transition-all duration-300 hover:scale-105'>
-//         <div className='relative w-full h-36 md:h-48 aspect-[3/2]'>
-//           {item.mainImage ? (
+//     <article
+//       className="
+//         group
+
+//         flex
+//         min-w-0
+//         flex-col
+
+//         w-[86vw]
+//         max-w-[390px]
+
+//         shrink-0
+//         snap-start
+
+//         overflow-hidden
+
+//         rounded-2xl
+
+//         border
+//         border-[#EC1C40]/30
+
+//         bg-white
+
+//         shadow-[0_5px_18px_rgba(0,0,0,0.045)]
+
+//         transition-[transform,border-color,box-shadow]
+//         duration-300
+//         ease-out
+
+//         focus-within:border-[#EC1C40]
+
+//         sm:w-[320px]
+
+//         md:w-[340px]
+
+//         lg:w-full
+//         lg:max-w-none
+//         lg:min-w-0
+
+//         lg:hover:-translate-y-1
+//         lg:hover:border-[#EC1C40]/45
+//         lg:hover:shadow-[0_14px_32px_rgba(236,28,64,0.08)]
+
+//         motion-reduce:transform-none
+//         motion-reduce:transition-none
+//       "
+//     >
+//       <Link
+//         href={href}
+//         className="
+//           flex
+//           h-full
+//           min-w-0
+//           flex-col
+
+//           rounded-[inherit]
+
+//           focus-visible:outline-none
+//           focus-visible:ring-2
+//           focus-visible:ring-inset
+//           focus-visible:ring-[#EC1C40]
+//         "
+//       >
+//         {/* ===================================================
+//             IMAGE
+//         ==================================================== */}
+
+//         <div
+//           className="
+//             relative
+
+//             aspect-[16/9]
+
+//             w-full
+//             shrink-0
+
+//             overflow-hidden
+
+//             bg-black/[0.025]
+//           "
+//         >
+//           {imageUrl ? (
 //             <Image
-//               src={getSanityImageUrl(item.mainImage, 1200, 800)}
-//               alt={item.mainImage?.alt || item.title || 'Dholera update'}
+//               src={imageUrl}
+//               alt={
+//                 item.mainImage?.alt ||
+//                 item.title ||
+//                 "Dholera update"
+//               }
 //               fill
-//               sizes='(max-width: 768px) 75vw, 288px'
-//               loading='lazy'
-//               className='object-cover'
+//               sizes="
+//                 (max-width: 639px) 86vw,
+//                 (max-width: 1023px) 340px,
+//                 20vw
+//               "
+//               className="
+//                 object-cover
+//                 object-center
+
+//                 transition-transform
+//                 duration-500
+//                 ease-out
+
+//                 lg:group-hover:scale-[1.025]
+
+//                 motion-reduce:transform-none
+//                 motion-reduce:transition-none
+//               "
 //             />
 //           ) : (
-//             <div className='w-full h-full bg-gray-700 flex items-center justify-center'>
-//               <span className='text-gray-400'>No image</span>
+//             <div
+//               className="
+//                 flex
+//                 h-full
+//                 w-full
+
+//                 items-center
+//                 justify-center
+
+//                 bg-gradient-to-br
+//                 from-[#EC1C40]/10
+//                 via-[#EC1C40]/5
+//                 to-white
+//               "
+//             >
+//               <span
+//                 className="
+//                   px-4
+
+//                   text-center
+
+//                   text-[13px]
+//                   font-medium
+
+//                   text-black/45
+//                 "
+//               >
+//                 No image available
+//               </span>
 //             </div>
 //           )}
+
+//           {/* SUBTLE IMAGE DEPTH */}
+
+//           <div
+//             aria-hidden="true"
+//             className="
+//               pointer-events-none
+
+//               absolute
+//               inset-0
+
+//               bg-gradient-to-t
+//               from-black/10
+//               via-transparent
+//               to-transparent
+//             "
+//           />
 //         </div>
 
-//         <div className='p-4'>
-//           <Link href={slug} className='block'>
-//             <h3 className='text-base font-semibold text-[#081719] line-clamp-2 mb-2  transition-colors duration-300'>
-//               {item.title}
-//             </h3>
-//             <div className='text-xs text-[#081719]-600 mb-3'>
-//               <time className='block mb-1'>
-//                 {new Date(item.publishedAt || item._createdAt).toLocaleDateString(
-//                   'en-US',
-//                   {
-//                     day: 'numeric',
-//                     month: 'long',
-//                     year: 'numeric',
-//                   },
+//         {/* ===================================================
+//             CONTENT
+//         ==================================================== */}
+
+//         <div
+//           className="
+//             flex
+//             flex-1
+//             flex-col
+
+//             bg-white
+
+//             px-3
+//             pb-3
+//             pt-3
+
+//             min-[414px]:px-3
+//             min-[414px]:pb-3
+//             min-[414px]:pt-3
+
+//             sm:px-3
+//             sm:pb-3
+//             sm:pt-3
+
+//             lg:px-3
+//             lg:pb-3
+//             lg:pt-3
+
+//             xl:px-3
+//             xl:pb-3
+//             xl:pt-3
+//           "
+//         >
+//           {/* =================================================
+//               TITLE
+//           ================================================== */}
+
+//           <h3
+//             className="
+//               line-clamp-2
+
+//               min-h-[52px]
+
+//               overflow-hidden
+
+//               text-[17px]
+//               font-semibold
+//               leading-[26px]
+
+//               tracking-[-0.015em]
+
+//               text-black
+
+//               sm:text-[17px]
+//               sm:leading-[25px]
+
+//               lg:min-h-[48px]
+//               lg:text-[15.5px]
+//               lg:leading-[23px]
+
+//               xl:min-h-[52px]
+//               xl:text-[16px]
+//               xl:leading-[24px]
+//             "
+//           >
+//             {item.title}
+//           </h3>
+
+//           {/* =================================================
+//               DIVIDER
+//           ================================================== */}
+
+//           <div
+//             className="
+//               mt-3
+
+//               border-t
+//               border-black/10
+
+//               sm:mt-3
+
+//               lg:mt-3
+//             "
+//           />
+
+//           {/* =================================================
+//               DATE + READ MORE
+//           ================================================== */}
+
+//           <div
+//             className="
+//               mt-auto
+
+//               flex
+//               min-h-[40px]
+
+//               items-end
+//               justify-between
+
+//               gap-2
+
+//               pt-2
+//             "
+//           >
+//             {/* DATE */}
+
+//             {parsedDate ? (
+//               <time
+//                 dateTime={
+//                   parsedDate.toISOString()
+//                 }
+//                 className="
+//                   shrink-0
+
+//                   text-[13px]
+//                   font-normal
+//                   leading-5
+
+//                   text-black/50
+
+//                   sm:text-[13.5px]
+
+//                   lg:text-[12.5px]
+
+//                   xl:text-[13px]
+//                 "
+//               >
+//                 {formatDate(
+//                   publishedDate,
 //                 )}
 //               </time>
-//               <span className='font-medium text-[#081719]'>Dholera Times</span>
-//             </div>
+//             ) : (
+//               <span />
+//             )}
 
-//             <span className='text-[#426A77] hover:text-white text-sm font-medium inline-flex items-center group underline underline-offset-4'>
-//               Explore More
+//             {/* READ MORE */}
+
+//             <span
+//               className="
+//                 inline-flex
+//                 shrink-0
+
+//                 items-center
+//                 justify-center
+
+//                 whitespace-nowrap
+
+//                 text-[14px]
+//                 font-semibold
+//                 leading-5
+
+//                 text-[#EC1C40]
+
+//                 transition-[color,transform]
+//                 duration-200
+//                 ease-out
+
+//                 group-hover:text-[#d9183a]
+
+//                 lg:text-[13.5px]
+
+//                 xl:text-[14px]
+
+//                 motion-reduce:transform-none
+//               "
+//             >
+//               Read More{" "}
+//               {/* <span
+//                 className="
+//                   ml-1
+
+//                   inline-block
+
+//                   transition-transform
+//                   duration-200
+
+//                   group-hover:translate-x-1
+
+//                   motion-reduce:transform-none
+//                 "
+//               >
+//                 →
+//               </span> */}
 //             </span>
-//           </Link>
+//           </div>
 //         </div>
-//       </div>
-//     </div>
+//       </Link>
+//     </article>
 //   );
 // }
 
+// /* ============================================================
+//    LATEST UPDATES
+// ============================================================ */
+
 // export default async function LatestUpdates() {
-//   const [blogsData, updatesData] = await Promise.all([getblogs(), getNews()]);
+//   const [
+//     blogsData,
+//     updatesData,
+//   ] = await Promise.all([
+//     getblogs(),
+//     getNews(),
+//   ]);
+
+//   /* ============================================================
+//      MERGE BLOGS + NEWS
+//   ============================================================ */
 
 //   const content = [
-//   ...(blogsData || []).map((item) => ({ ...item, _type: 'blog' })),
-//   ...(updatesData || []).map((item) => ({ ...item, _type: 'news' })),
-// ]
-//   .sort(
-//     (a, b) =>
-//       new Date(b.publishedAt || b._createdAt) -
-//       new Date(a.publishedAt || a._createdAt),
-//   )
-//   .slice(0, 4);
+//     ...(blogsData || []).map(
+//       (item) => ({
+//         ...item,
+//         _type: "blog",
+//       }),
+//     ),
+
+//     ...(updatesData || []).map(
+//       (item) => ({
+//         ...item,
+//         _type: "news",
+//       }),
+//     ),
+//   ]
+//     .sort((a, b) => {
+//       const dateA =
+//         parseDate(
+//           a.publishedAt ||
+//             a._createdAt,
+//         )?.getTime() ?? 0;
+
+//       const dateB =
+//         parseDate(
+//           b.publishedAt ||
+//             b._createdAt,
+//         )?.getTime() ?? 0;
+
+//       return dateB - dateA;
+//     })
+//     .slice(0, 5);
+
+//   if (!content.length) {
+//     return null;
+//   }
 
 //   return (
-//     <section className='py-12'>
-//       <div className='max-w-7xl mx-auto px-4'>
-//         <h2 className='text-2xl md:text-4xl text-center font-bold text-[#081719] mb-4'>
-//           Stay Updated with Dholera’s Latest Developments
-//         </h2>
+//     <section
+//       aria-labelledby="latest-updates-heading"
+//       className="
+//         w-full
 
-//         <div className='flex overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-6'>
-//           {content.map((item) => (
-//             <RelatedBlogCard
-//               key={item._id || item.slug?.current || item.title}
-//               item={item}
-//               type={item._type}
+//         bg-white
+
+//         px-4
+//         py-8
+
+//         selection:bg-[#EC1C40]
+//         selection:text-white
+
+//         min-[414px]:px-5
+
+//         sm:px-6
+//         sm:py-10
+
+//         md:px-8
+//         md:py-10
+
+//         lg:px-10
+//         lg:py-12
+//       "
+//     >
+//       <div
+//         className="
+//           mx-auto
+//           w-full
+//           max-w-7xl
+//         "
+//       >
+//         {/* ===================================================
+//             SECTION HEADER
+//         ==================================================== */}
+
+//         <header
+//           className="
+//             mb-5
+
+//             flex
+//             flex-col
+
+//             gap-3
+
+//             sm:mb-6
+
+//             lg:flex-row
+//             lg:items-center
+//             lg:justify-between
+//             lg:gap-6
+
+//             lg:mb-7
+//           "
+//         >
+//           {/* TITLE */}
+
+//           <h2
+//             id="latest-updates-heading"
+//             className="
+//               text-left
+
+//               text-[28px]
+//               font-bold
+//               leading-[1.2]
+
+//               tracking-[-0.025em]
+
+//               text-black
+
+//               sm:text-[30px]
+
+//               md:text-[32px]
+
+//               lg:text-[34px]
+//             "
+//           >
+//             Latest Dholera{" "}
+
+//             <span className="text-[#EC1C40]">
+//               News &amp; Updates
+//             </span>
+//           </h2>
+
+//           {/* =================================================
+//               DESKTOP — VIEW ALL UPDATES
+
+//               Hidden on phone/tablet.
+//               Desktop remains the same as before.
+//           ================================================== */}
+
+//           <Link
+//             href="/dholera-updates/latest-updates"
+//             className="
+//               group/view
+
+//               hidden
+//               w-fit
+//               shrink-0
+
+//               items-center
+
+//               gap-1.5
+
+//               text-[14px]
+//               font-semibold
+//               leading-5
+
+//               text-[#EC1C40]
+
+//               transition-colors
+//               duration-200
+
+//               hover:text-black
+
+//               focus-visible:outline
+//               focus-visible:outline-2
+//               focus-visible:outline-offset-4
+//               focus-visible:outline-[#EC1C40]
+
+//               lg:inline-flex
+//               lg:self-center
+//             "
+//           >
+//             <span>
+//               View All Updates
+//             </span>
+
+//             <ArrowRight
+//               size={16}
+//               strokeWidth={1.9}
+//               aria-hidden="true"
+//               className="
+//                 shrink-0
+
+//                 transition-transform
+//                 duration-200
+
+//                 group-hover/view:translate-x-1
+
+//                 motion-reduce:transform-none
+//                 motion-reduce:transition-none
+//               "
 //             />
-//           ))}
+//           </Link>
+//         </header>
+
+//         {/* ===================================================
+//             CARDS
+
+//             Phone / Tablet:
+//             Horizontal swipe remains enabled.
+
+//             Desktop:
+//             5 cards in one row.
+//         ==================================================== */}
+
+//         <div
+//           role="region"
+//           aria-labelledby="latest-updates-heading"
+//           tabIndex={0}
+//           className="
+//             flex
+
+//             snap-x
+//             snap-mandatory
+
+//             items-stretch
+
+//             gap-4
+
+//             overflow-x-auto
+//             overscroll-x-contain
+
+//             pb-1
+//             pt-1
+
+//             focus-visible:outline
+//             focus-visible:outline-2
+//             focus-visible:outline-offset-4
+//             focus-visible:outline-[#EC1C40]
+
+//             sm:gap-5
+
+//             md:gap-5
+
+//             lg:grid
+//             lg:grid-cols-5
+//             lg:gap-4
+
+//             lg:overflow-visible
+//             lg:pb-0
+
+//             xl:gap-5
+
+//             [&::-webkit-scrollbar]:hidden
+
+//             [-ms-overflow-style:none]
+
+//             [scrollbar-width:none]
+//           "
+//         >
+//           {content.map(
+//             (item) => (
+//               <RelatedBlogCard
+//                 key={`${item._type}-${
+//                   item._id ||
+//                   item.slug?.current ||
+//                   item.title
+//                 }`}
+//                 item={item}
+//                 type={item._type}
+//               />
+//             ),
+//           )}
+//         </div>
+
+//         {/* ===================================================
+//             PHONE / TABLET — VIEW ALL UPDATES BUTTON
+
+//             Replaces:
+//             - Swipe text
+//             - Left chevron
+//             - Right chevron
+
+//             Hidden on desktop.
+//         ==================================================== */}
+
+//         <div
+//           className="
+//             mt-6
+
+//             flex
+//             items-center
+//             justify-center
+
+//             lg:hidden
+//           "
+//         >
+//           <Link
+//             href="/dholera-updates/latest-updates"
+//             className="
+//               inline-flex
+//               items-center
+//               justify-center
+
+//               text-[14px]
+//               font-semibold
+//               leading-5
+
+//               text-[#EC1C40]
+
+//               transition-colors
+//               duration-200
+//               ease-out
+
+//               hover:text-[#EC1C40]
+
+//               focus-visible:outline-none
+//               focus-visible:text-[#EC1C40]
+
+//               sm:text-[14.5px]
+
+//               motion-reduce:transition-none
+//             "
+//           >
+//             View All Updates
+//             <ArrowRight
+//               size={16}
+//               strokeWidth={1.9}
+//               aria-hidden="true"
+//               className="
+//                 shrink-0
+
+//                 transition-transform
+//                 duration-200
+
+//                 group-hover/view:translate-x-1
+
+//                 motion-reduce:transform-none
+//                 motion-reduce:transition-none
+//               "
+//             />
+//           </Link>
 //         </div>
 //       </div>
 //     </section>
@@ -96,19 +772,13 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import {
-  ArrowRight,
-  ArrowUpRight,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
-import {
-  getblogs,
-  getNews,
-} from "@/sanity/lib/api";
+import { getblogs, getNews } from "@/sanity/lib/api";
 
 import { getSanityImageUrl } from "@/sanity/lib/image";
+
+import RelatedBlogCarousel from "./LatestBlogCrousel";
 
 /* ============================================================
    DATE HELPERS
@@ -119,9 +789,7 @@ function parseDate(date) {
 
   const parsed = new Date(date);
 
-  return Number.isNaN(parsed.getTime())
-    ? null
-    : parsed;
+  return Number.isNaN(parsed.getTime()) ? null : parsed;
 }
 
 function formatDate(date) {
@@ -138,60 +806,59 @@ function formatDate(date) {
 }
 
 /* ============================================================
-   UPDATE CARD
+   EXISTING RELATED BLOG CARD
+
+   IMPORTANT:
+   Padding / margins / typography / image ratio remain the same.
+
+   Only desktop width changes so 5 cards remain visible
+   inside the horizontal slider.
 ============================================================ */
 
-function RelatedBlogCard({
-  item,
-  type,
-}) {
+function RelatedBlogCard({ item, type }) {
   const basePath =
     type === "blog"
       ? "/dholera-updates/blogs"
       : "/dholera-updates/latest-updates";
 
-  const href =
-    item.slug?.current
-      ? `${basePath}/${item.slug.current}`
-      : basePath;
+  const href = item.slug?.current
+    ? `${basePath}/${item.slug.current}`
+    : basePath;
 
-  const publishedDate =
-    item.publishedAt ||
-    item._createdAt;
+  const publishedDate = item.publishedAt || item._createdAt;
 
-  const parsedDate =
-    parseDate(publishedDate);
+  const parsedDate = parseDate(publishedDate);
 
-  const imageUrl =
-    item.mainImage
-      ? getSanityImageUrl(
-          item.mainImage,
-          900,
-          600,
-        )
-      : null;
+  const imageUrl = item.mainImage
+    ? getSanityImageUrl(item.mainImage, 900, 506)
+    : null;
 
   return (
     <article
+      data-related-blog-card
       className="
         group
 
-        w-[78vw]
-        max-w-[290px]
+        flex
+        min-w-0
+        flex-col
+
+        w-[86vw]
+        max-w-[390px]
 
         shrink-0
         snap-start
 
         overflow-hidden
 
-        rounded-xl
+        rounded-2xl
 
         border
-        border-black/10
+        border-[#EC1C40]/30
 
         bg-white
 
-        shadow-[0_4px_16px_rgba(0,0,0,0.045)]
+        shadow-[0_5px_18px_rgba(0,0,0,0.045)]
 
         transition-[transform,border-color,box-shadow]
         duration-300
@@ -199,17 +866,19 @@ function RelatedBlogCard({
 
         focus-within:border-[#EC1C40]
 
-        sm:w-[280px]
+        sm:w-[320px]
 
-        md:w-[290px]
+        md:w-[340px]
 
-        lg:w-full
+        lg:w-[calc((100%_-_4rem)/5)]
         lg:max-w-none
         lg:min-w-0
 
+        xl:w-[calc((100%_-_5rem)/5)]
+
         lg:hover:-translate-y-1
-        lg:hover:border-[#EC1C40]/30
-        lg:hover:shadow-[0_12px_28px_rgba(0,0,0,0.08)]
+        lg:hover:border-[#EC1C40]/45
+        lg:hover:shadow-[0_14px_32px_rgba(236,28,64,0.08)]
 
         motion-reduce:transform-none
         motion-reduce:transition-none
@@ -239,31 +908,24 @@ function RelatedBlogCard({
           className="
             relative
 
-            aspect-[16/10]
-            w-full
+            aspect-[16/9]
 
+            w-full
             shrink-0
 
             overflow-hidden
 
-            border-b
-            border-black/10
-
-            bg-[#EC1C40]/5
+            bg-black/[0.025]
           "
         >
           {imageUrl ? (
             <Image
               src={imageUrl}
-              alt={
-                item.mainImage?.alt ||
-                item.title ||
-                "Dholera update"
-              }
+              alt={item.mainImage?.alt || item.title || "Dholera update"}
               fill
               sizes="
-                (max-width: 639px) 78vw,
-                (max-width: 1023px) 290px,
+                (max-width: 639px) 86vw,
+                (max-width: 1023px) 340px,
                 20vw
               "
               className="
@@ -274,7 +936,7 @@ function RelatedBlogCard({
                 duration-500
                 ease-out
 
-                lg:group-hover:scale-[1.035]
+                lg:group-hover:scale-[1.025]
 
                 motion-reduce:transform-none
                 motion-reduce:transition-none
@@ -291,8 +953,8 @@ function RelatedBlogCard({
                 justify-center
 
                 bg-gradient-to-br
-                from-[#EC1C40]/5
-                via-[#EC1C40]/[0.035]
+                from-[#EC1C40]/10
+                via-[#EC1C40]/5
                 to-white
               "
             >
@@ -305,7 +967,7 @@ function RelatedBlogCard({
                   text-[13px]
                   font-medium
 
-                  text-black/60
+                  text-black/45
                 "
               >
                 No image available
@@ -313,7 +975,7 @@ function RelatedBlogCard({
             </div>
           )}
 
-          {/* IMAGE DEPTH */}
+          {/* SUBTLE IMAGE DEPTH */}
 
           <div
             aria-hidden="true"
@@ -333,18 +995,37 @@ function RelatedBlogCard({
 
         {/* ===================================================
             CONTENT
+
+            EXACT EXISTING PADDING KEPT
         ==================================================== */}
 
         <div
           className="
             flex
-            min-h-0
             flex-1
             flex-col
 
-            px-4
-            pb-4
-            pt-4
+            bg-white
+
+            px-3
+            pb-3
+            pt-3
+
+            min-[414px]:px-3
+            min-[414px]:pb-3
+            min-[414px]:pt-3
+
+            sm:px-3
+            sm:pb-3
+            sm:pt-3
+
+            lg:px-3
+            lg:pb-3
+            lg:pt-3
+
+            xl:px-3
+            xl:pb-3
+            xl:pt-3
           "
         >
           {/* =================================================
@@ -354,117 +1035,130 @@ function RelatedBlogCard({
           <h3
             className="
               line-clamp-2
+
+              min-h-[52px]
+
               overflow-hidden
 
-              text-[14.5px]
+              text-[17px]
               font-semibold
-              leading-[21px]
+              leading-[26px]
 
-              tracking-[-0.01em]
+              tracking-[-0.015em]
 
               text-black
 
-              sm:text-[15px]
-              sm:leading-[22px]
+              sm:text-[17px]
+              sm:leading-[25px]
 
-              lg:text-[15px]
-              lg:leading-[22px]
+              lg:min-h-[48px]
+              lg:text-[15.5px]
+              lg:leading-[23px]
+
+              xl:min-h-[52px]
+              xl:text-[16px]
+              xl:leading-[24px]
             "
           >
             {item.title}
           </h3>
 
           {/* =================================================
-              DATE
+              DIVIDER
           ================================================== */}
 
-          {parsedDate && (
-            <time
-              dateTime={
-                parsedDate.toISOString()
-              }
-              className="
-                mt-2.5
+          <div
+            className="
+              mt-3
 
-                block
-                shrink-0
+              border-t
+              border-black/10
 
-                text-[12px]
-                font-medium
-                leading-5
+              sm:mt-3
 
-                text-[#EC1C40]
-
-                sm:text-[12.5px]
-              "
-            >
-              {formatDate(
-                publishedDate,
-              )}
-            </time>
-          )}
+              lg:mt-3
+            "
+          />
 
           {/* =================================================
-              EXPLORE MORE
+              DATE + READ MORE
           ================================================== */}
 
           <div
             className="
               mt-auto
 
-              pt-4
+              flex
+              min-h-[40px]
+
+              items-end
+              justify-between
+
+              gap-2
+
+              pt-2
             "
           >
-            <div
-              className="
-                border-t
-                border-black/10
+            {/* DATE */}
 
-                pt-3
-              "
-            >
-              <span
+            {parsedDate ? (
+              <time
+                dateTime={parsedDate.toISOString()}
                 className="
-                  inline-flex
-
-                  min-h-[38px]
-
-                  items-center
-                  justify-center
-
-                  gap-1.5
-
-                  rounded-lg
-
-                  bg-black/[0.045]
-
-                  px-3.5
-                  py-2
+                  shrink-0
 
                   text-[13px]
-                  font-semibold
+                  font-normal
                   leading-5
 
-                  text-black
-
-                  transition-[background-color,color,transform]
-                  duration-200
-                  ease-out
-
-                  group-hover:bg-[#EC1C40]
-                  group-hover:text-white
+                  text-black/50
 
                   sm:text-[13.5px]
 
-                  motion-reduce:transform-none
-                  motion-reduce:transition-none
+                  lg:text-[12.5px]
+
+                  xl:text-[13px]
                 "
               >
-                <span>
-                  Explore More
-                </span>
-              </span>
-            </div>
+                {formatDate(publishedDate)}
+              </time>
+            ) : (
+              <span />
+            )}
+
+            {/* READ MORE */}
+
+            <span
+              className="
+                inline-flex
+                shrink-0
+
+                items-center
+                justify-center
+
+                whitespace-nowrap
+
+                text-[14px]
+                font-semibold
+                leading-5
+
+                text-[#EC1C40]
+
+                transition-[color,transform]
+                duration-200
+                ease-out
+
+                group-hover:text-[#d9183a]
+
+                lg:text-[13.5px]
+
+                xl:text-[14px]
+
+                motion-reduce:transform-none
+              "
+            >
+              Read More
+            </span>
           </div>
         </div>
       </Link>
@@ -477,49 +1171,37 @@ function RelatedBlogCard({
 ============================================================ */
 
 export default async function LatestUpdates() {
-  const [
-    blogsData,
-    updatesData,
-  ] = await Promise.all([
-    getblogs(),
-    getNews(),
-  ]);
+  const [blogsData, updatesData] = await Promise.all([getblogs(), getNews()]);
 
   /* ============================================================
      MERGE BLOGS + NEWS
   ============================================================ */
 
   const content = [
-    ...(blogsData || []).map(
-      (item) => ({
-        ...item,
-        _type: "blog",
-      }),
-    ),
+    ...(blogsData || []).map((item) => ({
+      ...item,
+      _type: "blog",
+    })),
 
-    ...(updatesData || []).map(
-      (item) => ({
-        ...item,
-        _type: "news",
-      }),
-    ),
+    ...(updatesData || []).map((item) => ({
+      ...item,
+      _type: "news",
+    })),
   ]
     .sort((a, b) => {
-      const dateA =
-        parseDate(
-          a.publishedAt ||
-            a._createdAt,
-        )?.getTime() ?? 0;
+      const dateA = parseDate(a.publishedAt || a._createdAt)?.getTime() ?? 0;
 
-      const dateB =
-        parseDate(
-          b.publishedAt ||
-            b._createdAt,
-        )?.getTime() ?? 0;
+      const dateB = parseDate(b.publishedAt || b._createdAt)?.getTime() ?? 0;
 
       return dateB - dateA;
     })
-    .slice(0, 5);
+
+    /* ========================================================
+       ONLY CHANGE:
+       5 -> 8
+    ======================================================== */
+
+    .slice(0, 8);
 
   if (!content.length) {
     return null;
@@ -534,7 +1216,8 @@ export default async function LatestUpdates() {
         bg-white
 
         px-4
-        py-8
+        pt-8
+        pb-5
 
         selection:bg-[#EC1C40]
         selection:text-white
@@ -542,18 +1225,22 @@ export default async function LatestUpdates() {
         min-[414px]:px-5
 
         sm:px-6
-        sm:py-10
+        sm:pt-10
+        sm:pb-6
 
         md:px-8
-        md:py-10
+        md:pt-10
+        md:pb-6
 
         lg:px-10
-        lg:py-12
+        lg:pt-10
+        lg:pb-6
       "
     >
       <div
         className="
           mx-auto
+
           w-full
           max-w-7xl
         "
@@ -573,10 +1260,10 @@ export default async function LatestUpdates() {
 
             sm:mb-6
 
-            md:flex-row
-            md:items-center
-            md:justify-between
-            md:gap-6
+            lg:flex-row
+            lg:items-center
+            lg:justify-between
+            lg:gap-6
 
             lg:mb-7
           "
@@ -604,14 +1291,17 @@ export default async function LatestUpdates() {
             "
           >
             Latest Dholera{" "}
-
-            <span className="text-[#EC1C40]">
+            <span
+              className="
+                text-[#EC1C40]
+              "
+            >
               News &amp; Updates
             </span>
           </h2>
 
           {/* =================================================
-              VIEW ALL UPDATES
+              DESKTOP VIEW ALL
           ================================================== */}
 
           <Link
@@ -619,16 +1309,15 @@ export default async function LatestUpdates() {
             className="
               group/view
 
-              inline-flex
+              hidden
               w-fit
-
               shrink-0
 
               items-center
 
               gap-1.5
 
-              text-[13px]
+              text-[14px]
               font-semibold
               leading-5
 
@@ -644,14 +1333,11 @@ export default async function LatestUpdates() {
               focus-visible:outline-offset-4
               focus-visible:outline-[#EC1C40]
 
-              sm:text-[14px]
-
-              md:self-center
+              lg:inline-flex
+              lg:self-center
             "
           >
-            <span>
-              View All Updates
-            </span>
+            <span>View All Updates</span>
 
             <ArrowRight
               size={16}
@@ -673,83 +1359,37 @@ export default async function LatestUpdates() {
         </header>
 
         {/* ===================================================
-            CARDS
+            EXISTING RELATED BLOG CARDS
 
-            Phone / Tablet:
-            Horizontal swipe
+            No new card component is being created.
 
-            Desktop:
-            5 cards in one row
+            RelatedBlogCarousel only controls:
+            - scrolling
+            - arrows
+            - indicators
         ==================================================== */}
 
-        <div
-          role="region"
-          aria-labelledby="latest-updates-heading"
-          tabIndex={0}
-          className="
-            flex
-
-            snap-x
-            snap-mandatory
-
-            items-stretch
-
-            gap-4
-
-            overflow-x-auto
-            overscroll-x-contain
-
-            pb-1
-            pt-1
-
-            focus-visible:outline
-            focus-visible:outline-2
-            focus-visible:outline-offset-4
-            focus-visible:outline-[#EC1C40]
-
-            sm:gap-5
-
-            md:gap-5
-
-            lg:grid
-            lg:grid-cols-5
-            lg:gap-4
-
-            lg:overflow-visible
-            lg:pb-0
-
-            xl:gap-5
-
-            [&::-webkit-scrollbar]:hidden
-
-            [-ms-overflow-style:none]
-
-            [scrollbar-width:none]
-          "
-        >
-          {content.map(
-            (item) => (
-              <RelatedBlogCard
-                key={`${item._type}-${
-                  item._id ||
-                  item.slug?.current ||
-                  item.title
-                }`}
-                item={item}
-                type={item._type}
-              />
-            ),
-          )}
-        </div>
+        <RelatedBlogCarousel>
+          {content.map((item) => (
+            <RelatedBlogCard
+              key={`${item._type}-${
+                item._id || item.slug?.current || item.title
+              }`}
+              item={item}
+              type={item._type}
+            />
+          ))}
+        </RelatedBlogCarousel>
 
         {/* ===================================================
-            SWIPE INDICATOR
+            PHONE / TABLET VIEW ALL
+
+            Existing spacing preserved.
         ==================================================== */}
 
         <div
-          aria-hidden="true"
           className="
-            mt-5
+            mt-6
 
             flex
             items-center
@@ -758,94 +1398,56 @@ export default async function LatestUpdates() {
             lg:hidden
           "
         >
-          <div
+          <Link
+            href="/dholera-updates/latest-updates"
             className="
+              group/view
+
               inline-flex
 
               items-center
               justify-center
 
-              gap-3
+              gap-1
+
+              text-[14px]
+              font-semibold
+              leading-5
 
               text-[#EC1C40]
+
+              transition-colors
+              duration-200
+              ease-out
+
+              hover:text-[#EC1C40]
+
+              focus-visible:outline-none
+              focus-visible:text-[#EC1C40]
+
+              sm:text-[14.5px]
+
+              motion-reduce:transition-none
             "
           >
-            {/* LEFT */}
-
-            <span
+            View All Updates
+            <ArrowRight
+              size={16}
+              strokeWidth={1.9}
+              aria-hidden="true"
               className="
-                flex
+                shrink-0
 
-                h-8
-                w-8
+                transition-transform
+                duration-200
 
-                items-center
-                justify-center
+                group-hover/view:translate-x-1
 
-                rounded-full
-
-                border
-                border-[#EC1C40]/20
-
-                bg-[#EC1C40]/5
-
-                text-[#EC1C40]
+                motion-reduce:transform-none
+                motion-reduce:transition-none
               "
-            >
-              <ChevronLeft
-                size={17}
-                strokeWidth={2}
-                aria-hidden="true"
-              />
-            </span>
-
-            {/* TEXT */}
-
-            <span
-              className="
-                text-[12px]
-                font-semibold
-                leading-5
-
-                tracking-[0.04em]
-
-                text-[#EC1C40]
-
-                sm:text-[13px]
-              "
-            >
-              Swipe
-            </span>
-
-            {/* RIGHT */}
-
-            <span
-              className="
-                flex
-
-                h-8
-                w-8
-
-                items-center
-                justify-center
-
-                rounded-full
-
-                border
-                border-[#EC1C40]/20
-
-                bg-[#EC1C40]/5
-
-                text-[#EC1C40]
-              "
-            >
-              <ChevronRight
-                size={17}
-                strokeWidth={2}
-                aria-hidden="true"
-              />
-            </span>
-          </div>
+            />
+          </Link>
         </div>
       </div>
     </section>

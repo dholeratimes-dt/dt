@@ -364,6 +364,18 @@ export default function TermsAndConditionsPage() {
 
             <p
               className="
+                inline-flex
+                items-center
+
+                rounded-full
+
+                border
+                border-black/10
+
+                bg-black/[0.025]
+
+                px-4
+                py-2
                 mt-4
 
                 text-[13px]
@@ -372,8 +384,10 @@ export default function TermsAndConditionsPage() {
 
                 text-black/60
 
-                sm:mt-5
+                sm:px-4
+                sm:py-2
                 sm:text-[14px]
+                lg:mt-4
               "
             >
               Last Updated: 24 September 2026
@@ -491,22 +505,24 @@ export default function TermsAndConditionsPage() {
               DESKTOP CONTENT NAVIGATION
           ================================================== */}
 
-          <aside
-            className="
-              hidden
-              min-w-0
+          
 
-              lg:sticky
-              lg:top-24
-              lg:block
-            "
-          >
+          <aside
+              className="
+                hidden
+                min-w-0
+
+                lg:sticky
+                lg:top-24
+                lg:block
+              "
+            >
             <nav
               aria-label="Terms and Conditions sections"
               className="
                 max-h-[calc(100vh-120px)]
 
-                overflow-y-auto
+                overflow-hidden
 
                 rounded-2xl
 
@@ -514,12 +530,73 @@ export default function TermsAndConditionsPage() {
                 border-black/10
 
                 bg-black/[0.02]
-
-                p-2
               "
             >
-              {tableOfContents.map(
-                (item, index) => (
+              {/* =================================================
+                  CONTENTS HEADER
+              ================================================= */}
+
+              <div
+                className="
+                  flex
+                  items-center
+                  gap-3
+
+                  border-b
+                  border-black/10
+
+                  bg-white
+
+                  px-4
+                  py-4
+                "
+              >
+                <FileText
+                  size={19}
+                  strokeWidth={1.9}
+                  aria-hidden="true"
+                  className="
+                    shrink-0
+                    text-[#EC1C40]
+                  "
+                />
+
+                <h2
+                  className="
+                    text-[15px]
+                    font-bold
+                    leading-6
+
+                    text-black
+                  "
+                >
+                  Contents
+                </h2>
+              </div>
+
+              {/* =================================================
+                  SCROLLABLE CONTENT LIST
+              ================================================= */}
+
+              <div
+                className="
+                  max-h-[calc(100vh-185px)]
+
+                  overflow-y-auto
+
+                  p-2
+
+                  [scrollbar-width:thin]
+
+                  [&::-webkit-scrollbar]:w-[5px]
+
+                  [&::-webkit-scrollbar-track]:bg-transparent
+
+                  [&::-webkit-scrollbar-thumb]:rounded-full
+                  [&::-webkit-scrollbar-thumb]:bg-black/10
+                "
+              >
+                {tableOfContents.map((item, index) => (
                   <a
                     key={item.id}
                     href={`#${item.id}`}
@@ -527,9 +604,9 @@ export default function TermsAndConditionsPage() {
                       group
 
                       flex
-                      items-start
+                      items-center
 
-                      gap-2.5
+                      gap-3
 
                       rounded-lg
 
@@ -540,7 +617,7 @@ export default function TermsAndConditionsPage() {
                       font-medium
                       leading-5
 
-                      text-black/60
+                      text-black/55
 
                       transition-[background-color,color]
                       duration-200
@@ -551,16 +628,18 @@ export default function TermsAndConditionsPage() {
                       focus-visible:outline-none
                       focus-visible:ring-2
                       focus-visible:ring-[#EC1C40]
+                      focus-visible:ring-inset
                     "
                   >
+                    {/* Number */}
                     <span
                       className="
-                        mt-[1px]
-
                         min-w-[22px]
+                        shrink-0
 
                         text-[11px]
                         font-bold
+                        leading-5
 
                         text-[#EC1C40]
                       "
@@ -568,15 +647,22 @@ export default function TermsAndConditionsPage() {
                       {String(index + 1).padStart(2, "0")}
                     </span>
 
-                    <span>
+                    {/* Label */}
+                    <span
+                      className="
+                        min-w-0
+
+                        transition-colors
+                        duration-200
+                      "
+                    >
                       {item.label}
                     </span>
                   </a>
-                ),
-              )}
+                ))}
+              </div>
             </nav>
           </aside>
-
           {/* =================================================
               TERMS DOCUMENT
 

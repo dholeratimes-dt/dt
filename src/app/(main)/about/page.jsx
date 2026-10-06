@@ -366,6 +366,8 @@ import {
 } from "lucide-react";
 
 import hero from "@/assets/consultation-image.webp";
+import ConnectedFocusGraphic from "./connect";
+import CommonFAQ from "../components/Common/Faq";
 
 /* ============================================================
    SEO METADATA
@@ -479,6 +481,7 @@ const focusItems = [
       CheckCircle2,
   },
 ];
+
 
 const whatWeDoItems = [
   {
@@ -841,16 +844,12 @@ export default function AboutPage() {
         <section
           className="
             relative
-
             overflow-hidden
-
-            border-b
-            border-black/10
 
             bg-white
 
             px-4
-            py-12
+            py-8
 
             min-[414px]:px-5
 
@@ -858,58 +857,21 @@ export default function AboutPage() {
             sm:py-14
 
             md:px-8
-            md:py-16
+            md:py-12
 
             lg:px-10
-            lg:py-20
+            lg:py-12
           "
         >
-          {/* BACKGROUND DECORATION */}
 
-          <div
-            aria-hidden="true"
-            className="
-              pointer-events-none
-
-              absolute
-
-              -right-32
-              -top-40
-
-              h-[440px]
-              w-[440px]
-
-              rounded-full
-
-              bg-[#EC1C40]/[0.055]
-
-              blur-3xl
-            "
-          />
-
-          <div
-            aria-hidden="true"
-            className="
-              pointer-events-none
-
-              absolute
-              bottom-[-180px]
-              left-[-180px]
-
-              h-[400px]
-              w-[400px]
-
-              rounded-full
-
-              bg-black/[0.025]
-
-              blur-3xl
-            "
-          />
+          {/* =====================================================
+              CONTENT CONTAINER
+          ====================================================== */}
 
           <div
             className="
               relative
+              z-10
 
               mx-auto
               w-full
@@ -921,40 +883,23 @@ export default function AboutPage() {
                 grid
                 grid-cols-1
 
-                gap-10
+                gap-12
 
-                lg:grid-cols-[minmax(0,1.05fr)_minmax(420px,0.95fr)]
+                lg:grid-cols-[minmax(0,1.02fr)_minmax(470px,0.98fr)]
                 lg:items-center
-                lg:gap-16
+                lg:gap-14
+
+                xl:grid-cols-[minmax(0,1.05fr)_minmax(520px,0.95fr)]
+                xl:gap-20
               "
             >
-              {/* LEFT */}
+              {/* =================================================
+                  LEFT CONTENT
+              ================================================== */}
 
-              <div
-                className="
-                  max-w-4xl
-                "
-              >
-                <p
-                  className="
-                    text-[11px]
-                    font-bold
-                    uppercase
-
-                    tracking-[0.16em]
-
-                    text-[#EC1C40]
-
-                    sm:text-[12px]
-                  "
-                >
-                  Dholera Matlab Dholera Times
-                </p>
-
+              <div className="max-w-4xl">
                 <h1
                   className="
-                    mt-4
-
                     text-[38px]
                     font-bold
                     leading-[1.05]
@@ -969,16 +914,13 @@ export default function AboutPage() {
 
                     md:text-[56px]
 
-                    lg:text-[64px]
+                    lg:text-[58px]
+
+                    xl:text-[64px]
                   "
                 >
                   About{" "}
-
-                  <span
-                    className="
-                      text-[#EC1C40]
-                    "
-                  >
+                  <span className="text-[#EC1C40]">
                     Dholera Times
                   </span>
                 </h1>
@@ -1007,144 +949,52 @@ export default function AboutPage() {
                 </p>
               </div>
 
-              {/* RIGHT — FOCUS GRID */}
+              {/* =================================================
+                  RIGHT — STEPPED PYRAMID INFOGRAPHIC
+              ================================================== */}
 
               <div
                 className="
-                  grid
-                  grid-cols-1
+                  relative
 
-                  gap-3
-
-                  min-[480px]:grid-cols-2
+                  mx-auto
+                  w-full
+                  max-w-[620px]
+                  lg:ml-auto
+                  lg:mr-0
                 "
               >
-                {focusItems.map(
-                  (
-                    {
-                      title,
-                      icon: Icon,
-                    },
-                    index,
-                  ) => (
-                    <article
-                      key={
-                        title
-                      }
-                      className="
-                        group
+                {/* ===============================================
+                    VERY SUBTLE BACKGROUND SHAPE
+                ================================================ */}
 
-                        relative
+                <div
+                  aria-hidden="true"
+                  className="
+                    pointer-events-none
 
-                        min-h-[118px]
+                    absolute
+                    left-1/2
+                    top-1/2
 
-                        overflow-hidden
+                    h-[82%]
+                    w-[88%]
 
-                        rounded-2xl
+                    -translate-x-1/2
+                    -translate-y-1/2
 
-                        border
-                        border-black/10
+                    bg-[#EC1C40]/[0.025]
 
-                        bg-white
+                    blur-[70px]
+                  "
+                />
 
-                        p-4
+                  <ConnectedFocusGraphic />
 
-                        shadow-[0_12px_38px_-32px_rgba(0,0,0,0.30)]
-
-                        transition-[border-color,transform,box-shadow]
-                        duration-300
-
-                        md:hover:-translate-y-1
-                        md:hover:border-[#EC1C40]/30
-                        md:hover:shadow-[0_18px_45px_-32px_rgba(0,0,0,0.38)]
-
-                        sm:p-5
-
-                        motion-reduce:transform-none
-                      "
-                    >
-                      <div
-                        className="
-                          flex
-                          items-start
-                          justify-between
-
-                          gap-4
-                        "
-                      >
-                        <span
-                          className="
-                            flex
-                            h-10
-                            w-10
-
-                            shrink-0
-
-                            items-center
-                            justify-center
-
-                            rounded-xl
-
-                            bg-[#EC1C40]/10
-                          "
-                        >
-                          <Icon
-                            aria-hidden="true"
-                            className="
-                              h-5
-                              w-5
-
-                              stroke-[#EC1C40]
-                            "
-                            strokeWidth={
-                              2
-                            }
-                          />
-                        </span>
-
-                        <span
-                          className="
-                            text-[10px]
-                            font-bold
-
-                            tracking-[0.12em]
-
-                            text-black/25
-                          "
-                        >
-                          {String(
-                            index +
-                              1,
-                          ).padStart(
-                            2,
-                            "0",
-                          )}
-                        </span>
-                      </div>
-
-                      <h2
-                        className="
-                          mt-4
-
-                          text-[15px]
-                          font-bold
-                          leading-6
-
-                          text-black
-
-                          sm:text-[16px]
-                        "
-                      >
-                        {title}
-                      </h2>
-                    </article>
-                  ),
-                )}
               </div>
             </div>
           </div>
         </section>
-
         {/* ===================================================
             WHAT WE DO
         ==================================================== */}
@@ -1154,7 +1004,7 @@ export default function AboutPage() {
             bg-black/[0.025]
 
             px-4
-            py-12
+            py-8
 
             min-[414px]:px-5
 
@@ -1162,10 +1012,10 @@ export default function AboutPage() {
             sm:py-14
 
             md:px-8
-            md:py-16
+            md:py-10
 
             lg:px-10
-            lg:py-20
+            lg:py-10
           "
         >
           <div
@@ -1337,27 +1187,23 @@ export default function AboutPage() {
         {/* ===================================================
             MISSION / VISION
         ==================================================== */}
-
         <section
           className="
-            border-y
-            border-black/10
-
             bg-white
 
             px-4
-            py-12
+            py-8
 
             min-[414px]:px-5
 
             sm:px-6
-            sm:py-14
+            sm:py-12
 
             md:px-8
-            md:py-16
+            md:py-14
 
             lg:px-10
-            lg:py-20
+            lg:py-16
           "
         >
           <div
@@ -1370,135 +1216,15 @@ export default function AboutPage() {
 
               grid-cols-1
 
-              gap-4
+              gap-5
 
               lg:grid-cols-2
-              lg:gap-5
+              lg:gap-6
             "
           >
-            {/* MISSION */}
-
-            <article
-              className="
-                relative
-
-                overflow-hidden
-
-                rounded-[24px]
-
-                bg-black
-
-                p-6
-
-                text-white
-
-                sm:p-8
-
-                lg:p-10
-              "
-            >
-              <div
-                aria-hidden="true"
-                className="
-                  pointer-events-none
-
-                  absolute
-
-                  -right-24
-                  -top-24
-
-                  h-[220px]
-                  w-[220px]
-
-                  rounded-full
-
-                  bg-[#EC1C40]/20
-
-                  blur-3xl
-                "
-              />
-
-              <div
-                className="
-                  relative
-                "
-              >
-                <span
-                  className="
-                    flex
-                    h-11
-                    w-11
-
-                    items-center
-                    justify-center
-
-                    rounded-xl
-
-                    bg-white/10
-                  "
-                >
-                  <Target
-                    aria-hidden="true"
-                    className="
-                      h-5
-                      w-5
-
-                      stroke-[#EC1C40]
-                    "
-                    strokeWidth={
-                      2
-                    }
-                  />
-                </span>
-
-                <h2
-                  className="
-                    mt-6
-
-                    text-[28px]
-                    font-bold
-
-                    tracking-[-0.03em]
-
-                    text-white
-
-                    sm:text-[32px]
-                  "
-                >
-                  Our{" "}
-
-                  <span
-                    className="
-                      text-[#EC1C40]
-                    "
-                  >
-                    Mission
-                  </span>
-                </h2>
-
-                <p
-                  className="
-                    mt-5
-
-                    text-[15px]
-                    leading-7
-
-                    text-white/70
-
-                    sm:text-[16px]
-                    sm:leading-8
-                  "
-                >
-                  To make Dholera easier to understand,
-                  explore and invest in by bringing together
-                  reliable information, on-ground updates
-                  and property opportunities on one
-                  dedicated platform.
-                </p>
-              </div>
-            </article>
-
-            {/* VISION */}
+            {/* =====================================================
+                MISSION
+            ====================================================== */}
 
             <article
               className="
@@ -1522,64 +1248,240 @@ export default function AboutPage() {
                 lg:p-10
               "
             >
-              <span
+              {/* =================================================
+                  ICON + TITLE
+              ================================================== */}
+
+              <div
                 className="
                   flex
-                  h-11
-                  w-11
-
                   items-center
-                  justify-center
 
-                  rounded-xl
+                  gap-4
 
-                  bg-[#EC1C40]/10
+                  sm:gap-5
                 "
               >
-                <Eye
-                  aria-hidden="true"
-                  className="
-                    h-5
-                    w-5
-
-                    stroke-[#EC1C40]
-                  "
-                  strokeWidth={
-                    2
-                  }
-                />
-              </span>
-
-              <h2
-                className="
-                  mt-6
-
-                  text-[28px]
-                  font-bold
-
-                  tracking-[-0.03em]
-
-                  text-black
-
-                  sm:text-[32px]
-                "
-              >
-                Our{" "}
+                {/* ICON */}
 
                 <span
                   className="
-                    text-[#EC1C40]
+                    flex
+                    h-11
+                    w-11
+                    shrink-0
+
+                    items-center
+                    justify-center
+
+                    rounded-xl
+
+                    border
+                    border-[#EC1C40]/10
+
+                    bg-[#EC1C40]/10
                   "
                 >
-                  Vision
+                  <Target
+                    aria-hidden="true"
+                    className="
+                      h-5
+                      w-5
+
+                      stroke-[#EC1C40]
+                    "
+                    strokeWidth={2}
+                  />
                 </span>
-              </h2>
+
+                {/* TITLE */}
+
+                <h2
+                  className="
+                    min-w-0
+
+                    text-[26px]
+                    font-bold
+                    leading-[1.2]
+
+                    tracking-[-0.03em]
+
+                    text-black
+
+                    sm:text-[30px]
+
+                    lg:text-[32px]
+                  "
+                >
+                  Our{" "}
+                  <span className="text-[#EC1C40]">
+                    Mission
+                  </span>
+                </h2>
+              </div>
+
+              {/* =================================================
+                  DIVIDER
+              ================================================== */}
+
+              <div
+                aria-hidden="true"
+                className="
+                  my-6
+
+                  h-px
+                  w-full
+
+                  bg-black/10
+                "
+              />
+
+              {/* =================================================
+                  DESCRIPTION
+              ================================================== */}
 
               <p
                 className="
-                  mt-5
-
                   text-[15px]
+                  font-normal
+                  leading-7
+
+                  text-black/65
+
+                  sm:text-[16px]
+                  sm:leading-8
+                "
+              >
+                To make Dholera easier to understand,
+                explore and invest in by bringing together
+                reliable information, on-ground updates
+                and property opportunities on one
+                dedicated platform.
+              </p>
+            </article>
+
+            {/* =====================================================
+                VISION
+            ====================================================== */}
+
+            <article
+              className="
+                relative
+
+                overflow-hidden
+
+                rounded-[24px]
+
+                border
+                border-black/10
+
+                bg-white
+
+                p-6
+
+                shadow-[0_18px_52px_-40px_rgba(0,0,0,0.4)]
+
+                sm:p-8
+
+                lg:p-10
+              "
+            >
+              {/* =================================================
+                  ICON + TITLE
+              ================================================== */}
+
+              <div
+                className="
+                  flex
+                  items-center
+
+                  gap-4
+
+                  sm:gap-5
+                "
+              >
+                {/* ICON */}
+
+                <span
+                  className="
+                    flex
+                    h-11
+                    w-11
+                    shrink-0
+
+                    items-center
+                    justify-center
+
+                    rounded-xl
+
+                    border
+                    border-[#EC1C40]/10
+
+                    bg-[#EC1C40]/10
+                  "
+                >
+                  <Eye
+                    aria-hidden="true"
+                    className="
+                      h-5
+                      w-5
+
+                      stroke-[#EC1C40]
+                    "
+                    strokeWidth={2}
+                  />
+                </span>
+
+                {/* TITLE */}
+
+                <h2
+                  className="
+                    min-w-0
+
+                    text-[26px]
+                    font-bold
+                    leading-[1.2]
+
+                    tracking-[-0.03em]
+
+                    text-black
+
+                    sm:text-[30px]
+
+                    lg:text-[32px]
+                  "
+                >
+                  Our{" "}
+                  <span className="text-[#EC1C40]">
+                    Vision
+                  </span>
+                </h2>
+              </div>
+
+              {/* =================================================
+                  DIVIDER
+              ================================================== */}
+
+              <div
+                aria-hidden="true"
+                className="
+                  my-6
+
+                  h-px
+                  w-full
+
+                  bg-black/10
+                "
+              />
+
+              {/* =================================================
+                  DESCRIPTION
+              ================================================== */}
+
+              <p
+                className="
+                  text-[15px]
+                  font-normal
                   leading-7
 
                   text-black/65
@@ -1596,197 +1498,186 @@ export default function AboutPage() {
               </p>
             </article>
           </div>
-        </section>
-
+        </section>    
+                
+        
         {/* ===================================================
-            OUR PROMISE
+                  OUR PROMISE
         ==================================================== */}
-
         <section
+          aria-labelledby="our-promise-heading"
           className="
-            relative
+            w-full
 
-            overflow-hidden
 
-            bg-black
+            bg-black/[0.025]
 
             px-4
-            py-12
+            py-8
 
             min-[414px]:px-5
 
             sm:px-6
-            sm:py-14
+            sm:py-10
 
             md:px-8
-            md:py-16
+            md:py-10
 
             lg:px-10
-            lg:py-20
+            lg:py-10
           "
         >
-          {/* SUBTLE BACKGROUND DETAIL */}
-
-          <div
-            aria-hidden="true"
-            className="
-              pointer-events-none
-
-              absolute
-
-              -right-24
-              -top-28
-
-              h-[320px]
-              w-[320px]
-
-              rounded-full
-
-              bg-[#EC1C40]/10
-
-              blur-3xl
-            "
-          />
-
           <div
             className="
-              relative
-
               mx-auto
               w-full
               max-w-7xl
             "
           >
-            <h2
-              className="
-                text-[30px]
-                font-bold
-                leading-[1.1]
-
-                tracking-[-0.035em]
-
-                text-white
-
-                sm:text-[34px]
-
-                md:text-[38px]
-              "
-            >
-              Our Promise
-            </h2>
-
-            <p
-              className="
-                mt-3
-
-                text-[15px]
-                leading-7
-
-                text-white/60
-
-                sm:text-[16px]
-              "
-            >
-              At Dholera Times, we promise to:
-            </p>
-
-            {/* PROMISE CARDS */}
-
             <div
               className="
-                mt-8
-
                 grid
                 grid-cols-1
 
-                gap-3
+                gap-7
 
-                sm:grid-cols-2
-                sm:gap-4
+                md:grid-cols-[minmax(220px,0.72fr)_minmax(0,1.28fr)]
+                md:items-start
+                md:gap-10
 
-                lg:grid-cols-4
+                lg:grid-cols-[minmax(280px,0.75fr)_minmax(0,1.25fr)]
+                lg:gap-12
+
+                xl:grid-cols-[minmax(310px,0.78fr)_minmax(0,1.22fr)]
+                xl:gap-14
               "
             >
-              {promiseItems.map(
-                (
-                  item,
-                  index,
-                ) => (
-                  <article
-                    key={
-                      item
-                    }
+              {/* =================================================
+                  LEFT SIDE
+              ================================================== */}
+
+              <div
+                className="
+                  w-full
+
+                  py-0
+
+                  lg:grid
+                  lg:h-full
+                  lg:min-h-[340px]
+                  lg:grid-rows-[30%_70%]
+                "
+              >
+                <div
+                  className="
+                    text-left
+
+                    lg:row-start-2
+                    lg:self-start
+                  "
+                >
+                  <h2
+                    id="our-promise-heading"
                     className="
-                      group
+                      max-w-[340px]
 
-                      relative
+                      text-left
 
-                      min-h-[150px]
+                      text-[28px]
+                      font-bold
+                      leading-[1.1]
 
-                      overflow-hidden
+                      tracking-[-0.035em]
 
-                      rounded-2xl
+                      text-black
 
-                      border
-                      border-white/10
+                      min-[414px]:text-[29px]
 
-                      bg-white/[0.045]
+                      sm:text-[32px]
 
-                      p-5
+                      md:text-[34px]
 
-                      transition-[background-color,border-color,transform]
-                      duration-300
-
-                      hover:border-[#EC1C40]/35
-                      hover:bg-white/[0.065]
-
-                      md:hover:-translate-y-1
-
-                      sm:min-h-[160px]
-                      sm:p-6
-
-                      motion-reduce:transform-none
+                      lg:text-[38px]
                     "
                   >
-                    {/* TOP ACCENT */}
+                    Our{" "}
+                    <span className="text-[#EC1C40]">
+                      Promise
+                    </span>
+                  </h2>
 
-                    <div
-                      aria-hidden="true"
+                  <p
+                    className="
+                      mt-3
+
+                      max-w-[420px]
+
+                      text-left
+
+                      text-[15px]
+                      font-normal
+                      leading-7
+
+                      text-black/60
+
+                      sm:mt-4
+                      sm:text-[16px]
+                    "
+                  >
+                    At Dholera Times, we promise to:
+                  </p>
+                </div>
+              </div>
+              {/* =================================================
+                  RIGHT SIDE — PROMISE LIST
+              ================================================== */}
+
+              <div
+                className="
+                  min-w-0
+
+                  border-t
+                  border-black/10
+                "
+              >
+                {promiseItems.map(
+                  (item) => (
+                    <article
+                      key={item}
                       className="
-                        absolute
-                        inset-x-0
-                        top-0
+                        group
 
-                        h-[2px]
+                        grid
+                        grid-cols-[40px_minmax(0,1fr)]
 
-                        bg-[#EC1C40]
-
-                        opacity-70
-
-                        transition-opacity
-                        duration-300
-
-                        group-hover:opacity-100
-                      "
-                    />
-
-                    <div
-                      className="
-                        flex
                         items-center
-                        justify-between
 
                         gap-4
+
+                        border-b
+                        border-black/10
+
+                        py-4
+
+                        min-[414px]:grid-cols-[42px_minmax(0,1fr)]
+
+                        sm:gap-5
+                        sm:py-5
+
+                        lg:grid-cols-[44px_minmax(0,1fr)]
+                        lg:gap-5
+                        lg:py-[22px]
                       "
                     >
-                      {/* ICON */}
+                      {/* =========================================
+                          ICON
+                      ========================================== */}
 
                       <span
                         className="
                           flex
                           h-9
                           w-9
-
                           shrink-0
 
                           items-center
@@ -1794,88 +1685,95 @@ export default function AboutPage() {
 
                           rounded-full
 
-                          bg-[#EC1C40]/10
+                          bg-[#EC1C40]/5
+
+                          text-[#EC1C40]
+
+                          transition-[background-color,transform]
+                          duration-300
+                          ease-out
+
+                          group-hover:scale-105
+                          group-hover:bg-[#EC1C40]/10
+
+                          sm:h-10
+                          sm:w-10
+
+                          motion-reduce:transform-none
+                          motion-reduce:transition-none
                         "
                       >
                         <CheckCircle2
                           aria-hidden="true"
+                          strokeWidth={1.9}
                           className="
-                            h-[19px]
-                            w-[19px]
+                            h-[18px]
+                            w-[18px]
 
-                            stroke-[#EC1C40]
+                            sm:h-[19px]
+                            sm:w-[19px]
                           "
-                          strokeWidth={
-                            2
-                          }
                         />
                       </span>
 
-                      {/* NUMBER */}
+                      {/* =========================================
+                          PROMISE TEXT
+                      ========================================== */}
 
-                      <span
+                      <p
                         className="
-                          text-[11px]
-                          font-bold
+                          min-w-0
 
-                          tracking-[0.1em]
+                          text-[15px]
+                          font-semibold
+                          leading-6
 
-                          text-white/25
+                          tracking-[-0.012em]
+
+                          text-black/75
+
+                          transition-colors
+                          duration-200
+
+                          group-hover:text-black
+
+                          sm:text-[16px]
+                          sm:leading-7
+
+                          lg:text-[17px]
                         "
                       >
-                        {String(
-                          index +
-                            1,
-                        ).padStart(
-                          2,
-                          "0",
-                        )}
-                      </span>
-                    </div>
-
-                    <p
-                      className="
-                        mt-5
-
-                        text-[15px]
-                        font-semibold
-                        leading-6
-
-                        text-white
-
-                        sm:text-[16px]
-                      "
-                    >
-                      {item}
-                    </p>
-                  </article>
-                ),
-              )}
+                        {item}
+                      </p>
+                    </article>
+                  ),
+                )}
+              </div>
             </div>
           </div>
-        </section>
+        </section>    
+        
 
         {/* ===================================================
             WHY INVEST THROUGH DHOLERA TIMES
         ==================================================== */}
-
         <section
           className="
             bg-white
 
             px-4
-            py-12
+            py-10
 
             min-[414px]:px-5
 
             sm:px-6
-            sm:py-14
+            sm:py-12
 
             md:px-8
-            md:py-16
+            md:py-12
 
             lg:px-10
-            lg:py-20
+            lg:py-14
           "
         >
           <div
@@ -1914,9 +1812,7 @@ export default function AboutPage() {
                   index,
                 ) => (
                   <article
-                    key={
-                      title
-                    }
+                    key={title}
                     className="
                       group
 
@@ -1937,6 +1833,7 @@ export default function AboutPage() {
 
                       transition-[border-color,transform,box-shadow]
                       duration-300
+                      ease-out
 
                       md:hover:-translate-y-1
                       md:hover:border-[#EC1C40]/30
@@ -1945,84 +1842,115 @@ export default function AboutPage() {
                       sm:p-6
 
                       motion-reduce:transform-none
+                      motion-reduce:transition-none
                     "
                   >
+                    {/* ===============================================
+                        ICON + TITLE + NUMBER
+                    ================================================ */}
+
                     <div
                       className="
                         flex
-                        items-center
+                        items-start
                         justify-between
 
                         gap-4
                       "
                     >
-                      <span
+                      {/* ICON + TITLE */}
+
+                      <div
                         className="
                           flex
-                          h-11
-                          w-11
+                          min-w-0
+                          flex-1
 
                           items-center
-                          justify-center
 
-                          rounded-xl
+                          gap-3.5
 
-                          bg-[#EC1C40]/10
+                          sm:gap-4
                         "
                       >
-                        <Icon
-                          aria-hidden="true"
+                        {/* ICON */}
+
+                        <span
                           className="
-                            h-5
-                            w-5
+                            flex
+                            h-11
+                            w-11
+                            shrink-0
 
-                            stroke-[#EC1C40]
+                            items-center
+                            justify-center
+
+                            rounded-xl
+
+                            border
+                            border-[#EC1C40]/10
+
+                            bg-[#EC1C40]/10
                           "
-                          strokeWidth={
-                            2
-                          }
-                        />
-                      </span>
+                        >
+                          <Icon
+                            aria-hidden="true"
+                            className="
+                              h-5
+                              w-5
 
-                      <span
-                        className="
-                          text-[11px]
-                          font-bold
+                              stroke-[#EC1C40]
+                            "
+                            strokeWidth={2}
+                          />
+                        </span>
 
-                          tracking-[0.1em]
+                        {/* TITLE */}
 
-                          text-black/25
-                        "
-                      >
-                        {String(
-                          index +
-                            1,
-                        ).padStart(
-                          2,
-                          "0",
-                        )}
-                      </span>
+                        <h3
+                          className="
+                            min-w-0
+
+                            text-[17px]
+                            font-bold
+                            leading-[1.4]
+
+                            tracking-[-0.015em]
+
+                            text-black
+
+                            sm:text-[18px]
+                          "
+                        >
+                          {title}
+                        </h3>
+                      </div>
                     </div>
 
-                    <h3
+                    {/* ===============================================
+                        DIVIDER
+                    ================================================ */}
+
+                    <div
+                      aria-hidden="true"
                       className="
-                        mt-5
+                        my-5
 
-                        text-[18px]
-                        font-bold
-                        leading-6
+                        h-px
+                        w-full
 
-                        text-black
+                        bg-black/10
                       "
-                    >
-                      {title}
-                    </h3>
+                    />
+
+                    {/* ===============================================
+                        DESCRIPTION
+                    ================================================ */}
 
                     <p
                       className="
-                        mt-3
-
                         text-[14px]
+                        font-normal
                         leading-6
 
                         text-black/60
@@ -2040,238 +1968,13 @@ export default function AboutPage() {
           </div>
         </section>
 
+
         {/* ===================================================
             FAQ
         ==================================================== */}
-
-        <section
-          className="
-            border-t
-            border-black/10
-
-            bg-black/[0.025]
-
-            px-4
-            py-12
-
-            min-[414px]:px-5
-
-            sm:px-6
-            sm:py-14
-
-            md:px-8
-            md:py-16
-
-            lg:px-10
-            lg:py-20
-          "
-        >
-          <div
-            className="
-              mx-auto
-
-              grid
-              w-full
-              max-w-7xl
-
-              grid-cols-1
-
-              gap-8
-
-              lg:grid-cols-[280px_minmax(0,1fr)]
-              lg:gap-12
-            "
-          >
-            {/* FAQ HEADING */}
-
-            <div>
-              <h2
-                className="
-                  text-[30px]
-                  font-bold
-                  leading-[1.12]
-
-                  tracking-[-0.035em]
-
-                  text-black
-
-                  sm:text-[34px]
-
-                  lg:text-[40px]
-                "
-              >
-                Frequently Asked{" "}
-
-                <span className="text-[#EC1C40]">
-                  Questions
-                </span>
-              </h2>
-            </div>
-
-            {/* FAQ ACCORDION */}
-
-            <div
-              className="
-                overflow-hidden
-
-                rounded-[22px]
-
-                border
-                border-black/10
-
-                bg-white
-              "
-            >
-              {faqItems.map(
-                ({
-                  question,
-                  answer,
-                }) => (
-                  <details
-                    key={
-                      question
-                    }
-                    className="
-                      group
-
-                      border-b
-                      border-black/10
-
-                      last:border-b-0
-                    "
-                  >
-                    <summary
-                      className="
-                        flex
-                        min-h-[76px]
-
-                        cursor-pointer
-                        list-none
-
-                        items-center
-                        justify-between
-
-                        gap-4
-
-                        px-4
-                        py-4
-
-                        [&::-webkit-details-marker]:hidden
-
-                        min-[414px]:px-5
-
-                        sm:px-6
-
-                        lg:px-7
-                      "
-                    >
-                      <span
-                        className="
-                          text-[15px]
-                          font-semibold
-                          leading-6
-
-                          text-black
-
-                          sm:text-[16px]
-                        "
-                      >
-                        {question}
-                      </span>
-
-                      {/* PLUS / MINUS */}
-
-                      <span
-                        className="
-                          relative
-
-                          flex
-                          h-9
-                          w-9
-
-                          shrink-0
-
-                          items-center
-                          justify-center
-
-                          rounded-full
-
-                          border
-                          border-black/10
-
-                          bg-[#EC1C40]/5
-                        "
-                      >
-                        <span
-                          className="
-                            absolute
-
-                            h-[2px]
-                            w-3.5
-
-                            rounded-full
-
-                            bg-[#EC1C40]
-                          "
-                        />
-
-                        <span
-                          className="
-                            absolute
-
-                            h-3.5
-                            w-[2px]
-
-                            rounded-full
-
-                            bg-[#EC1C40]
-
-                            transition-transform
-                            duration-200
-
-                            group-open:scale-y-0
-                          "
-                        />
-                      </span>
-                    </summary>
-
-                    <div
-                      className="
-                        px-4
-                        pb-5
-
-                        min-[414px]:px-5
-
-                        sm:px-6
-                        sm:pb-6
-
-                        lg:px-7
-                      "
-                    >
-                      <p
-                        className="
-                          border-t
-                          border-black/10
-
-                          pt-4
-
-                          text-[15px]
-                          leading-7
-
-                          text-black/65
-
-                          sm:text-[16px]
-                        "
-                      >
-                        {answer}
-                      </p>
-                    </div>
-                  </details>
-                ),
-              )}
-            </div>
-          </div>
-        </section>
+        <CommonFAQ 
+          faqItems={faqItems}
+        />
       </main>
     </>
   );

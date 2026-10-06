@@ -6,7 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { trackPageView } from "@/lib/fbpixel";
 import logo from "@/assets/dt.webp";
-import logo2 from "@/assets/dtlogobg.png";
+import logo2 from "@/assets/dtlogobg.jpeg";
 import call from "@/assets/call.svg";
 
 const DESKTOP_OVERFLOW = [

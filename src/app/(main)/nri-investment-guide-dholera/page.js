@@ -26,6 +26,7 @@ import {
 } from "lucide-react";
 
 import nri from "@/assets/nri-hero.webp";
+import CommonFAQ from "../components/Common/Faq";
 
 /* ============================================================
    SEO METADATA
@@ -491,10 +492,7 @@ export default function NRIInvestmentGuide() {
 
       <main
         className="
-          overflow-hidden
-
           bg-white
-
           text-black
 
           selection:bg-[#EC1C40]
@@ -607,38 +605,6 @@ export default function NRIInvestmentGuide() {
                 max-w-4xl
               "
             >
-              <p
-                className="
-                  mb-4
-
-                  inline-flex
-
-                  rounded-full
-
-                  border
-                  border-white/20
-
-                  bg-white/10
-
-                  px-3.5
-                  py-1.5
-
-                  text-[11px]
-                  font-bold
-                  uppercase
-                  leading-5
-
-                  tracking-[0.15em]
-
-                  text-white
-
-                  backdrop-blur-md
-
-                  sm:text-[12px]
-                "
-              >
-                NRI Investment in Dholera
-              </p>
 
               <h1
                 className="
@@ -861,15 +827,12 @@ export default function NRIInvestmentGuide() {
         {/* ===================================================
             CAN NRIs BUY PROPERTY
         ==================================================== */}
-
         <section
           id="can-nri-buy"
           className="
             scroll-mt-24
-
             border-b
             border-black/10
-
             bg-white
 
             px-4
@@ -893,186 +856,54 @@ export default function NRIInvestmentGuide() {
               max-w-7xl
             "
           >
+            <SectionHeading
+              eyebrow="Property Rules"
+              title="Can NRIs Buy Property"
+              accent="in Dholera?"
+            />
+
             <div
               className="
-                grid
-                grid-cols-1
+                mt-6
+                w-full
 
-                gap-8
+                space-y-4
 
-                lg:grid-cols-[minmax(0,1.1fr)_minmax(320px,0.9fr)]
-                lg:items-center
-                lg:gap-12
+                text-[15px]
+                leading-7
+                text-black/65
+
+                sm:text-[16px]
+
+                lg:text-[17px]
+                lg:leading-8
               "
             >
-              <div>
-                <SectionHeading
-                  eyebrow="Property Rules"
-                  title="Can NRIs Buy Property"
-                  accent="in Dholera?"
-                />
+              <p>
+                Yes. NRIs and OCIs can generally purchase residential and commercial
+                immovable property in India, subject to FEMA and RBI rules.
+              </p>
 
-                <div
-                  className="
-                    mt-6
+              <p>
+                However, NRIs and OCIs cannot generally purchase agricultural land,
+                plantation property or farmhouses in India through a normal purchase
+                transaction.
+              </p>
 
-                    max-w-3xl
+              <p className="font-semibold text-black">
+                Before buying property in Dholera, always verify the land type, title,
+                location and applicable approvals.
+              </p>
 
-                    space-y-4
-
-                    text-[15px]
-                    leading-7
-
-                    text-black/65
-
-                    sm:text-[16px]
-                  "
-                >
-                  <p>
-                    Yes. NRIs and OCIs can generally
-                    purchase residential and commercial
-                    immovable property in India, subject to
-                    FEMA and RBI rules.
-                  </p>
-
-                  <p>
-                    However, NRIs and OCIs cannot generally
-                    purchase agricultural land, plantation
-                    property or farmhouses in India through
-                    a normal purchase transaction.
-                  </p>
-
-                  <p className="font-semibold text-black">
-                    Before buying property in Dholera,
-                    always verify the land type, title,
-                    location and applicable approvals.
-                  </p>
-                </div>
-              </div>
-
-              {/* RULE SUMMARY */}
-
-              <div
-                className="
-                  overflow-hidden
-
-                  rounded-[24px]
-
-                  border
-                  border-black/10
-
-                  bg-black
-
-                  shadow-[0_24px_70px_-40px_rgba(0,0,0,0.55)]
-                "
-              >
-                <div
-                  className="
-                    border-b
-                    border-white/10
-
-                    p-5
-
-                    sm:p-6
-                  "
-                >
-                  <Scale
-                    size={30}
-                    strokeWidth={1.6}
-                    aria-hidden="true"
-                    className="text-[#EC1C40]"
-                  />
-                </div>
-
-                <div
-                  className="
-                    divide-y
-                    divide-white/10
-                  "
-                >
-                  <div
-                    className="
-                      flex
-                      items-start
-
-                      gap-3
-
-                      p-5
-
-                      sm:p-6
-                    "
-                  >
-                    <CheckCircle2
-                      size={21}
-                      aria-hidden="true"
-                      className="
-                        mt-0.5
-                        shrink-0
-                        text-[#EC1C40]
-                      "
-                    />
-
-                    <p
-                      className="
-                        text-[15px]
-                        leading-7
-
-                        text-white/75
-                      "
-                    >
-                      NRIs and OCIs can generally purchase
-                      residential and commercial immovable
-                      property in India.
-                    </p>
-                  </div>
-
-                  <div
-                    className="
-                      flex
-                      items-start
-
-                      gap-3
-
-                      p-5
-
-                      sm:p-6
-                    "
-                  >
-                    <AlertTriangle
-                      size={21}
-                      aria-hidden="true"
-                      className="
-                        mt-0.5
-                        shrink-0
-                        text-[#EC1C40]
-                      "
-                    />
-
-                    <p
-                      className="
-                        text-[15px]
-                        leading-7
-
-                        text-white/75
-                      "
-                    >
-                      NRIs and OCIs cannot generally
-                      purchase agricultural land,
-                      plantation property or farmhouses
-                      through a normal purchase
-                      transaction.
-                    </p>
-                  </div>
-                </div>
-              </div>
+       
             </div>
           </div>
         </section>
 
+
         {/* ===================================================
             WHY NRIs ARE LOOKING AT DHOLERA
         ==================================================== */}
-
         <section
           id="why-dholera"
           className="
@@ -1091,7 +922,7 @@ export default function NRIInvestmentGuide() {
             md:px-8
 
             lg:px-10
-            lg:py-20
+            lg:py-16
           "
         >
           <div
@@ -1101,146 +932,211 @@ export default function NRIInvestmentGuide() {
               max-w-7xl
             "
           >
-            <SectionHeading
-              eyebrow="Dholera"
-              title="Why Are NRIs Looking"
-              accent="at Dholera?"
-              description="Dholera is attracting interest because of its planned industrial development, major infrastructure projects and growing manufacturing ecosystem."
-            />
-
             <div
               className="
-                mt-8
-
                 grid
                 grid-cols-1
+                gap-10
 
-                gap-3
+                lg:grid-cols-[0.72fr_1.28fr]
+                lg:items-start
+                lg:gap-20
 
-                sm:grid-cols-2
-                sm:gap-4
-
-                lg:grid-cols-4
+                xl:gap-24
               "
             >
-              {nriInterestFactors.map(
-                (item, index) => (
-                  <article
-                    key={item}
-                    className={`
-                      group
+              {/* =====================================================
+                  LEFT CONTENT
+                  STICKY LIKE REFERENCE VIDEO
+              ====================================================== */}
 
-                      flex
+              <div
+                className="
+                  min-w-0
 
-                      min-h-[128px]
+                  lg:sticky
+                  lg:top-48
+                  lg:self-start
+                  lg:h-fit
+                "
+              >
+                {/* Heading */}
+                <h2
+                  className="
+                    max-w-[500px]
 
-                      items-start
+                    text-[30px]
+                    font-bold
+                    leading-[1.12]
+                    tracking-[-0.035em]
 
-                      rounded-2xl
+                    text-black
 
-                      border
-                      border-black/10
+                    sm:text-[34px]
 
-                      bg-white
+                    lg:text-[38px]
 
-                      p-5
+                    xl:text-[40px]
+                  "
+                >
+                  Why Are NRIs Looking{" "}
+                  <span className="text-[#EC1C40]">
+                    at Dholera?
+                  </span>
+                </h2>
 
-                      shadow-[0_10px_35px_-30px_rgba(0,0,0,0.35)]
+                {/* Description */}
+                <p
+                  className="
+                    mt-4
+                    max-w-md
 
-                      transition-[transform,border-color,box-shadow]
-                      duration-300
+                    text-[15px]
+                    leading-7
 
-                      hover:-translate-y-1
-                      hover:border-[#EC1C40]/30
-                      hover:shadow-[0_18px_45px_-30px_rgba(0,0,0,0.38)]
+                    text-black/60
 
-                      ${
-                        index ===
-                        nriInterestFactors.length -
-                          1
-                          ? "lg:col-span-2"
-                          : ""
-                      }
+                    sm:text-[16px]
+                  "
+                >
+                  Dholera is attracting interest because of its
+                  planned industrial development, major
+                  infrastructure projects and growing manufacturing
+                  ecosystem.
+                </p>
 
-                      motion-reduce:transform-none
-                    `}
-                  >
-                    <span
+                {/* Link */}
+                <Link
+                  href="/dholera-sir"
+                  className="
+                    group
+
+                    mt-7
+
+                    inline-flex
+                    items-center
+                    gap-2
+
+                    text-[14px]
+                    font-semibold
+
+                    text-[#EC1C40]
+
+                    transition-colors
+                    duration-200
+
+                    hover:text-black
+                  "
+                >
+                  About Dholera SIR
+
+                  <ArrowRight
+                    size={17}
+                    strokeWidth={1.9}
+                    aria-hidden="true"
+                    className="
+                      transition-transform
+                      duration-200
+
+                      group-hover:translate-x-1
+                    "
+                  />
+                </Link>
+              </div>
+
+              {/* =====================================================
+                  RIGHT CONTENT
+                  NORMAL PAGE SCROLL
+              ====================================================== */}
+
+              <div className="min-w-0">
+                <div
+                  className="
+                    border-y
+                    border-black/10
+                  "
+                >
+                  {nriInterestFactors.map((item) => (
+                    <div
+                      key={item}
                       className="
-                        mr-4
+                        group
 
                         flex
-                        h-9
-                        w-9
-
-                        shrink-0
-
                         items-center
-                        justify-center
+                        gap-4
 
-                        rounded-full
+                        border-b
+                        border-black/10
 
-                        bg-[#EC1C40]/10
+                        py-5
 
-                        text-[#EC1C40]
+                        last:border-b-0
+
+                        sm:gap-5
+                        sm:py-6
+
+                        lg:min-h-[88px]
+                        lg:py-6
                       "
                     >
-                      <Check
-                        size={17}
-                        strokeWidth={2.2}
-                        aria-hidden="true"
-                      />
-                    </span>
+                      {/* Check icon */}
+                      <span
+                        className="
+                          flex
+                          h-10
+                          w-10
 
-                    <p
-                      className="
-                        pt-1
+                          shrink-0
 
-                        text-[15px]
-                        font-semibold
-                        leading-6
+                          items-center
+                          justify-center
 
-                        text-black
+                          rounded-full
 
-                        sm:text-[16px]
-                      "
-                    >
-                      {item}
-                    </p>
-                  </article>
-                ),
-              )}
+                          bg-[#EC1C40]/5
+                          text-[#EC1C40]
+
+                          transition-colors
+                          duration-200
+
+                          group-hover:bg-[#EC1C40]/10
+                        "
+                      >
+                        <Check
+                          size={17}
+                          strokeWidth={2}
+                          aria-hidden="true"
+                        />
+                      </span>
+
+                      {/* Item text */}
+                      <p
+                        className="
+                          min-w-0
+
+                          text-[15px]
+                          font-semibold
+                          leading-6
+
+                          text-black/70
+
+                          transition-colors
+                          duration-200
+
+                          group-hover:text-black
+
+                          sm:text-[16px]
+                          sm:leading-7
+                        "
+                      >
+                        {item}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-
-            <Link
-              href="/dholera-sir"
-              className="
-                mt-7
-
-                inline-flex
-                items-center
-
-                gap-2
-
-                text-[14px]
-                font-semibold
-
-                text-[#EC1C40]
-
-                transition-colors
-                duration-200
-
-                hover:text-black
-              "
-            >
-              About Dholera SIR
-
-              <ArrowRight
-                size={17}
-                strokeWidth={1.9}
-                aria-hidden="true"
-              />
-            </Link>
           </div>
         </section>
 
@@ -1252,10 +1148,8 @@ export default function NRIInvestmentGuide() {
           id="payments"
           className="
             scroll-mt-24
-
             border-y
             border-black/10
-
             bg-white
 
             px-4
@@ -1272,64 +1166,821 @@ export default function NRIInvestmentGuide() {
             lg:py-20
           "
         >
-          <div
-            className="
-              mx-auto
-              w-full
-              max-w-7xl
-            "
-          >
-            <SectionHeading
-              title="How Can an NRI Pay for"
-              accent="Property in India?"
-              description="Under RBI rules, payment for eligible immovable property should generally be made through permitted banking channels."
-            />
+          <div className="mx-auto w-full max-w-7xl">
+            {/* =====================================================
+                MAIN LAYOUT
+            ====================================================== */}
 
             <div
               className="
-                mt-8
+                grid
+                grid-cols-1
+                gap-10
+
+                lg:grid-cols-[0.72fr_1.28fr]
+                lg:items-start
+                lg:gap-16
+
+                xl:gap-24
+              "
+            >
+              {/* =====================================================
+                  LEFT CONTENT
+              ====================================================== */}
+
+              <div className="min-w-0">
+                {/* Accent */}
+              
+
+                {/* Heading */}
+                <h2
+                  className="
+                    max-w-[500px]
+
+                    text-[30px]
+                    font-bold
+                    leading-[1.12]
+                    tracking-[-0.035em]
+
+                    text-black
+
+                    sm:text-[34px]
+
+                    md:text-[36px]
+
+                    lg:text-[40px]
+                  "
+                >
+                  How Can an NRI Pay for{" "}
+                  <span className="text-[#EC1C40]">
+                    Property in India?
+                  </span>
+                </h2>
+
+                {/* Introduction */}
+                <p
+                  className="
+                    mt-5
+                    max-w-lg
+
+                    text-[15px]
+                    leading-7
+
+                    text-black/60
+
+                    sm:text-[16px]
+
+                    lg:text-[17px]
+                    lg:leading-8
+                  "
+                >
+                  Under RBI rules, payment for eligible immovable
+                  property should generally be made through permitted
+                  banking channels.
+                </p>
+
+                {/* Desktop decorative visual */}
+                <div
+                  aria-hidden="true"
+                  className="
+                    relative
+                    mt-10
+
+                    hidden
+                    h-[180px]
+
+                    overflow-hidden
+
+                    border
+                    border-black/10
+
+                    bg-black/[0.025]
+
+                    lg:block
+                  "
+                >
+                  {/* Vertical accent */}
+                  <div className="absolute bottom-0 left-0 top-0 w-[3px] bg-[#EC1C40]" />
+
+                  {/* Large icon */}
+                  <div
+                    className="
+                      absolute
+                      left-8
+                      top-1/2
+
+                      flex
+                      h-20
+                      w-20
+
+                      -translate-y-1/2
+
+                      items-center
+                      justify-center
+
+                      rounded-full
+
+                      bg-[#EC1C40]/5
+                      text-[#EC1C40]
+                    "
+                  >
+                    <Building2
+                      size={34}
+                      strokeWidth={1.5}
+                    />
+                  </div>
+
+                  {/* Decorative lines */}
+                  <div className="absolute right-8 top-9 h-px w-[42%] bg-black/10" />
+
+                  <div className="absolute right-8 top-[50%] h-px w-[55%] bg-black/10" />
+
+                  <div className="absolute bottom-9 right-8 h-px w-[34%] bg-black/10" />
+
+                  <div
+                    className="
+                      absolute
+                      -bottom-14
+                      -right-12
+
+                      h-40
+                      w-40
+
+                      rounded-full
+
+                      bg-[#EC1C40]/5
+                    "
+                  />
+                </div>
+              </div>
+
+              {/* =====================================================
+                  RIGHT PAYMENT METHODS
+              ====================================================== */}
+
+              <div className="min-w-0">
+                <div
+                  className="
+                    border-t
+                    border-black/10
+                  "
+                >
+                  {paymentMethods.map(
+                    ({ title, icon: Icon }, index) => (
+                      <div
+                        key={title}
+                        className="
+                          group
+
+                          grid
+                          grid-cols-[auto_1fr_auto]
+
+                          items-center
+
+                          gap-4
+
+                          border-b
+                          border-black/10
+
+                          py-5
+
+                          transition-colors
+                          duration-200
+
+                          hover:bg-[#EC1C40]/[0.025]
+
+                          sm:gap-5
+                          sm:py-6
+
+                          lg:min-h-[112px]
+                          lg:px-2
+                        "
+                      >
+                        {/* Number */}
+                        <span
+                          className="
+                            hidden
+
+                            text-[11px]
+                            font-bold
+
+                            tracking-[0.14em]
+
+                            text-black/35
+
+                            sm:block
+                          "
+                        >
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+
+                        {/* Method */}
+                        <div
+                          className="
+                            flex
+                            min-w-0
+                            items-center
+
+                            gap-4
+
+                            sm:gap-5
+                          "
+                        >
+                          {/* Icon */}
+                          <span
+                            className="
+                              flex
+                              h-12
+                              w-12
+
+                              shrink-0
+
+                              items-center
+                              justify-center
+
+                              rounded-xl
+
+                              border
+                              border-[#EC1C40]/10
+
+                              bg-[#EC1C40]/5
+
+                              text-[#EC1C40]
+
+                              transition-[background-color,color,border-color]
+                              duration-200
+
+                              group-hover:border-[#EC1C40]/20
+                              group-hover:bg-[#EC1C40]
+                              group-hover:text-white
+
+                              sm:h-14
+                              sm:w-14
+                            "
+                          >
+                            <Icon
+                              size={22}
+                              strokeWidth={1.7}
+                              aria-hidden="true"
+                            />
+                          </span>
+
+                          {/* Text */}
+                          <p
+                            className="
+                              text-[15px]
+                              font-semibold
+                              leading-6
+
+                              text-black/75
+
+                              transition-colors
+                              duration-200
+
+                              group-hover:text-black
+
+                              sm:text-[16px]
+                              sm:leading-7
+
+                              lg:text-[17px]
+                            "
+                          >
+                            {title}
+                          </p>
+                        </div>
+
+                        {/* Decorative marker */}
+                        <span
+                          aria-hidden="true"
+                          className="
+                            h-2
+                            w-2
+
+                            rounded-full
+
+                            bg-black/10
+
+                            transition-[background-color,transform]
+                            duration-200
+
+                            group-hover:scale-125
+                            group-hover:bg-[#EC1C40]
+                          "
+                        />
+                      </div>
+                    ),
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* =====================================================
+                IMPORTANT INFORMATION
+            ====================================================== */}
+
+            <div
+              className="
+                mt-10
 
                 grid
                 grid-cols-1
 
-                gap-4
+                border
+                border-black/10
 
-                sm:grid-cols-2
+                bg-black/[0.025]
 
-                lg:grid-cols-4
+                md:grid-cols-2
               "
             >
-              {paymentMethods.map(
-                ({
+              {/* Payment restriction */}
+              <div
+                className="
+                  flex
+                  items-start
+                  gap-4
+
+                  border-b
+                  border-black/10
+
+                  p-5
+
+                  sm:p-6
+
+                  md:border-b-0
+                  md:border-r
+
+                  lg:p-7
+                "
+              >
+                <span
+                  className="
+                    flex
+                    h-10
+                    w-10
+
+                    shrink-0
+
+                    items-center
+                    justify-center
+
+                    rounded-full
+
+                    bg-[#EC1C40]/10
+                    text-[#EC1C40]
+                  "
+                >
+                  <AlertTriangle
+                    size={18}
+                    strokeWidth={1.9}
+                    aria-hidden="true"
+                  />
+                </span>
+
+                <p
+                  className="
+                    pt-1
+
+                    text-[14px]
+                    font-semibold
+                    leading-6
+
+                    text-black
+
+                    sm:text-[15px]
+                    sm:leading-7
+                  "
+                >
+                  Property payments should not be made through foreign
+                  currency notes or travellers&apos; cheques.
+                </p>
+              </div>
+
+              {/* Advisory */}
+              <div
+                className="
+                  flex
+                  items-start
+                  gap-4
+
+                  p-5
+
+                  sm:p-6
+
+                  lg:p-7
+                "
+              >
+                <span
+                  className="
+                    flex
+                    h-10
+                    w-10
+
+                    shrink-0
+
+                    items-center
+                    justify-center
+
+                    rounded-full
+
+                    bg-white
+
+                    text-[#EC1C40]
+
+                    ring-1
+                    ring-black/10
+                  "
+                >
+                  <Landmark
+                    size={18}
+                    strokeWidth={1.8}
+                    aria-hidden="true"
+                  />
+                </span>
+
+                <p
+                  className="
+                    pt-1
+
+                    text-[14px]
+                    leading-6
+
+                    text-black/65
+
+                    sm:text-[15px]
+                    sm:leading-7
+                  "
+                >
+                  Your bank or financial adviser should confirm the
+                  correct payment route for your individual transaction.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+
+        {/* ===================================================
+            DOCUMENTS
+        ==================================================== */}
+      <section
+        id="documents"
+        className="
+          scroll-mt-24
+
+          bg-black/[0.025]
+
+          px-4
+          py-12
+
+          min-[414px]:px-5
+
+          sm:px-6
+          sm:py-14
+
+          md:px-8
+
+          lg:px-10
+          lg:py-20
+        "
+      >
+        <div
+          className="
+            mx-auto
+            w-full
+            max-w-7xl
+          "
+        >
+          <SectionHeading
+            title="Documents NRIs Should Check"
+            accent="Before Buying"
+            description="Property due diligence is especially important when you are buying remotely. Before considering a plot in Dholera, check:"
+          />
+
+          {/* =====================================================
+              DOCUMENT CARDS
+          ====================================================== */}
+
+          <div
+            className="
+              mt-8
+
+              grid
+              grid-cols-1
+              gap-4
+
+              md:grid-cols-2
+
+              xl:grid-cols-3
+            "
+          >
+            {documents.map(
+              ({
+                title,
+                description,
+                icon: Icon,
+              }) => (
+                <article
+                  key={title}
+                  className="
+                    group
+                    relative
+
+                    flex
+                    min-h-[190px]
+                    flex-col
+
+                    overflow-hidden
+
+                    rounded-2xl
+
+                    border
+                    border-black/10
+
+                    bg-white
+
+                    p-5
+
+                    transition-[border-color,box-shadow,transform]
+                    duration-300
+
+                    hover:-translate-y-0.5
+                    hover:border-[#EC1C40]/25
+                    hover:shadow-[0_18px_40px_-32px_rgba(0,0,0,0.35)]
+
+                    sm:min-h-[200px]
+                    sm:p-6
+
+                    lg:min-h-[210px]
+                  "
+                >
+                  {/* =================================================
+                      TOP ACCENT
+                  ================================================= */}
+
+                  <div
+                    aria-hidden="true"
+                    className="
+                      absolute
+                      inset-x-0
+                      top-0
+
+                      h-[3px]
+
+                      origin-left
+                      scale-x-0
+
+                      bg-[#EC1C40]
+
+                      transition-transform
+                      duration-300
+
+                      group-hover:scale-x-100
+                    "
+                  />
+
+                  {/* =================================================
+                      ICON + TITLE
+                  ================================================= */}
+
+                  <div
+                    className="
+                      flex
+                      min-w-0
+                      items-center
+
+                      gap-3
+
+                      sm:gap-4
+                    "
+                  >
+                    {/* Icon */}
+                    <span
+                      className="
+                        flex
+                        h-10
+                        w-10
+
+                        shrink-0
+
+                        items-center
+                        justify-center
+
+                        rounded-xl
+
+                        bg-[#EC1C40]/10
+
+                        text-[#EC1C40]
+
+                        transition-[background-color,color]
+                        duration-300
+
+                        group-hover:bg-[#EC1C40]
+                        group-hover:text-white
+
+                        sm:h-11
+                        sm:w-11
+                      "
+                    >
+                      <Icon
+                        size={19}
+                        strokeWidth={1.8}
+                        aria-hidden="true"
+                      />
+                    </span>
+
+                    {/* Title */}
+                    <h3
+                      className="
+                        min-w-0
+
+                        text-[16px]
+                        font-bold
+                        leading-6
+
+                        tracking-[-0.01em]
+
+                        text-black
+
+                        sm:text-[17px]
+
+                        lg:text-[18px]
+                      "
+                    >
+                      {title}
+                    </h3>
+                  </div>
+
+                  {/* =================================================
+                      DIVIDER
+                  ================================================= */}
+
+                  <div
+                    className="
+                      my-4
+
+                      h-px
+                      w-full
+
+                      bg-black/10
+
+                      sm:my-5
+                    "
+                  />
+
+                  {/* =================================================
+                      DESCRIPTION
+                  ================================================= */}
+
+                  <p
+                    className="
+                      text-[14px]
+                      leading-6
+
+                      text-black/60
+
+                      sm:text-[15px]
+                      sm:leading-7
+                    "
+                  >
+                    {description}
+                  </p>
+                </article>
+              ),
+            )}
+          </div>
+
+          {/* =====================================================
+              IMPORTANT NOTE
+          ====================================================== */}
+
+          <div
+            className="
+              mt-7
+
+              border-l-[3px]
+              border-[#EC1C40]
+
+              bg-white
+
+              px-5
+              py-4
+
+              text-[15px]
+              font-semibold
+              leading-7
+
+              text-black
+
+              sm:px-6
+              sm:py-5
+
+              lg:text-[16px]
+            "
+          >
+            Do not rely only on brochures, maps or verbal assurances.
+          </div>
+        </div>
+      </section>
+
+
+        {/* ===================================================
+            BUYING FROM ABROAD
+        ==================================================== */}
+      <section
+        id="buying-abroad"
+        className="
+          scroll-mt-24
+
+          border-y
+          border-black/10
+
+          bg-white
+
+          px-4
+          py-12
+
+          min-[414px]:px-5
+
+          sm:px-6
+          sm:py-14
+
+          md:px-8
+
+          lg:px-10
+          lg:py-20
+        "
+      >
+        <div
+          className="
+            mx-auto
+            w-full
+            max-w-7xl
+          "
+        >
+          <SectionHeading
+            eyebrow="Remote Assistance"
+            title="Buying Property in Dholera"
+            accent="From Abroad"
+            description="You do not necessarily need to travel to India for every step of the research process."
+          />
+
+            <p className="font-semibold text-black mt-1">
+              Dholera Times can help overseas buyers with:
+            </p>
+
+          <div
+            className="
+              relative
+
+              mt-9
+
+              grid
+              grid-cols-1
+
+              gap-4
+
+              md:grid-cols-2
+
+              lg:grid-cols-3
+            "
+          >
+            {remoteBuyingSteps.map(
+              (
+                {
                   title,
                   description,
                   icon: Icon,
-                }) => (
-                  <article
-                    key={title}
+                },
+                index,
+              ) => (
+                <article
+                  key={title}
+                  className="
+                    relative
+
+                    rounded-2xl
+
+                    border
+                    border-black/10
+
+                    bg-white
+
+                    p-5
+
+                    shadow-[0_12px_40px_-34px_rgba(0,0,0,0.35)]
+
+                    sm:p-6
+                  "
+                >
+                  <div
                     className="
-                      group
+                      flex
+                      items-center
+                      justify-between
 
-                      rounded-2xl
-
-                      border
-                      border-black/10
-
-                      bg-white
-
-                      p-5
-
-                      transition-[background-color,border-color,transform,box-shadow]
-                      duration-300
-
-                      hover:-translate-y-1
-                      hover:border-[#EC1C40]/30
-                      hover:bg-[#EC1C40]/[0.025]
-                      hover:shadow-[0_20px_45px_-32px_rgba(0,0,0,0.35)]
-
-                      sm:p-6
-
-                      motion-reduce:transform-none
+                      gap-4
                     "
                   >
                     <span
@@ -1343,494 +1994,118 @@ export default function NRIInvestmentGuide() {
 
                         rounded-xl
 
-                        bg-[#EC1C40]/10
+                        bg-black
 
-                        text-[#EC1C40]
+                        text-white
                       "
                     >
                       <Icon
-                        size={21}
+                        size={20}
                         strokeWidth={1.8}
                         aria-hidden="true"
                       />
                     </span>
 
-                    <h3
+                    <span
                       className="
-                        mt-5
-
-                        text-[17px]
+                        text-[12px]
                         font-bold
-                        leading-6
 
-                        text-black
+                        tracking-[0.1em]
+
+                        text-[#EC1C40]
                       "
                     >
-                      {title}
-                    </h3>
+                      {String(index + 1).padStart(
+                        2,
+                        "0",
+                      )}
+                    </span>
+                  </div>
 
-                    <p
-                      className="
-                        mt-2
-
-                        text-[14px]
-                        leading-6
-
-                        text-black/60
-                      "
-                    >
-                      {description}
-                    </p>
-                  </article>
-                ),
-              )}
-            </div>
-
-            <div
-              className="
-                mt-7
-
-                max-w-4xl
-
-                space-y-3
-
-                text-[15px]
-                leading-7
-
-                text-black/65
-
-                sm:text-[16px]
-              "
-            >
-              <p>
-                Property payments should not be made
-                through foreign currency notes or
-                travellers&apos; cheques.
-              </p>
-
-              <p>
-                Your bank or financial adviser should
-                confirm the correct payment route for your
-                individual transaction.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* ===================================================
-            DOCUMENTS
-        ==================================================== */}
-
-        <section
-          id="documents"
-          className="
-            scroll-mt-24
-
-            bg-black/[0.025]
-
-            px-4
-            py-12
-
-            min-[414px]:px-5
-
-            sm:px-6
-            sm:py-14
-
-            md:px-8
-
-            lg:px-10
-            lg:py-20
-          "
-        >
-          <div
-            className="
-              mx-auto
-              w-full
-              max-w-7xl
-            "
-          >
-            <SectionHeading
-              title="Documents NRIs Should Check"
-              accent="Before Buying"
-              description="Property due diligence is especially important when you are buying remotely. Before considering a plot in Dholera, check:"
-            />
-
-            <div
-              className="
-                mt-8
-
-                grid
-                grid-cols-1
-
-                gap-4
-
-                md:grid-cols-2
-
-                xl:grid-cols-3
-              "
-            >
-              {documents.map(
-                ({
-                  title,
-                  description,
-                  icon: Icon,
-                }) => (
-                  <article
-                    key={title}
+                  <h3
                     className="
-                      group
+                      mt-5
 
-                      relative
+                      text-[18px]
+                      font-bold
+                      leading-6
 
-                      overflow-hidden
-
-                      rounded-2xl
-
-                      border
-                      border-black/10
-
-                      bg-white
-
-                      p-5
-
-                      sm:p-6
+                      text-black
                     "
                   >
-                    <div
-                      aria-hidden="true"
-                      className="
-                        absolute
-                        inset-x-0
-                        top-0
+                    {title}
+                  </h3>
 
-                        h-[3px]
-
-                        origin-left
-                        scale-x-0
-
-                        bg-[#EC1C40]
-
-                        transition-transform
-                        duration-300
-
-                        group-hover:scale-x-100
-                      "
-                    />
-
-                    <div
-                      className="
-                        flex
-                        items-start
-
-                        gap-4
-                      "
-                    >
-                      <span
-                        className="
-                          flex
-                          h-10
-                          w-10
-
-                          shrink-0
-
-                          items-center
-                          justify-center
-
-                          rounded-xl
-
-                          bg-[#EC1C40]/10
-
-                          text-[#EC1C40]
-                        "
-                      >
-                        <Icon
-                          size={19}
-                          strokeWidth={1.8}
-                          aria-hidden="true"
-                        />
-                      </span>
-
-                      <div className="min-w-0">
-                        <h3
-                          className="
-                            text-[17px]
-                            font-bold
-                            leading-6
-
-                            text-black
-                          "
-                        >
-                          {title}
-                        </h3>
-
-                        <p
-                          className="
-                            mt-2
-
-                            text-[14px]
-                            leading-6
-
-                            text-black/60
-
-                            sm:text-[15px]
-                            sm:leading-7
-                          "
-                        >
-                          {description}
-                        </p>
-                      </div>
-                    </div>
-                  </article>
-                ),
-              )}
-            </div>
-
-            <div
-              className="
-                mt-7
-
-                rounded-2xl
-
-                border-l-[3px]
-                border-[#EC1C40]
-
-                bg-white
-
-                px-5
-                py-4
-
-                text-[15px]
-                font-semibold
-                leading-7
-
-                text-black
-
-                sm:px-6
-                sm:py-5
-              "
-            >
-              Do not rely only on brochures, maps or
-              verbal assurances.
-            </div>
-          </div>
-        </section>
-
-        {/* ===================================================
-            BUYING FROM ABROAD
-        ==================================================== */}
-
-        <section
-          id="buying-abroad"
-          className="
-            scroll-mt-24
-
-            border-y
-            border-black/10
-
-            bg-white
-
-            px-4
-            py-12
-
-            min-[414px]:px-5
-
-            sm:px-6
-            sm:py-14
-
-            md:px-8
-
-            lg:px-10
-            lg:py-20
-          "
-        >
-          <div
-            className="
-              mx-auto
-              w-full
-              max-w-7xl
-            "
-          >
-            <SectionHeading
-              eyebrow="Remote Assistance"
-              title="Buying Property in Dholera"
-              accent="From Abroad"
-              description="You do not necessarily need to travel to India for every step of the research process."
-            />
-
-            <div
-              className="
-                relative
-
-                mt-9
-
-                grid
-                grid-cols-1
-
-                gap-4
-
-                md:grid-cols-2
-
-                lg:grid-cols-3
-              "
-            >
-              {remoteBuyingSteps.map(
-                (
-                  {
-                    title,
-                    description,
-                    icon: Icon,
-                  },
-                  index,
-                ) => (
-                  <article
-                    key={title}
+                  <p
                     className="
-                      relative
+                      mt-2
 
-                      rounded-2xl
+                      text-[14px]
+                      leading-6
 
-                      border
-                      border-black/10
+                      text-black/60
 
-                      bg-white
-
-                      p-5
-
-                      shadow-[0_12px_40px_-34px_rgba(0,0,0,0.35)]
-
-                      sm:p-6
+                      sm:text-[15px]
+                      sm:leading-7
                     "
                   >
-                    <div
-                      className="
-                        flex
-                        items-center
-                        justify-between
-
-                        gap-4
-                      "
-                    >
-                      <span
-                        className="
-                          flex
-                          h-11
-                          w-11
-
-                          items-center
-                          justify-center
-
-                          rounded-xl
-
-                          bg-black
-
-                          text-white
-                        "
-                      >
-                        <Icon
-                          size={20}
-                          strokeWidth={1.8}
-                          aria-hidden="true"
-                        />
-                      </span>
-
-                      <span
-                        className="
-                          text-[12px]
-                          font-bold
-
-                          tracking-[0.1em]
-
-                          text-[#EC1C40]
-                        "
-                      >
-                        {String(index + 1).padStart(
-                          2,
-                          "0",
-                        )}
-                      </span>
-                    </div>
-
-                    <h3
-                      className="
-                        mt-5
-
-                        text-[18px]
-                        font-bold
-                        leading-6
-
-                        text-black
-                      "
-                    >
-                      {title}
-                    </h3>
-
-                    <p
-                      className="
-                        mt-2
-
-                        text-[14px]
-                        leading-6
-
-                        text-black/60
-
-                        sm:text-[15px]
-                        sm:leading-7
-                      "
-                    >
-                      {description}
-                    </p>
-                  </article>
-                ),
-              )}
-            </div>
-
-            <Link
-              href="/contact/inquiry"
-              className="
-                mt-8
-
-                inline-flex
-
-                min-h-[50px]
-
-                items-center
-                justify-center
-
-                gap-2
-
-                rounded-xl
-
-                bg-[#EC1C40]
-
-                px-5
-                py-3
-
-                text-[14px]
-                font-semibold
-
-                text-white
-
-                transition-[background-color,transform]
-                duration-200
-
-                hover:-translate-y-0.5
-                hover:bg-[#d81839]
-
-                sm:text-[15px]
-
-                motion-reduce:transform-none
-              "
-            >
-              Request an NRI Consultation
-
-              <ArrowRight
-                size={17}
-                strokeWidth={1.9}
-                aria-hidden="true"
-              />
-            </Link>
+                    {description}
+                  </p>
+                </article>
+              ),
+            )}
           </div>
-        </section>
+          
+        <Link
+          href="https://wa.me/919958993549"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="
+            mt-8
+
+            inline-flex
+
+            min-h-[50px]
+
+            items-center
+            justify-center
+
+            gap-2
+
+            rounded-xl
+
+            bg-[#EC1C40]
+
+            px-5
+            py-3
+
+            text-[14px]
+            font-semibold
+
+            text-white
+
+            transition-[background-color,transform]
+            duration-200
+
+            hover:-translate-y-0.5
+            hover:bg-[#d81839]
+
+            sm:text-[15px]
+
+            motion-reduce:transform-none
+          "
+        >
+          Request an NRI Consultation
+
+          <ArrowRight
+            size={17}
+            strokeWidth={1.9}
+            aria-hidden="true"
+          />
+        </Link>
+        </div>
+      </section>
 
         {/* ===================================================
             POWER OF ATTORNEY
@@ -1841,7 +2116,7 @@ export default function NRIInvestmentGuide() {
             bg-black
 
             px-4
-            py-12
+            py-10
 
             text-white
 
@@ -1853,7 +2128,7 @@ export default function NRIInvestmentGuide() {
             md:px-8
 
             lg:px-10
-            lg:py-16
+            lg:py-12
           "
         >
           <div
@@ -1873,28 +2148,7 @@ export default function NRIInvestmentGuide() {
               lg:gap-8
             "
           >
-            <span
-              className="
-                flex
-                h-14
-                w-14
-
-                items-center
-                justify-center
-
-                rounded-2xl
-
-                bg-[#EC1C40]
-
-                text-white
-              "
-            >
-              <Scale
-                size={25}
-                strokeWidth={1.7}
-                aria-hidden="true"
-              />
-            </span>
+            
 
             <div className="max-w-5xl">
               <h2
@@ -2082,7 +2336,6 @@ export default function NRIInvestmentGuide() {
         {/* ===================================================
             RISKS
         ==================================================== */}
-
         <section
           id="risks"
           className="
@@ -2113,12 +2366,77 @@ export default function NRIInvestmentGuide() {
               max-w-7xl
             "
           >
-            <SectionHeading
-              eyebrow="Risk Awareness"
-              title="Risks NRIs"
-              accent="Should Understand"
-              description="Every property investment carries risk."
-            />
+            {/* =====================================================
+                HEADING
+            ====================================================== */}
+
+            <div className="max-w-4xl">
+              {/* Eyebrow */}
+              <p
+                className="
+                  mb-3
+
+                  text-[11px]
+                  font-bold
+                  uppercase
+                  leading-5
+
+                  tracking-[0.16em]
+
+                  text-[#EC1C40]
+
+                  sm:text-[12px]
+                "
+              >
+                Risk Awareness
+              </p>
+
+              {/* Title */}
+              <h2
+                className="
+                  text-[28px]
+                  font-bold
+                  leading-[1.15]
+
+                  tracking-[-0.03em]
+
+                  text-white
+
+                  sm:text-[32px]
+
+                  md:text-[36px]
+
+                  lg:text-[40px]
+                "
+              >
+                Risks NRIs{" "}
+                <span className="text-[#EC1C40]">
+                  Should Understand
+                </span>
+              </h2>
+
+              {/* Description */}
+              <p
+                className="
+                  mt-4
+
+                  text-[15px]
+                  leading-7
+
+                  text-white/60
+
+                  sm:text-[16px]
+
+                  md:text-[17px]
+                "
+              >
+                Every property investment carries risk.
+              </p>
+            </div>
+
+            {/* =====================================================
+                RISK ITEMS
+            ====================================================== */}
 
             <div
               className="
@@ -2126,7 +2444,6 @@ export default function NRIInvestmentGuide() {
 
                 grid
                 grid-cols-1
-
                 gap-3
 
                 md:grid-cols-2
@@ -2136,40 +2453,76 @@ export default function NRIInvestmentGuide() {
                 <div
                   key={item}
                   className="
-                    flex
-                    items-start
+                    group
 
-                    gap-3
+                    flex
+                    items-center
+
+                    gap-3.5
 
                     rounded-xl
 
                     border
-                    border-white/10
+                    border-white/[0.14]
 
-                    bg-white/[0.04]
+                    bg-white/[0.045]
 
                     p-4
 
+                    transition-[background-color,border-color]
+                    duration-200
+
+                    hover:border-white/[0.24]
+                    hover:bg-white/[0.07]
+
+                    sm:min-h-[66px]
                     sm:p-5
                   "
                 >
-                  <AlertTriangle
-                    size={19}
-                    strokeWidth={1.9}
-                    aria-hidden="true"
+                  {/* Alert icon */}
+                  <span
                     className="
-                      mt-0.5
-                      shrink-0
-                      text-[#EC1C40]
-                    "
-                  />
+                      flex
+                      h-8
+                      w-8
 
+                      shrink-0
+
+                      items-center
+                      justify-center
+
+                      rounded-lg
+
+                      bg-[#EC1C40]/10
+
+                      text-[#EC1C40]
+
+                      transition-colors
+                      duration-200
+
+                      group-hover:bg-[#EC1C40]/15
+                    "
+                  >
+                    <AlertTriangle
+                      size={17}
+                      strokeWidth={1.9}
+                      aria-hidden="true"
+                    />
+                  </span>
+
+                  {/* Risk text */}
                   <p
                     className="
                       text-[14px]
+                      font-medium
                       leading-6
 
                       text-white/75
+
+                      transition-colors
+                      duration-200
+
+                      group-hover:text-white
 
                       sm:text-[15px]
                     "
@@ -2179,6 +2532,10 @@ export default function NRIInvestmentGuide() {
                 </div>
               ))}
             </div>
+
+            {/* =====================================================
+                CLOSING MESSAGE
+            ====================================================== */}
 
             <p
               className="
@@ -2206,7 +2563,6 @@ export default function NRIInvestmentGuide() {
         {/* ===================================================
             CONSULTATION
         ==================================================== */}
-
         <section
           id="consultation"
           className="
@@ -2281,51 +2637,51 @@ export default function NRIInvestmentGuide() {
                 </p>
               </div>
 
-              <Link
-                href="/contact/inquiry"
-                className="
-                  mt-7
+            <Link
+              href="https://wa.me/919958993549"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+                mt-7
 
-                  inline-flex
+                inline-flex
+                min-h-[50px]
 
-                  min-h-[50px]
+                items-center
+                justify-center
 
-                  items-center
-                  justify-center
+                gap-2
 
-                  gap-2
+                rounded-xl
 
-                  rounded-xl
+                bg-[#EC1C40]
 
-                  bg-[#EC1C40]
+                px-5
+                py-3
 
-                  px-5
-                  py-3
+                text-[14px]
+                font-semibold
+                text-white
 
-                  text-[14px]
-                  font-semibold
+                transition-[background-color,transform]
+                duration-200
 
-                  text-white
+                hover:-translate-y-0.5
+                hover:bg-[#d81839]
 
-                  transition-[background-color,transform]
-                  duration-200
+                sm:text-[15px]
 
-                  hover:-translate-y-0.5
-                  hover:bg-[#d81839]
+                motion-reduce:transform-none
+              "
+            >
+              Talk to Our NRI Advisory Team
 
-                  sm:text-[15px]
-
-                  motion-reduce:transform-none
-                "
-              >
-                Talk to Our NRI Advisory Team
-
-                <ArrowRight
-                  size={17}
-                  strokeWidth={1.9}
-                  aria-hidden="true"
-                />
-              </Link>
+              <ArrowRight
+                size={17}
+                strokeWidth={1.9}
+                aria-hidden="true"
+              />
+            </Link>
             </div>
 
             <div
@@ -2383,7 +2739,7 @@ export default function NRIInvestmentGuide() {
 
                           rounded-full
 
-                          bg-[#EC1C40]
+                          bg-black
 
                           text-white
                         "
@@ -2448,12 +2804,19 @@ export default function NRIInvestmentGuide() {
               max-w-7xl
             "
           >
+            {/* =====================================================
+                SECTION HEADING
+            ====================================================== */}
+
             <SectionHeading
               eyebrow="Dholera Times"
               title="Why NRIs Choose"
               accent="Dholera Times"
-              center
             />
+
+            {/* =====================================================
+                CARDS
+            ====================================================== */}
 
             <div
               className="
@@ -2480,6 +2843,14 @@ export default function NRIInvestmentGuide() {
                     className="
                       group
 
+                      relative
+
+                      flex
+                      min-h-[190px]
+                      flex-col
+
+                      overflow-hidden
+
                       rounded-2xl
 
                       border
@@ -2496,58 +2867,132 @@ export default function NRIInvestmentGuide() {
                       hover:border-[#EC1C40]/30
                       hover:shadow-[0_20px_45px_-32px_rgba(0,0,0,0.35)]
 
+                      sm:min-h-[200px]
                       sm:p-6
+
+                      lg:min-h-[210px]
 
                       motion-reduce:transform-none
                     "
                   >
-                    <span
+                    {/* =================================================
+                        TOP HOVER ACCENT
+                    ================================================= */}
+
+                    <div
+                      aria-hidden="true"
                       className="
-                        flex
-                        h-11
-                        w-11
+                        absolute
+                        inset-x-0
+                        top-0
 
-                        items-center
-                        justify-center
+                        h-[3px]
 
-                        rounded-xl
+                        origin-left
+                        scale-x-0
 
-                        bg-[#EC1C40]/10
+                        bg-[#EC1C40]
 
-                        text-[#EC1C40]
-
-                        transition-[background-color,color]
+                        transition-transform
                         duration-300
 
-                        group-hover:bg-[#EC1C40]
-                        group-hover:text-white
+                        group-hover:scale-x-100
                       "
-                    >
-                      <Icon
-                        size={20}
-                        strokeWidth={1.8}
-                        aria-hidden="true"
-                      />
-                    </span>
+                    />
 
-                    <h3
+                    {/* =================================================
+                        ICON + TITLE
+                    ================================================= */}
+
+                    <div
                       className="
-                        mt-5
+                        flex
+                        min-w-0
+                        items-center
 
-                        text-[18px]
-                        font-bold
-                        leading-6
+                        gap-3
 
-                        text-black
+                        sm:gap-4
                       "
                     >
-                      {title}
-                    </h3>
+                      <span
+                        className="
+                          flex
+                          h-10
+                          w-10
+
+                          shrink-0
+
+                          items-center
+                          justify-center
+
+                          rounded-xl
+
+                          bg-[#EC1C40]/10
+
+                          text-[#EC1C40]
+
+                          transition-[background-color,color]
+                          duration-300
+
+                          group-hover:bg-[#EC1C40]
+                          group-hover:text-white
+
+                          sm:h-11
+                          sm:w-11
+                        "
+                      >
+                        <Icon
+                          size={20}
+                          strokeWidth={1.8}
+                          aria-hidden="true"
+                        />
+                      </span>
+
+                      <h3
+                        className="
+                          min-w-0
+
+                          text-[16px]
+                          font-bold
+                          leading-6
+
+                          tracking-[-0.01em]
+
+                          text-black
+
+                          sm:text-[17px]
+
+                          lg:text-[18px]
+                        "
+                      >
+                        {title}
+                      </h3>
+                    </div>
+
+                    {/* =================================================
+                        DIVIDER
+                    ================================================= */}
+
+                    <div
+                      className="
+                        my-4
+
+                        h-px
+                        w-full
+
+                        bg-black/10
+
+                        sm:my-5
+                      "
+                    />
+
+                    {/* =================================================
+                        DESCRIPTION
+                    ================================================= */}
 
                     <p
                       className="
-                        mt-2
-
                         text-[14px]
                         leading-6
 
@@ -2570,217 +3015,9 @@ export default function NRIInvestmentGuide() {
             FAQs
         ==================================================== */}
 
-        <section
-          id="faqs"
-          className="
-            scroll-mt-24
-
-            bg-white
-
-            px-4
-            py-12
-
-            min-[414px]:px-5
-
-            sm:px-6
-            sm:py-14
-
-            md:px-8
-
-            lg:px-10
-            lg:py-20
-          "
-        >
-          <div
-            className="
-              mx-auto
-
-              grid
-              w-full
-              max-w-7xl
-
-              grid-cols-1
-
-              gap-8
-
-              lg:grid-cols-[minmax(250px,0.45fr)_minmax(0,1.55fr)]
-              lg:gap-12
-            "
-          >
-            {/* LEFT */}
-
-            <div>
-              <h2
-                className="
-                  mt-3
-
-                  text-[30px]
-                  font-bold
-                  leading-[1.12]
-
-                  tracking-[-0.035em]
-
-                  text-black
-
-                  sm:text-[34px]
-
-                  lg:text-[40px]
-                "
-              >
-                NRI Investment{" "}
-                <span className="text-[#EC1C40]">
-                  FAQs
-                </span>
-              </h2>
-            </div>
-
-            {/* RIGHT */}
-
-            <div
-              className="
-                overflow-hidden
-
-                rounded-2xl
-
-                border
-                border-black/10
-
-                bg-white
-              "
-            >
-              {faqItems.map(
-                (
-                  { question, answer },
-                  index,
-                ) => (
-                  <details
-                    key={question}
-                    className="
-                      group
-
-                      border-b
-                      border-black/10
-
-                      last:border-b-0
-                    "
-                  >
-                    <summary
-                      className="
-                        flex
-                        min-h-[74px]
-
-                        cursor-pointer
-                        list-none
-
-                        items-center
-                        justify-between
-
-                        gap-4
-
-                        px-4
-                        py-4
-
-                        text-left
-
-                        [&::-webkit-details-marker]:hidden
-
-                        min-[414px]:px-5
-
-                        sm:min-h-[80px]
-                        sm:px-6
-
-                        lg:px-7
-                      "
-                    >
-                      <span
-                        className="
-                          text-[15px]
-                          font-semibold
-                          leading-6
-
-                          text-black
-
-                          sm:text-[16px]
-                        "
-                      >
-                        {question}
-                      </span>
-
-                      <span
-                        className="
-                          flex
-                          h-9
-                          w-9
-
-                          shrink-0
-
-                          items-center
-                          justify-center
-
-                          rounded-full
-
-                          border
-                          border-black/10
-
-                          bg-[#EC1C40]/5
-
-                          text-[#EC1C40]
-
-                          transition-transform
-                          duration-300
-
-                          group-open:rotate-180
-                        "
-                      >
-                        <ChevronDown
-                          size={17}
-                          strokeWidth={2}
-                          aria-hidden="true"
-                        />
-                      </span>
-                    </summary>
-
-                    <div
-                      className="
-                        px-4
-                        pb-5
-
-                        min-[414px]:px-5
-
-                        sm:px-6
-                        sm:pb-6
-
-                        lg:px-7
-                      "
-                    >
-                      <div
-                        className="
-                          border-t
-                          border-black/10
-
-                          pt-4
-                        "
-                      >
-                        <p
-                          className="
-                            text-[15px]
-                            leading-7
-
-                            text-black/65
-
-                            sm:text-[16px]
-                          "
-                        >
-                          {answer}
-                        </p>
-                      </div>
-                    </div>
-                  </details>
-                ),
-              )}
-            </div>
-          </div>
-        </section>
+        <CommonFAQ 
+          faqItems={faqItems}
+        />
       </main>
     </>
   );

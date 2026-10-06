@@ -79,7 +79,7 @@ export default function WhyDT() {
         bg-white
 
         px-4
-        py-10
+        py-8
 
         text-black
 
@@ -89,13 +89,13 @@ export default function WhyDT() {
         min-[414px]:px-5
 
         sm:px-6
-        sm:py-12
+        sm:py-8
 
         md:px-8
-        md:py-14
+        md:py-8
 
         lg:px-10
-        lg:py-16
+        lg:py-8
       "
     >
       {/* =====================================================
@@ -147,15 +147,12 @@ export default function WhyDT() {
       <div className="mx-auto w-full max-w-7xl">
         {/* ===================================================
             SECTION HEADER
-        ==================================================== */}
-
+          ==================================================== */}
         <header
           className="
-            mx-auto
-
             max-w-5xl
 
-            text-center
+            text-left
           "
         >
           <h2
@@ -184,7 +181,6 @@ export default function WhyDT() {
 
           <p
             className="
-              mx-auto
               mt-3
 
               max-w-4xl
@@ -627,9 +623,6 @@ export default function WhyDT() {
         <div
           className="
             relative
-
-            mt-12
-
             hidden
             min-h-[575px]
 

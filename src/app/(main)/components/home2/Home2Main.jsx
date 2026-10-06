@@ -3,16 +3,36 @@ import HOME2 from "./carosuel";
 import Dholera from "./Dholera";
 import LatestUpdates from "../Latest-updates";
 import WhyDT from "./WhyDT";
-import AboutDT from "./AboutDT";
-import FAQS from "./FAQs";
 import ObservedSection from "./ObservedSection_codex_temp";
 import {
-  LazyBulkLandSection,
   LazyTestimonialsSection,
 } from "./LazyHomeSections";
 import ExploreDholera from "./ExploreDholera";
+import CommonFAQ from "../Common/Faq";
 
 
+const faqItems  = [
+  {
+    question: "What is Dholera Smart City?",
+    answer:
+      "Dholera Smart City also refers to Dholera Special Investment Region (Dholera SIR), a planned industrial city in Gujarat being developed as part of the Delhi-Mumbai Industrial Corridor.",
+  },
+  {
+    question: "What are the latest developments in Dholera?",
+    answer:
+      "Major developments include infrastructure, transportation, industrial projects, semiconductor manufacturing and expansion of the Dholera SIR ecosystem. Dholera Times tracks these developments individually as their status changes.",
+  },
+  {
+    question: "Where can I find the latest Dholera news?",
+    answer:
+      "You can follow the Dholera Times Latest Updates section for recent infrastructure, industry, government and investment developments.",
+  },
+  {
+    question: "Is Dholera good for investment?",
+    answer:
+      "Dholera has significant infrastructure and industrial development activity, but individual investment decisions depend on location, price, legal status, development stage, investment horizon and risk tolerance.",
+  },
+];
 
 
 
@@ -67,7 +87,9 @@ export default function Home2Main() {
       <ExploreDholera />
       <WhyDT />
       <LazyTestimonialsSection />
-      <FAQS />
+      <CommonFAQ faqItems={faqItems} />
+
+
 
       {/* <ObservedSection animation="fade-up"> */}
       {/* </ObservedSection> */}

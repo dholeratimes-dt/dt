@@ -66,7 +66,6 @@ const formatDate = (dateString) => {
 /* ============================================================
    TRENDING BLOG ITEM
 ============================================================ */
-
 export default function TrendingBlogItem({ post }) {
   if (!post) return null;
 
@@ -89,7 +88,7 @@ export default function TrendingBlogItem({ post }) {
     <article
       className="
         border-b
-        border-[#EAD9DF]
+        border-black/10
 
         py-5
 
@@ -111,7 +110,7 @@ export default function TrendingBlogItem({ post }) {
 
           focus-visible:outline-none
           focus-visible:ring-2
-          focus-visible:ring-[#8F2946]
+          focus-visible:ring-[#EC1C40]
           focus-visible:ring-offset-4
         "
       >
@@ -129,12 +128,9 @@ export default function TrendingBlogItem({ post }) {
 
             tracking-[-0.01em]
 
-            text-[#39252E]
+            text-black
 
-            transition-colors
-            duration-200
 
-            group-hover:text-[#8F2946]
 
             sm:text-[17px]
             sm:leading-[25px]
@@ -159,7 +155,7 @@ export default function TrendingBlogItem({ post }) {
             text-[13px]
             leading-5
 
-            text-[#78666E]
+            text-black/55
 
             sm:text-[14px]
           "
@@ -176,20 +172,20 @@ export default function TrendingBlogItem({ post }) {
           )}
 
           <p>
-            Posted By{" "}
+            
             <span
               className="
                 font-semibold
 
-                text-[#2563EB]
+                text-[#EC1C40]
 
                 transition-colors
                 duration-200
 
-                group-hover:text-[#1D4ED8]
+                group-hover:text-[#d81839]
               "
             >
-              {authorName}
+              Explore..
             </span>
           </p>
         </div>

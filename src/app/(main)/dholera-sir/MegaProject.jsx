@@ -26,62 +26,56 @@ const megaProjects = [
   {
     title: "Ahmedabad-Dholera Expressway",
     description:
-      "High-Speed Connectivity Corridor to Dholera",
+      "109 km expressway connecting Ahmedabad and Dholera.",
     icon: Route,
   },
   {
     title: "Dholera International Airport",
     description:
-      "India's Second Largest Airport",
+      "Planned airport for Dholera’s passenger and cargo connectivity.",
     icon: Plane,
   },
   {
-    title: "Tata Semiconductor Plant",
+    title: "Ahmedabad Dholera Rail Project",
     description:
-      "India's First Semiconductor Fab",
-    icon: Cpu,
+      "Semi-high-speed rail link connecting Ahmedabad and Dholera.",
+    icon: TrainFront,
   },
   {
     title: "Dholera Solar Park",
     description:
-      "One of Asia's Largest Solar Plants",
+      "Large-scale solar energy infrastructure supporting clean power.",
     icon: Sun,
   },
   {
-    title: "Dholera Sea Port",
+    title: "Dedicated Freight Corridor (DFC)",
     description:
-      "Proposed Deep-Sea Trade Gateway",
-    icon: Ship,
+      "Freight rail connectivity supporting industrial logistics.",
+    icon: Waypoints,
   },
   {
-    title: "Dholera Monorail",
+    title: "Tata Semiconductor Plant",
     description:
-      "High Speed Metro And Rail",
-    icon: TrainFront,
+      "Major semiconductor manufacturing project in Dholera SIR.",
+    icon: Cpu,
+  },
+  {
+    title: "Smart Infrastructure",
+    description:
+      "Modern roads, utilities, ICT and digital city systems.",
+    icon: Building2,
+  },
+  {
+    title: "Sea Port",
+    description:
+      "Planned port connectivity supporting Dholera’s trade and logistics.",
+    icon: Ship,
   },
   {
     title: "ABCD Building",
     description:
       "Dholera's Central Command Hub",
     icon: Building2,
-  },
-  {
-    title: "Activation Area",
-    description:
-      "Dholera's First Operational Smart Zone",
-    icon: Warehouse,
-  },
-  {
-    title: "DMIC",
-    description:
-      "India's Largest Industrial Corridor",
-    icon: Factory,
-  },
-  {
-    title: "Dedicated Freight Corridor",
-    description:
-      "High-Speed National Freight Network",
-    icon: Waypoints,
   },
 ];
 
@@ -177,7 +171,7 @@ function LatestNewsItem({
 
           focus-visible:outline-none
           focus-visible:ring-2
-          focus-visible:ring-[#8F2946]
+          focus-visible:ring-[#EC1C40]
           focus-visible:ring-offset-4
         "
       >
@@ -191,12 +185,11 @@ function LatestNewsItem({
 
             tracking-[-0.01em]
 
-            text-[#39252E]
+            text-black
 
             transition-colors
             duration-200
 
-            group-hover:text-[#8F2946]
 
             sm:text-[17px]
             sm:leading-[25px]
@@ -225,7 +218,7 @@ function LatestNewsItem({
               font-normal
               leading-5
 
-              text-[#78666E]
+              text-black/60
 
               sm:text-[14px]
             "
@@ -236,28 +229,27 @@ function LatestNewsItem({
           </time>
         )}
 
-            <p
-            className="
-                mt-0.5
+        <p
+          className="
+            mt-0.5
 
-                text-[13px]
-                font-medium
-                leading-5
+            text-[13px]
+            font-medium
+            leading-5
 
-                text-[#2563EB]
+            text-black/60
 
-                transition-colors
-                duration-200
+            transition-colors
+            duration-200
+            group-hover:text-[#EC1C40]
 
-                group-hover:text-[#1D4ED8]
+            sm:text-[14px]
 
-                sm:text-[14px]
-
-                motion-reduce:transition-none
-            "
-            >
-            Posted By Dholera Times
-            </p>
+            motion-reduce:transition-none
+          "
+        >
+          Explore
+        </p>
       </Link>
     </article>
   );
@@ -287,20 +279,17 @@ function MegaProjectCard({
         rounded-xl
 
         border
-        border-[#DFC9D1]
+        border-black/10
 
         bg-white
 
         p-4
 
-        shadow-[0_5px_18px_rgba(116,32,57,0.045)]
+        shadow-[0_5px_18px_rgba(0,0,0,0.035)]
 
         transition-[border-color,box-shadow,transform]
         duration-300
 
-        hover:-translate-y-0.5
-        hover:border-[#E0A4B5]
-        hover:shadow-[0_12px_28px_rgba(116,32,57,0.09)]
 
         sm:gap-4
         sm:p-[18px]
@@ -329,17 +318,17 @@ function MegaProjectCard({
           rounded-xl
 
           border
-          border-[#E0A4B5]/45
+          border-[#EC1C40]/20
 
-          bg-[#F7EBEF]
+          bg-black/[0.025]
 
-          text-[#8F2946]
+          text-[#EC1C40]
 
           transition-colors
           duration-300
 
-          group-hover:border-[#E0A4B5]
-          group-hover:bg-[#F3E7EC]
+          group-hover:border-[#EC1C40]/30
+          group-hover:bg-[#EC1C40]/10
 
           sm:h-12
           sm:w-12
@@ -373,7 +362,7 @@ function MegaProjectCard({
 
             tracking-[-0.01em]
 
-            text-[#39252E]
+            text-black
 
             sm:text-[16px]
             sm:leading-6
@@ -392,7 +381,7 @@ function MegaProjectCard({
             font-normal
             leading-5
 
-            text-[#68565E]
+            text-black/60
 
             sm:mt-1.5
             sm:text-[14px]
@@ -483,15 +472,15 @@ export default async function MegaProjectsSection() {
       className="
         w-full
 
-        bg-[#FAF7F8]
+        bg-black/[0.025]
 
         px-4
-        py-10
+        py-8
 
-        text-[#39252E]
+        text-black
 
-        selection:bg-[#E0A4B5]
-        selection:text-[#39252E]
+        selection:bg-[#EC1C40]/10
+        selection:text-black
 
         min-[414px]:px-6
 
@@ -500,14 +489,12 @@ export default async function MegaProjectsSection() {
         md:px-8
         md:py-14
 
-        lg:py-16
+        lg:py-14
       "
     >
       {/* =====================================================
           STANDARD SITE WIDTH
       ====================================================== */}
-
-      
 
       <div
         className="
@@ -563,13 +550,13 @@ export default async function MegaProjectsSection() {
                 rounded-2xl
 
                 border
-                border-[#DFC9D1]
+                border-black/10
 
                 bg-white
 
                 p-5
 
-                shadow-[0_8px_26px_rgba(116,32,57,0.055)]
+                shadow-[0_8px_26px_rgba(0,0,0,0.04)]
 
                 sm:p-6
               "
@@ -583,7 +570,7 @@ export default async function MegaProjectsSection() {
                   mb-5
 
                   border-b
-                  border-[#EAD9DF]
+                  border-black/10
 
                   pb-4
                 "
@@ -597,7 +584,7 @@ export default async function MegaProjectsSection() {
 
                     tracking-[-0.02em]
 
-                    text-[#39252E]
+                    text-black
 
                     sm:text-[24px]
 
@@ -607,7 +594,7 @@ export default async function MegaProjectsSection() {
                   "
                 >
                   Latest News on{" "}
-                  <span className="text-[#8F2946]">
+                  <span className="text-[#EC1C40]">
                     Dholera SIR
                   </span>
                 </h2>
@@ -622,7 +609,7 @@ export default async function MegaProjectsSection() {
                 <div
                   className="
                     divide-y
-                    divide-[#EAD9DF]
+                    divide-black/10
                   "
                 >
                   {trendingBlogs.map(
@@ -654,7 +641,7 @@ export default async function MegaProjectsSection() {
                     text-[14px]
                     leading-6
 
-                    text-[#68565E]
+                    text-black/60
                   "
                 >
                   No news available
@@ -692,22 +679,6 @@ export default async function MegaProjectsSection() {
                 md:mb-8
               "
             >
-              <div
-                aria-hidden="true"
-                className="
-                  mb-3
-
-                  h-[3px]
-                  w-10
-
-                  rounded-full
-
-                  bg-[#E0A4B5]
-
-                  md:mx-auto
-                "
-              />
-
               <h2
                 id="mega-projects-heading"
                 className="
@@ -720,12 +691,12 @@ export default async function MegaProjectsSection() {
 
                   tracking-[-0.025em]
 
-                  text-[#39252E]
+                  text-black
 
                   md:text-center
                 "
               >
-                Mega Projects in Dholera
+                Major Infrastructure in Dholera
               </h2>
             </header>
 

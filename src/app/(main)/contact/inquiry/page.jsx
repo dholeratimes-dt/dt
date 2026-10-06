@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 
-
 import {
   ArrowRight,
   Building2,
@@ -19,8 +18,10 @@ import {
 import { FaWhatsapp } from "react-icons/fa";
 
 import ContactForm from "../../components/NewContactForm";
-import get from "@/assets/contact-dholera-times-desktop.webp";
 import getM from "@/assets/contact-dholera-times-mobile.webp";
+import get from "@/assets/contactPage/DTcontactBanner.webp";
+
+import CommonFAQ from "../../components/Common/FAQ";
 
 /* ============================================================
    SEO METADATA
@@ -28,8 +29,7 @@ import getM from "@/assets/contact-dholera-times-mobile.webp";
 
 export const metadata = {
   title: {
-    absolute:
-      "Contact Dholera Times | Dholera News & Property Enquiries",
+    absolute: "Contact Dholera Times | Dholera News & Property Enquiries",
   },
 
   description:
@@ -45,8 +45,7 @@ export const metadata = {
   ],
 
   alternates: {
-    canonical:
-      "https://www.dholeratimes.com/contact/inquiry",
+    canonical: "https://www.dholeratimes.com/contact/inquiry",
   },
 
   robots: {
@@ -63,14 +62,12 @@ export const metadata = {
   },
 
   openGraph: {
-    title:
-      "Contact Dholera Times | Dholera News & Property Enquiries",
+    title: "Contact Dholera Times | Dholera News & Property Enquiries",
 
     description:
       "Contact Dholera Times for Dholera Smart City information, news enquiries, residential plots, pricing, site visits and property assistance.",
 
-    url:
-      "https://www.dholeratimes.com/contact/inquiry",
+    url: "https://www.dholeratimes.com/contact/inquiry",
 
     siteName: "Dholera Times",
 
@@ -80,8 +77,7 @@ export const metadata = {
   twitter: {
     card: "summary",
 
-    title:
-      "Contact Dholera Times | Dholera News & Property Enquiries",
+    title: "Contact Dholera Times | Dholera News & Property Enquiries",
 
     description:
       "Contact Dholera Times for Dholera Smart City information, news enquiries, residential plots, pricing, site visits and property assistance.",
@@ -94,8 +90,7 @@ export const metadata = {
 
 const helpItems = [
   {
-    title:
-      "Investment Consultation & Advisory",
+    title: "Investment Consultation & Advisory",
 
     description:
       "Get guidance on Dholera investment opportunities, locations, infrastructure impact, property options, pricing and key risks before making a decision.",
@@ -103,8 +98,7 @@ const helpItems = [
     icon: TrendingUp,
   },
   {
-    title:
-      "Dholera Investment Insights",
+    title: "Dholera Investment Insights",
 
     description:
       "Understand market trends, development progress, land and plot prices, major infrastructure projects and emerging investment opportunities across Dholera.",
@@ -112,8 +106,7 @@ const helpItems = [
     icon: SearchCheck,
   },
   {
-    title:
-      "Residential Plots in Dholera",
+    title: "Residential Plots in Dholera",
 
     description:
       "Explore residential plots in the Dholera region with details on location, plot sizes, pricing, documentation and current availability with Dholera Times.",
@@ -121,8 +114,7 @@ const helpItems = [
     icon: Building2,
   },
   {
-    title:
-      "Property Comparison & Due Diligence",
+    title: "Property Comparison & Due Diligence",
 
     description:
       "Compare locations and property options based on development status, connectivity, documentation, pricing and proximity to Dholera SIR.",
@@ -130,8 +122,7 @@ const helpItems = [
     icon: FileSearch,
   },
   {
-    title:
-      "Dholera Information & Business Enquiries",
+    title: "Dholera Information & Business Enquiries",
 
     description:
       "Contact us for information about Dholera SIR, infrastructure, industries, company developments, media enquiries, partnerships or business opportunities.",
@@ -142,36 +133,31 @@ const helpItems = [
 
 const faqItems = [
   {
-    question:
-      "How can I contact Dholera Times?",
+    question: "How can I contact Dholera Times?",
 
     answer:
       "You can contact Dholera Times by phone, WhatsApp, email or the enquiry form on this page.",
   },
   {
-    question:
-      "Can I enquire about residential plots in Dholera?",
+    question: "Can I enquire about residential plots in Dholera?",
 
     answer:
       "Yes. Our team can provide information about available residential plots, locations, sizes, pricing and documentation.",
   },
   {
-    question:
-      "Can Dholera Times arrange a site visit?",
+    question: "Can Dholera Times arrange a site visit?",
 
     answer:
       "Yes. Our team can help arrange a site visit in Dholera so you can understand the location and surrounding development.",
   },
   {
-    question:
-      "Can I share Dholera news or development information?",
+    question: "Can I share Dholera news or development information?",
 
     answer:
       "Yes. Companies, authorities, readers and local sources can contact us to share Dholera-related news, announcements or development information for review.",
   },
   {
-    question:
-      "How do I report incorrect information?",
+    question: "How do I report incorrect information?",
 
     answer:
       "You can email or contact our team with the page URL and correction details. We review reliable new information and update our coverage when required.",
@@ -192,22 +178,18 @@ const contactPageSchema = {
   description:
     "Contact Dholera Times for Dholera Smart City information, news enquiries, residential plots, pricing, site visits and property assistance.",
 
-  url:
-    "https://www.dholeratimes.com/contact/inquiry",
+  url: "https://www.dholeratimes.com/contact/inquiry",
 
   mainEntity: {
     "@type": "Organization",
 
     name: "Dholera Times",
 
-    url:
-      "https://www.dholeratimes.com/",
+    url: "https://www.dholeratimes.com/",
 
-    email:
-      "info@dholeratimes.com",
+    email: "info@dholeratimes.com",
 
-    telephone:
-      "+91 99589 93549",
+    telephone: "+91 99589 93549",
 
     address: {
       "@type": "PostalAddress",
@@ -215,30 +197,23 @@ const contactPageSchema = {
       streetAddress:
         "CGJ - 194, DLF Capital Greens, Shivaji Marg, Karampura Industrial Area",
 
-      addressLocality:
-        "Karam Pura",
+      addressLocality: "Karam Pura",
 
-      addressRegion:
-        "Delhi",
+      addressRegion: "Delhi",
 
-      postalCode:
-        "110015",
+      postalCode: "110015",
 
-      addressCountry:
-        "IN",
+      addressCountry: "IN",
     },
 
     contactPoint: {
       "@type": "ContactPoint",
 
-      telephone:
-        "+91 99589 93549",
+      telephone: "+91 99589 93549",
 
-      email:
-        "info@dholeratimes.com",
+      email: "info@dholeratimes.com",
 
-      contactType:
-        "customer service",
+      contactType: "customer service",
     },
   },
 };
@@ -248,54 +223,42 @@ const faqSchema = {
 
   "@type": "FAQPage",
 
-  mainEntity: faqItems.map(
-    (faq) => ({
-      "@type": "Question",
+  mainEntity: faqItems.map((faq) => ({
+    "@type": "Question",
 
-      name:
-        faq.question,
+    name: faq.question,
 
-      acceptedAnswer: {
-        "@type": "Answer",
+    acceptedAnswer: {
+      "@type": "Answer",
 
-        text:
-          faq.answer,
-      },
-    }),
-  ),
+      text: faq.answer,
+    },
+  })),
 };
 
 const breadcrumbSchema = {
-  "@context":
-    "https://schema.org",
+  "@context": "https://schema.org",
 
-  "@type":
-    "BreadcrumbList",
+  "@type": "BreadcrumbList",
 
   itemListElement: [
     {
-      "@type":
-        "ListItem",
+      "@type": "ListItem",
 
       position: 1,
 
-      name:
-        "Home",
+      name: "Home",
 
-      item:
-        "https://www.dholeratimes.com/",
+      item: "https://www.dholeratimes.com/",
     },
     {
-      "@type":
-        "ListItem",
+      "@type": "ListItem",
 
       position: 2,
 
-      name:
-        "Contact Us",
+      name: "Contact Us",
 
-      item:
-        "https://www.dholeratimes.com/contact/inquiry",
+      item: "https://www.dholeratimes.com/contact/inquiry",
     },
   ],
 };
@@ -314,30 +277,21 @@ export default function ContactPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html:
-            JSON.stringify(
-              contactPageSchema,
-            ),
+          __html: JSON.stringify(contactPageSchema),
         }}
       />
 
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html:
-            JSON.stringify(
-              faqSchema,
-            ),
+          __html: JSON.stringify(faqSchema),
         }}
       />
 
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html:
-            JSON.stringify(
-              breadcrumbSchema,
-            ),
+          __html: JSON.stringify(breadcrumbSchema),
         }}
       />
 
@@ -345,25 +299,25 @@ export default function ContactPage() {
           CONTACT PAGE BANNER
         ============================================================ */}
 
-    <section
-      aria-label="Contact Dholera Times"
-      className="
+      <section
+        aria-label="Contact Dholera Times"
+        className="
         w-full
 
         overflow-hidden
 
         bg-white
       "
-    >
-      {/* MOBILE BANNER */}
+      >
+        {/* MOBILE BANNER */}
 
-      <Image
-        src={getM}
-        alt="Contact Dholera Times"
-        priority
-        quality={90}
-        sizes="100vw"
-        className="
+        <Image
+          src={getM}
+          alt="Contact Dholera Times"
+          priority
+          quality={90}
+          sizes="100vw"
+          className="
           block
           h-auto
           w-full
@@ -372,17 +326,17 @@ export default function ContactPage() {
 
           md:hidden
         "
-      />
+        />
 
-      {/* DESKTOP / TABLET BANNER */}
+        {/* DESKTOP / TABLET BANNER */}
 
-      <Image
-        src={get}
-        alt="Contact Dholera Times"
-        priority
-        quality={90}
-        sizes="100vw"
-        className="
+        <Image
+          src={get}
+          alt="Contact Dholera Times"
+          priority
+          quality={90}
+          sizes="100vw"
+          className="
           hidden
           h-auto
           w-full
@@ -391,8 +345,8 @@ export default function ContactPage() {
 
           md:block
         "
-      />
-    </section>
+        />
+      </section>
 
       <main
         className="
@@ -410,644 +364,6 @@ export default function ContactPage() {
             HERO / CONTACT INTRO
         ==================================================== */}
 
-        <section
-          className="
-            relative
-
-            overflow-hidden
-
-            border-b
-            border-black/10
-
-            bg-white
-
-            px-4
-            py-10
-
-            min-[414px]:px-5
-
-            sm:px-6
-            sm:py-12
-
-            md:px-8
-            md:py-14
-
-            lg:px-10
-            lg:py-20
-          "
-        >
-          {/* BACKGROUND DETAIL */}
-
-          <div
-            aria-hidden="true"
-            className="
-              pointer-events-none
-
-              absolute
-
-              -right-32
-              -top-40
-
-              h-[420px]
-              w-[420px]
-
-              rounded-full
-
-              bg-[#EC1C40]/[0.055]
-
-              blur-3xl
-            "
-          />
-
-          <div
-            className="
-              relative
-
-              mx-auto
-
-              grid
-              w-full
-              max-w-7xl
-
-              grid-cols-1
-
-              gap-9
-
-              lg:grid-cols-[minmax(0,1.02fr)_minmax(410px,0.98fr)]
-              lg:items-center
-              lg:gap-14
-            "
-          >
-            {/* ===============================================
-                INTRO
-            ================================================ */}
-
-            <div
-              className="
-                max-w-3xl
-              "
-            >
-              <p
-                className="
-                  mb-3
-
-                  text-[11px]
-                  font-bold
-                  uppercase
-                  leading-5
-
-                  tracking-[0.16em]
-
-                  text-[#EC1C40]
-
-                  sm:text-[12px]
-                "
-              >
-                Contact Dholera Times
-              </p>
-
-              <h1
-                className="
-                  max-w-3xl
-
-                  text-[36px]
-                  font-bold
-                  leading-[1.08]
-
-                  tracking-[-0.04em]
-
-                  text-black
-
-                  min-[414px]:text-[40px]
-
-                  sm:text-[46px]
-
-                  md:text-[52px]
-
-                  lg:text-[58px]
-                "
-              >
-                Contact{" "}
-                <span className="text-[#EC1C40]">
-                  Us
-                </span>
-              </h1>
-
-              <div
-                className="
-                  mt-6
-
-                  max-w-3xl
-
-                  space-y-4
-
-                  text-[15px]
-                  leading-7
-
-                  text-black/65
-
-                  sm:text-[16px]
-                  sm:leading-7
-
-                  lg:text-[17px]
-                  lg:leading-8
-                "
-              >
-                <p>
-                  Have a question
-                  about Dholera
-                  Smart City, want
-                  to share an
-                  update, or need
-                  help exploring
-                  residential
-                  plots in
-                  Dholera?
-                </p>
-
-                <p>
-                  Connect with the
-                  Dholera Times
-                  team for
-                  information,
-                  property
-                  assistance,
-                  site visits and
-                  general
-                  enquiries.
-                </p>
-              </div>
-            </div>
-
-            {/* ===============================================
-                CONTACT PANEL
-            ================================================ */}
-
-            <div
-              className="
-                relative
-
-                overflow-hidden
-
-                rounded-[26px]
-
-                bg-black
-
-                p-3
-
-                shadow-[0_30px_80px_-45px_rgba(0,0,0,0.75)]
-
-                sm:p-4
-
-                lg:rounded-[30px]
-              "
-            >
-              <div
-                aria-hidden="true"
-                className="
-                  pointer-events-none
-
-                  absolute
-                  -right-24
-                  -top-24
-
-                  h-[220px]
-                  w-[220px]
-
-                  rounded-full
-
-                  bg-[#EC1C40]/20
-
-                  blur-3xl
-                "
-              />
-
-              <div
-                className="
-                  relative
-
-                  grid
-                  grid-cols-1
-
-                  gap-2.5
-                "
-              >
-                {/* CALL / WHATSAPP */}
-
-                <div
-                  className="
-                    rounded-[18px]
-
-                    border
-                    border-white/10
-
-                    bg-white/[0.055]
-
-                    p-5
-
-                    sm:p-6
-                  "
-                >
-                  <div
-                    className="
-                      flex
-
-                      items-start
-
-                      gap-4
-                    "
-                  >
-                    <span
-                      className="
-                        flex
-                        h-11
-                        w-11
-
-                        shrink-0
-
-                        items-center
-                        justify-center
-
-                        rounded-xl
-
-                        bg-[#EC1C40]
-
-                        text-white
-                      "
-                    >
-                      <Phone
-                        size={20}
-                        strokeWidth={1.8}
-                        aria-hidden="true"
-                      />
-                    </span>
-
-                    <div className="min-w-0">
-                      <p
-                        className="
-                          text-[12px]
-                          font-semibold
-                          uppercase
-
-                          tracking-[0.1em]
-
-                          text-white/50
-                        "
-                      >
-                        Call or WhatsApp
-                      </p>
-
-                      <a
-                        href="tel:+919958993549"
-                        className="
-                          mt-1.5
-
-                          block
-
-                          text-[19px]
-                          font-bold
-                          leading-7
-
-                          text-white
-
-                          transition-colors
-                          duration-200
-
-                          hover:text-[#EC1C40]
-
-                          sm:text-[21px]
-                        "
-                      >
-                        +91 99589 93549
-                      </a>
-
-                      <p
-                        className="
-                          mt-2
-
-                          text-[13px]
-                          leading-6
-
-                          text-white/60
-
-                          sm:text-[14px]
-                        "
-                      >
-                        For property
-                        enquiries,
-                        site visits
-                        and general
-                        assistance.
-                      </p>
-
-                      <div
-                        className="
-                          mt-4
-
-                          flex
-                          flex-wrap
-
-                          gap-2
-                        "
-                      >
-                        <a
-                          href="tel:+919958993549"
-                          className="
-                            inline-flex
-                            min-h-[42px]
-
-                            items-center
-                            justify-center
-
-                            gap-2
-
-                            rounded-lg
-
-                            bg-white
-
-                            px-4
-                            py-2
-
-                            text-[13px]
-                            font-semibold
-
-                            text-black
-
-                            transition-colors
-                            duration-200
-
-                            hover:bg-[#EC1C40]
-                            hover:text-white
-                          "
-                        >
-                          <Phone
-                            size={15}
-                            aria-hidden="true"
-                          />
-
-                          Call
-                        </a>
-
-                        <a
-                          href="https://wa.me/919958993549"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="
-                            inline-flex
-                            min-h-[42px]
-
-                            items-center
-                            justify-center
-
-                            gap-2
-
-                            rounded-lg
-
-                            border
-                            border-white/15
-
-                            px-4
-                            py-2
-
-                            text-[13px]
-                            font-semibold
-
-                            text-white
-
-                            transition-colors
-                            duration-200
-
-                            hover:border-[#EC1C40]
-                            hover:bg-[#EC1C40]
-                          "
-                        >
-                          <FaWhatsapp
-                            size={17}
-                            aria-hidden="true"
-                          />
-
-                          WhatsApp
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* EMAIL */}
-
-                <a
-                  href="mailto:info@dholeratimes.com"
-                  className="
-                    group
-
-                    rounded-[18px]
-
-                    border
-                    border-white/10
-
-                    bg-white/[0.055]
-
-                    p-5
-
-                    transition-[background-color,border-color]
-                    duration-200
-
-                    hover:border-[#EC1C40]/50
-                    hover:bg-white/[0.075]
-
-                    sm:p-6
-                  "
-                >
-                  <div
-                    className="
-                      flex
-                      items-start
-
-                      gap-4
-                    "
-                  >
-                    <span
-                      className="
-                        flex
-                        h-11
-                        w-11
-
-                        shrink-0
-
-                        items-center
-                        justify-center
-
-                        rounded-xl
-
-                        bg-white/10
-
-                        text-[#EC1C40]
-                      "
-                    >
-                      <Mail
-                        size={20}
-                        strokeWidth={1.8}
-                        aria-hidden="true"
-                      />
-                    </span>
-
-                    <div className="min-w-0">
-                      <p
-                        className="
-                          text-[12px]
-                          font-semibold
-                          uppercase
-
-                          tracking-[0.1em]
-
-                          text-white/50
-                        "
-                      >
-                        Email
-                      </p>
-
-                      <p
-                        className="
-                          mt-1.5
-
-                          break-all
-
-                          text-[16px]
-                          font-bold
-
-                          text-white
-
-                          group-hover:text-[#EC1C40]
-
-                          sm:text-[17px]
-                        "
-                      >
-                        info@dholeratimes.com
-                      </p>
-
-                      <p
-                        className="
-                          mt-2
-
-                          text-[13px]
-                          leading-6
-
-                          text-white/60
-
-                          sm:text-[14px]
-                        "
-                      >
-                        For general,
-                        news, media
-                        and business
-                        enquiries.
-                      </p>
-                    </div>
-                  </div>
-                </a>
-
-                {/* OFFICE */}
-
-                <div
-                  className="
-                    rounded-[18px]
-
-                    border
-                    border-white/10
-
-                    bg-white/[0.055]
-
-                    p-5
-
-                    sm:p-6
-                  "
-                >
-                  <div
-                    className="
-                      flex
-                      items-start
-
-                      gap-4
-                    "
-                  >
-                    <span
-                      className="
-                        flex
-                        h-11
-                        w-11
-
-                        shrink-0
-
-                        items-center
-                        justify-center
-
-                        rounded-xl
-
-                        bg-white/10
-
-                        text-[#EC1C40]
-                      "
-                    >
-                      <MapPin
-                        size={20}
-                        strokeWidth={1.8}
-                        aria-hidden="true"
-                      />
-                    </span>
-
-                    <address
-                      className="
-                        min-w-0
-
-                        not-italic
-                      "
-                    >
-                      <p
-                        className="
-                          text-[12px]
-                          font-semibold
-                          uppercase
-
-                          tracking-[0.1em]
-
-                          text-white/50
-                        "
-                      >
-                        Head Office
-                      </p>
-
-                      <p
-                        className="
-                          mt-1.5
-
-                          text-[14px]
-                          font-medium
-                          leading-6
-
-                          text-white/75
-
-                          sm:text-[15px]
-                        "
-                      >
-                        CGJ - 194,
-                        DLF Capital
-                        Greens,
-                        Shivaji Marg,
-                        Karampura
-                        Industrial
-                        Area, Karam
-                        Pura, Delhi -
-                        110015,
-                        India
-                      </p>
-                    </address>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* ===================================================
             HOW CAN WE HELP
         ==================================================== */}
@@ -1057,17 +373,17 @@ export default function ContactPage() {
             bg-black/[0.025]
 
             px-4
-            py-12
+            py-6
 
             min-[414px]:px-5
 
             sm:px-6
-            sm:py-14
+            sm:py-10
 
             md:px-8
 
             lg:px-10
-            lg:py-20
+            lg:py-10
           "
         >
           <div
@@ -1082,22 +398,6 @@ export default function ContactPage() {
                 max-w-4xl
               "
             >
-              <p
-                className="
-                  text-[11px]
-                  font-bold
-                  uppercase
-
-                  tracking-[0.16em]
-
-                  text-[#EC1C40]
-
-                  sm:text-[12px]
-                "
-              >
-                Dholera Times
-              </p>
-
               <h2
                 className="
                   mt-3
@@ -1117,17 +417,14 @@ export default function ContactPage() {
                   lg:text-[40px]
                 "
               >
-                How Can We{" "}
-                <span className="text-[#EC1C40]">
-                  Help?
-                </span>
+                How Can We <span className="text-[#EC1C40]">Help?</span>
               </h2>
 
               <p
                 className="
                   mt-4
 
-                  max-w-4xl
+                  w-full
 
                   text-[15px]
                   leading-7
@@ -1139,17 +436,9 @@ export default function ContactPage() {
                   md:text-[17px]
                 "
               >
-                Dholera Times
-                helps investors,
-                property buyers
-                and businesses
-                understand
-                Dholera with on
-                ground insights,
-                investment
-                consultation and
-                property advisory
-                support.
+                Dholera Times helps investors, property buyers and businesses
+                understand Dholera with on ground insights, investment
+                consultation and property advisory support.
               </p>
             </header>
 
@@ -1169,18 +458,10 @@ export default function ContactPage() {
                 lg:grid-cols-6
               "
             >
-              {helpItems.map(
-                (
-                  {
-                    title,
-                    description,
-                    icon: Icon,
-                  },
-                  index,
-                ) => (
-                  <article
-                    key={title}
-                    className={`
+              {helpItems.map(({ title, description, icon: Icon }, index) => (
+                <article
+                  key={title}
+                  className={`
                       group
 
                       relative
@@ -1207,18 +488,14 @@ export default function ContactPage() {
 
                       sm:p-6
 
-                      ${
-                        index < 3
-                          ? "lg:col-span-2"
-                          : "lg:col-span-3"
-                      }
+                      ${index < 3 ? "lg:col-span-2" : "lg:col-span-3"}
 
                       motion-reduce:transform-none
                     `}
-                  >
-                    <div
-                      aria-hidden="true"
-                      className="
+                >
+                  <div
+                    aria-hidden="true"
+                    className="
                         absolute
                         inset-x-0
                         top-0
@@ -1235,10 +512,10 @@ export default function ContactPage() {
 
                         group-hover:scale-x-100
                       "
-                    />
+                  />
 
-                    <span
-                      className="
+                  <span
+                    className="
                         flex
 
                         h-11
@@ -1259,16 +536,12 @@ export default function ContactPage() {
                         group-hover:bg-[#EC1C40]
                         group-hover:text-white
                       "
-                    >
-                      <Icon
-                        size={20}
-                        strokeWidth={1.8}
-                        aria-hidden="true"
-                      />
-                    </span>
+                  >
+                    <Icon size={20} strokeWidth={1.8} aria-hidden="true" />
+                  </span>
 
-                    <h3
-                      className="
+                  <h3
+                    className="
                         mt-5
 
                         text-[18px]
@@ -1281,12 +554,12 @@ export default function ContactPage() {
 
                         sm:text-[19px]
                       "
-                    >
-                      {title}
-                    </h3>
+                  >
+                    {title}
+                  </h3>
 
-                    <p
-                      className="
+                  <p
+                    className="
                         mt-3
 
                         text-[14px]
@@ -1297,17 +570,16 @@ export default function ContactPage() {
                         sm:text-[15px]
                         sm:leading-7
                       "
-                    >
-                      {description}
-                    </p>
-                  </article>
-                ),
-              )}
+                  >
+                    {description}
+                  </p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
 
-                {/* ===================================================
+        {/* ===================================================
             CLOSING
         ==================================================== */}
 
@@ -1316,19 +588,19 @@ export default function ContactPage() {
             bg-black
 
             px-4
-            py-12
+            py-8
 
             text-white
 
             min-[414px]:px-5
 
             sm:px-6
-            sm:py-14
+            sm:py-12
 
             md:px-8
 
             lg:px-10
-            lg:py-16
+            lg:py-12
           "
         >
           <div
@@ -1366,9 +638,7 @@ export default function ContactPage() {
                 "
               >
                 Dholera Matlab{" "}
-                <span className="text-[#EC1C40]">
-                  Dholera Times
-                </span>
+                <span className="text-[#EC1C40]">Dholera Times</span>
               </h2>
 
               <p
@@ -1383,18 +653,15 @@ export default function ContactPage() {
                   sm:text-[16px]
                 "
               >
-                Whether you want
-                to understand
-                Dholera, share
-                an update or
-                explore property
-                opportunities,
-                our team is here
-                to help.
+                Whether you want to understand Dholera, share an update or
+                explore property opportunities, our team is here to help.
               </p>
             </div>
 
             <Link
+              // href="https://wa.me/919958993549"
+              // target="_blank"
+              // rel="noopener noreferrer"
               href="#send-enquiry"
               className="
                 inline-flex
@@ -1432,11 +699,6 @@ export default function ContactPage() {
               "
             >
               Send Us an Enquiry
-
-              <ArrowRight
-                size={17}
-                aria-hidden="true"
-              />
             </Link>
           </div>
         </section>
@@ -1450,23 +712,20 @@ export default function ContactPage() {
           className="
             scroll-mt-24
 
-            border-y
-            border-black/10
-
             bg-white
 
             px-4
-            py-12
+            py-10
 
             min-[414px]:px-5
 
             sm:px-6
-            sm:py-14
+            sm:py-12
 
             md:px-8
 
             lg:px-10
-            lg:py-20
+            lg:py-16
           "
         >
           <div
@@ -1499,31 +758,11 @@ export default function ContactPage() {
                 lg:pr-4
               "
             >
-              {/* EYEBROW */}
-
-              <p
-                className="
-                  text-[11px]
-                  font-bold
-                  uppercase
-                  leading-5
-
-                  tracking-[0.16em]
-
-                  text-[#EC1C40]
-
-                  sm:text-[12px]
-                "
-              >
-                Contact Dholera Times
-              </p>
-
+              
               {/* HEADING */}
 
               <h2
                 className="
-                  mt-3
-
                   text-[30px]
                   font-bold
                   leading-[1.12]
@@ -1539,10 +778,7 @@ export default function ContactPage() {
                   lg:text-[42px]
                 "
               >
-                Tell Us What You{" "}
-                <span className="text-[#EC1C40]">
-                  Need
-                </span>
+                Tell Us What You <span className="text-[#EC1C40]">Need</span>
               </h2>
 
               {/* INTRO */}
@@ -1565,18 +801,17 @@ export default function ContactPage() {
                 "
               >
                 <p>
-                  Whether you want to understand Dholera Smart City,
-                  explore residential plots, check pricing or arrange
-                  a site visit, share your requirements with our team.
+                  Whether you want to understand Dholera Smart City, explore
+                  residential plots, check pricing or arrange a site visit,
+                  share your requirements with our team.
                 </p>
 
                 <p>
-                  You can also contact Dholera Times for Dholera
-                  development updates, news information, media
-                  enquiries and business-related communication.
+                  You can also contact Dholera Times for Dholera development
+                  updates, news information, media enquiries and
+                  business-related communication.
                 </p>
               </div>
-
             </div>
 
             {/* ========================================================
@@ -1600,263 +835,13 @@ export default function ContactPage() {
           </div>
         </section>
 
-
         {/* ===================================================
             FAQ
         ==================================================== */}
 
-        <section
-          className="
-            bg-black/[0.025]
-
-            px-4
-            py-12
-
-            min-[414px]:px-5
-
-            sm:px-6
-            sm:py-14
-
-            md:px-8
-
-            lg:px-10
-            lg:py-20
-          "
-        >
-          <div
-            className="
-              mx-auto
-
-              grid
-              w-full
-              max-w-7xl
-
-              grid-cols-1
-
-              gap-7
-
-              lg:grid-cols-[minmax(240px,0.42fr)_minmax(0,1.58fr)]
-              lg:gap-12
-            "
-          >
-            {/* LEFT */}
-
-            <div>
-              <p
-                className="
-                  text-[11px]
-                  font-bold
-                  uppercase
-
-                  tracking-[0.16em]
-
-                  text-[#EC1C40]
-
-                  sm:text-[12px]
-                "
-              >
-                FAQs
-              </p>
-
-              <h2
-                className="
-                  mt-3
-
-                  text-[30px]
-                  font-bold
-                  leading-[1.12]
-
-                  tracking-[-0.035em]
-
-                  text-black
-
-                  sm:text-[34px]
-
-                  lg:text-[40px]
-                "
-              >
-                Frequently Asked{" "}
-                <span className="text-[#EC1C40]">
-                  Questions
-                </span>
-              </h2>
-            </div>
-
-            {/* FAQ LIST */}
-
-            <div
-              className="
-                overflow-hidden
-
-                rounded-[22px]
-
-                border
-                border-black/10
-
-                bg-white
-              "
-            >
-              {faqItems.map(
-                (
-                  {
-                    question,
-                    answer,
-                  },
-                ) => (
-                  <details
-                    key={
-                      question
-                    }
-                    className="
-                      group
-
-                      border-b
-                      border-black/10
-
-                      last:border-b-0
-                    "
-                  >
-                    <summary
-                      className="
-                        flex
-                        min-h-[74px]
-
-                        cursor-pointer
-                        list-none
-
-                        items-center
-                        justify-between
-
-                        gap-4
-
-                        px-4
-                        py-4
-
-                        [&::-webkit-details-marker]:hidden
-
-                        min-[414px]:px-5
-
-                        sm:min-h-[80px]
-                        sm:px-6
-
-                        lg:px-7
-                      "
-                    >
-                      <span
-                        className="
-                          text-[15px]
-                          font-semibold
-                          leading-6
-
-                          text-black
-
-                          sm:text-[16px]
-                        "
-                      >
-                        {
-                          question
-                        }
-                      </span>
-
-                      <span
-                        className="
-                          relative
-
-                          flex
-                          h-9
-                          w-9
-
-                          shrink-0
-
-                          items-center
-                          justify-center
-
-                          rounded-full
-
-                          border
-                          border-black/10
-
-                          bg-[#EC1C40]/5
-                        "
-                      >
-                        <span
-                          className="
-                            absolute
-
-                            h-[2px]
-                            w-3.5
-
-                            rounded-full
-
-                            bg-[#EC1C40]
-                          "
-                        />
-
-                        <span
-                          className="
-                            absolute
-
-                            h-3.5
-                            w-[2px]
-
-                            rounded-full
-
-                            bg-[#EC1C40]
-
-                            transition-transform
-                            duration-200
-
-                            group-open:scale-y-0
-                          "
-                        />
-                      </span>
-                    </summary>
-
-                    <div
-                      className="
-                        px-4
-                        pb-5
-
-                        min-[414px]:px-5
-
-                        sm:px-6
-                        sm:pb-6
-
-                        lg:px-7
-                      "
-                    >
-                      <div
-                        className="
-                          border-t
-                          border-black/10
-
-                          pt-4
-                        "
-                      >
-                        <p
-                          className="
-                            text-[15px]
-                            leading-7
-
-                            text-black/65
-
-                            sm:text-[16px]
-                          "
-                        >
-                          {
-                            answer
-                          }
-                        </p>
-                      </div>
-                    </div>
-                  </details>
-                ),
-              )}
-            </div>
-          </div>
-        </section>
-
-
+        <CommonFAQ  
+            className="bg-black/[0.025]"
+        faqItems={faqItems} />
       </main>
     </>
   );

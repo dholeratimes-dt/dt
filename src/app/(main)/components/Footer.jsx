@@ -425,9 +425,9 @@ export default function Footer() {
             </div>
 
             <div className="mt-4">
-              <p
+              {/* <p
                 className="
-                  text-[11px]
+                  text-[14px]
                   font-semibold
                   uppercase
                   leading-5
@@ -437,10 +437,11 @@ export default function Footer() {
                   text-[#EC1C40]
 
                   sm:text-[12px]
+                  lg:text-[15px]
                 "
               >
                 Head Office
-              </p>
+              </p> */}
 
               <address
                 className="

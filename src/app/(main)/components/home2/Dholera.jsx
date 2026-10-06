@@ -6,7 +6,6 @@ import {
   Factory,
   Leaf,
   Map,
-  MapPin,
   Plug,
   RadioTower,
   Route,
@@ -21,44 +20,37 @@ import dholeraSite from "@/assets/dholera-smart-city-home-image2.webp";
 const highlights = [
   {
     title: "920 Sq. Km. Dholera SIR",
-    description:
-      "Large planned greenfield region in Gujarat",
+    description: "Large planned greenfield region in Gujarat",
     icon: Map,
   },
   {
     title: "Greenfield Smart City",
-    description:
-      "Modern infrastructure for industries and residents",
+    description: "Modern infrastructure for industries and residents",
     icon: Leaf,
   },
   {
     title: "DMIC",
-    description:
-      "Part of the Delhi-Mumbai Industrial Corridor",
+    description: "Part of the Delhi-Mumbai Industrial Corridor",
     icon: Route,
   },
   {
     title: "Plug & Play Infrastructure",
-    description:
-      "Digital systems and modern utilities",
+    description: "Digital systems and modern utilities",
     icon: Plug,
   },
   {
     title: "Industrial Hub",
-    description:
-      "Semiconductors, solar, defence and aerospace",
+    description: "Semiconductors, solar, defence and aerospace",
     icon: Factory,
   },
   {
     title: "Strong Connectivity",
-    description:
-      "Roads, rail, freight and Dholera Airport",
+    description: "Roads, rail, freight and Dholera Airport",
     icon: RadioTower,
   },
   {
     title: "Semiconductor Hub",
-    description:
-      "Major projects including Tata Electronics",
+    description: "Major projects including Tata Electronics",
     icon: Cpu,
   },
   {
@@ -95,13 +87,13 @@ export default function Dholera() {
         min-[414px]:px-5
 
         sm:px-6
-        sm:py-10
+        sm:py-8
 
         md:px-8
-        md:py-10
+        md:py-8
 
         lg:px-10
-        lg:py-12
+        lg:py-8
       "
     >
       {/* =====================================================
@@ -150,9 +142,13 @@ export default function Dholera() {
         "
       />
 
+      {/* =====================================================
+          CONTAINER
+      ====================================================== */}
+
       <div className="mx-auto w-full max-w-7xl">
         {/* ===================================================
-            FULL WIDTH INTRODUCTION
+            INTRODUCTION
         ==================================================== */}
 
         <header
@@ -164,9 +160,11 @@ export default function Dholera() {
 
             pb-5
 
-            sm:pb-6
+            sm:pb-5
 
-            lg:pb-7
+            md:pb-6
+
+            lg:pb-6
           "
         >
           <h2
@@ -189,22 +187,22 @@ export default function Dholera() {
               lg:text-[34px]
             "
           >
-            What Is Dholera Smart City?
+            What is <span className="text-[#EC1C40]">Dholera Smart City?</span>
           </h2>
 
           <p
             className="
-              mt-3
+              mt-2.5
 
               w-full
               max-w-6xl
 
               text-[15px]
-              leading-7
+              leading-[26px]
 
               text-black/65
 
-              sm:mt-4
+              sm:mt-3
               sm:text-[16px]
               sm:leading-7
 
@@ -224,10 +222,8 @@ export default function Dholera() {
             MAIN CONTENT
 
             Desktop:
-            Image on LEFT
-            Highlights on RIGHT
-
-            Both cards remain equal height.
+            Image LEFT
+            Highlights RIGHT
 
             Mobile:
             Image first
@@ -236,24 +232,26 @@ export default function Dholera() {
 
         <div
           className="
-            mt-6
+            mt-5
+
 
             grid
 
-            gap-6
+            gap-5
 
-            sm:mt-7
+            sm:mt-6
+            sm:gap-6
 
             lg:grid-cols-[minmax(340px,0.65fr)_minmax(0,1.35fr)]
             lg:items-stretch
-            lg:gap-7
+            lg:gap-6
 
             xl:grid-cols-[minmax(380px,0.6fr)_minmax(0,1.4fr)]
-            xl:gap-8
+            xl:gap-7
           "
         >
           {/* =================================================
-              IMAGE — LEFT SIDE
+              IMAGE
           ================================================== */}
 
           <figure
@@ -274,9 +272,9 @@ export default function Dholera() {
 
               bg-black/[0.03]
 
-              shadow-[0_10px_30px_rgba(0,0,0,0.08)]
+              shadow-[0_8px_24px_rgba(0,0,0,0.065)]
 
-              sm:rounded-[22px]
+              sm:rounded-[20px]
 
               lg:h-full
               lg:min-h-0
@@ -320,9 +318,10 @@ export default function Dholera() {
 
                 bg-gradient-to-t
 
-                from-black/25
+                from-black/20
                 via-transparent
                 to-transparent
+                lg:mb-10
               "
             />
 
@@ -344,105 +343,10 @@ export default function Dholera() {
                 sm:inset-4
               "
             />
-
-            {/* LOCATION CARD */}
-
-            <figcaption
-              className="
-                absolute
-
-                bottom-4
-                left-4
-                right-4
-
-                flex
-                items-center
-
-                gap-3
-
-                rounded-xl
-
-                border
-                border-white/60
-
-                bg-white/95
-
-                px-3.5
-                py-3
-
-                shadow-[0_6px_20px_rgba(0,0,0,0.12)]
-
-                backdrop-blur-sm
-
-                sm:right-auto
-                sm:min-w-[230px]
-                sm:px-4
-
-                lg:bottom-5
-                lg:left-5
-              "
-            >
-              <span
-                className="
-                  flex
-
-                  h-10
-                  w-10
-
-                  shrink-0
-
-                  items-center
-                  justify-center
-
-                  rounded-lg
-
-                  bg-[#EC1C40]/10
-
-                  text-[#EC1C40]
-                "
-              >
-                <MapPin
-                  size={18}
-                  strokeWidth={1.8}
-                  aria-hidden="true"
-                />
-              </span>
-
-              <div className="min-w-0">
-                <p
-                  className="
-                    text-[14px]
-                    font-semibold
-                    leading-5
-
-                    text-black
-
-                    sm:text-[15px]
-                  "
-                >
-                  Dholera Smart City
-                </p>
-
-                <p
-                  className="
-                    mt-0.5
-
-                    text-[12px]
-                    leading-5
-
-                    text-black/60
-
-                    sm:text-[13px]
-                  "
-                >
-                  Gujarat, India
-                </p>
-              </div>
-            </figcaption>
           </figure>
 
           {/* =================================================
-              HIGHLIGHTS — RIGHT SIDE
+              HIGHLIGHTS CARD
           ================================================== */}
 
           <div
@@ -458,13 +362,13 @@ export default function Dholera() {
 
               bg-white
 
-              shadow-[0_8px_26px_rgba(0,0,0,0.05)]
+              shadow-[0_7px_22px_rgba(0,0,0,0.045)]
 
-              sm:rounded-[22px]
+              sm:rounded-[20px]
             "
           >
             {/* ===============================================
-                HIGHLIGHTS TITLE
+                TITLE
             ================================================ */}
 
             <div
@@ -474,16 +378,17 @@ export default function Dholera() {
 
                 bg-gradient-to-r
                 from-[#EC1C40]/5
-                via-[#EC1C40]/[0.025]
+                via-[#EC1C40]/[0.02]
                 to-white
 
                 px-4
-                py-4
+                py-3.5
 
                 sm:px-5
-                sm:py-5
+                sm:py-4
 
-                lg:px-6
+                lg:px-5
+                lg:py-4
               "
             >
               <h3
@@ -499,7 +404,7 @@ export default function Dholera() {
                   sm:text-[21px]
                   sm:leading-7
 
-                  lg:text-[24px]
+                  lg:text-[23px]
                 "
               >
                 Key Highlights of Dholera Smart City
@@ -521,31 +426,20 @@ export default function Dholera() {
 
                 md:grid-cols-2
 
-                lg:px-6
+                lg:px-5
               "
             >
-              {highlights.map(
-                (
-                  {
-                    title,
-                    description,
-                    icon: Icon,
-                  },
-                  index,
-                ) => {
-                  const isLast =
-                    index === highlights.length - 1;
+              {highlights.map(({ title, description, icon: Icon }, index) => {
+                const isLast = index === highlights.length - 1;
 
-                  const isLeftColumn =
-                    index % 2 === 0;
+                const isLeftColumn = index % 2 === 0;
 
-                  const isLastDesktopRow =
-                    index >= highlights.length - 2;
+                const isLastDesktopRow = index >= highlights.length - 2;
 
-                  return (
-                    <div
-                      key={title}
-                      className={`
+                return (
+                  <div
+                    key={title}
+                    className={`
                         group
 
                         flex
@@ -553,50 +447,37 @@ export default function Dholera() {
 
                         items-start
 
-                        gap-3.5
+                        gap-3
 
                         border-black/10
 
-                        py-4
+                        py-3.5
 
-                        sm:gap-4
-                        sm:py-5
+                        sm:gap-3.5
+                        sm:py-4
 
-                        md:px-5
+                        md:px-4
 
-                        ${
-                          !isLast
-                            ? "border-b"
-                            : ""
-                        }
+                        lg:px-5
+                        lg:py-4
 
-                        ${
-                          isLeftColumn
-                            ? "md:border-r"
-                            : ""
-                        }
+                        ${!isLast ? "border-b" : ""}
 
-                        ${
-                          isLastDesktopRow
-                            ? "md:border-b-0"
-                            : "md:border-b"
-                        }
+                        ${isLeftColumn ? "md:border-r" : ""}
 
-                        ${
-                          isLeftColumn
-                            ? "md:pl-0"
-                            : "md:pr-0"
-                        }
+                        ${isLastDesktopRow ? "md:border-b-0" : "md:border-b"}
+
+                        ${isLeftColumn ? "md:pl-0" : "md:pr-0"}
                       `}
-                    >
-                      {/* ICON */}
+                  >
+                    {/* ICON */}
 
-                      <span
-                        className="
+                    <span
+                      className="
                           flex
 
-                          h-11
-                          w-11
+                          h-10
+                          w-10
 
                           shrink-0
 
@@ -616,6 +497,9 @@ export default function Dholera() {
                           duration-300
                           ease-out
 
+                          sm:h-11
+                          sm:w-11
+
                           md:group-hover:-translate-y-0.5
 
                           md:group-hover:border-[#EC1C40]/30
@@ -625,51 +509,55 @@ export default function Dholera() {
                           motion-reduce:transform-none
                           motion-reduce:transition-none
                         "
-                      >
-                        <Icon
-                          size={20}
-                          strokeWidth={1.8}
-                          aria-hidden="true"
-                        />
-                      </span>
+                    >
+                      <Icon size={19} strokeWidth={1.8} aria-hidden="true" />
+                    </span>
 
-                      {/* TEXT */}
+                    {/* TEXT */}
 
-                      <div className="min-w-0">
-                        <p
-                          className="
+                    <div
+                      className="
+                          min-w-0
+                          flex-1
+
+                          pt-0.5
+                        "
+                    >
+                      <p
+                        className="
                             text-[15px]
                             font-semibold
-                            leading-6
+                            leading-[22px]
 
                             text-black
 
                             sm:text-[16px]
+                            sm:leading-6
                           "
-                        >
-                          {title}
-                        </p>
+                      >
+                        {title}
+                      </p>
 
-                        <p
-                          className="
-                            mt-1
+                      <p
+                        className="
+                            mt-0.5
 
                             text-[13px]
                             leading-5
 
                             text-black/60
 
+                            sm:mt-1
                             sm:text-[14px]
-                            sm:leading-[22px]
+                            sm:leading-[21px]
                           "
-                        >
-                          {description}
-                        </p>
-                      </div>
+                      >
+                        {description}
+                      </p>
                     </div>
-                  );
-                },
-              )}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

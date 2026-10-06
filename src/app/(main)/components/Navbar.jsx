@@ -1,20 +1,12 @@
 "use client";
 
-import {
-  useEffect,
-  useId,
-  useRef,
-  useState,
-} from "react";
+import { useEffect, useId, useRef, useState } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import {
-  ChevronDown,
-  ChevronRight,
-} from "lucide-react";
+import { ChevronDown, ChevronRight } from "lucide-react";
 
 import { FaWhatsapp } from "react-icons/fa";
 
@@ -52,14 +44,12 @@ const MORE = [
   {
     title: "About Us",
     path: "/about",
-    description:
-      "Get to know Dholera Times",
+    description: "Get to know Dholera Times",
   },
   {
     title: "NRI Guide",
     path: "/nri-investment-guide-dholera",
-    description:
-      "Information for overseas buyers",
+    description: "Information for overseas buyers",
   },
 ];
 
@@ -68,10 +58,7 @@ const CONTACT = {
   path: "/contact/inquiry",
 };
 
-const MOBILE_MORE = [
-  ...MORE,
-  CONTACT,
-];
+const MOBILE_MORE = [...MORE, CONTACT];
 
 /* ============================================================
    MOBILE ANIMATION
@@ -85,53 +72,35 @@ const MAIN_LINK_DELAYS = [
   "delay-[760ms]",
 ];
 
-const MORE_LINK_DELAYS = [
-  "delay-[820ms]",
-  "delay-[880ms]",
-  "delay-[940ms]",
-];
+const MORE_LINK_DELAYS = ["delay-[820ms]", "delay-[880ms]", "delay-[940ms]"];
 
-const MOBILE_MOTION_DURATION =
-  1000;
+const MOBILE_MOTION_DURATION = 1000;
 
 /* ============================================================
    COLOR HELPERS
 ============================================================ */
 
-function parseCssColor(
-  color,
-) {
-  if (
-    !color ||
-    color === "transparent"
-  ) {
+function parseCssColor(color) {
+  if (!color || color === "transparent") {
     return null;
   }
 
-  const match =
-    color.match(
-      /rgba?\(([^)]+)\)/i,
-    );
+  const match = color.match(/rgba?\(([^)]+)\)/i);
 
   if (!match) {
     return null;
   }
 
-  const values =
-    match[1]
-      .replace(/\//g, " ")
-      .replace(/,/g, " ")
-      .trim()
-      .split(/\s+/)
-      .map(Number);
+  const values = match[1]
+    .replace(/\//g, " ")
+    .replace(/,/g, " ")
+    .trim()
+    .split(/\s+/)
+    .map(Number);
 
   if (
     values.length < 3 ||
-    values
-      .slice(0, 3)
-      .some((value) =>
-        Number.isNaN(value),
-      )
+    values.slice(0, 3).some((value) => Number.isNaN(value))
   ) {
     return null;
   }
@@ -141,25 +110,12 @@ function parseCssColor(
     g: values[1],
     b: values[2],
 
-    a:
-      Number.isFinite(
-        values[3],
-      )
-        ? values[3]
-        : 1,
+    a: Number.isFinite(values[3]) ? values[3] : 1,
   };
 }
 
-function getLuminance({
-  r,
-  g,
-  b,
-}) {
-  return (
-    r * 0.299 +
-    g * 0.587 +
-    b * 0.114
-  );
+function getLuminance({ r, g, b }) {
+  return r * 0.299 + g * 0.587 + b * 0.114;
 }
 
 /* ============================================================
@@ -171,75 +127,41 @@ function getLuminance({
    data-navbar-theme="light"
 ============================================================ */
 
-function resolveElementTheme(
-  element,
-) {
-  if (
-    !element ||
-    typeof window ===
-      "undefined"
-  ) {
+function resolveElementTheme(element) {
+  if (!element || typeof window === "undefined") {
     return null;
   }
 
-  let current =
-    element;
+  let current = element;
 
-  while (
-    current &&
-    current !==
-      document.documentElement
-  ) {
+  while (current && current !== document.documentElement) {
     /* ======================================================
        MANUAL OVERRIDE
     ======================================================= */
 
-    const manualTheme =
-      current.getAttribute?.(
-        "data-navbar-theme",
-      );
+    const manualTheme = current.getAttribute?.("data-navbar-theme");
 
-    if (
-      manualTheme ===
-        "dark" ||
-      manualTheme ===
-        "light"
-    ) {
+    if (manualTheme === "dark" || manualTheme === "light") {
       return manualTheme;
     }
 
-    const style =
-      window.getComputedStyle(
-        current,
-      );
+    const style = window.getComputedStyle(current);
 
     /* ======================================================
        SOLID / TRANSPARENT BACKGROUND
     ======================================================= */
 
-    const backgroundColor =
-      parseCssColor(
-        style.backgroundColor,
-      );
+    const backgroundColor = parseCssColor(style.backgroundColor);
 
-    if (
-      backgroundColor &&
-      backgroundColor.a >=
-        0.18
-    ) {
-      const luminance =
-        getLuminance(
-          backgroundColor,
-        );
+    if (backgroundColor && backgroundColor.a >= 0.18) {
+      const luminance = getLuminance(backgroundColor);
 
       /*
        * Black / dark backgrounds
        * and dark overlays.
        */
 
-      if (
-        luminance <= 145
-      ) {
+      if (luminance <= 145) {
         return "dark";
       }
 
@@ -247,11 +169,7 @@ function resolveElementTheme(
        * White / light backgrounds.
        */
 
-      if (
-        backgroundColor.a >=
-          0.7 &&
-        luminance >= 180
-      ) {
+      if (backgroundColor.a >= 0.7 && luminance >= 180) {
         return "light";
       }
     }
@@ -260,71 +178,35 @@ function resolveElementTheme(
        GRADIENT BACKGROUND
     ======================================================= */
 
-    const backgroundImage =
-      style.backgroundImage;
+    const backgroundImage = style.backgroundImage;
 
-    if (
-      backgroundImage &&
-      backgroundImage !==
-        "none"
-    ) {
-      const colors =
-        backgroundImage.match(
-          /rgba?\([^)]+\)/gi,
-        );
+    if (backgroundImage && backgroundImage !== "none") {
+      const colors = backgroundImage.match(/rgba?\([^)]+\)/gi);
 
-      if (
-        colors &&
-        colors.length
-      ) {
-        const parsedColors =
-          colors
-            .map(
-              parseCssColor,
-            )
-            .filter(
-              (color) =>
-                color &&
-                color.a >=
-                  0.15,
-            );
+      if (colors && colors.length) {
+        const parsedColors = colors
+          .map(parseCssColor)
+          .filter((color) => color && color.a >= 0.15);
 
-        if (
-          parsedColors.length
-        ) {
+        if (parsedColors.length) {
           const averageLuminance =
             parsedColors.reduce(
-              (
-                total,
-                item,
-              ) =>
-                total +
-                getLuminance(
-                  item,
-                ),
+              (total, item) => total + getLuminance(item),
               0,
-            ) /
-            parsedColors.length;
+            ) / parsedColors.length;
 
-          if (
-            averageLuminance <=
-            145
-          ) {
+          if (averageLuminance <= 145) {
             return "dark";
           }
 
-          if (
-            averageLuminance >=
-            185
-          ) {
+          if (averageLuminance >= 185) {
             return "light";
           }
         }
       }
     }
 
-    current =
-      current.parentElement;
+    current = current.parentElement;
   }
 
   return null;
@@ -334,37 +216,18 @@ function resolveElementTheme(
    NAVBAR
 ============================================================ */
 
-export default function Navbar({
-  whatsappNumber = "",
-}) {
-  const pathname =
-    usePathname() || "/";
+export default function Navbar({ whatsappNumber = "" }) {
+  const pathname = usePathname() || "/";
 
-  const uid =
-    useId().replace(
-      /:/g,
-      "",
-    );
+  const uid = useId().replace(/:/g, "");
 
-  const [
-    dropdown,
-    setDropdown,
-  ] = useState(null);
+  const [dropdown, setDropdown] = useState(null);
 
-  const [
-    mobileOpen,
-    setMobileOpen,
-  ] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-  const [
-    mobileVisible,
-    setMobileVisible,
-  ] = useState(false);
+  const [mobileVisible, setMobileVisible] = useState(false);
 
-  const [
-    scrolled,
-    setScrolled,
-  ] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   /* ==========================================================
      NAVBAR COLOR
@@ -374,153 +237,91 @@ export default function Navbar({
      This means black navigation text.
   ========================================================== */
 
-  const [
-    navbarTheme,
-    setNavbarTheme,
-  ] = useState("light");
+  const [navbarTheme, setNavbarTheme] = useState("light");
 
-  const closeTimerRef =
-    useRef(null);
+  const closeTimerRef = useRef(null);
 
-  const frameRef =
-    useRef(null);
+  const frameRef = useRef(null);
 
-  const themeFrameRef =
-    useRef(null);
+  const themeFrameRef = useRef(null);
 
-  const navbarThemeRef =
-    useRef("light");
+  const navbarThemeRef = useRef("light");
 
-  const headerRef =
-    useRef(null);
+  const headerRef = useRef(null);
 
-  const navRef =
-    useRef(null);
+  const navRef = useRef(null);
 
-  const menuButtonRef =
-    useRef(null);
+  const menuButtonRef = useRef(null);
 
-  const lastTrackedPath =
-    useRef(null);
+  const lastTrackedPath = useRef(null);
 
-  const isHome =
-    pathname === "/";
+  const isHome = pathname === "/";
 
-  const isDarkNavbar =
-    navbarTheme ===
-    "dark";
+  const isDarkNavbar = navbarTheme === "dark";
 
   /* ==========================================================
      ACTIVE ROUTE
   ========================================================== */
 
-  const active = (
-    path,
-  ) => {
+  const active = (path) => {
     if (path === "/") {
       return pathname === "/";
     }
 
-    return (
-      pathname === path ||
-      pathname.startsWith(
-        `${path}/`,
-      )
-    );
+    return pathname === path || pathname.startsWith(`${path}/`);
   };
 
-  const current = (
-    path,
-  ) =>
-    pathname === path
-      ? "page"
-      : undefined;
+  const current = (path) => (pathname === path ? "page" : undefined);
 
   /* ==========================================================
      WHATSAPP
   ========================================================== */
 
-  const number =
-    String(
-      whatsappNumber,
-    ).replace(
-      /[^0-9]/g,
-      "",
-    );
+  const number = String(whatsappNumber).replace(/[^0-9]/g, "");
 
-  const hasWhatsApp =
-    /^[1-9][0-9]{7,14}$/.test(
-      number,
-    );
+  const hasWhatsApp = /^[1-9][0-9]{7,14}$/.test(number);
 
   const whatsappMessage =
     "Hello Dholera Times, I am interested in buying a plot in Dholera. Please share the available projects, pricing, location, and other details.";
 
-  const enquiryHref =
-    hasWhatsApp
-      ? `https://wa.me/${number}?text=${encodeURIComponent(
-          whatsappMessage,
-        )}`
-      : CONTACT.path;
+  const enquiryHref = hasWhatsApp
+    ? `https://wa.me/${number}?text=${encodeURIComponent(whatsappMessage)}`
+    : CONTACT.path;
 
   /* ==========================================================
      MOBILE MENU
   ========================================================== */
 
   function openMobile() {
-    clearTimeout(
-      closeTimerRef.current,
-    );
+    clearTimeout(closeTimerRef.current);
 
-    cancelAnimationFrame(
-      frameRef.current,
-    );
+    cancelAnimationFrame(frameRef.current);
 
     setDropdown(null);
 
     setMobileOpen(true);
 
-    frameRef.current =
-      requestAnimationFrame(
-        () => {
-          frameRef.current =
-            requestAnimationFrame(
-              () => {
-                setMobileVisible(
-                  true,
-                );
-              },
-            );
-        },
-      );
+    frameRef.current = requestAnimationFrame(() => {
+      frameRef.current = requestAnimationFrame(() => {
+        setMobileVisible(true);
+      });
+    });
   }
 
-  function closeMobile(
-    restoreFocus = true,
-  ) {
-    clearTimeout(
-      closeTimerRef.current,
-    );
+  function closeMobile(restoreFocus = true) {
+    clearTimeout(closeTimerRef.current);
 
-    cancelAnimationFrame(
-      frameRef.current,
-    );
+    cancelAnimationFrame(frameRef.current);
 
     setMobileVisible(false);
 
-    closeTimerRef.current =
-      setTimeout(() => {
-        setMobileOpen(false);
+    closeTimerRef.current = setTimeout(() => {
+      setMobileOpen(false);
 
-        if (
-          restoreFocus &&
-          menuButtonRef.current
-            ?.getClientRects()
-            .length
-        ) {
-          menuButtonRef.current.focus();
-        }
-      }, MOBILE_MOTION_DURATION);
+      if (restoreFocus && menuButtonRef.current?.getClientRects().length) {
+        menuButtonRef.current.focus();
+      }
+    }, MOBILE_MOTION_DURATION);
   }
 
   function toggleMobile() {
@@ -546,12 +347,9 @@ export default function Navbar({
   ========================================================== */
 
   useEffect(() => {
-    navbarThemeRef.current =
-      "light";
+    navbarThemeRef.current = "light";
 
-    setNavbarTheme(
-      "light",
-    );
+    setNavbarTheme("light");
 
     setScrolled(false);
   }, [pathname]);
@@ -567,232 +365,148 @@ export default function Navbar({
        DETECT CURRENT SECTION UNDER NAVBAR
     ======================================================= */
 
-    const detectNavbarTheme =
-      () => {
-        themeFrameRef.current =
-          null;
+    const detectNavbarTheme = () => {
+      themeFrameRef.current = null;
 
-        if (
-          !mounted ||
-          !headerRef.current
-        ) {
-          return;
-        }
+      if (!mounted || !headerRef.current) {
+        return;
+      }
 
-        /*
-         * IMPORTANT:
-         *
-         * Detection must NEVER run
-         * while the page is still at
-         * the initial top position.
-         */
+      /*
+       * IMPORTANT:
+       *
+       * Detection must NEVER run
+       * while the page is still at
+       * the initial top position.
+       */
 
-        if (
-          window.scrollY <= 8
-        ) {
-          navbarThemeRef.current =
-            "light";
+      if (window.scrollY <= 8) {
+        navbarThemeRef.current = "light";
 
-          setNavbarTheme(
-            "light",
-          );
+        setNavbarTheme("light");
 
-          return;
-        }
+        return;
+      }
 
-        const headerRect =
-          headerRef.current.getBoundingClientRect();
+      const headerRect = headerRef.current.getBoundingClientRect();
 
-        if (
-          headerRect.height <= 0
-        ) {
-          return;
-        }
+      if (headerRect.height <= 0) {
+        return;
+      }
 
-        /*
-         * Sample:
-         * 1. Behind middle of navbar.
-         * 2. Just underneath navbar.
-         */
+      /*
+       * Sample:
+       * 1. Behind middle of navbar.
+       * 2. Just underneath navbar.
+       */
 
-        const sampleYs = [
-          Math.max(
+      const sampleYs = [
+        Math.max(
+          1,
+          Math.min(
+            window.innerHeight - 1,
+            headerRect.top + headerRect.height * 0.55,
+          ),
+        ),
+
+        Math.max(1, Math.min(window.innerHeight - 1, headerRect.bottom + 2)),
+      ];
+
+      /*
+       * Multiple horizontal points improve
+       * detection over image banners.
+       */
+
+      const sampleXs = [0.18, 0.38, 0.62, 0.82];
+
+      let darkVotes = 0;
+      let lightVotes = 0;
+
+      sampleYs.forEach((sampleY) => {
+        sampleXs.forEach((position) => {
+          const sampleX = Math.max(
             1,
             Math.min(
-              window.innerHeight -
-                1,
-              headerRect.top +
-                headerRect.height *
-                  0.55,
+              window.innerWidth - 1,
+
+              window.innerWidth * position,
             ),
-          ),
-
-          Math.max(
-            1,
-            Math.min(
-              window.innerHeight -
-                1,
-              headerRect.bottom +
-                2,
-            ),
-          ),
-        ];
-
-        /*
-         * Multiple horizontal points improve
-         * detection over image banners.
-         */
-
-        const sampleXs = [
-          0.18,
-          0.38,
-          0.62,
-          0.82,
-        ];
-
-        let darkVotes = 0;
-        let lightVotes = 0;
-
-        sampleYs.forEach(
-          (sampleY) => {
-            sampleXs.forEach(
-              (position) => {
-                const sampleX =
-                  Math.max(
-                    1,
-                    Math.min(
-                      window.innerWidth -
-                        1,
-
-                      window.innerWidth *
-                        position,
-                    ),
-                  );
-
-                const elements =
-                  document.elementsFromPoint(
-                    sampleX,
-                    sampleY,
-                  );
-
-                for (
-                  const element of
-                  elements
-                ) {
-                  /*
-                   * Ignore navbar itself.
-                   */
-
-                  if (
-                    headerRef.current?.contains(
-                      element,
-                    )
-                  ) {
-                    continue;
-                  }
-
-                  /*
-                   * Ignore mobile menu UI.
-                   */
-
-                  if (
-                    element.closest?.(
-                      "[data-navbar-ui='true']",
-                    )
-                  ) {
-                    continue;
-                  }
-
-                  const theme =
-                    resolveElementTheme(
-                      element,
-                    );
-
-                  if (
-                    theme ===
-                    "dark"
-                  ) {
-                    darkVotes +=
-                      1;
-
-                    break;
-                  }
-
-                  if (
-                    theme ===
-                    "light"
-                  ) {
-                    lightVotes +=
-                      1;
-
-                    break;
-                  }
-                }
-              },
-            );
-          },
-        );
-
-        /*
-         * Nothing useful found.
-         * Keep current theme.
-         */
-
-        if (
-          darkVotes === 0 &&
-          lightVotes === 0
-        ) {
-          return;
-        }
-
-        const nextTheme =
-          darkVotes >
-          lightVotes
-            ? "dark"
-            : "light";
-
-        if (
-          navbarThemeRef.current !==
-          nextTheme
-        ) {
-          navbarThemeRef.current =
-            nextTheme;
-
-          setNavbarTheme(
-            nextTheme,
           );
-        }
-      };
+
+          const elements = document.elementsFromPoint(sampleX, sampleY);
+
+          for (const element of elements) {
+            /*
+             * Ignore navbar itself.
+             */
+
+            if (headerRef.current?.contains(element)) {
+              continue;
+            }
+
+            /*
+             * Ignore mobile menu UI.
+             */
+
+            if (element.closest?.("[data-navbar-ui='true']")) {
+              continue;
+            }
+
+            const theme = resolveElementTheme(element);
+
+            if (theme === "dark") {
+              darkVotes += 1;
+
+              break;
+            }
+
+            if (theme === "light") {
+              lightVotes += 1;
+
+              break;
+            }
+          }
+        });
+      });
+
+      /*
+       * Nothing useful found.
+       * Keep current theme.
+       */
+
+      if (darkVotes === 0 && lightVotes === 0) {
+        return;
+      }
+
+      const nextTheme = darkVotes > lightVotes ? "dark" : "light";
+
+      if (navbarThemeRef.current !== nextTheme) {
+        navbarThemeRef.current = nextTheme;
+
+        setNavbarTheme(nextTheme);
+      }
+    };
 
     /* ======================================================
        RAF THROTTLE
     ======================================================= */
 
-    const scheduleThemeDetection =
-      () => {
-        if (
-          themeFrameRef.current
-        ) {
-          return;
-        }
+    const scheduleThemeDetection = () => {
+      if (themeFrameRef.current) {
+        return;
+      }
 
-        themeFrameRef.current =
-          requestAnimationFrame(
-            detectNavbarTheme,
-          );
-      };
+      themeFrameRef.current = requestAnimationFrame(detectNavbarTheme);
+    };
 
     /* ======================================================
        SCROLL HANDLER
     ======================================================= */
 
     const handleScroll = () => {
-      const scrollY =
-        window.scrollY;
+      const scrollY = window.scrollY;
 
-      setScrolled(
-        scrollY > 24,
-      );
+      setScrolled(scrollY > 24);
 
       /* ==================================================
          USER IS AT TOP
@@ -800,19 +514,11 @@ export default function Navbar({
          ALWAYS BLACK TEXT.
       =================================================== */
 
-      if (
-        scrollY <= 8
-      ) {
-        if (
-          navbarThemeRef.current !==
-          "light"
-        ) {
-          navbarThemeRef.current =
-            "light";
+      if (scrollY <= 8) {
+        if (navbarThemeRef.current !== "light") {
+          navbarThemeRef.current = "light";
 
-          setNavbarTheme(
-            "light",
-          );
+          setNavbarTheme("light");
         }
 
         return;
@@ -833,9 +539,7 @@ export default function Navbar({
        * when user is already scrolled.
        */
 
-      if (
-        window.scrollY > 8
-      ) {
+      if (window.scrollY > 8) {
         scheduleThemeDetection();
       }
     };
@@ -850,41 +554,23 @@ export default function Navbar({
      * Navbar therefore remains black when stable.
      */
 
-    window.addEventListener(
-      "scroll",
-      handleScroll,
-      {
-        passive: true,
-      },
-    );
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
 
-    window.addEventListener(
-      "resize",
-      handleResize,
-      {
-        passive: true,
-      },
-    );
+    window.addEventListener("resize", handleResize, {
+      passive: true,
+    });
 
     return () => {
       mounted = false;
 
-      window.removeEventListener(
-        "scroll",
-        handleScroll,
-      );
+      window.removeEventListener("scroll", handleScroll);
 
-      window.removeEventListener(
-        "resize",
-        handleResize,
-      );
+      window.removeEventListener("resize", handleResize);
 
-      if (
-        themeFrameRef.current
-      ) {
-        cancelAnimationFrame(
-          themeFrameRef.current,
-        );
+      if (themeFrameRef.current) {
+        cancelAnimationFrame(themeFrameRef.current);
       }
     };
   }, [pathname]);
@@ -895,20 +581,12 @@ export default function Navbar({
 
   useEffect(
     () => () => {
-      clearTimeout(
-        closeTimerRef.current,
-      );
+      clearTimeout(closeTimerRef.current);
 
-      cancelAnimationFrame(
-        frameRef.current,
-      );
+      cancelAnimationFrame(frameRef.current);
 
-      if (
-        themeFrameRef.current
-      ) {
-        cancelAnimationFrame(
-          themeFrameRef.current,
-        );
+      if (themeFrameRef.current) {
+        cancelAnimationFrame(themeFrameRef.current);
       }
     },
     [],
@@ -919,13 +597,9 @@ export default function Navbar({
   ========================================================== */
 
   useEffect(() => {
-    clearTimeout(
-      closeTimerRef.current,
-    );
+    clearTimeout(closeTimerRef.current);
 
-    cancelAnimationFrame(
-      frameRef.current,
-    );
+    cancelAnimationFrame(frameRef.current);
 
     setDropdown(null);
 
@@ -938,27 +612,17 @@ export default function Navbar({
      * Reset navbar to black on page navigation.
      */
 
-    navbarThemeRef.current =
-      "light";
+    navbarThemeRef.current = "light";
 
-    setNavbarTheme(
-      "light",
-    );
+    setNavbarTheme("light");
 
-    if (
-      lastTrackedPath.current !==
-      pathname
-    ) {
-      lastTrackedPath.current =
-        pathname;
+    if (lastTrackedPath.current !== pathname) {
+      lastTrackedPath.current = pathname;
 
       try {
         trackPageView();
       } catch (error) {
-        console.warn(
-          "Navbar page-view tracking failed",
-          error,
-        );
+        console.warn("Navbar page-view tracking failed", error);
       }
     }
   }, [pathname]);
@@ -972,22 +636,13 @@ export default function Navbar({
       return;
     }
 
-    const alreadyLocked =
-      document.body.classList.contains(
-        "overflow-hidden",
-      );
+    const alreadyLocked = document.body.classList.contains("overflow-hidden");
 
-    document.body.classList.add(
-      "overflow-hidden",
-    );
+    document.body.classList.add("overflow-hidden");
 
     return () => {
-      if (
-        !alreadyLocked
-      ) {
-        document.body.classList.remove(
-          "overflow-hidden",
-        );
+      if (!alreadyLocked) {
+        document.body.classList.remove("overflow-hidden");
       }
     };
   }, [mobileOpen]);
@@ -1001,27 +656,16 @@ export default function Navbar({
       return;
     }
 
-    const handleKeyDown = (
-      event,
-    ) => {
-      if (
-        event.key ===
-        "Escape"
-      ) {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
         closeMobile();
       }
     };
 
-    document.addEventListener(
-      "keydown",
-      handleKeyDown,
-    );
+    document.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      document.removeEventListener(
-        "keydown",
-        handleKeyDown,
-      );
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, [mobileOpen]);
 
@@ -1034,40 +678,20 @@ export default function Navbar({
       return;
     }
 
-    const dismiss = (
-      event,
-    ) => {
-      if (
-        !navRef.current?.contains(
-          event.target,
-        )
-      ) {
-        setDropdown(
-          null,
-        );
+    const dismiss = (event) => {
+      if (!navRef.current?.contains(event.target)) {
+        setDropdown(null);
       }
     };
 
-    document.addEventListener(
-      "pointerdown",
-      dismiss,
-    );
+    document.addEventListener("pointerdown", dismiss);
 
-    document.addEventListener(
-      "focusin",
-      dismiss,
-    );
+    document.addEventListener("focusin", dismiss);
 
     return () => {
-      document.removeEventListener(
-        "pointerdown",
-        dismiss,
-      );
+      document.removeEventListener("pointerdown", dismiss);
 
-      document.removeEventListener(
-        "focusin",
-        dismiss,
-      );
+      document.removeEventListener("focusin", dismiss);
     };
   }, [dropdown]);
 
@@ -1076,46 +700,26 @@ export default function Navbar({
   ========================================================== */
 
   useEffect(() => {
-    const desktop =
-      window.matchMedia(
-        "(min-width: 1280px)",
-      );
+    const desktop = window.matchMedia("(min-width: 1280px)");
 
-    const handleChange =
-      () => {
-        setDropdown(null);
+    const handleChange = () => {
+      setDropdown(null);
 
-        if (
-          desktop.matches
-        ) {
-          clearTimeout(
-            closeTimerRef.current,
-          );
+      if (desktop.matches) {
+        clearTimeout(closeTimerRef.current);
 
-          cancelAnimationFrame(
-            frameRef.current,
-          );
+        cancelAnimationFrame(frameRef.current);
 
-          setMobileVisible(
-            false,
-          );
+        setMobileVisible(false);
 
-          setMobileOpen(
-            false,
-          );
-        }
-      };
+        setMobileOpen(false);
+      }
+    };
 
-    desktop.addEventListener(
-      "change",
-      handleChange,
-    );
+    desktop.addEventListener("change", handleChange);
 
     return () => {
-      desktop.removeEventListener(
-        "change",
-        handleChange,
-      );
+      desktop.removeEventListener("change", handleChange);
     };
   }, []);
 
@@ -1171,78 +775,37 @@ export default function Navbar({
      MORE DROPDOWN
   ========================================================== */
 
-  const renderMoreDropdown =
-    () => {
-      const expanded =
-        dropdown ===
-        "more";
+  const renderMoreDropdown = () => {
+    const expanded = dropdown === "more";
 
-      const containsActive =
-        MORE.some(
-          (item) =>
-            active(
-              item.path,
-            ),
-        );
+    const containsActive = MORE.some((item) => active(item.path));
 
-      return (
-        <div
-          className="relative"
-          onMouseEnter={() =>
-            setDropdown(
-              "more",
-            )
+    return (
+      <div
+        className="relative"
+        onMouseEnter={() => setDropdown("more")}
+        onMouseLeave={() => setDropdown(null)}
+        onBlur={(event) => {
+          if (!event.currentTarget.contains(event.relatedTarget)) {
+            setDropdown(null);
           }
-          onMouseLeave={() =>
-            setDropdown(
-              null,
-            )
+        }}
+        onKeyDown={(event) => {
+          if (event.key === "Escape" && expanded) {
+            setDropdown(null);
+
+            event.currentTarget.querySelector("button")?.focus();
           }
-          onBlur={(event) => {
-            if (
-              !event.currentTarget.contains(
-                event.relatedTarget,
-              )
-            ) {
-              setDropdown(
-                null,
-              );
-            }
-          }}
-          onKeyDown={(event) => {
-            if (
-              event.key ===
-                "Escape" &&
-              expanded
-            ) {
-              setDropdown(
-                null,
-              );
+        }}
+      >
+        {/* MORE BUTTON */}
 
-              event.currentTarget
-                .querySelector(
-                  "button",
-                )
-                ?.focus();
-            }
-          }}
-        >
-          {/* MORE BUTTON */}
-
-          <button
-            type="button"
-            aria-expanded={
-              expanded
-            }
-            aria-controls={`${uid}-more`}
-            onClick={() =>
-              setDropdown(
-                expanded
-                  ? null
-                  : "more",
-              )
-            }
-            className={`
+        <button
+          type="button"
+          aria-expanded={expanded}
+          aria-controls={`${uid}-more`}
+          onClick={() => setDropdown(expanded ? null : "more")}
+          className={`
               group
               relative
 
@@ -1287,30 +850,24 @@ export default function Navbar({
                     `
               }
             `}
-          >
-            <span>
-              More
-            </span>
+        >
+          <span>More</span>
 
-            <ChevronDown
-              size={16}
-              strokeWidth={2}
-              aria-hidden="true"
-              className={`
+          <ChevronDown
+            size={16}
+            strokeWidth={2}
+            aria-hidden="true"
+            className={`
                 transition-transform
                 duration-200
 
-                ${
-                  expanded
-                    ? "rotate-180"
-                    : ""
-                }
+                ${expanded ? "rotate-180" : ""}
               `}
-            />
+          />
 
-            <span
-              aria-hidden="true"
-              className={`
+          <span
+            aria-hidden="true"
+            className={`
                 absolute
 
                 bottom-[3px]
@@ -1329,23 +886,20 @@ export default function Navbar({
                 duration-200
 
                 ${
-                  expanded ||
-                  containsActive
+                  expanded || containsActive
                     ? "scale-x-100"
                     : "scale-x-0 group-hover:scale-x-100"
                 }
               `}
-            />
-          </button>
+          />
+        </button>
 
-          {/* DROPDOWN */}
+        {/* DROPDOWN */}
 
-          <div
-            id={`${uid}-more`}
-            hidden={
-              !expanded
-            }
-            className="
+        <div
+          id={`${uid}-more`}
+          hidden={!expanded}
+          className="
               absolute
               right-0
               top-full
@@ -1355,9 +909,9 @@ export default function Navbar({
 
               pt-3
             "
-          >
-            <div
-              className="
+        >
+          <div
+            className="
                 overflow-hidden
 
                 rounded-2xl
@@ -1371,9 +925,9 @@ export default function Navbar({
 
                 shadow-[0_24px_60px_-24px_rgba(0,0,0,0.24)]
               "
-            >
-              <p
-                className="
+          >
+            <p
+              className="
                   px-3
                   pb-2
                   pt-2
@@ -1386,36 +940,24 @@ export default function Navbar({
 
                   text-[#EC1C40]
                 "
-              >
-                Dholera Times
-              </p>
+            >
+              Dholera Times
+            </p>
 
-              <div
-                className="
+            <div
+              className="
                   space-y-1
                 "
-              >
-                {MORE.map(
-                  (item) => {
-                    const isActive =
-                      active(
-                        item.path,
-                      );
+            >
+              {MORE.map((item) => {
+                const isActive = active(item.path);
 
-                    return (
-                      <Link
-                        key={
-                          item.path
-                        }
-                        href={
-                          item.path
-                        }
-                        onClick={() =>
-                          setDropdown(
-                            null,
-                          )
-                        }
-                        className={`
+                return (
+                  <Link
+                    key={item.path}
+                    href={item.path}
+                    onClick={() => setDropdown(null)}
+                    className={`
                           group
 
                           flex
@@ -1435,19 +977,17 @@ export default function Navbar({
                           duration-200
 
                           ${
-                            isActive
-                              ? "bg-[#EC1C40]/5"
-                              : "hover:bg-[#EC1C40]/5"
+                            isActive ? "bg-[#EC1C40]/5" : "hover:bg-[#EC1C40]/5"
                           }
                         `}
-                      >
-                        <span
-                          className="
+                  >
+                    <span
+                      className="
                             min-w-0
                           "
-                        >
-                          <strong
-                            className="
+                    >
+                      <strong
+                        className="
                               block
 
                               text-[17px]
@@ -1456,14 +996,12 @@ export default function Navbar({
 
                               text-black
                             "
-                          >
-                            {
-                              item.title
-                            }
-                          </strong>
+                      >
+                        {item.title}
+                      </strong>
 
-                          <small
-                            className="
+                      <small
+                        className="
                               mt-0.5
 
                               block
@@ -1473,20 +1011,16 @@ export default function Navbar({
 
                               text-black/60
                             "
-                          >
-                            {
-                              item.description
-                            }
-                          </small>
-                        </span>
+                      >
+                        {item.description}
+                      </small>
+                    </span>
 
-                        <ChevronRight
-                          size={17}
-                          strokeWidth={
-                            1.9
-                          }
-                          aria-hidden="true"
-                          className="
+                    <ChevronRight
+                      size={17}
+                      strokeWidth={1.9}
+                      aria-hidden="true"
+                      className="
                             shrink-0
 
                             text-[#EC1C40]
@@ -1496,17 +1030,16 @@ export default function Navbar({
 
                             group-hover:translate-x-0.5
                           "
-                        />
-                      </Link>
-                    );
-                  },
-                )}
-              </div>
+                    />
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </div>
-      );
-    };
+      </div>
+    );
+  };
 
   /* ============================================================
      RETURN
@@ -1535,11 +1068,7 @@ export default function Navbar({
 
           border-b
 
-          ${
-            isDarkNavbar
-              ? "border-white/10"
-              : "border-black/10"
-          }
+          ${isDarkNavbar ? "border-white/10" : "border-black/10"}
 
           ${
             scrolled
@@ -1663,40 +1192,22 @@ export default function Navbar({
               min-[1440px]:gap-1
             "
           >
-            {MAIN_LINKS.map(
-              (item) => {
-                const isActive =
-                  active(
-                    item.path,
-                  );
+            {MAIN_LINKS.map((item) => {
+              const isActive = active(item.path);
 
-                return (
-                  <Link
-                    key={
-                      item.path
-                    }
-                    href={
-                      item.path
-                    }
-                    aria-current={current(
-                      item.path,
-                    )}
-                    onClick={() =>
-                      setDropdown(
-                        null,
-                      )
-                    }
-                    className={
-                      desktopLinkClass
-                    }
-                  >
-                    {
-                      item.title
-                    }
+              return (
+                <Link
+                  key={item.path}
+                  href={item.path}
+                  aria-current={current(item.path)}
+                  onClick={() => setDropdown(null)}
+                  className={desktopLinkClass}
+                >
+                  {item.title}
 
-                    <span
-                      aria-hidden="true"
-                      className={`
+                  <span
+                    aria-hidden="true"
+                    className={`
                         absolute
 
                         bottom-[3px]
@@ -1720,28 +1231,19 @@ export default function Navbar({
                             : "scale-x-0 group-hover:scale-x-100"
                         }
                       `}
-                    />
-                  </Link>
-                );
-              },
-            )}
+                  />
+                </Link>
+              );
+            })}
 
             {renderMoreDropdown()}
 
             {/* CONTACT */}
 
             <Link
-              href={
-                CONTACT.path
-              }
-              aria-current={current(
-                CONTACT.path,
-              )}
-              onClick={() =>
-                setDropdown(
-                  null,
-                )
-              }
+              href={CONTACT.path}
+              aria-current={current(CONTACT.path)}
+              onClick={() => setDropdown(null)}
               className={`
                 ml-3
 
@@ -1774,9 +1276,7 @@ export default function Navbar({
                 focus-visible:ring-offset-2
 
                 ${
-                  active(
-                    CONTACT.path,
-                  )
+                  active(CONTACT.path)
                     ? `
                         border-[#EC1C40]
                         bg-[#EC1C40]
@@ -1850,23 +1350,13 @@ export default function Navbar({
       ======================================================== */}
 
       <button
-        ref={
-          menuButtonRef
-        }
+        ref={menuButtonRef}
         data-navbar-ui="true"
         type="button"
-        aria-label={
-          mobileVisible
-            ? "Close navigation"
-            : "Open navigation"
-        }
-        aria-expanded={
-          mobileVisible
-        }
+        aria-label={mobileVisible ? "Close navigation" : "Open navigation"}
+        aria-expanded={mobileVisible}
         aria-controls={`${uid}-mobile`}
-        onClick={
-          toggleMobile
-        }
+        onClick={toggleMobile}
         className={`
           fixed
 
@@ -1955,11 +1445,7 @@ export default function Navbar({
               duration-[1000ms]
               ease-linear
 
-              ${
-                mobileVisible
-                  ? "top-[11px] rotate-45"
-                  : "top-[4px] rotate-0"
-              }
+              ${mobileVisible ? "top-[11px] rotate-45" : "top-[4px] rotate-0"}
             `}
           />
 
@@ -2041,11 +1527,7 @@ export default function Navbar({
               duration-[1000ms]
               ease-linear
 
-              ${
-                mobileVisible
-                  ? "top-[11px] -rotate-45"
-                  : "top-[18px] rotate-0"
-              }
+              ${mobileVisible ? "top-[11px] -rotate-45" : "top-[18px] rotate-0"}
             `}
           />
         </span>
@@ -2078,9 +1560,7 @@ export default function Navbar({
           <button
             type="button"
             aria-label="Close navigation"
-            onClick={() =>
-              closeMobile()
-            }
+            onClick={() => closeMobile()}
             className={`
               absolute
               inset-0
@@ -2098,11 +1578,7 @@ export default function Navbar({
               duration-[1000ms]
               ease-linear
 
-              ${
-                mobileVisible
-                  ? "opacity-100"
-                  : "opacity-0"
-              }
+              ${mobileVisible ? "opacity-100" : "opacity-0"}
             `}
           />
 
@@ -2141,11 +1617,7 @@ export default function Navbar({
               duration-[1000ms]
               ease-linear
 
-              ${
-                mobileVisible
-                  ? "translate-x-0"
-                  : "-translate-x-full"
-              }
+              ${mobileVisible ? "translate-x-0" : "-translate-x-full"}
             `}
           >
             {/* MOBILE LINKS */}
@@ -2175,33 +1647,16 @@ export default function Navbar({
                   space-y-1
                 "
               >
-                {MAIN_LINKS.map(
-                  (
-                    item,
-                    index,
-                  ) => {
-                    const isActive =
-                      active(
-                        item.path,
-                      );
+                {MAIN_LINKS.map((item, index) => {
+                  const isActive = active(item.path);
 
-                    return (
-                      <Link
-                        key={
-                          item.path
-                        }
-                        href={
-                          item.path
-                        }
-                        aria-current={current(
-                          item.path,
-                        )}
-                        onClick={() =>
-                          closeMobile(
-                            false,
-                          )
-                        }
-                        className={`
+                  return (
+                    <Link
+                      key={item.path}
+                      href={item.path}
+                      aria-current={current(item.path)}
+                      onClick={() => closeMobile(false)}
+                      className={`
                           group
 
                           flex
@@ -2228,11 +1683,7 @@ export default function Navbar({
 
                           ease-[cubic-bezier(0.16,1,0.3,1)]
 
-                          ${
-                            MAIN_LINK_DELAYS[
-                              index
-                            ] || ""
-                          }
+                          ${MAIN_LINK_DELAYS[index] || ""}
 
                           ${
                             mobileVisible
@@ -2271,24 +1722,20 @@ export default function Navbar({
                           motion-reduce:transform-none
                           motion-reduce:transition-none
                         `}
-                      >
-                        <span
-                          className="
+                    >
+                      <span
+                        className="
                             min-w-0
                           "
-                        >
-                          {
-                            item.title
-                          }
-                        </span>
+                      >
+                        {item.title}
+                      </span>
 
-                        <ChevronRight
-                          size={16}
-                          strokeWidth={
-                            1.9
-                          }
-                          aria-hidden="true"
-                          className={`
+                      <ChevronRight
+                        size={16}
+                        strokeWidth={1.9}
+                        aria-hidden="true"
+                        className={`
                             shrink-0
 
                             transition-[color,transform]
@@ -2302,11 +1749,10 @@ export default function Navbar({
 
                             motion-reduce:transform-none
                           `}
-                        />
-                      </Link>
-                    );
-                  },
-                )}
+                      />
+                    </Link>
+                  );
+                })}
               </div>
 
               {/* MORE */}
@@ -2360,33 +1806,16 @@ export default function Navbar({
                     space-y-1
                   "
                 >
-                  {MOBILE_MORE.map(
-                    (
-                      item,
-                      index,
-                    ) => {
-                      const isActive =
-                        active(
-                          item.path,
-                        );
+                  {MOBILE_MORE.map((item, index) => {
+                    const isActive = active(item.path);
 
-                      return (
-                        <Link
-                          key={
-                            item.path
-                          }
-                          href={
-                            item.path
-                          }
-                          aria-current={current(
-                            item.path,
-                          )}
-                          onClick={() =>
-                            closeMobile(
-                              false,
-                            )
-                          }
-                          className={`
+                    return (
+                      <Link
+                        key={item.path}
+                        href={item.path}
+                        aria-current={current(item.path)}
+                        onClick={() => closeMobile(false)}
+                        className={`
                             group
 
                             flex
@@ -2413,11 +1842,7 @@ export default function Navbar({
 
                             ease-[cubic-bezier(0.16,1,0.3,1)]
 
-                            ${
-                              MORE_LINK_DELAYS[
-                                index
-                              ] || ""
-                            }
+                            ${MORE_LINK_DELAYS[index] || ""}
 
                             ${
                               mobileVisible
@@ -2456,24 +1881,20 @@ export default function Navbar({
                             motion-reduce:transform-none
                             motion-reduce:transition-none
                           `}
-                        >
-                          <span
-                            className="
+                      >
+                        <span
+                          className="
                               min-w-0
                             "
-                          >
-                            {
-                              item.title
-                            }
-                          </span>
+                        >
+                          {item.title}
+                        </span>
 
-                          <ChevronRight
-                            size={16}
-                            strokeWidth={
-                              1.9
-                            }
-                            aria-hidden="true"
-                            className={`
+                        <ChevronRight
+                          size={16}
+                          strokeWidth={1.9}
+                          aria-hidden="true"
+                          className={`
                               shrink-0
 
                               transition-[color,transform]
@@ -2487,11 +1908,10 @@ export default function Navbar({
 
                               motion-reduce:transform-none
                             `}
-                          />
-                        </Link>
-                      );
-                    },
-                  )}
+                        />
+                      </Link>
+                    );
+                  })}
                 </div>
               </div>
             </nav>
@@ -2529,24 +1949,10 @@ export default function Navbar({
               `}
             >
               <Link
-                href={
-                  enquiryHref
-                }
-                target={
-                  hasWhatsApp
-                    ? "_blank"
-                    : undefined
-                }
-                rel={
-                  hasWhatsApp
-                    ? "noopener noreferrer"
-                    : undefined
-                }
-                onClick={() =>
-                  closeMobile(
-                    false,
-                  )
-                }
+                href={enquiryHref}
+                target={hasWhatsApp ? "_blank" : undefined}
+                rel={hasWhatsApp ? "noopener noreferrer" : undefined}
+                onClick={() => closeMobile(false)}
                 className="
                   flex
                   min-h-[48px]
@@ -2595,13 +2001,7 @@ export default function Navbar({
                   motion-reduce:transform-none
                 "
               >
-                {hasWhatsApp && (
-                  <FaWhatsapp
-                    size={19}
-                    aria-hidden="true"
-                  />
-                )}
-
+                {hasWhatsApp && <FaWhatsapp size={19} aria-hidden="true" />}
                 Enquire now
               </Link>
             </div>

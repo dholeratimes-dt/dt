@@ -1,93 +1,85 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 
-import { getSanityImageUrl } from "@/sanity/lib/image";
+import { urlFor } from "@/sanity/lib/image";
 
 /* ============================================================
-   DATE HELPERS
+   DATE
 ============================================================ */
 
-const getValidDate = (dateString) => {
-  if (!dateString) return null;
-
-  const date = new Date(dateString);
-
-  return Number.isNaN(date.getTime()) ? null : date;
-};
-
 const formatDate = (dateString) => {
-  const date = getValidDate(dateString);
+  if (!dateString) {
+    return "";
+  }
 
-  if (!date) return "";
+  const date =
+    new Date(dateString);
 
-  return date.toLocaleDateString("en-US", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
+  if (
+    Number.isNaN(
+      date.getTime(),
+    )
+  ) {
+    return "";
+  }
+
+  return date.toLocaleDateString(
+    "en-US",
+    {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    },
+  );
 };
 
 /* ============================================================
    BLOG CARD
 ============================================================ */
 
-export default function BlogCard({ post }) {
-  const slug = post.slug?.current;
-
+export default function BlogCard({
+  post,
+}) {
   const href =
-    slug && slug !== "#"
-      ? `/dholera-updates/blogs/${slug}`
+    post.slug?.current
+      ? `/dholera-updates/blogs/${post.slug.current}`
       : "/dholera-updates/blogs";
 
   const publishedDate =
-    post.publishedAt || post._createdAt;
-
-  const validPublishedDate =
-    getValidDate(publishedDate);
-
-  const imageUrl = post.mainImage
-    ? getSanityImageUrl(
-        post.mainImage,
-        1200,
-        800,
-      )
-    : null;
+    post.publishedAt ||
+    post._createdAt;
 
   return (
     <article
       className="
         group
 
-        aspect-[4/5]
-
-        w-full
+        flex
         min-w-0
+        flex-col
 
         overflow-hidden
 
-        rounded-[16px]
+        rounded-xl
 
         border
-        border-[#E0A4B5]/60
+        border-[#EC1C40]/30
 
         bg-white
 
-        shadow-[0_5px_18px_rgba(57,37,46,0.05)]
+        shadow-[0_5px_18px_rgba(0,0,0,0.045)]
 
-        transition-[transform,border-color,box-shadow]
+        transition-[border-color,box-shadow,transform]
         duration-300
         ease-out
 
-        focus-within:border-[#8F2946]
-
-        sm:rounded-[18px]
-
         md:hover:-translate-y-1
-        md:hover:border-[#8F2946]
-        md:hover:shadow-[0_14px_32px_rgba(116,32,57,0.10)]
 
-        lg:rounded-[20px]
+        md:hover:border-[#EC1C40]/50
+
+        md:hover:shadow-[0_14px_32px_rgba(236,28,64,0.09)]
+
+        focus-within:border-[#EC1C40]
 
         motion-reduce:transform-none
         motion-reduce:transition-none
@@ -96,46 +88,55 @@ export default function BlogCard({ post }) {
       <Link
         href={href}
         className="
-          grid
+          flex
           h-full
-          min-h-0
-
-          grid-rows-[55fr_45fr]
+          min-w-0
+          flex-col
 
           rounded-[inherit]
 
           focus-visible:outline-none
           focus-visible:ring-2
           focus-visible:ring-inset
-          focus-visible:ring-[#8F2946]
+          focus-visible:ring-[#EC1C40]
         "
       >
         {/* ===================================================
-            IMAGE — 55%
+            IMAGE
+
+            Same structure on phone + desktop
         ==================================================== */}
 
         <div
           className="
             relative
 
-            min-h-0
+            aspect-[2/1]
+
             w-full
+
+            shrink-0
 
             overflow-hidden
 
-            bg-[#F3E7EC]
+            bg-black/[0.025]
           "
         >
-          {imageUrl ? (
+          {post.mainImage ? (
             <Image
-              src={imageUrl}
+              src={urlFor(
+                post.mainImage,
+              )
+                .width(900)
+                .height(450)
+                .url()}
               alt={
-                post.mainImage?.alt ||
+                post.mainImage
+                  ?.alt ||
                 post.title ||
-                "Dholera update"
+                "Dholera blog"
               }
               fill
-              unoptimized
               sizes="
                 (max-width: 639px) calc(100vw - 32px),
                 (max-width: 1023px) 50vw,
@@ -149,7 +150,7 @@ export default function BlogCard({ post }) {
                 duration-500
                 ease-out
 
-                md:group-hover:scale-[1.035]
+                md:group-hover:scale-[1.025]
 
                 motion-reduce:transform-none
                 motion-reduce:transition-none
@@ -166,258 +167,163 @@ export default function BlogCard({ post }) {
                 justify-center
 
                 bg-gradient-to-br
-                from-[#F3E7EC]
-                via-[#F7EEF1]
-                to-[#FAF7F8]
+                from-[#EC1C40]/10
+                via-[#EC1C40]/5
+                to-white
               "
             >
               <span
                 className="
-                  px-4
-
-                  text-center
-
-                  text-[13px]
+                  text-[14px]
                   font-medium
 
-                  text-[#78666E]
-
-                  sm:text-[14px]
+                  text-black/45
                 "
               >
                 No image available
               </span>
             </div>
           )}
-
-          {/* IMAGE DEPTH */}
-
-          <div
-            aria-hidden="true"
-            className="
-              pointer-events-none
-
-              absolute
-              inset-0
-
-              bg-gradient-to-t
-              from-[#39252E]/14
-              via-transparent
-              to-transparent
-            "
-          />
         </div>
 
         {/* ===================================================
-            CONTENT — 45%
+            CONTENT
         ==================================================== */}
 
         <div
           className="
             flex
-            min-h-0
+            flex-1
             flex-col
+
+            bg-white
 
             px-4
             pb-4
             pt-4
 
-            min-[390px]:px-[18px]
-            min-[390px]:pb-[17px]
-            min-[390px]:pt-[17px]
+            min-[414px]:px-[18px]
+            min-[414px]:pb-[18px]
 
-            sm:px-5
-            sm:pb-5
-            sm:pt-[18px]
-
-            lg:px-5
-            lg:pb-5
-            lg:pt-5
-
-            xl:px-6
+            sm:p-5
           "
         >
           {/* =================================================
               TITLE
-              Maximum 2 lines + ellipsis
           ================================================== */}
 
-          <h3
+          <h2
             className="
               line-clamp-2
-              overflow-hidden
 
-              text-[16px]
+              min-h-[50px]
+
+              text-[17px]
               font-semibold
-              leading-[22px]
+              leading-[25px]
 
               tracking-[-0.015em]
 
-              text-[#39252E]
+              text-black
 
-              transition-colors
-              duration-200
-
-              min-[390px]:text-[16.5px]
-              min-[390px]:leading-[23px]
-
+              sm:min-h-[52px]
               sm:text-[17px]
-              sm:leading-[24px]
+              sm:leading-[26px]
 
-              md:group-hover:text-[#8F2946]
-
-              lg:text-[17.5px]
-              lg:leading-[25px]
+              lg:text-[18px]
+              lg:leading-[27px]
             "
           >
-            {post.title}
-          </h3>
+            {post.title ||
+              "Dholera Smart City Update"}
+          </h2>
 
           {/* =================================================
-              DATE
+              DIVIDER
           ================================================== */}
 
-          {validPublishedDate && (
-            <div
-              className="
-                mt-2.5
+          <div
+            className="
+              mt-4
 
-                shrink-0
-
-                sm:mt-3
-
-                lg:mt-3
-              "
-            >
-              <time
-                dateTime={
-                  validPublishedDate.toISOString()
-                }
-                className="
-                  block
-
-                  text-[13px]
-                  font-medium
-                  leading-5
-
-                  text-[#76636B]
-
-                  sm:text-[13.5px]
-
-                  lg:text-[14px]
-                "
-              >
-                {formatDate(
-                  publishedDate,
-                )}
-              </time>
-            </div>
-          )}
+              border-t
+              border-black/10
+            "
+          />
 
           {/* =================================================
-              CTA
+              DATE + READ MORE
           ================================================== */}
 
           <div
             className="
               mt-auto
 
-              shrink-0
+              flex
 
-              border-t
-              border-[#EAD9DF]
+              min-h-[38px]
 
-              pt-3
+              items-end
+              justify-between
 
-              min-[390px]:pt-3.5
+              gap-3
 
-              sm:pt-3.5
-
-              lg:pt-4
             "
           >
-            <div
+            {/* DATE */}
+
+            <time
+              dateTime={
+                publishedDate
+                  ? new Date(
+                      publishedDate,
+                    ).toISOString()
+                  : undefined
+              }
               className="
-                flex
+                shrink-0
 
-                items-center
-                justify-between
+                text-[13px]
+                font-normal
+                leading-5
 
-                gap-3
+                text-black/50
+
+                sm:text-[14px]
               "
             >
-              {/* READ MORE */}
+              {formatDate(
+                publishedDate,
+              )}
+            </time>
 
-              <span
-                className="
-                  text-[14px]
-                  font-semibold
-                  leading-5
+            {/* READ MORE */}
 
-                  text-[#8F2946]
+            <span
+              className="
+                inline-flex
+                shrink-0
 
-                  transition-colors
-                  duration-200
+                items-center
 
-                  sm:text-[14.5px]
+                whitespace-nowrap
 
-                  md:group-hover:text-[#742039]
+                text-[14px]
+                font-semibold
+                leading-5
 
-                  lg:text-[15px]
-                  lg:leading-6
-                "
-              >
-                Read More
-              </span>
+                text-[#EC1C40]
 
-              {/* ARROW */}
+                transition-colors
+                duration-200
 
-              <span
-                aria-hidden="true"
-                className="
-                  flex
+                group-hover:text-[#d9183a]
 
-                  h-8
-                  w-8
-
-                  shrink-0
-
-                  items-center
-                  justify-center
-
-                  rounded-full
-
-                  bg-[#F7EBEF]
-
-                  text-[#8F2946]
-
-                  transition-[transform,background-color,color]
-                  duration-200
-                  ease-out
-
-                  min-[390px]:h-9
-                  min-[390px]:w-9
-
-                  sm:h-9
-                  sm:w-9
-
-                  md:group-hover:translate-x-0.5
-                  md:group-hover:bg-[#8F2946]
-                  md:group-hover:text-white
-
-                  motion-reduce:transform-none
-                "
-              >
-                <ArrowUpRight
-                  size={16}
-                  strokeWidth={2}
-                  className="
-                    min-[390px]:h-[17px]
-                    min-[390px]:w-[17px]
-                  "
-                />
-              </span>
-            </div>
+                sm:text-[15px]
+              "
+            >
+              Read More →
+            </span>
           </div>
         </div>
       </Link>

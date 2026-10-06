@@ -72,6 +72,7 @@
 // }
 
 
+
 "use client";
 
 import {
@@ -88,21 +89,37 @@ import BlogCard from "./BlogCard";
 
 const BLOGS_PER_PAGE = 10;
 
+/* ============================================================
+   BLOG LIST
+============================================================ */
+
 export default function MobileBlogSwiper({
   posts = [],
 }) {
-  const [currentPage, setCurrentPage] =
-    useState(1);
+  const [
+    currentPage,
+    setCurrentPage,
+  ] = useState(1);
 
-  const listRef = useRef(null);
+  const listRef =
+    useRef(null);
 
-  const totalPages = Math.max(
-    1,
-    Math.ceil(
-      posts.length /
-        BLOGS_PER_PAGE,
-    ),
-  );
+  /* =========================================================
+     TOTAL PAGES
+  ========================================================= */
+
+  const totalPages =
+    Math.max(
+      1,
+      Math.ceil(
+        posts.length /
+          BLOGS_PER_PAGE,
+      ),
+    );
+
+  /* =========================================================
+     CURRENT POSTS
+  ========================================================= */
 
   const startIndex =
     (currentPage - 1) *
@@ -115,77 +132,110 @@ export default function MobileBlogSwiper({
         BLOGS_PER_PAGE,
     );
 
-  const goToPage = (page) => {
-    const nextPage = Math.min(
-      Math.max(page, 1),
-      totalPages,
-    );
+  /* =========================================================
+     CHANGE PAGE
+  ========================================================= */
 
-    if (nextPage === currentPage) {
+  const goToPage = (
+    page,
+  ) => {
+    const nextPage =
+      Math.min(
+        Math.max(
+          page,
+          1,
+        ),
+        totalPages,
+      );
+
+    if (
+      nextPage ===
+      currentPage
+    ) {
       return;
     }
 
-    setCurrentPage(nextPage);
+    setCurrentPage(
+      nextPage,
+    );
 
-    requestAnimationFrame(() => {
-      listRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    });
+    window.requestAnimationFrame(
+      () => {
+        listRef.current?.scrollIntoView(
+          {
+            behavior:
+              "smooth",
+
+            block:
+              "start",
+          },
+        );
+      },
+    );
   };
 
   /* =========================================================
-     PAGINATION NUMBERS
-
-     Instead of showing too many numbers:
-     1 2 3 ... 8
+     DESKTOP PAGE NUMBERS
   ========================================================= */
 
-  const getVisiblePages = () => {
-    if (totalPages <= 5) {
-      return Array.from(
-        { length: totalPages },
-        (_, index) =>
-          index + 1,
-      );
-    }
+  const getVisiblePages =
+    () => {
+      if (
+        totalPages <= 5
+      ) {
+        return Array.from(
+          {
+            length:
+              totalPages,
+          },
+          (
+            _,
+            index,
+          ) =>
+            index + 1,
+        );
+      }
 
-    if (currentPage <= 3) {
+      if (
+        currentPage <= 3
+      ) {
+        return [
+          1,
+          2,
+          3,
+          4,
+          "...",
+          totalPages,
+        ];
+      }
+
+      if (
+        currentPage >=
+        totalPages - 2
+      ) {
+        return [
+          1,
+          "...",
+          totalPages -
+            3,
+          totalPages -
+            2,
+          totalPages -
+            1,
+          totalPages,
+        ];
+      }
+
       return [
         1,
-        2,
-        3,
-        4,
+        "...",
+        currentPage - 1,
+        currentPage,
+        currentPage + 1,
         "...",
         totalPages,
       ];
-    }
-
-    if (
-      currentPage >=
-      totalPages - 2
-    ) {
-      return [
-        1,
-        "...",
-        totalPages - 3,
-        totalPages - 2,
-        totalPages - 1,
-        totalPages,
-      ];
-    }
-
-    return [
-      1,
-      "...",
-      currentPage - 1,
-      currentPage,
-      currentPage + 1,
-      "...",
-      totalPages,
-    ];
-  };
+    };
 
   if (!posts.length) {
     return null;
@@ -196,6 +246,7 @@ export default function MobileBlogSwiper({
       ref={listRef}
       className="
         scroll-mt-28
+
         space-y-7
 
         sm:space-y-8
@@ -203,6 +254,11 @@ export default function MobileBlogSwiper({
     >
       {/* =====================================================
           BLOG GRID
+
+          Same BlogCard design on:
+          - Phone
+          - Tablet
+          - Desktop
       ====================================================== */}
 
       <div
@@ -210,22 +266,29 @@ export default function MobileBlogSwiper({
           grid
           grid-cols-1
 
+          items-stretch
+
           gap-5
 
           sm:grid-cols-2
           sm:gap-6
 
           lg:grid-cols-3
+          lg:gap-6
 
           xl:gap-7
         "
       >
         {visiblePosts.map(
-          (post, index) => (
+          (
+            post,
+            index,
+          ) => (
             <BlogCard
               key={
                 post._id ||
-                post.slug?.current ||
+                post.slug
+                  ?.current ||
                 `${startIndex}-${index}`
               }
               post={post}
@@ -244,19 +307,22 @@ export default function MobileBlogSwiper({
           className="
             flex
             flex-col
+
             items-center
 
             gap-4
 
             border-t
-            border-[#EAD9DF]
+            border-black/10
 
             pt-6
 
             sm:pt-7
           "
         >
-          {/* MOBILE PAGINATION */}
+          {/* =================================================
+              PHONE PAGINATION
+          ================================================== */}
 
           <div
             className="
@@ -271,19 +337,24 @@ export default function MobileBlogSwiper({
               sm:hidden
             "
           >
+            {/* PREVIOUS */}
+
             <button
               type="button"
               onClick={() =>
                 goToPage(
-                  currentPage - 1,
+                  currentPage -
+                    1,
                 )
               }
               disabled={
-                currentPage === 1
+                currentPage ===
+                1
               }
               aria-label="Previous page"
               className="
                 inline-flex
+
                 min-h-11
 
                 items-center
@@ -294,7 +365,7 @@ export default function MobileBlogSwiper({
                 rounded-xl
 
                 border
-                border-[#DFC9D1]
+                border-black/10
 
                 bg-white
 
@@ -305,33 +376,40 @@ export default function MobileBlogSwiper({
                 font-semibold
                 leading-5
 
-                text-[#39252E]
+                text-black
 
-                shadow-[0_3px_12px_rgba(57,37,46,0.04)]
+                shadow-[0_3px_12px_rgba(0,0,0,0.04)]
 
-                transition-[background-color,border-color,color]
+                transition-[background-color,border-color,color,transform]
+                duration-200
 
-                active:bg-[#F7EBEF]
+                active:bg-black/[0.03]
 
                 disabled:cursor-not-allowed
-                disabled:border-[#EEE4E8]
-                disabled:bg-[#FAF8F9]
-                disabled:text-[#B7A8AE]
+                disabled:border-black/[0.06]
+                disabled:bg-black/[0.02]
+                disabled:text-black/30
 
                 focus-visible:outline-none
                 focus-visible:ring-2
-                focus-visible:ring-[#8F2946]
+                focus-visible:ring-[#EC1C40]
                 focus-visible:ring-offset-2
+
+                motion-reduce:transform-none
               "
             >
               <ChevronLeft
                 size={17}
-                strokeWidth={2}
+                strokeWidth={
+                  2
+                }
                 aria-hidden="true"
               />
 
               Prev
             </button>
+
+            {/* PAGE COUNT */}
 
             <div
               className="
@@ -340,26 +418,35 @@ export default function MobileBlogSwiper({
                 text-[14px]
                 font-medium
 
-                text-[#68565E]
+                text-black/60
               "
             >
               Page{" "}
               <span
                 className="
                   font-semibold
-                  text-[#8F2946]
+
+                  text-[#EC1C40]
                 "
               >
-                {currentPage}
+                {
+                  currentPage
+                }
               </span>{" "}
-              of {totalPages}
+              of{" "}
+              {
+                totalPages
+              }
             </div>
+
+            {/* NEXT */}
 
             <button
               type="button"
               onClick={() =>
                 goToPage(
-                  currentPage + 1,
+                  currentPage +
+                    1,
                 )
               }
               disabled={
@@ -369,6 +456,7 @@ export default function MobileBlogSwiper({
               aria-label="Next page"
               className="
                 inline-flex
+
                 min-h-11
 
                 items-center
@@ -379,7 +467,7 @@ export default function MobileBlogSwiper({
                 rounded-xl
 
                 border
-                border-[#DFC9D1]
+                border-black/10
 
                 bg-white
 
@@ -390,36 +478,43 @@ export default function MobileBlogSwiper({
                 font-semibold
                 leading-5
 
-                text-[#39252E]
+                text-black
 
-                shadow-[0_3px_12px_rgba(57,37,46,0.04)]
+                shadow-[0_3px_12px_rgba(0,0,0,0.04)]
 
-                transition-[background-color,border-color,color]
+                transition-[background-color,border-color,color,transform]
+                duration-200
 
-                active:bg-[#F7EBEF]
+                active:bg-black/[0.03]
 
                 disabled:cursor-not-allowed
-                disabled:border-[#EEE4E8]
-                disabled:bg-[#FAF8F9]
-                disabled:text-[#B7A8AE]
+                disabled:border-black/[0.06]
+                disabled:bg-black/[0.02]
+                disabled:text-black/30
 
                 focus-visible:outline-none
                 focus-visible:ring-2
-                focus-visible:ring-[#8F2946]
+                focus-visible:ring-[#EC1C40]
                 focus-visible:ring-offset-2
+
+                motion-reduce:transform-none
               "
             >
               Next
 
               <ChevronRight
                 size={17}
-                strokeWidth={2}
+                strokeWidth={
+                  2
+                }
                 aria-hidden="true"
               />
             </button>
           </div>
 
-          {/* TABLET / DESKTOP PAGINATION */}
+          {/* =================================================
+              TABLET + DESKTOP PAGINATION
+          ================================================== */}
 
           <div
             className="
@@ -435,23 +530,26 @@ export default function MobileBlogSwiper({
               sm:flex
             "
           >
-            {/* Previous */}
+            {/* PREVIOUS */}
 
             <button
               type="button"
               onClick={() =>
                 goToPage(
-                  currentPage - 1,
+                  currentPage -
+                    1,
                 )
               }
               disabled={
-                currentPage === 1
+                currentPage ===
+                1
               }
               aria-label="Previous page"
               className="
                 mr-1
 
                 inline-flex
+
                 min-h-11
 
                 items-center
@@ -462,7 +560,7 @@ export default function MobileBlogSwiper({
                 rounded-xl
 
                 border
-                border-[#DFC9D1]
+                border-black/10
 
                 bg-white
 
@@ -472,24 +570,29 @@ export default function MobileBlogSwiper({
                 text-[14px]
                 font-semibold
 
-                text-[#39252E]
+                text-black
 
-                transition-[background-color,border-color,color,transform]
+                shadow-[0_3px_12px_rgba(0,0,0,0.035)]
+
+                transition-[background-color,border-color,color,transform,box-shadow]
                 duration-200
 
                 hover:-translate-y-px
-                hover:border-[#8F2946]
-                hover:bg-[#F7EBEF]
-                hover:text-[#8F2946]
+                hover:border-[#EC1C40]/40
+                hover:bg-[#EC1C40]/5
+                hover:text-[#EC1C40]
+
+                hover:shadow-[0_6px_18px_rgba(0,0,0,0.055)]
 
                 disabled:pointer-events-none
-                disabled:border-[#EEE4E8]
-                disabled:bg-[#FAF8F9]
-                disabled:text-[#B7A8AE]
+                disabled:border-black/[0.06]
+                disabled:bg-black/[0.02]
+                disabled:text-black/30
+                disabled:shadow-none
 
                 focus-visible:outline-none
                 focus-visible:ring-2
-                focus-visible:ring-[#8F2946]
+                focus-visible:ring-[#EC1C40]
                 focus-visible:ring-offset-2
 
                 motion-reduce:transform-none
@@ -497,24 +600,33 @@ export default function MobileBlogSwiper({
             >
               <ChevronLeft
                 size={17}
-                strokeWidth={2}
+                strokeWidth={
+                  2
+                }
+                aria-hidden="true"
               />
 
               Previous
             </button>
 
-            {/* Page numbers */}
+            {/* PAGE NUMBERS */}
 
             {getVisiblePages().map(
-              (page, index) => {
+              (
+                page,
+                index,
+              ) => {
                 if (
-                  page === "..."
+                  page ===
+                  "..."
                 ) {
                   return (
                     <span
                       key={`dots-${index}`}
+                      aria-hidden="true"
                       className="
                         flex
+
                         h-11
                         min-w-8
 
@@ -524,7 +636,7 @@ export default function MobileBlogSwiper({
                         text-[14px]
                         font-semibold
 
-                        text-[#917B84]
+                        text-black/40
                       "
                     >
                       •••
@@ -538,10 +650,14 @@ export default function MobileBlogSwiper({
 
                 return (
                   <button
-                    key={page}
+                    key={
+                      page
+                    }
                     type="button"
                     onClick={() =>
-                      goToPage(page)
+                      goToPage(
+                        page,
+                      )
                     }
                     aria-label={`Go to page ${page}`}
                     aria-current={
@@ -551,6 +667,7 @@ export default function MobileBlogSwiper({
                     }
                     className={`
                       inline-flex
+
                       h-11
                       min-w-11
 
@@ -569,7 +686,7 @@ export default function MobileBlogSwiper({
 
                       focus-visible:outline-none
                       focus-visible:ring-2
-                      focus-visible:ring-[#8F2946]
+                      focus-visible:ring-[#EC1C40]
                       focus-visible:ring-offset-2
 
                       motion-reduce:transform-none
@@ -577,28 +694,35 @@ export default function MobileBlogSwiper({
                       ${
                         isCurrent
                           ? `
-                              border
-                              border-[#8F2946]
+                            border
+                            border-[#EC1C40]
 
-                              bg-[#8F2946]
+                            bg-[#EC1C40]
 
-                              text-white
+                            text-white
 
-                              shadow-[0_5px_14px_rgba(143,41,70,0.20)]
-                            `
+                            shadow-[0_6px_16px_rgba(236,28,64,0.20)]
+                          `
                           : `
-                              border
-                              border-[#DFC9D1]
+                            border
+                            border-black/10
 
-                              bg-white
+                            bg-white
 
-                              text-[#39252E]
+                            text-black
 
-                              hover:-translate-y-px
-                              hover:border-[#8F2946]
-                              hover:bg-[#F7EBEF]
-                              hover:text-[#8F2946]
-                            `
+                            shadow-[0_2px_8px_rgba(0,0,0,0.025)]
+
+                            hover:-translate-y-px
+
+                            hover:border-[#EC1C40]/40
+
+                            hover:bg-[#EC1C40]/5
+
+                            hover:text-[#EC1C40]
+
+                            hover:shadow-[0_5px_14px_rgba(0,0,0,0.05)]
+                          `
                       }
                     `}
                   >
@@ -608,13 +732,14 @@ export default function MobileBlogSwiper({
               },
             )}
 
-            {/* Next */}
+            {/* NEXT */}
 
             <button
               type="button"
               onClick={() =>
                 goToPage(
-                  currentPage + 1,
+                  currentPage +
+                    1,
                 )
               }
               disabled={
@@ -626,6 +751,7 @@ export default function MobileBlogSwiper({
                 ml-1
 
                 inline-flex
+
                 min-h-11
 
                 items-center
@@ -636,7 +762,7 @@ export default function MobileBlogSwiper({
                 rounded-xl
 
                 border
-                border-[#DFC9D1]
+                border-black/10
 
                 bg-white
 
@@ -646,24 +772,29 @@ export default function MobileBlogSwiper({
                 text-[14px]
                 font-semibold
 
-                text-[#39252E]
+                text-black
 
-                transition-[background-color,border-color,color,transform]
+                shadow-[0_3px_12px_rgba(0,0,0,0.035)]
+
+                transition-[background-color,border-color,color,transform,box-shadow]
                 duration-200
 
                 hover:-translate-y-px
-                hover:border-[#8F2946]
-                hover:bg-[#F7EBEF]
-                hover:text-[#8F2946]
+                hover:border-[#EC1C40]/40
+                hover:bg-[#EC1C40]/5
+                hover:text-[#EC1C40]
+
+                hover:shadow-[0_6px_18px_rgba(0,0,0,0.055)]
 
                 disabled:pointer-events-none
-                disabled:border-[#EEE4E8]
-                disabled:bg-[#FAF8F9]
-                disabled:text-[#B7A8AE]
+                disabled:border-black/[0.06]
+                disabled:bg-black/[0.02]
+                disabled:text-black/30
+                disabled:shadow-none
 
                 focus-visible:outline-none
                 focus-visible:ring-2
-                focus-visible:ring-[#8F2946]
+                focus-visible:ring-[#EC1C40]
                 focus-visible:ring-offset-2
 
                 motion-reduce:transform-none
@@ -673,7 +804,10 @@ export default function MobileBlogSwiper({
 
               <ChevronRight
                 size={17}
-                strokeWidth={2}
+                strokeWidth={
+                  2
+                }
+                aria-hidden="true"
               />
             </button>
           </div>
