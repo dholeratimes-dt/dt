@@ -367,7 +367,7 @@ import {
 
 import hero from "@/assets/consultation-image.webp";
 import ConnectedFocusGraphic from "./connect";
-import CommonFAQ from "../components/Common/Faq";
+import CommonFAQ from "@/components/Common/Faq";
 
 /* ============================================================
    SEO METADATA
