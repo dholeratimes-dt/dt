@@ -21,7 +21,7 @@ import ContactForm from "../../components/NewContactForm";
 import getM from "@/assets/contact-dholera-times-mobile.webp";
 import get from "@/assets/contactPage/DTcontactBanner.webp";
 
-import CommonFAQ from "@/components/Common/FAQ";
+import CommonFAQ from "../../components/Common/Faq";
 
 
 
