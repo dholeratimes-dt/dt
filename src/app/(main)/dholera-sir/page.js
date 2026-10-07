@@ -4,13 +4,9 @@ import Link from "next/link";
 import {
   ArrowRight,
   Building2,
-  CheckCircle2,
   Cpu,
   Factory,
-  FileText,
-  Globe2,
   Landmark,
-  Map,
   MapPin,
   Plane,
   Route,
@@ -28,7 +24,11 @@ import {
 import { getNews, getProjectInfo } from "@/sanity/lib/api";
 import { urlFor } from "@/sanity/lib/image";
 
-import hero from "@/assets/DholeraSirhero.webp";
+import hero from "@/assets/DholeraSirhero2.webp";
+import heroMobile from "@/assets/DholerSirHeroPhone.webp";
+
+
+
 import CommonFAQ from "../components/Common/Faq";
 import MegaProjectsSection from "./MegaProject";
 import BlogSlider from "./BlogSlider";
@@ -708,38 +708,82 @@ export default async function DholeraSirPage() {
             HERO
         ==================================================== */}
 
-        <section
+        {/* <section
           className="
             relative
-
-            min-h-[500px]
-
+            w-full
             overflow-hidden
-
-            bg-black
-
-            sm:min-h-[540px]
-
-            md:min-h-[570px]
-
-            lg:min-h-[620px]
+            bg-white
           "
         >
           <Image
             src={hero}
-            alt="Dholera SIR Smart City"
-            fill
+            alt="About Dholera SIR"
+            width={1640}
+            height={624}
             priority
-            quality={90}
+            quality={95}
             sizes="100vw"
             className="
-              object-cover
-              object-center
+              block
+              h-auto
+              w-full
+              max-w-none
+              object-contain
+            "
+          />
+        </section> */}
+
+
+        <section
+          className="
+            relative
+            w-full
+            overflow-hidden
+            bg-white
+          "
+        >
+          {/* =========================================================
+              PHONE VIEW
+          ========================================================== */}
+
+          <Image
+            src={heroMobile}
+            alt="About Dholera SIR"
+            priority
+            quality={95}
+            sizes="100vw"
+            className="
+              block
+              h-auto
+              w-full
+              max-w-none
+              object-contain
+
+              md:hidden
             "
           />
 
-          {/* OVERLAY */}
+          {/* =========================================================
+              TABLET / DESKTOP VIEW
+          ========================================================== */}
 
+          <Image
+            src={hero}
+            alt="About Dholera SIR"
+            priority
+            quality={95}
+            sizes="100vw"
+            className="
+              hidden
+              h-auto
+              w-full
+              max-w-none
+              object-contain
+
+              md:block
+            "
+          />
         </section>
 
 
@@ -1274,7 +1318,21 @@ export default async function DholeraSirPage() {
         {/*  MAJOR INFRASTRUCTURE */}
         <MegaProjectsSection />
 
-        <div className="bg-gray-50 px-4 py-6">
+        <div className="
+           bg-gray-50
+
+            px-4
+            py-2
+
+            min-[414px]:px-5
+            min-[414px]:py-7
+
+            sm:px-10
+            sm:py-6
+
+            md:px-10
+            md:py-6
+          ">
           <div className="flex flex-col max-sm:flex-col-reverse lg:flex-row gap-8">
             {/* Left Sidebar */}
 
@@ -1297,13 +1355,13 @@ export default async function DholeraSirPage() {
             min-[414px]:px-5
 
             sm:px-6
-            sm:py-12
+            sm:py-10
 
             md:px-8
-            md:py-14
+            md:py-10
 
             lg:px-10
-            lg:py-12
+            lg:py-10
           "
         >
           <div
@@ -1386,13 +1444,13 @@ export default async function DholeraSirPage() {
             min-[414px]:px-5
 
             sm:px-6
-            sm:py-12
+            sm:py-10
 
             md:px-8
-            md:py-12
+            md:py-10
 
             lg:px-10
-            lg:py-12
+            lg:py-10
           "
         >
           <div

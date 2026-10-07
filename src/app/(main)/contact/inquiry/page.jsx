@@ -402,8 +402,6 @@ export default function ContactPage() {
             >
               <h2
                 className="
-                  mt-3
-
                   text-[28px]
                   font-bold
                   leading-[1.15]
@@ -602,7 +600,7 @@ export default function ContactPage() {
             md:px-8
 
             lg:px-10
-            lg:py-12
+            lg:py-10
           "
         >
           <div
@@ -661,10 +659,9 @@ export default function ContactPage() {
             </div>
 
             <Link
-              // href="https://wa.me/919958993549"
-              // target="_blank"
-              // rel="noopener noreferrer"
-              href="#send-enquiry"
+              href="https://wa.me/919958993549"
+              target="_blank"
+              rel="noopener noreferrer"
               className="
                 inline-flex
                 min-h-[50px]
@@ -717,17 +714,18 @@ export default function ContactPage() {
             bg-white
 
             px-4
-            py-10
+            pt-8
+            pb-4
 
             min-[414px]:px-5
 
             sm:px-6
-            sm:py-12
+            sm:py-10
 
             md:px-8
 
             lg:px-10
-            lg:py-16
+            lg:py-12
           "
         >
           <div

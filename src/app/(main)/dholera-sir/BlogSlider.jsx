@@ -125,17 +125,17 @@ export default function BlogSlider({
     return (
       <div
         className="
-          w-full
-
+           w-full
           bg-black/[0.025]
-
-          px-5
-          py-8
-
+          px-4
+          py-6
           text-center
-
+          min-[414px]:px-5
+          min-[414px]:py-7
           sm:px-6
-          sm:py-10
+          sm:py-8
+          md:px-8
+          md:py-10
         "
       >
         <h3

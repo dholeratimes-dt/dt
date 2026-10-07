@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 import Image from "next/image";
 
-import { ChevronLeft, ChevronRight, X, ZoomIn } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, CirclePlay  } from "lucide-react";
 
 import hero from "@/assets/gallery/galleryHero.webp";
 
@@ -47,12 +47,14 @@ const galleryImages = [
     src: img4,
     alt: "Dholera International Airport",
     caption: "Ahmedabad–Dholera Expressway",
+    link: "https://www.youtube.com/shorts/8xulcipgb1w",
   },
   {
     id: 4,
     src: img7,
     alt: "Dholera ReNew Power Plant",
     caption: "Cargo Terminal – Dholera International Airport",
+    link: "https://www.youtube.com/shorts/FUINp8jCK5k",
   },
   {
     id: 5,
@@ -65,12 +67,15 @@ const galleryImages = [
     src: img6,
     alt: "Tata Semiconductor Plant Dholera",
     caption: "Main Gate – Tata Semiconductor Plant",
+    link: "https://www.youtube.com/shorts/Qmyg21f-h0U",
+
   },
   {
     id: 7,
     src: img3,
     alt: "Dholera Expressway",
     caption: "ReNew Solar Cell Manufacturing Plant",
+    link: "https://www.youtube.com/shorts/8xulcipgb1w",
   },
   {
     id: 8,
@@ -83,6 +88,7 @@ const galleryImages = [
     src: img9,
     alt: "Dholera International Airport Runway",
     caption: "Runway – Dholera International Airport",
+    link: "https://www.youtube.com/shorts/8xulcipgb1w",
   },
   {
     id: 10,
@@ -95,18 +101,21 @@ const galleryImages = [
     src: img11,
     alt: "Semiconductor Plant in Dholera",
     caption: "Tata Semiconductor Plant – Construction Phase",
+    link: "https://www.youtube.com/shorts/Qmyg21f-h0U",
   },
   {
     id: 12,
     src: img12,
     alt: "Tata Solar Park Dholera",
     caption: "Tata Solar Park – Dholera",
+    link: "https://www.youtube.com/shorts/jm3u-IbngnA",
   },
   {
     id: 13,
     src: img13,
     alt: "Water Treatment Plant Dholera",
     caption: "Water Treatment Plant – Dholera",
+    link: "https://www.youtube.com/shorts/eQSdLClaJ6g",
   },
   {
     id: 14,
@@ -326,7 +335,7 @@ function MobileGalleryCard({ image, priority = false }) {
             backdrop-blur-md
           "
         >
-          <ZoomIn size={17} strokeWidth={2} />
+          <CirclePlay  size={17} strokeWidth={2} />
         </div>
       </div>
 
@@ -467,7 +476,7 @@ function DesktopGalleryCard({ image }) {
             motion-reduce:transform-none
           "
         >
-          <ZoomIn size={19} strokeWidth={1.9} />
+          <CirclePlay  size={19} strokeWidth={1.9} />
         </div>
       </div>
 

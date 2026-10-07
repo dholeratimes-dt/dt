@@ -23,9 +23,15 @@ import {
   ShieldCheck,
   Video,
   WalletCards,
+  ArrowUpRight,
+  
 } from "lucide-react";
 
-import nri from "@/assets/nri-hero.webp";
+// import nri from "@/assets/nri-hero.webp";
+import HeroNRI from "@/assets/NRIGuideHero.webp";
+
+
+
 import CommonFAQ from "../components/Common/Faq";
 
 /* ============================================================
@@ -507,234 +513,31 @@ export default function NRIInvestmentGuide() {
           className="
             relative
 
-            min-h-[610px]
+            w-full
 
             overflow-hidden
 
             bg-black
-
-            sm:min-h-[620px]
-
-            lg:min-h-[640px]
           "
         >
-          {/* IMAGE */}
-
           <Image
-            src={nri}
+            src={HeroNRI}
             alt="NRI investment in Dholera"
-            fill
             priority
-            quality={90}
+            quality={95}
             sizes="100vw"
             className="
-              object-cover
-              object-center
-            "
-          />
+              block
 
-          {/* OVERLAY */}
-
-          <div
-            aria-hidden="true"
-            className="
-              absolute
-              inset-0
-
-              bg-black/65
-
-              lg:bg-gradient-to-r
-              lg:from-black/90
-              lg:via-black/70
-              lg:to-black/25
-            "
-          />
-
-          <div
-            aria-hidden="true"
-            className="
-              absolute
-              inset-x-0
-              bottom-0
-
-              h-40
-
-              bg-gradient-to-t
-              from-black/55
-              to-transparent
-            "
-          />
-
-          {/* CONTENT */}
-
-          <div
-            className="
-              relative
-              z-10
-
-              mx-auto
-
-              flex
-              min-h-[610px]
+              h-auto
               w-full
-              max-w-7xl
+              max-w-none
 
-              items-end
-
-              px-4
-              pb-10
-              pt-24
-
-              min-[414px]:px-5
-
-              sm:min-h-[620px]
-              sm:px-6
-              sm:pb-12
-
-              md:px-8
-
-              lg:min-h-[640px]
-              lg:items-center
-              lg:px-10
-              lg:pb-16
-              lg:pt-24
+              object-contain
             "
-          >
-            <div
-              className="
-                max-w-4xl
-              "
-            >
-
-              <h1
-                className="
-                  max-w-4xl
-
-                  text-[36px]
-                  font-bold
-                  leading-[1.08]
-
-                  tracking-[-0.04em]
-
-                  text-white
-
-                  min-[414px]:text-[40px]
-
-                  sm:text-[46px]
-
-                  md:text-[54px]
-
-                  lg:text-[62px]
-                "
-              >
-                NRI Investment in Dholera:{" "}
-                <span className="text-[#EC1C40]">
-                  Property Guide for Overseas Indians
-                </span>
-              </h1>
-
-              <div
-                className="
-                  mt-6
-
-                  max-w-3xl
-
-                  space-y-3
-
-                  text-[15px]
-                  leading-7
-
-                  text-white/75
-
-                  sm:text-[16px]
-
-                  lg:text-[17px]
-                  lg:leading-8
-                "
-              >
-                <p>
-                  Dholera Times helps NRIs understand
-                  Dholera, compare residential property
-                  options, verify important information and
-                  manage the buying process with support
-                  from our on ground team.
-                </p>
-
-                <p>
-                  From Dholera SIR development and
-                  infrastructure to property locations,
-                  pricing, documentation and site visits,
-                  our aim is to help you make a more
-                  informed decision before investing.
-                </p>
-              </div>
-
-              <div
-                className="
-                  mt-7
-
-                  flex
-                  flex-col
-
-                  gap-3
-
-                  min-[480px]:flex-row
-                "
-              >
-                <Link
-                  href="/contact/inquiry"
-                  className="
-                    inline-flex
-
-                    min-h-[52px]
-
-                    items-center
-                    justify-center
-
-                    gap-2
-
-                    rounded-xl
-
-                    bg-[#EC1C40]
-
-                    px-6
-                    py-3
-
-                    text-[15px]
-                    font-semibold
-
-                    text-white
-
-                    shadow-[0_12px_30px_-15px_rgba(236,28,64,0.8)]
-
-                    transition-[background-color,transform,box-shadow]
-                    duration-200
-
-                    hover:-translate-y-0.5
-                    hover:bg-[#d81839]
-                    hover:shadow-[0_16px_34px_-16px_rgba(236,28,64,0.9)]
-
-                    focus-visible:outline-none
-                    focus-visible:ring-2
-                    focus-visible:ring-white
-                    focus-visible:ring-offset-2
-                    focus-visible:ring-offset-black
-
-                    motion-reduce:transform-none
-                  "
-                >
-                  Talk to a Dholera Expert
-
-                  <ArrowRight
-                    size={18}
-                    strokeWidth={1.9}
-                    aria-hidden="true"
-                  />
-                </Link>
-              </div>
-            </div>
-          </div>
+          />
         </section>
+
 
         {/* ===================================================
             QUICK NAVIGATION
@@ -824,6 +627,467 @@ export default function NRIInvestmentGuide() {
           </nav>
         </div>
 
+
+        
+
+    <section
+      aria-labelledby="nri-investment-heading"
+      className="
+        relative
+        w-full
+        overflow-hidden
+
+        bg-white
+
+        px-4
+        py-8
+
+        min-[414px]:px-5
+
+        sm:px-6
+        sm:py-10
+
+        md:px-8
+        md:py-10
+
+        lg:px-10
+        lg:py-12
+      "
+    >
+      {/* =========================================================
+          SUBTLE BACKGROUND DETAILS
+      ========================================================== */}
+
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none
+
+          absolute
+          right-[-120px]
+          top-[-140px]
+
+          h-[360px]
+          w-[360px]
+
+          rounded-full
+
+          border
+          border-[#EC1C40]/[0.06]
+        "
+      />
+
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none
+
+          absolute
+          right-[-55px]
+          top-[-75px]
+
+          h-[230px]
+          w-[230px]
+
+          rounded-full
+
+          border
+          border-[#EC1C40]/[0.08]
+        "
+      />
+
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none
+
+          absolute
+          bottom-0
+          left-0
+
+          h-px
+          w-full
+
+          bg-gradient-to-r
+          from-transparent
+          via-black/[0.06]
+          to-transparent
+        "
+      />
+
+      {/* =========================================================
+          CONTENT
+      ========================================================== */}
+
+      <div
+        className="
+          relative
+          z-10
+
+          mx-auto
+          w-full
+          max-w-7xl
+        "
+      >
+        <div
+          className="
+            overflow-hidden
+
+            rounded-[24px]
+
+            border
+            border-black/[0.07]
+
+            bg-[#FAFAFA]
+
+            shadow-[0_18px_55px_rgba(0,0,0,0.045)]
+
+            sm:rounded-[28px]
+
+            lg:grid
+            lg:grid-cols-[minmax(0,1.35fr)_minmax(300px,0.65fr)]
+          "
+        >
+          {/* =====================================================
+              LEFT — CONTENT
+          ====================================================== */}
+
+          <div
+            className="
+              flex
+              flex-col
+
+              px-4
+              py-8
+
+              min-[414px]:px-6
+
+              sm:px-8
+              sm:py-9
+
+              md:px-10
+              md:py-10
+
+              lg:px-10
+              lg:py-10
+
+              xl:px-10
+              xl:py-10
+            "
+          >
+          
+            {/* HEADING */}
+
+            <h2
+              id="nri-investment-heading"
+              className="
+                max-w-4xl
+
+                text-[28px]
+                font-bold
+                leading-[1.18]
+
+                tracking-[-0.03em]
+
+                text-black
+
+                sm:text-[32px]
+
+                md:text-[36px]
+
+                lg:text-[40px]
+                lg:leading-[1.15]
+
+                xl:text-[40px]
+              "
+            >
+              NRI Investment in Dholera:{" "}
+              <span className="text-[#EC1C40]">
+                Property Guide for Overseas Indians
+              </span>
+            </h2>
+
+            {/* DESCRIPTION */}
+
+            <div
+              className="
+                mt-5
+
+                max-w-3xl
+
+                space-y-4
+
+                text-[15px]
+                font-normal
+                leading-7
+
+                text-black/65
+
+                sm:mt-6
+                sm:text-[16px]
+                sm:leading-7
+
+                lg:text-[16.5px]
+                lg:leading-8
+              "
+            >
+              <p>
+                Dholera Times helps NRIs understand Dholera,
+                compare residential property options, verify
+                important information and manage the buying
+                process with support from our on ground team.
+              </p>
+
+              <p>
+                From Dholera SIR development and infrastructure
+                to property locations, pricing, documentation and
+                site visits, our aim is to help you make a more
+                informed decision before investing.
+              </p>
+            </div>
+
+            {/* CTA */}
+
+            <div className="mt-7 sm:mt-8">
+              <Link
+                href={`https://wa.me/919958993549?text=${encodeURIComponent(
+                  "Hello, I would like to request an NRI consultation for property investment in Dholera."
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="
+
+                  inline-flex
+
+                  min-h-[50px]
+
+                  items-center
+                  justify-center
+
+                  gap-2
+
+                  rounded-xl
+
+                  bg-[#EC1C40]
+
+                  px-5
+                  py-3
+
+                  text-[14px]
+                  font-semibold
+
+                  text-white
+
+                  transition-[background-color,transform]
+                  duration-200
+
+                  hover:-translate-y-0.5
+                  hover:bg-[#d81839]
+
+                  sm:text-[15px]
+
+                  motion-reduce:transform-none
+                "
+              >
+                <span>
+                  Talk to a Dholera Expert
+                </span>
+
+                <ArrowUpRight
+                  size={18}
+                  strokeWidth={2}
+                  aria-hidden="true"
+                  className="
+                    shrink-0
+
+                    transition-transform
+                    duration-200
+                    ease-out
+
+                    group-hover:translate-x-0.5
+                    group-hover:-translate-y-0.5
+
+                    motion-reduce:transform-none
+                    motion-reduce:transition-none
+                  "
+                />
+              </Link>
+            </div>
+          </div>
+
+          {/* =====================================================
+              RIGHT — VISUAL PANEL
+          ====================================================== */}
+
+          <div
+            aria-hidden="true"
+            className="
+              relative
+
+              hidden
+
+              min-h-full
+              overflow-hidden
+
+              border-l
+              border-black/[0.06]
+
+              bg-white
+
+              lg:flex
+              lg:items-center
+              lg:justify-center
+            "
+          >
+            {/* LARGE CIRCLE */}
+
+            <div
+              className="
+                relative
+
+                flex
+                h-[250px]
+                w-[250px]
+
+                items-center
+                justify-center
+
+                rounded-full
+
+                border
+                border-black/[0.06]
+
+                bg-[#FAFAFA]
+              "
+            >
+              <div
+                className="
+                  absolute
+                  inset-[18px]
+
+                  rounded-full
+
+                  border
+                  border-[#EC1C40]/10
+                "
+              />
+
+              <div
+                className="
+                  absolute
+                  inset-[42px]
+
+                  rounded-full
+
+                  border
+                  border-dashed
+                  border-black/10
+                "
+              />
+
+              <div
+                className="
+                  relative
+                  z-10
+
+                  flex
+                  h-24
+                  w-24
+
+                  items-center
+                  justify-center
+
+                  rounded-full
+
+                  bg-white
+
+                  shadow-[0_18px_45px_rgba(0,0,0,0.08)]
+                "
+              >
+                <Globe
+                  size={43}
+                  strokeWidth={1.4}
+                  className="text-[#EC1C40]"
+                />
+              </div>
+
+              {/* DECORATIVE POINTS */}
+
+              <span
+                className="
+                  absolute
+                  left-[26px]
+                  top-[95px]
+
+                  h-2.5
+                  w-2.5
+
+                  rounded-full
+
+                  bg-[#EC1C40]
+                "
+              />
+
+              <span
+                className="
+                  absolute
+                  right-[36px]
+                  top-[55px]
+
+                  h-2
+                  w-2
+
+                  rounded-full
+
+                  bg-black/20
+                "
+              />
+
+              <span
+                className="
+                  bottom-[43px]
+                  right-[53px]
+
+                  absolute
+
+                  h-3
+                  w-3
+
+                  rounded-full
+
+                  border-2
+                  border-[#EC1C40]/60
+
+                  bg-white
+                "
+              />
+            </div>
+
+            {/* BOTTOM DECORATIVE LINE */}
+
+            <div
+              className="
+                absolute
+                bottom-0
+                left-0
+
+                h-1
+                w-full
+
+                bg-gradient-to-r
+                from-transparent
+                via-[#EC1C40]
+                to-transparent
+
+                opacity-60
+              "
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+
         {/* ===================================================
             CAN NRIs BUY PROPERTY
         ==================================================== */}
@@ -836,17 +1100,17 @@ export default function NRIInvestmentGuide() {
             bg-white
 
             px-4
-            py-12
+            py-8
 
             min-[414px]:px-5
 
             sm:px-6
-            sm:py-14
+            sm:py-10
 
             md:px-8
 
             lg:px-10
-            lg:py-20
+            lg:py-10
           "
         >
           <div
@@ -857,7 +1121,6 @@ export default function NRIInvestmentGuide() {
             "
           >
             <SectionHeading
-              eyebrow="Property Rules"
               title="Can NRIs Buy Property"
               accent="in Dholera?"
             />
@@ -912,17 +1175,17 @@ export default function NRIInvestmentGuide() {
             bg-black/[0.025]
 
             px-4
-            py-12
+            py-8
 
             min-[414px]:px-5
 
             sm:px-6
-            sm:py-14
+            sm:py-10
 
             md:px-8
 
             lg:px-10
-            lg:py-16
+            lg:py-10
           "
         >
           <div
@@ -1153,17 +1416,17 @@ export default function NRIInvestmentGuide() {
             bg-white
 
             px-4
-            py-12
+            py-8
 
             min-[414px]:px-5
 
             sm:px-6
-            sm:py-14
+            sm:py-10
 
             md:px-8
 
             lg:px-10
-            lg:py-20
+            lg:py-12
           "
         >
           <div className="mx-auto w-full max-w-7xl">
@@ -1632,7 +1895,7 @@ export default function NRIInvestmentGuide() {
           bg-black/[0.025]
 
           px-4
-          py-12
+          py-8
 
           min-[414px]:px-5
 
@@ -1642,7 +1905,7 @@ export default function NRIInvestmentGuide() {
           md:px-8
 
           lg:px-10
-          lg:py-20
+          lg:py-10
         "
       >
         <div
@@ -1899,17 +2162,17 @@ export default function NRIInvestmentGuide() {
           bg-white
 
           px-4
-          py-12
+          py-8
 
           min-[414px]:px-5
 
           sm:px-6
-          sm:py-14
+          sm:py-10
 
           md:px-8
 
           lg:px-10
-          lg:py-20
+          lg:py-10
         "
       >
         <div
@@ -1920,7 +2183,6 @@ export default function NRIInvestmentGuide() {
           "
         >
           <SectionHeading
-            eyebrow="Remote Assistance"
             title="Buying Property in Dholera"
             accent="From Abroad"
             description="You do not necessarily need to travel to India for every step of the research process."
@@ -2116,19 +2378,19 @@ export default function NRIInvestmentGuide() {
             bg-black
 
             px-4
-            py-10
+            py-8
 
             text-white
 
             min-[414px]:px-5
 
             sm:px-6
-            sm:py-14
+            sm:py-10
 
             md:px-8
 
             lg:px-10
-            lg:py-12
+            lg:py-10
           "
         >
           <div
@@ -2223,17 +2485,17 @@ export default function NRIInvestmentGuide() {
             bg-white
 
             px-4
-            py-12
+            py-8
 
             min-[414px]:px-5
 
             sm:px-6
-            sm:py-14
+            sm:py-10
 
             md:px-8
 
             lg:px-10
-            lg:py-20
+            lg:py-10
           "
         >
           <div
@@ -2244,7 +2506,6 @@ export default function NRIInvestmentGuide() {
             "
           >
             <SectionHeading
-              eyebrow="Evaluation"
               title="NRI Property Investment:"
               accent="What Should You Evaluate?"
               description="Do not evaluate a Dholera property only by looking at the quoted price."
@@ -2344,19 +2605,19 @@ export default function NRIInvestmentGuide() {
             bg-black
 
             px-4
-            py-12
+            py-8
 
             text-white
 
             min-[414px]:px-5
 
             sm:px-6
-            sm:py-14
+            sm:py-10
 
             md:px-8
 
             lg:px-10
-            lg:py-20
+            lg:py-10
           "
         >
           <div
@@ -2371,26 +2632,6 @@ export default function NRIInvestmentGuide() {
             ====================================================== */}
 
             <div className="max-w-4xl">
-              {/* Eyebrow */}
-              <p
-                className="
-                  mb-3
-
-                  text-[11px]
-                  font-bold
-                  uppercase
-                  leading-5
-
-                  tracking-[0.16em]
-
-                  text-[#EC1C40]
-
-                  sm:text-[12px]
-                "
-              >
-                Risk Awareness
-              </p>
-
               {/* Title */}
               <h2
                 className="
@@ -2571,17 +2812,17 @@ export default function NRIInvestmentGuide() {
             bg-white
 
             px-4
-            py-12
+            py-8
 
             min-[414px]:px-5
 
             sm:px-6
-            sm:py-14
+            sm:py-10
 
             md:px-8
 
             lg:px-10
-            lg:py-20
+            lg:py-12
           "
         >
           <div
@@ -2602,7 +2843,6 @@ export default function NRIInvestmentGuide() {
           >
             <div>
               <SectionHeading
-                eyebrow="Advisory Support"
                 title="NRI Investment Consultation"
                 accent="With Dholera Times"
               />
@@ -2784,17 +3024,17 @@ export default function NRIInvestmentGuide() {
             bg-black/[0.025]
 
             px-4
-            py-12
+            py-8
 
             min-[414px]:px-5
 
             sm:px-6
-            sm:py-14
+            sm:py-10
 
             md:px-8
 
             lg:px-10
-            lg:py-20
+            lg:py-10
           "
         >
           <div
@@ -2809,7 +3049,6 @@ export default function NRIInvestmentGuide() {
             ====================================================== */}
 
             <SectionHeading
-              eyebrow="Dholera Times"
               title="Why NRIs Choose"
               accent="Dholera Times"
             />

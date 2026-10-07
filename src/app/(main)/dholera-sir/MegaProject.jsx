@@ -484,12 +484,13 @@ export default async function MegaProjectsSection() {
 
         min-[414px]:px-6
 
-        sm:py-12
+        sm:py-10
 
-        md:px-8
-        md:py-14
-
-        lg:py-14
+        md:px-10
+        md:py-10
+        
+        lg:px-10
+        lg:py-10
       "
     >
       {/* =====================================================
