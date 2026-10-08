@@ -4,7 +4,9 @@ import { getblogs } from "@/sanity/lib/api";
 import BlogCard from "./BlogCard";
 import MobileBlogSwiper from "./MobileBlog";
 import TrendingBlogItem from "./TrendingBlog";
-import hero from "@/assets/blog-hero.webp";
+import hero from "@/assets/DTBlogBanner.webp";
+
+
 import heroM from "@/assets/blog-m-v.webp";
 import Image from "next/image";
 import { FaWhatsapp } from "react-icons/fa";

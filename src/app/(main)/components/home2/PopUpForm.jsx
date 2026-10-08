@@ -6,6 +6,8 @@ import React, {
   useState,
 } from "react";
 
+import { usePathname } from "next/navigation";
+
 import {
   AnimatePresence,
   motion,
@@ -19,11 +21,41 @@ import {
 
 import { createPortal } from "react-dom";
 
+/* ============================================================
+   PAGES WHERE AUTO POPUP SHOULD WORK
+
+   Add/remove your page URLs here.
+============================================================ */
+
+const AUTO_POPUP_PAGES = [
+  "/",
+  "/dholera-sir",
+  "/nri-investment-guide-dholera",
+  "/dholera-updates/latest-updates",
+  "/dholera-updates/blogs",
+  "/gallery/dholera-sir-progress",
+  "/about",
+];
+
+/* ============================================================
+   POPUP FORM
+============================================================ */
+
 export default function PopupForm() {
+  const pathname = usePathname() || "/";
+
+  /* ============================================================
+     CHECK CURRENT PAGE
+  ============================================================ */
+
+  const shouldAutoOpenPopup =
+    AUTO_POPUP_PAGES.includes(pathname);
+
   /* ============================================================
      STATES
   ============================================================ */
 
+  
   const [
     showFormPopup,
     setShowFormPopup,
@@ -63,7 +95,26 @@ export default function PopupForm() {
     setIsMounted,
   ] = useState(false);
 
+  /* ============================================================
+     REFS
+  ============================================================ */
+
   const recaptchaRef = useRef(null);
+
+  /*
+   * This tracks whether the popup has already
+   * appeared during the CURRENT page visit.
+   *
+   * IMPORTANT:
+   * We reset this every time pathname changes.
+   */
+
+  const popupShownForCurrentVisitRef =
+    useRef(false);
+
+  /* ============================================================
+     ENVIRONMENT
+  ============================================================ */
 
   const siteKey =
     process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
@@ -77,7 +128,46 @@ export default function PopupForm() {
   }, []);
 
   /* ============================================================
-     GET IN TOUCH BUTTON TRIGGER
+     RESET POPUP WHEN USER CHANGES PAGE
+
+     Example:
+
+     Home
+        ↓
+     Dholera SIR
+        ↓
+     Blogs
+
+     Every pathname change starts a NEW popup visit.
+  ============================================================ */
+
+  useEffect(() => {
+    /*
+     * Allow popup again on the new page.
+     */
+
+    popupShownForCurrentVisitRef.current =
+      false;
+
+    /*
+     * Reset popup state.
+     */
+
+    setShowFormPopup(false);
+
+    setShowThankYou(false);
+
+    setErrorMessage("");
+
+    setIsLoading(false);
+  }, [pathname]);
+
+  /* ============================================================
+     MANUAL BUTTON TRIGGER
+
+     Any button can still open the popup using:
+
+     data-open-dholera-popup
   ============================================================ */
 
   useEffect(() => {
@@ -94,11 +184,29 @@ export default function PopupForm() {
         "[data-open-dholera-popup]",
       );
 
-      if (trigger) {
-        setShowThankYou(false);
-        setErrorMessage("");
-        setShowFormPopup(true);
+      if (!trigger) {
+        return;
       }
+
+      /*
+       * Mark popup as already shown during
+       * this page visit.
+       *
+       * This prevents the 35% scroll popup
+       * from appearing again after the user
+       * already manually opened it.
+       */
+
+      popupShownForCurrentVisitRef.current =
+        true;
+
+      setShowThankYou(false);
+
+      setErrorMessage("");
+
+      setIsLoading(false);
+
+      setShowFormPopup(true);
     };
 
     document.addEventListener(
@@ -116,65 +224,130 @@ export default function PopupForm() {
 
   /* ============================================================
      AUTO POPUP
+
+     REQUIREMENT:
+
+     - Only selected URLs
+     - Opens at 35% scroll
+     - Once during CURRENT page visit
+     - Navigate to another page = reset
+     - Return to previous page = reset
+     - NO sessionStorage
+     - NO localStorage
   ============================================================ */
 
   useEffect(() => {
-    const sessionPopupShown =
-      sessionStorage.getItem(
-        "popupShownThisSession",
-      );
+    /*
+     * Don't enable automatic popup
+     * for URLs not included above.
+     */
 
-    if (!sessionPopupShown) {
-      const handleScroll = () => {
-        const scrollTop =
-          window.pageYOffset ||
-          document.documentElement.scrollTop;
+    if (!shouldAutoOpenPopup) {
+      return;
+    }
 
-        const documentHeight =
-          document.documentElement
-            .scrollHeight -
-          document.documentElement
-            .clientHeight;
+    /* ==========================================================
+       SCROLL HANDLER
+    =========================================================== */
 
-        const scrollPercent =
-          documentHeight > 0
-            ? (scrollTop /
-                documentHeight) *
-              100
-            : 0;
+    const handleScroll = () => {
+      /*
+       * Popup already appeared during
+       * this page visit.
+       */
 
-        if (scrollPercent >= 35) {
-          setShowThankYou(false);
+      if (
+        popupShownForCurrentVisitRef.current
+      ) {
+        return;
+      }
 
-          setErrorMessage("");
+      /* ========================================================
+         CURRENT SCROLL POSITION
+      ======================================================== */
 
-          setShowFormPopup(true);
+      const scrollTop =
+        window.pageYOffset ||
+        document.documentElement.scrollTop;
 
-          sessionStorage.setItem(
-            "popupShownThisSession",
-            "true",
-          );
+      /* ========================================================
+         TOTAL SCROLLABLE HEIGHT
+      ======================================================== */
 
-          window.removeEventListener(
-            "scroll",
-            handleScroll,
-          );
-        }
-      };
+      const documentHeight =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
 
-      window.addEventListener(
-        "scroll",
-        handleScroll,
-      );
+      /* ========================================================
+         SCROLL PERCENTAGE
+      ======================================================== */
 
-      return () => {
+      const scrollPercent =
+        documentHeight > 0
+          ? (scrollTop / documentHeight) *
+            100
+          : 0;
+
+      /* ========================================================
+         OPEN POPUP AT 35%
+      ======================================================== */
+
+      if (scrollPercent >= 45) {
+        /*
+         * Mark popup as shown ONLY for
+         * this current page visit.
+         */
+
+        popupShownForCurrentVisitRef.current =
+          true;
+
+        setShowThankYou(false);
+
+        setErrorMessage("");
+
+        setIsLoading(false);
+
+        setShowFormPopup(true);
+
+        /*
+         * Popup has appeared.
+         * No reason to keep checking
+         * scroll on this visit.
+         */
+
         window.removeEventListener(
           "scroll",
           handleScroll,
         );
-      };
-    }
-  }, []);
+      }
+    };
+
+    /* ==========================================================
+       START LISTENING
+    =========================================================== */
+
+    window.addEventListener(
+      "scroll",
+      handleScroll,
+      {
+        passive: true,
+      },
+    );
+
+    /* ==========================================================
+       CLEANUP WHEN PAGE CHANGES
+    =========================================================== */
+
+    return () => {
+      window.removeEventListener(
+        "scroll",
+        handleScroll,
+      );
+    };
+  }, [
+    pathname,
+    shouldAutoOpenPopup,
+  ]);
 
   /* ============================================================
      LOAD RECAPTCHA
@@ -201,8 +374,9 @@ export default function PopupForm() {
 
           existingScript.addEventListener(
             "load",
-            () =>
-              setRecaptchaLoaded(true),
+            () => {
+              setRecaptchaLoaded(true);
+            },
             {
               once: true,
             },
@@ -218,13 +392,16 @@ export default function PopupForm() {
           "https://www.google.com/recaptcha/api.js";
 
         script.async = true;
+
         script.defer = true;
 
-        script.onload = () =>
+        script.onload = () => {
           setRecaptchaLoaded(true);
+        };
 
-        script.onerror = () =>
+        script.onerror = () => {
           setRecaptchaLoaded(true);
+        };
 
         document.head.appendChild(script);
       } else if (
@@ -239,15 +416,32 @@ export default function PopupForm() {
   }, [siteKey]);
 
   /* ============================================================
+     CLOSE POPUP
+  ============================================================ */
+
+  const handlePopupClose = () => {
+    setShowFormPopup(false);
+
+    setShowThankYou(false);
+
+    setErrorMessage("");
+
+    setIsLoading(false);
+  };
+
+  /* ============================================================
      ESC KEY CLOSE
   ============================================================ */
 
   useEffect(() => {
-    const handleEscapeKey = (event) => {
-      if (
-        event.key === "Escape" &&
-        showFormPopup
-      ) {
+    if (!showFormPopup) {
+      return;
+    }
+
+    const handleEscapeKey = (
+      event,
+    ) => {
+      if (event.key === "Escape") {
         handlePopupClose();
       }
     };
@@ -290,16 +484,19 @@ export default function PopupForm() {
      FORM CHANGE
   ============================================================ */
 
-  const handleChange = (e) => {
+  const handleChange = (event) => {
     const {
       name,
       value,
-    } = e.target;
+    } = event.target;
 
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setFormData(
+      (previousData) => ({
+        ...previousData,
+
+        [name]: value,
+      }),
+    );
 
     setErrorMessage("");
   };
@@ -333,12 +530,15 @@ export default function PopupForm() {
       return false;
     }
 
+    const normalizedPhone =
+      formData.mobileNumber.replace(
+        /\D/g,
+        "",
+      );
+
     if (
       !/^\d{10,15}$/.test(
-        formData.mobileNumber.replace(
-          /\D/g,
-          "",
-        ),
+        normalizedPhone,
       )
     ) {
       setErrorMessage(
@@ -373,7 +573,8 @@ export default function PopupForm() {
 
           body: JSON.stringify({
             fields: {
-              name: formData.fullName,
+              name:
+                formData.fullName,
 
               phone:
                 formData.mobileNumber,
@@ -400,25 +601,27 @@ export default function PopupForm() {
         },
       );
 
-      if (response.ok) {
-        setFormData({
-          fullName: "",
-          mobileNumber: "",
-          email: "",
-        });
-
-        setShowThankYou(true);
-
-        setTimeout(() => {
-          setShowThankYou(false);
-
-          setShowFormPopup(false);
-        }, 3000);
-      } else {
+      if (!response.ok) {
         throw new Error(
           "Error submitting form",
         );
       }
+
+      /* SUCCESS */
+
+      setFormData({
+        fullName: "",
+        mobileNumber: "",
+        email: "",
+      });
+
+      setShowThankYou(true);
+
+      setTimeout(() => {
+        setShowThankYou(false);
+
+        setShowFormPopup(false);
+      }, 3000);
     } catch (error) {
       console.error(
         "Form submission error:",
@@ -451,10 +654,13 @@ export default function PopupForm() {
      FORM SUBMIT
   ============================================================ */
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (
+    event,
+  ) => {
+    event.preventDefault();
 
     setIsLoading(true);
+
     setErrorMessage("");
 
     if (!validateForm()) {
@@ -484,12 +690,14 @@ export default function PopupForm() {
         window.grecaptcha.render(
           recaptchaRef.current,
           {
-            sitekey: siteKey,
+            sitekey:
+              siteKey,
 
             callback:
               onRecaptchaSuccess,
 
-            theme: "light",
+            theme:
+              "light",
           },
         );
       } catch (error) {
@@ -505,25 +713,33 @@ export default function PopupForm() {
         setIsLoading(false);
       }
     } else {
-      window.grecaptcha.execute();
+      try {
+        window.grecaptcha.execute();
+      } catch (error) {
+        console.error(
+          "Error executing reCAPTCHA:",
+          error,
+        );
+
+        setErrorMessage(
+          "Error with verification. Please try again.",
+        );
+
+        setIsLoading(false);
+      }
     }
   };
 
   /* ============================================================
-     CLOSE POPUP
+     BACKDROP CLICK
   ============================================================ */
 
-  const handlePopupClose = () => {
-    setShowFormPopup(false);
-
-    setShowThankYou(false);
-
-    setErrorMessage("");
-  };
-
-  const handleBackdropClick = (e) => {
+  const handleBackdropClick = (
+    event,
+  ) => {
     if (
-      e.target === e.currentTarget
+      event.target ===
+      event.currentTarget
     ) {
       handlePopupClose();
     }
@@ -538,10 +754,9 @@ export default function PopupForm() {
   }
 
   /* ============================================================
-     PORTAL
-     IMPORTANT:
-     Popup is rendered directly inside document.body.
-     Therefore parent overflow-hidden / z-index cannot clip it.
+     KEEP YOUR EXISTING createPortal UI FROM HERE
+
+     return createPortal(...)
   ============================================================ */
 
   return createPortal(
@@ -590,10 +805,6 @@ export default function PopupForm() {
             sm:py-8
           "
         >
-          {/* =================================================
-              MODAL
-          ================================================= */}
-
           <motion.div
             initial={{
               opacity: 0,
@@ -614,8 +825,8 @@ export default function PopupForm() {
               duration: 0.22,
               ease: "easeOut",
             }}
-            onClick={(e) =>
-              e.stopPropagation()
+            onClick={(event) =>
+              event.stopPropagation()
             }
             role="dialog"
             aria-modal="true"
@@ -653,9 +864,7 @@ export default function PopupForm() {
               sm:pt-8
             "
           >
-            {/* =================================================
-                CLOSE BUTTON
-            ================================================= */}
+            {/* CLOSE */}
 
             <button
               type="button"
@@ -686,30 +895,22 @@ export default function PopupForm() {
 
                 text-black/60
 
-                transition-[background-color,color,border-color,transform]
+                transition-all
                 duration-200
 
                 hover:rotate-90
                 hover:border-[#EC1C40]/20
                 hover:bg-[#EC1C40]/10
                 hover:text-[#EC1C40]
-
-                focus-visible:outline-none
-                focus-visible:ring-2
-                focus-visible:ring-[#EC1C40]
-                focus-visible:ring-offset-2
               "
             >
               <X
                 size={18}
                 strokeWidth={2}
-                aria-hidden="true"
               />
             </button>
 
-            {/* =================================================
-                THANK YOU
-            ================================================= */}
+            {/* THANK YOU */}
 
             {showThankYou ? (
               <div
@@ -749,7 +950,6 @@ export default function PopupForm() {
                   "
                 >
                   <svg
-                    xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -773,9 +973,6 @@ export default function PopupForm() {
                   className="
                     text-[24px]
                     font-bold
-                    leading-tight
-
-                    tracking-[-0.03em]
 
                     text-black
                   "
@@ -799,14 +996,11 @@ export default function PopupForm() {
               </div>
             ) : (
               <>
-                {/* =================================================
-                    HEADING
-                ================================================= */}
+                {/* HEADING */}
 
                 <div
                   className="
                     mb-6
-
                     pr-10
                   "
                 >
@@ -829,15 +1023,12 @@ export default function PopupForm() {
                     "
                   >
                     Registry Ready Plots
-                    in Dholera
-                    Starting from ₹10
-                    Lakh
+                    in Dholera Starting
+                    from ₹10 Lakh
                   </h2>
                 </div>
 
-                {/* =================================================
-                    FORM
-                ================================================= */}
+                {/* FORM */}
 
                 <form
                   onSubmit={
@@ -864,7 +1055,6 @@ export default function PopupForm() {
 
                         text-[13px]
                         font-medium
-                        leading-5
 
                         text-[#EC1C40]
                       "
@@ -873,18 +1063,13 @@ export default function PopupForm() {
                     </div>
                   )}
 
-                  {/* =================================================
-                      INPUTS
-                  ================================================= */}
-
                   <div className="space-y-4">
-                    {/* FULL NAME */}
+                    {/* NAME */}
 
                     <div className="relative">
                       <UserRound
                         size={20}
                         strokeWidth={1.7}
-                        aria-hidden="true"
                         className="
                           pointer-events-none
 
@@ -910,7 +1095,6 @@ export default function PopupForm() {
                         }
                         required
                         autoComplete="name"
-                        aria-label="Full Name"
                         placeholder="Enter your full name"
                         className="
                           h-[54px]
@@ -928,14 +1112,10 @@ export default function PopupForm() {
                           pr-4
 
                           text-[15px]
-                          font-normal
 
                           text-black
 
                           outline-none
-
-                          transition-[border-color,box-shadow]
-                          duration-200
 
                           placeholder:text-black/40
 
@@ -955,7 +1135,6 @@ export default function PopupForm() {
                       <Phone
                         size={20}
                         strokeWidth={1.7}
-                        aria-hidden="true"
                         className="
                           pointer-events-none
 
@@ -982,7 +1161,6 @@ export default function PopupForm() {
                         required
                         inputMode="tel"
                         autoComplete="tel"
-                        aria-label="Phone Number"
                         placeholder="Enter your phone number"
                         className="
                           h-[54px]
@@ -1000,14 +1178,10 @@ export default function PopupForm() {
                           pr-4
 
                           text-[15px]
-                          font-normal
 
                           text-black
 
                           outline-none
-
-                          transition-[border-color,box-shadow]
-                          duration-200
 
                           placeholder:text-black/40
 
@@ -1022,16 +1196,16 @@ export default function PopupForm() {
                     </div>
                   </div>
 
-                  {/* =================================================
-                      RECAPTCHA
-                  ================================================= */}
+                  {/* RECAPTCHA */}
 
                   <div
                     className="
                       mt-3
 
                       flex
+
                       max-w-full
+
                       justify-center
 
                       overflow-hidden
@@ -1044,9 +1218,7 @@ export default function PopupForm() {
                     />
                   </div>
 
-                  {/* =================================================
-                      SUBMIT
-                  ================================================= */}
+                  {/* SUBMIT */}
 
                   <button
                     type="submit"
@@ -1071,77 +1243,29 @@ export default function PopupForm() {
 
                       text-[15px]
                       font-bold
-                      leading-6
 
                       text-white
-
-                      transition-[background-color,transform,box-shadow,opacity]
-                      duration-200
-
-                      sm:min-h-[56px]
-                      sm:text-[16px]
 
                       ${
                         isLoading ||
                         !recaptchaLoaded
                           ? `
-                            cursor-not-allowed
-                            bg-[#EC1C40]/60
-                          `
+                              cursor-not-allowed
+                              bg-[#EC1C40]/60
+                            `
                           : `
-                            bg-[#EC1C40]
+                              bg-[#EC1C40]
 
-                            hover:bg-[#d9183a]
+                              hover:bg-[#d9183a]
 
-                            hover:shadow-[0_10px_28px_rgba(236,28,64,0.22)]
-
-                            active:scale-[0.99]
-                          `
+                              hover:shadow-[0_10px_28px_rgba(236,28,64,0.22)]
+                            `
                       }
                     `}
                   >
-                    {isLoading ? (
-                      <span
-                        className="
-                          flex
-                          items-center
-                          justify-center
-
-                          gap-2.5
-                        "
-                      >
-                        <svg
-                          className="
-                            h-5
-                            w-5
-
-                            animate-spin
-                          "
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                        >
-                          <circle
-                            className="opacity-25"
-                            cx="12"
-                            cy="12"
-                            r="10"
-                            stroke="currentColor"
-                            strokeWidth="4"
-                          />
-
-                          <path
-                            className="opacity-75"
-                            fill="currentColor"
-                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                          />
-                        </svg>
-
-                        Submitting...
-                      </span>
-                    ) : (
-                      "Get A Call Back"
-                    )}
+                    {isLoading
+                      ? "Submitting..."
+                      : "Get A Call Back"}
                   </button>
                 </form>
               </>
@@ -1150,6 +1274,7 @@ export default function PopupForm() {
         </motion.div>
       )}
     </AnimatePresence>,
+
     document.body,
   );
 }

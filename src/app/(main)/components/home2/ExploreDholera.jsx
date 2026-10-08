@@ -2,7 +2,6 @@ import Link from "next/link";
 
 import { Building2, Factory, Home, Landmark, Phone } from "lucide-react";
 
-import PopupForm from "./PopUpForm";
 
 /* ============================================================
    EXPLORE DHOLERA DATA
@@ -397,12 +396,6 @@ export default function ExploreDholera() {
               <span className="whitespace-nowrap">Get In Touch</span>
             </button>
           </div>
-
-          {/* =====================================================
-              POPUP
-          ====================================================== */}
-
-          <PopupForm />
         </div>
       </section>
 

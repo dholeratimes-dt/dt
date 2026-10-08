@@ -191,22 +191,40 @@ export default function BlogCard({
         ==================================================== */}
 
         <div
-          className="
-            flex
-            flex-1
-            flex-col
+        className="
+          flex
+          flex-1
+          flex-col
 
-            bg-white
+          bg-white
 
-            px-4
-            pb-4
-            pt-4
+          px-3
+          pb-3
+          pt-4
 
-            min-[414px]:px-[18px]
-            min-[414px]:pb-[18px]
+          min-[414px]:px-5
+          min-[414px]:pb-5
+          min-[414px]:pt-5
 
-            sm:p-5
-          "
+          sm:px-3
+          sm:pb-3
+          sm:pt-3
+
+          md:px-3
+          md:pb-3
+          md:pt-3
+
+          lg:px-3
+          lg:pb-3
+          lg:pt-3
+
+          xl:px-3
+
+          xl:pb-3
+
+          xl:pt-3
+
+        "
         >
           {/* =================================================
               TITLE
@@ -258,15 +276,14 @@ export default function BlogCard({
           <div
             className="
               mt-auto
-
               flex
-
               min-h-[38px]
-
+            
               items-end
               justify-between
 
               gap-3
+              pb-1
 
             "
           >

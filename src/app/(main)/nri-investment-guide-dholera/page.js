@@ -1921,199 +1921,447 @@ export default function NRIInvestmentGuide() {
             description="Property due diligence is especially important when you are buying remotely. Before considering a plot in Dholera, check:"
           />
 
-          {/* =====================================================
-              DOCUMENT CARDS
-          ====================================================== */}
+{/* ============================================================
+    DOCUMENTS
 
-          <div
+    MOBILE:
+    Small icon left + title/description right
+
+    TABLET / DESKTOP:
+    Existing card design
+============================================================ */}
+
+<>
+  {/* ==========================================================
+      MOBILE VIEW
+      BELOW 768px
+  =========================================================== */}
+
+  <div
+    className="
+      relative
+      mt-8
+      w-full
+
+      md:hidden
+    "
+  >
+    <div
+      className="
+        flex
+        flex-col
+
+        gap-6
+      "
+    >
+      {documents.map(
+        ({
+          title,
+          description,
+          icon: Icon,
+        }) => (
+          <article
+            key={title}
             className="
-              mt-8
+              relative
 
               grid
-              grid-cols-1
-              gap-4
+              grid-cols-[64px_minmax(0,1fr)]
 
-              md:grid-cols-2
+              items-center
 
-              xl:grid-cols-3
+              gap-3
+
+              py-2
+
+              min-[390px]:grid-cols-[68px_minmax(0,1fr)]
+
+              min-[414px]:grid-cols-[70px_minmax(0,1fr)]
+              min-[414px]:gap-4
             "
           >
-            {documents.map(
-              ({
-                title,
-                description,
-                icon: Icon,
-              }) => (
-                <article
-                  key={title}
+            {/* ===============================================
+                LEFT — ICON
+            ================================================ */}
+
+            <div
+              className="
+                relative
+
+                flex
+
+                items-center
+                justify-center
+              "
+            >
+              {/* SOFT OUTER HALO */}
+
+              <div
+                aria-hidden="true"
+                className="
+                  pointer-events-none
+
+                  absolute
+
+                  h-[60px]
+                  w-[60px]
+
+                  rounded-full
+
+                  bg-[#EC1C40]/[0.04]
+
+                  min-[414px]:h-[64px]
+                  min-[414px]:w-[64px]
+                "
+              />
+
+              {/* MAIN CIRCLE */}
+
+              <div
+                className="
+                  relative
+                  z-10
+
+                  flex
+                  h-[52px]
+                  w-[52px]
+
+                  shrink-0
+
+                  items-center
+                  justify-center
+
+                  rounded-full
+
+                  border-[1.5px]
+                  border-[#EC1C40]
+
+                  bg-white
+
+                  shadow-[0_8px_20px_rgba(236,28,64,0.10)]
+
+                  min-[414px]:h-[56px]
+                  min-[414px]:w-[56px]
+                "
+              >
+                {/* INNER RING */}
+
+                <div
                   className="
-                    group
-                    relative
-
                     flex
-                    min-h-[190px]
-                    flex-col
+                    h-[40px]
+                    w-[40px]
 
-                    overflow-hidden
+                    items-center
+                    justify-center
 
-                    rounded-2xl
+                    rounded-full
 
                     border
-                    border-black/10
+                    border-[#EC1C40]/15
 
                     bg-white
 
-                    p-5
-
-                    transition-[border-color,box-shadow,transform]
-                    duration-300
-
-                    hover:-translate-y-0.5
-                    hover:border-[#EC1C40]/25
-                    hover:shadow-[0_18px_40px_-32px_rgba(0,0,0,0.35)]
-
-                    sm:min-h-[200px]
-                    sm:p-6
-
-                    lg:min-h-[210px]
+                    min-[414px]:h-[43px]
+                    min-[414px]:w-[43px]
                   "
                 >
-                  {/* =================================================
-                      TOP ACCENT
-                  ================================================= */}
-
-                  <div
-                    aria-hidden="true"
-                    className="
-                      absolute
-                      inset-x-0
-                      top-0
-
-                      h-[3px]
-
-                      origin-left
-                      scale-x-0
-
-                      bg-[#EC1C40]
-
-                      transition-transform
-                      duration-300
-
-                      group-hover:scale-x-100
-                    "
-                  />
-
-                  {/* =================================================
-                      ICON + TITLE
-                  ================================================= */}
+                  {/* ICON BACKGROUND */}
 
                   <div
                     className="
                       flex
-                      min-w-0
+                      h-[29px]
+                      w-[29px]
+
                       items-center
+                      justify-center
 
-                      gap-3
+                      rounded-full
 
-                      sm:gap-4
+                      bg-[#EC1C40]/[0.045]
+
+                      text-[#EC1C40]
+
+                      min-[414px]:h-[31px]
+                      min-[414px]:w-[31px]
                     "
                   >
-                    {/* Icon */}
-                    <span
+                    <Icon
+                      size={16}
+                      strokeWidth={1.8}
+                      aria-hidden="true"
                       className="
-                        flex
-                        h-10
-                        w-10
-
-                        shrink-0
-
-                        items-center
-                        justify-center
-
-                        rounded-xl
-
-                        bg-[#EC1C40]/10
-
-                        text-[#EC1C40]
-
-                        transition-[background-color,color]
-                        duration-300
-
-                        group-hover:bg-[#EC1C40]
-                        group-hover:text-white
-
-                        sm:h-11
-                        sm:w-11
+                        min-[414px]:h-[17px]
+                        min-[414px]:w-[17px]
                       "
-                    >
-                      <Icon
-                        size={19}
-                        strokeWidth={1.8}
-                        aria-hidden="true"
-                      />
-                    </span>
-
-                    {/* Title */}
-                    <h3
-                      className="
-                        min-w-0
-
-                        text-[16px]
-                        font-bold
-                        leading-6
-
-                        tracking-[-0.01em]
-
-                        text-black
-
-                        sm:text-[17px]
-
-                        lg:text-[18px]
-                      "
-                    >
-                      {title}
-                    </h3>
+                    />
                   </div>
+                </div>
+              </div>
+            </div>
 
-                  {/* =================================================
-                      DIVIDER
-                  ================================================= */}
+            {/* ===============================================
+                RIGHT — CONTENT
+            ================================================ */}
 
-                  <div
-                    className="
-                      my-4
+            <div
+              className="
+                min-w-0
 
-                      h-px
-                      w-full
+                py-2
+              "
+            >
+              {/* TITLE */}
 
-                      bg-black/10
+              <h3
+                className="
+                  text-[16px]
+                  font-bold
+                  leading-[23px]
 
-                      sm:my-5
-                    "
-                  />
+                  tracking-[-0.018em]
 
-                  {/* =================================================
-                      DESCRIPTION
-                  ================================================= */}
+                  text-black
 
-                  <p
-                    className="
-                      text-[14px]
-                      leading-6
+                  min-[390px]:text-[16.5px]
 
-                      text-black/60
+                  min-[414px]:text-[17px]
+                  min-[414px]:leading-6
+                "
+              >
+                {title}
+              </h3>
 
-                      sm:text-[15px]
-                      sm:leading-7
-                    "
-                  >
-                    {description}
-                  </p>
-                </article>
-              ),
-            )}
+              {/* DESCRIPTION */}
+
+              <p
+                className="
+                  mt-2
+
+                  text-[13px]
+                  font-normal
+                  leading-[21px]
+
+                  text-black/55
+
+                  min-[390px]:text-[13.5px]
+                  min-[390px]:leading-[22px]
+
+                  min-[414px]:text-[14px]
+                  min-[414px]:leading-[23px]
+                "
+              >
+                {description}
+              </p>
+            </div>
+          </article>
+        ),
+      )}
+    </div>
+  </div>
+
+  {/* ==========================================================
+      TABLET + DESKTOP VIEW
+      768px AND ABOVE
+
+      EXISTING DESIGN
+  =========================================================== */}
+
+  <div
+    className="
+      mt-8
+
+      hidden
+
+      grid-cols-1
+      gap-4
+
+      md:grid
+      md:grid-cols-2
+
+      xl:grid-cols-3
+    "
+  >
+    {documents.map(
+      ({
+        title,
+        description,
+        icon: Icon,
+      }) => (
+        <article
+          key={title}
+          className="
+            group
+            relative
+
+            flex
+            min-h-[190px]
+            flex-col
+
+            overflow-hidden
+
+            rounded-2xl
+
+            border
+            border-black/10
+
+            bg-white
+
+            p-5
+
+            transition-[border-color,box-shadow,transform]
+            duration-300
+
+            hover:-translate-y-0.5
+            hover:border-[#EC1C40]/25
+            hover:shadow-[0_18px_40px_-32px_rgba(0,0,0,0.35)]
+
+            sm:min-h-[200px]
+            sm:p-6
+
+            lg:min-h-[210px]
+          "
+        >
+          {/* =================================================
+              TOP ACCENT
+          ================================================= */}
+
+          <div
+            aria-hidden="true"
+            className="
+              absolute
+              inset-x-0
+              top-0
+
+              h-[3px]
+
+              origin-left
+              scale-x-0
+
+              bg-[#EC1C40]
+
+              transition-transform
+              duration-300
+
+              group-hover:scale-x-100
+            "
+          />
+
+          {/* =================================================
+              ICON + TITLE
+          ================================================= */}
+
+          <div
+            className="
+              flex
+              min-w-0
+
+              items-center
+
+              gap-3
+
+              sm:gap-4
+            "
+          >
+            {/* ICON */}
+
+            <span
+              className="
+                flex
+                h-10
+                w-10
+
+                shrink-0
+
+                items-center
+                justify-center
+
+                rounded-xl
+
+                bg-[#EC1C40]/10
+
+                text-[#EC1C40]
+
+                transition-[background-color,color]
+                duration-300
+
+                group-hover:bg-[#EC1C40]
+                group-hover:text-white
+
+                sm:h-11
+                sm:w-11
+              "
+            >
+              <Icon
+                size={19}
+                strokeWidth={1.8}
+                aria-hidden="true"
+              />
+            </span>
+
+            {/* TITLE */}
+
+            <h3
+              className="
+                min-w-0
+
+                text-[16px]
+                font-bold
+                leading-6
+
+                tracking-[-0.01em]
+
+                text-black
+
+                sm:text-[17px]
+
+                lg:text-[18px]
+              "
+            >
+              {title}
+            </h3>
           </div>
 
+          {/* =================================================
+              DIVIDER
+          ================================================= */}
+
+          <div
+            className="
+              my-4
+
+              h-px
+              w-full
+
+              bg-black/10
+
+              sm:my-5
+            "
+          />
+
+          {/* =================================================
+              DESCRIPTION
+          ================================================= */}
+
+          <p
+            className="
+              text-[14px]
+              leading-6
+
+              text-black/60
+
+              sm:text-[15px]
+              sm:leading-7
+            "
+          >
+            {description}
+          </p>
+        </article>
+      ),
+    )}
+  </div>
+</>
           {/* =====================================================
               IMPORTANT NOTE
           ====================================================== */}

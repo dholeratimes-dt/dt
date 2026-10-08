@@ -6,7 +6,7 @@ import Footer from "./components/Footer";
 import FloatingIcons from "./components/Floating";
 import ScrollToTop from "./components/ScrollToTop";
 import Script from "next/script";
-import RageClickPopup from "./components/RageClickPopup";
+import PopupForm from "@/app/(main)/components/home2/PopUpForm";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -64,7 +64,7 @@ export default function RootLayout({ children }) {
 
         <FloatingIcons />
         <Footer />
-        <RageClickPopup />
+        <PopupForm />
       </body>
     </html>
   );
