@@ -9,7 +9,7 @@ import {
 import Image from "next/image";
 
 import hero3 from "@/assets/hero/DT-Home-Banner-Web.webp";
-import heroM2 from "@/assets/hero/DT-Home-Banner-Phone.webp";
+import heroM2 from "@/assets/hero/DT-Home-Banner-Phone2.webp";
 
 
 import HeroForm from "./HeroForm";
@@ -24,24 +24,21 @@ function HeroImage() {
 
       <div
         className="
-          relative
-
-          aspect-[5/8]
-
           w-full
-
+          overflow-hidden
           md:hidden
         "
       >
         <Image
           src={heroM2}
           alt="Dholera Times"
-          fill
           priority
           sizes="100vw"
           className="
-            object-cover
-            object-center
+            block
+            h-auto
+            w-full
+            object-contain
           "
         />
       </div>
@@ -57,10 +54,8 @@ function HeroImage() {
         sizes="100vw"
         className="
           hidden
-
           h-auto
           w-full
-
           md:block
         "
       />

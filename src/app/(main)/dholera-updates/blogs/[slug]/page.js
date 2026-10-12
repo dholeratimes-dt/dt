@@ -704,7 +704,6 @@ export default async function BlogDetail({ params }) {
                   className="
                     mb-7
                     w-full
-
                     sm:mb-8
                     lg:mb-9
                   "
@@ -712,26 +711,16 @@ export default async function BlogDetail({ params }) {
                   <div
                     className="
                       relative
-
                       mx-auto
                       w-full
                       max-w-[700px]
-
                       overflow-hidden
-
                       rounded-xl
-
                       bg-[#F3E7EC]
-
                       shadow-[0_8px_28px_rgba(57,37,46,0.10)]
-
                       sm:rounded-2xl
                     "
                   >
-                    {/* =====================================================
-                        FEATURED IMAGE
-                    ====================================================== */}
-
                     <Image
                       src={getSanityImageUrl(post.mainImage, 1200, 800)}
                       alt={
@@ -756,79 +745,97 @@ export default async function BlogDetail({ params }) {
                       "
                     />
 
-                    {/* =====================================================
-                        SUBTLE IMAGE OVERLAY
-                    ====================================================== */}
-
                     <div
                       aria-hidden="true"
                       className="
                         pointer-events-none
-
                         absolute
                         inset-0
-
                         bg-gradient-to-t
-                        from-[#39252E]/10
+                        from-black/[0.08]
                         via-transparent
-                        to-black/[0.03]
+                        to-transparent
                       "
                     />
-
-                    {/* =====================================================
-                        READ TIME BADGE
-                        Responsive for phone + desktop
-                    ====================================================== */}
 
                     <div
                       className="
                         absolute
-
+                        bottom-3
                         left-3
-                        top-3
                         z-20
 
-                        flex
+                        inline-flex
                         items-center
-                        justify-center
+                        gap-1.5
 
                         rounded-full
 
-                        bg-[#183746]/95
+                        border
+                        border-black/[0.08]
 
-                        px-3
+                        bg-white/95
+
+                        px-2.5
                         py-1.5
 
-                        text-[11px]
+                        text-[10px]
                         font-semibold
                         leading-none
 
-                        text-[#F6E7B0]
+                        text-black/70
 
-                        shadow-[0_4px_14px_rgba(0,0,0,0.22)]
+                        shadow-[0_4px_14px_rgba(0,0,0,0.12)]
 
                         backdrop-blur-md
 
+                        min-[390px]:bottom-4
                         min-[390px]:left-4
-                        min-[390px]:top-4
-                        min-[390px]:px-3.5
-                        min-[390px]:py-[7px]
-                        min-[390px]:text-[12px]
+                        min-[390px]:px-3
+                        min-[390px]:text-[11px]
 
+                        sm:bottom-5
                         sm:left-5
-                        sm:top-5
-                        sm:px-4
-                        sm:py-2
-                        sm:text-[13px]
+                        sm:px-3.5
+                        sm:py-[7px]
+                        sm:text-[12px]
 
+                        lg:bottom-6
                         lg:left-6
-                        lg:top-6
-                        lg:px-[18px]
-                        lg:py-[9px]
-                        lg:text-[14px]
+                        lg:px-4
+                        lg:py-2
+                        lg:text-[13px]
                       "
                     >
-                      4 min read
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        aria-hidden="true"
+                        className="
+                          h-3.5
+                          w-3.5
+                          text-[#EC1C40]
+                          sm:h-4
+                          sm:w-4
+                        "
+                      >
+                        <circle
+                          cx="12"
+                          cy="12"
+                          r="9"
+                          strokeWidth="1.8"
+                        />
+
+                        <path
+                          d="M12 7v5l3 2"
+                          strokeWidth="1.8"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+
+                      <span>4 min read</span>
                     </div>
                   </div>
                 </div>
@@ -918,31 +925,116 @@ export default async function BlogDetail({ params }) {
                   />
                 </div>
                 {/* Trending posts */}
-                <div className="bg-[#151f28] rounded-xl shadow-2xl shadow-gray-500 p-6 border border-gray-700">
-                  <h3 className="text-xl font-bold mb-4 text-white">
-                    Latest Blogs
-                  </h3>
-                  <div className="">
+                <div
+                  className="
+                    overflow-hidden
+                    rounded-2xl
+                    border
+                    border-black/[0.08]
+                    bg-white
+                    shadow-[0_18px_50px_-36px_rgba(0,0,0,0.30)]
+                    
+                  "
+                >
+                  <div
+                    className="
+                      flex
+                      items-center
+                      justify-between
+                      border-b
+                      border-black/[0.07]
+                      px-4
+                      py-4
+                      sm:px-5
+                      sm:py-5
+                    "
+                  >
+                    <h3
+                      className="
+                        text-[20px]
+                        font-bold
+                        leading-7
+                        tracking-[-0.025em]
+                        text-black
+                        sm:text-[22px]
+                      "
+                    >
+                      Latest Blogs
+                    </h3>
+
+                    {/* <span
+                      className="
+                        h-2
+                        w-2
+                        rounded-full
+                        bg-[#EC1C40]
+                      "
+                    /> */}
+                  </div>
+
+                  <div className="divide-y divide-black/[0.07]">
                     {trendingBlogs && trendingBlogs.length > 0 ? (
                       trendingBlogs
-                        .filter((post) => post.slug.current !== slug) // Filter out the current blog
+                        .filter(
+                          (post) =>
+                            post.slug.current !== slug
+                        )
                         .slice(0, 5)
                         .map((post) => (
-                          <div key={post._id} className="mb-3">
-                            <TrendingBlogItem post={post} />
-                          </div>
+                          <TrendingBlogItem
+                            key={post._id}
+                            post={post}
+                          />
                         ))
                     ) : (
-                      <p className="text-gray-400">
+                      <p
+                        className="
+                          px-4
+                          py-6
+                          text-[14px]
+                          leading-6
+                          text-black/50
+                          sm:px-5
+                        "
+                      >
                         No trending articles found.
                       </p>
                     )}
                   </div>
-                  <div className="flex items-center justify-center mt-6">
-                    <Link href="/dholera-updates/blogs">
-                      <span className="text-center rounded-xl text-white font-semibold bg-[#d7b56d] hover:bg-[#c6a45d] p-3 transition-colors">
-                        Explore More
-                      </span>
+
+                  <div
+                    className="
+                      border-t
+                      border-black/[0.07]
+                      px-4
+                      py-4
+                      sm:px-5
+                    "
+                  >
+                    <Link
+                      href="/dholera-updates/blogs"
+                      className="
+                        inline-flex
+                        min-h-[42px]
+                        w-full
+                        items-center
+                        justify-center
+                        rounded-xl
+                        bg-[#EC1C40]
+                        px-4
+                        py-2.5
+                        text-[13px]
+                        font-semibold
+                        text-white
+                        transition-all
+                        duration-200
+                        hover:bg-[#d9183a]
+                        hover:shadow-[0_10px_24px_-14px_rgba(236,28,64,0.55)]
+                        active:scale-[0.99]
+                        sm:text-[14px]
+                      "
+                    >
+                      Explore More
                     </Link>
                   </div>
                 </div>
@@ -1280,9 +1372,9 @@ export default async function BlogDetail({ params }) {
           </div>
         </section>
 
-        <div className="pt-4">
+        {/* <div className="pt-4">
           <CommonForm title="Still Have Questions? Contact Us Now" />
-        </div>
+        </div> */}
       </div>
     );
   } catch (error) {

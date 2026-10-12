@@ -2,9 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import {
-  ArrowRight,
   Building2,
-  CheckCircle2,
   FileSearch,
   Mail,
   MapPin,
@@ -13,6 +11,7 @@ import {
   Phone,
   SearchCheck,
   TrendingUp,
+  ArrowUpRight,
 } from "lucide-react";
 
 import { FaWhatsapp } from "react-icons/fa";
@@ -365,6 +364,495 @@ export default function ContactPage() {
         {/* ===================================================
             HERO / CONTACT INTRO
         ==================================================== */}
+        <section
+          className="
+            relative
+            overflow-hidden
+            bg-white
+            py-10
+            sm:py-12
+            lg:py-12
+            xl:py-12
+          "
+        >
+          <div
+            aria-hidden="true"
+            className="
+              pointer-events-none
+              absolute
+              -right-20
+              top-0
+              h-[260px]
+              w-[260px]
+              rounded-full
+              bg-[#EC1C40]/[0.03]
+              blur-3xl
+            "
+          />
+
+          <div
+            className="
+              relative
+              mx-auto
+              w-full
+              max-w-[1280px]
+              px-4
+              min-[480px]:px-6
+              md:px-8
+              lg:px-10
+            "
+          >
+            <div
+              className="
+                grid
+                gap-8
+                lg:grid-cols-[0.9fr_1.1fr]
+                lg:items-center
+                lg:gap-12
+                xl:gap-16
+              "
+            >
+              <div
+                className="
+                  hidden
+                  max-w-[500px]
+                  lg:block
+                "
+              >
+                <h2
+                  className="
+                    text-[38px]
+                    font-bold
+                    leading-[1.1]
+                    tracking-[-0.035em]
+                    text-black
+                    xl:text-[44px]
+                  "
+                >
+                  Connect With{" "}
+                  <span className="text-[#EC1C40]">
+                    Dholera Times
+                  </span>
+                </h2>
+
+                <div
+                  className="
+                    mt-6
+                    space-y-4
+                    text-[15px]
+                    leading-7
+                    text-black/60
+                    xl:text-[16px]
+                    xl:leading-8
+                  "
+                >
+                  <p>
+                    Have a question about Dholera Smart City, want to share an
+                    update, or need help exploring residential plots in Dholera?
+                  </p>
+
+                  <p>
+                    Connect with the Dholera Times team for information, property
+                    assistance, site visits and general enquiries.
+                  </p>
+                </div>
+
+                <div
+                  aria-hidden="true"
+                  className="
+                    mt-7
+                    h-px
+                    w-20
+                    bg-gradient-to-r
+                    from-[#EC1C40]
+                    to-transparent
+                  "
+                />
+              </div>
+
+              <div
+                className="
+                  overflow-hidden
+                  rounded-[20px]
+                  border
+                  border-black/[0.08]
+                  bg-white
+                  shadow-[0_20px_55px_-40px_rgba(0,0,0,0.28)]
+                  sm:rounded-[22px]
+                "
+              >
+                <div
+                  className="
+                    group
+                    grid
+                    grid-cols-[46px_minmax(0,1fr)]
+                    items-start
+                    gap-3
+                    p-4
+                    min-[390px]:grid-cols-[48px_minmax(0,1fr)]
+                    min-[390px]:gap-4
+                    sm:grid-cols-[52px_minmax(0,1fr)]
+                    sm:p-5
+                    lg:p-6
+                  "
+                >
+                  <div
+                    className="
+                      flex
+                      h-[44px]
+                      w-[44px]
+                      shrink-0
+                      items-center
+                      justify-center
+                      rounded-[12px]
+                      bg-[#EC1C40]/[0.08]
+                      text-[#EC1C40]
+                      transition-colors
+                      duration-300
+                      group-hover:bg-[#EC1C40]
+                      group-hover:text-white
+                      min-[390px]:h-[46px]
+                      min-[390px]:w-[46px]
+                      sm:h-[50px]
+                      sm:w-[50px]
+                    "
+                  >
+                    <Phone
+                      size={19}
+                      strokeWidth={1.8}
+                      aria-hidden="true"
+                    />
+                  </div>
+
+                  <div className="min-w-0">
+                    <p
+                      className="
+                        text-[10px]
+                        font-bold
+                        uppercase
+                        leading-5
+                        tracking-[0.14em]
+                        text-[#EC1C40]
+                        sm:text-[11px]
+                      "
+                    >
+                      Call or WhatsApp
+                    </p>
+
+                    <a
+                      href="tel:+919958993549"
+                      className="
+                        mt-0.5
+                        inline-block
+                        text-[19px]
+                        font-bold
+                        leading-7
+                        tracking-[-0.02em]
+                        text-black
+                        transition-colors
+                        duration-200
+                        hover:text-[#EC1C40]
+                        min-[390px]:text-[20px]
+                        sm:text-[22px]
+                      "
+                    >
+                      +91 99589 93549
+                    </a>
+
+                    <p
+                      className="
+                        mt-1.5
+                        text-[12.5px]
+                        leading-5
+                        text-black/55
+                        min-[390px]:text-[13px]
+                        sm:text-[14px]
+                        sm:leading-6
+                      "
+                    >
+                      For property enquiries, site visits and general assistance.
+                    </p>
+
+                    <div
+                      className="
+                        mt-3
+                        flex
+                        flex-wrap
+                        gap-2
+                      "
+                    >
+                      <a
+                        href="tel:+919958993549"
+                        className="
+                          inline-flex
+                          min-h-[36px]
+                          items-center
+                          justify-center
+                          gap-1.5
+                          rounded-full
+                          border
+                          border-[#EC1C40]
+                          px-3
+                          py-1.5
+                          text-[12px]
+                          font-semibold
+                          text-[#EC1C40]
+                          transition-colors
+                          duration-200
+                          hover:bg-[#EC1C40]
+                          hover:text-white
+                          sm:min-h-[38px]
+                          sm:px-3.5
+                          sm:text-[13px]
+                        "
+                      >
+                        <Phone
+                          size={13}
+                          strokeWidth={2}
+                          aria-hidden="true"
+                        />
+                        Call Now
+                      </a>
+
+                      <a
+                        href="https://wa.me/919958993549"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="
+                          inline-flex
+                          min-h-[36px]
+                          items-center
+                          justify-center
+                          gap-1.5
+                          rounded-full
+                          bg-[#EC1C40]
+                          px-3
+                          py-1.5
+                          text-[12px]
+                          font-semibold
+                          text-white
+                          transition-[background-color,box-shadow]
+                          duration-200
+                          hover:bg-[#d9183a]
+                          hover:shadow-[0_8px_22px_-13px_rgba(236,28,64,0.55)]
+                          sm:min-h-[38px]
+                          sm:px-3.5
+                          sm:text-[13px]
+                        "
+                      >
+                        <FaWhatsapp
+                          size={13}
+                          strokeWidth={2}
+                          aria-hidden="true"
+                        />
+                        WhatsApp
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mx-4 h-px bg-black/[0.07] sm:mx-5 lg:mx-6" />
+
+                <div
+                  className="
+                    group
+                    grid
+                    grid-cols-[46px_minmax(0,1fr)]
+                    items-start
+                    gap-3
+                    p-4
+                    min-[390px]:grid-cols-[48px_minmax(0,1fr)]
+                    min-[390px]:gap-4
+                    sm:grid-cols-[52px_minmax(0,1fr)]
+                    sm:p-5
+                    lg:p-6
+                  "
+                >
+                  <div
+                    className="
+                      flex
+                      h-[44px]
+                      w-[44px]
+                      shrink-0
+                      items-center
+                      justify-center
+                      rounded-[12px]
+                      bg-[#EC1C40]/[0.08]
+                      text-[#EC1C40]
+                      transition-colors
+                      duration-300
+                      group-hover:bg-[#EC1C40]
+                      group-hover:text-white
+                      min-[390px]:h-[46px]
+                      min-[390px]:w-[46px]
+                      sm:h-[50px]
+                      sm:w-[50px]
+                    "
+                  >
+                    <Mail
+                      size={19}
+                      strokeWidth={1.8}
+                      aria-hidden="true"
+                    />
+                  </div>
+
+                  <div className="min-w-0">
+                    <p
+                      className="
+                        text-[10px]
+                        font-bold
+                        uppercase
+                        leading-5
+                        tracking-[0.14em]
+                        text-[#EC1C40]
+                        sm:text-[11px]
+                      "
+                    >
+                      Email
+                    </p>
+
+                    <a
+                      href="mailto:info@dholeratimes.com"
+                      className="
+                        mt-0.5
+                        block
+                        break-all
+                        text-[17px]
+                        font-bold
+                        leading-6
+                        tracking-[-0.015em]
+                        text-black
+                        transition-colors
+                        duration-200
+                        hover:text-[#EC1C40]
+                        min-[390px]:text-[18px]
+                        sm:text-[20px]
+                      "
+                    >
+                      info@dholeratimes.com
+                    </a>
+
+                    <p
+                      className="
+                        mt-1.5
+                        text-[12.5px]
+                        leading-5
+                        text-black/55
+                        min-[390px]:text-[13px]
+                        sm:text-[14px]
+                        sm:leading-6
+                      "
+                    >
+                      For general, news, media and business enquiries.
+                    </p>
+
+                    <a
+                      href="mailto:info@dholeratimes.com"
+                      className="
+                        mt-2.5
+                        inline-flex
+                        items-center
+                        gap-1
+                        text-[12px]
+                        font-semibold
+                        text-[#EC1C40]
+                        sm:text-[13px]
+                      "
+                    >
+                      Send Email
+
+                      <ArrowUpRight
+                        size={14}
+                        strokeWidth={2}
+                        aria-hidden="true"
+                      />
+                    </a>
+                  </div>
+                </div>
+
+                <div className="mx-4 h-px bg-black/[0.07] sm:mx-5 lg:mx-6" />
+
+                <div
+                  className="
+                    group
+                    grid
+                    grid-cols-[46px_minmax(0,1fr)]
+                    items-start
+                    gap-3
+                    p-4
+                    min-[390px]:grid-cols-[48px_minmax(0,1fr)]
+                    min-[390px]:gap-4
+                    sm:grid-cols-[52px_minmax(0,1fr)]
+                    sm:p-5
+                    lg:p-6
+                  "
+                >
+                  <div
+                    className="
+                      flex
+                      h-[44px]
+                      w-[44px]
+                      shrink-0
+                      items-center
+                      justify-center
+                      rounded-[12px]
+                      bg-[#EC1C40]/[0.08]
+                      text-[#EC1C40]
+                      transition-colors
+                      duration-300
+                      group-hover:bg-[#EC1C40]
+                      group-hover:text-white
+                      min-[390px]:h-[46px]
+                      min-[390px]:w-[46px]
+                      sm:h-[50px]
+                      sm:w-[50px]
+                    "
+                  >
+                    <MapPin
+                      size={19}
+                      strokeWidth={1.8}
+                      aria-hidden="true"
+                    />
+                  </div>
+
+                  <div className="min-w-0">
+                    <p
+                      className="
+                        text-[10px]
+                        font-bold
+                        uppercase
+                        leading-5
+                        tracking-[0.14em]
+                        text-[#EC1C40]
+                        sm:text-[11px]
+                      "
+                    >
+                      Head Office
+                    </p>
+
+                    <address
+                      className="
+                        mt-1
+                        not-italic
+                        text-[13px]
+                        font-medium
+                        leading-[22px]
+                        text-black/70
+                        sm:text-[14px]
+                        sm:leading-6
+                        lg:text-[15px]
+                      "
+                    >
+                      CGJ - 194, DLF Capital Greens, Shivaji Marg, Karampura
+                      Industrial Area, Karam Pura, Delhi - 110015, India
+                    </address>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
 
         {/* ===================================================
             HOW CAN WE HELP
@@ -697,7 +1185,7 @@ export default function ContactPage() {
                 motion-reduce:transform-none
               "
             >
-              Send Us an Enquiry
+              Know more 
             </Link>
           </div>
         </section>
@@ -753,7 +1241,9 @@ export default function ContactPage() {
 
             <div
               className="
+                hidden
                 max-w-xl
+                lg:block
 
                 lg:pr-4
               "

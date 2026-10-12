@@ -253,7 +253,7 @@ export default function HeroForm({
         mb-8
         w-full
         min-w-0
-        max-w-[420px]
+        max-w-[400px]
 
         overflow-hidden
 

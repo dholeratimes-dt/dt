@@ -64,14 +64,19 @@ export default function page() {
   return (
     <>
       <title>Bulk Land in Dholera Smart City | High ROI Investment</title>
+
       <meta
         name="description"
         content="Invest in bulk land in Dholera Smart City with AUDA-approved plots ideal for residential, commercial, and industrial projects near Dholera International Airport."
       />
+
       <meta
         name="keywords"
         content="Dholera Smart City, Dholera Gujarat, Dholera SIR, Dholera Project, Invest in Dholera, Dholera Property Investment"
       />
+
+      <meta name="robots" content="noindex, nofollow" />
+      
       <div id="hero" className="relative w-full overflow-hidden">
         {/* ── DESKTOP (lg+): translateX sliding ──────────────────────────── */}
         <div

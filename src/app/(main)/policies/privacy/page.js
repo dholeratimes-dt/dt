@@ -21,7 +21,7 @@ export const metadata = {
 
   alternates: {
     canonical:
-      "https://www.dholeratimes.com/policies/privacypolicy",
+      "https://www.dholeratimes.com/policies/privacy",
   },
 
   robots: {
@@ -44,7 +44,7 @@ export const metadata = {
       "Read the Dholera Times Privacy Policy to understand how we collect, use, protect and manage personal information submitted through our website and services.",
 
     url:
-      "https://www.dholeratimes.com/policies/privacypolicy",
+      "https://www.dholeratimes.com/policies/privacy",
 
     siteName: "Dholera Times",
 
