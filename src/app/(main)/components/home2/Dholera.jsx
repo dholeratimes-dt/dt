@@ -25,12 +25,14 @@ const highlights = [
   },
   {
     title: "Greenfield Smart City",
-    description: "Modern infrastructure for industries and residents",
+    description:
+      "Modern infrastructure for industries and residents",
     icon: Leaf,
   },
   {
     title: "DMIC",
-    description: "Part of the Delhi-Mumbai Industrial Corridor",
+    description:
+      "Part of the Delhi-Mumbai Industrial Corridor",
     icon: Route,
   },
   {
@@ -40,17 +42,20 @@ const highlights = [
   },
   {
     title: "Industrial Hub",
-    description: "Semiconductors, solar, defence and aerospace",
+    description:
+      "Semiconductors, solar, defence and aerospace",
     icon: Factory,
   },
   {
     title: "Strong Connectivity",
-    description: "Roads, rail, freight and Dholera Airport",
+    description:
+      "Roads, rail, freight and Dholera Airport",
     icon: RadioTower,
   },
   {
     title: "Semiconductor Hub",
-    description: "Major projects including Tata Electronics",
+    description:
+      "Major projects including Tata Electronics",
     icon: Cpu,
   },
   {
@@ -85,67 +90,25 @@ export default function Dholera() {
         selection:text-white
 
         min-[414px]:px-5
-
         sm:px-6
-        sm:py-8
-
         md:px-8
-        md:py-8
-
         lg:px-10
-        lg:py-8
       "
+      style={{
+        backgroundImage: `
+          radial-gradient(
+            circle at 0% 0%,
+            rgba(236, 28, 64, 0.05),
+            transparent 26%
+          ),
+          radial-gradient(
+            circle at 100% 100%,
+            rgba(236, 28, 64, 0.035),
+            transparent 30%
+          )
+        `,
+      }}
     >
-      {/* =====================================================
-          SOFT BACKGROUND ACCENTS
-      ====================================================== */}
-
-      <div
-        aria-hidden="true"
-        className="
-          pointer-events-none
-
-          absolute
-          -left-32
-          -top-32
-          -z-10
-
-          h-[320px]
-          w-[320px]
-
-          rounded-full
-
-          bg-[#EC1C40]/5
-
-          blur-3xl
-        "
-      />
-
-      <div
-        aria-hidden="true"
-        className="
-          pointer-events-none
-
-          absolute
-          -bottom-36
-          -right-28
-          -z-10
-
-          h-[400px]
-          w-[400px]
-
-          rounded-full
-
-          bg-[#EC1C40]/[0.035]
-
-          blur-3xl
-        "
-      />
-
-      {/* =====================================================
-          CONTAINER
-      ====================================================== */}
-
       <div className="mx-auto w-full max-w-7xl">
         {/* ===================================================
             INTRODUCTION
@@ -160,11 +123,7 @@ export default function Dholera() {
 
             pb-5
 
-            sm:pb-5
-
             md:pb-6
-
-            lg:pb-6
           "
         >
           <h2
@@ -187,7 +146,10 @@ export default function Dholera() {
               lg:text-[34px]
             "
           >
-            What is <span className="text-[#EC1C40]">Dholera Smart City?</span>
+            What is{" "}
+            <span className="text-[#EC1C40]">
+              Dholera Smart City?
+            </span>
           </h2>
 
           <p
@@ -205,38 +167,26 @@ export default function Dholera() {
               sm:mt-3
               sm:text-[16px]
               sm:leading-7
-
-              lg:text-[16px]
-              lg:leading-7
             "
           >
-            Dholera Smart City is a planned greenfield smart city in Gujarat,
-            developed within the Dholera Special Investment Region (Dholera
-            SIR). It is part of the Delhi-Mumbai Industrial Corridor (DMIC) and
-            is being developed with modern infrastructure for industries,
+            Dholera Smart City is a planned greenfield smart city
+            in Gujarat, developed within the Dholera Special
+            Investment Region (Dholera SIR). It is part of the
+            Delhi-Mumbai Industrial Corridor (DMIC) and is being
+            developed with modern infrastructure for industries,
             businesses, residential areas and public services.
           </p>
         </header>
 
         {/* ===================================================
             MAIN CONTENT
-
-            Desktop:
-            Image LEFT
-            Highlights RIGHT
-
-            Mobile:
-            Image first
-            Highlights below
         ==================================================== */}
 
         <div
           className="
             mt-5
 
-
             grid
-
             gap-5
 
             sm:mt-6
@@ -252,6 +202,11 @@ export default function Dholera() {
         >
           {/* =================================================
               IMAGE
+
+              before = inner white border
+              after  = dark bottom gradient
+
+              This removes two extra DOM elements.
           ================================================== */}
 
           <figure
@@ -260,7 +215,6 @@ export default function Dholera() {
               m-0
 
               aspect-[4/3]
-
               w-full
 
               overflow-hidden
@@ -274,7 +228,27 @@ export default function Dholera() {
 
               shadow-[0_8px_24px_rgba(0,0,0,0.065)]
 
+              before:pointer-events-none
+              before:absolute
+              before:inset-3
+              before:z-10
+              before:rounded-xl
+              before:border
+              before:border-white/25
+              before:content-['']
+
+              after:pointer-events-none
+              after:absolute
+              after:inset-0
+              after:z-[5]
+              after:bg-gradient-to-t
+              after:from-black/20
+              after:via-transparent
+              after:to-transparent
+              after:content-['']
+
               sm:rounded-[20px]
+              sm:before:inset-4
 
               lg:h-full
               lg:min-h-0
@@ -286,61 +260,25 @@ export default function Dholera() {
               alt="Dholera Smart City"
               fill
               sizes="
-                (min-width: 1280px) 400px,
-                (min-width: 1024px) 34vw,
-                (min-width: 768px) calc(100vw - 64px),
-                calc(100vw - 32px)
+                (max-width: 413px) calc(100vw - 32px),
+                (max-width: 639px) calc(100vw - 40px),
+                (max-width: 767px) calc(100vw - 48px),
+                (max-width: 1023px) calc(100vw - 64px),
+                (max-width: 1279px) 31vw,
+                380px
               "
               className="
                 object-cover
                 object-center
 
                 transition-transform
-                duration-700
+                duration-300
                 ease-out
 
                 md:hover:scale-[1.02]
 
                 motion-reduce:transform-none
                 motion-reduce:transition-none
-              "
-            />
-
-            {/* IMAGE OVERLAY */}
-
-            <div
-              aria-hidden="true"
-              className="
-                pointer-events-none
-
-                absolute
-                inset-0
-
-                bg-gradient-to-t
-
-                from-black/20
-                via-transparent
-                to-transparent
-                lg:mb-10
-              "
-            />
-
-            {/* INNER BORDER */}
-
-            <div
-              aria-hidden="true"
-              className="
-                pointer-events-none
-
-                absolute
-                inset-3
-
-                rounded-xl
-
-                border
-                border-white/25
-
-                sm:inset-4
               "
             />
           </figure>
@@ -352,7 +290,6 @@ export default function Dholera() {
           <div
             className="
               min-w-0
-
               overflow-hidden
 
               rounded-2xl
@@ -386,9 +323,6 @@ export default function Dholera() {
 
                 sm:px-5
                 sm:py-4
-
-                lg:px-5
-                lg:py-4
               "
             >
               <h3
@@ -425,26 +359,34 @@ export default function Dholera() {
                 sm:px-5
 
                 md:grid-cols-2
-
-                lg:px-5
               "
             >
-              {highlights.map(({ title, description, icon: Icon }, index) => {
-                const isLast = index === highlights.length - 1;
+              {highlights.map(
+                (
+                  {
+                    title,
+                    description,
+                    icon: Icon,
+                  },
+                  index,
+                ) => {
+                  const isLast =
+                    index === highlights.length - 1;
 
-                const isLeftColumn = index % 2 === 0;
+                  const isLeftColumn =
+                    index % 2 === 0;
 
-                const isLastDesktopRow = index >= highlights.length - 2;
+                  const isLastDesktopRow =
+                    index >= highlights.length - 2;
 
-                return (
-                  <div
-                    key={title}
-                    className={`
+                  return (
+                    <div
+                      key={title}
+                      className={`
                         group
 
                         flex
                         min-w-0
-
                         items-start
 
                         gap-3
@@ -461,19 +403,37 @@ export default function Dholera() {
                         lg:px-5
                         lg:py-4
 
-                        ${!isLast ? "border-b" : ""}
+                        ${
+                          !isLast
+                            ? "border-b"
+                            : ""
+                        }
 
-                        ${isLeftColumn ? "md:border-r" : ""}
+                        ${
+                          isLeftColumn
+                            ? "md:border-r"
+                            : ""
+                        }
 
-                        ${isLastDesktopRow ? "md:border-b-0" : "md:border-b"}
+                        ${
+                          isLastDesktopRow
+                            ? "md:border-b-0"
+                            : "md:border-b"
+                        }
 
-                        ${isLeftColumn ? "md:pl-0" : "md:pr-0"}
+                        ${
+                          isLeftColumn
+                            ? "md:pl-0"
+                            : "md:pr-0"
+                        }
                       `}
-                  >
-                    {/* ICON */}
+                    >
+                      {/* ===============================
+                          ICON
+                      ================================ */}
 
-                    <span
-                      className="
+                      <span
+                        className="
                           flex
 
                           h-10
@@ -494,7 +454,7 @@ export default function Dholera() {
                           text-[#EC1C40]
 
                           transition-[background-color,color,border-color,transform]
-                          duration-300
+                          duration-200
                           ease-out
 
                           sm:h-11
@@ -509,22 +469,28 @@ export default function Dholera() {
                           motion-reduce:transform-none
                           motion-reduce:transition-none
                         "
-                    >
-                      <Icon size={19} strokeWidth={1.8} aria-hidden="true" />
-                    </span>
+                      >
+                        <Icon
+                          size={19}
+                          strokeWidth={1.8}
+                          aria-hidden="true"
+                        />
+                      </span>
 
-                    {/* TEXT */}
+                      {/* ===============================
+                          TEXT
+                      ================================ */}
 
-                    <div
-                      className="
+                      <div
+                        className="
                           min-w-0
                           flex-1
 
                           pt-0.5
                         "
-                    >
-                      <p
-                        className="
+                      >
+                        <p
+                          className="
                             text-[15px]
                             font-semibold
                             leading-[22px]
@@ -534,12 +500,12 @@ export default function Dholera() {
                             sm:text-[16px]
                             sm:leading-6
                           "
-                      >
-                        {title}
-                      </p>
+                        >
+                          {title}
+                        </p>
 
-                      <p
-                        className="
+                        <p
+                          className="
                             mt-0.5
 
                             text-[13px]
@@ -551,13 +517,14 @@ export default function Dholera() {
                             sm:text-[14px]
                             sm:leading-[21px]
                           "
-                      >
-                        {description}
-                      </p>
+                        >
+                          {description}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                },
+              )}
             </div>
           </div>
         </div>

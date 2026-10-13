@@ -1,12 +1,11 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
-import { GoogleTagManager } from "@next/third-parties/google";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import FloatingIcons from "./components/Floating";
 import ScrollToTop from "./components/ScrollToTop";
 import Script from "next/script";
-import PopupForm from "@/app/(main)/components/home2/PopUpForm";
+import PopupForm from "@/app/(main)/components/home2/DeferredPopupForm";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -24,26 +23,22 @@ export default function RootLayout({ children }) {
         <meta name="msvalidate.01" content="4EEB445EE58BDF9E15EFDE4DB906372D" />
 
         {/* ── Google Tag Manager ── */}
-        <GoogleTagManager gtmId="GTM-NLL6M3PL" />
+        <Script id="gtm-loader" strategy="lazyOnload">
+          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-NLL6M3PL');`}
+        </Script>
 
         <meta
           name="google-site-verification"
           content="w4B8pqZZDySMLUmxZYsGxeKSCsTI_aHk-myN3iKS3CU"
         />
 
-        <Script          async
+        <Script id="google-ads-loader" strategy="lazyOnload"
           src="https://www.googletagmanager.com/gtag/js?id=AW-18098009906"
         />
-        <Script />
-        <Script type="text/javascript">
-          {`
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-              })(window,document,'script','dataLayer','AW-18098009906');
-           `}
-        </Script>
       </head>
 
       <body>

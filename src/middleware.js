@@ -41,6 +41,10 @@ export async function middleware(request) {
   }
 
   // Sanity Redirects — site specific
+  // The canonical homepage has no legacy path to resolve. Avoid a CMS
+  // round trip here; www normalization above still applies.
+  if (url.pathname === "/") return NextResponse.next();
+
   const redirects = await fetchRedirects();
   const pathname = request.nextUrl.pathname;
   const match = redirects.find((r) => r.source === pathname);

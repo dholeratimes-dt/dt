@@ -3,7 +3,6 @@ import HOME2 from "./carosuel";
 import Dholera from "./Dholera";
 import LatestUpdates from "../Latest-updates";
 import WhyDT from "./WhyDT";
-import ObservedSection from "./ObservedSection_codex_temp";
 import {
   LazyTestimonialsSection,
 } from "./LazyHomeSections";
@@ -88,29 +87,6 @@ export default function Home2Main() {
       <WhyDT />
       <LazyTestimonialsSection />
       <CommonFAQ faqItems={faqItems} />
-
-
-
-      {/* <ObservedSection animation="fade-up"> */}
-      {/* </ObservedSection> */}
-
-      {/* <ObservedSection animation="fade-right">
-        <AboutDT />
-      </ObservedSection> */}
-
-      {/* <ObservedSection animation="fade-up" delay={80}> */}
-      {/* </ObservedSection> */}
-
-      {/* <ObservedSection animation="fade-left"> */}
-      {/* </ObservedSection> */}
-
-      {/* <LazyBulkLandSection /> */}
-
-      {/* <ObservedSection animation="fade-up"> */}
-  
-      {/* </ObservedSection> */}
-
-
     </>
   );
 }

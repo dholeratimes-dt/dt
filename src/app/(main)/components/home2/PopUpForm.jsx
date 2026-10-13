@@ -7,6 +7,7 @@ import React, {
 } from "react";
 
 import { usePathname } from "next/navigation";
+import { AUTO_POPUP_PAGES, AUTO_POPUP_SCROLL_PERCENT } from "./popupTriggers";
 
 import {
   AnimatePresence,
@@ -27,21 +28,11 @@ import { createPortal } from "react-dom";
    Add/remove your page URLs here.
 ============================================================ */
 
-const AUTO_POPUP_PAGES = [
-  "/",
-  "/dholera-sir",
-  "/nri-investment-guide-dholera",
-  "/dholera-updates/latest-updates",
-  "/dholera-updates/blogs",
-  "/gallery/dholera-sir-progress",
-  "/about",
-];
-
 /* ============================================================
    POPUP FORM
 ============================================================ */
 
-export default function PopupForm() {
+export default function PopupForm({ initiallyOpen = false }) {
   const pathname = usePathname() || "/";
 
   /* ============================================================
@@ -59,7 +50,7 @@ export default function PopupForm() {
   const [
     showFormPopup,
     setShowFormPopup,
-  ] = useState(false);
+  ] = useState(initiallyOpen);
 
   const [
     showThankYou,
@@ -147,20 +138,20 @@ export default function PopupForm() {
      */
 
     popupShownForCurrentVisitRef.current =
-      false;
+      initiallyOpen;
 
     /*
      * Reset popup state.
      */
 
-    setShowFormPopup(false);
+    setShowFormPopup(initiallyOpen);
 
     setShowThankYou(false);
 
     setErrorMessage("");
 
     setIsLoading(false);
-  }, [pathname]);
+  }, [pathname, initiallyOpen]);
 
   /* ============================================================
      MANUAL BUTTON TRIGGER
@@ -292,7 +283,7 @@ export default function PopupForm() {
          OPEN POPUP AT 35%
       ======================================================== */
 
-      if (scrollPercent >= 45) {
+      if (scrollPercent >= AUTO_POPUP_SCROLL_PERCENT) {
         /*
          * Mark popup as shown ONLY for
          * this current page visit.
@@ -354,6 +345,7 @@ export default function PopupForm() {
   ============================================================ */
 
   useEffect(() => {
+    if (!showFormPopup) return;
     const loadRecaptcha = () => {
       if (
         typeof window !== "undefined" &&
@@ -413,7 +405,7 @@ export default function PopupForm() {
     };
 
     loadRecaptcha();
-  }, [siteKey]);
+  }, [siteKey, showFormPopup]);
 
   /* ============================================================
      CLOSE POPUP

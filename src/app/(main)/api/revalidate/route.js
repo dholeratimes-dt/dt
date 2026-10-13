@@ -8,9 +8,9 @@ export async function POST(request) {
     return NextResponse.json({ message: "Invalid secret" }, { status: 401 });
   }
 
-  if (type === "post") {
-    revalidatePath("/sitemap.xml");
-  }
+  revalidatePath("/sitemap.xml");
+  revalidatePath("/");
+  revalidateTag("home-updates");
 
   revalidateTag("redirect");
   return NextResponse.json({ revalidated: true });
