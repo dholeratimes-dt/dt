@@ -17,7 +17,7 @@ import {
 import { FaWhatsapp } from "react-icons/fa";
 
 import ContactForm from "../../components/NewContactForm";
-import getM from "@/assets/contact-dholera-times-mobile.webp";
+import getM from "@/assets/DT-ContactUs-phoneview.webp";
 import get from "@/assets/contactPage/DTcontactBanner.webp";
 
 import CommonFAQ from "../../components/Common/Faq";

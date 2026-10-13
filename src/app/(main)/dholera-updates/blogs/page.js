@@ -5,9 +5,7 @@ import BlogCard from "./BlogCard";
 import MobileBlogSwiper from "./MobileBlog";
 import TrendingBlogItem from "./TrendingBlog";
 import hero from "@/assets/DTBlogBanner.webp";
-
-
-import heroM from "@/assets/blog-m-v.webp";
+import heroM from "@/assets/DT-Blog-phone.webp";
 import Image from "next/image";
 import { FaWhatsapp } from "react-icons/fa";
 import LeadForm from "../../dholera-sir/LeadForm";

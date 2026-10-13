@@ -30,6 +30,9 @@ import {
 // import nri from "@/assets/nri-hero.webp";
 import HeroNRI from "@/assets/NRIGuideHero.webp";
 
+import HeroPhonNRI from "@/assets/DTNRIPhoneView.webp";
+
+
 
 
 import CommonFAQ from "../components/Common/Faq";
@@ -510,30 +513,43 @@ export default function NRIInvestmentGuide() {
         ==================================================== */}
 
         <section
+          aria-label="About Dholera Times"
           className="
             relative
-
             w-full
-
             overflow-hidden
-
-            bg-black
+            bg-white
           "
         >
           <Image
-            src={HeroNRI}
-            alt="NRI investment in Dholera"
+            src={HeroPhonNRI}
+            alt="About Dholera Times"
             priority
             quality={95}
             sizes="100vw"
             className="
               block
-
               h-auto
               w-full
               max-w-none
-
               object-contain
+              md:hidden
+            "
+          />
+
+          <Image
+            src={HeroNRI}
+            alt="About Dholera Times"
+            priority
+            quality={95}
+            sizes="100vw"
+            className="
+              hidden
+              h-auto
+              w-full
+              max-w-none
+              object-contain
+              md:block
             "
           />
         </section>

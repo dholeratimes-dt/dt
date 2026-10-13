@@ -14,6 +14,8 @@ import {
 } from "lucide-react";
 
 import hero from "@/assets/AboutUsHero.webp";
+import heroMobile from "@/assets/DTAboutUsPhoneView.webp";
+
 import ConnectedFocusGraphic from "./connect";
 import CommonFAQ from "../components/Common/Faq";
 
@@ -440,6 +442,8 @@ export default function AboutPage() {
             Desktop: 330 - 360px
         ==================================================== */}
 
+        
+
         <section
           aria-label="About Dholera Times"
           className="
@@ -450,7 +454,7 @@ export default function AboutPage() {
           "
         >
           <Image
-            src={hero}
+            src={heroMobile}
             alt="About Dholera Times"
             priority
             quality={95}
@@ -461,6 +465,23 @@ export default function AboutPage() {
               w-full
               max-w-none
               object-contain
+              md:hidden
+            "
+          />
+
+          <Image
+            src={hero}
+            alt="About Dholera Times"
+            priority
+            quality={95}
+            sizes="100vw"
+            className="
+              hidden
+              h-auto
+              w-full
+              max-w-none
+              object-contain
+              md:block
             "
           />
         </section>
