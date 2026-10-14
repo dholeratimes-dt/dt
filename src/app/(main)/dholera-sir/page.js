@@ -1,46 +1,35 @@
-import Image from "next/image";
+
+import { Suspense } from "react";
+
+import Image, { getImageProps } from "next/image";
 import Link from "next/link";
 
 import {
   ArrowRight,
   Building2,
-  Cpu,
-  Factory,
   Landmark,
-  MapPin,
-  Plane,
-  Route,
-  Ship,
-  Sun,
-  Train,
-  Zap,
-  Focus,
-  House,
-  Maximize2,
-  UtilityPole,
-  Warehouse,
 } from "lucide-react";
 
-import { getNews, getProjectInfo } from "@/sanity/lib/api";
+import {
+  getNews,
+  getProjectInfo,
+} from "@/sanity/lib/api";
+
 import { urlFor } from "@/sanity/lib/image";
 
 import hero from "@/assets/DholeraSirhero2.webp";
 import heroMobile from "@/assets/DholerSirHeroPhone.webp";
 
-
-
 import CommonFAQ from "../components/Common/Faq";
 import MegaProjectsSection from "./MegaProject";
 import BlogSlider from "./BlogSlider";
-import DholeraGlance from "./DholeraGlance";
 
-/* ============================================================
-   SEO
-============================================================ */
+/* SEO*/
 
 export const metadata = {
   title: {
-    absolute: "Dholera SIR: Smart City, Projects & Updates | Dholera Times",
+    absolute:
+      "Dholera SIR: Smart City, Projects & Updates | Dholera Times",
   },
 
   description:
@@ -60,7 +49,8 @@ export const metadata = {
   ],
 
   alternates: {
-    canonical: "https://www.dholeratimes.com/dholera-sir",
+    canonical:
+      "https://www.dholeratimes.com/dholera-sir",
   },
 
   robots: {
@@ -77,12 +67,14 @@ export const metadata = {
   },
 
   openGraph: {
-    title: "Dholera SIR: Smart City, Projects & Updates | Dholera Times",
+    title:
+      "Dholera SIR: Smart City, Projects & Updates | Dholera Times",
 
     description:
       "Explore Dholera SIR, its master plan, Activation Area, infrastructure, connectivity, industries, major projects and latest development status.",
 
-    url: "https://www.dholeratimes.com/dholera-sir",
+    url:
+      "https://www.dholeratimes.com/dholera-sir",
 
     siteName: "Dholera Times",
 
@@ -92,287 +84,54 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
 
-    title: "Dholera SIR: Smart City, Projects & Updates | Dholera Times",
+    title:
+      "Dholera SIR: Smart City, Projects & Updates | Dholera Times",
 
     description:
       "Explore Dholera SIR, its master plan, Activation Area, infrastructure, connectivity, industries, major projects and latest development status.",
   },
 };
 
-/* ============================================================
-   DHOLERA SIR AT A GLANCE
-============================================================ */
-
-
-
-
-const glanceItems = [
-  {
-    label: "Location",
-    value: "Gujarat, India",
-    icon: MapPin,
-    className: "lg:col-span-3",
-    variant: "light",
-  },
-  {
-    label: "Area",
-    value: "Around 920 sq. km.",
-    icon: Maximize2,
-    className: "lg:col-span-3",
-    variant: "accent",
-  },
-  {
-    label: "Villages",
-    value: "22",
-    icon: House,
-    className: "lg:col-span-2",
-    variant: "light",
-  },
-  {
-    label: "Activation Area",
-    value: "22.54 sq. km.",
-    icon: Focus,
-    className: "lg:col-span-4",
-    variant: "dark",
-  },
-  {
-    label: "DMIC",
-    value:
-      "Key node of the Delhi-Mumbai Industrial Corridor",
-    icon: Route,
-    className: "lg:col-span-5",
-    variant: "light",
-  },
-  {
-    label: "Focus",
-    value:
-      "Manufacturing, semiconductors, solar, defence and other industries",
-    icon: Factory,
-    className: "lg:col-span-7",
-    variant: "softAccent",
-  },
-  {
-    label: "Connectivity",
-    value:
-      "Airport, expressway, rail and freight connectivity",
-    icon: Plane,
-    className: "lg:col-span-4",
-    variant: "light",
-  },
-  {
-    label: "Infrastructure",
-    value:
-      "Power, water, roads and smart utilities",
-    icon: UtilityPole,
-    className: "lg:col-span-4",
-    variant: "light",
-  },
-  {
-    label: "Development",
-    value:
-      "Planned greenfield industrial city",
-    icon: Building2,
-    className: "lg:col-span-4",
-    variant: "light",
-  },
-  {
-    label: "Major Sector",
-    value: "Semiconductor manufacturing",
-    icon: Cpu,
-    className: "lg:col-span-5",
-    variant: "accent",
-  },
-  {
-    label: "Urban Development",
-    value:
-      "Residential, commercial and public use areas",
-    icon: Warehouse,
-    className: "lg:col-span-7",
-    variant: "light",
-  },
-];
-
-/* ============================================================
-   VARIANT STYLES
-============================================================ */
-
-const getVariantStyles = (variant) => {
-  switch (variant) {
-    case "accent":
-      return {
-        card: `
-          border-[#EC1C40]
-          bg-[#EC1C40]
-        `,
-        icon: `
-          border-white/20
-          bg-white/10
-          text-white
-        `,
-        label: "text-white/65",
-        value: "text-white",
-        line: "bg-white/20",
-      };
-
-    case "dark":
-      return {
-        card: `
-          border-black
-          bg-black
-        `,
-        icon: `
-          border-white/15
-          bg-white/10
-          text-[#EC1C40]
-        `,
-        label: "text-white/55",
-        value: "text-white",
-        line: "bg-white/15",
-      };
-
-    case "softAccent":
-      return {
-        card: `
-          border-[#EC1C40]/15
-          bg-[#EC1C40]/5
-        `,
-        icon: `
-          border-[#EC1C40]/15
-          bg-white
-          text-[#EC1C40]
-        `,
-        label: "text-black/45",
-        value: "text-black",
-        line: "bg-[#EC1C40]/15",
-      };
-
-    default:
-      return {
-        card: `
-          border-black/10
-          bg-white
-        `,
-        icon: `
-          border-[#EC1C40]/10
-          bg-[#EC1C40]/5
-          text-[#EC1C40]
-        `,
-        label: "text-black/40",
-        value: "text-black",
-        line: "bg-black/10",
-      };
-  }
-};
-/* ============================================================
-   INFRASTRUCTURE
-============================================================ */
-
-const infrastructureItems = [
-  {
-    title: "Ahmedabad-Dholera Expressway",
-
-    description: "109 km expressway connecting Ahmedabad and Dholera.",
-
-    icon: Route,
-  },
-  {
-    title: "Dholera International Airport",
-
-    description:
-      "Planned airport for Dholera’s passenger and cargo connectivity.",
-
-    icon: Plane,
-  },
-  {
-    title: "Ahmedabad–Dholera Rail Project",
-
-    description: "Semi-high-speed rail link connecting Ahmedabad and Dholera.",
-
-    icon: Train,
-  },
-  {
-    title: "Dholera Solar Park",
-
-    description:
-      "Large-scale solar energy infrastructure supporting clean power.",
-
-    icon: Sun,
-  },
-  {
-    title: "Dedicated Freight Corridor (DFC)",
-
-    description: "Freight rail connectivity supporting industrial logistics.",
-
-    icon: Train,
-  },
-  {
-    title: "Tata Semiconductor Plant",
-
-    description: "Major semiconductor manufacturing project in Dholera SIR.",
-
-    icon: Cpu,
-  },
-  {
-    title: "Smart Infrastructure",
-
-    description: "Modern roads, utilities, ICT and digital city systems.",
-
-    icon: Zap,
-  },
-  {
-    title: "Sea Port",
-
-    description:
-      "Planned port connectivity supporting Dholera’s trade and logistics.",
-
-    icon: Ship,
-  },
-];
-
-/* ============================================================
-   FAQ
-============================================================ */
+/* FAQ*/
 
 const faqItems = [
   {
     question: "What is Dholera SIR?",
-
     answer:
       "Dholera SIR is the Dholera Special Investment Region, a planned greenfield industrial city in Gujarat and the largest node of the Delhi-Mumbai Industrial Corridor.",
   },
   {
     question: "How big is Dholera SIR?",
-
     answer:
       "Dholera SIR covers approximately 920 sq. km, while the initial Activation Area covers about 22.54 sq. km.",
   },
   {
-    question: "What is the Dholera Activation Area?",
-
+    question:
+      "What is the Dholera Activation Area?",
     answer:
       "The Activation Area is the first major development zone of Dholera SIR, where trunk infrastructure such as roads and utilities has been developed.",
   },
   {
-    question: "Is Dholera SIR fully developed?",
-
+    question:
+      "Is Dholera SIR fully developed?",
     answer:
       "No. Dholera SIR is being developed in phases. Some infrastructure has been completed, while other industrial, airport, rail and urban projects are still under development or at different stages.",
   },
   {
-    question: "Which major companies are investing in Dholera?",
-
+    question:
+      "Which major companies are investing in Dholera?",
     answer:
       "One of the largest projects is the Tata Electronics semiconductor fab, which is currently being developed in Dholera. Other industrial and supply-chain developments are also emerging around the semiconductor ecosystem.",
   },
   {
-    question: "Is Dholera Airport operational?",
-
+    question:
+      "Is Dholera Airport operational?",
     answer:
       "As of the latest official July 2026 update, Dholera International Airport was still under construction and development.",
   },
   {
-    question: "Can I buy residential plots in Dholera SIR?",
-
+    question:
+      "Can I buy residential plots in Dholera SIR?",
     answer:
       "Property is available across the wider Dholera region, but buyers should verify whether a specific plot is inside Dholera SIR or near Dholera SIR. The location, survey number, land use and approvals should be checked before purchase.",
   },
@@ -380,46 +139,133 @@ const faqItems = [
 
 const faqSchema = {
   "@context": "https://schema.org",
-
   "@type": "FAQPage",
 
-  mainEntity: faqItems.map(({ question, answer }) => ({
-    "@type": "Question",
+  mainEntity: faqItems.map(
+    ({ question, answer }) => ({
+      "@type": "Question",
+      name: question,
 
-    name: question,
-
-    acceptedAnswer: {
-      "@type": "Answer",
-
-      text: answer,
-    },
-  })),
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: answer,
+      },
+    }),
+  ),
 };
 
-function formatDate(dateString) {
+/* DATE*/
+
+const dateFormatter = new Intl.DateTimeFormat(
+  "en-US",
+  {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  },
+);
+
+function getFormattedDate(dateString) {
   if (!dateString) {
-    return "";
+    return null;
   }
 
   const date = new Date(dateString);
 
   if (Number.isNaN(date.getTime())) {
-    return "";
+    return null;
   }
 
-  return date.toLocaleDateString("en-US", {
-    year: "numeric",
-
-    month: "short",
-
-    day: "numeric",
-  });
+  return {
+    iso: date.toISOString(),
+    display: dateFormatter.format(date),
+  };
 }
+
+/* HERO*/
+
+function HeroBanner() {
+  const { props: mobileProps } =
+    getImageProps({
+      src: heroMobile,
+      alt: "About Dholera SIR",
+      sizes: "100vw",
+      quality: 75,
+    });
+
+  const { props: desktopProps } =
+    getImageProps({
+      src: hero,
+      alt: "About Dholera SIR",
+      sizes: "100vw",
+      quality: 75,
+    });
+
+  return (
+    <section
+      aria-label="Dholera SIR"
+      className="
+        relative
+        w-full
+        overflow-hidden
+        bg-white
+      "
+    >
+      <picture className="block w-full">
+        <source
+          media="(max-width: 767px)"
+          srcSet={mobileProps.srcSet}
+          sizes="100vw"
+          width={mobileProps.width}
+          height={mobileProps.height}
+        />
+
+        <source
+          media="(min-width: 768px)"
+          srcSet={desktopProps.srcSet}
+          sizes="100vw"
+          width={desktopProps.width}
+          height={desktopProps.height}
+        />
+
+        <img
+          src={desktopProps.src}
+          srcSet={desktopProps.srcSet}
+          sizes="100vw"
+          width={desktopProps.width}
+          height={desktopProps.height}
+          alt="About Dholera SIR"
+          loading="eager"
+          fetchPriority="high"
+          className="
+            block
+            h-auto
+            w-full
+            max-w-none
+          "
+        />
+      </picture>
+    </section>
+  );
+}
+
+/* UPDATE CARD*/
 
 function UpdateCard({ post }) {
   const href = post.slug?.current
     ? `/dholera-updates/latest-updates/${post.slug.current}`
     : "/dholera-updates/latest-updates";
+
+  const date = getFormattedDate(
+    post.publishedAt || post._createdAt,
+  );
+
+  const imageUrl = post.mainImage
+    ? urlFor(post.mainImage)
+        .width(800)
+        .height(450)
+        .url()
+    : null;
 
   return (
     <article
@@ -441,14 +287,15 @@ function UpdateCard({ post }) {
 
         shadow-[0_10px_34px_-30px_rgba(0,0,0,0.4)]
 
-        transition-[transform,border-color,box-shadow]
+        transition-[transform,border-color]
         duration-300
+        ease-out
 
         md:hover:-translate-y-1
         md:hover:border-[#EC1C40]/30
-        md:hover:shadow-[0_22px_48px_-32px_rgba(0,0,0,0.42)]
 
         motion-reduce:transform-none
+        motion-reduce:transition-none
       "
     >
       <Link
@@ -459,19 +306,19 @@ function UpdateCard({ post }) {
           flex-col
 
           focus-visible:outline-none
+
           focus-visible:ring-2
           focus-visible:ring-inset
           focus-visible:ring-[#EC1C40]
         "
       >
-        {/* IMAGE */}
+        {/* IMAGE*/}
 
         <div
           className="
             relative
 
             aspect-[16/9]
-
             w-full
 
             overflow-hidden
@@ -479,25 +326,33 @@ function UpdateCard({ post }) {
             bg-black/[0.04]
           "
         >
-          {post.mainImage ? (
+          {imageUrl ? (
             <Image
-              src={urlFor(post.mainImage).width(800).height(450).url()}
-              alt={post.mainImage?.alt || post.title || "Dholera SIR update"}
+              src={imageUrl}
+              alt={
+                post.mainImage?.alt ||
+                post.title ||
+                "Dholera SIR update"
+              }
               fill
+              loading="lazy"
+              quality={70}
               sizes="
                 (max-width: 639px) calc(100vw - 32px),
-                (max-width: 1023px) 50vw,
-                33vw
+                (max-width: 1023px) calc(50vw - 36px),
+                400px
               "
               className="
                 object-cover
 
                 transition-transform
-                duration-500
+                duration-300
+                ease-out
 
-                md:group-hover:scale-[1.035]
+                md:group-hover:scale-[1.02]
 
                 motion-reduce:transform-none
+                motion-reduce:transition-none
               "
             />
           ) : (
@@ -516,7 +371,6 @@ function UpdateCard({ post }) {
               <span
                 className="
                   text-[13px]
-
                   text-black/45
                 "
               >
@@ -526,7 +380,7 @@ function UpdateCard({ post }) {
           )}
         </div>
 
-        {/* CONTENT */}
+        {/* CONTENT*/}
 
         <div
           className="
@@ -576,20 +430,23 @@ function UpdateCard({ post }) {
               pt-3
             "
           >
-            <p
-              className="
-                text-[13px]
-
-                text-black/50
-              "
-            >
-              {formatDate(post.publishedAt || post._createdAt)}
-            </p>
+            {date ? (
+              <time
+                dateTime={date.iso}
+                className="
+                  text-[13px]
+                  text-black/50
+                "
+              >
+                {date.display}
+              </time>
+            ) : (
+              <span />
+            )}
 
             <span
               className="
                 inline-flex
-
                 shrink-0
 
                 items-center
@@ -605,12 +462,12 @@ function UpdateCard({ post }) {
               "
             >
               Read More
+
               <ArrowRight
                 aria-hidden="true"
                 className="
                   h-4
                   w-4
-
                   shrink-0
 
                   stroke-[#EC1C40]
@@ -625,40 +482,98 @@ function UpdateCard({ post }) {
   );
 }
 
-//  PAGE
+/* BLOG SLIDER DATA*/
 
-export default async function DholeraSirPage() {
-  /* =========================================================
-     LATEST NEWS
-  ========================================================= */
+async function ProjectBlogSection() {
+  let safePosts = [];
 
-  let posts = [];
   try {
-    const postsData = await getProjectInfo();
-    posts = Array.isArray(postsData) ? postsData : [];
+    const postsData =
+      await getProjectInfo();
 
-    // Sort by publishedAt date (newest first)
+    const posts = Array.isArray(postsData)
+      ? [...postsData]
+      : [];
+
     posts.sort((a, b) => {
-      const dateA = new Date(a.publishedAt || a._createdAt || 0);
-      const dateB = new Date(b.publishedAt || b._createdAt || 0);
-      return dateB - dateA; // Descending order (newest first)
+      const dateA = new Date(
+        a.publishedAt ||
+          a._createdAt ||
+          0,
+      );
+
+      const dateB = new Date(
+        b.publishedAt ||
+          b._createdAt ||
+          0,
+      );
+
+      return dateB - dateA;
     });
 
-    // console.log("Posts data fetched:", posts.length);
+    safePosts = posts.map((post) => ({
+      ...post,
+
+      author:
+        post.author ||
+        "BookMyAssets",
+
+      mainImage:
+        post.mainImage || null,
+
+      slug: post.slug?.current
+        ? {
+            current:
+              post.slug.current,
+          }
+        : {
+            current: "#",
+          },
+    }));
   } catch (error) {
-    console.error("Error fetching blog posts:", error);
+    console.error(
+      "Error fetching blog posts:",
+      error,
+    );
   }
 
-  // Add error handling for post data
-  const safePosts = posts.map((post) => ({
-    ...post,
-    author: post.author || "BookMyAssets",
-    mainImage: post.mainImage || null,
-    slug: post.slug?.current
-      ? { current: post.slug.current }
-      : { current: "#" },
-  }));
+  return (
+    <section
+      className="
+        bg-gray-50
 
+        px-4
+        py-2
+
+        min-[414px]:px-5
+        min-[414px]:py-7
+
+        sm:px-10
+        sm:py-6
+      "
+    >
+      <BlogSlider posts={safePosts} />
+    </section>
+  );
+}
+
+/* PROJECT BLOG FALLBACK*/
+
+function ProjectBlogFallback() {
+  return (
+    <div
+      aria-hidden="true"
+      className="
+        min-h-[300px]
+        bg-gray-50
+      "
+    />
+  );
+}
+
+/* LATEST NEWS*/
+
+async function LatestNewsSection() {
   let latestPosts = [];
 
   try {
@@ -667,28 +582,208 @@ export default async function DholeraSirPage() {
     latestPosts = Array.isArray(news)
       ? [...news]
           .sort((a, b) => {
-            const aDate = new Date(a.publishedAt || a._createdAt || 0);
+            const aDate = new Date(
+              a.publishedAt ||
+                a._createdAt ||
+                0,
+            );
 
-            const bDate = new Date(b.publishedAt || b._createdAt || 0);
+            const bDate = new Date(
+              b.publishedAt ||
+                b._createdAt ||
+                0,
+            );
 
             return bDate - aDate;
           })
           .slice(0, 3)
       : [];
   } catch (error) {
-    console.error("Error fetching Dholera updates:", error);
+    console.error(
+      "Error fetching Dholera updates:",
+      error,
+    );
   }
 
   return (
+    <section
+      className="
+        bg-white
+
+        px-4
+        py-8
+
+        min-[414px]:px-5
+
+        sm:px-6
+        sm:py-10
+
+        md:px-8
+
+        lg:px-10
+      "
+    >
+      <div
+        className="
+          mx-auto
+          w-full
+          max-w-7xl
+        "
+      >
+        {/* HEADER*/}
+
+        <div
+          className="
+            flex
+            flex-col
+
+            gap-4
+
+            lg:flex-row
+            lg:items-center
+            lg:justify-between
+            lg:gap-6
+          "
+        >
+          <h2
+            className="
+              min-w-0
+
+              text-[28px]
+              font-bold
+              leading-[1.15]
+
+              tracking-[-0.03em]
+
+              text-black
+
+              sm:text-[32px]
+
+              md:text-[34px]
+
+              lg:flex-1
+              lg:whitespace-nowrap
+              lg:text-[32px]
+
+              xl:text-[36px]
+            "
+          >
+            Stay Updated with Latest{" "}
+            <span className="text-[#EC1C40]">
+              Dholera SIR News &amp;
+              Updates
+            </span>
+          </h2>
+
+          <Link
+            href="/dholera-updates/latest-updates"
+            className="
+              inline-flex
+              min-h-[44px]
+              w-fit
+              shrink-0
+
+              items-center
+              justify-center
+
+              gap-2
+
+              text-[14px]
+              font-semibold
+
+              text-[#EC1C40]
+
+              transition-colors
+              duration-200
+
+              hover:text-black
+
+              focus-visible:outline-none
+              focus-visible:ring-2
+              focus-visible:ring-[#EC1C40]
+              focus-visible:ring-offset-2
+            "
+          >
+            View All Updates
+
+            <ArrowRight
+              aria-hidden="true"
+              className="
+                h-4
+                w-4
+                shrink-0
+
+                stroke-[#EC1C40]
+              "
+              strokeWidth={2}
+            />
+          </Link>
+        </div>
+
+        {/* NEWS*/}
+
+        {latestPosts.length > 0 && (
+          <div
+            className="
+              mt-7
+
+              grid
+              grid-cols-1
+
+              gap-5
+
+              sm:grid-cols-2
+
+              lg:mt-9
+              lg:grid-cols-3
+              lg:gap-6
+            "
+          >
+            {latestPosts.map(
+              (post, index) => (
+                <UpdateCard
+                  key={
+                    post._id ||
+                    post.slug?.current ||
+                    index
+                  }
+                  post={post}
+                />
+              ),
+            )}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+/* NEWS FALLBACK*/
+
+function LatestNewsFallback() {
+  return (
+    <div
+      aria-hidden="true"
+      className="
+        min-h-[420px]
+        bg-white
+      "
+    />
+  );
+}
+
+/* PAGE*/
+
+export default function DholeraSirPage() {
+  return (
     <>
-      {/* =====================================================
-          FAQ SCHEMA
-      ====================================================== */}
+      {/* FAQ SCHEMA*/}
 
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(faqSchema),
+          __html:
+            JSON.stringify(faqSchema),
         }}
       />
 
@@ -697,97 +792,18 @@ export default async function DholeraSirPage() {
           overflow-hidden
 
           bg-white
-
           text-black
 
           selection:bg-[#EC1C40]
           selection:text-white
         "
       >
-        {/* ===================================================
-            HERO
-        ==================================================== */}
+        {/* HERO*/}
 
-        {/* <section
-          className="
-            relative
-            w-full
-            overflow-hidden
-            bg-white
-          "
-        >
-          <Image
-            src={hero}
-            alt="About Dholera SIR"
-            width={1640}
-            height={624}
-            priority
-            quality={95}
-            sizes="100vw"
-            className="
-              block
-              h-auto
-              w-full
-              max-w-none
-              object-contain
-            "
-          />
-        </section> */}
+        <HeroBanner />
 
+        {/* ABOUT*/}
 
-        <section
-          className="
-            relative
-            w-full
-            overflow-hidden
-            bg-white
-          "
-        >
-          {/* =========================================================
-              PHONE VIEW
-          ========================================================== */}
-
-          <Image
-            src={heroMobile}
-            alt="About Dholera SIR"
-            priority
-            quality={95}
-            sizes="100vw"
-            className="
-              block
-              h-auto
-              w-full
-              max-w-none
-              object-contain
-
-              md:hidden
-            "
-          />
-
-          {/* =========================================================
-              TABLET / DESKTOP VIEW
-          ========================================================== */}
-
-          <Image
-            src={hero}
-            alt="About Dholera SIR"
-            priority
-            quality={95}
-            sizes="100vw"
-            className="
-              hidden
-              h-auto
-              w-full
-              max-w-none
-              object-contain
-
-              md:block
-            "
-          />
-        </section>
-
-
-        {/* <DholeraGlance /> */}
         <section
           aria-labelledby="about-dholera-sir-heading"
           className="
@@ -802,10 +818,8 @@ export default async function DholeraSirPage() {
             sm:py-10
 
             md:px-8
-            md:py-10
 
             lg:px-10
-            lg:py-10
           "
         >
           <div
@@ -815,8 +829,6 @@ export default async function DholeraSirPage() {
               max-w-7xl
             "
           >
-            {/* HEADING */}
-
             <h2
               id="about-dholera-sir-heading"
               className="
@@ -843,8 +855,6 @@ export default async function DholeraSirPage() {
               </span>
             </h2>
 
-            {/* DESCRIPTION */}
-
             <p
               className="
                 mt-4
@@ -860,27 +870,29 @@ export default async function DholeraSirPage() {
                 sm:leading-8
 
                 lg:text-[17px]
-                lg:leading-8
               "
             >
-              Dholera Special Investment Region (Dholera SIR) is a planned
-              greenfield industrial city in Gujarat and the largest node of the
-              Delhi-Mumbai Industrial Corridor (DMIC). Spread across approximately
-              920 sq. km, Dholera SIR is being developed with industrial land,
-              modern infrastructure, residential and commercial areas, utilities
-              and multimodal connectivity.
+              Dholera Special Investment
+              Region (Dholera SIR) is a
+              planned greenfield industrial
+              city in Gujarat and the largest
+              node of the Delhi-Mumbai
+              Industrial Corridor (DMIC).
+              Spread across approximately 920
+              sq. km, Dholera SIR is being
+              developed with industrial land,
+              modern infrastructure,
+              residential and commercial
+              areas, utilities and multimodal
+              connectivity.
             </p>
           </div>
         </section>
 
-        
-        {/* ===================================================
-            SIR ACT
-        ==================================================== */}
+        {/* SIR ACT*/}
 
         <section
           className="
-
             bg-black/[0.025]
 
             px-4
@@ -892,10 +904,8 @@ export default async function DholeraSirPage() {
             sm:py-12
 
             md:px-8
-            md:py-12
 
             lg:px-10
-            lg:py-12
           "
         >
           <div
@@ -920,8 +930,6 @@ export default async function DholeraSirPage() {
               <div>
                 <h2
                   className="
-                    lg:mt-5
-
                     text-[27px]
                     font-bold
                     leading-[1.18]
@@ -931,14 +939,12 @@ export default async function DholeraSirPage() {
                     text-black
 
                     sm:text-[30px]
+
+                    lg:mt-5
                   "
                 >
                   What is the{" "}
-                  <span
-                    className="
-                      text-[#EC1C40]
-                    "
-                  >
+                  <span className="text-[#EC1C40]">
                     SIR Act 2009?
                   </span>
                 </h2>
@@ -971,23 +977,31 @@ export default async function DholeraSirPage() {
                     sm:leading-8
                   "
                 >
-                  The Gujarat Special Investment Region Act, 2009, commonly
-                  called the Gujarat SIR Act, 2009, is a law created by the
-                  Gujarat Government to establish, develop, operate and manage
-                  large Special Investment Regions (SIRs) and industrial areas
-                  in Gujarat. The Act came into force on 6 January 2009. Dholera
-                  SIR is developed under this framework as a planned industrial
-                  and investment region, with infrastructure for industries,
-                  businesses and urban development.
+                  The Gujarat Special
+                  Investment Region Act, 2009,
+                  commonly called the Gujarat
+                  SIR Act, 2009, is a law
+                  created by the Gujarat
+                  Government to establish,
+                  develop, operate and manage
+                  large Special Investment
+                  Regions (SIRs) and industrial
+                  areas in Gujarat. The Act
+                  came into force on 6 January
+                  2009. Dholera SIR is
+                  developed under this
+                  framework as a planned
+                  industrial and investment
+                  region, with infrastructure
+                  for industries, businesses
+                  and urban development.
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* ===================================================
-            WHO IS DEVELOPING DHOLERA SIR
-          ==================================================== */}
+        {/* DEVELOPERS*/}
 
         <section
           className="
@@ -1002,10 +1016,8 @@ export default async function DholeraSirPage() {
             sm:py-10
 
             md:px-8
-            md:py-10
 
             lg:px-10
-            lg:py-10
           "
         >
           <div
@@ -1015,10 +1027,6 @@ export default async function DholeraSirPage() {
               max-w-7xl
             "
           >
-            {/* ======================================================
-                SECTION HEADING
-            ======================================================= */}
-
             <h2
               className="
                 text-[28px]
@@ -1037,12 +1045,10 @@ export default async function DholeraSirPage() {
               "
             >
               Who is Developing{" "}
-              <span className="text-[#EC1C40]">Dholera SIR?</span>
+              <span className="text-[#EC1C40]">
+                Dholera SIR?
+              </span>
             </h2>
-
-            {/* ======================================================
-                SECTION DESCRIPTION
-            ======================================================= */}
 
             <p
               className="
@@ -1058,13 +1064,11 @@ export default async function DholeraSirPage() {
                 sm:text-[16px]
               "
             >
-              Dholera SIR is being developed through a partnership between the
-              Government of India and the Government of Gujarat.
+              Dholera SIR is being developed
+              through a partnership between
+              the Government of India and the
+              Government of Gujarat.
             </p>
-
-            {/* ======================================================
-                CARDS
-            ======================================================= */}
 
             <div
               className="
@@ -1078,13 +1082,11 @@ export default async function DholeraSirPage() {
                 md:grid-cols-2
               "
             >
-              {/* ====================================================
-                  DICDL
-              ===================================================== */}
+              {/* DICDL*/}
 
               <article
                 className="
-                rounded-2xl
+                  rounded-2xl
 
                   border
                   border-black/10
@@ -1100,7 +1102,6 @@ export default async function DholeraSirPage() {
                   lg:p-7
                 "
               >
-                {/* ICON + TITLE */}
                 <div
                   className="
                     flex
@@ -1140,7 +1141,7 @@ export default async function DholeraSirPage() {
 
                   <h3
                     className="
-                     min-w-0
+                      min-w-0
 
                       pt-1
 
@@ -1155,19 +1156,18 @@ export default async function DholeraSirPage() {
                       sm:text-[20px]
 
                       lg:text-[21px]
-                      lg:leading-[1.4]
                     "
                   >
-                    Dholera Industrial City Development Limited (DICDL)
+                    Dholera Industrial City
+                    Development Limited
+                    (DICDL)
                   </h3>
                 </div>
 
-                {/* DIVIDER */}
                 <div
                   aria-hidden="true"
                   className="
                     my-5
-
                     h-px
                     w-full
 
@@ -1175,7 +1175,6 @@ export default async function DholeraSirPage() {
                   "
                 />
 
-                {/* DESCRIPTION */}
                 <p
                   className="
                     text-[14px]
@@ -1187,15 +1186,16 @@ export default async function DholeraSirPage() {
                     sm:text-[15px]
                   "
                 >
-                  Dholera Industrial City Development Limited (DICDL) is the
-                  special purpose vehicle responsible for developing the
-                  industrial city.
+                  Dholera Industrial City
+                  Development Limited (DICDL)
+                  is the special purpose
+                  vehicle responsible for
+                  developing the industrial
+                  city.
                 </p>
               </article>
 
-              {/* ====================================================
-                  DSIRDA
-              ===================================================== */}
+              {/* DSIRDA*/}
 
               <article
                 className="
@@ -1215,7 +1215,6 @@ export default async function DholeraSirPage() {
                   lg:p-7
                 "
               >
-                {/* ICON + TITLE */}
                 <div
                   className="
                     flex
@@ -1273,20 +1272,18 @@ export default async function DholeraSirPage() {
                       sm:text-[20px]
 
                       lg:text-[21px]
-                      lg:leading-[1.4]
                     "
                   >
-                    Dholera Special Investment Region Development Authority
-                    (DSIRDA)
+                    Dholera Special Investment
+                    Region Development
+                    Authority (DSIRDA)
                   </h3>
                 </div>
 
-                {/* DIVIDER */}
                 <div
                   aria-hidden="true"
                   className="
                     my-5
-
                     h-px
                     w-full
 
@@ -1294,7 +1291,6 @@ export default async function DholeraSirPage() {
                   "
                 />
 
-                {/* DESCRIPTION */}
                 <p
                   className="
                     text-[14px]
@@ -1306,44 +1302,33 @@ export default async function DholeraSirPage() {
                     sm:text-[15px]
                   "
                 >
-                  The Dholera Special Investment Region Development Authority
-                  (DSIRDA) has an important role in planning and development
-                  regulation.
+                  The Dholera Special
+                  Investment Region
+                  Development Authority
+                  (DSIRDA) has an important
+                  role in planning and
+                  development regulation.
                 </p>
               </article>
             </div>
           </div>
         </section>
 
-        {/*  MAJOR INFRASTRUCTURE */}
+        {/* MAJOR INFRASTRUCTURE*/}
+
         <MegaProjectsSection />
 
-        <div className="
-           bg-gray-50
+        {/* BLOG SLIDER*/}
 
-            px-4
-            py-2
+        <Suspense
+          fallback={
+            <ProjectBlogFallback />
+          }
+        >
+          <ProjectBlogSection />
+        </Suspense>
 
-            min-[414px]:px-5
-            min-[414px]:py-7
-
-            sm:px-10
-            sm:py-6
-
-            md:px-10
-            md:py-6
-          ">
-          <div className="flex flex-col max-sm:flex-col-reverse lg:flex-row gap-8">
-            {/* Left Sidebar */}
-
-            {/* Blog Grid */}
-          </div>
-          <BlogSlider posts={safePosts} />
-        </div>
-
-        {/* ===================================================
-            WHY INVEST
-        ==================================================== */}
+        {/* WHY INVEST*/}
 
         <section
           className="
@@ -1358,10 +1343,8 @@ export default async function DholeraSirPage() {
             sm:py-10
 
             md:px-8
-            md:py-10
 
             lg:px-10
-            lg:py-10
           "
         >
           <div
@@ -1371,7 +1354,6 @@ export default async function DholeraSirPage() {
               grid
               w-full
               max-w-7xl
-
               grid-cols-1
 
               gap-6
@@ -1397,11 +1379,7 @@ export default async function DholeraSirPage() {
               "
             >
               Why Invest in{" "}
-              <span
-                className="
-                  text-[#EC1C40]
-                "
-              >
+              <span className="text-[#EC1C40]">
                 Dholera?
               </span>
             </h2>
@@ -1419,185 +1397,40 @@ export default async function DholeraSirPage() {
                 lg:text-[17px]
               "
             >
-              Dholera offers planned infrastructure, strong connectivity and
-              growing industrial development. With projects such as the Tata
-              semiconductor plant, Dholera Airport, Ahmedabad-Dholera
-              Expressway, DFC and solar infrastructure, Dholera is developing as
-              a major industrial and smart city region. Its planned residential
-              and commercial development also creates opportunities for long
+              Dholera offers planned
+              infrastructure, strong
+              connectivity and growing
+              industrial development. With
+              projects such as the Tata
+              semiconductor plant, Dholera
+              Airport, Ahmedabad-Dholera
+              Expressway, DFC and solar
+              infrastructure, Dholera is
+              developing as a major
+              industrial and smart city
+              region. Its planned residential
+              and commercial development also
+              creates opportunities for long
               term real estate investment.
             </p>
           </div>
         </section>
 
-        {/* ===================================================
-            LATEST NEWS
-        ==================================================== */}
+        {/* LATEST NEWS*/}
 
-        <section
-          className="
-            bg-white
-
-            px-4
-            py-8
-
-            min-[414px]:px-5
-
-            sm:px-6
-            sm:py-10
-
-            md:px-8
-            md:py-10
-
-            lg:px-10
-            lg:py-10
-          "
+        <Suspense
+          fallback={
+            <LatestNewsFallback />
+          }
         >
-          <div
-            className="
-              mx-auto
-              w-full
-              max-w-7xl
-            "
-          >
-            {/* ===============================================
-                HEADING
+          <LatestNewsSection />
+        </Suspense>
 
-                PHONE:
-                Wraps normally.
+        {/* FAQ*/}
 
-                DESKTOP:
-                One line.
-            ================================================ */}
-
-            <div
-              className="
-                flex
-                flex-col
-
-                gap-4
-
-                lg:flex-row
-                lg:items-center
-                lg:justify-between
-                lg:gap-6
-              "
-            >
-              <h2
-                className="
-                  min-w-0
-
-                  text-[28px]
-                  font-bold
-                  leading-[1.15]
-
-                  tracking-[-0.03em]
-
-                  text-black
-
-                  sm:text-[32px]
-
-                  md:text-[34px]
-
-                  lg:flex-1
-                  lg:whitespace-nowrap
-                  lg:text-[32px]
-
-                  xl:text-[36px]
-                "
-              >
-                Stay Updated with Latest{" "}
-                <span
-                  className="
-                    text-[#EC1C40]
-                  "
-                >
-                  Dholera SIR News &amp; Updates
-                </span>
-              </h2>
-
-              <Link
-                href="/dholera-updates/latest-updates"
-                className="
-                  inline-flex
-
-                  min-h-[44px]
-                  w-fit
-
-                  shrink-0
-
-                  items-center
-                  justify-center
-
-                  gap-2
-
-                  text-[14px]
-                  font-semibold
-
-                  text-[#EC1C40]
-
-                  transition-colors
-                  duration-200
-
-                  hover:text-black
-
-                  focus-visible:outline-none
-                  focus-visible:ring-2
-                  focus-visible:ring-[#EC1C40]
-                  focus-visible:ring-offset-2
-                "
-              >
-                View All Updates
-                <ArrowRight
-                  aria-hidden="true"
-                  className="
-                    h-4
-                    w-4
-
-                    shrink-0
-
-                    stroke-[#EC1C40]
-                  "
-                  strokeWidth={2}
-                />
-              </Link>
-            </div>
-
-            {/* NEWS CARDS */}
-
-            {latestPosts.length > 0 && (
-              <div
-                className="
-                  mt-7
-
-                  grid
-                  grid-cols-1
-
-                  gap-5
-
-                  sm:grid-cols-2
-
-                  lg:mt-9
-                  lg:grid-cols-3
-                  lg:gap-6
-                "
-              >
-                {latestPosts.map((post, index) => (
-                  <UpdateCard
-                    key={post._id || post.slug?.current || index}
-                    post={post}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
-        </section>
-
-        {/* ===================================================
-            FAQ
-        ==================================================== */}
-
-        <CommonFAQ faqItems={faqItems} />
+        <CommonFAQ
+          faqItems={faqItems}
+        />
       </main>
     </>
   );
