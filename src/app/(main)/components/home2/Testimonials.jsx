@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  useEffect,
   useRef,
   useState,
 } from "react";
@@ -301,6 +302,12 @@ const TestimonialPagination = () => {
   const sliderRef =
     useRef(null);
 
+  const scrollFrameRef = useRef(0);
+
+  useEffect(() => {
+    return () => cancelAnimationFrame(scrollFrameRef.current);
+  }, []);
+
   const [
     mobileSlide,
     setMobileSlide,
@@ -347,42 +354,24 @@ const TestimonialPagination = () => {
      DETECT SWIPE / SCROLL POSITION
   ========================================================= */
 
-  const handleMobileScroll =
-    () => {
-      const slider =
-        sliderRef.current;
+  const handleMobileScroll = () => {
+    if (scrollFrameRef.current) return;
 
-      if (!slider) {
-        return;
-      }
+    scrollFrameRef.current = requestAnimationFrame(() => {
+      scrollFrameRef.current = 0;
+      const slider = sliderRef.current;
+      if (!slider) return;
 
-      const width =
-        slider.clientWidth;
+      const width = slider.clientWidth;
+      if (!width) return;
 
-      if (!width) {
-        return;
-      }
-
-      const index =
-        Math.round(
-          slider.scrollLeft /
-            width,
-        );
-
-      const safeIndex =
-        Math.max(
-          0,
-          Math.min(
-            testimonials.length -
-              1,
-            index,
-          ),
-        );
-
-      setMobileSlide(
-        safeIndex,
+      const index = Math.round(slider.scrollLeft / width);
+      const safeIndex = Math.max(0, Math.min(testimonials.length - 1, index));
+      setMobileSlide((previousIndex) =>
+        previousIndex === safeIndex ? previousIndex : safeIndex,
       );
-    };
+    });
+  };
 
   /* =========================================================
      DESKTOP BUTTON CLASS

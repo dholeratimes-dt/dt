@@ -1,7 +1,8 @@
 "use client"
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback, useId } from 'react'
 
 export default function Magnet() {
+    const formId = useId();
 
     const [formData, setFormData] = useState({ 
       fullName: "", 
@@ -14,36 +15,101 @@ export default function Magnet() {
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const [showPopup, setShowPopup] = useState(false);
-    const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
     const recaptchaRef = useRef(null);
+    const formRef = useRef(null);
+    const recaptchaLoaderRef = useRef(null);
     const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
   
-    useEffect(() => {
-      // Load reCAPTCHA script
-      const loadRecaptcha = () => {
-        if (typeof window !== "undefined" && !window.grecaptcha && siteKey) {
-          try {
-            const script = document.createElement("script");
-            script.src = "https://www.google.com/recaptcha/api.js";
-            script.async = true;
-            script.defer = true;
-            script.onload = () => setRecaptchaLoaded(true);
-            script.onerror = () => {
-              console.error("Failed to load reCAPTCHA script");
-              setRecaptchaLoaded(true);
-            };
-            document.head.appendChild(script);
-          } catch (err) {
-            console.error("reCAPTCHA script loading error:", err);
-            setRecaptchaLoaded(true);
+    /* LAZY RECAPTCHA LOADER*/
+
+    const loadRecaptcha = useCallback(() => {
+      if (!siteKey) {
+        return Promise.reject(new Error("reCAPTCHA site key is missing"));
+      }
+      if (window.grecaptcha?.render) return Promise.resolve();
+      if (recaptchaLoaderRef.current) return recaptchaLoaderRef.current;
+
+      recaptchaLoaderRef.current = new Promise((resolve, reject) => {
+        const existing = document.querySelector(
+          'script[src^="https://www.google.com/recaptcha/api.js"]',
+        );
+        const script = existing || document.createElement("script");
+        let finished = false;
+        let timerId;
+
+        const finish = (error) => {
+          if (finished) return;
+          finished = true;
+          clearTimeout(timerId);
+          script.removeEventListener("load", onLoad);
+          script.removeEventListener("error", onError);
+          if (error) {
+            if (!existing) script.remove();
+            reject(error);
+          } else {
+            resolve();
           }
-        } else if (window.grecaptcha || !siteKey) {
-          setRecaptchaLoaded(true);
+        };
+        const onLoad = () => {
+          const api = window.grecaptcha;
+          if (!api) {
+            finish(new Error("reCAPTCHA API did not initialize"));
+            return;
+          }
+          if (typeof api.ready === "function") {
+            api.ready(() => {
+              if (window.grecaptcha?.render) finish();
+              else finish(new Error("reCAPTCHA is not ready"));
+            });
+          } else if (api.render) {
+            finish();
+          } else {
+            finish(new Error("reCAPTCHA API did not initialize"));
+          }
+        };
+        const onError = () => finish(new Error("reCAPTCHA could not load"));
+
+        script.addEventListener("load", onLoad);
+        script.addEventListener("error", onError);
+        timerId = window.setTimeout(
+          () => finish(new Error("reCAPTCHA request timed out")),
+          15000,
+        );
+
+        if (!existing) {
+          script.src = "https://www.google.com/recaptcha/api.js";
+          script.async = true;
+          script.defer = true;
+          document.head.appendChild(script);
         }
-      };
-  
-      loadRecaptcha();
-  
+      }).catch((error) => {
+        recaptchaLoaderRef.current = null;
+        throw error;
+      });
+
+      return recaptchaLoaderRef.current;
+    }, [siteKey]);
+
+    /* PREPARE VERIFICATION WHEN FORM APPROACHES VIEWPORT*/
+
+    useEffect(() => {
+      const form = formRef.current;
+      if (!form) return;
+      const prime = () => void loadRecaptcha().catch(() => {});
+      if (!("IntersectionObserver" in window)) {
+        prime();
+        return;
+      }
+      const observer = new IntersectionObserver(([entry]) => {
+        if (!entry.isIntersecting) return;
+        prime();
+        observer.disconnect();
+      }, { rootMargin: "400px 0px" });
+      observer.observe(form);
+      return () => observer.disconnect();
+    }, [loadRecaptcha]);
+
+    useEffect(() => {
       // Get submission count from localStorage
       if (typeof window !== "undefined") {
         const storedCount = parseInt(localStorage.getItem("formSubmissionCount") || "0", 10);
@@ -210,28 +276,26 @@ export default function Magnet() {
         return;
       }
   
-      if (!recaptchaLoaded || !window.grecaptcha) {
-        setErrorMessage("Security verification not loaded. Please refresh the page.");
-        setIsLoading(false);
-        return;
-      }
-  
-      // Render reCAPTCHA if not already rendered
-      if (!recaptchaRef.current.innerHTML) {
-        try {
+      // A quick submit still completes verification after the script arrives.
+      try {
+        await loadRecaptcha();
+        if (!window.grecaptcha?.render || !recaptchaRef.current) {
+          throw new Error("reCAPTCHA is unavailable");
+        }
+
+        if (!recaptchaRef.current.innerHTML) {
           window.grecaptcha.render(recaptchaRef.current, {
             sitekey: siteKey,
             callback: onRecaptchaSuccess,
             theme: "dark",
           });
-        } catch (error) {
-          console.error("Error rendering reCAPTCHA:", error);
-          setErrorMessage("Error with verification. Please try again.");
-          setIsLoading(false);
+        } else {
+          window.grecaptcha.execute();
         }
-      } else {
-        // Execute existing reCAPTCHA
-        window.grecaptcha.execute();
+      } catch (error) {
+        console.error("reCAPTCHA verification error:", error);
+        setErrorMessage("Security verification not loaded. Please refresh the page.");
+        setIsLoading(false);
       }
     };
 
@@ -239,14 +303,19 @@ export default function Magnet() {
     <>
       <div className='bg-[#151f28] flex items-center justify-center p-6 z-50'>
         <div className='w-full max-w-6xl'>
-          <form onSubmit={handleSubmit}>
+          <form
+            ref={formRef}
+            onSubmit={handleSubmit}
+            onFocusCapture={() => void loadRecaptcha().catch(() => {})}
+          >
             <div className='grid grid-cols-2 md:grid-cols-5 gap-6'>
               <div>
-                <label className='block text-xs md:text-base font-medium uppercase tracking-wide mb-2 text-[#d3b36b]'>
+                <label htmlFor={`${formId}-investment`} className='block text-xs md:text-base font-medium uppercase tracking-wide mb-2 text-[#d3b36b]'>
                   Investment Amount
                 </label>
                 <div className='relative'>
                   <select 
+                    id={`${formId}-investment`}
                     name="investmentAmt"
                     value={formData.investmentAmt}
                     onChange={handleChange}
@@ -267,11 +336,13 @@ export default function Magnet() {
               </div>
               
               <div>
-                <label className='block text-xs md:text-base font-medium uppercase tracking-wide mb-2 text-[#d3b36b]'>
+                <label htmlFor={`${formId}-name`} className='block text-xs md:text-base font-medium uppercase tracking-wide mb-2 text-[#d3b36b]'>
                   Full Name*
                 </label>
                 <input 
                   type="text" 
+                  id={`${formId}-name`}
+                  autoComplete="name"
                   name="fullName"
                   value={formData.fullName}
                   onChange={handleChange}
@@ -282,11 +353,13 @@ export default function Magnet() {
               </div>
               
               <div>
-                <label className='block text-xs md:text-base font-medium uppercase tracking-wide mb-2 text-[#d3b36b]'>
+                <label htmlFor={`${formId}-city`} className='block text-xs md:text-base font-medium uppercase tracking-wide mb-2 text-[#d3b36b]'>
                   City
                 </label>
                 <input 
                   type="text" 
+                  id={`${formId}-city`}
+                  autoComplete="address-level2"
                   name="city"
                   value={formData.city}
                   onChange={handleChange}
@@ -296,11 +369,14 @@ export default function Magnet() {
               </div>
               
               <div>
-                <label className='block text-xs md:text-base font-medium uppercase tracking-wide mb-2 text-[#d3b36b]'>
+                <label htmlFor={`${formId}-phone`} className='block text-xs md:text-base font-medium uppercase tracking-wide mb-2 text-[#d3b36b]'>
                   Phone Number*
                 </label>
                 <input 
                   type="tel" 
+                  id={`${formId}-phone`}
+                  inputMode="tel"
+                  autoComplete="tel"
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}

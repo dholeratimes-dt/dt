@@ -36,6 +36,7 @@ export default function MegaIndustries() {
           src={bg}
           alt="Background Image"
           fill
+          sizes="100vw"
           className="absolute inset-0 -z-10 opacity-30 object-cover"
         />
         <div className=" max-w-7xl mx-auto">
@@ -87,6 +88,7 @@ export default function MegaIndustries() {
                   <Image
                     src={company.logo}
                     alt={company.name}
+                    sizes="160px"
                   /*   width={160}
                     height={80} */
                     className="object-contain w-40 h-28 "

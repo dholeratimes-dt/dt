@@ -259,6 +259,8 @@ export default function Dholera() {
               src={dholeraSite}
               alt="Dholera Smart City"
               fill
+              loading="lazy"
+              fetchPriority="low"
               sizes="
                 (max-width: 413px) calc(100vw - 32px),
                 (max-width: 639px) calc(100vw - 40px),

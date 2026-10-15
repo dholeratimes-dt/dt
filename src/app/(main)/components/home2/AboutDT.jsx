@@ -69,6 +69,7 @@ export default function AboutDT() {
                     src={project.image}
                     alt={project.name}
                     fill
+                    sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1279px) 46vw, 608px"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
