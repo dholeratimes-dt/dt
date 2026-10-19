@@ -43,18 +43,32 @@ const getCachedBlogs = unstable_cache(
   },
 );
 
-/* DATE SORTING*/
+/* DATE SORTING AND DEDUPLICATION */
 
 function getDateValue(post) {
-  const dateString = post?.publishedAt || post?._createdAt;
+  const value = post?.createdAt || post?._createdAt || post?.publishedAt;
+  const timestamp = value ? Date.parse(value) : NaN;
+  return Number.isFinite(timestamp) ? timestamp : 0;
+}
 
-  if (!dateString) {
-    return 0;
+function normalizeUniquePosts(posts) {
+  const bySlug = new Map();
+
+  for (const post of posts) {
+    const slug = post?.slug?.current?.trim();
+    if (!slug || slug === "#") continue;
+
+    // Slug is the public article identity; IDs may differ for duplicates.
+    const existing = bySlug.get(slug);
+    if (!existing || getDateValue(post) > getDateValue(existing)) {
+      bySlug.set(slug, post);
+    }
   }
 
-  const timestamp = Date.parse(dateString);
-
-  return Number.isNaN(timestamp) ? 0 : timestamp;
+  return [...bySlug.values()].sort((a, b) => {
+    const difference = getDateValue(b) - getDateValue(a);
+    return difference || a.slug.current.localeCompare(b.slug.current);
+  });
 }
 
 /* RESPONSIVE HERO*/
@@ -107,9 +121,7 @@ export default async function BlogsPage() {
   try {
     const postsData = await getCachedBlogs();
 
-    posts = [...postsData].sort(
-      (a, b) => getDateValue(b) - getDateValue(a),
-    );
+    posts = normalizeUniquePosts(postsData);
   } catch (error) {
     console.error("Error fetching blog posts:", error);
   }
@@ -130,6 +142,7 @@ export default async function BlogsPage() {
     title: post.title,
     slug: post.slug,
     publishedAt: post.publishedAt,
+    createdAt: post.createdAt,
     _createdAt: post._createdAt,
     mainImage: post.mainImage,
   }));

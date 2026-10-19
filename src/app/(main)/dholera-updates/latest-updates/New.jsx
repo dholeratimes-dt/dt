@@ -124,8 +124,10 @@ function NewsCard({
               src={urlFor(
                 post.mainImage,
               )
-                .width(900)
-                .height(506)
+                .width(800)
+                .height(450)
+                .auto("format")
+                .quality(75)
                 .url()}
               alt={
                 post.mainImage?.alt ||

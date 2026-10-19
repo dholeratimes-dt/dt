@@ -48,7 +48,7 @@ export default function BlogCard({ post }) {
   );
 
   const imageUrl = post.mainImage
-    ? urlFor(post.mainImage).width(900).height(450).url()
+    ? urlFor(post.mainImage).width(800).height(400).auto("format").quality(75).url()
     : null;
 
   return (

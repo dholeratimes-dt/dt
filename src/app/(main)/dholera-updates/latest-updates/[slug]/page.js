@@ -710,7 +710,8 @@ export default async function BlogDetail({ params }) {
                       }
                       width={1200}
                       height={800}
-                      unoptimized
+                      sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1200px) 70vw, 800px"
+                      quality={72}
                       className="w-full h-auto aspect-[3/2]"
                       priority
                     />
@@ -863,13 +864,15 @@ export default async function BlogDetail({ params }) {
                                       <Image
                                         src={getSanityImageUrl(
                                           blog.mainImage,
-                                          1200,
-                                          800,
+                                          720,
+                                          480,
                                         )}
                                         alt={blog.title || "Dholera Times"}
                                         width={1200}
                                         height={800}
-                                        unoptimized
+                                        sizes="(max-width: 768px) 100vw, 33vw"
+                                    loading="lazy"
+                                    quality={72}
                                         className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                                       />
                                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -989,13 +992,15 @@ export default async function BlogDetail({ params }) {
                                   <Image
                                     src={getSanityImageUrl(
                                       blog.mainImage,
-                                      1200,
-                                      800,
+                                      720,
+                                      480,
                                     )}
                                     alt={blog.title || "Dholera Times"}
                                     width={1200}
                                     height={800}
-                                    unoptimized
+                                    sizes="(max-width: 768px) 100vw, 33vw"
+                                    loading="lazy"
+                                    quality={72}
                                     className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                                   />
                                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

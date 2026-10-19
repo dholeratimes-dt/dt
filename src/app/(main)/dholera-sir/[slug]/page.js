@@ -675,7 +675,8 @@ export default async function BlogDetail({ params }) {
                     alt={post.title || "Dholera Times"}
                     width={1200}
                     height={800}
-                    unoptimized
+                    sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1200px) 70vw, 800px"
+                    quality={72}
                     className="w-full h-auto aspect-[3/2]"
                     priority
                   />

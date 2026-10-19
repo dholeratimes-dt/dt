@@ -15,11 +15,13 @@ export default function BlogCard({ post }) {
       <div className="relative w-full h-64">
         {post.mainImage ? (
           <Image
-            src={getSanityImageUrl(post.mainImage, 1200, 800)}
+            src={getSanityImageUrl(post.mainImage, 700, 466)}
             alt={post.mainImage?.alt || post.title || "Dholera update"}
-            width={1200}
-            height={800}
-            unoptimized
+            width={700}
+            height={466}
+            sizes="(max-width: 768px) 100vw, 33vw"
+            loading="lazy"
+            quality={72}
             className="object-cover h-full"
           />
         ) : (

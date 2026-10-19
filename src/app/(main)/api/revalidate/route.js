@@ -15,3 +15,4 @@ export async function POST(request) {
   revalidateTag("redirect");
   return NextResponse.json({ revalidated: true });
 }
+

@@ -784,15 +784,18 @@ export default function MobileNews({
                       src={urlFor(
                         post.mainImage,
                       )
-                        .width(800)
-                        .height(400)
+                        .width(700)
+                        .height(350)
+                        .auto("format")
+                        .quality(75)
                         .url()}
                       alt={
                         post.title ||
                         "Dholera SIR Blog Post"
                       }
-                      width={800}
-                      height={400}
+                      width={700}
+                      height={350}
+                      sizes="(max-width: 767px) 100vw, 50vw"
                       className="
                         h-full
                         w-full
