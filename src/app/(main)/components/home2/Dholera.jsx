@@ -170,7 +170,7 @@ export default function Dholera() {
             "
           >
             Dholera Smart City is a planned greenfield smart city
-            in Gujarat, developed within the Dholera Special
+            in Gujarat, developed with in the धोलेर Special
             Investment Region (Dholera SIR). It is part of the
             Delhi-Mumbai Industrial Corridor (DMIC) and is being
             developed with modern infrastructure for industries,

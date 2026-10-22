@@ -208,9 +208,9 @@ export default function WhyDT() {
               sm:text-[16px]
             "
           >
-            Dholera Times covers Dholera Smart City news,
+            Dholera Times covers धोलेरा Smart City news,
             development updates and investment insights with a
-            focus on verified information, local reporting and
+            focus on verified जानकारी, local reporting and
             clear project status.
           </p>
         </header>
