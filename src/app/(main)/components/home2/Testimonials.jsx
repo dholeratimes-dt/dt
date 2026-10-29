@@ -492,7 +492,7 @@ const TestimonialPagination = () => {
           >
             What our customers{" "}
             <span className="text-[#EC1C40]">
-              say
+              say?
             </span>
           </h2>
         </header>

@@ -22,54 +22,71 @@ const megaProjects = [
     description:
       "109 km expressway connecting Ahmedabad and Dholera.",
     icon: Route,
+    href: "dholera-updates/blogs/ahmedabad-dholera-expressway-investment-corridor",
   },
   {
     title: "Dholera International Airport",
     description:
       "Planned airport for Dholera’s passenger and cargo connectivity.",
     icon: Plane,
+    href: "dholera-updates/blogs/dholera-international-airport-impact-gujarat-global-reach",
+
+    
   },
   {
     title: "Ahmedabad Dholera Rail Project",
     description:
       "Semi-high-speed rail link connecting Ahmedabad and Dholera.",
     icon: TrainFront,
+    href: "dholera-updates/latest-updates/ahmedabad-dholera-rail-news-project-approved",
+
   },
   {
     title: "Dholera Solar Park",
     description:
       "Large-scale solar energy infrastructure supporting clean power.",
     icon: Sun,
+    href: "dholera-updates/blogs/dholera-solar-park-shaping-plot-demand-dholera-sir",
+
   },
   {
     title: "Dedicated Freight Corridor (DFC)",
-    description:
-      "Freight rail connectivity supporting industrial logistics.",
+    description:"Freight rail connectivity supporting industrial logistics.",
     icon: Waypoints,
+    href: "dholera-updates/blogs/western-dedicated-freight-corridor-dholera-smart-city",
+
   },
   {
     title: "Tata Semiconductor Plant",
     description:
       "Major semiconductor manufacturing project in Dholera SIR.",
     icon: Cpu,
+    href: "dholera-updates/blogs/tata-semiconductor-dholera-project-timeline-2024-2028",
+
   },
   {
     title: "Smart Infrastructure",
     description:
       "Modern roads, utilities, ICT and digital city systems.",
     icon: Building2,
+    href: "dholera-updates/latest-updates/gujarat-hudco-mou-dholera-infrastructure-boost",
+
   },
   {
     title: "Sea Port",
     description:
       "Planned port connectivity supporting Dholera’s trade and logistics.",
     icon: Ship,
+    href: "dholera-updates/blogs/dholera-sea-port-growth",
+
   },
   {
     title: "ABCD Building",
     description:
       "Dholera's Central Command Hub",
     icon: Building2,
+    href: "dholera-sir/the-abcd-building-in-dholera",
+
   },
 ];
 
@@ -536,10 +553,13 @@ export default async function MegaProjectsSection() {
               "
             >
               {megaProjects.map((project) => (
-                <MegaProjectCard
-                  key={project.title}
-                  project={project}
-                />
+                  <Link
+                    key={project.id || project.title}
+                    href={project.href || "#"}
+                    className="block"
+                  >
+                    <MegaProjectCard project={project} />
+                  </Link>
               ))}
             </div>
           </div>

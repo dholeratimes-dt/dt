@@ -6,7 +6,7 @@ import {
   RefreshCw,
   SearchCheck,
 } from "lucide-react";
-
+import Link from "next/link";
 /* ============================================================
    DATA
 ============================================================ */
@@ -208,7 +208,13 @@ export default function WhyDT() {
               sm:text-[16px]
             "
           >
-            Dholera Times covers धोलेरा Smart City news,
+            <Link
+              href="/about"
+              className="text-blue-600 hover:underline"
+            >
+              Dholera Times
+            </Link>
+            {" "}covers धोलेरा Smart City news,
             development updates and investment insights with a
             focus on verified जानकारी, local reporting and
             clear project status.

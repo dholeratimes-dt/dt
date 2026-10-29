@@ -855,7 +855,14 @@ export default function NRIInvestmentGuide() {
               </p>
 
               <p>
-                From Dholera SIR development and infrastructure
+                From{" "}
+                <Link
+                  href="/dholera-updates/blogs/dholera-smart-city-development-progress-2025"
+                  className="text-blue-600 hover:underline"
+                >
+                  Dholera SIR development
+                </Link>
+                {" "} and infrastructure
                 to property locations, pricing, documentation and
                 site visits, our aim is to help you make a more
                 informed decision before investing.
@@ -1170,7 +1177,14 @@ export default function NRIInvestmentGuide() {
               </p>
 
               <p className="font-semibold text-black">
-                Before buying property in Dholera, always verify the land type, title,
+                <Link
+                  href="/dholera-updates/blogs/dholera-smart-city-investment-guide-2025"
+                  className="text-blue-600 hover:underline"
+                >
+                  Before buying property in Dholera
+                </Link>
+                
+                 {" "}always verify the land type, title,
                 location and applicable approvals.
               </p>
 
@@ -2453,7 +2467,7 @@ export default function NRIInvestmentGuide() {
           />
 
             <p className="font-semibold text-black mt-1">
-              Dholera Times can help overseas buyers with:
+              Dholera Times help overseas buyers with:
             </p>
 
           <div

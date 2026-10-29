@@ -873,7 +873,14 @@ export default function DholeraSirPage() {
               "
             >
               Dholera Special Investment
-              Region (Dholera SIR) is a
+              Region{" "}
+              <Link
+                href="/dholera-updates/blogs/what-is-dholera-sir-real-estate-investment-benefits"
+                className="text-blue-600 hover:underline"
+              >
+                (Dholera SIR)
+              </Link>
+              {" "}is a
               planned greenfield industrial
               city in Gujarat and the largest
               node of the Delhi-Mumbai

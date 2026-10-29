@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import {
   Building2,
@@ -171,7 +172,14 @@ export default function Dholera() {
           >
             Dholera Smart City is a planned greenfield smart city
             in Gujarat, developed with in the धोलेर Special
-            Investment Region (Dholera SIR). It is part of the
+            Investment Region{" "}
+            <Link
+              href="/dholera-sir"
+              className="text-blue-600 hover:underline"
+            >
+              (Dholera SIR).
+            </Link>
+            {" "}It is part of the
             Delhi-Mumbai Industrial Corridor (DMIC) and is being
             developed with modern infrastructure for industries,
             businesses, residential areas and public services.

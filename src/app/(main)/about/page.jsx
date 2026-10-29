@@ -1,5 +1,6 @@
 
 import Image from "next/image";
+import Link from "next/link";
 import {
   Building2,
   CheckCircle2,
@@ -256,8 +257,21 @@ export default function AboutPage() {
                   About <span className="text-[#EC1C40]">Dholera Times</span>
                 </h1>
                 <p className="mt-6 max-w-3xl text-[16px] leading-8 text-black/65 sm:text-[17px] lg:text-[18px] lg:leading-8">
-                  Dholera Times is a dedicated platform for Dholera Smart City
-                  news, development updates, investment insights and investment
+                  <Link
+                    href="/contact/inquiry"
+                    className="text-blue-600 hover:underline"
+                  >
+                    Dholera Times
+                  </Link>
+                  {" "}is a dedicated platform for{" "} 
+
+                  <Link
+                    href="/dholera-updates/latest-updates"
+                    className="text-blue-600 hover:underline"
+                  >
+                    Dholera Smart City news,
+                  </Link>
+                  {" "}development updates, investment insights and investment
                   opportunities.
                 </p>
               </div>
@@ -280,7 +294,8 @@ export default function AboutPage() {
             <SectionHeading
               title="What"
               accent="We Do"
-              description="Dholera is developing across multiple sectors, and important information often comes from different sources. Dholera Times brings these developments together in one place."
+              description="Dholera is developing across multiple sectors, and important information often comes from different sources. 
+              Dholera Times brings these developments together in one place."
             />
 
             <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-6">
