@@ -1,7 +1,6 @@
 // TrendingBlogItem.jsx
-'use client';
-
 import Link from "next/link";
+import NewsDate from "./NewsDate";
 
 export default function TrendingBlogItem({ post }) {
   if (!post) return null;
@@ -13,13 +12,7 @@ export default function TrendingBlogItem({ post }) {
           {post.title}
         </h3>
         <p className="text-sm text-[#2863e5] mt-4">
-          <span><time className="text-gray-500">
-              {new Date(post.publishedAt).toLocaleDateString("en-US", {
-                day: "numeric",
-                month: "long",
-                year: "numeric",
-              })}
-            </time></span>
+          <span><NewsDate post={post} className="text-gray-500" /></span>
           <br />
           
 

@@ -1,4 +1,5 @@
 import { urlFor } from "@/sanity/lib/image";
+import { resolveBlogDates } from "@/lib/blogDates";
 
 // Latest Update Schema Markup Component
 const SchemaMarkup = ({ post, relatedBlog = [] }) => {
@@ -47,8 +48,10 @@ const SchemaMarkup = ({ post, relatedBlog = [] }) => {
 
   const baseUrl = "https://dholeratimes.com"; // Replace with your actual domain
   const postUrl = `${baseUrl}/dholera-updates/blogs/${post.slug.current}`;
-  const publishedDate = post.createdAt;
-  const modifiedDate = post.publishedAt;
+  const {
+    originalPublicationDate: publishedDate,
+    modificationDate: modifiedDate,
+  } = resolveBlogDates(post);
   
   // Main Latest Update post schema
   const blogSchema = {

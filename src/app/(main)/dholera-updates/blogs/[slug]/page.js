@@ -12,6 +12,8 @@ import LeadFormBlock from "@/app/(main)/components/blog/LeadFormBlock";
 import SchemaMarkup from "../SchemaMarkup";
 import SocialShare from "../../../components/blog/SocialShare";
 import TableOfContents from "../../../components/blog/TableOfContents.jsx";
+import BlogDates from "../../../components/blog/BlogDates";
+import { removeBlogBodyDateBlocks } from "@/lib/blogDates";
 import {
   createTableOfContents,
   getHeadingText,
@@ -29,7 +31,7 @@ export const revalidate = 300;
 
 const getCachedBlogBySlug = unstable_cache(
   async (slug) => getBlogBySlug(slug, SITE),
-  ["dholera-blog-detail-v1"],
+  ["dholera-blog-detail-v2"],
   {
     revalidate: 300,
     tags: ["dholera-blog-detail"],
@@ -39,8 +41,8 @@ const getCachedBlogBySlug = unstable_cache(
 const getBlogPost = cache((slug) => getCachedBlogBySlug(slug));
 
 const getCachedTrendingBlogs = unstable_cache(
-  async () => getblogs(4),
-  ["dholera-blog-trending-v1"],
+  async (slug) => getblogs(slug, 5),
+  ["dholera-blog-trending-v3"],
   {
     revalidate: 300,
     tags: ["dholera-blogs"],
@@ -49,7 +51,7 @@ const getCachedTrendingBlogs = unstable_cache(
 
 const getCachedRelatedNews = unstable_cache(
   async (slug) => getNews(slug, 3),
-  ["dholera-blog-related-news-v1"],
+  ["dholera-blog-related-news-v2"],
   {
     revalidate: 300,
     tags: ["dholera-news"],
@@ -57,12 +59,6 @@ const getCachedRelatedNews = unstable_cache(
 );
 
 /* DATE HELPERS*/
-
-const fullDateFormatter = new Intl.DateTimeFormat("en-US", {
-  day: "numeric",
-  month: "long",
-  year: "numeric",
-});
 
 const shortDateFormatter = new Intl.DateTimeFormat("en-US", {
   month: "short",
@@ -81,17 +77,6 @@ function parseDate(dateValue) {
   const date = new Date(dateValue);
 
   return Number.isNaN(date.getTime()) ? null : date;
-}
-
-function formatPostDate(dateValue) {
-  const date = parseDate(dateValue);
-
-  if (!date) return null;
-
-  return {
-    dateTime: date.toISOString().slice(0, 10),
-    label: fullDateFormatter.format(date),
-  };
 }
 
 function formatRelatedDate(dateValue) {
@@ -857,27 +842,6 @@ function BreadcrumbChevron() {
   );
 }
 
-/* DATE ICON*/
-
-function CalendarIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      className="mr-1 h-4 w-4"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-      />
-    </svg>
-  );
-}
-
 /* ARTICLE METADATA*/
 
 export async function generateMetadata({ params }) {
@@ -912,7 +876,7 @@ export default async function BlogDetail({ params }) {
 
     const results = await Promise.allSettled([
       getBlogPost(slug),
-      getCachedTrendingBlogs(),
+      getCachedTrendingBlogs(slug),
       getCachedRelatedNews(slug),
     ]);
 
@@ -964,16 +928,10 @@ export default async function BlogDetail({ params }) {
 
   if (!post) notFound();
 
-  const { items: headingTree, headingIds } = createTableOfContents(
-    post.body || [],
-  );
+  const articleBody = removeBlogBodyDateBlocks(post.body);
+  const { items: headingTree, headingIds } = createTableOfContents(articleBody);
 
   const components = createPortableTextComponents(headingIds);
-
-  /* ARTICLE DATES*/
-
-  const publishedDate = formatPostDate(post.createdAt);
-  const updatedDate = formatPostDate(post.publishedAt);
 
   return (
     <div className="min-h-screen bg-white">
@@ -1058,45 +1016,29 @@ export default async function BlogDetail({ params }) {
                 {post.title}
               </h1>
 
-              {(updatedDate || post.readingTime) && (
-                <div className="mb-6 flex flex-wrap items-center gap-4 text-sm text-gray-500">
-                  {updatedDate && (
-                    <div className="flex items-center">
-                      <CalendarIcon />
+              <div className="mb-6 flex flex-wrap items-center gap-x-8 gap-y-4 text-sm text-gray-500">
+                <BlogDates post={post} />
+                {post.readingTime && (
+                  <div className="flex items-center">
+                    <svg
+                      aria-hidden="true"
+                      className="mr-1 h-4 w-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
 
-                      <span className="mr-1">Updated On:</span>
-
-                      <time
-                        className="text-gray-500"
-                        dateTime={updatedDate.dateTime}
-                      >
-                        {updatedDate.label}
-                      </time>
-                    </div>
-                  )}
-
-                  {post.readingTime && (
-                    <div className="flex items-center">
-                      <svg
-                        aria-hidden="true"
-                        className="mr-1 h-4 w-4"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
-
-                      <span>{post.readingTime} min read</span>
-                    </div>
-                  )}
-                </div>
-              )}
+                    <span>{post.readingTime} min read</span>
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* FEATURED IMAGE*/}
@@ -1192,12 +1134,12 @@ export default async function BlogDetail({ params }) {
             <div
               className="
                 rounded-xl border border-gray-200
-                bg-white p-8 leading-5 text-black shadow-2xl
+                bg-white px-8 pb-8 pt-4 leading-5 text-black shadow-2xl sm:pt-6
               "
             >
-              <div className="max-w-none text-xl">
+              <div className="max-w-none text-xl [&>:first-child]:mt-0">
                 <PortableText
-                  value={post.body || []}
+                  value={articleBody}
                   components={components}
                 />
               </div>
@@ -1224,25 +1166,6 @@ export default async function BlogDetail({ params }) {
                         #{tag}
                       </Link>
                     ))}
-                  </div>
-                </div>
-              )}
-
-              {/* PUBLICATION DATE*/}
-
-              {publishedDate && (
-                <div className="mt-12 border-t border-gray-200 pt-6 text-sm text-gray-500">
-                  <div className="flex items-center">
-                    <CalendarIcon />
-
-                    <span className="mr-1">Published On:</span>
-
-                    <time
-                      className="text-gray-500"
-                      dateTime={publishedDate.dateTime}
-                    >
-                      {publishedDate.label}
-                    </time>
                   </div>
                 </div>
               )}

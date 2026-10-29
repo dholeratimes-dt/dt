@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getSanityImageUrl } from "@/sanity/lib/image";
+import NewsDate from "./NewsDate";
 
 export default function BlogCard({ post }) {
   // Handle author object properly
@@ -44,13 +45,7 @@ export default function BlogCard({ post }) {
 
           {/* Meta info */}
           <div className="text-sm text-gray-400">
-            <time>
-              {new Date(post.publishedAt).toLocaleDateString("en-US", {
-                day: "numeric",
-                month: "long",
-                year: "numeric",
-              })}
-            </time>
+            <NewsDate post={post} />
           </div>
 
           {/* CTA */}

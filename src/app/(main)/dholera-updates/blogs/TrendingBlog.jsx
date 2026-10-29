@@ -39,29 +39,8 @@
 
 
 
-"use client";
-
 import Link from "next/link";
-
-/* ============================================================
-   DATE FORMATTER
-============================================================ */
-
-const formatDate = (dateString) => {
-  if (!dateString) return "";
-
-  const date = new Date(dateString);
-
-  if (Number.isNaN(date.getTime())) {
-    return "";
-  }
-
-  return date.toLocaleDateString("en-US", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-};
+import { getVisibleBlogDate } from "@/lib/blogDates";
 
 /* ============================================================
    TRENDING BLOG ITEM
@@ -76,13 +55,7 @@ export default function TrendingBlogItem({ post }) {
       ? `/dholera-updates/blogs/${slug}`
       : "/dholera-updates/blogs";
 
-  const authorName =
-    typeof post.author === "object"
-      ? post.author?.name || "Dholera Times"
-      : post.author || "Dholera Times";
-
-  const publishedDate =
-    post.publishedAt || post._createdAt;
+  const visibleDate = getVisibleBlogDate(post);
 
   return (
     <article
@@ -160,14 +133,13 @@ export default function TrendingBlogItem({ post }) {
             sm:text-[14px]
           "
         >
-          {publishedDate && (
+          {visibleDate && (
             <time
-              dateTime={
-                new Date(publishedDate).toISOString()
-              }
+              dateTime={visibleDate.dateTime}
+              title={visibleDate.label}
               className="block"
             >
-              {formatDate(publishedDate)}
+              {visibleDate.formatted}
             </time>
           )}
 

@@ -1,10 +1,11 @@
 import { PortableText } from "@portabletext/react";
+import { cache } from "react";
+import { unstable_cache } from "next/cache";
 import { getSanityImageUrl } from "@/sanity/lib/image";
 import {
   getblogs,
   getNews,
   getNewsBySlug,
-  getProjects,
 } from "@/sanity/lib/api";
 import Link from "next/link";
 import Image from "next/image";
@@ -12,6 +13,9 @@ import Image from "next/image";
 import SchemaMarkup from "../SchemaMarkup";
 import SocialShare from "../../../components/blog/SocialShare";
 import TableOfContents from "../../../components/blog/TableOfContents.jsx";
+import BlogDates from "../../../components/blog/BlogDates";
+import NewsDate from "../NewsDate";
+import { removeBlogBodyDateBlocks } from "@/lib/blogDates";
 import {
   createTableOfContents,
   getHeadingText,
@@ -19,35 +23,32 @@ import {
 import LeadFormSlug from "./LeadForm";
 import LeadFormBlock from "@/app/(main)/components/blog/LeadFormBlock";
 
+export const revalidate = 300;
+
+const getCachedNewsBySlug = unstable_cache(
+  (slug) => getNewsBySlug(slug),
+  ["dholera-news-detail-v1"],
+  { revalidate: 300, tags: ["dholera-news-detail"] },
+);
+const getNewsPost = cache((slug) => getCachedNewsBySlug(slug));
+
+const getCachedTrendingNews = unstable_cache(
+  (slug) => getNews(slug, 5),
+  ["dholera-news-trending-v1"],
+  { revalidate: 300, tags: ["dholera-news"] },
+);
+const getCachedRelatedBlogs = unstable_cache(
+  (slug) => getblogs(slug, 3),
+  ["dholera-news-related-blogs-v1"],
+  { revalidate: 300, tags: ["dholera-blogs"] },
+);
+
 const URLFormatter = (text) => {
   if (!text) return "";
   return text
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
-};
-
-const formatPostDate = (dateValue) => {
-  if (!dateValue) return null;
-
-  const date = new Date(dateValue);
-  if (Number.isNaN(date.getTime())) return null;
-
-  return {
-    dateTime: date.toISOString().split("T")[0],
-    label: date.toLocaleDateString("en-US", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    }),
-  };
-};
-
-const getArticleDates = (post) => {
-  const publishedAt = post?.createdAt;
-  const updatedAt = post?.publishedAt;
-
-  return { publishedAt, updatedAt };
 };
 
 // Trending Blog Item Component
@@ -58,11 +59,11 @@ const TrendingBlogItem = ({ post }) => {
         {post.mainImage && (
           <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
             <Image
-              src={getSanityImageUrl(post.mainImage, 80, 80)}
+              src={getSanityImageUrl(post.mainImage, 160, 160)}
               alt={post.title || "Dholera Times"}
               width={80}
               height={80}
-              unoptimized
+              sizes="80px"
               className="w-full h-full object-cover"
             />
           </div>
@@ -82,24 +83,22 @@ const TrendingBlogItem = ({ post }) => {
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const site = "dholera-times";
-  const post = await getNewsBySlug(slug, site);
+  const post = await getNewsPost(slug);
 
   return {
-    title: post.metaTitle,
-    description: post.metaDescription,
-    keywords: post.keywords,
+    title: post?.metaTitle,
+    description: post?.metaDescription,
+    keywords: post?.keywords,
     publisher: "Dholera Times",
     robots: "index, follow",
     alternates: {
-      canonical: `https://www.dholeratimes.com/dholera-updates/latest-updates/${post.slug.current}`,
+      canonical: `https://www.dholeratimes.com/dholera-updates/latest-updates/${slug}`,
     },
   };
 }
 
 export default async function BlogDetail({ params }) {
   const { slug } = await params;
-  const site = "dholera-times";
 
   if (!slug) {
     return (
@@ -110,12 +109,19 @@ export default async function BlogDetail({ params }) {
   }
 
   try {
-    const [post, trendingBlogs, relatedBlogs, getPro] = await Promise.all([
-      getNewsBySlug(slug, site),
-      getNews(4), // Get top 4 trending news
-      getblogs(slug, 3), // Get 3 related blogs based on categories or tags
-      getProjects(slug),
+    const results = await Promise.allSettled([
+      getNewsPost(slug),
+      getCachedTrendingNews(slug),
+      getCachedRelatedBlogs(slug),
     ]);
+    if (results[0].status === "rejected") throw results[0].reason;
+    const post = results[0].value;
+    const trendingBlogs = results[1].status === "fulfilled" && Array.isArray(results[1].value)
+      ? results[1].value
+      : [];
+    const relatedBlogs = results[2].status === "fulfilled" && Array.isArray(results[2].value)
+      ? results[2].value
+      : [];
 
     if (!post) {
       return (
@@ -133,7 +139,8 @@ export default async function BlogDetail({ params }) {
       );
     }
 
-    const { items: headingTree, headingIds } = createTableOfContents(post.body);
+    const articleBody = removeBlogBodyDateBlocks(post.body);
+    const { items: headingTree, headingIds } = createTableOfContents(articleBody);
 
     const components = {
       types: {
@@ -508,7 +515,7 @@ export default async function BlogDetail({ params }) {
         blockquote: ({ children }) => (
           <blockquote className="relative my-12 p-8 bg-gradient-to-br from-[#d3b66b]/5 to-[#b69b5e]/10 rounded-2xl shadow-lg border border-[#d3b66b]/20">
             <div className="absolute top-4 left-6 text-6xl text-[#d3b66b]/30 font-serif">
-              "
+              &quot;
             </div>
             <div className="pl-8 italic text-xl leading-relaxed font-medium">
               {children}
@@ -557,10 +564,6 @@ export default async function BlogDetail({ params }) {
         ),
       },
     };
-
-    const articleDates = getArticleDates(post);
-    const publishedDate = formatPostDate(articleDates.publishedAt);
-    const updatedDate = formatPostDate(articleDates.updatedAt);
 
     return (
       <>
@@ -649,55 +652,29 @@ export default async function BlogDetail({ params }) {
                     {post.title}
                   </h1>
 
-                  {(updatedDate || post.readingTime) && (
-                    <div className="flex flex-wrap items-center gap-4 text-gray-500 text-sm mb-6">
-                      {updatedDate && (
-                        <div className="flex items-center">
-                          <svg
-                            className="w-4 h-4 mr-1"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                            ></path>
-                          </svg>
-                          <span className="mr-1">Updated On:</span>
-                          <time
-                            className="text-gray-500"
-                            dateTime={updatedDate.dateTime}
-                          >
-                            {updatedDate.label}
-                          </time>
-                        </div>
-                      )}
-
-                      {post.readingTime && (
-                        <div className="flex items-center">
-                          <svg
-                            className="w-4 h-4 mr-1"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                            ></path>
-                          </svg>
-                          <span>{post.readingTime} min read</span>
-                        </div>
-                      )}
-                    </div>
-                  )}
+                  <div className="mb-6 flex flex-wrap items-center gap-x-8 gap-y-4 text-sm text-gray-500">
+                    <BlogDates post={post} />
+                    {post.readingTime && (
+                      <div className="flex items-center">
+                        <svg
+                          aria-hidden="true"
+                          className="w-4 h-4 mr-1"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                          ></path>
+                        </svg>
+                        <span>{post.readingTime} min read</span>
+                      </div>
+                    )}
+                  </div>
                 </div>
 
                 {/* Featured Image */}
@@ -719,9 +696,9 @@ export default async function BlogDetail({ params }) {
                 )}
                 <TableOfContents items={headingTree} />
                 {/* Content */}
-                <div className="bg-white rounded-xl shadow-2xl text-black leading-5 shadow-t-2xl p-8 border border-gray-200">
-                  <div className="text-xl max-w-none">
-                    <PortableText value={post.body} components={components} />
+                <div className="bg-white rounded-xl shadow-2xl text-black leading-5 shadow-t-2xl px-8 pb-8 pt-4 sm:pt-6 border border-gray-200">
+                  <div className="text-xl max-w-none [&>:first-child]:mt-0">
+                    <PortableText value={articleBody} components={components} />
                   </div>
 
                   {/* Tags */}
@@ -740,34 +717,6 @@ export default async function BlogDetail({ params }) {
                             #{tag}
                           </Link>
                         ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {publishedDate && (
-                    <div className="mt-12 pt-6 border-t border-gray-200 text-sm text-gray-500">
-                      <div className="flex items-center">
-                        <svg
-                          className="w-4 h-4 mr-1"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                          ></path>
-                        </svg>
-                        <span className="mr-1">Published On:</span>
-                        <time
-                          className="text-gray-500"
-                          dateTime={publishedDate.dateTime}
-                        >
-                          {publishedDate.label}
-                        </time>
                       </div>
                     </div>
                   )}
@@ -913,7 +862,7 @@ export default async function BlogDetail({ params }) {
 
                                   {/* Footer */}
                                   <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                                    {blog.publishedAt && (
+                                    {(blog.publishedAt || blog.createdAt || blog._createdAt) && (
                                       <div className="flex items-center gap-1.5 text-gray-400">
                                         <svg
                                           className="w-3.5 h-3.5"
@@ -928,14 +877,7 @@ export default async function BlogDetail({ params }) {
                                             d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                                           />
                                         </svg>
-                                        <span className="text-xs font-medium">
-                                          {new Date(
-                                            blog.publishedAt,
-                                          ).toLocaleDateString("en-US", {
-                                            month: "short",
-                                            day: "numeric",
-                                          })}
-                                        </span>
+                                        <NewsDate post={blog} compact className="text-xs font-medium" />
                                       </div>
                                     )}
                                     <div className="flex items-center gap-1.5 text-[#b69b5e] font-semibold text-sm group-hover:gap-2.5 transition-all duration-300">
@@ -1041,7 +983,7 @@ export default async function BlogDetail({ params }) {
 
                               {/* Footer */}
                               <div className="flex items-center justify-between pt-4 mt-auto border-t border-gray-100">
-                                {blog.publishedAt && (
+                                {(blog.publishedAt || blog.createdAt || blog._createdAt) && (
                                   <div className="flex items-center gap-2 text-gray-400">
                                     <svg
                                       className="w-4 h-4"
@@ -1056,15 +998,7 @@ export default async function BlogDetail({ params }) {
                                         d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                                       />
                                     </svg>
-                                    <span className="text-sm font-medium">
-                                      {new Date(
-                                        blog.publishedAt,
-                                      ).toLocaleDateString("en-US", {
-                                        year: "numeric",
-                                        month: "short",
-                                        day: "numeric",
-                                      })}
-                                    </span>
+                                    <NewsDate post={blog} compact className="text-sm font-medium" />
                                   </div>
                                 )}
                                 <div className="flex items-center gap-2 text-[#b69b5e] font-semibold text-sm group-hover:gap-3 transition-all duration-300">

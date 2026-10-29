@@ -1,6 +1,7 @@
 import { getblogs } from "@/sanity/lib/api";
 import { unstable_cache } from "next/cache";
 import { getImageProps } from "next/image";
+import { getBlogRecency } from "@/lib/blogDates";
 
 import BlogCard from "./BlogCard";
 import MobileBlogSwiper from "./MobileBlog";
@@ -36,7 +37,7 @@ const getCachedBlogs = unstable_cache(
       }
     }
   },
-  ["dholera-public-blogs-v1"],
+  ["dholera-public-blogs-v3"],
   {
     revalidate: 300,
     tags: ["dholera-blogs"],
@@ -44,12 +45,6 @@ const getCachedBlogs = unstable_cache(
 );
 
 /* DATE SORTING AND DEDUPLICATION */
-
-function getDateValue(post) {
-  const value = post?.createdAt || post?._createdAt || post?.publishedAt;
-  const timestamp = value ? Date.parse(value) : NaN;
-  return Number.isFinite(timestamp) ? timestamp : 0;
-}
 
 function normalizeUniquePosts(posts) {
   const bySlug = new Map();
@@ -60,13 +55,13 @@ function normalizeUniquePosts(posts) {
 
     // Slug is the public article identity; IDs may differ for duplicates.
     const existing = bySlug.get(slug);
-    if (!existing || getDateValue(post) > getDateValue(existing)) {
+    if (!existing || getBlogRecency(post) > getBlogRecency(existing)) {
       bySlug.set(slug, post);
     }
   }
 
   return [...bySlug.values()].sort((a, b) => {
-    const difference = getDateValue(b) - getDateValue(a);
+    const difference = getBlogRecency(b) - getBlogRecency(a);
     return difference || a.slug.current.localeCompare(b.slug.current);
   });
 }

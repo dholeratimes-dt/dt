@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { urlFor } from "@/sanity/lib/image";
+import { getVisibleBlogDate } from "@/lib/blogDates";
 
 /* DATE FORMATTER*/
 
@@ -8,6 +9,7 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
   year: "numeric",
   month: "short",
   day: "numeric",
+  timeZone: "Asia/Kolkata",
 });
 
 /* DATE HELPER*/
@@ -43,9 +45,8 @@ export default function BlogCard({ post }) {
       ? `/dholera-updates/blogs/${slug}`
       : "/dholera-updates/blogs";
 
-  const publishedDate = getPublicationDate(
-    post.publishedAt || post._createdAt,
-  );
+  const visibleDate = getVisibleBlogDate(post);
+  const publishedDate = getPublicationDate(visibleDate?.dateTime);
 
   const imageUrl = post.mainImage
     ? urlFor(post.mainImage).width(800).height(400).auto("format").quality(75).url()
@@ -156,6 +157,7 @@ export default function BlogCard({ post }) {
             {publishedDate && (
               <time
                 dateTime={publishedDate.dateTime}
+                title={`${visibleDate.label}: ${visibleDate.formatted}`}
                 className="
                   shrink-0 text-[13px] font-normal
                   leading-5 text-black/50 sm:text-[14px]

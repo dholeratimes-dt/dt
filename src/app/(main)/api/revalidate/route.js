@@ -11,6 +11,14 @@ export async function POST(request) {
   revalidatePath("/sitemap.xml");
   revalidatePath("/");
   revalidateTag("home-updates");
+  revalidateTag("dholera-blogs");
+  revalidateTag("dholera-blog-detail");
+  revalidateTag("dholera-news");
+  revalidateTag("dholera-news-detail");
+  revalidatePath("/dholera-updates/blogs");
+  revalidatePath("/dholera-updates/blogs/[slug]", "page");
+  revalidatePath("/dholera-updates/latest-updates");
+  revalidatePath("/dholera-updates/latest-updates/[slug]", "page");
 
   revalidateTag("redirect");
   return NextResponse.json({ revalidated: true });

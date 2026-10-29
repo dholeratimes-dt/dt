@@ -594,30 +594,9 @@ import {
 } from "lucide-react";
 
 import { urlFor } from "@/sanity/lib/image";
+import NewsDate from "./NewsDate";
 
 const NEWS_PER_PAGE = 10;
-
-/* ============================================================
-   DATE
-============================================================ */
-
-const formatDate = (dateString) => {
-  if (!dateString) return "";
-
-  const date =
-    new Date(dateString);
-
-  const options = {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  };
-
-  return date.toLocaleDateString(
-    "en-US",
-    options,
-  );
-};
 
 /* ============================================================
    MOBILE NEWS
@@ -909,18 +888,11 @@ export default function MobileNews({
                     >
                       {/* DATE */}
 
-                      <p
-                        className="
-                          text-sm
-
-                          text-black/50
-                        "
-                      >
-                        {formatDate(
-                          post.publishedAt ||
-                            post._createdAt,
-                        )}
-                      </p>
+                      <NewsDate
+                        post={post}
+                        compact
+                        className="text-sm text-black/50"
+                      />
 
                       {/* READ MORE */}
 

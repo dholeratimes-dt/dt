@@ -63,7 +63,7 @@ function RelatedBlogCard({ item, type }) {
     : basePath;
 
   const publishedDate =
-    item.publishedAt || item._createdAt;
+    item.publishedAt || item.createdAt || item._createdAt;
 
   const formattedDate =
     getFormattedDate(publishedDate);

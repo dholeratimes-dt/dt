@@ -1,4 +1,6 @@
 import { getNews } from "@/sanity/lib/api";
+import { unstable_cache } from "next/cache";
+import { getBlogRecency } from "@/lib/blogDates";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -7,6 +9,7 @@ import { urlFor } from "@/sanity/lib/image";
 
 import SidebarWithForm from "./Sidebar";
 import MobileNews from "./MobileNews";
+import NewsDate from "./NewsDate";
 
 /* ============================================================
    SETTINGS
@@ -15,27 +18,11 @@ import MobileNews from "./MobileNews";
 const PAGE_PATH =
   "/dholera-updates/latest-updates";
 
-/* ============================================================
-   DATE
-============================================================ */
-
-const formatDate = (dateString) => {
-  if (!dateString) {
-    return "";
-  }
-
-  const date = new Date(dateString);
-
-  if (Number.isNaN(date.getTime())) {
-    return "";
-  }
-
-  return date.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
-};
+const getCachedNews = unstable_cache(
+  () => getNews(),
+  ["dholera-public-news-v1"],
+  { revalidate: 300, tags: ["dholera-news"] },
+);
 
 /* ============================================================
    DESKTOP NEWS CARD
@@ -252,19 +239,11 @@ function NewsCard({
               pt-3
             "
           >
-            <p
-              className="
-                text-[14px]
-                leading-5
-
-                text-black/55
-              "
-            >
-              {formatDate(
-                post.publishedAt ||
-                  post._createdAt,
-              )}
-            </p>
+            <NewsDate
+              post={post}
+              compact
+              className="text-[14px] leading-5 text-black/55"
+            />
 
             <span
               className="
@@ -303,32 +282,26 @@ export default async function New() {
 
   try {
     const postsData =
-      await getNews();
+      await getCachedNews();
 
-    posts = Array.isArray(
-      postsData,
-    )
-      ? [...postsData]
-      : [];
+    const bySlug = new Map();
+    for (const post of Array.isArray(postsData) ? postsData : []) {
+      const slug = post?.slug?.current?.trim();
+      if (!slug || slug === "#") continue;
+      const existing = bySlug.get(slug);
+      if (!existing || getBlogRecency(post) > getBlogRecency(existing)) {
+        bySlug.set(slug, post);
+      }
+    }
+    posts = [...bySlug.values()];
 
     /* =======================================================
        SORT NEWEST FIRST
     ======================================================= */
 
     posts.sort((a, b) => {
-      const dateA = new Date(
-        a.publishedAt ||
-          a._createdAt ||
-          0,
-      );
-
-      const dateB = new Date(
-        b.publishedAt ||
-          b._createdAt ||
-          0,
-      );
-
-      return dateB - dateA;
+      return getBlogRecency(b) - getBlogRecency(a) ||
+        a.slug.current.localeCompare(b.slug.current);
     });
   } catch (error) {
     console.error(
@@ -364,25 +337,7 @@ export default async function New() {
      POPULAR ARTICLES
   ========================================================= */
 
-  const popularArticles = [
-    ...safePosts,
-  ]
-    .sort((a, b) => {
-      const dateA = new Date(
-        a.publishedAt ||
-          a._createdAt ||
-          0,
-      );
-
-      const dateB = new Date(
-        b.publishedAt ||
-          b._createdAt ||
-          0,
-      );
-
-      return dateB - dateA;
-    })
-    .slice(0, 3);
+  const popularArticles = safePosts.slice(0, 3);
 
   return (
     <>

@@ -36,34 +36,66 @@ export async function getProjects() {
   return posts;
 }
 /* Blogs */
-export async function getblogs() {
-  const query = `*[_type == "post" && "Blog" in categories[]->title && author-> name == "Dholera Times" ]{
+export async function getblogs(slugOrLimit = null, limit = null) {
+  const excludedSlug = typeof slugOrLimit === "string" ? slugOrLimit : "";
+  const resultLimit = typeof slugOrLimit === "number" ? slugOrLimit : limit;
+  const slice = Number.isInteger(resultLimit) && resultLimit > 0
+    ? `[0...${resultLimit}]`
+    : "";
+
+  const query = `*[
+    _type == "post" && site == $site && "Blog" in categories[]->title
+    && author->name == "Dholera Times" && defined(slug.current)
+    && slug.current != $excludedSlug
+    && !(_id in path("drafts.**")) && !(_id in path("versions.**"))
+  ] | order(coalesce(publishedAt, createdAt, _createdAt) desc, _id asc) ${slice} {
     _id,
     title,
     slug,
     mainImage,
-    publishedAt,
-    body,
-    author->{name, image},
+    createdAt, publishedAt, _createdAt, _updatedAt,
+    description,
+    author->{name},
     categories[]->{title, _id}
   }`;
-  const posts = await client.fetch(query, {}, { cache: 'no-store' }); // Disables caching
+  // Cards do not need Portable Text bodies. Limit sidebar queries in Sanity,
+  // and bypass its CDN so a revalidation reads the latest published content.
+  const posts = await client.fetch(query, { site, excludedSlug }, {
+    cache: "no-store",
+    useCdn: false,
+    perspective: "published",
+  });
   return posts;
 }
 
 /* News */
-export async function getNews() {
-  const query = `*[_type == "post" && "News" in categories[]->title && author-> name == "Dholera Times" ]{
+export async function getNews(slugOrLimit = null, limit = null) {
+  const excludedSlug = typeof slugOrLimit === "string" ? slugOrLimit : "";
+  const resultLimit = typeof slugOrLimit === "number" ? slugOrLimit : limit;
+  const slice = Number.isInteger(resultLimit) && resultLimit > 0
+    ? `[0...${resultLimit}]`
+    : "";
+
+  const query = `*[
+    _type == "post" && site == $site && "News" in categories[]->title
+    && author->name == "Dholera Times" && defined(slug.current)
+    && slug.current != $excludedSlug
+    && !(_id in path("drafts.**")) && !(_id in path("versions.**"))
+  ] | order(coalesce(publishedAt, createdAt, _createdAt) desc, _id asc) ${slice} {
     _id,
     title,
     slug,
     mainImage,
-    publishedAt,
-    body,
-    author->{name, image},
+    createdAt, publishedAt, _createdAt, _updatedAt,
+    description,
+    author->{name},
     categories[]->{title, _id}
   }`;
-  const posts = await client.fetch(query, {}, { cache: 'no-store' }); // Disables caching
+  const posts = await client.fetch(query, { site, excludedSlug }, {
+    cache: "no-store",
+    useCdn: false,
+    perspective: "published",
+  });
   return posts;
 }
 
@@ -103,7 +135,11 @@ export async function getPostBySlug(slug, category = null) {
     body[]{ ..., _type=="image"=>{..., asset->{ _id, _ref, url }}, markDefs[]{..., _type=="link"=>{"href":@.href}} },
     author->{ name, image }, categories[]->{ title, _id }, readingTime
   }`;
-  return await client.fetch(query, { slug, site });
+  return await client.fetch(query, { slug, site }, ["Blog", "News"].includes(category) ? {
+    cache: "no-store",
+    useCdn: false,
+    perspective: "published",
+  } : undefined);
 } 
 
 
