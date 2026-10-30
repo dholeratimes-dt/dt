@@ -101,13 +101,6 @@ export default async function sitemap() {
       priority: 0.6,
       changeFrequency: "monthly",
     },
-
-    {
-      url: `${BASE_URL}/channel-partner`,
-      priority: 0.6,
-      changeFrequency: "monthly",
-    },
-
     {
       url: `${BASE_URL}/gallery/dholera-sir-progress`,
       priority: 0.5,

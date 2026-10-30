@@ -9,10 +9,6 @@ import {
   TrainFront,
   Waypoints,
 } from "lucide-react";
-import {
-  getNews,
-  getUpdates,
-} from "@/sanity/lib/api";
 
 /* MEGA PROJECTS*/
 
@@ -134,23 +130,6 @@ function getFormattedDate(value) {
     iso: date.toISOString(),
     display: dateFormatter.format(date),
   };
-}
-
-function sortNewestFirst(items) {
-  if (!Array.isArray(items)) {
-    return [];
-  }
-
-  return items
-    .map((item) => ({
-      item,
-      timestamp: getDateValue(item),
-    }))
-    .sort(
-      (a, b) =>
-        b.timestamp - a.timestamp,
-    )
-    .map(({ item }) => item);
 }
 
 /* LATEST NEWS ITEM*/
@@ -349,47 +328,7 @@ function MegaProjectCard({ project }) {
 
 /* MAIN SECTION*/
 
-export default async function MegaProjectsSection() {
-  let trendingBlogs = [];
-
-  try {
-    const newsData =
-      await getNews();
-
-    if (
-      Array.isArray(newsData) &&
-      newsData.length > 0
-    ) {
-      trendingBlogs =
-        sortNewestFirst(newsData).slice(0, 3);
-    }
-  } catch (error) {
-    console.error(
-      "Error fetching latest news:",
-      error,
-    );
-  }
-
-  if (trendingBlogs.length === 0) {
-    try {
-      const updatesData =
-        await getUpdates();
-
-      if (
-        Array.isArray(updatesData) &&
-        updatesData.length > 0
-      ) {
-        trendingBlogs =
-          sortNewestFirst(updatesData).slice(0, 3);
-      }
-    } catch (error) {
-      console.error(
-        "Error fetching fallback updates:",
-        error,
-      );
-    }
-  }
-
+export default function MegaProjectsSection() {
   return (
     <section
       aria-labelledby="mega-projects-heading"
@@ -408,160 +347,58 @@ export default async function MegaProjectsSection() {
       "
     >
       <div className="mx-auto w-full max-w-7xl">
-        <div
-          className="
-            grid
-            grid-cols-1
-            gap-9
-            lg:grid-cols-[minmax(280px,0.29fr)_minmax(0,0.71fr)]
-            lg:items-start
-            lg:gap-8
-            xl:grid-cols-[minmax(300px,0.28fr)_minmax(0,0.72fr)]
-            xl:gap-10
-          "
-        >
-          {/* LATEST NEWS*/}
+        {/* MEGA PROJECTS */}
 
-          <aside
-            aria-labelledby="latest-news-heading"
+        <div className="min-w-0">
+          <header
             className="
-              order-2
-              min-w-0
-              lg:order-1
-              lg:sticky
-              lg:top-40
-              lg:self-start
+              mb-6
+              sm:mb-7
+              md:mb-8
             "
           >
-            <div
+            <h2
+              id="mega-projects-heading"
               className="
-                overflow-hidden
-                rounded-2xl
-                border
-                border-black/10
-                bg-white
-                p-5
-                shadow-[0_8px_26px_rgba(0,0,0,0.04)]
-                sm:p-6
+                text-left
+                text-[28px]
+                font-bold
+                leading-[1.15]
+                tracking-[-0.03em]
+                text-black
+                sm:text-[32px]
+                md:text-[36px]
+                lg:text-[40px]
               "
             >
-              <header
-                className="
-                  mb-5
-                  border-b
-                  border-black/10
-                  pb-4
-                "
-              >
-                <h2
-                  id="latest-news-heading"
-                  className="
-                    text-[22px]
-                    font-semibold
-                    leading-[1.25]
-                    tracking-[-0.02em]
-                    text-black
-                    sm:text-[24px]
-                    lg:text-[22px]
-                    xl:text-[24px]
-                  "
-                >
-                  Latest News on{" "}
-                  <span className="text-[#EC1C40]">
-                    Dholera SIR
-                  </span>
-                </h2>
-              </header>
-
-              {trendingBlogs.length > 0 ? (
-                <div className="divide-y divide-black/10">
-                  {trendingBlogs.map((post) => (
-                    <div
-                      key={
-                        post._id ||
-                        post.slug?.current ||
-                        post.title
-                      }
-                      className="
-                        py-5
-                        first:pt-0
-                        last:pb-0
-                      "
-                    >
-                      <LatestNewsItem
-                        post={post}
-                      />
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p
-                  className="
-                    text-[14px]
-                    leading-6
-                    text-black/60
-                  "
-                >
-                  No news available at the moment.
-                </p>
-              )}
-            </div>
-          </aside>
-
-          {/* MEGA PROJECTS*/}
+              Major Infrastructure{" "}
+              <span className="text-[#EC1C40]">
+                in Dholera
+              </span>
+            </h2>
+          </header>
 
           <div
             className="
-              order-1
-              min-w-0
-              lg:order-2
+              grid
+              grid-cols-1
+              gap-3.5
+              min-[520px]:grid-cols-2
+              min-[520px]:gap-4
+              lg:grid-cols-2
+              lg:gap-4
+              xl:grid-cols-3
             "
           >
-            <header
-              className="
-                mb-6
-                sm:mb-7
-                md:mb-8
-              "
-            >
-              <h2
-                id="mega-projects-heading"
-                className="
-                  text-left
-                  text-[clamp(1.75rem,2.5vw,2.375rem)]
-                  font-semibold
-                  leading-[1.2]
-                  tracking-[-0.025em]
-                  text-black
-                  md:text-center
-                "
+            {megaProjects.map((project) => (
+              <Link
+                key={project.id || project.title}
+                href={project.href || "#"}
+                className="block"
               >
-                Major Infrastructure in Dholera
-              </h2>
-            </header>
-
-            <div
-              className="
-                grid
-                grid-cols-1
-                gap-3.5
-                min-[520px]:grid-cols-2
-                min-[520px]:gap-4
-                lg:grid-cols-2
-                lg:gap-4
-                xl:grid-cols-3
-              "
-            >
-              {megaProjects.map((project) => (
-                  <Link
-                    key={project.id || project.title}
-                    href={project.href || "#"}
-                    className="block"
-                  >
-                    <MegaProjectCard project={project} />
-                  </Link>
-              ))}
-            </div>
+                <MegaProjectCard project={project} />
+              </Link>
+            ))}
           </div>
         </div>
       </div>
