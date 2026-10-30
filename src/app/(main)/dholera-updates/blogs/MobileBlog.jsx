@@ -1,7 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
-import BlogCard from "./BlogCard";
+import { Children, useRef, useState } from "react";
 
 const BLOGS_PER_PAGE = 10;
 
@@ -107,7 +106,7 @@ function PaginationArrowButton({
       type="button"
       onClick={onClick}
       disabled={disabled}
-      aria-label={isPrevious ? "Previous page" : "Next page"}
+      aria-label={isPrevious ? (mobile ? "Prev page" : "Previous page") : "Next page"}
       className={`${paginationButtonClass} ${mobile ? "px-3" : "px-4"}`}
     >
       {isPrevious && <ChevronIcon direction="left" />}
@@ -123,22 +122,19 @@ function PaginationArrowButton({
 
 /* BLOG PAGINATION*/
 
-export default function MobileBlogSwiper({ posts = [] }) {
+export default function BlogGrid({ children }) {
+  // Cards are rendered by the server. Only pagination needs browser JavaScript.
+  const cards = Children.toArray(children);
   const [currentPage, setCurrentPage] = useState(1);
   const listRef = useRef(null);
 
   const totalPages = Math.max(
     1,
-    Math.ceil(posts.length / BLOGS_PER_PAGE),
+    Math.ceil(cards.length / BLOGS_PER_PAGE),
   );
 
   const activePage = Math.min(currentPage, totalPages);
   const startIndex = (activePage - 1) * BLOGS_PER_PAGE;
-
-  const visiblePosts = posts.slice(
-    startIndex,
-    startIndex + BLOGS_PER_PAGE,
-  );
 
   const visiblePages = getVisiblePages(activePage, totalPages);
 
@@ -158,19 +154,22 @@ export default function MobileBlogSwiper({ posts = [] }) {
 
     window.requestAnimationFrame(() => {
       listRef.current?.scrollIntoView({
-        behavior: "smooth",
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "auto"
+          : "smooth",
         block: "start",
       });
     });
   }
 
-  if (!posts.length) {
+  if (!cards.length) {
     return null;
   }
 
   return (
     <section
       ref={listRef}
+      aria-label="Dholera blogs"
       className="scroll-mt-28 space-y-7 sm:space-y-8"
     >
       {/* BLOG GRID*/}
@@ -178,20 +177,21 @@ export default function MobileBlogSwiper({ posts = [] }) {
       <div
         className="
           grid grid-cols-1 items-stretch gap-5
-          sm:grid-cols-2 sm:gap-6
+          sm:grid-cols-2 sm:gap-6 md:gap-6
           lg:grid-cols-3 lg:gap-6
-          xl:gap-7
         "
       >
-        {visiblePosts.map((post, index) => (
-          <BlogCard
-            key={
-              post._id ||
-              post.slug?.current ||
-              `${startIndex}-${index}`
-            }
-            post={post}
-          />
+        {cards.map((card, index) => (
+          <div
+            key={card.key}
+            className={`min-w-0 [&>article]:w-full ${
+              index >= startIndex && index < startIndex + BLOGS_PER_PAGE
+                ? "flex"
+                : "hidden md:flex"
+            }`}
+          >
+            {card}
+          </div>
         ))}
       </div>
 
@@ -201,7 +201,7 @@ export default function MobileBlogSwiper({ posts = [] }) {
         <nav
           aria-label="Blog pagination"
           className="
-            flex flex-col items-center gap-4
+            flex flex-col items-center gap-4 md:hidden
             border-t border-black/10 pt-6 sm:pt-7
           "
         >

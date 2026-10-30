@@ -1,6 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
-import { urlFor } from "@/sanity/lib/image";
+import SanityImage from "../../components/blog/SanityImage";
 import { getVisibleBlogDate } from "@/lib/blogDates";
 
 /* DATE FORMATTER*/
@@ -48,10 +47,6 @@ export default function BlogCard({ post }) {
   const visibleDate = getVisibleBlogDate(post);
   const publishedDate = getPublicationDate(visibleDate?.dateTime);
 
-  const imageUrl = post.mainImage
-    ? urlFor(post.mainImage).width(800).height(400).auto("format").quality(75).url()
-    : null;
-
   return (
     <article
       className="
@@ -66,6 +61,7 @@ export default function BlogCard({ post }) {
     >
       <Link
         href={href}
+        prefetch={false}
         className="
           flex h-full min-w-0 flex-col rounded-[inherit]
           focus-visible:outline-none focus-visible:ring-2
@@ -80,9 +76,11 @@ export default function BlogCard({ post }) {
             overflow-hidden bg-black/[0.025]
           "
         >
-          {imageUrl ? (
-            <Image
-              src={imageUrl}
+          {post.mainImage?.asset ? (
+            <SanityImage
+              image={post.mainImage}
+              width={1200}
+              height={600}
               alt={
                 post.mainImage?.alt ||
                 post.title ||
@@ -90,11 +88,10 @@ export default function BlogCard({ post }) {
               }
               fill
               sizes="
-                (max-width: 639px) 86vw,
-                (max-width: 767px) 70vw,
-                (max-width: 1023px) calc(50vw - 40px),
-                (max-width: 1535px) 25vw,
-                400px
+                (max-width: 639px) calc(100vw - 32px),
+                (max-width: 767px) calc(50vw - 28px),
+                (max-width: 1023px) calc(50vw - 76px),
+                calc(25vw - 54px)
               "
               className="
                 object-cover object-center
@@ -160,7 +157,7 @@ export default function BlogCard({ post }) {
                 title={`${visibleDate.label}: ${visibleDate.formatted}`}
                 className="
                   shrink-0 text-[13px] font-normal
-                  leading-5 text-black/50 sm:text-[14px]
+                  leading-5 text-black/60 sm:text-[14px]
                 "
               >
                 {publishedDate.display}
@@ -170,7 +167,7 @@ export default function BlogCard({ post }) {
             <span
               className="
                 inline-flex shrink-0 items-center whitespace-nowrap
-                text-[14px] font-semibold leading-5 text-[#EC1C40]
+                text-[14px] font-semibold leading-5 text-[#d9183a]
                 transition-colors duration-200
                 group-hover:text-[#d9183a]
                 sm:text-[15px]

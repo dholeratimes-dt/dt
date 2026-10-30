@@ -651,7 +651,7 @@ export default function LeadForm({
 
                 rounded-xl
 
-                bg-[#EC1C40]
+                bg-[#d9183a]
 
                 px-5
                 py-3
@@ -896,7 +896,7 @@ export default function LeadForm({
 
                 rounded-xl
 
-                bg-[#EC1C40]
+                bg-[#d9183a]
 
                 px-5
                 py-3

@@ -1,4 +1,6 @@
-import { createClient } from 'next-sanity'
+// Import the data client directly. The next-sanity barrel also registers live
+// preview client components that published pages do not need to download.
+import { createClient } from '@sanity/client'
 
 import { apiVersion, dataset, projectId, token } from '../env'
 

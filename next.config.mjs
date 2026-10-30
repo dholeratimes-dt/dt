@@ -1,10 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Keep production audits separate from an IDE's running development server.
+  distDir: process.env.DT_BUILD_DIR || ".next",
   output: "standalone",
   poweredByHeader: false,
+  compress: true,
 
   images: {
-    domains: ["cdn.sanity.io"], // Allow Sanity images
+    remotePatterns: [
+      { protocol: "https", hostname: "cdn.sanity.io" },
+    ],
+    // Local imports and Sanity assets have content hashes in their URLs.
+    minimumCacheTTL: 31536000,
   },
   async redirects() {
     return [

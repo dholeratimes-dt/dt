@@ -1,7 +1,6 @@
 import { PortableText } from "@portabletext/react";
 import { cache } from "react";
 import { unstable_cache } from "next/cache";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -13,6 +12,7 @@ import SchemaMarkup from "../SchemaMarkup";
 import SocialShare from "../../../components/blog/SocialShare";
 import TableOfContents from "../../../components/blog/TableOfContents.jsx";
 import BlogDates from "../../../components/blog/BlogDates";
+import SanityImage from "../../../components/blog/SanityImage";
 import { removeBlogBodyDateBlocks } from "@/lib/blogDates";
 import {
   createTableOfContents,
@@ -26,6 +26,12 @@ const BLOGS_PATH = "/dholera-updates/blogs";
 const NEWS_PATH = "/dholera-updates/latest-updates";
 
 export const revalidate = 300;
+
+// Cache each article's HTML on its first visit and revalidate it in the
+// background, instead of rendering the same published content on every request.
+export function generateStaticParams() {
+  return [];
+}
 
 /* CACHED PUBLIC CONTENT*/
 
@@ -161,8 +167,8 @@ function createPortableTextComponents(headingIds) {
           "my-6 aspect-[3/2] h-auto w-full rounded-lg object-cover";
 
         const imageNode = canOptimize ? (
-          <Image
-            src={imageUrl}
+          <SanityImage
+            image={value}
             alt={value.alt || ""}
             width={1200}
             height={800}
@@ -333,7 +339,7 @@ function createPortableTextComponents(headingIds) {
             title={value.title || extractText(children)}
             rel="noopener noreferrer"
             className="
-              rounded px-1 py-0.5 text-[#d3b36b]
+              rounded px-1 py-0.5 text-[#866a2d]
               underline decoration-[#b69b5e]/30
               decoration-2 underline-offset-4
               transition-colors duration-200
@@ -552,7 +558,7 @@ function TrendingBlogItem({ post }) {
   if (!slug) return null;
 
   return (
-    <Link href={`${BLOGS_PATH}/${slug}`}>
+    <Link href={`${BLOGS_PATH}/${slug}`} prefetch={false}>
       <div
         className="
           flex items-center gap-4 rounded-lg
@@ -562,8 +568,8 @@ function TrendingBlogItem({ post }) {
       >
         {post.mainImage && (
           <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-lg">
-            <Image
-              src={getSanityImageUrl(post.mainImage, 160, 160)}
+            <SanityImage
+              image={post.mainImage}
               alt={post.title || "Dholera Times"}
               width={80}
               height={80}
@@ -599,6 +605,7 @@ function RelatedBlogCard({ blog }) {
   return (
     <Link
       href={`${NEWS_PATH}/${slug}`}
+      prefetch={false}
       className="
         group w-[calc(100vw-3rem)] flex-shrink-0
         snap-start first:ml-0 md:w-auto md:min-w-0
@@ -615,8 +622,10 @@ function RelatedBlogCard({ blog }) {
       >
         <div className="relative h-48 overflow-hidden bg-gray-100 md:h-56">
           {blog.mainImage ? (
-            <Image
-              src={getSanityImageUrl(blog.mainImage, 900, 600)}
+            <SanityImage
+              image={blog.mainImage}
+              width={900}
+              height={600}
               alt={blog.title || "Dholera update"}
               fill
               sizes="
@@ -695,7 +704,7 @@ function RelatedBlogCard({ blog }) {
             {date && (
               <time
                 dateTime={date.dateTime}
-                className="shrink-0 text-xs font-medium text-gray-400 md:text-sm"
+                className="shrink-0 text-xs font-medium text-gray-600 md:text-sm"
               >
                 <span className="md:hidden">{date.mobile}</span>
                 <span className="hidden md:inline">{date.desktop}</span>
@@ -705,7 +714,7 @@ function RelatedBlogCard({ blog }) {
             <span
               className="
                 ml-auto inline-flex shrink-0 items-center
-                gap-2 text-sm font-semibold text-[#b69b5e]
+                gap-2 text-sm font-semibold text-[#866a2d]
               "
             >
               <span className="md:hidden">Explore More</span>
@@ -758,7 +767,7 @@ function RelatedBlogsSection({ relatedBlogs }) {
             href={NEWS_PATH}
             className="
               rounded-xl bg-[#d7b56d] p-1
-              font-semibold text-white hover:bg-[#c6a45d]
+              font-semibold text-gray-900 hover:bg-[#c6a45d]
             "
           >
             View all
@@ -1053,8 +1062,8 @@ export default async function BlogDetail({ params }) {
                     sm:rounded-2xl
                   "
                 >
-                  <Image
-                    src={getSanityImageUrl(post.mainImage, 1200, 800)}
+                  <SanityImage
+                    image={post.mainImage}
                     alt={
                       post.mainImage?.alt ||
                       post.title ||
@@ -1063,6 +1072,7 @@ export default async function BlogDetail({ params }) {
                     width={1200}
                     height={800}
                     priority
+                    data-blog-hero=""
                     sizes="
                       (max-width: 639px) calc(100vw - 32px),
                       (max-width: 1023px) 680px,
@@ -1240,7 +1250,7 @@ export default async function BlogDetail({ params }) {
                     className="
                       inline-flex min-h-[42px] w-full
                       items-center justify-center rounded-xl
-                      bg-[#EC1C40] px-4 py-2.5
+                      bg-[#d9183a] px-4 py-2.5
                       text-[13px] font-semibold text-white
                       transition-colors duration-200
                       hover:bg-[#d9183a] sm:text-[14px]

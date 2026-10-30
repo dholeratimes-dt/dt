@@ -495,7 +495,7 @@ export default function LeadFormSlug({
                         bg-[#EC1C40]/50
                       `
                     : `
-                        bg-[#EC1C40]
+                        bg-[#d9183a]
 
                         hover:bg-[#d9183a]
 

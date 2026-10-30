@@ -24,6 +24,7 @@ const SANITY_CONTENT_ROUTES = [
 
 export default function Footer() {
   const pathname = usePathname();
+  const isBlogRoute = pathname?.startsWith("/dholera-updates/blogs");
 
   const showProjectLinks =
     SANITY_CONTENT_ROUTES.some(
@@ -589,6 +590,7 @@ export default function Footer() {
             <ul className="mt-4 space-y-0.5">
               <li>
                 <Link
+                  prefetch={isBlogRoute ? false : null}
                   href="/dholera-sir"
                   className={linkClass}
                 >
@@ -598,6 +600,7 @@ export default function Footer() {
 
               <li>
                 <Link
+                  prefetch={isBlogRoute ? false : null}
                   href="/dholera-updates/latest-updates"
                   className={linkClass}
                 >
@@ -607,6 +610,7 @@ export default function Footer() {
 
               <li>
                 <Link
+                  prefetch={isBlogRoute ? false : null}
                   href="/dholera-updates/blogs"
                   className={linkClass}
                 >
@@ -616,6 +620,7 @@ export default function Footer() {
 
               <li>
                 <Link
+                  prefetch={isBlogRoute ? false : null}
                   href="/about"
                   className={linkClass}
                 >
@@ -625,6 +630,7 @@ export default function Footer() {
 
               <li>
                 <Link
+                  prefetch={isBlogRoute ? false : null}
                   href="/contact/inquiry"
                   className={linkClass}
                 >
@@ -658,6 +664,7 @@ export default function Footer() {
             <ul className="mt-4 space-y-0.5">
               <li>
                 <Link
+                  prefetch={isBlogRoute ? false : null}
                   href="/policies/privacy"
                   className={linkClass}
                 >
@@ -667,6 +674,7 @@ export default function Footer() {
 
               <li>
                 <Link
+                  prefetch={isBlogRoute ? false : null}
                   href="/policies/termsandconditions"
                   className={linkClass}
                 >
@@ -676,6 +684,7 @@ export default function Footer() {
 
               <li>
                 <Link
+                  prefetch={isBlogRoute ? false : null}
                   href="/copyright"
                   className={linkClass}
                 >

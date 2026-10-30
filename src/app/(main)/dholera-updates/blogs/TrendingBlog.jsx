@@ -74,6 +74,7 @@ export default function TrendingBlogItem({ post }) {
     >
       <Link
         href={href}
+        prefetch={false}
         className="
           group
 
@@ -149,7 +150,7 @@ export default function TrendingBlogItem({ post }) {
               className="
                 font-semibold
 
-                text-[#EC1C40]
+                text-[#d9183a]
 
                 transition-colors
                 duration-200

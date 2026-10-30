@@ -36,9 +36,8 @@ export default function RootLayout({ children }) {
           content="w4B8pqZZDySMLUmxZYsGxeKSCsTI_aHk-myN3iKS3CU"
         />
 
-        <Script id="google-ads-loader" strategy="lazyOnload"
-          src="https://www.googletagmanager.com/gtag/js?id=AW-18098009906"
-        />
+        {/* Google Ads is already configured in GTM-NLL6M3PL. Loading gtag.js
+            separately downloads the same Ads tag twice. */}
       </head>
 
       <body>

@@ -29,7 +29,7 @@ export default function Whatsapp() {
     <button
       type="button"
       onClick={handleWhatsAppClick}
-      aria-label="Chat with us on WhatsApp"
+      aria-label="Chat with us on WhatsApp (1 unread message)"
       className="
         group
         fixed
@@ -86,7 +86,7 @@ export default function Whatsapp() {
 
       {/* Notification badge */}
       <span
-        aria-label="1 unread message"
+        aria-hidden="true"
         className="
           absolute
           -right-[2px]

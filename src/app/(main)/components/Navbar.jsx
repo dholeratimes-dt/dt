@@ -218,6 +218,7 @@ function resolveElementTheme(element) {
 
 export default function Navbar({ whatsappNumber = "" }) {
   const pathname = usePathname() || "/";
+  const isBlogRoute = pathname.startsWith("/dholera-updates/blogs");
 
   const uid = useId().replace(/:/g, "");
 
@@ -954,6 +955,7 @@ export default function Navbar({ whatsappNumber = "" }) {
 
                 return (
                   <Link
+                    prefetch={isBlogRoute ? false : null}
                     key={item.path}
                     href={item.path}
                     onClick={() => setDropdown(null)}
@@ -1126,6 +1128,7 @@ export default function Navbar({ whatsappNumber = "" }) {
           {/* LOGO */}
 
           <Link
+            prefetch={isBlogRoute ? false : null}
             href="/"
             aria-label="Dholera Times home"
             className={`
@@ -1197,6 +1200,7 @@ export default function Navbar({ whatsappNumber = "" }) {
 
               return (
                 <Link
+                  prefetch={isBlogRoute ? false : null}
                   key={item.path}
                   href={item.path}
                   aria-current={current(item.path)}
@@ -1241,6 +1245,7 @@ export default function Navbar({ whatsappNumber = "" }) {
             {/* CONTACT */}
 
             <Link
+              prefetch={isBlogRoute ? false : null}
               href={CONTACT.path}
               aria-current={current(CONTACT.path)}
               onClick={() => setDropdown(null)}
@@ -1303,7 +1308,7 @@ export default function Navbar({ whatsappNumber = "" }) {
 
                           bg-transparent
 
-                          text-[#EC1C40]
+                          text-[#d9183a]
 
                           hover:-translate-y-px
 
@@ -1652,6 +1657,7 @@ export default function Navbar({ whatsappNumber = "" }) {
 
                   return (
                     <Link
+                      prefetch={isBlogRoute ? false : null}
                       key={item.path}
                       href={item.path}
                       aria-current={current(item.path)}
@@ -1811,6 +1817,7 @@ export default function Navbar({ whatsappNumber = "" }) {
 
                     return (
                       <Link
+                        prefetch={isBlogRoute ? false : null}
                         key={item.path}
                         href={item.path}
                         aria-current={current(item.path)}
@@ -1949,6 +1956,7 @@ export default function Navbar({ whatsappNumber = "" }) {
               `}
             >
               <Link
+                prefetch={isBlogRoute ? false : null}
                 href={enquiryHref}
                 target={hasWhatsApp ? "_blank" : undefined}
                 rel={hasWhatsApp ? "noopener noreferrer" : undefined}

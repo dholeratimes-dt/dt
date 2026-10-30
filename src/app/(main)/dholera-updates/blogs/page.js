@@ -4,7 +4,7 @@ import { getImageProps } from "next/image";
 import { getBlogRecency } from "@/lib/blogDates";
 
 import BlogCard from "./BlogCard";
-import MobileBlogSwiper from "./MobileBlog";
+import BlogGrid from "./MobileBlog";
 import TrendingBlogItem from "./TrendingBlog";
 import LeadForm from "../../dholera-sir/LeadForm";
 
@@ -14,6 +14,16 @@ import heroM from "@/assets/DT-Blog-phone.webp";
 /* SETTINGS*/
 
 export const revalidate = 300;
+
+export const metadata = {
+  title: "Explore Dholera SIR Growth and Updates",
+  description:
+    "Read expert Dholera Smart City blogs, investment guides, price analysis and infrastructure updates from Dholera Times.",
+  alternates: {
+    canonical: "https://www.dholeratimes.com/dholera-updates/blogs",
+  },
+  robots: { index: true, follow: true },
+};
 
 /* CACHED BLOGS*/
 
@@ -70,11 +80,12 @@ function normalizeUniquePosts(posts) {
 
 function BlogHero() {
   const {
-    props: { srcSet: desktopSrcSet },
+    props: desktopImageProps,
   } = getImageProps({
     src: hero,
     alt: "Dholera Smart City Gujarat",
     sizes: "100vw",
+    quality: 65,
   });
 
   const {
@@ -83,14 +94,31 @@ function BlogHero() {
     src: heroM,
     alt: "Dholera Smart City Gujarat",
     sizes: "100vw",
+    quality: 65,
   });
 
   return (
     <section className="relative w-full overflow-hidden bg-black">
+      <link
+        rel="preload"
+        as="image"
+        media="(min-width: 768px)"
+        imageSrcSet={desktopImageProps.srcSet}
+        imageSizes="100vw"
+        fetchPriority="high"
+      />
+      <link
+        rel="preload"
+        as="image"
+        media="(max-width: 767.98px)"
+        imageSrcSet={mobileImageProps.srcSet}
+        imageSizes="100vw"
+        fetchPriority="high"
+      />
       <picture className="block w-full">
         <source
           media="(min-width: 768px)"
-          srcSet={desktopSrcSet}
+          srcSet={desktopImageProps.srcSet}
           sizes="100vw"
           width={hero.width}
           height={hero.height}
@@ -98,6 +126,7 @@ function BlogHero() {
 
         <img
           {...mobileImageProps}
+          data-blog-hero=""
           loading="eager"
           fetchPriority="high"
           decoding="async"
@@ -130,44 +159,13 @@ export default async function BlogsPage() {
     slug: post.slug || { current: "#" },
   }));
 
-  /* MOBILE DATA*/
-
-  const mobilePosts = safePosts.map((post) => ({
-    _id: post._id,
-    title: post.title,
-    slug: post.slug,
-    publishedAt: post.publishedAt,
-    createdAt: post.createdAt,
-    _createdAt: post._createdAt,
-    mainImage: post.mainImage,
-  }));
-
   /* RECENT POSTS*/
 
   const trendingBlogs = safePosts.slice(0, 2);
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* SEO*/}
-
-      <link
-        rel="canonical"
-        href="https://www.dholeratimes.com/dholera-updates/blogs"
-      />
-
-      <title>
-        Explore Dholera SIR Growth and Updates
-      </title>
-
-      <meta
-        name="description"
-        content="Read expert Dholera Smart City blogs, investment guides, price analysis and infrastructure updates from Dholera Times."
-      />
-
-      <meta
-        name="robots"
-        content="index, follow"
-      />
+    <main className="min-h-screen bg-white">
+      <h1 className="sr-only">Dholera Smart City Blogs and Updates</h1>
 
       {/* HERO*/}
 
@@ -180,22 +178,14 @@ export default async function BlogsPage() {
           {/* BLOG GRID*/}
 
           <div className="lg:w-3/4">
-            {/* MOBILE*/}
-
-            <div className="md:hidden">
-              <MobileBlogSwiper posts={mobilePosts} />
-            </div>
-
-            {/* TABLET AND DESKTOP*/}
-
-            <div className="hidden gap-4 md:grid md:grid-cols-2 md:gap-6 lg:grid-cols-3">
+            <BlogGrid>
               {safePosts.map((post) => (
                 <BlogCard
                   key={post._id}
                   post={post}
                 />
               ))}
-            </div>
+            </BlogGrid>
           </div>
 
           {/* SIDEBAR*/}
@@ -255,6 +245,6 @@ export default async function BlogsPage() {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
