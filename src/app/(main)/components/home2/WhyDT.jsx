@@ -214,7 +214,7 @@ export default function WhyDT() {
             >
               Dholera Times
             </Link>
-            {" "}covers धोलेरा Smart City news,
+            {" "}covers Dholera(धोलेरा) Smart City news,
             development updates and investment insights with a
             focus on verified जानकारी, local reporting and
             clear project status.

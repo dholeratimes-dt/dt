@@ -171,7 +171,7 @@ export default function Dholera() {
             "
           >
             Dholera Smart City is a planned greenfield smart city
-            in Gujarat, developed with in the धोलेर Special
+            in Gujarat, developed with in the Dholera(धोलेर) Special
             Investment Region{" "}
             <Link
               href="/dholera-sir"
