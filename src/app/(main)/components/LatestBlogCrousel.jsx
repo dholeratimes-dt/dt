@@ -292,7 +292,7 @@ export default function RelatedBlogCarousel({
           pb-1
           pt-1
 
-          touch-pan-x
+          touch-auto
 
           focus-visible:outline
           focus-visible:outline-2
