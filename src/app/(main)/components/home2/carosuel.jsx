@@ -84,9 +84,12 @@ function HeroImage() {
 export default function HOME2() {
   return (
     <section
-      aria-label="Dholera Times"
+      aria-labelledby="home-heading"
       className="relative m-0 w-full overflow-hidden bg-transparent p-0 pt-[72px] min-[480px]:pt-[76px] md:pt-0"
     >
+      <h1 id="home-heading" className="sr-only">
+        Dholera Smart City News, Updates and Investment Insights
+      </h1>
       {/* HERO BANNER*/}
       <div className="relative m-0 w-full overflow-hidden p-0">
         <HeroImage />

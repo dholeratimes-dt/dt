@@ -794,7 +794,7 @@ export default function NRIInvestmentGuide() {
           
             {/* HEADING */}
 
-            <h2
+            <h1
               id="nri-investment-heading"
               className="
                 max-w-4xl
@@ -821,7 +821,7 @@ export default function NRIInvestmentGuide() {
               <span className="text-[#EC1C40]">
                 Property Guide for Overseas Indians
               </span>
-            </h2>
+            </h1>
 
             {/* DESCRIPTION */}
 

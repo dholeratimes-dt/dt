@@ -50,13 +50,13 @@ function ItemContent({ item, variant = "light" }) {
             }`}
           />
         </div>
-        <h3
+        <h2
           className={`max-w-[220px] text-[15px] font-bold leading-[1.25] tracking-[-0.02em] sm:text-[16px] ${
             isLight ? "text-black" : "text-white"
           }`}
         >
           {item.title}
-        </h3>
+        </h2>
       </div>
     </div>
   );

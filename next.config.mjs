@@ -5,6 +5,9 @@ const nextConfig = {
   output: "standalone",
   poweredByHeader: false,
   compress: true,
+  // Keep titles, descriptions and canonical links in the initial <head> for
+  // HTML validators and crawlers that do not execute streamed metadata scripts.
+  htmlLimitedBots: /.*/,
 
   images: {
     remotePatterns: [

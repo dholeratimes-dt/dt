@@ -463,7 +463,7 @@ export default function TermsAndConditionsPage() {
           MAIN CONTENT
       ====================================================== */}
 
-      <section
+      <div
         className="
           bg-white
 
@@ -673,7 +673,7 @@ export default function TermsAndConditionsPage() {
               Original document card returns.
           ================================================== */}
 
-          <article
+          <div
             className="
               min-w-0
 
@@ -1979,9 +1979,9 @@ export default function TermsAndConditionsPage() {
                 </p>
               </div>
             </section>
-          </article>
+          </div>
         </div>
-      </section>
+      </div>
     </main>
   );
 }

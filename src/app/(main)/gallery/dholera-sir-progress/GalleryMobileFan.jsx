@@ -63,7 +63,7 @@ function getTransform(position, dragX, width) {
 function MobileGalleryCard({ image, position }) {
   return (
     <>
-      <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden bg-black/[0.035]">
+      <span className="relative block aspect-[4/3] w-full shrink-0 overflow-hidden bg-black/[0.035]">
         <Image
           src={image.src}
           alt={image.alt}
@@ -77,11 +77,11 @@ function MobileGalleryCard({ image, position }) {
           draggable={false}
           className="pointer-events-none select-none object-cover object-center"
         />
-        <div
+        <span
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent"
         />
-        <div
+        <span
           aria-hidden="true"
           className="pointer-events-none absolute bottom-3 right-3 flex h-9 w-9 items-center justify-center rounded-full border border-white/70 bg-white/95 text-[#EC1C40] shadow-[0_5px_18px_rgba(0,0,0,0.16)] backdrop-blur-md"
         >
@@ -99,13 +99,13 @@ function MobileGalleryCard({ image, position }) {
             <circle cx="12" cy="12" r="10" />
             <path d="m10 8 6 4-6 4V8Z" />
           </svg>
-        </div>
-      </div>
-      <div className="flex h-[52px] min-h-[52px] items-center bg-white px-4">
-        <h2 className="line-clamp-2 text-[14.5px] font-semibold leading-[1.28] tracking-[-0.012em] text-black min-[390px]:text-[15px]">
+        </span>
+      </span>
+      <span className="flex h-[52px] min-h-[52px] items-center bg-white px-4">
+        <span className="line-clamp-2 text-[14.5px] font-semibold leading-[1.28] tracking-[-0.012em] text-black min-[390px]:text-[15px]">
           {image.alt}
-        </h2>
-      </div>
+        </span>
+      </span>
     </>
   );
 }
@@ -336,6 +336,7 @@ export default function GalleryMobileFan({ items }) {
         {/* FAN CARDS*/}
         <div
           ref={stackRef}
+          role="group"
           aria-label="Swipeable Dholera gallery"
           className="relative mx-auto h-[358px] w-full min-[375px]:h-[373px] min-[414px]:h-[386px]"
         >

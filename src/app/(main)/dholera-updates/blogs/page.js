@@ -98,7 +98,7 @@ function BlogHero() {
   });
 
   return (
-    <section className="relative w-full overflow-hidden bg-black">
+    <div className="relative w-full overflow-hidden bg-black">
       <link
         rel="preload"
         as="image"
@@ -133,7 +133,7 @@ function BlogHero() {
           className="block h-auto w-full"
         />
       </picture>
-    </section>
+    </div>
   );
 }
 

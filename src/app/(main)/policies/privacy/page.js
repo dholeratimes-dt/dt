@@ -518,7 +518,7 @@ export default function PrivacyPolicyPage() {
           MAIN POLICY
       ====================================================== */}
 
-      <section
+      <div
         className="
           bg-white
 
@@ -727,7 +727,7 @@ export default function PrivacyPolicyPage() {
               Rounded document container.
           ================================================== */}
 
-          <article
+          <div
             className="
               min-w-0
 
@@ -1890,9 +1890,9 @@ export default function PrivacyPolicyPage() {
                 </p>
               </div>
             </section>
-          </article>
+          </div>
         </div>
-      </section>
+      </div>
     </main>
   );
 }

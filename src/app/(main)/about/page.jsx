@@ -330,7 +330,7 @@ export default function AboutPage() {
         </section>
 
         {/* Mission / Vision */}
-        <section className="bg-white px-4 py-8 min-[414px]:px-5 sm:px-6 sm:py-12 md:px-8 md:py-14 lg:px-10 lg:py-12">
+        <div className="bg-white px-4 py-8 min-[414px]:px-5 sm:px-6 sm:py-12 md:px-8 md:py-14 lg:px-10 lg:py-12">
           <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-6">
             {/* Mission */}
             <article className="relative overflow-hidden rounded-[24px] border border-black/10 bg-white p-6 shadow-[0_18px_52px_-40px_rgba(0,0,0,0.4)] sm:p-8 lg:p-10">
@@ -376,7 +376,7 @@ export default function AboutPage() {
               </p>
             </article>
           </div>
-        </section>
+        </div>
 
         {/* Our Promise */}
         <section
@@ -401,9 +401,9 @@ export default function AboutPage() {
               </div>
 
               {/* Promise List */}
-              <div className="min-w-0 border-t border-black/10">
+              <ul className="min-w-0 border-t border-black/10">
                 {promiseItems.map((item) => (
-                  <article
+                  <li
                     key={item}
                     className="group grid grid-cols-[40px_minmax(0,1fr)] items-center gap-4 border-b border-black/10 py-4 min-[414px]:grid-cols-[42px_minmax(0,1fr)] sm:gap-5 sm:py-5 lg:grid-cols-[44px_minmax(0,1fr)] lg:gap-5 lg:py-[22px]"
                   >
@@ -417,9 +417,9 @@ export default function AboutPage() {
                     <p className="min-w-0 text-[15px] font-semibold leading-6 tracking-[-0.012em] text-black/75 transition-colors duration-200 group-hover:text-black sm:text-[16px] sm:leading-7 lg:text-[17px]">
                       {item}
                     </p>
-                  </article>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
           </div>
         </section>

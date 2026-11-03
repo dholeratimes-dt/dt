@@ -347,6 +347,7 @@ export default function RelatedBlogCarousel({
 
             gap-2
           "
+          role="group"
           aria-label={`Slide ${
             currentPosition + 1
           } of ${totalPositions}`}

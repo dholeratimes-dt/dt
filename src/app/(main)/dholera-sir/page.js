@@ -538,7 +538,7 @@ async function ProjectBlogSection() {
   }
 
   return (
-    <section
+    <div
       className="
         bg-gray-50
 
@@ -553,7 +553,7 @@ async function ProjectBlogSection() {
       "
     >
       <BlogSlider posts={safePosts} />
-    </section>
+    </div>
   );
 }
 
@@ -829,7 +829,7 @@ export default function DholeraSirPage() {
               max-w-7xl
             "
           >
-            <h2
+            <h1
               id="about-dholera-sir-heading"
               className="
                 w-full
@@ -853,7 +853,7 @@ export default function DholeraSirPage() {
               <span className="text-[#EC1C40]">
                 Dholera SIR
               </span>
-            </h2>
+            </h1>
 
             <p
               className="

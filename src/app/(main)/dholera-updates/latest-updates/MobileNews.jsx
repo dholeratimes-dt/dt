@@ -836,7 +836,7 @@ export default function MobileNews({
                 >
                   {/* TITLE */}
 
-                  <h3
+                  <h2
                     className="
                       mb-2
 
@@ -862,7 +862,7 @@ export default function MobileNews({
                         index +
                         1
                       }`}
-                  </h3>
+                  </h2>
 
                   {/* DIVIDER */}
 

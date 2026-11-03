@@ -212,7 +212,7 @@ export default function ExploreDholera() {
             "
           >
             Invest in Registry Ready Plots in Dholera{" "}
-            <span className="text-[#EC1C40]">From ₹10 Lakh</span>
+            <span className="text-[#EC1C40]">from ₹10 Lakh</span>
           </h2>
 
           {/* =====================================================

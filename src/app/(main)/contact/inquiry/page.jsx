@@ -375,6 +375,7 @@ export default function ContactPage() {
             xl:py-12
           "
         >
+          <h1 className="sr-only">Contact Dholera Times</h1>
           <div
             aria-hidden="true"
             className="

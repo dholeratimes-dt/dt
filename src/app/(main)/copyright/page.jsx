@@ -459,7 +459,7 @@ export default function CopyrightPolicyPage() {
           MAIN DOCUMENT
       ====================================================== */}
 
-      <section
+      <div
         className="
           px-4
           py-8
@@ -668,7 +668,7 @@ export default function CopyrightPolicyPage() {
               POLICY CONTENT
           ================================================== */}
 
-          <article
+          <div
             className="
               min-w-0
 
@@ -1661,9 +1661,9 @@ export default function CopyrightPolicyPage() {
                 </p>
               </div>
             </div>
-          </article>
+          </div>
         </div>
-      </section>
+      </div>
     </main>
   );
 }

@@ -351,7 +351,7 @@ export default function Dholera() {
                   lg:text-[23px]
                 "
               >
-                Key Highlights of Dholera Smart City
+                Key highlights of Dholera Smart City
               </h3>
             </div>
 
