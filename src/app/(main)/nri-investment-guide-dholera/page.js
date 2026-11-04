@@ -109,18 +109,16 @@ export const metadata = {
 ============================================================ */
 
 const nriInterestFactors = [
-  "Dholera SIR development",
-  "Ahmedabad-Dholera connectivity",
-  "Dholera International Airport",
-  "Semiconductor and industrial development",
-  "Residential growth around Dholera",
-  "Property prices and entry cost",
+  "Planned smart city development",
+  "Government backed infrastructure",
+  "Semiconductor hub",
+  "Early entry property investment",
   "Long term development potential",
 ];
 
 const paymentMethods = [
   {
-    title: "Inward Remittance",
+    title: "Inward remittance through banking channels",
     description:
       "Inward remittance through banking channels",
     icon: Banknote,
@@ -1176,7 +1174,7 @@ export default function NRIInvestmentGuide() {
                 transaction.
               </p>
 
-              <p className="font-semibold text-black">
+              {/* <p className="font-semibold text-black">
                 <Link
                   href="/dholera-updates/blogs/dholera-smart-city-investment-guide-2025"
                   className="text-blue-600 hover:underline"
@@ -1186,7 +1184,7 @@ export default function NRIInvestmentGuide() {
                 
                  {" "}always verify the land type, title,
                 location and applicable approvals.
-              </p>
+              </p> */}
 
        
             </div>
@@ -1272,9 +1270,9 @@ export default function NRIInvestmentGuide() {
                     xl:text-[40px]
                   "
                 >
-                  Why Are NRIs Looking{" "}
+                  Why are NRIs investing{" "}
                   <span className="text-[#EC1C40]">
-                    at Dholera?
+                    in Dholera?
                   </span>
                 </h2>
 
@@ -1504,7 +1502,7 @@ export default function NRIInvestmentGuide() {
                     lg:text-[40px]
                   "
                 >
-                  How Can an NRI Pay for{" "}
+                  How can an NRI pay for{" "}
                   <span className="text-[#EC1C40]">
                     Property in India?
                   </span>
@@ -1946,8 +1944,8 @@ export default function NRIInvestmentGuide() {
           "
         >
           <SectionHeading
-            title="Documents NRIs Should Check"
-            accent="Before Buying"
+            title="Documents NRIs should check before buying plot"
+            accent="in Dholera"
             description="Property due diligence is especially important when you are buying remotely. Before considering a plot in Dholera, check:"
           />
 

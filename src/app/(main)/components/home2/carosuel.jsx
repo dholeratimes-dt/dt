@@ -2,6 +2,7 @@ import { getImageProps } from "next/image";
 import hero3 from "@/assets/hero/DT-Home-Banner-Web.webp";
 import heroM2 from "@/assets/hero/DT-Home-Banner-Phone2.webp";
 import HeroDesktopFormGate from "./HeroDesktopFormGate";
+import BannerDecorations from "./BannerDecorations";
 
 /* RESPONSIVE HERO IMAGE*/
 
@@ -101,6 +102,7 @@ export default function HOME2() {
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 hidden bg-gradient-to-r from-[#39252E]/10 via-transparent to-[#742039]/10 md:block"
         />
+        <BannerDecorations />
       </div>
 
       {/* DESKTOP LEAD FORM*/}

@@ -123,18 +123,6 @@ const faqItems = [
     answer:
       "One of the largest projects is the Tata Electronics semiconductor fab, which is currently being developed in Dholera. Other industrial and supply-chain developments are also emerging around the semiconductor ecosystem.",
   },
-  {
-    question:
-      "Is Dholera Airport operational?",
-    answer:
-      "As of the latest official July 2026 update, Dholera International Airport was still under construction and development.",
-  },
-  {
-    question:
-      "Can I buy residential plots in Dholera SIR?",
-    answer:
-      "Property is available across the wider Dholera region, but buyers should verify whether a specific plot is inside Dholera SIR or near Dholera SIR. The location, survey number, land use and approvals should be checked before purchase.",
-  },
 ];
 
 const faqSchema = {
@@ -1051,7 +1039,7 @@ export default function DholeraSirPage() {
                 lg:text-[40px]
               "
             >
-              Who is Developing{" "}
+              Who is developing{" "}
               <span className="text-[#EC1C40]">
                 Dholera SIR?
               </span>

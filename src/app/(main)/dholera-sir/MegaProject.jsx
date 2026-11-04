@@ -371,7 +371,7 @@ export default function MegaProjectsSection() {
                 lg:text-[40px]
               "
             >
-              Major Infrastructure{" "}
+              Major infrastructure{" "}
               <span className="text-[#EC1C40]">
                 in Dholera
               </span>

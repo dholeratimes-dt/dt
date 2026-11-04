@@ -153,37 +153,38 @@ export default function Dholera() {
             </span>
           </h2>
 
-          <p
-            className="
-              mt-2.5
-
-              w-full
-              max-w-6xl
-
-              text-[15px]
-              leading-[26px]
-
-              text-black/65
-
-              sm:mt-3
-              sm:text-[16px]
-              sm:leading-7
-            "
-          >
-            Dholera Smart City is a planned greenfield smart city
-            in Gujarat, developed with in the Dholera(धोलेर) Special
-            Investment Region{" "}
-            <Link
-              href="/dholera-sir"
-              className="text-blue-600 hover:underline"
+            <p
+              className="
+                mt-2.5
+                w-full
+                max-w-6xl
+                text-[15px]
+                leading-[26px]
+                text-black/65
+                sm:mt-3
+                sm:text-[16px]
+                sm:leading-7
+              "
             >
-              (Dholera SIR).
-            </Link>
-            {" "}It is part of the
-            Delhi-Mumbai Industrial Corridor (DMIC) and is being
-            developed with modern infrastructure for industries,
-            businesses, residential areas and public services.
-          </p>
+              Dholera Smart City is a planned greenfield smart city
+              in Gujarat, developed within the Dholera (धोलेर) Special
+              Investment Region{" "}
+              <Link
+                href="/dholera-sir"
+                className="text-blue-600 hover:underline"
+              >
+                (Dholera SIR).
+              </Link>
+
+              <span className="mt-3 block sm:mt-0 sm:inline">
+                {" "}It is part of the Delhi-Mumbai Industrial Corridor
+                (DMIC) and is being developed with modern infrastructure
+                for industries, businesses, residential areas and
+                public services.
+              </span>
+            </p>
+
+
         </header>
 
         {/* ===================================================

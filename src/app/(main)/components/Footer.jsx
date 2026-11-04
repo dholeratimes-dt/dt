@@ -467,21 +467,18 @@ export default function Footer() {
                 className="
                   mt-2
                   max-w-[410px]
-
                   not-italic
-
                   text-[14px]
                   leading-[1.7]
-
                   text-white/80
-
                   sm:text-[15px]
                 "
               >
-                CGJ - 194, Dlf Capital Greens,
-                Shivaji Marg, Karampura Industrial
-                Area, Karam Pura, Delhi - 110015,
-                India
+                CGJ-194, DLF Capital Greens,
+                <br />
+                Shivaji Marg, Karampura Industrial Area,
+                <br />
+                Karam Pura, Delhi 110015, India
               </address>
             </div>
 
@@ -521,7 +518,7 @@ export default function Footer() {
                 </span>
 
                 <span className="leading-none">
-                  +91 99589 93549
+                  +91 99 58 99 35 49
                 </span>
               </a>
 
@@ -657,7 +654,7 @@ export default function Footer() {
           >
             <div className={headingWrapperClass}>
               <h2 className={headingClass}>
-                Polices
+                Policies
               </h2>
             </div>
 

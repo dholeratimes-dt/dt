@@ -430,7 +430,7 @@ export default function ContactPage() {
                     xl:text-[44px]
                   "
                 >
-                  Connect With{" "}
+                  Connect with{" "}
                   <span className="text-[#EC1C40]">
                     Dholera Times
                   </span>
@@ -557,7 +557,7 @@ export default function ContactPage() {
                         sm:text-[22px]
                       "
                     >
-                      +91 99589 93549
+                      +91 99 58 99 35 49
                     </a>
 
                     <p
