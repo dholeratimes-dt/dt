@@ -1213,6 +1213,7 @@ export default function PopupForm({ initiallyOpen = false }) {
                   {/* SUBMIT */}
 
                   <button
+                    id="common-popup-callback-btn"
                     type="submit"
                     disabled={
                       isLoading ||

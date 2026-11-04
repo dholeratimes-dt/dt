@@ -761,6 +761,7 @@ export default function SidebarWithForm({
             />
 
             <button
+              id="dholera-news-advisor-btn"
               type="submit"
               disabled={
                 isLoading

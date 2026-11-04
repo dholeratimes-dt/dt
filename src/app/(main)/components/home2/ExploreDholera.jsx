@@ -252,6 +252,7 @@ export default function ExploreDholera() {
             ================================================== */}
 
             <a
+              id="home-phonecall-btn"
               href="tel:+919958993549"
               className="
                 group
@@ -333,6 +334,7 @@ export default function ExploreDholera() {
             ================================================== */}
 
             <button
+              id="home-get-in-touch-btn"
               type="button"
               data-open-dholera-popup
               className="
