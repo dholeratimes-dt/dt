@@ -948,7 +948,7 @@ export default async function BlogDetail({ params }) {
 
       {/* ARTICLE LAYOUT*/}
 
-      <main className="mx-auto max-w-7xl px-4 py-8">
+      <main className="mx-auto max-w-7xl px-4 py-5">
         <div className="flex flex-col gap-10 lg:flex-row">
           <article className="lg:w-2/3">
             {/* BREADCRUMBS*/}

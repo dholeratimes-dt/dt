@@ -1112,7 +1112,7 @@ export default function Navbar({ whatsappNumber = "" }) {
 
             gap-5
 
-            px-4
+            px-2
             py-2
 
             min-[480px]:min-h-[76px]
@@ -1153,7 +1153,7 @@ export default function Navbar({ whatsappNumber = "" }) {
           >
             <Image
               src={logo}
-              alt="Dholera Times"
+              alt="Dholera Times logo"
               width={150}
               height={150}
               priority

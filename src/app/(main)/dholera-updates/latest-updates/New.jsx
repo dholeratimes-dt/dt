@@ -96,8 +96,6 @@ function NewsCard({
           className="
             relative
 
-            aspect-[16/9]
-
             w-full
             shrink-0
 
@@ -112,7 +110,8 @@ function NewsCard({
                 post.mainImage,
               )
                 .width(800)
-                .height(450)
+                .fit("max")
+                .ignoreImageParams()
                 .auto("format")
                 .quality(75)
                 .url()}
@@ -121,28 +120,19 @@ function NewsCard({
                 post.title ||
                 "Dholera SIR news"
               }
-              fill
+              width={800}
+              height={450}
               sizes="
                 (max-width: 1279px) 45vw,
                 430px
               "
-              className="
-                object-cover
-
-                transition-transform
-                duration-500
-                ease-out
-
-                md:group-hover:scale-[1.035]
-
-                motion-reduce:transform-none
-                motion-reduce:transition-none
-              "
+              className="block h-auto w-full"
             />
           ) : (
             <div
               className="
                 flex
+                aspect-[16/9]
                 h-full
                 w-full
 

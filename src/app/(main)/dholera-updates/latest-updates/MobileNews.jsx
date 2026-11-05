@@ -743,7 +743,7 @@ export default function MobileNews({
                 {/* ===========================================
                     IMAGE
 
-                    SIZE / DIMENSIONS UNCHANGED
+                    FULL-WIDTH IMAGE AT ITS NATURAL ASPECT RATIO
                 ============================================ */}
 
                 <div
@@ -764,7 +764,8 @@ export default function MobileNews({
                         post.mainImage,
                       )
                         .width(700)
-                        .height(350)
+                        .fit("max")
+                        .ignoreImageParams()
                         .auto("format")
                         .quality(75)
                         .url()}
@@ -775,17 +776,7 @@ export default function MobileNews({
                       width={700}
                       height={350}
                       sizes="(max-width: 767px) 100vw, 50vw"
-                      className="
-                        h-full
-                        w-full
-
-                        object-cover
-
-                        transition-transform
-                        duration-500
-
-                        hover:scale-110
-                      "
+                      className="block h-auto w-full"
                     />
                   ) : (
                     <div

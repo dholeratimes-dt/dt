@@ -572,7 +572,7 @@ export default async function BlogDetail({ params }) {
           <div className="bg-white shadow-sm sticky top-0 z-30" />
 
           {/* Main content */}
-          <main className="max-w-7xl mx-auto px-4 py-8">
+          <main className="max-w-7xl mx-auto px-4 py-5">
             <div className="flex flex-col lg:flex-row gap-10">
               {/* Article */}
               <article className="lg:w-2/3">
