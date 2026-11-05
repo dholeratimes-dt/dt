@@ -1004,7 +1004,7 @@ export default async function BlogDetail({ params }) {
 
             {/* CATEGORIES AND TITLE*/}
 
-            <div className="mb-8">
+            <div className="mb-4 sm:mb-5">
               {post.categories?.length > 0 && (
                 <div className="mb-4 flex flex-wrap gap-2">
                   {post.categories.map((category) => (
@@ -1025,7 +1025,7 @@ export default async function BlogDetail({ params }) {
                 {post.title}
               </h1>
 
-              <div className="mb-6 flex flex-wrap items-center gap-x-8 gap-y-4 text-sm text-gray-500">
+              <div className="flex flex-wrap items-center gap-x-8 gap-y-2 text-sm text-gray-500">
                 <BlogDates post={post} />
                 {post.readingTime && (
                   <div className="flex items-center">
@@ -1056,7 +1056,7 @@ export default async function BlogDetail({ params }) {
               <div className="mb-7 w-full sm:mb-8 lg:mb-9">
                 <div
                   className="
-                    relative mx-auto w-full max-w-[700px]
+                    relative aspect-[3/2] w-full
                     overflow-hidden rounded-xl bg-[#F3E7EC]
                     shadow-[0_8px_28px_rgba(57,37,46,0.10)]
                     sm:rounded-2xl
@@ -1073,12 +1073,8 @@ export default async function BlogDetail({ params }) {
                     height={800}
                     priority
                     data-blog-hero=""
-                    sizes="
-                      (max-width: 639px) calc(100vw - 32px),
-                      (max-width: 1023px) 680px,
-                      680px
-                    "
-                    className="block h-auto w-full object-contain"
+                    sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1200px) 70vw, 800px"
+                    className="block aspect-[3/2] h-auto w-full object-cover"
                   />
 
                   <div

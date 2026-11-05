@@ -143,47 +143,53 @@ const paymentMethods = [
 
 const documents = [
   {
-    title: "Property Title",
+    title: "7/12 Extract & Form 8A",
     description:
-      "Confirm ownership and review the chain of title.",
+      "Land revenue records showing the landowner’s name, land details, area, and cultivation information. Form 8A shows the landholder’s account details.",
     icon: FileCheck2,
   },
   {
-    title: "Survey Number",
+    title: "Sale Deed",
     description:
-      "Verify the exact survey number and location of the land.",
+      "A legal document that proves ownership of the property has been transferred from the seller to the buyer.",
     icon: MapPin,
   },
+{
+  title: "NA (Non-Agricultural Permission)",
+  description:
+    "Government approval to use agricultural land for residential, commercial, or other non-agricultural purposes.",
+  icon: Map,
+},
+{
+  title: "NOC (No Objection Certificate)",
+  description:
+    "Approval or clearance from the relevant authority confirming there is no objection to the proposed use or transaction.",
+  icon: ClipboardCheck,
+},
   {
-    title: "Land Use",
+    title: "Property Card",
     description:
-      "Confirm whether the property is residential/non-agricultural and suitable for the proposed use.",
-    icon: Map,
-  },
-  {
-    title: "Project Approvals",
-    description:
-      "Review the relevant approvals and layout documents where applicable.",
-    icon: ClipboardCheck,
-  },
-  {
-    title: "Sale Documents",
-    description:
-      "Understand the agreement, payment schedule, possession terms and registration process.",
+      "An official government record showing property ownership, property details, area, and other land-related information.",
     icon: FileText,
   },
   {
-    title: "Encumbrances",
+    title: "Approved Plan Pass",
     description:
-      "Check whether there are existing charges, disputes or claims over the property.",
+      "An official approval from the local authority confirming that the building construction plan follows the required rules and regulations.",
+    icon: ClipboardCheck,
+  },
+  {
+    title: "Mutation",
+    description:
+      "The process of updating government land or property records with the new owner’s name after a sale, inheritance, or transfer.",
+    icon: FileText,
+  },
+  {
+    title: "EC Certificate",
+    description:
+      "A document showing the registered transactions and any recorded loans or legal claims against the property for a specific period.",
     icon: ShieldCheck,
   },
-  // {
-  //   title: "Location Verification",
-  //   description:
-  //     "Confirm whether the property is inside Dholera SIR, near Dholera SIR or elsewhere in the wider region.",
-  //   icon: Navigation,
-  // },
 ];
 
 const remoteBuyingSteps = [
