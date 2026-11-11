@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import {
@@ -21,6 +20,7 @@ import getM from "@/assets/DT-ContactUs-phoneview.webp";
 import get from "@/assets/contactPage/DTcontactBanner.webp";
 
 import CommonFAQ from "../../components/Common/Faq";
+import ResponsiveHeroImage from "../../components/ResponsiveHeroImage";
 
 
 
@@ -310,42 +310,12 @@ export default function ContactPage() {
         bg-white
       "
       >
-        {/* MOBILE BANNER */}
-
-        <Image
-          src={getM}
+        <ResponsiveHeroImage
+          mobile={getM}
+          desktop={get}
           alt="Contact Dholera Times"
-          priority
           quality={90}
-          sizes="100vw"
-          className="
-          block
-          h-auto
-          w-full
-
-          object-cover
-
-          md:hidden
-        "
-        />
-
-        {/* DESKTOP / TABLET BANNER */}
-
-        <Image
-          src={get}
-          alt="Contact Dholera Times"
-          priority
-          quality={90}
-          sizes="100vw"
-          className="
-          hidden
-          h-auto
-          w-full
-
-          object-cover
-
-          md:block
-        "
+          className="block h-auto w-full object-cover"
         />
       </section>
 

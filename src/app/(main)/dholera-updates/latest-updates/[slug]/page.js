@@ -9,6 +9,7 @@ import {
 } from "@/sanity/lib/api";
 import Link from "next/link";
 import Image from "next/image";
+import SanityImage from "../../../components/blog/SanityImage";
 
 import SchemaMarkup from "../SchemaMarkup";
 import SocialShare from "../../../components/blog/SocialShare";
@@ -24,6 +25,11 @@ import LeadFormSlug from "./LeadForm";
 import LeadFormBlock from "@/app/(main)/components/blog/LeadFormBlock";
 
 export const revalidate = 300;
+
+// Reuse each published article's HTML, as the blog detail route already does.
+export function generateStaticParams() {
+  return [];
+}
 
 const getCachedNewsBySlug = unstable_cache(
   (slug) => getNewsBySlug(slug),
@@ -147,16 +153,15 @@ export default async function BlogDetail({ params }) {
         image: ({ value }) => {
           if (!value?.asset) return null;
 
-          const imageUrl =
-            value.asset.url || getSanityImageUrl(value, 1200, 800);
-
           const imageNode = (
-            <img
-              src={imageUrl}
+            <SanityImage
+              image={value}
+              fit="max"
               alt={value.alt || ""}
               className="w-full h-auto aspect-[3/2] rounded-lg my-6"
               width={1200}
               height={800}
+              sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1200px) 70vw, 800px"
               loading="lazy"
             />
           );
@@ -680,8 +685,8 @@ export default async function BlogDetail({ params }) {
                 {/* Featured Image */}
                 {post.mainImage && (
                   <div className="mb-10 overflow-hidden rounded-xl shadow-lg aspect-[3/2]">
-                    <Image
-                      src={getSanityImageUrl(post.mainImage, 1200, 800)}
+                    <SanityImage
+                      image={post.mainImage}
                       alt={
                         post.mainImage?.alt || post.title || "Dholera update"
                       }

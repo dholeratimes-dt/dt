@@ -12,18 +12,22 @@ export default function SanityImage({
   sizes,
   quality = 60,
   priority = false,
+  fit = "crop",
   ...rest
 }) {
   if (!image?.asset) return null;
 
-  const loader = ({ width: requestedWidth, quality: requestedQuality }) =>
-    urlFor(image)
-      .width(requestedWidth)
-      .height(Math.round((requestedWidth * height) / width))
-      .fit("crop")
+  const loader = ({ width: requestedWidth, quality: requestedQuality }) => {
+    let builder = urlFor(image).width(requestedWidth);
+    if (fit === "crop") {
+      builder = builder.height(Math.round((requestedWidth * height) / width));
+    }
+    return builder
+      .fit(fit)
       .quality(requestedQuality || quality)
       .auto("format")
       .url();
+  };
 
   const { props } = getImageProps({
     ...rest,
@@ -50,7 +54,7 @@ export default function SanityImage({
       )}
       {/* The server-generated srcset uses Sanity's image optimization. */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img {...props} />
+      <img {...props} alt={alt} />
     </>
   );
 }

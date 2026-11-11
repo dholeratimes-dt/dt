@@ -1,8 +1,9 @@
 import { PortableText } from "@portabletext/react";
-import { getSanityImageUrl } from "@/sanity/lib/image";
-import { getAboutBySlug, getProjectInfo, getProjects } from "@/sanity/lib/api";
+import { cache } from "react";
+import { unstable_cache } from "next/cache";
+import { getAboutBySlug, getProjectInfo } from "@/sanity/lib/api";
 import Link from "next/link";
-import Image from "next/image";
+import SanityImage from "../../components/blog/SanityImage";
 
 import SchemaMarkup from "../SchemaMarkup";
 import LeadFormSlug from "../../dholera-updates/latest-updates/[slug]/LeadForm";
@@ -14,19 +15,37 @@ import {
   getHeadingText,
 } from "../../components/blog/tableOfContents.js";
 
+export const revalidate = 300;
+
+export function generateStaticParams() {
+  return [];
+}
+
+const getCachedSirPost = unstable_cache(
+  (slug) => getAboutBySlug(slug),
+  ["dholera-sir-detail-v1"],
+  { revalidate: 300, tags: ["dholera-sir-detail"] },
+);
+const getSirPost = cache((slug) => getCachedSirPost(slug));
+
+const getCachedProjectInfo = unstable_cache(
+  () => getProjectInfo({ includeBody: false }),
+  ["dholera-sir-project-info-v1"],
+  { revalidate: 300, tags: ["dholera-sir-project-info"] },
+);
+
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const site = "dholera-times";
-  const post = await getAboutBySlug(slug, site);
+  const post = await getSirPost(slug);
 
   return {
-    title: post.metaTitle,
-    description: post.metaDescription,
-    keywords: post.keywords,
+    title: post?.metaTitle,
+    description: post?.metaDescription,
+    keywords: post?.keywords,
     publisher: "Dholera Times",
     robots: "index, follow",
     alternates: {
-      canonical: `https://www.dholeratimes.com/dholera-sir/${post.slug.current}`,
+      canonical: `https://www.dholeratimes.com/dholera-sir/${post?.slug?.current || slug}`,
     },
   };
 }
@@ -61,12 +80,12 @@ const TrendingBlogItem = ({ post }) => {
       <div className="flex gap-4 items-center bg-white hover:bg-gray-50 p-4 rounded-lg border border-gray-100 transition-all hover:shadow-md">
         {post.mainImage && (
           <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
-            <Image
-              src={getSanityImageUrl(post.mainImage, 1200, 800)}
+            <SanityImage
+              image={post.mainImage}
               alt={post.mainImage?.alt || post.title || "Dholera SIR"}
               width={1200}
               height={800}
-              unoptimized
+              sizes="80px"
               className="w-full h-full object-cover"
             />
           </div>
@@ -86,7 +105,6 @@ const TrendingBlogItem = ({ post }) => {
 
 export default async function BlogDetail({ params }) {
   const { slug } = await params;
-  const site = "dholera-times";
 
   if (!slug) {
     return (
@@ -98,8 +116,8 @@ export default async function BlogDetail({ params }) {
 
   try {
     const [post, trendingBlogs] = await Promise.all([
-      getAboutBySlug(slug, site),
-      getProjectInfo(),
+      getSirPost(slug),
+      getCachedProjectInfo(),
     ]);
 
     if (!post) {
@@ -125,16 +143,15 @@ export default async function BlogDetail({ params }) {
         image: ({ value }) => {
           if (!value?.asset) return null;
 
-          const imageUrl =
-            value.asset.url || getSanityImageUrl(value, 1200, 800);
-
           const imageNode = (
-            <img
-              src={imageUrl}
+            <SanityImage
+              image={value}
+              fit="max"
               alt={value.alt || ""}
               className="w-full h-auto aspect-[3/2] rounded-lg my-6"
               width={1200}
               height={800}
+              sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1200px) 70vw, 800px"
               loading="lazy"
             />
           );
@@ -670,8 +687,8 @@ export default async function BlogDetail({ params }) {
               {/* Featured Image */}
               {post.mainImage && (
                 <div className="mb-10 overflow-hidden rounded-xl shadow-lg aspect-[3/2]">
-                  <Image
-                    src={getSanityImageUrl(post.mainImage, 1200, 800)}
+                  <SanityImage
+                    image={post.mainImage}
                     alt={post.title || "Dholera Times"}
                     width={1200}
                     height={800}

@@ -270,14 +270,14 @@ export async function getEventBySlug(slug) {
   return post;
 }
 
-export async function getProjectInfo() {
+export async function getProjectInfo({ includeBody = true } = {}) {
   const query = `*[_type == "post" && "project-Info" in categories[]->title && author-> name == "Dholera Times" ]{
     _id,
     title,
     slug,
     mainImage,
     publishedAt,
-    body,
+    ${includeBody ? "body," : ""}
     author->{name, image},
     categories[]->{title, _id}
   }`;

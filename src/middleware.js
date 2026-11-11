@@ -1,6 +1,6 @@
 // src/middleware.js
 import { NextResponse } from "next/server";
-import { createClient } from "next-sanity";
+import { createClient } from "@sanity/client";
 
 const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
@@ -14,22 +14,46 @@ const SITE_NAME = process.env.SITE_NAME || "dholeratimes";
 
 let redirectCache = null;
 let cacheTime = 0;
+let redirectRefresh = null;
+let retryAfter = 0;
 const CACHE_TTL = 60 * 1000;
 
-async function fetchRedirects() {
-  const now = Date.now();
-  if (redirectCache && now - cacheTime < CACHE_TTL) return redirectCache;
+function refreshRedirects() {
+  // Concurrent page requests share one CMS request, including on cold starts.
+  if (!redirectRefresh) {
+    redirectRefresh = client.fetch(
+      `*[_type == "redirect" && site == $site]{ source, destination, permanent }`,
+      { site: SITE_NAME }
+    ).then((redirects) => {
+      if (!Array.isArray(redirects)) throw new Error("Invalid redirect data");
+      redirectCache = redirects;
+      cacheTime = Date.now();
+      retryAfter = 0;
+      return redirectCache;
+    }).finally(() => {
+      redirectRefresh = null;
+    });
+  }
+  return redirectRefresh;
+}
 
-  // Sirf is site ke redirects fetch karo
-  redirectCache = await client.fetch(
-    `*[_type == "redirect" && site == $site]{ source, destination, permanent }`,
-    { site: SITE_NAME }
-  );
-  cacheTime = now;
+async function fetchRedirects(event) {
+  // The first request must resolve redirects before serving the destination.
+  if (!redirectCache) return refreshRedirects();
+
+  if (Date.now() - cacheTime >= CACHE_TTL && Date.now() >= retryAfter) {
+    const refresh = refreshRedirects().catch(() => {
+      // Keep the last successful rules during a CMS outage, with a retry delay.
+      retryAfter = Date.now() + 5000;
+      console.warn("Could not refresh redirects; using the cached rules.");
+    });
+    // Keep background work alive without adding a CMS round trip to page TTFB.
+    event.waitUntil(refresh);
+  }
   return redirectCache;
 }
 
-export async function middleware(request) {
+export async function middleware(request, event) {
   const url = request.nextUrl.clone();
   const hostname = request.headers.get("host") || "";
 
@@ -45,7 +69,7 @@ export async function middleware(request) {
   // round trip here; www normalization above still applies.
   if (url.pathname === "/") return NextResponse.next();
 
-  const redirects = await fetchRedirects();
+  const redirects = await fetchRedirects(event);
   const pathname = request.nextUrl.pathname;
   const match = redirects.find((r) => r.source === pathname);
 

@@ -19,6 +19,8 @@ export default function RootLayout({ children }) {
     <html lang="en" className={inter.className}>
       <head>
         <link rel="icon" href="/favicon.ico" />
+        {/* Article images are served directly by Sanity's image CDN. */}
+        <link rel="preconnect" href="https://cdn.sanity.io" />
         {/* Bing Search Engine(webmaster by Bing) Code */}
         <meta name="msvalidate.01" content="4EEB445EE58BDF9E15EFDE4DB906372D" />
 

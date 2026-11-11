@@ -1,5 +1,4 @@
 
-import Image from "next/image";
 import Link from "next/link";
 import {
   Building2,
@@ -18,6 +17,7 @@ import hero from "@/assets/AboutUsHero.webp";
 import heroMobile from "@/assets/DTAboutUsPhoneView.webp";
 import ConnectedFocusGraphic from "./connect";
 import CommonFAQ from "../components/Common/Faq";
+import ResponsiveHeroImage from "../components/ResponsiveHeroImage";
 
 // SEO Metadata
 export const metadata = {
@@ -229,21 +229,12 @@ export default function AboutPage() {
           aria-label="About Dholera Times"
           className="relative w-full overflow-hidden bg-white"
         >
-          <Image
-            src={heroMobile}
+          <ResponsiveHeroImage
+            mobile={heroMobile}
+            desktop={hero}
             alt="About Dholera Times"
-            priority
             quality={95}
-            sizes="100vw"
-            className="block h-auto w-full max-w-none object-contain md:hidden"
-          />
-          <Image
-            src={hero}
-            alt="About Dholera Times"
-            priority
-            quality={95}
-            sizes="100vw"
-            className="hidden h-auto w-full max-w-none object-contain md:block"
+            className="block h-auto w-full max-w-none object-contain"
           />
         </section>
 

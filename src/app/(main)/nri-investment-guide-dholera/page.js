@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import ResponsiveHeroImage from "../components/ResponsiveHeroImage";
 
 import {
   AlertTriangle,
@@ -525,36 +525,12 @@ export default function NRIInvestmentGuide() {
             bg-white
           "
         >
-          <Image
-            src={HeroPhonNRI}
+          <ResponsiveHeroImage
+            mobile={HeroPhonNRI}
+            desktop={HeroNRI}
             alt="About Dholera Times"
-            priority
             quality={95}
-            sizes="100vw"
-            className="
-              block
-              h-auto
-              w-full
-              max-w-none
-              object-contain
-              md:hidden
-            "
-          />
-
-          <Image
-            src={HeroNRI}
-            alt="About Dholera Times"
-            priority
-            quality={95}
-            sizes="100vw"
-            className="
-              hidden
-              h-auto
-              w-full
-              max-w-none
-              object-contain
-              md:block
-            "
+            className="block h-auto w-full max-w-none object-contain"
           />
         </section>
 
