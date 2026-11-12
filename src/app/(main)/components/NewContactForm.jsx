@@ -1,11 +1,11 @@
 "use client";
 
 import {
-  useCallback,
   useEffect,
   useRef,
   useState,
 } from "react";
+import useRecaptcha from "@/hooks/useRecaptcha";
 
 import {
   CheckCircle2,
@@ -52,17 +52,11 @@ export default function ContactForm({
     setErrorMessage,
   ] = useState("");
 
-  const [
-    recaptchaLoaded,
-    setRecaptchaLoaded,
-  ] = useState(false);
+  const submittingRef = useRef(false);
+  const { recaptchaRef, loadRecaptcha, verifyRecaptcha, resetRecaptcha } =
+    useRecaptcha();
 
-  const recaptchaRef =
-    useRef(null);
-
-  const siteKey =
-    process.env
-      .NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+  const preloadRecaptcha = () => loadRecaptcha().catch(() => {});
 
   const [formData, setFormData] =
     useState({
@@ -138,76 +132,6 @@ export default function ContactForm({
       storedCount >= 3,
     );
   }, []);
-
-  /* ============================================================
-     RECAPTCHA
-  ============================================================ */
-
-  const loadRecaptcha =
-    useCallback(() => {
-      if (
-        typeof window ===
-        "undefined"
-      ) {
-        return;
-      }
-
-      if (
-        window.grecaptcha
-      ) {
-        setRecaptchaLoaded(
-          true,
-        );
-
-        return;
-      }
-
-      if (recaptchaLoaded) {
-        return;
-      }
-
-      const existingScript =
-        document.querySelector(
-          'script[src*="google.com/recaptcha/api.js"]',
-        );
-
-      if (existingScript) {
-        existingScript.addEventListener(
-          "load",
-          () => {
-            setRecaptchaLoaded(
-              true,
-            );
-          },
-          {
-            once: true,
-          },
-        );
-
-        return;
-      }
-
-      const script =
-        document.createElement(
-          "script",
-        );
-
-      script.src =
-        "https://www.google.com/recaptcha/api.js";
-
-      script.async = true;
-      script.defer = true;
-
-      script.onload = () => {
-        setRecaptchaLoaded(
-          true,
-        );
-      };
-
-      document.head.appendChild(
-        script,
-      );
-    }, [recaptchaLoaded]);
 
   /* ============================================================
      INPUT CHANGE
@@ -337,354 +261,72 @@ export default function ContactForm({
   };
 
   /* ============================================================
-     RECAPTCHA SUCCESS / LEAD SUBMISSION
-  ============================================================ */
-
-  const onRecaptchaSuccess =
-    async (token) => {
-      try {
-        let storedCount =
-          Number.parseInt(
-            localStorage.getItem(
-              "formSubmissionCount",
-            ) || "0",
-            10,
-          );
-
-        const lastSubmissionTime =
-          Number.parseInt(
-            localStorage.getItem(
-              "lastSubmissionTime",
-            ) || "0",
-            10,
-          );
-
-        /* ================================================
-           RESET LIMIT AFTER 24 HOURS
-        ================================================= */
-
-        if (
-          lastSubmissionTime
-        ) {
-          const hoursPassed =
-            (Date.now() -
-              lastSubmissionTime) /
-            (1000 * 60 * 60);
-
-          if (
-            hoursPassed >= 24
-          ) {
-            storedCount = 0;
-
-            localStorage.setItem(
-              "formSubmissionCount",
-              "0",
-            );
-
-            localStorage.setItem(
-              "lastSubmissionTime",
-              Date.now().toString(),
-            );
-
-            setSubmissionCount(
-              0,
-            );
-
-            setIsDisabled(
-              false,
-            );
-          }
-        }
-
-        /* ================================================
-           LIMIT
-        ================================================= */
-
-        if (
-          storedCount >= 3
-        ) {
-          setErrorMessage(
-            "You have reached the maximum submission limit. Try again after 24 hours.",
-          );
-
-          setIsDisabled(
-            true,
-          );
-
-          return;
-        }
-
-        /* ================================================
-           API REQUEST
-        ================================================= */
-
-        const response =
-          await fetch(
-            "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
-            {
-              method:
-                "POST",
-
-              headers: {
-                "Content-Type":
-                  "application/json",
-
-                Authorization:
-                  `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
-              },
-
-              body:
-                JSON.stringify({
-                  fields: {
-                    name:
-                      formData.fullName.trim(),
-
-                    phone:
-                      formData.phone.replace(
-                        /\D/g,
-                        "",
-                      ),
-
-                    email:
-                      formData.email.trim(),
-
-                    source:
-                      getLeadSource(),
-                  },
-
-                  source:
-                    "Dholera Times Website",
-
-                  tags: [
-                    "Dholera Investment",
-                    "Website Lead",
-                  ],
-
-                  recaptchaToken:
-                    token,
-                }),
-            },
-          );
-
-        const responseText =
-          await response.text();
-
-        /* ================================================
-           SUCCESS
-        ================================================= */
-
-        if (response.ok) {
-          if (
-            responseText ===
-              "OK" ||
-            responseText
-              .toLowerCase()
-              .includes(
-                "success",
-              )
-          ) {
-            setFormData({
-              fullName: "",
-              email: "",
-              phone: "",
-            });
-
-            setShowPopup(
-              true,
-            );
-
-            const nextCount =
-              storedCount + 1;
-
-            setSubmissionCount(
-              nextCount,
-            );
-
-            localStorage.setItem(
-              "formSubmissionCount",
-              nextCount.toString(),
-            );
-
-            localStorage.setItem(
-              "lastSubmissionTime",
-              Date.now().toString(),
-            );
-
-            if (
-              nextCount >= 3
-            ) {
-              setIsDisabled(
-                true,
-              );
-            }
-
-            /* GOOGLE TAG */
-
-            window.dataLayer =
-              window.dataLayer ||
-              [];
-
-            window.dataLayer.push({
-              event:
-                "lead_form",
-            });
-          } else {
-            console.log(
-              "Response Text:",
-              responseText,
-            );
-
-            setErrorMessage(
-              "Submission received but with unexpected response",
-            );
-          }
-        } else {
-          console.error(
-            "Server Error:",
-            responseText,
-          );
-
-          throw new Error(
-            responseText ||
-              "Submission failed",
-          );
-        }
-      } catch (error) {
-        console.error(
-          "Error submitting form:",
-          error,
-        );
-
-        setErrorMessage(
-          `Error submitting form: ${error.message}`,
-        );
-      } finally {
-        setIsLoading(
-          false,
-        );
-
-        if (
-          typeof window !==
-            "undefined" &&
-          window.grecaptcha
-        ) {
-          try {
-            window.grecaptcha.reset();
-          } catch (error) {
-            console.error(
-              "Error resetting reCAPTCHA:",
-              error,
-            );
-          }
-        }
-      }
-    };
-
-  /* ============================================================
      SUBMIT
   ============================================================ */
 
-  const handleSubmit =
-    async (event) => {
-      event.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (submittingRef.current || isDisabled) return;
+    setErrorMessage("");
+    if (!validateForm()) return;
 
-      setIsLoading(true);
+    submittingRef.current = true;
+    setIsLoading(true);
 
-      setErrorMessage("");
-
-      if (!validateForm()) {
-        setIsLoading(
-          false,
-        );
-
-        return;
+    try {
+      let storedCount = Number.parseInt(
+        localStorage.getItem("formSubmissionCount") || "0", 10,
+      );
+      const lastTime = Number.parseInt(
+        localStorage.getItem("lastSubmissionTime") || "0", 10,
+      );
+      if (lastTime && Date.now() - lastTime >= 24 * 60 * 60 * 1000) {
+        storedCount = 0;
+      }
+      if (storedCount >= 3) {
+        setIsDisabled(true);
+        throw new Error("You have reached the maximum submission limit. Try again after 24 hours.");
       }
 
-      if (
-        !recaptchaLoaded ||
-        !window.grecaptcha
-      ) {
-        loadRecaptcha();
-
-        setErrorMessage(
-          "Security verification is loading. Please try again in a moment.",
-        );
-
-        setIsLoading(
-          false,
-        );
-
-        return;
+      const token = await verifyRecaptcha();
+      const response = await fetch("/api/submit-form", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fields: {
+            name: formData.fullName.trim(),
+            phone: formData.phone.replace(/\D/g, ""),
+            email: formData.email.trim(),
+            source: getLeadSource(),
+          },
+          source: "Dholera Times Website",
+          tags: ["Dholera Investment", "Website Lead"],
+          recaptchaToken: token,
+        }),
+      });
+      const data = await response.json();
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || "Error submitting form. Please try again.");
       }
 
-      if (!siteKey) {
-        setErrorMessage(
-          "Security verification is unavailable. Please try again later.",
-        );
+      setFormData({ fullName: "", email: "", phone: "" });
+      setShowPopup(true);
+      const nextCount = storedCount + 1;
+      setSubmissionCount(nextCount);
+      setIsDisabled(nextCount >= 3);
+      localStorage.setItem("formSubmissionCount", nextCount.toString());
+      localStorage.setItem("lastSubmissionTime", Date.now().toString());
 
-        setIsLoading(
-          false,
-        );
-
-        return;
-      }
-
-      /* ================================================
-         RENDER RECAPTCHA
-      ================================================= */
-
-      if (
-        recaptchaRef.current &&
-        !recaptchaRef.current
-          .innerHTML
-      ) {
-        try {
-          window.grecaptcha.render(
-            recaptchaRef.current,
-            {
-              sitekey:
-                siteKey,
-
-              callback:
-                onRecaptchaSuccess,
-
-              theme:
-                "light",
-            },
-          );
-        } catch (error) {
-          console.error(
-            "Error rendering reCAPTCHA:",
-            error,
-          );
-
-          setErrorMessage(
-            "Error with verification. Please try again.",
-          );
-
-          setIsLoading(
-            false,
-          );
-        }
-      } else {
-        try {
-          window.grecaptcha.execute();
-        } catch (error) {
-          console.error(
-            "Error executing reCAPTCHA:",
-            error,
-          );
-
-          setErrorMessage(
-            "Error with verification. Please try again.",
-          );
-
-          setIsLoading(
-            false,
-          );
-        }
-      }
-    };
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: "lead_form" });
+    } catch (error) {
+      setErrorMessage(error.message || "Error submitting form. Please try again.");
+    } finally {
+      submittingRef.current = false;
+      setIsLoading(false);
+      resetRecaptcha();
+    }
+  };
 
   /* ============================================================
      CLOSE
@@ -1041,13 +683,13 @@ export default function ContactForm({
               handleSubmit
             }
             onFocus={
-              loadRecaptcha
+              preloadRecaptcha
             }
             onPointerEnter={
-              loadRecaptcha
+              preloadRecaptcha
             }
             onTouchStart={
-              loadRecaptcha
+              preloadRecaptcha
             }
             className="
               flex

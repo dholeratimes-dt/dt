@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import useRecaptcha from "@/hooks/useRecaptcha";
 
 import LeadForm from "../../dholera-sir/LeadForm";
 
@@ -55,11 +56,6 @@ export default function SidebarWithForm({
     useState("");
 
   const [
-    recaptchaLoaded,
-    setRecaptchaLoaded,
-  ] = useState(false);
-
-  const [
     isContactFormOpen,
     setIsContactFormOpen,
   ] = useState(false);
@@ -73,11 +69,9 @@ export default function SidebarWithForm({
   const [buttonName, setButtonName] =
     useState("");
 
-  const recaptchaRef = useRef(null);
-  const recaptchaWidgetId = useRef(null);
-
-  const siteKey =
-    process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+  const submittingRef = useRef(false);
+  const { recaptchaRef, loadRecaptcha, verifyRecaptcha, resetRecaptcha } =
+    useRecaptcha();
 
   /* ============================================================
      CONTACT POPUP
@@ -172,70 +166,7 @@ export default function SidebarWithForm({
   ============================================================ */
 
   useEffect(() => {
-    const loadRecaptcha = () => {
-      if (
-        typeof window === "undefined"
-      ) {
-        return;
-      }
-
-      if (window.grecaptcha) {
-        setRecaptchaLoaded(true);
-        return;
-      }
-
-      try {
-        const existingScript =
-          document.querySelector(
-            'script[src="https://www.google.com/recaptcha/api.js"]',
-          );
-
-        if (existingScript) {
-          const handleLoad = () => {
-            setRecaptchaLoaded(true);
-          };
-
-          existingScript.addEventListener(
-            "load",
-            handleLoad,
-          );
-
-          return;
-        }
-
-        const script =
-          document.createElement(
-            "script",
-          );
-
-        script.src =
-          "https://www.google.com/recaptcha/api.js";
-
-        script.async = true;
-        script.defer = true;
-
-        script.onload = () => {
-          setRecaptchaLoaded(true);
-        };
-
-        script.onerror = () => {
-          console.error(
-            "Failed to load reCAPTCHA script",
-          );
-        };
-
-        document.head.appendChild(
-          script,
-        );
-      } catch (error) {
-        console.error(
-          "reCAPTCHA script loading error:",
-          error,
-        );
-      }
-    };
-
-    loadRecaptcha();
+    loadRecaptcha().catch(() => {});
 
     if (
       typeof window !== "undefined"
@@ -258,7 +189,7 @@ export default function SidebarWithForm({
         ),
       );
     }
-  }, []);
+  }, [loadRecaptcha]);
 
   /* ============================================================
      INPUT
@@ -347,211 +278,53 @@ export default function SidebarWithForm({
   };
 
   /* ============================================================
-     SEND LEAD
+     SUBMIT
   ============================================================ */
 
-  const onRecaptchaSuccess =
-    async () => {
-      try {
-        const response =
-          await fetch(
-            "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
-            {
-              method: "POST",
-
-              headers: {
-                "Content-Type":
-                  "application/json",
-
-                Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
-              },
-
-              body: JSON.stringify({
-                fields: {
-                  name:
-                    formData.fullName,
-
-                  phone:
-                    formData.phone.replace(
-                      /\D/g,
-                      "",
-                    ),
-
-                  source:
-                    "Dholera Times",
-                },
-
-                source:
-                  "Dholera Times Website",
-
-                tags: [
-                  "Dholera Investment",
-                  "Website Lead",
-                ],
-              }),
-            },
-          );
-
-        const responseText =
-          await response.text();
-
-        if (!response.ok) {
-          let errorData;
-
-          try {
-            errorData =
-              JSON.parse(
-                responseText,
-              );
-          } catch {
-            errorData = {
-              message:
-                responseText,
-            };
-          }
-
-          throw new Error(
-            errorData.message ||
-              "Error submitting form",
-          );
-        }
-
-        setFormData({
-          fullName: "",
-          phone: "",
-        });
-
-        setShowPopup(true);
-
-        setSubmissionCount(
-          (previous) => {
-            const newCount =
-              previous + 1;
-
-            if (
-              typeof window !==
-              "undefined"
-            ) {
-              localStorage.setItem(
-                "formSubmissionCount",
-                newCount.toString(),
-              );
-
-              localStorage.setItem(
-                "lastSubmissionTime",
-                Date.now().toString(),
-              );
-            }
-
-            return newCount;
-          },
-        );
-      } catch (error) {
-        console.error(
-          "Form submission error:",
-          error,
-        );
-
-        setErrorMessage(
-          error.message ||
-            "Error submitting form. Please try again.",
-        );
-      } finally {
-        setIsLoading(false);
-
-        if (
-          typeof window !==
-            "undefined" &&
-          window.grecaptcha &&
-          recaptchaWidgetId.current !==
-            null
-        ) {
-          try {
-            window.grecaptcha.reset(
-              recaptchaWidgetId.current,
-            );
-          } catch (error) {
-            console.error(
-              "Error resetting reCAPTCHA:",
-              error,
-            );
-          }
-        }
-      }
-    };
-
-  /* ============================================================
-     FORM SUBMIT
-  ============================================================ */
-
-  const handleSubmit = async (
-    event,
-  ) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
-    setIsLoading(true);
+    if (submittingRef.current) return;
     setErrorMessage("");
+    if (!validateForm()) return;
 
-    if (!validateForm()) {
-      setIsLoading(false);
-      return;
-    }
-
-    if (
-      typeof window !==
-        "undefined" &&
-      window.grecaptcha &&
-      recaptchaLoaded &&
-      siteKey
-    ) {
-      try {
-        if (
-          recaptchaWidgetId.current ===
-            null &&
-          recaptchaRef.current
-        ) {
-          recaptchaWidgetId.current =
-            window.grecaptcha.render(
-              recaptchaRef.current,
-              {
-                sitekey: siteKey,
-
-                callback:
-                  onRecaptchaSuccess,
-
-                theme: "light",
-              },
-            );
-        } else if (
-          recaptchaWidgetId.current !==
-          null
-        ) {
-          window.grecaptcha.reset(
-            recaptchaWidgetId.current,
-          );
-
-          window.grecaptcha.execute(
-            recaptchaWidgetId.current,
-          );
-        }
-      } catch (error) {
-        console.error(
-          "Error rendering reCAPTCHA:",
-          error,
-        );
-
-        setErrorMessage(
-          "Error with verification. Please try again.",
-        );
-
-        setIsLoading(false);
+    submittingRef.current = true;
+    setIsLoading(true);
+    try {
+      const token = await verifyRecaptcha();
+      const response = await fetch("/api/submit-form", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fields: {
+            name: formData.fullName.trim(),
+            phone: formData.phone.replace(/\D/g, ""),
+            source: "Dholera Times",
+          },
+          source: "Dholera Times Website",
+          tags: ["Dholera Investment", "Website Lead"],
+          recaptchaToken: token,
+        }),
+      });
+      const data = await response.json();
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || "Error submitting form. Please try again.");
       }
-    } else {
-      setErrorMessage(
-        "reCAPTCHA not loaded. Please refresh and try again.",
-      );
 
+      setFormData({ fullName: "", phone: "" });
+      setShowPopup(true);
+      const now = Date.now();
+      const nextCount = now - lastSubmissionTime >= 24 * 60 * 60 * 1000
+        ? 1 : submissionCount + 1;
+      setSubmissionCount(nextCount);
+      setLastSubmissionTime(now);
+      localStorage.setItem("formSubmissionCount", nextCount.toString());
+      localStorage.setItem("lastSubmissionTime", now.toString());
+    } catch (error) {
+      setErrorMessage(error.message || "Error submitting form. Please try again.");
+    } finally {
+      submittingRef.current = false;
       setIsLoading(false);
+      resetRecaptcha();
     }
   };
 

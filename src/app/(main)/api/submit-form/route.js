@@ -18,6 +18,25 @@ function cleanString(value, maxLength) {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
 }
 
+export async function GET() {
+  // Only the public site key goes to the browser. Support the existing server
+  // environment name so these forms do not depend on build-time public envs.
+  const siteKey =
+    process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY?.trim() ||
+    process.env.SITE_KEY?.trim();
+
+  if (!siteKey || !process.env.RECAPTCHA_SECRET_KEY) {
+    return NextResponse.json(
+      { error: "Security verification is unavailable. Please try again later." },
+      { status: 503 },
+    );
+  }
+
+  return NextResponse.json({ siteKey }, {
+    headers: { "Cache-Control": "no-store" },
+  });
+}
+
 export async function POST(request) {
   try {
     const body = await request.json();
@@ -53,6 +72,48 @@ export async function POST(request) {
         { error: "Server configuration error" },
         { status: 500 },
       );
+    }
+
+    // These three forms include a token. Preserve the request contract for
+    // existing callers of this shared endpoint that do not use reCAPTCHA.
+    if (Object.prototype.hasOwnProperty.call(body, "recaptchaToken")) {
+      if (typeof body.recaptchaToken !== "string" || !body.recaptchaToken.trim()) {
+        return NextResponse.json(
+          { error: "Please complete the security verification." },
+          { status: 400 },
+        );
+      }
+
+      const secret = process.env.RECAPTCHA_SECRET_KEY;
+      if (!secret) {
+        return NextResponse.json(
+          { error: "Security verification is unavailable. Please try again later." },
+          { status: 503 },
+        );
+      }
+
+      let verification;
+      try {
+        const response = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+          method: "POST",
+          body: new URLSearchParams({ secret, response: body.recaptchaToken }),
+          signal: AbortSignal.timeout(15000),
+        });
+        if (!response.ok) throw new Error("Verification service unavailable");
+        verification = await response.json();
+      } catch {
+        return NextResponse.json(
+          { error: "Security verification could not connect. Please try again." },
+          { status: 503 },
+        );
+      }
+
+      if (verification?.success !== true) {
+        return NextResponse.json(
+          { error: "Security verification failed or expired. Please try again." },
+          { status: 400 },
+        );
+      }
     }
 
     const leadSource =

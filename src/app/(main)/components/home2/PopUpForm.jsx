@@ -7,6 +7,7 @@ import React, {
 } from "react";
 
 import { usePathname } from "next/navigation";
+import useRecaptcha from "@/hooks/useRecaptcha";
 import { AUTO_POPUP_PAGES, AUTO_POPUP_SCROLL_PERCENT } from "./popupTriggers";
 
 import {
@@ -77,11 +78,6 @@ export default function PopupForm({ initiallyOpen = false }) {
   ] = useState(false);
 
   const [
-    recaptchaLoaded,
-    setRecaptchaLoaded,
-  ] = useState(false);
-
-  const [
     isMounted,
     setIsMounted,
   ] = useState(false);
@@ -90,7 +86,9 @@ export default function PopupForm({ initiallyOpen = false }) {
      REFS
   ============================================================ */
 
-  const recaptchaRef = useRef(null);
+  const submittingRef = useRef(false);
+  const { recaptchaRef, loadRecaptcha, verifyRecaptcha, resetRecaptcha } =
+    useRecaptcha(showFormPopup);
 
   /*
    * This tracks whether the popup has already
@@ -102,13 +100,6 @@ export default function PopupForm({ initiallyOpen = false }) {
 
   const popupShownForCurrentVisitRef =
     useRef(false);
-
-  /* ============================================================
-     ENVIRONMENT
-  ============================================================ */
-
-  const siteKey =
-    process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
   /* ============================================================
      CLIENT MOUNT
@@ -345,67 +336,8 @@ export default function PopupForm({ initiallyOpen = false }) {
   ============================================================ */
 
   useEffect(() => {
-    if (!showFormPopup) return;
-    const loadRecaptcha = () => {
-      if (
-        typeof window !== "undefined" &&
-        !window.grecaptcha &&
-        siteKey
-      ) {
-        const existingScript =
-          document.querySelector(
-            'script[src="https://www.google.com/recaptcha/api.js"]',
-          );
-
-        if (existingScript) {
-          if (window.grecaptcha) {
-            setRecaptchaLoaded(true);
-
-            return;
-          }
-
-          existingScript.addEventListener(
-            "load",
-            () => {
-              setRecaptchaLoaded(true);
-            },
-            {
-              once: true,
-            },
-          );
-
-          return;
-        }
-
-        const script =
-          document.createElement("script");
-
-        script.src =
-          "https://www.google.com/recaptcha/api.js";
-
-        script.async = true;
-
-        script.defer = true;
-
-        script.onload = () => {
-          setRecaptchaLoaded(true);
-        };
-
-        script.onerror = () => {
-          setRecaptchaLoaded(true);
-        };
-
-        document.head.appendChild(script);
-      } else if (
-        window.grecaptcha ||
-        !siteKey
-      ) {
-        setRecaptchaLoaded(true);
-      }
-    };
-
-    loadRecaptcha();
-  }, [siteKey, showFormPopup]);
+    if (showFormPopup) loadRecaptcha().catch(() => {});
+  }, [showFormPopup, loadRecaptcha]);
 
   /* ============================================================
      CLOSE POPUP
@@ -544,181 +476,52 @@ export default function PopupForm({ initiallyOpen = false }) {
   };
 
   /* ============================================================
-     RECAPTCHA SUCCESS / TELECRM SUBMIT
-  ============================================================ */
-
-  const onRecaptchaSuccess = async (
-    token,
-  ) => {
-    try {
-      const response = await fetch(
-        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
-        {
-          method: "POST",
-
-          headers: {
-            "Content-Type":
-              "application/json",
-
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
-          },
-
-          body: JSON.stringify({
-            fields: {
-              name:
-                formData.fullName,
-
-              phone:
-                formData.mobileNumber,
-
-              email:
-                formData.email,
-
-              source:
-                "Dholera Times",
-            },
-
-            source:
-              "Dholera Times",
-
-            tags: [
-              "Dholera Investment",
-              "Popup Lead",
-              "Dholera Times",
-            ],
-
-            recaptchaToken:
-              token,
-          }),
-        },
-      );
-
-      if (!response.ok) {
-        throw new Error(
-          "Error submitting form",
-        );
-      }
-
-      /* SUCCESS */
-
-      setFormData({
-        fullName: "",
-        mobileNumber: "",
-        email: "",
-      });
-
-      setShowThankYou(true);
-
-      setTimeout(() => {
-        setShowThankYou(false);
-
-        setShowFormPopup(false);
-      }, 3000);
-    } catch (error) {
-      console.error(
-        "Form submission error:",
-        error,
-      );
-
-      setErrorMessage(
-        "Error submitting form. Please try again.",
-      );
-    } finally {
-      setIsLoading(false);
-
-      if (
-        window.grecaptcha &&
-        recaptchaRef.current
-      ) {
-        try {
-          window.grecaptcha.reset();
-        } catch (error) {
-          console.error(
-            "Error resetting reCAPTCHA:",
-            error,
-          );
-        }
-      }
-    }
-  };
-
-  /* ============================================================
      FORM SUBMIT
   ============================================================ */
 
-  const handleSubmit = async (
-    event,
-  ) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    if (submittingRef.current) return;
+    setErrorMessage("");
+    if (!validateForm()) return;
 
+    submittingRef.current = true;
     setIsLoading(true);
 
-    setErrorMessage("");
-
-    if (!validateForm()) {
-      setIsLoading(false);
-
-      return;
-    }
-
-    if (
-      !recaptchaLoaded ||
-      !window.grecaptcha
-    ) {
-      setErrorMessage(
-        "Security verification not loaded. Please refresh the page.",
-      );
-
-      setIsLoading(false);
-
-      return;
-    }
-
-    if (
-      recaptchaRef.current &&
-      !recaptchaRef.current.innerHTML
-    ) {
-      try {
-        window.grecaptcha.render(
-          recaptchaRef.current,
-          {
-            sitekey:
-              siteKey,
-
-            callback:
-              onRecaptchaSuccess,
-
-            theme:
-              "light",
+    try {
+      const token = await verifyRecaptcha();
+      const response = await fetch("/api/submit-form", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fields: {
+            name: formData.fullName.trim(),
+            phone: formData.mobileNumber.replace(/\D/g, ""),
+            email: formData.email.trim(),
+            source: "Dholera Times",
           },
-        );
-      } catch (error) {
-        console.error(
-          "Error rendering reCAPTCHA:",
-          error,
-        );
-
-        setErrorMessage(
-          "Error with verification. Please try again.",
-        );
-
-        setIsLoading(false);
+          source: "Dholera Times",
+          tags: ["Dholera Investment", "Popup Lead", "Dholera Times"],
+          recaptchaToken: token,
+        }),
+      });
+      const data = await response.json();
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || "Error submitting form. Please try again.");
       }
-    } else {
-      try {
-        window.grecaptcha.execute();
-      } catch (error) {
-        console.error(
-          "Error executing reCAPTCHA:",
-          error,
-        );
 
-        setErrorMessage(
-          "Error with verification. Please try again.",
-        );
-
-        setIsLoading(false);
-      }
+      setFormData({ fullName: "", mobileNumber: "", email: "" });
+      setShowThankYou(true);
+      setTimeout(() => {
+        setShowThankYou(false);
+        setShowFormPopup(false);
+      }, 3000);
+    } catch (error) {
+      setErrorMessage(error.message || "Error submitting form. Please try again.");
+    } finally {
+      submittingRef.current = false;
+      setIsLoading(false);
+      resetRecaptcha();
     }
   };
 
@@ -774,7 +577,7 @@ export default function PopupForm({ initiallyOpen = false }) {
             fixed
             inset-0
 
-            z-[2147483647]
+            z-[10000]
 
             flex
 
@@ -1216,8 +1019,7 @@ export default function PopupForm({ initiallyOpen = false }) {
                     id="common-popup-callback-btn"
                     type="submit"
                     disabled={
-                      isLoading ||
-                      !recaptchaLoaded
+                      isLoading
                     }
                     className={`
                       mt-5
@@ -1240,8 +1042,7 @@ export default function PopupForm({ initiallyOpen = false }) {
                       text-white
 
                       ${
-                        isLoading ||
-                        !recaptchaLoaded
+                        isLoading
                           ? `
                               cursor-not-allowed
                               bg-[#EC1C40]/60
