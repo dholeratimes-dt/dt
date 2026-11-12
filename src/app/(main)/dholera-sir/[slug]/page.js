@@ -1,4 +1,5 @@
 import { PortableText } from "@portabletext/react";
+import { resolveRetiredHref } from "@/lib/retiredRoutes.mjs";
 import { cache } from "react";
 import { unstable_cache } from "next/cache";
 import { getAboutBySlug, getProjectInfo } from "@/sanity/lib/api";
@@ -160,7 +161,7 @@ export default async function BlogDetail({ params }) {
             <figure className="my-6">
               {value.url ? (
                 <a
-                  href={value.url}
+                  href={resolveRetiredHref(value.url)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block hover:opacity-90 transition-opacity cursor-pointer"
@@ -274,7 +275,7 @@ export default async function BlogDetail({ params }) {
       marks: {
         link: ({ children, value }) => (
           <Link
-            href={value.href}
+            href={resolveRetiredHref(value.href)}
             title={value.title || ""} // Add the title attribute here
             rel="noopener noreferrer"
             className="text-[#d3b36b] hover:text-[#b69b5e] underline decoration-[#b69b5e]/30 hover:decoration-[#b69b5e] decoration-2 underline-offset-4 transition-all duration-300 hover:bg-[#b69b5e]/5 px-1 py-0.5 rounded"
@@ -311,7 +312,7 @@ export default async function BlogDetail({ params }) {
 
           return (
             <Link
-              href={value.href}
+              href={resolveRetiredHref(value.href)}
               className={`inline-block px-8 py-3 rounded-xl text-white font-semibold transition-all duration-300 transform hover:scale-105 ${getButtonClasses()}`}
             >
               {value.text || children}

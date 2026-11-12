@@ -1,3 +1,5 @@
+import { retiredRouteRedirects } from "./src/lib/retiredRoutes.mjs";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Keep production audits separate from an IDE's running development server.
@@ -261,18 +263,6 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: "/dholera-residential-plots/abcd-building",
-        destination: "/dholera-sir/the-abcd-building-in-dholera",
-        permanent: true,
-      },
-      {
-        source: "/dholera-residential-plots/dholera-connectivity",
-        destination:
-          "/dholera-sir/connectivity-makes-dholera-the-next-big-investment-hub",
-        permanent: true,
-      },
-
-      {
         source:
           "/Dholera-SIR/delhi-mumbai-industrial-corridor-set-to-transform-india-with-usd-100-billion-investment",
         destination:
@@ -300,6 +290,7 @@ const nextConfig = {
           "/dholera-updates/blogs/dholera-connectivity-industrial-growth",
         permanent: true,
       },
+      ...retiredRouteRedirects,
     ];
   },
 };

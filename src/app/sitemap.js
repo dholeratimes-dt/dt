@@ -12,7 +12,7 @@ const SANITY_OPTIONS = {
 };
 
 export default async function sitemap() {
-  const [blogs, updates, aboutDholera] = await Promise.all([
+  const [blogs, updates, aboutDholera, redirects] = await Promise.all([
 
     client.fetch(
       `
@@ -78,6 +78,14 @@ export default async function sitemap() {
           _updatedAt
         }
       `,
+      {},
+      SANITY_OPTIONS
+    ),
+
+    // Old posts can remain published after their URLs move to another section.
+    // Use the site's CMS rules to exclude those redirect sources from discovery.
+    client.fetch(
+      `*[_type == "redirect" && site == "dholera-times" && defined(source)]{ source }`,
       {},
       SANITY_OPTIONS
     ),
@@ -159,10 +167,12 @@ export default async function sitemap() {
   }));
 
 
+  const redirectSources = new Set(redirects.map(({ source }) => source));
+
   return [
     ...staticPages,
     ...updateUrls,
     ...blogUrls,
     ...aboutDholeraUrls,
-  ];
+  ].filter(({ url }) => !redirectSources.has(new URL(url).pathname));
 }

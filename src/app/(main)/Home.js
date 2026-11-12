@@ -384,7 +384,7 @@ export default function Home() {
                     #DholeraDevelopment
                   </span>
                 </div>
-                  <a href="/infopack/videos" className="inline-flex my-5 items-center px-3 py-1 rounded-full text-lg font-semibold bg-[#d8b66d] text-white">
+                  <a href="/gallery/dholera-sir-progress" className="inline-flex my-5 items-center px-3 py-1 rounded-full text-lg font-semibold bg-[#d8b66d] text-white">
                     Know More <FaArrowAltCircleRight className="mx-3"/>
                   </a>
               </div>

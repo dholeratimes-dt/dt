@@ -1,4 +1,5 @@
 import { PortableText } from "@portabletext/react";
+import { resolveRetiredHref } from "@/lib/retiredRoutes.mjs";
 import { cache } from "react";
 import { unstable_cache } from "next/cache";
 import Link from "next/link";
@@ -192,7 +193,7 @@ function createPortableTextComponents(headingIds) {
           <figure className="my-6">
             {value.url ? (
               <a
-                href={value.url}
+                href={resolveRetiredHref(value.url)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="
@@ -335,7 +336,7 @@ function createPortableTextComponents(headingIds) {
 
         return (
           <Link
-            href={value.href}
+            href={resolveRetiredHref(value.href)}
             title={value.title || extractText(children)}
             rel="noopener noreferrer"
             className="
@@ -388,7 +389,7 @@ function createPortableTextComponents(headingIds) {
 
         return (
           <Link
-            href={value.href}
+            href={resolveRetiredHref(value.href)}
             className={`
               inline-block rounded-xl px-8 py-3
               font-semibold text-white
