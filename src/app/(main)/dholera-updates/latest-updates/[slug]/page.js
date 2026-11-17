@@ -17,6 +17,7 @@ import SocialShare from "../../../components/blog/SocialShare";
 import TableOfContents from "../../../components/blog/TableOfContents.jsx";
 import BlogDates from "../../../components/blog/BlogDates";
 import NewsDate from "../NewsDate";
+import BlogReadMore from "../../blogs/[slug]/BlogReadMore";
 import { removeBlogBodyDateBlocks } from "@/lib/blogDates";
 import {
   createTableOfContents,
@@ -703,9 +704,9 @@ export default async function BlogDetail({ params }) {
                 <TableOfContents items={headingTree} />
                 {/* Content */}
                 <div className="bg-white rounded-xl shadow-2xl text-black leading-5 shadow-t-2xl px-8 pb-8 pt-4 sm:pt-6 border border-gray-200">
-                  <div className="text-xl max-w-none [&>:first-child]:mt-0">
+                  <BlogReadMore key={slug}>
                     <PortableText value={articleBody} components={components} />
-                  </div>
+                  </BlogReadMore>
 
                   {/* Tags */}
                   {post.tags && post.tags.length > 0 && (

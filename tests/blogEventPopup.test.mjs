@@ -32,6 +32,15 @@ function harness({ strictMode = false } = {}) {
     this.removeAttribute("open");
     queueMicrotask(() => this.dispatchEvent(new dom.window.Event("close")));
   };
+  const timers = new Map();
+  let now = 0;
+  let nextTimerId = 0;
+  dom.window.setTimeout = (callback, delay) => {
+    const id = ++nextTimerId;
+    timers.set(id, { callback, time: now + delay });
+    return id;
+  };
+  dom.window.clearTimeout = (id) => timers.delete(id);
   const { createRoot } = require("react-dom/client");
   const root = createRoot(document.getElementById("root"));
   const calls = [];
@@ -56,6 +65,17 @@ function harness({ strictMode = false } = {}) {
   return {
     calls,
     respondWith(fn) { respond = fn; },
+    async advanceTime(milliseconds) {
+      now += milliseconds;
+      await React.act(async () => {
+        for (const [id, timer] of timers) {
+          if (timer.time <= now) {
+            timers.delete(id);
+            timer.callback();
+          }
+        }
+      });
+    },
     async render(path = pathname) {
       pathname = path;
       await React.act(async () => {
@@ -86,6 +106,7 @@ test("event registrations retain attribution, use the server API, and prevent du
   const ui = harness();
   try {
     await ui.render();
+    await ui.advanceTime(2500);
     assert.ok(document.querySelector("dialog[open]"));
     await ui.fill("  Event Visitor  ", "9876543210");
     let resolve;
@@ -111,6 +132,7 @@ test("invalid details never reach CRM; rejected requests preserve input and allo
   const ui = harness();
   try {
     await ui.render();
+    await ui.advanceTime(2500);
     await ui.fill(" ", "1234567890");
     await ui.submit();
     assert.equal(ui.calls.length, 0);
@@ -130,27 +152,46 @@ test("invalid details never reach CRM; rejected requests preserve input and allo
   } finally { await ui.close(); }
 });
 
-test("Strict Mode keeps the popup open; closing restores focus and every blog visit reopens it", async () => {
+test("Strict Mode delays the popup on every blog visit; closing restores focus", async () => {
   const ui = harness({ strictMode: true });
   try {
     document.getElementById("previous").focus();
     await ui.render();
+    assert.equal(document.querySelector("dialog"), null);
+    assert.equal(document.body.style.overflow, "auto");
+    await ui.advanceTime(2499);
+    assert.equal(document.querySelector("dialog"), null);
+    await ui.advanceTime(1);
+    assert.ok(document.querySelector("dialog[open]"));
     assert.equal(document.body.style.overflow, "hidden");
     await React.act(async () => document.querySelector('[aria-label="Close event popup"]').click());
     assert.equal(document.querySelector("dialog[open]"), null);
     assert.equal(document.body.style.overflow, "auto");
     assert.equal(document.activeElement.id, "previous");
     await ui.render();
+    await ui.advanceTime(2500);
     assert.equal(document.querySelector("dialog[open]"), null);
     await ui.render("/dholera-updates/blogs/example-article");
+    assert.equal(document.querySelector("dialog"), null);
+    await ui.advanceTime(2500);
     assert.ok(document.querySelector("dialog[open]"));
     await React.act(async () => document.querySelector("dialog").dispatchEvent(new window.Event("cancel")));
     assert.equal(document.querySelector("dialog[open]"), null);
     assert.equal(document.body.style.overflow, "auto");
     await ui.render("/dholera-updates/blogs");
+    assert.equal(document.querySelector("dialog"), null);
+    await ui.advanceTime(2500);
     assert.ok(document.querySelector("dialog[open]"), "Returning to the blog listing reopens the popup");
     await React.act(async () => document.querySelector('[aria-label="Close event popup"]').click());
     await ui.render("/dholera-updates/blogs/example-article");
+    await ui.advanceTime(1000);
+    await ui.render("/dholera-updates/blogs");
+    await ui.advanceTime(1500);
+    assert.equal(document.querySelector("dialog"), null, "Navigating away cancels the previous visit's timer");
+    await ui.advanceTime(1000);
+    assert.ok(document.querySelector("dialog[open]"));
+    await ui.render("/dholera-updates/blogs/example-article");
+    await ui.advanceTime(2500);
     assert.ok(document.querySelector("dialog[open]"), "Returning to an article reopens the popup");
   } finally { await ui.close(); }
 });

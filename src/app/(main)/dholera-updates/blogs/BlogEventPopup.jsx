@@ -23,13 +23,18 @@ const { props: mobileImageProps } = getImageProps({
 });
 
 function EventDialog({ pathname }) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({ name: "", phone: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const dialogRef = useRef(null);
   const submittingRef = useRef(false);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setIsOpen(true), 2500);
+    return () => window.clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -198,7 +203,7 @@ function EventDialog({ pathname }) {
                 </div>
               </div> 
 
-              <button type="submit" className={styles.submit} disabled={isSubmitting}>
+              <button id="blog-event-submit" type="submit" className={styles.submit} disabled={isSubmitting}>
                 {isSubmitting ? "Reserving your seat..." : "Book Your Consultation"}
               </button>
             </form>
