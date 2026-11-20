@@ -10,6 +10,7 @@ import {
 } from "@/sanity/lib/api";
 import Link from "next/link";
 import Image from "next/image";
+import { FaWhatsapp } from "react-icons/fa6";
 import SanityImage from "../../../components/blog/SanityImage";
 
 import SchemaMarkup from "../SchemaMarkup";
@@ -25,6 +26,9 @@ import {
 } from "../../../components/blog/tableOfContents.js";
 import LeadFormSlug from "./LeadForm";
 import LeadFormBlock from "@/app/(main)/components/blog/LeadFormBlock";
+
+// Tata Electronics to Spend $5-6 Billion on Equipment for Dholera Semiconductor Fab
+const TATA_EQUIPMENT_NEWS_POST_ID = "6fdf0f41-025f-46c1-a3a2-69522ff4cb6d";
 
 export const revalidate = 300;
 
@@ -551,14 +555,42 @@ export default async function BlogDetail({ params }) {
       },
 
       listItem: {
-        bullet: ({ children }) => (
-          <li className="text-lg leading-relaxed flex items-start gap-4 bg-white p-4 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300">
-            <div className="w-2 h-2 rounded-full bg-gradient-to-b from-[#d3b66b] to-[#b69b5e] mt-2 flex-shrink-0"></div>
-            <div className="flex-1 [&>ul]:mt-4 [&>ul]:mb-0 [&>ol]:mt-4 [&>ol]:mb-0 [&>ul>li]:shadow-none [&>ul>li]:border-0 [&>ul>li]:p-2 [&>ol>li]:shadow-none [&>ol>li]:border-0 [&>ol>li]:p-2">
-              {children}
-            </div>
-          </li>
-        ),
+        bullet: ({ children, value }) => {
+          const isTataRegistration =
+            post._id === TATA_EQUIPMENT_NEWS_POST_ID &&
+            /^register\s+here\s*:/i.test(getHeadingText(value)) &&
+            (value?.markDefs || []).some(
+              (mark) =>
+                mark._type === "link" &&
+                /^https?:\/\/(?:www\.)?dholeranowornever\.com\/?$/i.test(mark.href || ""),
+            );
+
+          if (isTataRegistration) {
+            return (
+              <li className="list-none">
+                <a
+                  href="https://wa.me/919910994247"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Register Now on WhatsApp at +91 99109 94247"
+                  className="inline-flex min-h-11 items-center justify-center gap-2 bg-[#32d26f] px-6 py-4 text-lg font-semibold leading-normal text-white no-underline transition-colors hover:bg-[#25b85c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#25b85c]"
+                >
+                  <FaWhatsapp aria-hidden="true" className="h-6 w-6 shrink-0" />
+                  Register Now
+                </a>
+              </li>
+            );
+          }
+
+          return (
+            <li className="text-lg leading-relaxed flex items-start gap-4 bg-white p-4 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300">
+              <div className="w-2 h-2 rounded-full bg-gradient-to-b from-[#d3b66b] to-[#b69b5e] mt-2 flex-shrink-0"></div>
+              <div className="flex-1 [&>ul]:mt-4 [&>ul]:mb-0 [&>ol]:mt-4 [&>ol]:mb-0 [&>ul>li]:shadow-none [&>ul>li]:border-0 [&>ul>li]:p-2 [&>ol>li]:shadow-none [&>ol>li]:border-0 [&>ol>li]:p-2">
+                {children}
+              </div>
+            </li>
+          );
+        },
         number: ({ children }) => (
           <li
             className="text-lg leading-relaxed  flex items-start gap-4 bg-white p-4 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300 relative before:content-[counter(item)] before:absolute before:left-4 before:top-4 before:w-8 before:h-8 before:bg-gradient-to-r before:from-[#d3b66b] before:to-[#b69b5e] before:rounded-full before:flex before:items-center before:justify-center before:text-white before:text-sm before:font-bold"

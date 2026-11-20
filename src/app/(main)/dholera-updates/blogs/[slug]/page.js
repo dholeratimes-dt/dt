@@ -4,6 +4,7 @@ import { cache } from "react";
 import { unstable_cache } from "next/cache";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { FaWhatsapp } from "react-icons/fa6";
 
 import { getSanityImageUrl } from "@/sanity/lib/image";
 import { getblogs, getNews, getBlogBySlug } from "@/sanity/lib/api";
@@ -26,6 +27,8 @@ import {
 const SITE = "dholera-times";
 const BLOGS_PATH = "/dholera-updates/blogs";
 const NEWS_PATH = "/dholera-updates/latest-updates";
+// The Countdown Begins! Dholera Investor Event is Coming to Gurgaon!
+const GURGAON_EVENT_POST_ID = "47ad3c26-6330-42d7-958b-900db1374b25";
 
 export const revalidate = 300;
 
@@ -128,6 +131,28 @@ function extractText(node) {
   return "";
 }
 
+function getWhatsAppRegistrationLinkKeys(post, body) {
+  if (post._id !== GURGAON_EVENT_POST_ID) return new Set();
+
+  return new Set(
+    body
+      .filter(
+        (block) =>
+          block?._type === "block" &&
+          /^(?:register\s+now|registration)\s*:/i.test(getHeadingText(block)),
+      )
+      .flatMap((block) =>
+        (block.markDefs || [])
+          .filter(
+            (mark) =>
+              mark._type === "link" &&
+              /^https?:\/\/(?:www\.)?dholeranowornever\.com\/?$/i.test(mark.href || ""),
+          )
+          .map((mark) => mark._key),
+      ),
+  );
+}
+
 function createHeadingComponent(Tag, className, headingIds) {
   return function ArticleHeading({ children, value }) {
     const text = getHeadingText(value) || extractText(children);
@@ -150,7 +175,7 @@ function createHeadingComponent(Tag, className, headingIds) {
 
 /* PORTABLE TEXT COMPONENTS*/
 
-function createPortableTextComponents(headingIds) {
+function createPortableTextComponents(headingIds, whatsappRegistrationLinkKeys) {
   return {
     types: {
       image: ({ value }) => {
@@ -335,6 +360,27 @@ function createPortableTextComponents(headingIds) {
       link: ({ children, value }) => {
         if (!value?.href) return children;
 
+        if (whatsappRegistrationLinkKeys.has(value._key)) {
+          return (
+            <a
+              href="https://wa.me/919910994247"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Register on WhatsApp at +91 99109 94247"
+              className="
+                inline-flex min-h-11 shrink-0 items-center gap-2 rounded-lg
+                bg-[#25D366] px-4 py-2 align-middle text-base font-semibold
+                text-white no-underline transition-[filter] hover:brightness-95
+                focus-visible:outline focus-visible:outline-2
+                focus-visible:outline-offset-2 focus-visible:outline-[#25D366]
+              "
+            >
+              <FaWhatsapp aria-hidden="true" className="h-5 w-5 shrink-0" />
+              WhatsApp
+            </a>
+          );
+        }
+
         return (
           <Link
             href={resolveRetiredHref(value.href)}
@@ -487,35 +533,42 @@ function createPortableTextComponents(headingIds) {
     },
 
     listItem: {
-      bullet: ({ children }) => (
-        <li
-          className="
-            flex items-start gap-4 rounded-lg border
-            border-gray-100 bg-white p-4 text-lg
-            leading-relaxed shadow-sm
-            transition-shadow duration-200 hover:shadow-md
-          "
-        >
-          <div
-            className="
-              mt-2 h-2 w-2 flex-shrink-0 rounded-full
-              bg-gradient-to-b from-[#d3b66b] to-[#b69b5e]
-            "
-          />
-          <div
-            className="
-              flex-1 [&>ul]:mb-0 [&>ul]:mt-4
-              [&>ol]:mb-0 [&>ol]:mt-4
-              [&>ul>li]:border-0 [&>ul>li]:p-2
-              [&>ul>li]:shadow-none
-              [&>ol>li]:border-0 [&>ol>li]:p-2
-              [&>ol>li]:shadow-none
-            "
+      bullet: ({ children, value }) => {
+        const isWhatsAppRegistration = (value?.markDefs || []).some((mark) =>
+          whatsappRegistrationLinkKeys.has(mark._key),
+        );
+
+        return (
+          <li
+            className={`
+              flex ${isWhatsAppRegistration ? "items-center" : "items-start"} gap-4 rounded-lg border
+              border-gray-100 bg-white p-4 text-lg
+              leading-relaxed shadow-sm
+              transition-shadow duration-200 hover:shadow-md
+            `}
           >
-            {children}
-          </div>
-        </li>
-      ),
+            <div
+              className={`
+                ${isWhatsAppRegistration ? "" : "mt-2"} h-2 w-2 flex-shrink-0 rounded-full
+                bg-gradient-to-b from-[#d3b66b] to-[#b69b5e]
+              `}
+            />
+            <div
+              className={`
+                ${isWhatsAppRegistration ? "flex min-w-0 flex-wrap items-center gap-x-6 gap-y-3" : ""}
+                flex-1 [&>ul]:mb-0 [&>ul]:mt-4
+                [&>ol]:mb-0 [&>ol]:mt-4
+                [&>ul>li]:border-0 [&>ul>li]:p-2
+                [&>ul>li]:shadow-none
+                [&>ol>li]:border-0 [&>ol>li]:p-2
+                [&>ol>li]:shadow-none
+              `}
+            >
+              {children}
+            </div>
+          </li>
+        );
+      },
 
       number: ({ children }) => (
         <li
@@ -942,7 +995,10 @@ export default async function BlogDetail({ params }) {
   const articleBody = removeBlogBodyDateBlocks(post.body);
   const { items: headingTree, headingIds } = createTableOfContents(articleBody);
 
-  const components = createPortableTextComponents(headingIds);
+  const components = createPortableTextComponents(
+    headingIds,
+    getWhatsAppRegistrationLinkKeys(post, articleBody),
+  );
 
   return (
     <div className="min-h-screen bg-white">
