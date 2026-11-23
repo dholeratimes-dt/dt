@@ -8,7 +8,7 @@ import React, {
 
 import { usePathname } from "next/navigation";
 import useRecaptcha from "@/hooks/useRecaptcha";
-import { AUTO_POPUP_PAGES, AUTO_POPUP_SCROLL_PERCENT } from "./popupTriggers";
+import { AUTO_POPUP_SCROLL_PERCENT } from "./popupTriggers";
 
 import {
   AnimatePresence,
@@ -24,24 +24,11 @@ import {
 import { createPortal } from "react-dom";
 
 /* ============================================================
-   PAGES WHERE AUTO POPUP SHOULD WORK
-
-   Add/remove your page URLs here.
-============================================================ */
-
-/* ============================================================
    POPUP FORM
 ============================================================ */
 
 export default function PopupForm({ initiallyOpen = false }) {
   const pathname = usePathname() || "/";
-
-  /* ============================================================
-     CHECK CURRENT PAGE
-  ============================================================ */
-
-  const shouldAutoOpenPopup =
-    AUTO_POPUP_PAGES.includes(pathname);
 
   /* ============================================================
      STATES
@@ -174,7 +161,7 @@ export default function PopupForm({ initiallyOpen = false }) {
        * Mark popup as already shown during
        * this page visit.
        *
-       * This prevents the 35% scroll popup
+       * This prevents the 30% scroll popup
        * from appearing again after the user
        * already manually opened it.
        */
@@ -209,8 +196,8 @@ export default function PopupForm({ initiallyOpen = false }) {
 
      REQUIREMENT:
 
-     - Only selected URLs
-     - Opens at 35% scroll
+     - Every page in the main site layout
+     - Opens at 30% scroll
      - Once during CURRENT page visit
      - Navigate to another page = reset
      - Return to previous page = reset
@@ -219,15 +206,6 @@ export default function PopupForm({ initiallyOpen = false }) {
   ============================================================ */
 
   useEffect(() => {
-    /*
-     * Don't enable automatic popup
-     * for URLs not included above.
-     */
-
-    if (!shouldAutoOpenPopup) {
-      return;
-    }
-
     /* ==========================================================
        SCROLL HANDLER
     =========================================================== */
@@ -271,7 +249,7 @@ export default function PopupForm({ initiallyOpen = false }) {
           : 0;
 
       /* ========================================================
-         OPEN POPUP AT 35%
+         OPEN POPUP AT 30%
       ======================================================== */
 
       if (scrollPercent >= AUTO_POPUP_SCROLL_PERCENT) {
@@ -328,7 +306,6 @@ export default function PopupForm({ initiallyOpen = false }) {
     };
   }, [
     pathname,
-    shouldAutoOpenPopup,
   ]);
 
   /* ============================================================

@@ -4,10 +4,7 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
-import {
-  AUTO_POPUP_PAGES,
-  AUTO_POPUP_SCROLL_PERCENT,
-} from "./popupTriggers";
+import { AUTO_POPUP_SCROLL_PERCENT } from "./popupTriggers";
 
 // Load popup without showing a loading screen
 const PopupForm = dynamic(() => import("./PopUpForm"), {
@@ -63,11 +60,9 @@ export default function DeferredPopupForm() {
 
     document.addEventListener("click", onClick);
 
-    if (AUTO_POPUP_PAGES.includes(pathname)) {
-      window.addEventListener("scroll", onScroll, {
-        passive: true,
-      });
-    }
+    window.addEventListener("scroll", onScroll, {
+      passive: true,
+    });
 
     return () => {
       document.removeEventListener("click", onClick);

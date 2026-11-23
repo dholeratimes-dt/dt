@@ -1,7 +1,2 @@
-// Blog pages show their event popup from the blogs layout instead.
-export const AUTO_POPUP_PAGES = [
-  "/", "/dholera-sir", "/nri-investment-guide-dholera",
-  "/dholera-updates/latest-updates",
-  "/gallery/dholera-sir-progress", "/about",
-];
-export const AUTO_POPUP_SCROLL_PERCENT = 45;
+// The shared callback popup applies to every page in the main site layout.
+export const AUTO_POPUP_SCROLL_PERCENT = 30;

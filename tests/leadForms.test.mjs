@@ -161,6 +161,8 @@ function uiHarness() {
     vm.runInNewContext(compile(path), {
       module: compiledModule, exports: compiledModule.exports,
       window, document, Element, HTMLElement, URLSearchParams, AbortSignal,
+      requestAnimationFrame: (callback) => setImmediate(callback),
+      cancelAnimationFrame: clearImmediate,
       localStorage: window.localStorage,
       console,
       setTimeout: (...args) => { const timer = setTimeout(...args); timer.unref(); return timer; },
@@ -172,6 +174,11 @@ function uiHarness() {
       require: (name) => {
         if (name.startsWith("@/")) return load(`${name.slice(2)}.js`);
         if (name === "./popupTriggers") return load("app/(main)/components/home2/popupTriggers.js");
+        if (name === "./PopUpForm") return load("app/(main)/components/home2/PopUpForm.jsx");
+        if (name === "next/dynamic") return (loader) => {
+          const Popup = React.lazy(loader);
+          return (props) => React.createElement(React.Suspense, { fallback: null }, React.createElement(Popup, props));
+        };
         if (name === "framer-motion") return { motion, AnimatePresence: ({ children }) => children };
         if (name === "lucide-react") return new Proxy({}, {
           get: () => (props) => React.createElement("svg", props),
@@ -344,13 +351,14 @@ test("configuration failures can retry without refreshing the page", async () =>
   } finally { await ui.close(); }
 });
 
-test("popup keeps its configured scroll threshold, once-per-visit behavior, and manual triggers", async () => {
+test("callback popup opens at 30% on every page, once per visit, and supports manual reopening", async () => {
   const ui = uiHarness();
-  const closedPopup = { path: popup, props: { initiallyOpen: false } };
+  const closedPopup = { path: "app/(main)/components/home2/DeferredPopupForm.jsx" };
   const isOpen = () => Boolean(document.querySelector("#common-popup-callback-btn"));
   const scroll = async (offset) => {
     await React.act(async () => {
       window.pageYOffset = offset;
+      window.scrollY = offset;
       window.dispatchEvent(new window.Event("scroll"));
       await tick();
     });
@@ -360,23 +368,40 @@ test("popup keeps its configured scroll threshold, once-per-visit behavior, and 
     await ui.mount(closedPopup);
     Object.defineProperty(document.documentElement, "scrollHeight", { value: 2000 });
     Object.defineProperty(document.documentElement, "clientHeight", { value: 1000 });
-    await scroll(449);
+    window.innerHeight = 1000;
+    await scroll(299);
     assert.equal(isOpen(), false);
-    await scroll(450);
+    await scroll(300);
     assert.equal(isOpen(), true);
+    assert.match(document.querySelector("#dholera-popup-heading").textContent, /Registry Ready Plots\s+in Dholera Starting\s+from ₹10 Lakh/);
+    assert.equal(document.querySelectorAll('[role="dialog"]').length, 1);
     await React.act(async () => document.querySelector('[aria-label="Close popup"]').click());
     await scroll(600);
     assert.equal(isOpen(), false);
     ui.setPath("/dholera-sir");
     await ui.mount(closedPopup);
-    await scroll(450);
+    await scroll(300);
     assert.equal(isOpen(), true);
     ui.setPath("/contact/inquiry");
     await ui.mount(closedPopup);
-    await scroll(800);
+    await scroll(299);
     assert.equal(isOpen(), false);
+    await scroll(300);
+    assert.equal(isOpen(), true);
+    await React.act(async () => document.querySelector('[aria-label="Close popup"]').click());
     await React.act(async () => document.querySelector('[data-open-dholera-popup]').click());
     assert.equal(isOpen(), true);
+    for (const pathname of ["/dholera-updates/blogs", "/dholera-updates/blogs/example", "/dholera-residential-plots/example", "/about"]) {
+      ui.setPath(pathname);
+      await ui.mount(closedPopup);
+      assert.equal(isOpen(), false, pathname);
+      assert.notEqual(document.body.style.overflow, "hidden", pathname);
+      await scroll(299);
+      assert.equal(isOpen(), false, pathname);
+      await scroll(300);
+      assert.equal(isOpen(), true, pathname);
+      assert.equal(document.querySelectorAll('[role="dialog"]').length, 1, pathname);
+    }
   } finally { await ui.close(); }
 });
 
