@@ -37,8 +37,8 @@ const faqItems  = [
 
 export async function generateMetadata() {
   return {
-    title: "Dholera Times | Dholera Smart City News, Updates & Investment Insights",
-    description: "Follow Dholera Smart City news, Dholera SIR development updates, infrastructure progress, industry announcements and investment insights with Dholera Times.",
+    title: "Dholera Smart City News, Updates & Investment | Dholera Times",
+    description: "Get the latest Dholera Smart City news, project updates, infrastructure developments, semiconductor investments, real estate insights and plot investment guides with Dholera Times",
     keywords: [
       "Dholera Smart City",
       "Dholera Smart City news",
