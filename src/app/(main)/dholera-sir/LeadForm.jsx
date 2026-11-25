@@ -346,9 +346,9 @@ export default function LeadForm({
             h-[4px]
 
             bg-gradient-to-r
-            from-[#EC1C40]
-            via-[#EC1C40]
-            to-[#EC1C40]
+            from-[#FFA000]
+            via-[#FFA000]
+            to-[#FFA000]
           "
         />
 
@@ -420,9 +420,9 @@ export default function LeadForm({
               rounded-xl
 
               border
-              border-[#EC1C40]/20
+              border-[#FFA000]/20
 
-              bg-[#EC1C40]/5
+              bg-[#FFA000]/5
 
               px-4
               py-3
@@ -431,7 +431,7 @@ export default function LeadForm({
               font-medium
               leading-5
 
-              text-[#EC1C40]
+              text-[#FFA000]
 
               sm:text-[14px]
             "
@@ -452,9 +452,9 @@ export default function LeadForm({
               rounded-xl
 
               border
-              border-[#EC1C40]/20
+              border-[#FFA000]/20
 
-              bg-[#EC1C40]/5
+              bg-[#FFA000]/5
 
               px-4
               py-4
@@ -465,7 +465,7 @@ export default function LeadForm({
               font-semibold
               leading-6
 
-              text-[#EC1C40]
+              text-[#FFA000]
 
               sm:text-[15px]
             "
@@ -545,12 +545,12 @@ export default function LeadForm({
                   transition-[border-color,box-shadow,background-color]
                   duration-200
 
-                  hover:border-[#EC1C40]/35
+                  hover:border-[#FFA000]/35
 
-                  focus:border-[#EC1C40]
+                  focus:border-[#FFA000]
                   focus:outline-none
                   focus:ring-4
-                  focus:ring-[#EC1C40]/10
+                  focus:ring-[#FFA000]/10
 
                   sm:min-h-[54px]
                   sm:pl-12
@@ -616,12 +616,12 @@ export default function LeadForm({
                   transition-[border-color,box-shadow,background-color]
                   duration-200
 
-                  hover:border-[#EC1C40]/35
+                  hover:border-[#FFA000]/35
 
-                  focus:border-[#EC1C40]
+                  focus:border-[#FFA000]
                   focus:outline-none
                   focus:ring-4
-                  focus:ring-[#EC1C40]/10
+                  focus:ring-[#FFA000]/10
 
                   sm:min-h-[54px]
                   sm:pl-12
@@ -652,7 +652,7 @@ export default function LeadForm({
 
                 rounded-xl
 
-                bg-[#d9183a]
+                bg-[#E69000]
 
                 px-5
                 py-3
@@ -663,14 +663,14 @@ export default function LeadForm({
 
                 text-white
 
-                shadow-[0_8px_22px_rgba(236,28,64,0.20)]
+                shadow-[0_8px_22px_rgba(255,160,0,0.20)]
 
                 transition-[background-color,transform,box-shadow]
                 duration-200
 
                 hover:-translate-y-0.5
                 hover:bg-[#d81839]
-                hover:shadow-[0_12px_28px_rgba(236,28,64,0.25)]
+                hover:shadow-[0_12px_28px_rgba(255,160,0,0.25)]
 
                 active:translate-y-0
 
@@ -681,7 +681,7 @@ export default function LeadForm({
 
                 focus-visible:outline-none
                 focus-visible:ring-2
-                focus-visible:ring-[#EC1C40]
+                focus-visible:ring-[#FFA000]
                 focus-visible:ring-offset-2
 
                 sm:min-h-[54px]
@@ -778,9 +778,9 @@ export default function LeadForm({
                 h-[4px]
 
                 bg-gradient-to-r
-                from-[#EC1C40]
-                via-[#EC1C40]
-                to-[#EC1C40]
+                from-[#FFA000]
+                via-[#FFA000]
+                to-[#FFA000]
               "
             />
 
@@ -799,14 +799,14 @@ export default function LeadForm({
                 rounded-full
 
                 border
-                border-[#EC1C40]/20
+                border-[#FFA000]/20
 
-                bg-[#EC1C40]/10
+                bg-[#FFA000]/10
 
                 text-[20px]
                 font-bold
 
-                text-[#EC1C40]
+                text-[#FFA000]
 
                 sm:h-12
                 sm:w-12
@@ -897,7 +897,7 @@ export default function LeadForm({
 
                 rounded-xl
 
-                bg-[#d9183a]
+                bg-[#E69000]
 
                 px-5
                 py-3
@@ -908,20 +908,20 @@ export default function LeadForm({
 
                 text-white
 
-                shadow-[0_8px_22px_rgba(236,28,64,0.20)]
+                shadow-[0_8px_22px_rgba(255,160,0,0.20)]
 
                 transition-[background-color,transform,box-shadow]
                 duration-200
 
                 hover:-translate-y-0.5
                 hover:bg-[#d81839]
-                hover:shadow-[0_12px_28px_rgba(236,28,64,0.25)]
+                hover:shadow-[0_12px_28px_rgba(255,160,0,0.25)]
 
                 active:translate-y-0
 
                 focus-visible:outline-none
                 focus-visible:ring-2
-                focus-visible:ring-[#EC1C40]
+                focus-visible:ring-[#FFA000]
                 focus-visible:ring-offset-2
 
                 motion-reduce:transform-none

@@ -145,7 +145,7 @@ export default function BlogReadMore({ children }) {
             aria-expanded={false}
             aria-controls={contentId}
             onClick={readMore}
-            className="pointer-events-auto inline-flex min-h-11 items-center justify-center rounded-lg bg-[#d71920] px-5 py-2.5 text-base font-semibold leading-6 text-white shadow-md transition-colors hover:bg-[#bb151b] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d71920] focus-visible:ring-offset-2"
+            className="pointer-events-auto inline-flex min-h-11 items-center justify-center rounded-lg bg-[#FFA000] px-5 py-2.5 text-base font-semibold leading-6 text-white shadow-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d71920] focus-visible:ring-offset-2"
           >
             Read More
           </button>

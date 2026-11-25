@@ -1166,7 +1166,7 @@ export default async function BlogDetail({ params }) {
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
-                      className="h-3.5 w-3.5 text-[#EC1C40] sm:h-4 sm:w-4"
+                      className="h-3.5 w-3.5 text-[#FFA000] sm:h-4 sm:w-4"
                     >
                       <circle
                         cx="12"
@@ -1304,10 +1304,10 @@ export default async function BlogDetail({ params }) {
                     className="
                       inline-flex min-h-[42px] w-full
                       items-center justify-center rounded-xl
-                      bg-[#d9183a] px-4 py-2.5
+                      bg-[#E69000] px-4 py-2.5
                       text-[13px] font-semibold text-white
                       transition-colors duration-200
-                      hover:bg-[#d9183a] sm:text-[14px]
+                      hover:bg-[#E69000] sm:text-[14px]
                     "
                   >
                     Explore More

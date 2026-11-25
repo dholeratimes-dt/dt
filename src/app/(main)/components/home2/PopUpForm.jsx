@@ -671,9 +671,9 @@ export default function PopupForm({ initiallyOpen = false }) {
                 duration-200
 
                 hover:rotate-90
-                hover:border-[#EC1C40]/20
-                hover:bg-[#EC1C40]/10
-                hover:text-[#EC1C40]
+                hover:border-brand/20
+                hover:bg-brand/10
+                hover:text-brand
               "
             >
               <X
@@ -718,7 +718,7 @@ export default function PopupForm({ initiallyOpen = false }) {
 
                     rounded-full
 
-                    bg-[#EC1C40]/10
+                    bg-brand/10
                   "
                 >
                   <svg
@@ -729,7 +729,7 @@ export default function PopupForm({ initiallyOpen = false }) {
                       h-7
                       w-7
 
-                      text-[#EC1C40]
+                      text-brand
                     "
                   >
                     <path
@@ -818,9 +818,9 @@ export default function PopupForm({ initiallyOpen = false }) {
                         rounded-lg
 
                         border
-                        border-[#EC1C40]/20
+                        border-brand/20
 
-                        bg-[#EC1C40]/5
+                        bg-brand/5
 
                         px-4
                         py-3
@@ -828,7 +828,7 @@ export default function PopupForm({ initiallyOpen = false }) {
                         text-[13px]
                         font-medium
 
-                        text-[#EC1C40]
+                        text-brand
                       "
                     >
                       {errorMessage}
@@ -891,9 +891,9 @@ export default function PopupForm({ initiallyOpen = false }) {
 
                           placeholder:text-black/40
 
-                          focus:border-[#EC1C40]
+                          focus:border-brand
 
-                          focus:shadow-[0_0_0_3px_rgba(236,28,64,0.08)]
+                          focus:shadow-[0_0_0_3px_rgb(var(--brand-accent,255_160_0)/0.08)]
 
                           sm:h-[56px]
                           sm:text-[16px]
@@ -957,9 +957,9 @@ export default function PopupForm({ initiallyOpen = false }) {
 
                           placeholder:text-black/40
 
-                          focus:border-[#EC1C40]
+                          focus:border-brand
 
-                          focus:shadow-[0_0_0_3px_rgba(236,28,64,0.08)]
+                          focus:shadow-[0_0_0_3px_rgb(var(--brand-accent,255_160_0)/0.08)]
 
                           sm:h-[56px]
                           sm:text-[16px]
@@ -1022,14 +1022,14 @@ export default function PopupForm({ initiallyOpen = false }) {
                         isLoading
                           ? `
                               cursor-not-allowed
-                              bg-[#EC1C40]/60
+                              bg-brand/60
                             `
                           : `
-                              bg-[#EC1C40]
+                              bg-brand
 
-                              hover:bg-[#d9183a]
+                              hover:bg-brand-hover
 
-                              hover:shadow-[0_10px_28px_rgba(236,28,64,0.22)]
+                              hover:shadow-[0_10px_28px_rgb(var(--brand-accent,255_160_0)/0.22)]
                             `
                       }
                     `}

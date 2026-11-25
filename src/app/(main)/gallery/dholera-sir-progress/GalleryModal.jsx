@@ -111,8 +111,8 @@ export default function GalleryModal({ image, onClose }) {
           onClick={onClose}
           aria-label={video ? "Close video" : "Close media preview"}
           className={video
-            ? "absolute right-3 top-3 z-50 flex h-10 w-10 touch-manipulation items-center justify-center rounded-full border border-white/20 bg-white/95 text-black shadow-[0_6px_20px_rgba(0,0,0,0.25)] backdrop-blur-md transition-[background-color,color,transform] duration-200 hover:bg-[#EC1C40] hover:text-white active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EC1C40] focus-visible:ring-offset-2 focus-visible:ring-offset-black sm:right-4 sm:top-4 sm:h-11 sm:w-11 motion-reduce:transform-none"
-            : "absolute right-3 top-3 z-40 flex h-11 w-11 touch-manipulation items-center justify-center rounded-full border border-white/35 bg-black/45 text-white shadow-[0_6px_20px_rgba(0,0,0,0.25)] backdrop-blur-md transition-[background-color,color,transform] duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EC1C40] focus-visible:ring-offset-2 focus-visible:ring-offset-black sm:right-4 sm:top-4 sm:border-black/10 sm:bg-white/95 sm:text-black sm:hover:bg-[#EC1C40]/5 sm:hover:text-[#EC1C40] motion-reduce:transform-none"}
+            ? "absolute right-3 top-3 z-50 flex h-10 w-10 touch-manipulation items-center justify-center rounded-full border border-white/20 bg-white/95 text-black shadow-[0_6px_20px_rgba(0,0,0,0.25)] backdrop-blur-md transition-[background-color,color,transform] duration-200 hover:bg-[#FFA000] hover:text-white active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFA000] focus-visible:ring-offset-2 focus-visible:ring-offset-black sm:right-4 sm:top-4 sm:h-11 sm:w-11 motion-reduce:transform-none"
+            : "absolute right-3 top-3 z-40 flex h-11 w-11 touch-manipulation items-center justify-center rounded-full border border-white/35 bg-black/45 text-white shadow-[0_6px_20px_rgba(0,0,0,0.25)] backdrop-blur-md transition-[background-color,color,transform] duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFA000] focus-visible:ring-offset-2 focus-visible:ring-offset-black sm:right-4 sm:top-4 sm:border-black/10 sm:bg-white/95 sm:text-black sm:hover:bg-[#FFA000]/5 sm:hover:text-[#FFA000] motion-reduce:transform-none"}
         >
           <svg
             aria-hidden="true"
@@ -155,7 +155,7 @@ export default function GalleryModal({ image, onClose }) {
               />
               {/* MOBILE IMAGE CAPTION*/}
               <div className="absolute inset-x-0 bottom-0 z-20 bg-gradient-to-t from-black/75 via-black/30 to-transparent px-4 pb-4 pt-14 sm:hidden">
-                <div aria-hidden="true" className="mb-2.5 h-1 w-9 rounded-full bg-[#EC1C40]" />
+                <div aria-hidden="true" className="mb-2.5 h-1 w-9 rounded-full bg-[#FFA000]" />
                 <h3 className="max-w-[90%] text-[17px] font-semibold leading-[1.4] tracking-[-0.01em] text-white">
                   {image.alt}
                 </h3>
@@ -163,7 +163,7 @@ export default function GalleryModal({ image, onClose }) {
             </div>
             {/* DESKTOP IMAGE CAPTION*/}
             <div className="hidden shrink-0 border-t border-black/10 bg-white px-6 py-5 sm:block">
-              <div aria-hidden="true" className="mb-2.5 h-1 w-9 rounded-full bg-[#EC1C40]" />
+              <div aria-hidden="true" className="mb-2.5 h-1 w-9 rounded-full bg-[#FFA000]" />
               <h3 className="pr-4 text-[18px] font-semibold leading-[1.35] tracking-[-0.01em] text-black sm:text-[20px]">
                 {image.alt}
               </h3>

@@ -356,13 +356,13 @@ export default function BlogSlider({
 
                       focus-visible:outline-none
                       focus-visible:ring-2
-                      focus-visible:ring-[#EC1C40]
+                      focus-visible:ring-[#FFA000]
                       focus-visible:ring-offset-2
 
                       ${
                         isActive
-                          ? "w-7 bg-[#EC1C40]"
-                          : "w-2 bg-black/15 hover:bg-[#EC1C40]/40"
+                          ? "w-7 bg-[#FFA000]"
+                          : "w-2 bg-black/15 hover:bg-[#FFA000]/40"
                       }
 
                       motion-reduce:transition-none
@@ -408,11 +408,11 @@ export default function BlogSlider({
                 rounded-full
 
                 border
-                border-[#EC1C40]/10
+                border-[#FFA000]/10
 
-                bg-[#EC1C40]/5
+                bg-[#FFA000]/5
 
-                text-[#EC1C40]
+                text-[#FFA000]
 
                 shadow-[0_5px_16px_rgba(0,0,0,0.05)]
 
@@ -420,8 +420,8 @@ export default function BlogSlider({
                 duration-200
 
                 hover:-translate-y-0.5
-                hover:border-[#EC1C40]
-                hover:bg-[#EC1C40]
+                hover:border-[#FFA000]
+                hover:bg-[#FFA000]
                 hover:text-white
                 hover:shadow-[0_9px_20px_rgba(0,0,0,0.10)]
 
@@ -440,7 +440,7 @@ export default function BlogSlider({
 
                 focus-visible:outline-none
                 focus-visible:ring-2
-                focus-visible:ring-[#EC1C40]
+                focus-visible:ring-[#FFA000]
                 focus-visible:ring-offset-2
 
                 sm:h-12
@@ -484,20 +484,20 @@ export default function BlogSlider({
                 rounded-full
 
                 border
-                border-[#EC1C40]
+                border-[#FFA000]
 
-                bg-[#EC1C40]
+                bg-[#FFA000]
 
                 text-white
 
-                shadow-[0_7px_18px_rgba(236,28,64,0.18)]
+                shadow-[0_7px_18px_rgba(255,160,0,0.18)]
 
                 transition-[background-color,border-color,transform,box-shadow]
                 duration-200
 
                 hover:-translate-y-0.5
-                hover:bg-[#EC1C40]
-                hover:shadow-[0_10px_24px_rgba(236,28,64,0.24)]
+                hover:bg-[#FFA000]
+                hover:shadow-[0_10px_24px_rgba(255,160,0,0.24)]
 
                 active:translate-y-0
 
@@ -514,7 +514,7 @@ export default function BlogSlider({
 
                 focus-visible:outline-none
                 focus-visible:ring-2
-                focus-visible:ring-[#EC1C40]
+                focus-visible:ring-[#FFA000]
                 focus-visible:ring-offset-2
 
                 sm:h-12

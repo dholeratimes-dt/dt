@@ -63,10 +63,10 @@ function NewsCard({
         ease-out
 
         md:hover:-translate-y-1
-        md:hover:border-[#EC1C40]/40
-        md:hover:shadow-[0_16px_36px_rgba(236,28,64,0.10)]
+        md:hover:border-[#FFA000]/40
+        md:hover:shadow-[0_16px_36px_rgba(255,160,0,0.10)]
 
-        focus-within:border-[#EC1C40]
+        focus-within:border-[#FFA000]
 
         motion-reduce:transform-none
         motion-reduce:transition-none
@@ -85,7 +85,7 @@ function NewsCard({
           focus-visible:outline-none
           focus-visible:ring-2
           focus-visible:ring-inset
-          focus-visible:ring-[#EC1C40]
+          focus-visible:ring-[#FFA000]
         "
       >
         {/* ===================================================
@@ -140,8 +140,8 @@ function NewsCard({
                 justify-center
 
                 bg-gradient-to-br
-                from-[#EC1C40]/[0.055]
-                via-[#EC1C40]/[0.025]
+                from-[#FFA000]/[0.055]
+                via-[#FFA000]/[0.025]
                 to-white
               "
             >
@@ -247,7 +247,7 @@ function NewsCard({
                 font-semibold
                 leading-6
 
-                text-[#EC1C40]
+                text-[#FFA000]
               "
             >
               Read More →
@@ -382,7 +382,7 @@ export default async function New() {
 
           text-black
 
-          selection:bg-[#EC1C40]
+          selection:bg-[#FFA000]
           selection:text-white
         "
       >
@@ -578,7 +578,7 @@ export default async function New() {
                   Dholera Smart City{" "}
                   <span
                     className="
-                      text-[#EC1C40]
+                      text-[#FFA000]
                     "
                   >
                     Latest News &amp;

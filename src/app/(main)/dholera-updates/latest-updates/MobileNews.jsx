@@ -402,13 +402,13 @@
 
 //                   enabled:active:scale-[0.97]
 
-//                   enabled:hover:border-[#EC1C40]/25
-//                   enabled:hover:bg-[#EC1C40]/5
-//                   enabled:hover:text-[#EC1C40]
+//                   enabled:hover:border-[#FFA000]/25
+//                   enabled:hover:bg-[#FFA000]/5
+//                   enabled:hover:text-[#FFA000]
 
 //                   focus-visible:outline-none
 //                   focus-visible:ring-2
-//                   focus-visible:ring-[#EC1C40]/40
+//                   focus-visible:ring-[#FFA000]/40
 //                   focus-visible:ring-offset-2
 
 //                   disabled:cursor-not-allowed
@@ -466,7 +466,7 @@
 //                   className="
 //                     font-semibold
 
-//                     text-[#EC1C40]
+//                     text-[#FFA000]
 //                   "
 //                 >
 //                   {currentPage}
@@ -543,13 +543,13 @@
 
 //                   enabled:active:scale-[0.97]
 
-//                   enabled:hover:border-[#EC1C40]/25
-//                   enabled:hover:bg-[#EC1C40]/5
-//                   enabled:hover:text-[#EC1C40]
+//                   enabled:hover:border-[#FFA000]/25
+//                   enabled:hover:bg-[#FFA000]/5
+//                   enabled:hover:text-[#FFA000]
 
 //                   focus-visible:outline-none
 //                   focus-visible:ring-2
-//                   focus-visible:ring-[#EC1C40]/40
+//                   focus-visible:ring-[#FFA000]/40
 //                   focus-visible:ring-offset-2
 
 //                   disabled:cursor-not-allowed
@@ -720,7 +720,7 @@ export default function MobileNews({
                 rounded-xl
 
                 border
-                border-[#EC1C40]/30
+                border-[#FFA000]/30
 
                 bg-white
 
@@ -731,10 +731,10 @@ export default function MobileNews({
 
                 hover:scale-[1.03]
 
-                hover:border-[#EC1C40]/55
+                hover:border-[#FFA000]/55
 
                 hover:shadow-lg
-                hover:shadow-[#EC1C40]/10
+                hover:shadow-[#FFA000]/10
               "
             >
               <Link
@@ -791,8 +791,8 @@ export default function MobileNews({
 
                         bg-gradient-to-br
 
-                        from-[#EC1C40]/10
-                        via-[#EC1C40]/5
+                        from-[#FFA000]/10
+                        via-[#FFA000]/5
                         to-white
                       "
                     >
@@ -844,7 +844,7 @@ export default function MobileNews({
                       transition-colors
                       duration-200
 
-                      hover:text-[#EC1C40]
+                      hover:text-[#FFA000]
                     "
                   >
                     {post.title ||
@@ -893,12 +893,12 @@ export default function MobileNews({
 
                           font-semibold
 
-                          text-[#EC1C40]
+                          text-[#FFA000]
 
                           transition-colors
                           duration-200
 
-                          hover:text-[#d9183a]
+                          hover:text-[#E69000]
                         "
                       >
                         Read More →
@@ -1001,13 +1001,13 @@ export default function MobileNews({
 
                   enabled:active:scale-[0.97]
 
-                  enabled:hover:border-[#EC1C40]/25
-                  enabled:hover:bg-[#EC1C40]/5
-                  enabled:hover:text-[#EC1C40]
+                  enabled:hover:border-[#FFA000]/25
+                  enabled:hover:bg-[#FFA000]/5
+                  enabled:hover:text-[#FFA000]
 
                   focus-visible:outline-none
                   focus-visible:ring-2
-                  focus-visible:ring-[#EC1C40]/40
+                  focus-visible:ring-[#FFA000]/40
                   focus-visible:ring-offset-2
 
                   disabled:cursor-not-allowed
@@ -1065,7 +1065,7 @@ export default function MobileNews({
                   className="
                     font-semibold
 
-                    text-[#EC1C40]
+                    text-[#FFA000]
                   "
                 >
                   {currentPage}
@@ -1142,13 +1142,13 @@ export default function MobileNews({
 
                   enabled:active:scale-[0.97]
 
-                  enabled:hover:border-[#EC1C40]/25
-                  enabled:hover:bg-[#EC1C40]/5
-                  enabled:hover:text-[#EC1C40]
+                  enabled:hover:border-[#FFA000]/25
+                  enabled:hover:bg-[#FFA000]/5
+                  enabled:hover:text-[#FFA000]
 
                   focus-visible:outline-none
                   focus-visible:ring-2
-                  focus-visible:ring-[#EC1C40]/40
+                  focus-visible:ring-[#FFA000]/40
                   focus-visible:ring-offset-2
 
                   disabled:cursor-not-allowed

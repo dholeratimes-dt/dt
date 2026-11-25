@@ -51,11 +51,11 @@ export default function BlogCard({ post }) {
     <article
       className="
         group flex min-w-0 flex-col overflow-hidden
-        rounded-xl border border-[#EC1C40]/30 bg-white
+        rounded-xl border border-[#FFA000]/30 bg-white
         shadow-[0_5px_18px_rgba(0,0,0,0.045)]
         transition-[border-color,transform] duration-300 ease-out
-        md:hover:-translate-y-1 md:hover:border-[#EC1C40]/50
-        focus-within:border-[#EC1C40]
+        md:hover:-translate-y-1 md:hover:border-[#FFA000]/50
+        focus-within:border-[#FFA000]
         motion-reduce:transform-none motion-reduce:transition-none
       "
     >
@@ -65,7 +65,7 @@ export default function BlogCard({ post }) {
         className="
           flex h-full min-w-0 flex-col rounded-[inherit]
           focus-visible:outline-none focus-visible:ring-2
-          focus-visible:ring-inset focus-visible:ring-[#EC1C40]
+          focus-visible:ring-inset focus-visible:ring-[#FFA000]
         "
       >
         {/* IMAGE*/}
@@ -105,8 +105,8 @@ export default function BlogCard({ post }) {
             <div
               className="
                 flex h-full w-full items-center justify-center
-                bg-gradient-to-br from-[#EC1C40]/10
-                via-[#EC1C40]/5 to-white
+                bg-gradient-to-br from-[#FFA000]/10
+                via-[#FFA000]/5 to-white
               "
             >
               <span className="text-[14px] font-medium text-black/45">
@@ -167,9 +167,9 @@ export default function BlogCard({ post }) {
             <span
               className="
                 inline-flex shrink-0 items-center whitespace-nowrap
-                text-[14px] font-semibold leading-5 text-[#d9183a]
+                text-[14px] font-semibold leading-5 text-[#E69000]
                 transition-colors duration-200
-                group-hover:text-[#d9183a]
+                group-hover:text-[#E69000]
                 sm:text-[15px]
                 motion-reduce:transition-none
               "

@@ -83,7 +83,7 @@ function MobileGalleryCard({ image, position }) {
         />
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute bottom-3 right-3 flex h-9 w-9 items-center justify-center rounded-full border border-white/70 bg-white/95 text-[#EC1C40] shadow-[0_5px_18px_rgba(0,0,0,0.16)] backdrop-blur-md"
+          className="pointer-events-none absolute bottom-3 right-3 flex h-9 w-9 items-center justify-center rounded-full border border-white/70 bg-white/95 text-[#FFA000] shadow-[0_5px_18px_rgba(0,0,0,0.16)] backdrop-blur-md"
         >
           <svg
             aria-hidden="true"
@@ -326,11 +326,11 @@ export default function GalleryMobileFan({ items }) {
       {/* BACKGROUND GLOW*/}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-0 h-[300px] w-[300px] -translate-x-1/2 rounded-full bg-[#EC1C40]/10 blur-[90px]"
+        className="pointer-events-none absolute left-1/2 top-0 h-[300px] w-[300px] -translate-x-1/2 rounded-full bg-[#FFA000]/10 blur-[90px]"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -bottom-24 -right-24 h-[290px] w-[290px] rounded-full bg-[#EC1C40]/10 blur-[95px]"
+        className="pointer-events-none absolute -bottom-24 -right-24 h-[290px] w-[290px] rounded-full bg-[#FFA000]/10 blur-[95px]"
       />
       <div className="relative z-20 mx-auto w-full max-w-[460px] px-3 pb-7">
         {/* FAN CARDS*/}
@@ -375,7 +375,7 @@ export default function GalleryMobileFan({ items }) {
                 willChange: position === 0 ? "transform" : "auto",
                 backfaceVisibility: "hidden",
               }}
-              className="absolute left-1/2 top-[36px] flex w-[76vw] min-w-[246px] max-w-[306px] flex-col overflow-hidden rounded-[18px] border border-white/10 bg-white text-left shadow-[0_18px_48px_rgba(0,0,0,0.40)] outline-none focus-visible:ring-2 focus-visible:ring-[#EC1C40] focus-visible:ring-offset-3 focus-visible:ring-offset-black"
+              className="absolute left-1/2 top-[36px] flex w-[76vw] min-w-[246px] max-w-[306px] flex-col overflow-hidden rounded-[18px] border border-white/10 bg-white text-left shadow-[0_18px_48px_rgba(0,0,0,0.40)] outline-none focus-visible:ring-2 focus-visible:ring-[#FFA000] focus-visible:ring-offset-3 focus-visible:ring-offset-black"
             >
               <MobileGalleryCard image={image} position={position} />
             </button>
@@ -388,7 +388,7 @@ export default function GalleryMobileFan({ items }) {
             onClick={() => navigate(1)}
             disabled={isAnimating}
             aria-label="Previous gallery image"
-            className="group flex h-8 w-8 shrink-0 touch-manipulation items-center justify-center rounded-full border border-white/10 bg-white/10 text-white/80 shadow-[0_4px_14px_rgba(0,0,0,0.18)] backdrop-blur-sm transition-[background-color,border-color,color,transform,opacity] duration-200 active:scale-90 hover:border-white/20 hover:bg-white/20 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EC1C40] focus-visible:ring-offset-2 focus-visible:ring-offset-black disabled:cursor-not-allowed disabled:opacity-35 motion-reduce:transform-none"
+            className="group flex h-8 w-8 shrink-0 touch-manipulation items-center justify-center rounded-full border border-white/10 bg-white/10 text-white/80 shadow-[0_4px_14px_rgba(0,0,0,0.18)] backdrop-blur-sm transition-[background-color,border-color,color,transform,opacity] duration-200 active:scale-90 hover:border-white/20 hover:bg-white/20 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFA000] focus-visible:ring-offset-2 focus-visible:ring-offset-black disabled:cursor-not-allowed disabled:opacity-35 motion-reduce:transform-none"
           >
             <ArrowIcon direction="left" />
           </button>
@@ -408,7 +408,7 @@ export default function GalleryMobileFan({ items }) {
             onClick={() => navigate(-1)}
             disabled={isAnimating}
             aria-label="Next gallery image"
-            className="group flex h-8 w-8 shrink-0 touch-manipulation items-center justify-center rounded-full border border-white/10 bg-white/10 text-white/80 shadow-[0_4px_14px_rgba(0,0,0,0.18)] backdrop-blur-sm transition-[background-color,border-color,color,transform,opacity] duration-200 active:scale-90 hover:border-white/20 hover:bg-white/20 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EC1C40] focus-visible:ring-offset-2 focus-visible:ring-offset-black disabled:cursor-not-allowed disabled:opacity-35 motion-reduce:transform-none"
+            className="group flex h-8 w-8 shrink-0 touch-manipulation items-center justify-center rounded-full border border-white/10 bg-white/10 text-white/80 shadow-[0_4px_14px_rgba(0,0,0,0.18)] backdrop-blur-sm transition-[background-color,border-color,color,transform,opacity] duration-200 active:scale-90 hover:border-white/20 hover:bg-white/20 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFA000] focus-visible:ring-offset-2 focus-visible:ring-offset-black disabled:cursor-not-allowed disabled:opacity-35 motion-reduce:transform-none"
           >
             <ArrowIcon direction="right" />
           </button>

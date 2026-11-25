@@ -13,7 +13,7 @@ function DesktopGalleryCard({ image }) {
       data-gallery-alt={image.alt}
       data-gallery-link={image.link || ""}
       aria-label={image.link ? `Play ${image.alt} video` : `View ${image.alt}`}
-      className="group relative flex min-w-0 flex-col overflow-hidden rounded-2xl border border-black/10 bg-white text-left shadow-[0_6px_22px_rgba(0,0,0,0.045)] transition-[border-color,box-shadow,transform] duration-300 ease-out md:hover:-translate-y-1 md:hover:border-[#EC1C40]/40 md:hover:shadow-[0_16px_38px_rgba(0,0,0,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EC1C40] focus-visible:ring-offset-3 motion-reduce:transform-none motion-reduce:transition-none"
+      className="group relative flex min-w-0 flex-col overflow-hidden rounded-2xl border border-black/10 bg-white text-left shadow-[0_6px_22px_rgba(0,0,0,0.045)] transition-[border-color,box-shadow,transform] duration-300 ease-out md:hover:-translate-y-1 md:hover:border-[#FFA000]/40 md:hover:shadow-[0_16px_38px_rgba(0,0,0,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFA000] focus-visible:ring-offset-3 motion-reduce:transform-none motion-reduce:transition-none"
     >
       {/* IMAGE*/}
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-black/[0.035]">
@@ -31,7 +31,7 @@ function DesktopGalleryCard({ image }) {
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute bottom-3 right-3 flex h-10 w-10 items-center justify-center rounded-full border border-white/50 bg-white/95 text-[#EC1C40] shadow-[0_4px_16px_rgba(0,0,0,0.14)] backdrop-blur-sm transition-[background-color,color,transform,opacity] duration-200 md:translate-y-1 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 motion-reduce:transform-none"
+          className="pointer-events-none absolute bottom-3 right-3 flex h-10 w-10 items-center justify-center rounded-full border border-white/50 bg-white/95 text-[#FFA000] shadow-[0_4px_16px_rgba(0,0,0,0.14)] backdrop-blur-sm transition-[background-color,color,transform,opacity] duration-200 md:translate-y-1 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 motion-reduce:transform-none"
         >
           <svg
             aria-hidden="true"
@@ -51,7 +51,7 @@ function DesktopGalleryCard({ image }) {
       </div>
       {/* TITLE*/}
       <div className="flex min-h-[76px] w-full items-center px-4 py-4 min-[414px]:px-5 sm:min-h-[82px] sm:py-5">
-        <h2 className="text-[16px] font-semibold leading-[24px] tracking-[-0.01em] text-black transition-colors duration-200 md:group-hover:text-[#EC1C40] sm:text-[17px] sm:leading-[25px]">
+        <h2 className="text-[16px] font-semibold leading-[24px] tracking-[-0.01em] text-black transition-colors duration-200 md:group-hover:text-[#FFA000] sm:text-[17px] sm:leading-[25px]">
           {image.alt}
         </h2>
       </div>

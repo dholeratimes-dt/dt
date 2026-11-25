@@ -84,7 +84,7 @@ export default function TrendingBlogItem({ post }) {
 
           focus-visible:outline-none
           focus-visible:ring-2
-          focus-visible:ring-[#EC1C40]
+          focus-visible:ring-[#FFA000]
           focus-visible:ring-offset-4
         "
       >
@@ -150,7 +150,7 @@ export default function TrendingBlogItem({ post }) {
               className="
                 font-semibold
 
-                text-[#d9183a]
+                text-[#E69000]
 
                 transition-colors
                 duration-200

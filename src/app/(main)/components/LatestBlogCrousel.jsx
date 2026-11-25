@@ -297,7 +297,7 @@ export default function RelatedBlogCarousel({
           focus-visible:outline
           focus-visible:outline-2
           focus-visible:outline-offset-4
-          focus-visible:outline-[#EC1C40]
+          focus-visible:outline-brand
 
           sm:gap-5
 
@@ -381,7 +381,7 @@ export default function RelatedBlogCarousel({
                         h-[6px]
                         w-[28px]
 
-                        bg-[#EC1C40]
+                        bg-brand
                       `
                       : `
                         h-[7px]
@@ -448,9 +448,9 @@ export default function RelatedBlogCarousel({
 
               enabled:hover:-translate-y-0.5
 
-              enabled:hover:border-[#EC1C40]/20
-              enabled:hover:bg-[#EC1C40]/5
-              enabled:hover:text-[#EC1C40]
+              enabled:hover:border-brand/20
+              enabled:hover:bg-brand/5
+              enabled:hover:text-brand
 
               enabled:active:translate-y-0
               enabled:active:scale-95
@@ -463,7 +463,7 @@ export default function RelatedBlogCarousel({
 
               focus-visible:outline-none
               focus-visible:ring-2
-              focus-visible:ring-[#EC1C40]/40
+              focus-visible:ring-brand/40
               focus-visible:ring-offset-2
 
               sm:h-12
@@ -504,13 +504,13 @@ export default function RelatedBlogCarousel({
               rounded-full
 
               border
-              border-[#EC1C40]
+              border-brand
 
-              bg-[#EC1C40]
+              bg-brand
 
               text-white
 
-              shadow-[0_8px_22px_rgba(236,28,64,0.22)]
+              shadow-[0_8px_22px_rgb(var(--brand-accent,255_160_0)/0.22)]
 
               transition-[background-color,border-color,color,transform,box-shadow]
               duration-200
@@ -518,9 +518,9 @@ export default function RelatedBlogCarousel({
 
               enabled:hover:-translate-y-0.5
 
-              enabled:hover:bg-[#d9183a]
+              enabled:hover:bg-brand-hover
 
-              enabled:hover:shadow-[0_10px_28px_rgba(236,28,64,0.28)]
+              enabled:hover:shadow-[0_10px_28px_rgb(var(--brand-accent,255_160_0)/0.28)]
 
               enabled:active:translate-y-0
               enabled:active:scale-95
@@ -533,7 +533,7 @@ export default function RelatedBlogCarousel({
 
               focus-visible:outline-none
               focus-visible:ring-2
-              focus-visible:ring-[#EC1C40]/40
+              focus-visible:ring-brand/40
               focus-visible:ring-offset-2
 
               sm:h-12

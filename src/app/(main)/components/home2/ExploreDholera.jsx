@@ -68,7 +68,7 @@ export default function ExploreDholera() {
 
           text-white
 
-          selection:bg-[#EC1C40]
+          selection:bg-brand
           selection:text-white
 
           min-[375px]:px-5
@@ -123,7 +123,7 @@ export default function ExploreDholera() {
 
             rounded-full
 
-            bg-[#EC1C40]/15
+            bg-brand/15
 
             blur-3xl
           "
@@ -212,7 +212,7 @@ export default function ExploreDholera() {
             "
           >
             Invest in Registry Ready Plots in Dholera{" "}
-            <span className="text-[#EC1C40]">from ₹10 Lakh</span>
+            <span className="text-brand">from ₹10 Lakh</span>
           </h2>
 
           {/* =====================================================
@@ -290,10 +290,10 @@ export default function ExploreDholera() {
                 ease-out
 
                 hover:-translate-y-0.5
-                hover:border-[#EC1C40]
-                hover:bg-[#EC1C40]
+                hover:border-brand
+                hover:bg-brand
                 hover:text-white
-                hover:shadow-[0_12px_28px_rgba(236,28,64,0.24)]
+                hover:shadow-[0_12px_28px_rgb(var(--brand-accent,255_160_0)/0.24)]
 
                 active:translate-y-0
 
@@ -351,9 +351,9 @@ export default function ExploreDholera() {
                 rounded-none
 
                 border
-                border-[#EC1C40]
+                border-brand
 
-                bg-[#EC1C40]
+                bg-brand
 
                 px-3
                 py-3
@@ -364,7 +364,7 @@ export default function ExploreDholera() {
 
                 text-white
 
-                shadow-[0_8px_24px_rgba(236,28,64,0.20)]
+                shadow-[0_8px_24px_rgb(var(--brand-accent,255_160_0)/0.20)]
 
                 transition-[background-color,color,border-color,transform,box-shadow]
                 duration-200
@@ -419,7 +419,7 @@ export default function ExploreDholera() {
 
           text-black
 
-          selection:bg-[#EC1C40]
+          selection:bg-brand
           selection:text-white
 
           min-[375px]:px-5
@@ -454,7 +454,7 @@ export default function ExploreDholera() {
 
             rounded-full
 
-            bg-[#EC1C40]/5
+            bg-brand/5
 
             blur-3xl
           "
@@ -520,7 +520,7 @@ export default function ExploreDholera() {
                 lg:text-[34px]
               "
             >
-              Explore <span className="text-[#EC1C40]">Dholera</span>
+              Explore <span className="text-brand">Dholera</span>
             </h2>
 
             <p
@@ -609,7 +609,7 @@ export default function ExploreDholera() {
                     xl:p-6
 
                     md:hover:-translate-y-1
-                    md:hover:border-[#EC1C40]/25
+                    md:hover:border-brand/25
                     md:hover:bg-white
                     md:hover:shadow-[0_14px_32px_rgba(0,0,0,0.08)]
 
@@ -645,11 +645,11 @@ export default function ExploreDholera() {
                         rounded-xl
 
                         border
-                        border-[#EC1C40]/20
+                        border-brand/20
 
-                        bg-[#EC1C40]/10
+                        bg-brand/10
 
-                        text-[#EC1C40]
+                        text-brand
 
                         transition-[background-color,color,border-color]
                         duration-300
@@ -657,8 +657,8 @@ export default function ExploreDholera() {
                         sm:h-11
                         sm:w-11
 
-                        md:group-hover:border-[#EC1C40]
-                        md:group-hover:bg-[#EC1C40]
+                        md:group-hover:border-brand
+                        md:group-hover:bg-brand
                         md:group-hover:text-white
                       "
                     >
@@ -756,18 +756,18 @@ export default function ExploreDholera() {
                         duration-200
                         ease-out
 
-                        hover:border-[#EC1C40]
-                        hover:bg-[#EC1C40]
+                        hover:border-brand
+                        hover:bg-brand
                         hover:text-white
 
-                        hover:shadow-[0_6px_16px_rgba(236,28,64,0.16)]
+                        hover:shadow-[0_6px_16px_rgb(var(--brand-accent,255_160_0)/0.16)]
 
                         active:scale-[0.98]
 
                         focus-visible:outline
                         focus-visible:outline-2
                         focus-visible:outline-offset-3
-                        focus-visible:outline-[#EC1C40]
+                        focus-visible:outline-brand
 
                         sm:text-[14px]
 

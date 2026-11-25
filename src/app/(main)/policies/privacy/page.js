@@ -196,7 +196,7 @@ function PolicySection({
 
             rounded-full
 
-            bg-[#EC1C40]/10
+            bg-[#FFA000]/10
 
             px-2
 
@@ -204,7 +204,7 @@ function PolicySection({
             font-bold
             leading-none
 
-            text-[#EC1C40]
+            text-[#FFA000]
 
             sm:flex
           "
@@ -272,7 +272,7 @@ function BulletList({ children }) {
 
         pl-5
 
-        marker:text-[#EC1C40]
+        marker:text-[#FFA000]
       "
     >
       {children}
@@ -294,7 +294,7 @@ export default function PrivacyPolicyPage() {
 
         text-black
 
-        selection:bg-[#EC1C40]
+        selection:bg-[#FFA000]
         selection:text-white
       "
     >
@@ -414,7 +414,7 @@ export default function PrivacyPolicyPage() {
               "
             >
               Privacy{" "}
-              <span className="text-[#EC1C40]">
+              <span className="text-[#FFA000]">
                 Policy
               </span>
             </h1>
@@ -485,10 +485,10 @@ export default function PrivacyPolicyPage() {
                   className="
                     font-semibold
 
-                    text-[#EC1C40]
+                    text-[#FFA000]
 
                     underline
-                    decoration-[#EC1C40]/30
+                    decoration-[#FFA000]/30
                     underline-offset-4
 
                     transition-colors
@@ -610,7 +610,7 @@ export default function PrivacyPolicyPage() {
                   aria-hidden="true"
                   className="
                     shrink-0
-                    text-[#EC1C40]
+                    text-[#FFA000]
                   "
                 />
 
@@ -675,12 +675,12 @@ export default function PrivacyPolicyPage() {
                       transition-[background-color,color]
                       duration-200
 
-                      hover:bg-[#EC1C40]/5
+                      hover:bg-[#FFA000]/5
                       hover:text-black
 
                       focus-visible:outline-none
                       focus-visible:ring-2
-                      focus-visible:ring-[#EC1C40]
+                      focus-visible:ring-[#FFA000]
                       focus-visible:ring-inset
                     "
                   >
@@ -694,7 +694,7 @@ export default function PrivacyPolicyPage() {
                         font-bold
                         leading-5
 
-                        text-[#EC1C40]
+                        text-[#FFA000]
                       "
                     >
                       {String(index + 1).padStart(2, "0")}
@@ -1575,8 +1575,8 @@ export default function PrivacyPolicyPage() {
                     transition-[background-color,border-color]
                     duration-200
 
-                    hover:border-[#EC1C40]/25
-                    hover:bg-[#EC1C40]/5
+                    hover:border-[#FFA000]/25
+                    hover:bg-[#FFA000]/5
                   "
                 >
                   <span
@@ -1592,9 +1592,9 @@ export default function PrivacyPolicyPage() {
 
                       rounded-lg
 
-                      bg-[#EC1C40]/10
+                      bg-[#FFA000]/10
 
-                      text-[#EC1C40]
+                      text-[#FFA000]
                     "
                   >
                     <Mail
@@ -1660,8 +1660,8 @@ export default function PrivacyPolicyPage() {
                     transition-[background-color,border-color]
                     duration-200
 
-                    hover:border-[#EC1C40]/25
-                    hover:bg-[#EC1C40]/5
+                    hover:border-[#FFA000]/25
+                    hover:bg-[#FFA000]/5
                   "
                 >
                   <span
@@ -1677,9 +1677,9 @@ export default function PrivacyPolicyPage() {
 
                       rounded-lg
 
-                      bg-[#EC1C40]/10
+                      bg-[#FFA000]/10
 
-                      text-[#EC1C40]
+                      text-[#FFA000]
                     "
                   >
                     <Phone
@@ -1755,9 +1755,9 @@ export default function PrivacyPolicyPage() {
 
                       rounded-lg
 
-                      bg-[#EC1C40]/10
+                      bg-[#FFA000]/10
 
-                      text-[#EC1C40]
+                      text-[#FFA000]
                     "
                   >
                     <MapPin
@@ -1851,7 +1851,7 @@ export default function PrivacyPolicyPage() {
                 "
               >
                 Your Privacy{" "}
-                <span className="text-[#EC1C40]">
+                <span className="text-[#FFA000]">
                   Matters to Us
                 </span>
               </h2>

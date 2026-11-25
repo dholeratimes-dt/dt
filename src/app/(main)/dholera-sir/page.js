@@ -280,7 +280,7 @@ function UpdateCard({ post }) {
         ease-out
 
         md:hover:-translate-y-1
-        md:hover:border-[#EC1C40]/30
+        md:hover:border-[#FFA000]/30
 
         motion-reduce:transform-none
         motion-reduce:transition-none
@@ -297,7 +297,7 @@ function UpdateCard({ post }) {
 
           focus-visible:ring-2
           focus-visible:ring-inset
-          focus-visible:ring-[#EC1C40]
+          focus-visible:ring-[#FFA000]
         "
       >
         {/* IMAGE*/}
@@ -353,7 +353,7 @@ function UpdateCard({ post }) {
                 items-center
                 justify-center
 
-                bg-[#EC1C40]/5
+                bg-[#FFA000]/5
               "
             >
               <span
@@ -444,7 +444,7 @@ function UpdateCard({ post }) {
                 text-[13px]
                 font-semibold
 
-                text-[#EC1C40]
+                text-[#FFA000]
 
                 sm:text-[14px]
               "
@@ -458,7 +458,7 @@ function UpdateCard({ post }) {
                   w-4
                   shrink-0
 
-                  stroke-[#EC1C40]
+                  stroke-[#FFA000]
                 "
                 strokeWidth={2}
               />
@@ -657,7 +657,7 @@ async function LatestNewsSection() {
             "
           >
             Stay Updated with Latest{" "}
-            <span className="text-[#EC1C40]">
+            <span className="text-[#FFA000]">
               Dholera SIR News &amp;
               Updates
             </span>
@@ -679,7 +679,7 @@ async function LatestNewsSection() {
               text-[14px]
               font-semibold
 
-              text-[#EC1C40]
+              text-[#FFA000]
 
               transition-colors
               duration-200
@@ -688,7 +688,7 @@ async function LatestNewsSection() {
 
               focus-visible:outline-none
               focus-visible:ring-2
-              focus-visible:ring-[#EC1C40]
+              focus-visible:ring-[#FFA000]
               focus-visible:ring-offset-2
             "
           >
@@ -701,7 +701,7 @@ async function LatestNewsSection() {
                 w-4
                 shrink-0
 
-                stroke-[#EC1C40]
+                stroke-[#FFA000]
               "
               strokeWidth={2}
             />
@@ -782,7 +782,7 @@ export default function DholeraSirPage() {
           bg-white
           text-black
 
-          selection:bg-[#EC1C40]
+          selection:bg-[#FFA000]
           selection:text-white
         "
       >
@@ -838,7 +838,7 @@ export default function DholeraSirPage() {
               "
             >
               About{" "}
-              <span className="text-[#EC1C40]">
+              <span className="text-[#FFA000]">
                 Dholera SIR
               </span>
             </h1>
@@ -939,7 +939,7 @@ export default function DholeraSirPage() {
                   "
                 >
                   What is the{" "}
-                  <span className="text-[#EC1C40]">
+                  <span className="text-[#FFA000]">
                     SIR Act 2009?
                   </span>
                 </h2>
@@ -1040,7 +1040,7 @@ export default function DholeraSirPage() {
               "
             >
               Who is developing{" "}
-              <span className="text-[#EC1C40]">
+              <span className="text-[#FFA000]">
                 Dholera SIR?
               </span>
             </h2>
@@ -1119,7 +1119,7 @@ export default function DholeraSirPage() {
 
                       rounded-xl
 
-                      bg-[#EC1C40]/10
+                      bg-[#FFA000]/10
                     "
                   >
                     <Landmark
@@ -1128,7 +1128,7 @@ export default function DholeraSirPage() {
                         h-[22px]
                         w-[22px]
 
-                        stroke-[#EC1C40]
+                        stroke-[#FFA000]
                       "
                       strokeWidth={2}
                     />
@@ -1233,9 +1233,9 @@ export default function DholeraSirPage() {
                       rounded-xl
 
                       border
-                      border-[#EC1C40]/10
+                      border-[#FFA000]/10
 
-                      bg-[#EC1C40]/5
+                      bg-[#FFA000]/5
                     "
                   >
                     <Building2
@@ -1244,7 +1244,7 @@ export default function DholeraSirPage() {
                         h-[22px]
                         w-[22px]
 
-                        stroke-[#EC1C40]
+                        stroke-[#FFA000]
                       "
                       strokeWidth={2}
                     />
@@ -1374,7 +1374,7 @@ export default function DholeraSirPage() {
               "
             >
               Why Invest in{" "}
-              <span className="text-[#EC1C40]">
+              <span className="text-[#FFA000]">
                 Dholera?
               </span>
             </h2>

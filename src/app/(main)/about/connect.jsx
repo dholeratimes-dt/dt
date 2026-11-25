@@ -32,7 +32,7 @@ function ItemContent({ item, variant = "light" }) {
       <div className="flex min-w-0 flex-col items-start justify-center">
         <span
           className={`text-[34px] font-light leading-none tracking-[-0.065em] sm:text-[40px] ${
-            isLight ? "text-[#EC1C40]" : "text-white"
+            isLight ? "text-[#FFA000]" : "text-white"
           }`}
         >
           {item.number}
@@ -46,7 +46,7 @@ function ItemContent({ item, variant = "light" }) {
             aria-hidden="true"
             strokeWidth={1.9}
             className={`h-[18px] w-[18px] shrink-0 ${
-              isLight ? "text-[#EC1C40]" : "text-white"
+              isLight ? "text-[#FFA000]" : "text-white"
             }`}
           />
         </div>
@@ -88,7 +88,7 @@ function DesktopGraphic() {
       </article>
 
       {/* Item 02 - Left / Accent */}
-      <article className="group absolute left-0 top-[82px] z-10 h-[158px] w-[55%] overflow-hidden rounded-l-[30px] rounded-tr-[28px] bg-[#EC1C40] shadow-[0_14px_34px_rgba(236,28,64,0.14)] transition-[transform,box-shadow] duration-300 ease-out hover:scale-[1.01] hover:shadow-[0_18px_40px_rgba(236,28,64,0.18)] motion-reduce:transform-none motion-reduce:transition-none">
+      <article className="group absolute left-0 top-[82px] z-10 h-[158px] w-[55%] overflow-hidden rounded-l-[30px] rounded-tr-[28px] bg-[#FFA000] shadow-[0_14px_34px_rgba(255,160,0,0.14)] transition-[transform,box-shadow] duration-300 ease-out hover:scale-[1.01] hover:shadow-[0_18px_40px_rgba(255,160,0,0.18)] motion-reduce:transform-none motion-reduce:transition-none">
         <ItemContent item={focusItems[1]} variant="accent" />
       </article>
 
@@ -128,7 +128,7 @@ function MobileGraphic() {
       </article>
 
       {/* Item 02 */}
-      <article className="absolute left-0 top-[128px] z-10 min-h-[134px] w-[84%] overflow-hidden rounded-l-[26px] rounded-tr-[24px] bg-[#EC1C40] shadow-[0_12px_30px_rgba(236,28,64,0.14)] min-[430px]:w-[78%] sm:w-[72%]">
+      <article className="absolute left-0 top-[128px] z-10 min-h-[134px] w-[84%] overflow-hidden rounded-l-[26px] rounded-tr-[24px] bg-[#FFA000] shadow-[0_12px_30px_rgba(255,160,0,0.14)] min-[430px]:w-[78%] sm:w-[72%]">
         <ItemContent item={focusItems[1]} variant="accent" />
       </article>
 

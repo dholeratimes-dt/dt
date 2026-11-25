@@ -12,11 +12,11 @@ const paginationButtonClass = `
   py-2 text-[14px] font-semibold text-black
   shadow-[0_3px_12px_rgba(0,0,0,0.035)]
   transition-colors duration-150
-  enabled:hover:border-[#EC1C40]/40
-  enabled:hover:bg-[#EC1C40]/5
-  enabled:hover:text-[#EC1C40]
+  enabled:hover:border-[#FFA000]/40
+  enabled:hover:bg-[#FFA000]/5
+  enabled:hover:text-[#FFA000]
   focus-visible:outline-none focus-visible:ring-2
-  focus-visible:ring-[#EC1C40] focus-visible:ring-offset-2
+  focus-visible:ring-[#FFA000] focus-visible:ring-offset-2
   disabled:cursor-not-allowed disabled:border-black/[0.06]
   disabled:bg-black/[0.02] disabled:text-black/30
   disabled:shadow-none motion-reduce:transition-none
@@ -27,7 +27,7 @@ const pageNumberClass = `
   items-center justify-center rounded-xl border px-3
   text-[14px] font-semibold transition-colors duration-150
   focus-visible:outline-none focus-visible:ring-2
-  focus-visible:ring-[#EC1C40] focus-visible:ring-offset-2
+  focus-visible:ring-[#FFA000] focus-visible:ring-offset-2
   motion-reduce:transition-none
 `;
 
@@ -229,7 +229,7 @@ export default function BlogGrid({ children }) {
               "
             >
               Page{" "}
-              <span className="font-semibold text-[#EC1C40]">
+              <span className="font-semibold text-[#FFA000]">
                 {activePage}
               </span>{" "}
               of {totalPages}
@@ -290,19 +290,19 @@ export default function BlogGrid({ children }) {
                     ${
                       isCurrent
                         ? `
-                          border-[#EC1C40]
-                          bg-[#EC1C40]
+                          border-[#FFA000]
+                          bg-[#FFA000]
                           text-white
-                          shadow-[0_6px_16px_rgba(236,28,64,0.20)]
+                          shadow-[0_6px_16px_rgba(255,160,0,0.20)]
                         `
                         : `
                           border-black/10
                           bg-white
                           text-black
                           shadow-[0_2px_8px_rgba(0,0,0,0.025)]
-                          hover:border-[#EC1C40]/40
-                          hover:bg-[#EC1C40]/5
-                          hover:text-[#EC1C40]
+                          hover:border-[#FFA000]/40
+                          hover:bg-[#FFA000]/5
+                          hover:text-[#FFA000]
                         `
                     }
                   `}

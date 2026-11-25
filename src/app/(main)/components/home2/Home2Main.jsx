@@ -78,7 +78,7 @@ export async function generateMetadata() {
 
 export default function Home2Main() {
   return (
-    <>
+    <div data-home-page className="contents">
       <HOME2 />
       <LatestUpdates />
       <Dholera />
@@ -87,6 +87,6 @@ export default function Home2Main() {
       <WhyDT />
       <LazyTestimonialsSection />
       <CommonFAQ faqItems={faqItems} />
-    </>
+    </div>
   );
 }

@@ -217,7 +217,7 @@ export default async function BlogsPage() {
 
               <div
                 aria-hidden="true"
-                className="mb-4 h-1 w-10 rounded-full bg-[#EC1C40]"
+                className="mb-4 h-1 w-10 rounded-full bg-[#FFA000]"
               />
 
               {/* HEADING*/}

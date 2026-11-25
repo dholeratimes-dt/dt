@@ -327,7 +327,7 @@ export default function ContactPage() {
 
           text-black
 
-          selection:bg-[#EC1C40]
+          selection:bg-[#FFA000]
           selection:text-white
         "
       >
@@ -356,7 +356,7 @@ export default function ContactPage() {
               h-[260px]
               w-[260px]
               rounded-full
-              bg-[#EC1C40]/[0.03]
+              bg-[#FFA000]/[0.03]
               blur-3xl
             "
           />
@@ -401,7 +401,7 @@ export default function ContactPage() {
                   "
                 >
                   Connect with{" "}
-                  <span className="text-[#EC1C40]">
+                  <span className="text-[#FFA000]">
                     Dholera Times
                   </span>
                 </h2>
@@ -435,7 +435,7 @@ export default function ContactPage() {
                     h-px
                     w-20
                     bg-gradient-to-r
-                    from-[#EC1C40]
+                    from-[#FFA000]
                     to-transparent
                   "
                 />
@@ -476,11 +476,11 @@ export default function ContactPage() {
                       items-center
                       justify-center
                       rounded-[12px]
-                      bg-[#EC1C40]/[0.08]
-                      text-[#EC1C40]
+                      bg-[#FFA000]/[0.08]
+                      text-[#FFA000]
                       transition-colors
                       duration-300
-                      group-hover:bg-[#EC1C40]
+                      group-hover:bg-[#FFA000]
                       group-hover:text-white
                       min-[390px]:h-[46px]
                       min-[390px]:w-[46px]
@@ -503,7 +503,7 @@ export default function ContactPage() {
                         uppercase
                         leading-5
                         tracking-[0.14em]
-                        text-[#EC1C40]
+                        text-[#FFA000]
                         sm:text-[11px]
                       "
                     >
@@ -522,7 +522,7 @@ export default function ContactPage() {
                         text-black
                         transition-colors
                         duration-200
-                        hover:text-[#EC1C40]
+                        hover:text-[#FFA000]
                         min-[390px]:text-[20px]
                         sm:text-[22px]
                       "
@@ -562,15 +562,15 @@ export default function ContactPage() {
                           gap-1.5
                           rounded-full
                           border
-                          border-[#EC1C40]
+                          border-[#FFA000]
                           px-3
                           py-1.5
                           text-[12px]
                           font-semibold
-                          text-[#EC1C40]
+                          text-[#FFA000]
                           transition-colors
                           duration-200
-                          hover:bg-[#EC1C40]
+                          hover:bg-[#FFA000]
                           hover:text-white
                           sm:min-h-[38px]
                           sm:px-3.5
@@ -596,7 +596,7 @@ export default function ContactPage() {
                           justify-center
                           gap-1.5
                           rounded-full
-                          bg-[#EC1C40]
+                          bg-[#FFA000]
                           px-3
                           py-1.5
                           text-[12px]
@@ -604,8 +604,8 @@ export default function ContactPage() {
                           text-white
                           transition-[background-color,box-shadow]
                           duration-200
-                          hover:bg-[#d9183a]
-                          hover:shadow-[0_8px_22px_-13px_rgba(236,28,64,0.55)]
+                          hover:bg-[#E69000]
+                          hover:shadow-[0_8px_22px_-13px_rgba(255,160,0,0.55)]
                           sm:min-h-[38px]
                           sm:px-3.5
                           sm:text-[13px]
@@ -648,11 +648,11 @@ export default function ContactPage() {
                       items-center
                       justify-center
                       rounded-[12px]
-                      bg-[#EC1C40]/[0.08]
-                      text-[#EC1C40]
+                      bg-[#FFA000]/[0.08]
+                      text-[#FFA000]
                       transition-colors
                       duration-300
-                      group-hover:bg-[#EC1C40]
+                      group-hover:bg-[#FFA000]
                       group-hover:text-white
                       min-[390px]:h-[46px]
                       min-[390px]:w-[46px]
@@ -675,7 +675,7 @@ export default function ContactPage() {
                         uppercase
                         leading-5
                         tracking-[0.14em]
-                        text-[#EC1C40]
+                        text-[#FFA000]
                         sm:text-[11px]
                       "
                     >
@@ -695,7 +695,7 @@ export default function ContactPage() {
                         text-black
                         transition-colors
                         duration-200
-                        hover:text-[#EC1C40]
+                        hover:text-[#FFA000]
                         min-[390px]:text-[18px]
                         sm:text-[20px]
                       "
@@ -726,7 +726,7 @@ export default function ContactPage() {
                         gap-1
                         text-[12px]
                         font-semibold
-                        text-[#EC1C40]
+                        text-[#FFA000]
                         sm:text-[13px]
                       "
                     >
@@ -767,11 +767,11 @@ export default function ContactPage() {
                       items-center
                       justify-center
                       rounded-[12px]
-                      bg-[#EC1C40]/[0.08]
-                      text-[#EC1C40]
+                      bg-[#FFA000]/[0.08]
+                      text-[#FFA000]
                       transition-colors
                       duration-300
-                      group-hover:bg-[#EC1C40]
+                      group-hover:bg-[#FFA000]
                       group-hover:text-white
                       min-[390px]:h-[46px]
                       min-[390px]:w-[46px]
@@ -794,7 +794,7 @@ export default function ContactPage() {
                         uppercase
                         leading-5
                         tracking-[0.14em]
-                        text-[#EC1C40]
+                        text-[#FFA000]
                         sm:text-[11px]
                       "
                     >
@@ -876,7 +876,7 @@ export default function ContactPage() {
                   lg:text-[40px]
                 "
               >
-                How Can We <span className="text-[#EC1C40]">Help?</span>
+                How Can We <span className="text-[#FFA000]">Help?</span>
               </h2>
 
               <p
@@ -942,7 +942,7 @@ export default function ContactPage() {
                       duration-300
 
                       hover:-translate-y-1
-                      hover:border-[#EC1C40]/30
+                      hover:border-[#FFA000]/30
                       hover:shadow-[0_22px_50px_-34px_rgba(0,0,0,0.38)]
 
                       sm:p-6
@@ -964,7 +964,7 @@ export default function ContactPage() {
                         origin-left
                         scale-x-0
 
-                        bg-[#EC1C40]
+                        bg-[#FFA000]
 
                         transition-transform
                         duration-300
@@ -985,14 +985,14 @@ export default function ContactPage() {
 
                         rounded-xl
 
-                        bg-[#EC1C40]/10
+                        bg-[#FFA000]/10
 
-                        text-[#EC1C40]
+                        text-[#FFA000]
 
                         transition-[background-color,color]
                         duration-300
 
-                        group-hover:bg-[#EC1C40]
+                        group-hover:bg-[#FFA000]
                         group-hover:text-white
                       "
                   >
@@ -1097,7 +1097,7 @@ export default function ContactPage() {
                 "
               >
                 Dholera Matlab{" "}
-                <span className="text-[#EC1C40]">Dholera Times</span>
+                <span className="text-[#FFA000]">Dholera Times</span>
               </h2>
 
               <p
@@ -1135,7 +1135,7 @@ export default function ContactPage() {
 
                 rounded-xl
 
-                bg-[#EC1C40]
+                bg-[#FFA000]
 
                 px-5
                 py-3
@@ -1239,7 +1239,7 @@ export default function ContactPage() {
                   lg:text-[42px]
                 "
               >
-                Tell Us What You <span className="text-[#EC1C40]">Need</span>
+                Tell Us What You <span className="text-[#FFA000]">Need</span>
               </h2>
 
               {/* INTRO */}

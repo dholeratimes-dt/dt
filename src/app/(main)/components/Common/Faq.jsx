@@ -45,7 +45,7 @@ export default function CommonFAQ({
 
         text-black
 
-        selection:bg-[#EC1C40]
+        selection:bg-brand
         selection:text-white
 
         min-[414px]:px-5
@@ -119,7 +119,7 @@ export default function CommonFAQ({
             "
           >
             FAQ
-            <span className="text-[#EC1C40]">
+            <span className="text-brand">
               s
             </span>
           </h2>
@@ -179,7 +179,7 @@ export default function CommonFAQ({
 
                       ${
                         isOpen
-                          ? "bg-[#EC1C40]/[0.018]"
+                          ? "bg-brand/[0.018]"
                           : "bg-white hover:bg-black/[0.018]"
                       }
 
@@ -201,7 +201,7 @@ export default function CommonFAQ({
 
                         w-[3px]
 
-                        bg-[#EC1C40]
+                        bg-brand
 
                         transition-transform
                         duration-300
@@ -255,7 +255,7 @@ export default function CommonFAQ({
                           focus-visible:outline-none
                           focus-visible:ring-2
                           focus-visible:ring-inset
-                          focus-visible:ring-[#EC1C40]
+                          focus-visible:ring-brand
 
                           min-[414px]:px-5
 
@@ -330,21 +330,21 @@ export default function CommonFAQ({
                             ${
                               isOpen
                                 ? `
-                                    border-[#EC1C40]
+                                    border-brand
 
-                                    bg-[#EC1C40]
+                                    bg-brand
 
                                     text-white
                                   `
                                 : `
-                                    border-[#EC1C40]/20
+                                    border-brand/20
 
-                                    bg-[#EC1C40]/5
+                                    bg-brand/5
 
-                                    text-[#EC1C40]
+                                    text-brand
 
-                                    group-hover:border-[#EC1C40]/40
-                                    group-hover:bg-[#EC1C40]/10
+                                    group-hover:border-brand/40
+                                    group-hover:bg-brand/10
                                   `
                             }
 

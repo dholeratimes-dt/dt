@@ -750,11 +750,11 @@ export default function Navbar({ whatsappNumber = "" }) {
     transition-colors
     duration-300
 
-    hover:text-[#EC1C40]
+    hover:text-brand
 
     focus-visible:outline-none
     focus-visible:ring-2
-    focus-visible:ring-[#EC1C40]
+    focus-visible:ring-brand
     focus-visible:ring-offset-2
 
     min-[1440px]:px-4
@@ -830,11 +830,11 @@ export default function Navbar({ whatsappNumber = "" }) {
               transition-colors
               duration-300
 
-              hover:text-[#EC1C40]
+              hover:text-brand
 
               focus-visible:outline-none
               focus-visible:ring-2
-              focus-visible:ring-[#EC1C40]
+              focus-visible:ring-brand
               focus-visible:ring-offset-2
 
               min-[1440px]:px-4
@@ -881,7 +881,7 @@ export default function Navbar({ whatsappNumber = "" }) {
 
                 rounded-full
 
-                bg-[#EC1C40]
+                bg-brand
 
                 transition-transform
                 duration-200
@@ -939,7 +939,7 @@ export default function Navbar({ whatsappNumber = "" }) {
 
                   tracking-[0.14em]
 
-                  text-[#EC1C40]
+                  text-brand
                 "
             >
               Dholera Times
@@ -979,7 +979,7 @@ export default function Navbar({ whatsappNumber = "" }) {
                           duration-200
 
                           ${
-                            isActive ? "bg-[#EC1C40]/5" : "hover:bg-[#EC1C40]/5"
+                            isActive ? "bg-brand/5" : "hover:bg-brand/5"
                           }
                         `}
                   >
@@ -1025,7 +1025,7 @@ export default function Navbar({ whatsappNumber = "" }) {
                       className="
                             shrink-0
 
-                            text-[#EC1C40]
+                            text-brand
 
                             transition-transform
                             duration-200
@@ -1143,7 +1143,7 @@ export default function Navbar({ whatsappNumber = "" }) {
 
               focus-visible:outline-none
               focus-visible:ring-2
-              focus-visible:ring-[#EC1C40]
+              focus-visible:ring-brand
               focus-visible:ring-offset-2
 
               ${
@@ -1226,7 +1226,7 @@ export default function Navbar({ whatsappNumber = "" }) {
 
                         rounded-full
 
-                        bg-[#EC1C40]
+                        bg-brand
 
                         transition-transform
                         duration-200
@@ -1279,14 +1279,14 @@ export default function Navbar({ whatsappNumber = "" }) {
 
                 focus-visible:outline-none
                 focus-visible:ring-2
-                focus-visible:ring-[#EC1C40]
+                focus-visible:ring-brand
                 focus-visible:ring-offset-2
 
                 ${
                   active(CONTACT.path)
                     ? `
-                        border-[#EC1C40]
-                        bg-[#EC1C40]
+                        border-brand
+                        bg-brand
                         text-white
                       `
                     : isDarkNavbar
@@ -1299,25 +1299,25 @@ export default function Navbar({ whatsappNumber = "" }) {
 
                           hover:-translate-y-px
 
-                          hover:border-[#EC1C40]
-                          hover:bg-[#EC1C40]
+                          hover:border-brand
+                          hover:bg-brand
                           hover:text-white
 
-                          hover:shadow-[0_8px_22px_-14px_rgba(236,28,64,0.60)]
+                          hover:shadow-[0_8px_22px_-14px_rgb(var(--brand-accent,255_160_0)/0.60)]
                         `
                       : `
-                          border-[#EC1C40]
+                          border-brand
 
                           bg-transparent
 
-                          text-[#d9183a]
+                          text-brand-hover
 
                           hover:-translate-y-px
 
-                          hover:bg-[#EC1C40]
+                          hover:bg-brand
                           hover:text-white
 
-                          hover:shadow-[0_8px_22px_-14px_rgba(236,28,64,0.55)]
+                          hover:shadow-[0_8px_22px_-14px_rgb(var(--brand-accent,255_160_0)/0.55)]
                         `
                 }
 
@@ -1702,28 +1702,28 @@ export default function Navbar({ whatsappNumber = "" }) {
                           ${
                             isActive
                               ? `
-                                  border-[#EC1C40]/20
+                                  border-brand/20
 
-                                  bg-[#EC1C40]/5
+                                  bg-brand/5
 
                                   font-semibold
 
-                                  text-[#EC1C40]
+                                  text-brand
                                 `
                               : `
                                   border-transparent
 
                                   text-black/75
 
-                                  hover:border-[#EC1C40]/10
-                                  hover:bg-[#EC1C40]/5
+                                  hover:border-brand/10
+                                  hover:bg-brand/5
                                   hover:text-black
                                 `
                           }
 
                           focus-visible:outline-none
                           focus-visible:ring-2
-                          focus-visible:ring-[#EC1C40]
+                          focus-visible:ring-brand
                           focus-visible:ring-offset-1
                           focus-visible:ring-offset-white
 
@@ -1751,8 +1751,8 @@ export default function Navbar({ whatsappNumber = "" }) {
 
                             ${
                               isActive
-                                ? "text-[#EC1C40]"
-                                : "text-black/40 group-hover:translate-x-0.5 group-hover:text-[#EC1C40]"
+                                ? "text-brand"
+                                : "text-black/40 group-hover:translate-x-0.5 group-hover:text-brand"
                             }
 
                             motion-reduce:transform-none
@@ -1788,7 +1788,7 @@ export default function Navbar({ whatsappNumber = "" }) {
 
                     tracking-[0.16em]
 
-                    text-[#EC1C40]
+                    text-brand
 
                     transition-[transform,opacity]
                     duration-[780ms]
@@ -1862,28 +1862,28 @@ export default function Navbar({ whatsappNumber = "" }) {
                             ${
                               isActive
                                 ? `
-                                    border-[#EC1C40]/20
+                                    border-brand/20
 
-                                    bg-[#EC1C40]/5
+                                    bg-brand/5
 
                                     font-semibold
 
-                                    text-[#EC1C40]
+                                    text-brand
                                   `
                                 : `
                                     border-transparent
 
                                     text-black/75
 
-                                    hover:border-[#EC1C40]/10
-                                    hover:bg-[#EC1C40]/5
+                                    hover:border-brand/10
+                                    hover:bg-brand/5
                                     hover:text-black
                                   `
                             }
 
                             focus-visible:outline-none
                             focus-visible:ring-2
-                            focus-visible:ring-[#EC1C40]
+                            focus-visible:ring-brand
                             focus-visible:ring-offset-1
                             focus-visible:ring-offset-white
 
@@ -1911,8 +1911,8 @@ export default function Navbar({ whatsappNumber = "" }) {
 
                               ${
                                 isActive
-                                  ? "text-[#EC1C40]"
-                                  : "text-black/40 group-hover:translate-x-0.5 group-hover:text-[#EC1C40]"
+                                  ? "text-brand"
+                                  : "text-black/40 group-hover:translate-x-0.5 group-hover:text-brand"
                               }
 
                               motion-reduce:transform-none
@@ -1978,9 +1978,9 @@ export default function Navbar({ whatsappNumber = "" }) {
                   rounded-xl
 
                   border
-                  border-[#EC1C40]
+                  border-brand
 
-                  bg-[#EC1C40]
+                  bg-brand
 
                   px-3
                   py-3
@@ -1991,20 +1991,20 @@ export default function Navbar({ whatsappNumber = "" }) {
 
                   text-white
 
-                  shadow-[0_8px_22px_-14px_rgba(236,28,64,0.60)]
+                  shadow-[0_8px_22px_-14px_rgb(var(--brand-accent,255_160_0)/0.60)]
 
                   transition-[transform,box-shadow]
                   duration-300
 
                   hover:-translate-y-px
 
-                  hover:shadow-[0_12px_26px_-14px_rgba(236,28,64,0.70)]
+                  hover:shadow-[0_12px_26px_-14px_rgb(var(--brand-accent,255_160_0)/0.70)]
 
                   active:scale-[0.985]
 
                   focus-visible:outline-none
                   focus-visible:ring-2
-                  focus-visible:ring-[#EC1C40]
+                  focus-visible:ring-brand
                   focus-visible:ring-offset-2
                   focus-visible:ring-offset-white
 

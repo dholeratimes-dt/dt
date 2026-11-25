@@ -202,7 +202,7 @@ function SectionHeading({ title, accent, description, center = false }) {
     <header className={center ? "mx-auto max-w-4xl text-center" : "max-w-4xl"}>
       <h2 className="text-[28px] font-bold leading-[1.15] tracking-[-0.03em] text-black sm:text-[32px] md:text-[36px] lg:text-[40px]">
         {title}{" "}
-        {accent && <span className="text-[#EC1C40]">{accent}</span>}
+        {accent && <span className="text-[#FFA000]">{accent}</span>}
       </h2>
       {description && (
         <p className="mt-4 text-[15px] leading-7 text-black/65 sm:text-[16px] md:text-[17px]">
@@ -223,7 +223,7 @@ export default function AboutPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
-      <main className="overflow-hidden bg-white text-black selection:bg-[#EC1C40] selection:text-white">
+      <main className="overflow-hidden bg-white text-black selection:bg-[#FFA000] selection:text-white">
         {/* Top Banner */}
         <section
           aria-label="About Dholera Times"
@@ -245,7 +245,7 @@ export default function AboutPage() {
               {/* Left Content */}
               <div className="max-w-4xl">
                 <h1 className="text-[38px] font-bold leading-[1.05] tracking-[-0.045em] text-black min-[414px]:text-[42px] sm:text-[48px] md:text-[56px] lg:text-[58px] xl:text-[64px]">
-                  About <span className="text-[#EC1C40]">Dholera Times</span>
+                  About <span className="text-[#FFA000]">Dholera Times</span>
                 </h1>
                 <p className="mt-6 max-w-3xl text-[16px] leading-8 text-black/65 sm:text-[17px] lg:text-[18px] lg:leading-8">
                   <Link
@@ -271,7 +271,7 @@ export default function AboutPage() {
               <div className="relative mx-auto w-full max-w-[620px] lg:ml-auto lg:mr-0">
                 <div
                   aria-hidden="true"
-                  className="pointer-events-none absolute left-1/2 top-1/2 h-[82%] w-[88%] -translate-x-1/2 -translate-y-1/2 bg-[#EC1C40]/[0.025] blur-[70px]"
+                  className="pointer-events-none absolute left-1/2 top-1/2 h-[82%] w-[88%] -translate-x-1/2 -translate-y-1/2 bg-[#FFA000]/[0.025] blur-[70px]"
                 />
                 <ConnectedFocusGraphic />
               </div>
@@ -293,18 +293,18 @@ export default function AboutPage() {
               {whatWeDoItems.map(({ title, description, icon: Icon }, index) => (
                 <article
                   key={title}
-                  className={`group relative overflow-hidden rounded-[22px] border border-black/10 bg-white p-5 shadow-[0_14px_40px_-34px_rgba(0,0,0,0.3)] transition-[border-color,box-shadow,transform] duration-300 md:hover:-translate-y-1 md:hover:border-[#EC1C40]/30 md:hover:shadow-[0_22px_50px_-35px_rgba(0,0,0,0.38)] sm:p-6 ${
+                  className={`group relative overflow-hidden rounded-[22px] border border-black/10 bg-white p-5 shadow-[0_14px_40px_-34px_rgba(0,0,0,0.3)] transition-[border-color,box-shadow,transform] duration-300 md:hover:-translate-y-1 md:hover:border-[#FFA000]/30 md:hover:shadow-[0_22px_50px_-35px_rgba(0,0,0,0.38)] sm:p-6 ${
                     index < 3 ? "lg:col-span-2" : "lg:col-span-3"
                   } motion-reduce:transform-none`}
                 >
                   <div
                     aria-hidden="true"
-                    className="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-[#EC1C40] transition-transform duration-300 group-hover:scale-x-100"
+                    className="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-[#FFA000] transition-transform duration-300 group-hover:scale-x-100"
                   />
-                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#EC1C40]/10">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#FFA000]/10">
                     <Icon
                       aria-hidden="true"
-                      className="h-5 w-5 stroke-[#EC1C40]"
+                      className="h-5 w-5 stroke-[#FFA000]"
                       strokeWidth={2}
                     />
                   </span>
@@ -326,15 +326,15 @@ export default function AboutPage() {
             {/* Mission */}
             <article className="relative overflow-hidden rounded-[24px] border border-black/10 bg-white p-6 shadow-[0_18px_52px_-40px_rgba(0,0,0,0.4)] sm:p-8 lg:p-10">
               <div className="flex items-center gap-4 sm:gap-5">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#EC1C40]/10 bg-[#EC1C40]/10">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#FFA000]/10 bg-[#FFA000]/10">
                   <Target
                     aria-hidden="true"
-                    className="h-5 w-5 stroke-[#EC1C40]"
+                    className="h-5 w-5 stroke-[#FFA000]"
                     strokeWidth={2}
                   />
                 </span>
                 <h2 className="min-w-0 text-[26px] font-bold leading-[1.2] tracking-[-0.03em] text-black sm:text-[30px] lg:text-[32px]">
-                  Our <span className="text-[#EC1C40]">Mission</span>
+                  Our <span className="text-[#FFA000]">Mission</span>
                 </h2>
               </div>
               <div aria-hidden="true" className="my-6 h-px w-full bg-black/10" />
@@ -348,15 +348,15 @@ export default function AboutPage() {
             {/* Vision */}
             <article className="relative overflow-hidden rounded-[24px] border border-black/10 bg-white p-6 shadow-[0_18px_52px_-40px_rgba(0,0,0,0.4)] sm:p-8 lg:p-10">
               <div className="flex items-center gap-4 sm:gap-5">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#EC1C40]/10 bg-[#EC1C40]/10">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#FFA000]/10 bg-[#FFA000]/10">
                   <Eye
                     aria-hidden="true"
-                    className="h-5 w-5 stroke-[#EC1C40]"
+                    className="h-5 w-5 stroke-[#FFA000]"
                     strokeWidth={2}
                   />
                 </span>
                 <h2 className="min-w-0 text-[26px] font-bold leading-[1.2] tracking-[-0.03em] text-black sm:text-[30px] lg:text-[32px]">
-                  Our <span className="text-[#EC1C40]">Vision</span>
+                  Our <span className="text-[#FFA000]">Vision</span>
                 </h2>
               </div>
               <div aria-hidden="true" className="my-6 h-px w-full bg-black/10" />
@@ -383,7 +383,7 @@ export default function AboutPage() {
                     id="our-promise-heading"
                     className="max-w-[340px] text-left text-[28px] font-bold leading-[1.1] tracking-[-0.035em] text-black min-[414px]:text-[29px] sm:text-[32px] md:text-[34px] lg:text-[38px]"
                   >
-                    Our <span className="text-[#EC1C40]">Promise</span>
+                    Our <span className="text-[#FFA000]">Promise</span>
                   </h2>
                   <p className="mt-3 max-w-[420px] text-left text-[15px] font-normal leading-7 text-black/60 sm:mt-4 sm:text-[16px]">
                     At Dholera Times, we promise to:
@@ -398,7 +398,7 @@ export default function AboutPage() {
                     key={item}
                     className="group grid grid-cols-[40px_minmax(0,1fr)] items-center gap-4 border-b border-black/10 py-4 min-[414px]:grid-cols-[42px_minmax(0,1fr)] sm:gap-5 sm:py-5 lg:grid-cols-[44px_minmax(0,1fr)] lg:gap-5 lg:py-[22px]"
                   >
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#EC1C40]/5 text-[#EC1C40] transition-[background-color,transform] duration-300 ease-out group-hover:scale-105 group-hover:bg-[#EC1C40]/10 sm:h-10 sm:w-10 motion-reduce:transform-none motion-reduce:transition-none">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#FFA000]/5 text-[#FFA000] transition-[background-color,transform] duration-300 ease-out group-hover:scale-105 group-hover:bg-[#FFA000]/10 sm:h-10 sm:w-10 motion-reduce:transform-none motion-reduce:transition-none">
                       <CheckCircle2
                         aria-hidden="true"
                         strokeWidth={1.9}
@@ -427,14 +427,14 @@ export default function AboutPage() {
               {investItems.map(({ title, description, icon: Icon }, index) => (
                 <article
                   key={title}
-                  className="group relative overflow-hidden rounded-[22px] border border-black/10 bg-white p-5 shadow-[0_12px_38px_-32px_rgba(0,0,0,0.3)] transition-[border-color,transform,box-shadow] duration-300 ease-out md:hover:-translate-y-1 md:hover:border-[#EC1C40]/30 md:hover:shadow-[0_20px_46px_-34px_rgba(0,0,0,0.4)] sm:p-6 motion-reduce:transform-none motion-reduce:transition-none"
+                  className="group relative overflow-hidden rounded-[22px] border border-black/10 bg-white p-5 shadow-[0_12px_38px_-32px_rgba(0,0,0,0.3)] transition-[border-color,transform,box-shadow] duration-300 ease-out md:hover:-translate-y-1 md:hover:border-[#FFA000]/30 md:hover:shadow-[0_20px_46px_-34px_rgba(0,0,0,0.4)] sm:p-6 motion-reduce:transform-none motion-reduce:transition-none"
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex min-w-0 flex-1 items-center gap-3.5 sm:gap-4">
-                      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#EC1C40]/10 bg-[#EC1C40]/10">
+                      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#FFA000]/10 bg-[#FFA000]/10">
                         <Icon
                           aria-hidden="true"
-                          className="h-5 w-5 stroke-[#EC1C40]"
+                          className="h-5 w-5 stroke-[#FFA000]"
                           strokeWidth={2}
                         />
                       </span>

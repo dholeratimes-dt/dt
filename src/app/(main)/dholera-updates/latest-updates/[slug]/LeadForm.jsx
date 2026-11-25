@@ -310,16 +310,16 @@ export default function LeadFormSlug({
               rounded-lg
 
               border
-              border-[#EC1C40]/25
+              border-[#FFA000]/25
 
-              bg-[#EC1C40]/[0.06]
+              bg-[#FFA000]/[0.06]
 
               p-3
 
               text-[14px]
               font-medium
 
-              text-[#EC1C40]
+              text-[#FFA000]
             "
           >
             {errorMessage}
@@ -332,7 +332,7 @@ export default function LeadFormSlug({
               text-center
               font-semibold
 
-              text-[#EC1C40]
+              text-[#FFA000]
             "
           >
             You have reached the
@@ -396,10 +396,10 @@ export default function LeadFormSlug({
 
                   placeholder:text-black/40
 
-                  focus:border-[#EC1C40]
+                  focus:border-[#FFA000]
 
                   focus:ring-2
-                  focus:ring-[#EC1C40]/15
+                  focus:ring-[#FFA000]/15
                 "
               />
             </div>
@@ -455,10 +455,10 @@ export default function LeadFormSlug({
 
                   placeholder:text-black/40
 
-                  focus:border-[#EC1C40]
+                  focus:border-[#FFA000]
 
                   focus:ring-2
-                  focus:ring-[#EC1C40]/15
+                  focus:ring-[#FFA000]/15
                 "
               />
             </div>
@@ -492,14 +492,14 @@ export default function LeadFormSlug({
                     ? `
                         cursor-not-allowed
 
-                        bg-[#EC1C40]/50
+                        bg-[#FFA000]/50
                       `
                     : `
-                        bg-[#d9183a]
+                        bg-[#E69000]
 
-                        hover:bg-[#d9183a]
+                        hover:bg-[#E69000]
 
-                        hover:shadow-[0_12px_30px_-14px_rgba(236,28,64,0.55)]
+                        hover:shadow-[0_12px_30px_-14px_rgba(255,160,0,0.55)]
 
                         active:scale-[0.98]
                       `
@@ -564,7 +564,7 @@ export default function LeadFormSlug({
 
                 rounded-full
 
-                bg-[#EC1C40]/10
+                bg-[#FFA000]/10
               "
             >
               <svg
@@ -575,7 +575,7 @@ export default function LeadFormSlug({
                   h-7
                   w-7
 
-                  text-[#EC1C40]
+                  text-[#FFA000]
                 "
                 aria-hidden="true"
               >
@@ -630,7 +630,7 @@ export default function LeadFormSlug({
 
                 rounded-xl
 
-                bg-[#EC1C40]
+                bg-[#FFA000]
 
                 px-4
                 py-3
@@ -642,9 +642,9 @@ export default function LeadFormSlug({
                 transition-all
                 duration-300
 
-                hover:bg-[#d9183a]
+                hover:bg-[#E69000]
 
-                hover:shadow-[0_10px_26px_-14px_rgba(236,28,64,0.60)]
+                hover:shadow-[0_10px_26px_-14px_rgba(255,160,0,0.60)]
 
                 active:scale-[0.98]
               "

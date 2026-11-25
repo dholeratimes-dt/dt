@@ -375,10 +375,10 @@ export default function ContactForm({
 
     hover:border-black/20
 
-    focus:border-[#EC1C40]
+    focus:border-[#FFA000]
     focus:bg-white
     focus:ring-4
-    focus:ring-[#EC1C40]/10
+    focus:ring-[#FFA000]/10
 
     disabled:cursor-not-allowed
     disabled:bg-black/[0.025]
@@ -455,7 +455,7 @@ export default function ContactForm({
 
             h-[3px]
 
-            bg-[#EC1C40]
+            bg-[#FFA000]
           "
         />
 
@@ -498,15 +498,15 @@ export default function ContactForm({
               transition-[background-color,color,border-color,transform]
               duration-200
 
-              hover:border-[#EC1C40]/20
-              hover:bg-[#EC1C40]/5
-              hover:text-[#EC1C40]
+              hover:border-[#FFA000]/20
+              hover:bg-[#FFA000]/5
+              hover:text-[#FFA000]
 
               active:scale-95
 
               focus-visible:outline-none
               focus-visible:ring-2
-              focus-visible:ring-[#EC1C40]
+              focus-visible:ring-[#FFA000]
               focus-visible:ring-offset-2
 
               sm:right-4
@@ -603,9 +603,9 @@ export default function ContactForm({
               rounded-xl
 
               border
-              border-[#EC1C40]/20
+              border-[#FFA000]/20
 
-              bg-[#EC1C40]/5
+              bg-[#FFA000]/5
 
               px-4
               py-3
@@ -644,9 +644,9 @@ export default function ContactForm({
                 rounded-2xl
 
                 border
-                border-[#EC1C40]/20
+                border-[#FFA000]/20
 
-                bg-[#EC1C40]/5
+                bg-[#FFA000]/5
 
                 px-5
                 py-6
@@ -911,7 +911,7 @@ export default function ContactForm({
 
                 rounded-[14px]
 
-                bg-[#EC1C40]
+                bg-[#FFA000]
 
                 px-5
                 py-3
@@ -922,14 +922,14 @@ export default function ContactForm({
 
                 text-white
 
-                shadow-[0_12px_30px_-16px_rgba(236,28,64,0.75)]
+                shadow-[0_12px_30px_-16px_rgba(255,160,0,0.75)]
 
                 transition-[background-color,transform,box-shadow]
                 duration-200
 
                 hover:-translate-y-0.5
                 hover:bg-[#D81839]
-                hover:shadow-[0_16px_35px_-17px_rgba(236,28,64,0.9)]
+                hover:shadow-[0_16px_35px_-17px_rgba(255,160,0,0.9)]
 
                 active:translate-y-0
 
@@ -940,7 +940,7 @@ export default function ContactForm({
 
                 focus-visible:outline-none
                 focus-visible:ring-2
-                focus-visible:ring-[#EC1C40]
+                focus-visible:ring-[#FFA000]
                 focus-visible:ring-offset-2
 
                 sm:min-h-[56px]
@@ -1041,7 +1041,7 @@ export default function ContactForm({
 
                 h-[3px]
 
-                bg-[#EC1C40]
+                bg-[#FFA000]
               "
             />
 
@@ -1058,9 +1058,9 @@ export default function ContactForm({
 
                 rounded-full
 
-                bg-[#EC1C40]/10
+                bg-[#FFA000]/10
 
-                text-[#EC1C40]
+                text-[#FFA000]
               "
             >
               <CheckCircle2
@@ -1138,11 +1138,11 @@ export default function ContactForm({
                 transition-colors
                 duration-200
 
-                hover:bg-[#EC1C40]
+                hover:bg-[#FFA000]
 
                 focus-visible:outline-none
                 focus-visible:ring-2
-                focus-visible:ring-[#EC1C40]
+                focus-visible:ring-[#FFA000]
                 focus-visible:ring-offset-2
               "
             >

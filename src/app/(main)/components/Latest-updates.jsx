@@ -103,7 +103,7 @@ function RelatedBlogCard({ item, type }) {
         rounded-2xl
 
         border
-        border-[#EC1C40]/30
+        border-brand/30
 
         bg-white
 
@@ -113,7 +113,7 @@ function RelatedBlogCard({ item, type }) {
         duration-300
         ease-out
 
-        focus-within:border-[#EC1C40]
+        focus-within:border-brand
 
         sm:w-[320px]
 
@@ -124,7 +124,7 @@ function RelatedBlogCard({ item, type }) {
         lg:min-w-0
 
         lg:hover:-translate-y-1
-        lg:hover:border-[#EC1C40]/45
+        lg:hover:border-brand/45
 
         xl:w-[calc((100%_-_5rem)/5)]
 
@@ -145,7 +145,7 @@ function RelatedBlogCard({ item, type }) {
           focus-visible:outline-none
           focus-visible:ring-2
           focus-visible:ring-inset
-          focus-visible:ring-[#EC1C40]
+          focus-visible:ring-brand
         "
       >
         {/* ===================================================
@@ -206,8 +206,8 @@ function RelatedBlogCard({ item, type }) {
                 justify-center
 
                 bg-gradient-to-br
-                from-[#EC1C40]/10
-                via-[#EC1C40]/5
+                from-brand/10
+                via-brand/5
                 to-white
               "
             >
@@ -360,13 +360,13 @@ function RelatedBlogCard({ item, type }) {
                 font-semibold
                 leading-5
 
-                text-[#EC1C40]
+                text-brand
 
                 transition-colors
                 duration-200
                 ease-out
 
-                group-hover:text-[#d9183a]
+                group-hover:text-brand-hover
 
                 lg:text-[13.5px]
 
@@ -415,7 +415,7 @@ function ViewAllUpdatesLink() {
         font-semibold
         leading-5
 
-        text-[#EC1C40]
+        text-brand
 
         transition-colors
         duration-200
@@ -426,7 +426,7 @@ function ViewAllUpdatesLink() {
         focus-visible:outline
         focus-visible:outline-2
         focus-visible:outline-offset-4
-        focus-visible:outline-[#EC1C40]
+        focus-visible:outline-brand
 
         sm:text-[14.5px]
 
@@ -482,7 +482,7 @@ export default async function LatestUpdates() {
         pb-5
         pt-8
 
-        selection:bg-[#EC1C40]
+        selection:bg-brand
         selection:text-white
 
         min-[414px]:px-5
@@ -553,7 +553,7 @@ export default async function LatestUpdates() {
           "
         >
           Latest Dholera{" "}
-          <span className="text-[#EC1C40]">
+          <span className="text-brand">
             News &amp; Updates
           </span>
         </h2>

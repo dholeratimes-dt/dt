@@ -78,11 +78,11 @@ export default function Footer() {
     duration-200
 
     hover:translate-x-0.5
-    hover:text-[#EC1C40]
+    hover:text-brand
 
     focus-visible:outline-none
     focus-visible:ring-2
-    focus-visible:ring-[#EC1C40]
+    focus-visible:ring-brand
     focus-visible:ring-offset-2
     focus-visible:ring-offset-black
 
@@ -112,11 +112,11 @@ export default function Footer() {
     transition-colors
     duration-200
 
-    hover:text-[#EC1C40]
+    hover:text-brand
 
     focus-visible:outline-none
     focus-visible:ring-2
-    focus-visible:ring-[#EC1C40]
+    focus-visible:ring-brand
     focus-visible:ring-offset-2
     focus-visible:ring-offset-black
 
@@ -152,17 +152,17 @@ export default function Footer() {
 
     hover:-translate-y-0.5
 
-    hover:border-[#EC1C40]
-    hover:bg-[#EC1C40]
+    hover:border-brand
+    hover:bg-brand
     hover:text-white
 
-    hover:shadow-[0_8px_20px_rgba(236,28,64,0.20)]
+    hover:shadow-[0_8px_20px_rgb(var(--brand-accent,255_160_0)/0.20)]
 
     active:translate-y-0
 
     focus-visible:outline-none
     focus-visible:ring-2
-    focus-visible:ring-[#EC1C40]
+    focus-visible:ring-brand
     focus-visible:ring-offset-2
     focus-visible:ring-offset-black
 
@@ -304,7 +304,7 @@ export default function Footer() {
 
         text-white/80
 
-        selection:bg-[#EC1C40]
+        selection:bg-brand
         selection:text-white
       "
     >
@@ -343,7 +343,7 @@ export default function Footer() {
 
           rounded-full
 
-          bg-[#EC1C40]/10
+          bg-brand/10
 
           blur-3xl
         "
@@ -454,7 +454,7 @@ export default function Footer() {
 
                   tracking-[0.14em]
 
-                  text-[#EC1C40]
+                  text-brand
 
                   sm:text-[12px]
                   lg:text-[15px]
@@ -500,14 +500,14 @@ export default function Footer() {
 
                     rounded-full
 
-                    bg-[#EC1C40]/10
+                    bg-brand/10
 
-                    text-[#EC1C40]
+                    text-brand
 
                     transition-[background-color,color]
                     duration-200
 
-                    group-hover:bg-[#EC1C40]
+                    group-hover:bg-brand
                     group-hover:text-white
                   "
                 >
@@ -539,14 +539,14 @@ export default function Footer() {
 
                     rounded-full
 
-                    bg-[#EC1C40]/10
+                    bg-brand/10
 
-                    text-[#EC1C40]
+                    text-brand
 
                     transition-[background-color,color]
                     duration-200
 
-                    group-hover:bg-[#EC1C40]
+                    group-hover:bg-brand
                     group-hover:text-white
                   "
                 >

@@ -429,7 +429,7 @@ function SectionHeading({
 
             tracking-[0.16em]
 
-            text-[#EC1C40]
+            text-[#FFA000]
 
             sm:text-[12px]
           "
@@ -457,7 +457,7 @@ function SectionHeading({
       >
         {title}{" "}
         {accent && (
-          <span className="text-[#EC1C40]">
+          <span className="text-[#FFA000]">
             {accent}
           </span>
         )}
@@ -508,7 +508,7 @@ export default function NRIInvestmentGuide() {
           bg-white
           text-black
 
-          selection:bg-[#EC1C40]
+          selection:bg-[#FFA000]
           selection:text-white
         "
       >
@@ -609,12 +609,12 @@ export default function NRIInvestmentGuide() {
                   transition-[background-color,color]
                   duration-200
 
-                  hover:bg-[#EC1C40]/5
-                  hover:text-[#EC1C40]
+                  hover:bg-[#FFA000]/5
+                  hover:text-[#FFA000]
 
                   focus-visible:outline-none
                   focus-visible:ring-2
-                  focus-visible:ring-[#EC1C40]
+                  focus-visible:ring-[#FFA000]
                 "
               >
                 {label}
@@ -669,7 +669,7 @@ export default function NRIInvestmentGuide() {
           rounded-full
 
           border
-          border-[#EC1C40]/[0.06]
+          border-[#FFA000]/[0.06]
         "
       />
 
@@ -688,7 +688,7 @@ export default function NRIInvestmentGuide() {
           rounded-full
 
           border
-          border-[#EC1C40]/[0.08]
+          border-[#FFA000]/[0.08]
         "
       />
 
@@ -798,7 +798,7 @@ export default function NRIInvestmentGuide() {
               "
             >
               NRI Investment in Dholera:{" "}
-              <span className="text-[#EC1C40]">
+              <span className="text-[#FFA000]">
                 Property Guide for Overseas Indians
               </span>
             </h1>
@@ -871,7 +871,7 @@ export default function NRIInvestmentGuide() {
 
                   rounded-xl
 
-                  bg-[#EC1C40]
+                  bg-[#FFA000]
 
                   px-5
                   py-3
@@ -971,7 +971,7 @@ export default function NRIInvestmentGuide() {
                   rounded-full
 
                   border
-                  border-[#EC1C40]/10
+                  border-[#FFA000]/10
                 "
               />
 
@@ -1010,7 +1010,7 @@ export default function NRIInvestmentGuide() {
                 <Globe
                   size={43}
                   strokeWidth={1.4}
-                  className="text-[#EC1C40]"
+                  className="text-[#FFA000]"
                 />
               </div>
 
@@ -1027,7 +1027,7 @@ export default function NRIInvestmentGuide() {
 
                   rounded-full
 
-                  bg-[#EC1C40]
+                  bg-[#FFA000]
                 "
               />
 
@@ -1059,7 +1059,7 @@ export default function NRIInvestmentGuide() {
                   rounded-full
 
                   border-2
-                  border-[#EC1C40]/60
+                  border-[#FFA000]/60
 
                   bg-white
                 "
@@ -1079,7 +1079,7 @@ export default function NRIInvestmentGuide() {
 
                 bg-gradient-to-r
                 from-transparent
-                via-[#EC1C40]
+                via-[#FFA000]
                 to-transparent
 
                 opacity-60
@@ -1253,7 +1253,7 @@ export default function NRIInvestmentGuide() {
                   "
                 >
                   Why are NRIs investing{" "}
-                  <span className="text-[#EC1C40]">
+                  <span className="text-[#FFA000]">
                     in Dholera?
                   </span>
                 </h2>
@@ -1293,7 +1293,7 @@ export default function NRIInvestmentGuide() {
                     text-[14px]
                     font-semibold
 
-                    text-[#EC1C40]
+                    text-[#FFA000]
 
                     transition-colors
                     duration-200
@@ -1367,13 +1367,13 @@ export default function NRIInvestmentGuide() {
 
                           rounded-full
 
-                          bg-[#EC1C40]/5
-                          text-[#EC1C40]
+                          bg-[#FFA000]/5
+                          text-[#FFA000]
 
                           transition-colors
                           duration-200
 
-                          group-hover:bg-[#EC1C40]/10
+                          group-hover:bg-[#FFA000]/10
                         "
                       >
                         <Check
@@ -1485,7 +1485,7 @@ export default function NRIInvestmentGuide() {
                   "
                 >
                   How can an NRI pay for{" "}
-                  <span className="text-[#EC1C40]">
+                  <span className="text-[#FFA000]">
                     Property in India?
                   </span>
                 </h2>
@@ -1533,7 +1533,7 @@ export default function NRIInvestmentGuide() {
                   "
                 >
                   {/* Vertical accent */}
-                  <div className="absolute bottom-0 left-0 top-0 w-[3px] bg-[#EC1C40]" />
+                  <div className="absolute bottom-0 left-0 top-0 w-[3px] bg-[#FFA000]" />
 
                   {/* Large icon */}
                   <div
@@ -1553,8 +1553,8 @@ export default function NRIInvestmentGuide() {
 
                       rounded-full
 
-                      bg-[#EC1C40]/5
-                      text-[#EC1C40]
+                      bg-[#FFA000]/5
+                      text-[#FFA000]
                     "
                   >
                     <Building2
@@ -1581,7 +1581,7 @@ export default function NRIInvestmentGuide() {
 
                       rounded-full
 
-                      bg-[#EC1C40]/5
+                      bg-[#FFA000]/5
                     "
                   />
                 </div>
@@ -1620,7 +1620,7 @@ export default function NRIInvestmentGuide() {
                           transition-colors
                           duration-200
 
-                          hover:bg-[#EC1C40]/[0.025]
+                          hover:bg-[#FFA000]/[0.025]
 
                           sm:gap-5
                           sm:py-6
@@ -1674,17 +1674,17 @@ export default function NRIInvestmentGuide() {
                               rounded-xl
 
                               border
-                              border-[#EC1C40]/10
+                              border-[#FFA000]/10
 
-                              bg-[#EC1C40]/5
+                              bg-[#FFA000]/5
 
-                              text-[#EC1C40]
+                              text-[#FFA000]
 
                               transition-[background-color,color,border-color]
                               duration-200
 
-                              group-hover:border-[#EC1C40]/20
-                              group-hover:bg-[#EC1C40]
+                              group-hover:border-[#FFA000]/20
+                              group-hover:bg-[#FFA000]
                               group-hover:text-white
 
                               sm:h-14
@@ -1737,7 +1737,7 @@ export default function NRIInvestmentGuide() {
                             duration-200
 
                             group-hover:scale-125
-                            group-hover:bg-[#EC1C40]
+                            group-hover:bg-[#FFA000]
                           "
                         />
                       </div>
@@ -1799,8 +1799,8 @@ export default function NRIInvestmentGuide() {
 
                     rounded-full
 
-                    bg-[#EC1C40]/10
-                    text-[#EC1C40]
+                    bg-[#FFA000]/10
+                    text-[#FFA000]
                   "
                 >
                   <AlertTriangle
@@ -1858,7 +1858,7 @@ export default function NRIInvestmentGuide() {
 
                     bg-white
 
-                    text-[#EC1C40]
+                    text-[#FFA000]
 
                     ring-1
                     ring-black/10
@@ -2018,7 +2018,7 @@ export default function NRIInvestmentGuide() {
 
                   rounded-full
 
-                  bg-[#EC1C40]/[0.04]
+                  bg-[#FFA000]/[0.04]
 
                   min-[414px]:h-[64px]
                   min-[414px]:w-[64px]
@@ -2044,11 +2044,11 @@ export default function NRIInvestmentGuide() {
                   rounded-full
 
                   border-[1.5px]
-                  border-[#EC1C40]
+                  border-[#FFA000]
 
                   bg-white
 
-                  shadow-[0_8px_20px_rgba(236,28,64,0.10)]
+                  shadow-[0_8px_20px_rgba(255,160,0,0.10)]
 
                   min-[414px]:h-[56px]
                   min-[414px]:w-[56px]
@@ -2068,7 +2068,7 @@ export default function NRIInvestmentGuide() {
                     rounded-full
 
                     border
-                    border-[#EC1C40]/15
+                    border-[#FFA000]/15
 
                     bg-white
 
@@ -2089,9 +2089,9 @@ export default function NRIInvestmentGuide() {
 
                       rounded-full
 
-                      bg-[#EC1C40]/[0.045]
+                      bg-[#FFA000]/[0.045]
 
-                      text-[#EC1C40]
+                      text-[#FFA000]
 
                       min-[414px]:h-[31px]
                       min-[414px]:w-[31px]
@@ -2224,7 +2224,7 @@ export default function NRIInvestmentGuide() {
             duration-300
 
             hover:-translate-y-0.5
-            hover:border-[#EC1C40]/25
+            hover:border-[#FFA000]/25
             hover:shadow-[0_18px_40px_-32px_rgba(0,0,0,0.35)]
 
             sm:min-h-[200px]
@@ -2249,7 +2249,7 @@ export default function NRIInvestmentGuide() {
               origin-left
               scale-x-0
 
-              bg-[#EC1C40]
+              bg-[#FFA000]
 
               transition-transform
               duration-300
@@ -2289,14 +2289,14 @@ export default function NRIInvestmentGuide() {
 
                 rounded-xl
 
-                bg-[#EC1C40]/10
+                bg-[#FFA000]/10
 
-                text-[#EC1C40]
+                text-[#FFA000]
 
                 transition-[background-color,color]
                 duration-300
 
-                group-hover:bg-[#EC1C40]
+                group-hover:bg-[#FFA000]
                 group-hover:text-white
 
                 sm:h-11
@@ -2503,7 +2503,7 @@ export default function NRIInvestmentGuide() {
 
                         tracking-[0.1em]
 
-                        text-[#EC1C40]
+                        text-[#FFA000]
                       "
                     >
                       {String(index + 1).padStart(
@@ -2565,7 +2565,7 @@ export default function NRIInvestmentGuide() {
 
             rounded-xl
 
-            bg-[#EC1C40]
+            bg-[#FFA000]
 
             px-5
             py-3
@@ -2657,7 +2657,7 @@ export default function NRIInvestmentGuide() {
                 "
               >
                 Can an NRI buy Property Through{" "}
-                <span className="text-[#EC1C40]">
+                <span className="text-[#FFA000]">
                   Power of Attorney?
                 </span>
               </h2>
@@ -2796,7 +2796,7 @@ export default function NRIInvestmentGuide() {
                       duration-300
 
                       hover:-translate-y-1
-                      hover:border-[#EC1C40]/30
+                      hover:border-[#FFA000]/30
                       hover:shadow-[0_20px_45px_-32px_rgba(0,0,0,0.35)]
 
                       sm:min-h-[200px]
@@ -2823,7 +2823,7 @@ export default function NRIInvestmentGuide() {
                         origin-left
                         scale-x-0
 
-                        bg-[#EC1C40]
+                        bg-[#FFA000]
 
                         transition-transform
                         duration-300
@@ -2860,14 +2860,14 @@ export default function NRIInvestmentGuide() {
 
                           rounded-xl
 
-                          bg-[#EC1C40]/10
+                          bg-[#FFA000]/10
 
-                          text-[#EC1C40]
+                          text-[#FFA000]
 
                           transition-[background-color,color]
                           duration-300
 
-                          group-hover:bg-[#EC1C40]
+                          group-hover:bg-[#FFA000]
                           group-hover:text-white
 
                           sm:h-11

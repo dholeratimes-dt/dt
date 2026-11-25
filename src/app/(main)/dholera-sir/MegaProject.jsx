@@ -163,7 +163,7 @@ function LatestNewsItem({ post }) {
           rounded-lg
           focus-visible:outline-none
           focus-visible:ring-2
-          focus-visible:ring-[#EC1C40]
+          focus-visible:ring-[#FFA000]
           focus-visible:ring-offset-4
         "
       >
@@ -214,7 +214,7 @@ function LatestNewsItem({ post }) {
             text-black/60
             transition-colors
             duration-200
-            group-hover:text-[#EC1C40]
+            group-hover:text-[#FFA000]
             sm:text-[14px]
             motion-reduce:transition-none
           "
@@ -265,13 +265,13 @@ function MegaProjectCard({ project }) {
           justify-center
           rounded-xl
           border
-          border-[#EC1C40]/20
+          border-[#FFA000]/20
           bg-black/[0.025]
-          text-[#EC1C40]
+          text-[#FFA000]
           transition-colors
           duration-200
-          group-hover:border-[#EC1C40]/30
-          group-hover:bg-[#EC1C40]/10
+          group-hover:border-[#FFA000]/30
+          group-hover:bg-[#FFA000]/10
           sm:h-12
           sm:w-12
           motion-reduce:transition-none
@@ -338,7 +338,7 @@ export default function MegaProjectsSection() {
         px-4
         py-8
         text-black
-        selection:bg-[#EC1C40]/10
+        selection:bg-[#FFA000]/10
         selection:text-black
         min-[414px]:px-6
         sm:py-10
@@ -372,7 +372,7 @@ export default function MegaProjectsSection() {
               "
             >
               Major infrastructure{" "}
-              <span className="text-[#EC1C40]">
+              <span className="text-[#FFA000]">
                 in Dholera
               </span>
             </h2>

@@ -87,7 +87,7 @@ export default function Dholera() {
 
         text-black
 
-        selection:bg-[#EC1C40]
+        selection:bg-brand
         selection:text-white
 
         min-[414px]:px-5
@@ -99,12 +99,12 @@ export default function Dholera() {
         backgroundImage: `
           radial-gradient(
             circle at 0% 0%,
-            rgba(236, 28, 64, 0.05),
+            rgb(var(--brand-accent, 255 160 0) / 0.05),
             transparent 26%
           ),
           radial-gradient(
             circle at 100% 100%,
-            rgba(236, 28, 64, 0.035),
+            rgb(var(--brand-accent, 255 160 0) / 0.035),
             transparent 30%
           )
         `,
@@ -148,7 +148,7 @@ export default function Dholera() {
             "
           >
             What is{" "}
-            <span className="text-[#EC1C40]">
+            <span className="text-brand">
               Dholera Smart City?
             </span>
           </h2>
@@ -325,8 +325,8 @@ export default function Dholera() {
                 border-black/10
 
                 bg-gradient-to-r
-                from-[#EC1C40]/5
-                via-[#EC1C40]/[0.02]
+                from-brand/5
+                via-brand/[0.02]
                 to-white
 
                 px-4
@@ -458,11 +458,11 @@ export default function Dholera() {
                           rounded-full
 
                           border
-                          border-[#EC1C40]/20
+                          border-brand/20
 
-                          bg-[#EC1C40]/10
+                          bg-brand/10
 
-                          text-[#EC1C40]
+                          text-brand
 
                           transition-[background-color,color,border-color,transform]
                           duration-200
@@ -473,8 +473,8 @@ export default function Dholera() {
 
                           md:group-hover:-translate-y-0.5
 
-                          md:group-hover:border-[#EC1C40]/30
-                          md:group-hover:bg-[#EC1C40]
+                          md:group-hover:border-brand/30
+                          md:group-hover:bg-brand
                           md:group-hover:text-white
 
                           motion-reduce:transform-none

@@ -201,7 +201,7 @@ export default function HeroForm({
 
       text-black
 
-      caret-[#EC1C40]
+      caret-brand
 
       placeholder:text-black/45
 
@@ -230,10 +230,10 @@ export default function HeroForm({
           : `
               border-black/20
 
-              enabled:hover:border-[#EC1C40]/60
+              enabled:hover:border-brand/60
 
-              focus:border-[#EC1C40]
-              focus:ring-[#EC1C40]
+              focus:border-brand
+              focus:ring-brand
             `
       }
     `;
@@ -268,7 +268,7 @@ export default function HeroForm({
 
         shadow-[0_16px_48px_rgba(0,0,0,0.08)]
 
-        selection:bg-[#EC1C40]
+        selection:bg-brand
         selection:text-white
 
         lg:mt-8
@@ -509,7 +509,7 @@ export default function HeroForm({
             border
             border-transparent
 
-            bg-[#EC1C40]
+            bg-brand
 
             px-5
             py-3
@@ -527,14 +527,14 @@ export default function HeroForm({
 
             enabled:hover:-translate-y-0.5
             enabled:hover:bg-[#D81839]
-            enabled:hover:shadow-[0_12px_26px_-14px_rgba(236,28,64,0.70)]
+            enabled:hover:shadow-[0_12px_26px_-14px_rgb(var(--brand-accent,255_160_0)/0.70)]
 
             active:translate-y-0
 
             focus-visible:outline
             focus-visible:outline-2
             focus-visible:outline-offset-4
-            focus-visible:outline-[#EC1C40]
+            focus-visible:outline-brand
 
             disabled:cursor-not-allowed
             disabled:bg-black/10
@@ -585,9 +585,9 @@ export default function HeroForm({
                 rounded-lg
 
                 border
-                border-[#EC1C40]/20
+                border-brand/20
 
-                bg-[#EC1C40]/5
+                bg-brand/5
 
                 p-3
 

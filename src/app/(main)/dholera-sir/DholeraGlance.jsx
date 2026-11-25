@@ -166,7 +166,7 @@ function GlanceHexagon({
 
           ${
             isPrimary
-              ? "bg-[#EC1C40]"
+              ? "bg-[#FFA000]"
               : "bg-black/10"
           }
         `}
@@ -205,12 +205,12 @@ function GlanceHexagon({
           ${
             isPrimary
               ? `
-                  bg-[#EC1C40]
-                  shadow-[0_12px_26px_rgba(236,28,64,0.12)]
+                  bg-[#FFA000]
+                  shadow-[0_12px_26px_rgba(255,160,0,0.12)]
                 `
               : isSoftAccent
                 ? `
-                    bg-[#EC1C40]/10
+                    bg-[#FFA000]/10
                   `
                 : isNeutral
                   ? `
@@ -242,7 +242,7 @@ function GlanceHexagon({
             ${
               isPrimary
                 ? "text-white"
-                : "text-[#EC1C40]"
+                : "text-[#FFA000]"
             }
           `}
         />
@@ -329,7 +329,7 @@ function DecorativeHexagon({
 
         ${
           accent
-            ? "bg-[#EC1C40]/5"
+            ? "bg-[#FFA000]/5"
             : "bg-black/[0.035]"
         }
 
@@ -428,7 +428,7 @@ export default function DholeraGlance() {
 
           rounded-full
 
-          bg-[#EC1C40]/[0.025]
+          bg-[#FFA000]/[0.025]
 
           blur-[90px]
 
@@ -496,7 +496,7 @@ export default function DholeraGlance() {
             "
           >
             Dholera SIR{" "}
-            <span className="text-[#EC1C40]">
+            <span className="text-[#FFA000]">
               at a Glance
             </span>
           </h2>

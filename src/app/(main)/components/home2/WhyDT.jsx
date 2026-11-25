@@ -130,7 +130,7 @@ export default function WhyDT() {
 
         text-black
 
-        selection:bg-[#EC1C40]
+        selection:bg-brand
         selection:text-white
 
         min-[414px]:px-5
@@ -157,7 +157,7 @@ export default function WhyDT() {
           background: `
             radial-gradient(
               circle at 100% 0%,
-              rgba(236, 28, 64, 0.045),
+              rgb(var(--brand-accent, 255 160 0) / 0.045),
               transparent 28%
             ),
             radial-gradient(
@@ -190,7 +190,7 @@ export default function WhyDT() {
             "
           >
             Why Follow{" "}
-            <span className="text-[#EC1C40]">
+            <span className="text-brand">
               Dholera Times?
             </span>
           </h2>
@@ -276,7 +276,7 @@ export default function WhyDT() {
             <path
               d={mobileRoadPath}
               fill="none"
-              stroke="rgba(236,28,64,0.28)"
+              stroke="rgb(var(--brand-accent, 255 160 0) / 0.28)"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -319,7 +319,7 @@ export default function WhyDT() {
             <path
               d={desktopRoadPath}
               fill="none"
-              stroke="rgba(236,28,64,0.25)"
+              stroke="rgb(var(--brand-accent, 255 160 0) / 0.25)"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -424,11 +424,11 @@ export default function WhyDT() {
                           border-[5px]
                           border-white
 
-                          bg-[#EC1C40]
+                          bg-brand
 
                           text-white
 
-                          shadow-[0_8px_22px_rgba(236,28,64,0.22)]
+                          shadow-[0_8px_22px_rgb(var(--brand-accent,255_160_0)/0.22)]
 
                           transition-transform
                           duration-300
@@ -500,7 +500,7 @@ export default function WhyDT() {
                         lg:p-4
 
                         lg:group-hover:-translate-y-0.5
-                        lg:group-hover:border-[#EC1C40]/20
+                        lg:group-hover:border-brand/20
 
                         xl:p-5
 

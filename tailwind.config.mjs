@@ -9,6 +9,8 @@ export default {
   theme: {
   	extend: {
   		colors: {
+            brand: 'rgb(var(--brand-accent, 255 160 0) / <alpha-value>)',
+            'brand-hover': 'rgb(var(--brand-accent-hover, 230 144 0) / <alpha-value>)',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

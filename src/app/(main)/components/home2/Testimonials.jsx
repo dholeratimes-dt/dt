@@ -99,7 +99,7 @@ function TestimonialCard({
         ease-out
 
         hover:-translate-y-0.5
-        hover:border-[#EC1C40]/30
+        hover:border-brand/30
         hover:bg-white
         hover:shadow-[0_14px_34px_rgba(0,0,0,0.08)]
 
@@ -138,7 +138,7 @@ function TestimonialCard({
           origin-left
           scale-x-0
 
-          bg-[#EC1C40]
+          bg-brand
 
           transition-transform
           duration-300
@@ -171,17 +171,17 @@ function TestimonialCard({
           rounded-xl
 
           border
-          border-[#EC1C40]/20
+          border-brand/20
 
-          bg-[#EC1C40]/10
+          bg-brand/10
 
-          text-[#EC1C40]
+          text-brand
 
           transition-[background-color,border-color,color]
           duration-200
 
-          group-hover:border-[#EC1C40]
-          group-hover:bg-[#EC1C40]
+          group-hover:border-brand
+          group-hover:bg-brand
           group-hover:text-white
 
           sm:mb-6
@@ -398,7 +398,7 @@ const TestimonialPagination = () => {
 
     focus-visible:outline-none
     focus-visible:ring-2
-    focus-visible:ring-[#EC1C40]
+    focus-visible:ring-brand
     focus-visible:ring-offset-2
     focus-visible:ring-offset-white
 
@@ -424,7 +424,7 @@ const TestimonialPagination = () => {
 
         text-black
 
-        selection:bg-[#EC1C40]
+        selection:bg-brand
         selection:text-white
 
         min-[414px]:px-5
@@ -491,7 +491,7 @@ const TestimonialPagination = () => {
             "
           >
             What our customers{" "}
-            <span className="text-[#EC1C40]">
+            <span className="text-brand">
               say?
             </span>
           </h2>
@@ -621,9 +621,9 @@ const TestimonialPagination = () => {
 
                 enabled:active:scale-95
 
-                enabled:hover:border-[#EC1C40]
-                enabled:hover:bg-[#EC1C40]/5
-                enabled:hover:text-[#EC1C40]
+                enabled:hover:border-brand
+                enabled:hover:bg-brand/5
+                enabled:hover:text-brand
 
                 disabled:cursor-not-allowed
                 disabled:bg-black/[0.025]
@@ -631,7 +631,7 @@ const TestimonialPagination = () => {
 
                 focus-visible:outline-none
                 focus-visible:ring-2
-                focus-visible:ring-[#EC1C40]
+                focus-visible:ring-brand
                 focus-visible:ring-offset-2
               "
             >
@@ -714,7 +714,7 @@ const TestimonialPagination = () => {
                               ? `
                                 w-6
 
-                                bg-[#EC1C40]
+                                bg-brand
                               `
                               : `
                                 w-2
@@ -746,7 +746,7 @@ const TestimonialPagination = () => {
                 <span
                   className="
                     font-semibold
-                    text-[#EC1C40]
+                    text-brand
                   "
                 >
                   {mobileSlide +
@@ -803,9 +803,9 @@ const TestimonialPagination = () => {
 
                 enabled:active:scale-95
 
-                enabled:hover:border-[#EC1C40]
-                enabled:hover:bg-[#EC1C40]/5
-                enabled:hover:text-[#EC1C40]
+                enabled:hover:border-brand
+                enabled:hover:bg-brand/5
+                enabled:hover:text-brand
 
                 disabled:cursor-not-allowed
                 disabled:bg-black/[0.025]
@@ -813,7 +813,7 @@ const TestimonialPagination = () => {
 
                 focus-visible:outline-none
                 focus-visible:ring-2
-                focus-visible:ring-[#EC1C40]
+                focus-visible:ring-brand
                 focus-visible:ring-offset-2
               "
             >
@@ -916,9 +916,9 @@ const TestimonialPagination = () => {
               text-black
 
               enabled:hover:-translate-y-0.5
-              enabled:hover:border-[#EC1C40]
-              enabled:hover:bg-[#EC1C40]/5
-              enabled:hover:text-[#EC1C40]
+              enabled:hover:border-brand
+              enabled:hover:bg-brand/5
+              enabled:hover:text-brand
 
               disabled:cursor-not-allowed
               disabled:border-black/10
@@ -976,13 +976,13 @@ const TestimonialPagination = () => {
                     ${
                       isActive
                         ? `
-                          border-[#EC1C40]
+                          border-brand
 
-                          bg-[#EC1C40]
+                          bg-brand
 
                           text-white
 
-                          shadow-[0_8px_20px_-12px_rgba(236,28,64,0.48)]
+                          shadow-[0_8px_20px_-12px_rgb(var(--brand-accent,255_160_0)/0.48)]
                         `
                         : `
                           border-black/15
@@ -992,9 +992,9 @@ const TestimonialPagination = () => {
                           text-black
 
                           hover:-translate-y-0.5
-                          hover:border-[#EC1C40]
-                          hover:bg-[#EC1C40]/5
-                          hover:text-[#EC1C40]
+                          hover:border-brand
+                          hover:bg-brand/5
+                          hover:text-brand
                         `
                     }
                   `}
@@ -1036,9 +1036,9 @@ const TestimonialPagination = () => {
               text-black
 
               enabled:hover:-translate-y-0.5
-              enabled:hover:border-[#EC1C40]
-              enabled:hover:bg-[#EC1C40]/5
-              enabled:hover:text-[#EC1C40]
+              enabled:hover:border-brand
+              enabled:hover:bg-brand/5
+              enabled:hover:text-brand
 
               disabled:cursor-not-allowed
               disabled:border-black/10

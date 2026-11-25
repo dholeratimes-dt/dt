@@ -56,7 +56,7 @@ function GalleryHero() {
 
 export default function DholeraProgressPage() {
   return (
-    <main className="overflow-x-clip bg-black text-black selection:bg-[#EC1C40]/15 selection:text-black sm:min-h-screen sm:bg-white">
+    <main className="overflow-x-clip bg-black text-black selection:bg-[#FFA000]/15 selection:text-black sm:min-h-screen sm:bg-white">
       {/* HERO*/}
       <GalleryHero />
       {/* MOBILE GALLERY*/}

@@ -72,15 +72,15 @@ export default function BlogCard({ post }) {
         overflow-hidden
         rounded-[20px]
         border
-        border-[#EC1C40]/45
+        border-[#FFA000]/45
         bg-white
         shadow-[0_6px_22px_rgba(0,0,0,0.035)]
         transition-[transform,border-color,box-shadow]
         duration-300
         ease-out
         md:hover:-translate-y-1
-        md:hover:border-[#EC1C40]/65
-        md:hover:shadow-[0_16px_36px_rgba(236,28,64,0.08)]
+        md:hover:border-[#FFA000]/65
+        md:hover:shadow-[0_16px_36px_rgba(255,160,0,0.08)]
 
         motion-reduce:transform-none
         motion-reduce:transition-none
@@ -101,7 +101,7 @@ export default function BlogCard({ post }) {
           focus-visible:outline-none
           focus-visible:ring-2
           focus-visible:ring-inset
-          focus-visible:ring-[#EC1C40]
+          focus-visible:ring-[#FFA000]
         "
       >
         {/* =====================================================
@@ -161,8 +161,8 @@ export default function BlogCard({ post }) {
                 justify-center
 
                 bg-gradient-to-br
-                from-[#EC1C40]/10
-                via-[#EC1C40]/5
+                from-[#FFA000]/10
+                via-[#FFA000]/5
                 to-white
 
                 px-4
@@ -345,13 +345,13 @@ export default function BlogCard({ post }) {
                 font-semibold
                 leading-5
 
-                text-[#EC1C40]
+                text-[#FFA000]
 
                 transition-colors
                 duration-200
                 ease-out
 
-                group-hover:text-[#D9183A]
+                group-hover:text-[#E69000]
 
                 sm:text-[15px]
               "
