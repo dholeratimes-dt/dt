@@ -152,7 +152,7 @@
 //                 rounded-xl
 
 //                 border
-//                 border-[#d3b36b]/20
+//                 border-[#FFA000]/20
 
 //                 bg-[#151f28]
 
@@ -162,9 +162,9 @@
 //                 duration-300
 
 //                 hover:scale-[1.03]
-//                 hover:border-[#d3b36b]/40
+//                 hover:border-[#FFA000]/40
 //                 hover:shadow-lg
-//                 hover:shadow-[#d3b36b]/20
+//                 hover:shadow-[#FFA000]/20
 //               "
 //             >
 //               <Link
@@ -223,7 +223,7 @@
 //                         justify-center
 
 //                         bg-gradient-to-br
-//                         from-[#d3b36b]/20
+//                         from-[#FFA000]/20
 //                         to-[#151f28]/20
 //                       "
 //                     >
@@ -247,7 +247,7 @@
 //                     transition-colors
 //                     duration-300
 
-//                     hover:text-[#d3b36b]
+//                     hover:text-[#FFA000]
 //                   "
 //                 >
 //                   <h3
@@ -299,7 +299,7 @@
 
 //                         font-medium
 
-//                         text-[#d3b36b]
+//                         text-[#FFA000]
 
 //                         hover:underline
 //                       "

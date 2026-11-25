@@ -155,7 +155,7 @@ export default function TrendingBlogItem({ post }) {
                 transition-colors
                 duration-200
 
-                group-hover:text-[#d81839]
+                group-hover:text-[#E69500]
               "
             >
               Explore..

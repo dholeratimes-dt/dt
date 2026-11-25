@@ -164,7 +164,7 @@ function createHeadingComponent(Tag, className, headingIds) {
           aria-hidden="true"
           className="
             absolute -left-1 top-0 h-full w-1 rounded-full
-            bg-gradient-to-b from-[#d3b66b] to-[#b69b5e]
+            bg-gradient-to-b from-[#d3b66b] to-[#FFA000]
           "
         />
         {children}
@@ -266,7 +266,7 @@ function createPortableTextComponents(headingIds, whatsappRegistrationLinkKeys) 
                       key={index}
                       className={`transition-colors duration-200 hover:bg-gray-50 ${
                         index === 0
-                          ? "bg-gradient-to-r from-[#d3b66b]/10 to-[#b69b5e]/10 font-semibold"
+                          ? "bg-gradient-to-r from-[#d3b66b]/10 to-[#FFA000]/10 font-semibold"
                           : index % 2 === 0
                             ? "bg-gray-50/50"
                             : "bg-white"
@@ -388,11 +388,11 @@ function createPortableTextComponents(headingIds, whatsappRegistrationLinkKeys) 
             rel="noopener noreferrer"
             className="
               rounded px-1 py-0.5 text-[#866a2d]
-              underline decoration-[#b69b5e]/30
+              underline decoration-[#FFA000]/30
               decoration-2 underline-offset-4
               transition-colors duration-200
-              hover:bg-[#b69b5e]/5 hover:text-[#b69b5e]
-              hover:decoration-[#b69b5e]
+              hover:bg-[#FFA000]/5 hover:text-[#FFA000]
+              hover:decoration-[#FFA000]
             "
           >
             {children}
@@ -430,7 +430,7 @@ function createPortableTextComponents(headingIds, whatsappRegistrationLinkKeys) 
             ? "bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-[#151f28] shadow-lg hover:shadow-xl"
             : value?.style === "outline"
               ? "bg-transparent border-2 border-[#d3b66b] text-[#d3b66b] hover:bg-[#d3b66b] hover:text-white shadow-md hover:shadow-lg"
-              : "bg-gradient-to-r from-[#d3b66b] to-[#b69b5e] hover:from-[#b69b5e] hover:to-[#d3b66b] shadow-lg hover:shadow-xl";
+              : "bg-gradient-to-r from-[#d3b66b] to-[#FFA000] hover:from-[#FFA000] hover:to-[#d3b66b] shadow-lg hover:shadow-xl";
 
         if (!value?.href) return children;
 
@@ -453,37 +453,37 @@ function createPortableTextComponents(headingIds, whatsappRegistrationLinkKeys) 
     block: {
       h1: createHeadingComponent(
         "h1",
-        "relative mb-6 mt-8 border-l-4 border-[#b69b5e] bg-gradient-to-r from-[#b69b5e]/5 to-transparent py-4 pl-6 text-2xl font-black text-gray-800 scroll-mt-24 md:text-5xl [&+ul]:mt-4 [&+ol]:mt-4",
+        "relative mb-6 mt-8 border-l-4 border-[#FFA000] bg-gradient-to-r from-[#FFA000]/5 to-transparent py-4 pl-6 text-2xl font-black text-gray-800 scroll-mt-24 md:text-5xl [&+ul]:mt-4 [&+ol]:mt-4",
         headingIds,
       ),
 
       h2: createHeadingComponent(
         "h2",
-        "relative mb-6 mt-8 border-l-4 border-[#b69b5e] bg-gradient-to-r from-[#b69b5e]/5 to-transparent py-3 pl-6 text-2xl font-bold text-gray-800 scroll-mt-24 md:text-3xl [&+ul]:mt-4 [&+ol]:mt-4",
+        "relative mb-6 mt-8 border-l-4 border-[#FFA000] bg-gradient-to-r from-[#FFA000]/5 to-transparent py-3 pl-6 text-2xl font-bold text-gray-800 scroll-mt-24 md:text-3xl [&+ul]:mt-4 [&+ol]:mt-4",
         headingIds,
       ),
 
       h3: createHeadingComponent(
         "h3",
-        "relative mb-5 mt-8 border-l-4 border-[#b69b5e] bg-gradient-to-r from-[#b69b5e]/5 to-transparent py-2 pl-6 text-xl font-bold text-gray-800 scroll-mt-24 md:text-2xl [&+ul]:mt-4 [&+ol]:mt-4",
+        "relative mb-5 mt-8 border-l-4 border-[#FFA000] bg-gradient-to-r from-[#FFA000]/5 to-transparent py-2 pl-6 text-xl font-bold text-gray-800 scroll-mt-24 md:text-2xl [&+ul]:mt-4 [&+ol]:mt-4",
         headingIds,
       ),
 
       h4: createHeadingComponent(
         "h4",
-        "relative mb-4 mt-10 border-l-4 border-[#b69b5e] bg-gradient-to-r from-[#b69b5e]/5 to-transparent py-2 pl-6 text-lg font-semibold text-gray-800 scroll-mt-24 md:text-2xl [&+ul]:mt-3 [&+ol]:mt-3",
+        "relative mb-4 mt-10 border-l-4 border-[#FFA000] bg-gradient-to-r from-[#FFA000]/5 to-transparent py-2 pl-6 text-lg font-semibold text-gray-800 scroll-mt-24 md:text-2xl [&+ul]:mt-3 [&+ol]:mt-3",
         headingIds,
       ),
 
       h5: createHeadingComponent(
         "h5",
-        "relative mb-3 mt-8 border-l-4 border-[#b69b5e] bg-gradient-to-r from-[#b69b5e]/5 to-transparent py-2 pl-6 text-lg font-semibold text-gray-800 scroll-mt-24 md:text-xl [&+ul]:mt-3 [&+ol]:mt-3",
+        "relative mb-3 mt-8 border-l-4 border-[#FFA000] bg-gradient-to-r from-[#FFA000]/5 to-transparent py-2 pl-6 text-lg font-semibold text-gray-800 scroll-mt-24 md:text-xl [&+ul]:mt-3 [&+ol]:mt-3",
         headingIds,
       ),
 
       h6: createHeadingComponent(
         "h6",
-        "relative mb-2 mt-6 border-l-4 border-[#b69b5e] bg-gradient-to-r from-[#b69b5e]/5 to-transparent py-1 pl-6 text-lg font-semibold text-gray-800 scroll-mt-24 [&+ul]:mt-2 [&+ol]:mt-2",
+        "relative mb-2 mt-6 border-l-4 border-[#FFA000] bg-gradient-to-r from-[#FFA000]/5 to-transparent py-1 pl-6 text-lg font-semibold text-gray-800 scroll-mt-24 [&+ul]:mt-2 [&+ol]:mt-2",
         headingIds,
       ),
 
@@ -497,7 +497,7 @@ function createPortableTextComponents(headingIds, whatsappRegistrationLinkKeys) 
         <blockquote
           className="
             relative my-12 rounded-2xl border border-[#d3b66b]/20
-            bg-gradient-to-br from-[#d3b66b]/5 to-[#b69b5e]/10
+            bg-gradient-to-br from-[#d3b66b]/5 to-[#FFA000]/10
             p-8 shadow-lg
           "
         >
@@ -550,7 +550,7 @@ function createPortableTextComponents(headingIds, whatsappRegistrationLinkKeys) 
             <div
               className={`
                 ${isWhatsAppRegistration ? "" : "mt-2"} h-2 w-2 flex-shrink-0 rounded-full
-                bg-gradient-to-b from-[#d3b66b] to-[#b69b5e]
+                bg-gradient-to-b from-[#d3b66b] to-[#FFA000]
               `}
             />
             <div
@@ -581,7 +581,7 @@ function createPortableTextComponents(headingIds, whatsappRegistrationLinkKeys) 
             before:items-center before:justify-center
             before:rounded-full
             before:bg-gradient-to-r
-            before:from-[#d3b66b] before:to-[#b69b5e]
+            before:from-[#d3b66b] before:to-[#FFA000]
             before:text-sm before:font-bold before:text-white
             before:content-[counter(item)]
           "
@@ -699,7 +699,7 @@ function RelatedBlogCard({ blog }) {
               className="
                 relative flex h-full w-full items-center justify-center
                 overflow-hidden bg-gradient-to-br from-[#d3b66b]
-                via-[#b69b5e] to-[#9e8750]
+                via-[#FFA000] to-[#9e8750]
               "
             >
               <span className="relative z-10 text-sm font-medium text-white/80 md:hidden">
@@ -717,7 +717,7 @@ function RelatedBlogCard({ blog }) {
               <span
                 className="
                   rounded-full bg-white/95 px-3 py-1
-                  text-xs font-semibold text-[#b69b5e] shadow-lg
+                  text-xs font-semibold text-[#FFA000] shadow-lg
                   md:px-4 md:py-1.5
                 "
               >
@@ -732,7 +732,7 @@ function RelatedBlogCard({ blog }) {
             className="
               mb-2.5 line-clamp-2 text-lg font-bold
               leading-snug text-gray-900 transition-colors
-              duration-200 group-hover:text-[#b69b5e]
+              duration-200 group-hover:text-[#FFA000]
               md:mb-3 md:text-xl md:leading-tight
             "
           >
@@ -797,7 +797,7 @@ function RelatedBlogCard({ blog }) {
           className="
             absolute bottom-0 left-0 right-0 h-1
             origin-left scale-x-0 bg-gradient-to-r
-            from-[#d3b66b] via-[#b69b5e] to-[#9e8750]
+            from-[#d3b66b] via-[#FFA000] to-[#9e8750]
             transition-transform duration-300
             md:group-hover:scale-x-100
           "
@@ -821,7 +821,7 @@ function RelatedBlogsSection({ relatedBlogs }) {
           <Link
             href={NEWS_PATH}
             className="
-              rounded-xl bg-[#d7b56d] p-1
+              rounded-xl bg-[#FFA000] p-1
               font-semibold text-gray-900 hover:bg-[#c6a45d]
             "
           >

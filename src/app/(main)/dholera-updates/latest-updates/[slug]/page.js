@@ -225,7 +225,7 @@ export default async function BlogDetail({ params }) {
                         key={i}
                         className={`hover:bg-gray-50 transition-colors duration-200 ${
                           i === 0
-                            ? "bg-gradient-to-r from-[#d3b66b]/10 to-[#b69b5e]/10 font-semibold"
+                            ? "bg-gradient-to-r from-[#d3b66b]/10 to-[#FFA000]/10 font-semibold"
                             : i % 2 === 0
                               ? "bg-gray-50/50"
                               : "bg-white"
@@ -309,7 +309,7 @@ export default async function BlogDetail({ params }) {
               href={resolveRetiredHref(value.href)}
               title={titleText}
               rel="noopener noreferrer"
-              className="text-[#d3b36b] hover:text-[#b69b5e] underline decoration-[#b69b5e]/30 hover:decoration-[#b69b5e] decoration-2 underline-offset-4 transition-all duration-300 hover:bg-[#b69b5e]/5 px-1 py-0.5 rounded"
+              className="text-[#FFA000] hover:text-[#FFA000] underline decoration-[#FFA000]/30 hover:decoration-[#FFA000] decoration-2 underline-offset-4 transition-all duration-300 hover:bg-[#FFA000]/5 px-1 py-0.5 rounded"
             >
               {children}
             </Link>
@@ -338,7 +338,7 @@ export default async function BlogDetail({ params }) {
               case "outline":
                 return "bg-transparent border-2 border-[#d3b66b] text-[#d3b66b] hover:bg-[#d3b66b] hover:text-white shadow-md hover:shadow-lg";
               default:
-                return "bg-gradient-to-r from-[#d3b66b] to-[#b69b5e] hover:from-[#b69b5e] hover:to-[#d3b66b] shadow-lg hover:shadow-xl";
+                return "bg-gradient-to-r from-[#d3b66b] to-[#FFA000] hover:from-[#FFA000] hover:to-[#d3b66b] shadow-lg hover:shadow-xl";
             }
           };
 
@@ -375,7 +375,7 @@ export default async function BlogDetail({ params }) {
           return (
             <h1
               id={id}
-              className="scroll-mt-24 text-2xl md:text-5xl font-black mt-8 mb-6 text-gray-800 relative border-l-4 border-[#b69b5e] pl-6 bg-gradient-to-r from-[#b69b5e]/5 to-transparent py-4 [&+ul]:mt-4 [&+ol]:mt-4"
+              className="scroll-mt-24 text-2xl md:text-5xl font-black mt-8 mb-6 text-gray-800 relative border-l-4 border-[#FFA000] pl-6 bg-gradient-to-r from-[#FFA000]/5 to-transparent py-4 [&+ul]:mt-4 [&+ol]:mt-4"
             >
               <span className="absolute -left-1 top-0 w-1 h-full bg-gradient-to-b from-[#d3b66b] to-[#9e8750] rounded-full"></span>
               {children}
@@ -402,9 +402,9 @@ export default async function BlogDetail({ params }) {
           return (
             <h2
               id={id}
-              className="scroll-mt-24 text-2xl md:text-3xl font-bold mt-8 mb-6 text-gray-800 relative border-l-4 border-[#b69b5e] pl-6 bg-gradient-to-r from-[#b69b5e]/5 to-transparent py-3 [&+ul]:mt-4 [&+ol]:mt-4"
+              className="scroll-mt-24 text-2xl md:text-3xl font-bold mt-8 mb-6 text-gray-800 relative border-l-4 border-[#FFA000] pl-6 bg-gradient-to-r from-[#FFA000]/5 to-transparent py-3 [&+ul]:mt-4 [&+ol]:mt-4"
             >
-              <span className="absolute -left-1 top-0 w-1 h-full bg-gradient-to-b from-[#d3b66b] to-[#b69b5e] rounded-full"></span>
+              <span className="absolute -left-1 top-0 w-1 h-full bg-gradient-to-b from-[#d3b66b] to-[#FFA000] rounded-full"></span>
               {children}
             </h2>
           );
@@ -429,9 +429,9 @@ export default async function BlogDetail({ params }) {
           return (
             <h3
               id={id}
-              className="scroll-mt-24 text-xl md:text-2xl font-bold mt-8 mb-5 text-gray-800 relative border-l-4 border-[#b69b5e] pl-6 bg-gradient-to-r from-[#b69b5e]/5 to-transparent py-2 [&+ul]:mt-4 [&+ol]:mt-4"
+              className="scroll-mt-24 text-xl md:text-2xl font-bold mt-8 mb-5 text-gray-800 relative border-l-4 border-[#FFA000] pl-6 bg-gradient-to-r from-[#FFA000]/5 to-transparent py-2 [&+ul]:mt-4 [&+ol]:mt-4"
             >
-              <span className="absolute -left-1 top-0 w-1 h-full bg-gradient-to-b from-[#d3b66b] to-[#b69b5e] rounded-full"></span>
+              <span className="absolute -left-1 top-0 w-1 h-full bg-gradient-to-b from-[#d3b66b] to-[#FFA000] rounded-full"></span>
               {children}
             </h3>
           );
@@ -456,9 +456,9 @@ export default async function BlogDetail({ params }) {
           return (
             <h4
               id={id}
-              className="scroll-mt-24 text-lg md:text-2xl font-semibold mt-10 mb-4 text-gray-800 relative border-l-4 border-[#b69b5e] pl-6 bg-gradient-to-r from-[#b69b5e]/5 to-transparent py-2 [&+ul]:mt-3 [&+ol]:mt-3"
+              className="scroll-mt-24 text-lg md:text-2xl font-semibold mt-10 mb-4 text-gray-800 relative border-l-4 border-[#FFA000] pl-6 bg-gradient-to-r from-[#FFA000]/5 to-transparent py-2 [&+ul]:mt-3 [&+ol]:mt-3"
             >
-              <span className="absolute -left-1 top-0 w-1 h-full bg-gradient-to-b from-[#d3b66b] to-[#b69b5e] rounded-full"></span>
+              <span className="absolute -left-1 top-0 w-1 h-full bg-gradient-to-b from-[#d3b66b] to-[#FFA000] rounded-full"></span>
               {children}
             </h4>
           );
@@ -483,9 +483,9 @@ export default async function BlogDetail({ params }) {
           return (
             <h5
               id={id}
-              className="scroll-mt-24 text-lg md:text-xl font-semibold mt-8 mb-3 text-gray-800 relative border-l-4 border-[#b69b5e] pl-6 bg-gradient-to-r from-[#b69b5e]/5 to-transparent py-2 [&+ul]:mt-3 [&+ol]:mt-3"
+              className="scroll-mt-24 text-lg md:text-xl font-semibold mt-8 mb-3 text-gray-800 relative border-l-4 border-[#FFA000] pl-6 bg-gradient-to-r from-[#FFA000]/5 to-transparent py-2 [&+ul]:mt-3 [&+ol]:mt-3"
             >
-              <span className="absolute -left-1 top-0 w-1 h-full bg-gradient-to-b from-[#d3b66b] to-[#b69b5e] rounded-full"></span>
+              <span className="absolute -left-1 top-0 w-1 h-full bg-gradient-to-b from-[#d3b66b] to-[#FFA000] rounded-full"></span>
               {children}
             </h5>
           );
@@ -510,9 +510,9 @@ export default async function BlogDetail({ params }) {
           return (
             <h6
               id={id}
-              className="scroll-mt-24 text-lg font-semibold mt-6 mb-2 text-gray-800 relative border-l-4 border-[#b69b5e] pl-6 bg-gradient-to-r from-[#b69b5e]/5 to-transparent py-1 [&+ul]:mt-2 [&+ol]:mt-2"
+              className="scroll-mt-24 text-lg font-semibold mt-6 mb-2 text-gray-800 relative border-l-4 border-[#FFA000] pl-6 bg-gradient-to-r from-[#FFA000]/5 to-transparent py-1 [&+ul]:mt-2 [&+ol]:mt-2"
             >
-              <span className="absolute -left-1 top-0 w-1 h-full bg-gradient-to-b from-[#d3b66b] to-[#b69b5e] rounded-full"></span>
+              <span className="absolute -left-1 top-0 w-1 h-full bg-gradient-to-b from-[#d3b66b] to-[#FFA000] rounded-full"></span>
               {children}
             </h6>
           );
@@ -524,7 +524,7 @@ export default async function BlogDetail({ params }) {
           </p>
         ),
         blockquote: ({ children }) => (
-          <blockquote className="relative my-12 p-8 bg-gradient-to-br from-[#d3b66b]/5 to-[#b69b5e]/10 rounded-2xl shadow-lg border border-[#d3b66b]/20">
+          <blockquote className="relative my-12 p-8 bg-gradient-to-br from-[#d3b66b]/5 to-[#FFA000]/10 rounded-2xl shadow-lg border border-[#d3b66b]/20">
             <div className="absolute top-4 left-6 text-6xl text-[#d3b66b]/30 font-serif">
               &quot;
             </div>
@@ -584,7 +584,7 @@ export default async function BlogDetail({ params }) {
 
           return (
             <li className="text-lg leading-relaxed flex items-start gap-4 bg-white p-4 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300">
-              <div className="w-2 h-2 rounded-full bg-gradient-to-b from-[#d3b66b] to-[#b69b5e] mt-2 flex-shrink-0"></div>
+              <div className="w-2 h-2 rounded-full bg-gradient-to-b from-[#d3b66b] to-[#FFA000] mt-2 flex-shrink-0"></div>
               <div className="flex-1 [&>ul]:mt-4 [&>ul]:mb-0 [&>ol]:mt-4 [&>ol]:mb-0 [&>ul>li]:shadow-none [&>ul>li]:border-0 [&>ul>li]:p-2 [&>ol>li]:shadow-none [&>ol>li]:border-0 [&>ol>li]:p-2">
                 {children}
               </div>
@@ -593,7 +593,7 @@ export default async function BlogDetail({ params }) {
         },
         number: ({ children }) => (
           <li
-            className="text-lg leading-relaxed  flex items-start gap-4 bg-white p-4 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300 relative before:content-[counter(item)] before:absolute before:left-4 before:top-4 before:w-8 before:h-8 before:bg-gradient-to-r before:from-[#d3b66b] before:to-[#b69b5e] before:rounded-full before:flex before:items-center before:justify-center before:text-white before:text-sm before:font-bold"
+            className="text-lg leading-relaxed  flex items-start gap-4 bg-white p-4 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300 relative before:content-[counter(item)] before:absolute before:left-4 before:top-4 before:w-8 before:h-8 before:bg-gradient-to-r before:from-[#d3b66b] before:to-[#FFA000] before:rounded-full before:flex before:items-center before:justify-center before:text-white before:text-sm before:font-bold"
             style={{ counterIncrement: "item" }}
           >
             <div className="ml-10 flex-1 [&>ul]:mt-4 [&>ul]:mb-0 [&>ol]:mt-4 [&>ol]:mb-0 [&>ul>li]:shadow-none [&>ul>li]:border-0 [&>ul>li]:p-2 [&>ol>li]:shadow-none [&>ol>li]:border-0 [&>ol>li]:p-2">
@@ -798,7 +798,7 @@ export default async function BlogDetail({ params }) {
                     </div>
                     <div className="flex items-center justify-center mt-6">
                       <Link href="/dholera-updates/blogs">
-                        <span className="text-center rounded-xl text-white font-semibold bg-[#d7b56d] hover:bg-[#c6a45d] p-3 transition-colors">
+                        <span className="text-center rounded-xl text-white font-semibold bg-[#FFA000] hover:bg-[#FFA000] p-3 transition-colors">
                           Explore More
                         </span>
                       </Link>
@@ -818,7 +818,24 @@ export default async function BlogDetail({ params }) {
                 </h2>
                 <Link
                   href="/dholera-updates/blogs"
-                  className="rounded-xl text-[#151f28] max-sm:text-center font-semibold bg-[#d7b56d] p-1 hover:bg-[#c6a45d] "
+                  className="
+                    inline-flex
+                    items-center
+                    justify-center
+                    min-h-11
+                    rounded-xl
+                    bg-[#FFA000]
+                    px-4 py-2
+                    sm:px-5 sm:py-2.5
+                    text-sm sm:text-base
+                    font-semibold
+                    text-white
+                    whitespace-nowrap
+                    focus-visible:outline-none
+                    focus-visible:ring-2
+                    focus-visible:ring-[#FFA000]
+                    focus-visible:ring-offset-2
+                  "
                 >
                   View all
                 </Link>
@@ -866,7 +883,7 @@ export default async function BlogDetail({ params }) {
                                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                                     </>
                                   ) : (
-                                    <div className="w-full h-full bg-gradient-to-br from-[#d3b66b] via-[#b69b5e] to-[#9e8750] flex items-center justify-center relative overflow-hidden">
+                                    <div className="w-full h-full bg-gradient-to-br from-[#d3b66b] via-[#FFA000] to-[#9e8750] flex items-center justify-center relative overflow-hidden">
                                       <div className="absolute inset-0 opacity-10">
                                         <div className="absolute top-0 left-0 w-40 h-40 bg-white rounded-full -translate-x-20 -translate-y-20" />
                                         <div className="absolute bottom-0 right-0 w-32 h-32 bg-white rounded-full translate-x-16 translate-y-16" />
@@ -880,7 +897,7 @@ export default async function BlogDetail({ params }) {
                                   {/* Category Badge */}
                                   {blog.category && (
                                     <div className="absolute top-4 left-4 z-10">
-                                      <span className="bg-white/95 backdrop-blur-sm text-[#b69b5e] px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
+                                      <span className="bg-white/95 backdrop-blur-sm text-[#FFA000] px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
                                         {blog.category}
                                       </span>
                                     </div>
@@ -889,7 +906,7 @@ export default async function BlogDetail({ params }) {
 
                                 {/* Content Section */}
                                 <div className="p-5">
-                                  <h3 className="text-lg font-bold mb-2.5 text-gray-900 group-hover:text-[#b69b5e] line-clamp-2 transition-colors duration-300 leading-snug">
+                                  <h3 className="text-lg font-bold mb-2.5 text-gray-900 group-hover:text-[#FFA000] line-clamp-2 transition-colors duration-300 leading-snug">
                                     {blog.title}
                                   </h3>
 
@@ -919,7 +936,7 @@ export default async function BlogDetail({ params }) {
                                         <NewsDate post={blog} compact className="text-xs font-medium" />
                                       </div>
                                     )}
-                                    <div className="flex items-center gap-1.5 text-[#b69b5e] font-semibold text-sm group-hover:gap-2.5 transition-all duration-300">
+                                    <div className="flex items-center gap-1.5 text-[#FFA000] font-semibold text-sm group-hover:gap-2.5 transition-all duration-300">
                                       <span>Read More</span>
                                       <svg
                                         className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"
@@ -939,7 +956,7 @@ export default async function BlogDetail({ params }) {
                                 </div>
 
                                 {/* Hover Accent Line */}
-                                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d3b66b] via-[#b69b5e] to-[#9e8750] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d3b66b] via-[#FFA000] to-[#9e8750] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                               </div>
                             </Link>
                           ))}
@@ -987,7 +1004,7 @@ export default async function BlogDetail({ params }) {
                                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                                 </>
                               ) : (
-                                <div className="h-full bg-gradient-to-br from-[#d3b66b] via-[#b69b5e] to-[#9e8750] flex items-center justify-center relative overflow-hidden">
+                                <div className="h-full bg-gradient-to-br from-[#d3b66b] via-[#FFA000] to-[#9e8750] flex items-center justify-center relative overflow-hidden">
                                   <div className="absolute inset-0 opacity-10">
                                     <div className="absolute top-0 left-0 w-64 h-64 bg-white rounded-full -translate-x-32 -translate-y-32" />
                                     <div className="absolute bottom-0 right-0 w-48 h-48 bg-white rounded-full translate-x-24 translate-y-24" />
@@ -1001,7 +1018,7 @@ export default async function BlogDetail({ params }) {
                               {/* Category Badge */}
                               {blog.category && (
                                 <div className="absolute top-4 left-4 z-10">
-                                  <span className="bg-white/95 backdrop-blur-sm text-[#b69b5e] px-4 py-1.5 rounded-full text-xs font-semibold shadow-lg">
+                                  <span className="bg-white/95 backdrop-blur-sm text-[#FFA000] px-4 py-1.5 rounded-full text-xs font-semibold shadow-lg">
                                     {blog.category}
                                   </span>
                                 </div>
@@ -1010,7 +1027,7 @@ export default async function BlogDetail({ params }) {
 
                             {/* Content Section */}
                             <div className="p-6 flex flex-col flex-grow">
-                              <h3 className="text-xl font-bold mb-3 text-gray-900 group-hover:text-[#b69b5e] line-clamp-2 transition-colors duration-300 leading-tight">
+                              <h3 className="text-xl font-bold mb-3 text-gray-900 group-hover:text-[#FFA000] line-clamp-2 transition-colors duration-300 leading-tight">
                                 {blog.title}
                               </h3>
 
@@ -1040,7 +1057,7 @@ export default async function BlogDetail({ params }) {
                                     <NewsDate post={blog} compact className="text-sm font-medium" />
                                   </div>
                                 )}
-                                <div className="flex items-center gap-2 text-[#b69b5e] font-semibold text-sm group-hover:gap-3 transition-all duration-300">
+                                <div className="flex items-center gap-2 text-[#FFA000] font-semibold text-sm group-hover:gap-3 transition-all duration-300">
                                   <span>Read More</span>
                                   <svg
                                     className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"
@@ -1060,7 +1077,7 @@ export default async function BlogDetail({ params }) {
                             </div>
 
                             {/* Hover Accent Line */}
-                            <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d3b66b] via-[#b69b5e] to-[#9e8750] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                            <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#d3b66b] via-[#FFA000] to-[#9e8750] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                           </div>
                         </Link>
                       ))}
